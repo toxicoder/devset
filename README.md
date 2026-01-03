@@ -43,6 +43,10 @@ This repository is designed to be used as a template/reference:
 - `docs/technical_design_doc.md` - Template for technical design documents
 - Standardized format for project documentation
 
+### Agent to Agent (A2A)
+- `a2a/` - The Agent to Agent protocol for inter-agent communication
+- Enables communication and interoperability between opaque agentic applications
+
 ## How to Use
 
 1. Clone or fork this repository
