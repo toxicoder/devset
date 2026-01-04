@@ -1,5 +1,7 @@
 site_name: DevSet
 site_url: https://toxicoder.github.io/devset/
+repo_url: https://github.com/toxicoder/devset
+repo_name: toxicoder/devset
 
 theme:
   name: material
