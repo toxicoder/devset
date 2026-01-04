@@ -47,16 +47,70 @@ done
 # 13. deepseek-ai/deepseek-v3.1
 # 14. alibaba/qwen3-30b-a3b-thinking
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="$SCRIPT_DIR/dgx-spark-distributed-model-config.json"
+
+# SSH options
+SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=10"
+
+read_config() {
+    if [ ! -f "$CONFIG_FILE" ]; then
+        echo "Error: Config file not found at $CONFIG_FILE"
+        exit 1
+    fi
+    IP1=$(grep '"ip1":' "$CONFIG_FILE" | head -n1 | awk -F'"' '{print $4}')
+    IP2=$(grep '"ip2":' "$CONFIG_FILE" | head -n1 | awk -F'"' '{print $4}')
+    MODEL_ARG=$(grep '"model":' "$CONFIG_FILE" | head -n1 | awk -F'"' '{print $4}')
+
+    if [ -z "$IP1" ] || [ -z "$IP2" ] || [ -z "$MODEL_ARG" ]; then
+        echo "Error: Failed to parse config file."
+        exit 1
+    fi
+}
+
+write_config() {
+    cat > "$CONFIG_FILE" <<EOF
+{
+    "ip1": "$IP1",
+    "ip2": "$IP2",
+    "model": "$MODEL_ARG"
+}
+EOF
+    echo "Configuration saved to $CONFIG_FILE"
+}
+
 # Check arguments
-if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
-    echo "Usage: $0 <IP1> <IP2> [<MODEL_NAME>]"
-    echo "Example: $0 192.168.1.10 192.168.1.11 meta/llama-3.1-405b-instruct"
+MODE="setup"
+if [ "$#" -eq 1 ] && [ "$1" == "stop" ]; then
+    MODE="stop"
+elif [ "$#" -eq 1 ] && [ "$1" == "start" ]; then
+    MODE="start"
+elif [ "$#" -ge 2 ] && [ "$#" -le 3 ]; then
+    MODE="setup"
+else
+    echo "Usage:"
+    echo "  $0 <IP1> <IP2> [<MODEL_NAME>]  (First run / Setup)"
+    echo "  $0 start                       (Start using saved config)"
+    echo "  $0 stop                        (Stop using saved config)"
     exit 1
 fi
 
-IP1=$1
-IP2=$2
-MODEL_ARG=${3:-"meta/llama-3.1-70b-instruct"}
+if [ "$MODE" == "stop" ]; then
+    read_config
+    echo "Stopping distributed model on $IP1 and $IP2..."
+    for IP in "$IP1" "$IP2"; do
+        ssh $SSH_OPTS "$IP" "docker rm -f nim-distributed || true"
+    done
+    echo "Stopped."
+    exit 0
+elif [ "$MODE" == "start" ]; then
+    read_config
+elif [ "$MODE" == "setup" ]; then
+    IP1=$1
+    IP2=$2
+    MODEL_ARG=${3:-"meta/llama-3.1-70b-instruct"}
+    write_config
+fi
 
 # Validate IP addresses
 validate_ip() {
@@ -75,9 +129,6 @@ if [ -z "${NGC_API_KEY:-}" ]; then
     echo "Please export your NGC API Key: export NGC_API_KEY='nvapi-...'"
     exit 1
 fi
-
-# SSH options
-SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=10"
 
 # === Model Configuration ===
 
