@@ -3,7 +3,7 @@
 **Role Code:** SEC1001
 
 ## Job Description
-Protects infrastructure and data.
+A vital role dedicated to safeguarding the organization's information systems and data assets. The Security Engineer conducts vulnerability assessments, penetration testing, and security audits to identify and mitigate risks. They design and implement security protocols, monitor for suspicious activity, and lead incident response efforts. This role involves staying ahead of emerging cyber threats and ensuring compliance with industry security standards.
 
 ## Responsibilities
 

@@ -3,7 +3,7 @@
 **Role Code:** SWEN1001
 
 ## Job Description
-Generalist engineer building core applications.
+A versatile engineering role responsible for the full lifecycle of software development, from conception to deployment. The Software Engineer writes clean, maintainable code to build scalable applications and features. They participate in system design discussions, code reviews, and debugging sessions to ensure software quality. This role requires a strong understanding of computer science fundamentals and the ability to adapt to new technologies and challenges.
 
 ## Responsibilities
 

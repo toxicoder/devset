@@ -3,7 +3,7 @@
 **Role Code:** RSCH3002
 
 ## Job Description
-Conducts qualitative research.
+An empathetic investigator dedicated to understanding the needs, behaviors, and motivations of users. The User Researcher designs and conducts qualitative and quantitative studies, including interviews, usability testing, and surveys. They synthesize findings into actionable insights that inform product strategy and design decisions. This role is the voice of the customer, ensuring the team builds solutions that truly solve user problems.
 
 ## Responsibilities
 

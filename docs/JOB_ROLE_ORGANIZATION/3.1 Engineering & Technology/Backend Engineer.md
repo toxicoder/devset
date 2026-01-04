@@ -3,7 +3,7 @@
 **Role Code:** SWEN1002
 
 ## Job Description
-Builds server-side logic and databases.
+A specialized engineering role focused on the server-side logic, database management, and architecture that powers the application. The Backend Engineer designs and implements robust APIs, ensures high availability and performance of server-side applications, and manages data storage solutions. This role involves optimizing database queries, designing microservices architectures, and ensuring secure data handling. They collaborate closely with frontend engineers and data teams to deliver seamless and scalable user experiences.
 
 ## Responsibilities
 

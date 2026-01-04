@@ -3,7 +3,7 @@
 **Role Code:** QA1001
 
 ## Job Description
-Ensures software quality through testing.
+A quality-focused role responsible for ensuring the reliability and stability of software releases. The QA Engineer designs and executes comprehensive test plans, including automated and manual tests, to identify bugs and regressions before they reach production. They work closely with developers to reproduce issues and verify fixes. This role is crucial for maintaining user trust by preventing defective software from being deployed.
 
 ## Responsibilities
 

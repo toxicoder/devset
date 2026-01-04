@@ -3,7 +3,7 @@
 **Role Code:** SREL1005
 
 ## Job Description
-Ensures uptime and scalability.
+A hybrid role combining software engineering and systems administration to build and run large-scale, fault-tolerant systems. The Site Reliability Engineer (SRE) focuses on automating infrastructure, monitoring system health, and responding to incidents to ensure high availability and reliability. They conduct capacity planning and lead post-incident reviews to prevent recurrence. This role is essential for maintaining trust and ensuring the service is always available to users.
 
 ## Responsibilities
 

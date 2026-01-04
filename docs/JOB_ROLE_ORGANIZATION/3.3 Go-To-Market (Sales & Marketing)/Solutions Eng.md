@@ -3,7 +3,7 @@
 **Role Code:** SALE9003
 
 ## Job Description
-Technical expert assisting sales.
+A technical advisor who bridges the gap between sales and engineering. The Solutions Engineer partners with Account Executives to deliver compelling product demonstrations and technical proof-of-concepts (POCs). They answer complex technical questions, address security and compliance concerns, and remove technical barriers to closing deals. This role requires a deep understanding of the product architecture and the ability to explain it to both technical and non-technical audiences.
 
 ## Responsibilities
 

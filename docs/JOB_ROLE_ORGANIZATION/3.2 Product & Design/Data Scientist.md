@@ -3,7 +3,7 @@
 **Role Code:** DATA4001
 
 ## Job Description
-Analyzes data to drive decisions.
+A strategic analytical role that leverages advanced statistical techniques and machine learning to extract actionable insights from complex datasets. The Data Scientist designs and implements predictive models to solve business problems, optimize product features, and drive strategic decision-making. They communicate findings to stakeholders through clear visualizations and storytelling. This role requires deep technical expertise in algorithms and data manipulation, as well as the business acumen to identify high-impact opportunities.
 
 ## Responsibilities
 

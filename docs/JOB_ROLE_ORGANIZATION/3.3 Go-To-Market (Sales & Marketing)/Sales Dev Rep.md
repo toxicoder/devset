@@ -3,7 +3,7 @@
 **Role Code:** SALE9002
 
 ## Job Description
-Outbound prospecting for leads.
+The engine of the sales organization, responsible for generating new business opportunities. The Sales Development Representative (SDR) conducts high-volume outbound prospecting through cold calling, emailing, and social outreach. They qualify leads by identifying pain points and scheduling meetings for Account Executives. This role is a training ground for future sales leaders, requiring resilience, persistence, and strong communication skills.
 
 ## Responsibilities
 

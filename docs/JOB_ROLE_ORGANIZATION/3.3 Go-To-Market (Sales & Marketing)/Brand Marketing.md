@@ -3,7 +3,7 @@
 **Role Code:** MKTG9003
 
 ## Job Description
-Manages reputation and brand.
+A creative and strategic guardian of the company's brand identity. The Brand Marketing Manager develops and executes comprehensive marketing campaigns that build brand awareness and equity. They oversee the creation of compelling content, manage external agency relationships, and ensure consistent messaging across all channels. This role involves analyzing market trends to position the brand effectively and connecting emotionally with the target audience.
 
 ## Responsibilities
 

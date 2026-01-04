@@ -3,7 +3,7 @@
 **Role Code:** SWEN1003
 
 ## Job Description
-Builds client-side UI (Web/Mobile).
+A creative and technical role dedicated to building intuitive and responsive user interfaces for web and mobile applications. The Frontend Engineer translates design mockups into high-quality code, ensuring a seamless user experience across different devices and browsers. They optimize application performance, manage application state, and ensure accessibility standards are met. This role requires close collaboration with designers and backend engineers to bring product visions to life.
 
 ## Responsibilities
 
