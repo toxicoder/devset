@@ -114,25 +114,23 @@ nav:
           - Security Red Team: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Security Red Team.md
           - Strategic Partner: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Strategic Partner.md
           - Sustainability (ESG): JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Sustainability (ESG).md
-  - Interview Prep:
-      - Backend Engineer: interview-prep/3.1 Engineering & Technology/Backend Engineer.md
-      - Data Analysis: interview-prep/data-analysis.md
-      - Data Engineering: interview-prep/data-engineering.md
-      - Data Infrastructure: interview-prep/data-infrastructure.md
-      - Data Science: interview-prep/data-science.md
-      - Frontend Engineer: interview-prep/3.1 Engineering & Technology/Frontend Engineer.md
-      - Golang: interview-prep/golang.md
-      - Java: interview-prep/java.md
-      - JavaScript: interview-prep/javascript.md
-      - Kotlin: interview-prep/kotlin.md
-      - Protocol Buffers: interview-prep/protocol-buffers.md
-      - Python: interview-prep/python.md
-      - Software Engineering: interview-prep/software-engineering.md
-      - SQL: interview-prep/sql.md
-      - System Design: interview-prep/system-design.md
-      - TypeScript: interview-prep/typescript.md
   - Interview Questions:
-      - SQL Questions: interview-questions/sql.md
+      - Backend Engineer: interview-questions/3.1 Engineering & Technology/Backend Engineer.md
+      - Data Analysis: interview-questions/data-analysis.md
+      - Data Engineering: interview-questions/data-engineering.md
+      - Data Infrastructure: interview-questions/data-infrastructure.md
+      - Data Science: interview-questions/data-science.md
+      - Frontend Engineer: interview-questions/3.1 Engineering & Technology/Frontend Engineer.md
+      - Golang: interview-questions/golang.md
+      - Java: interview-questions/java.md
+      - JavaScript: interview-questions/javascript.md
+      - Kotlin: interview-questions/kotlin.md
+      - Protocol Buffers: interview-questions/protocol-buffers.md
+      - Python: interview-questions/python.md
+      - Software Engineering: interview-questions/software-engineering.md
+      - SQL: interview-questions/sql.md
+      - System Design: interview-questions/system-design.md
+      - TypeScript: interview-questions/typescript.md
   - Style Guides:
       - Bash: style-guides/bash/bash-style-guide.md
       - C++: style-guides/cpp/cpp-style-guide.md
