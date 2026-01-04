@@ -58,6 +58,7 @@ yarn-error.log
 dist/
 out/
 build/
+site/
 
 # Python test coverage
 .coverage

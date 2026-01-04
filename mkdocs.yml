@@ -1,0 +1,10 @@
+site_name: Project Documentation
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+
+docs_dir: docs
