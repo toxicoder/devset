@@ -7,10 +7,19 @@ A strategic sales professional responsible for driving revenue growth by acquiri
 
 ## Responsibilities
 
-* Client demos;
-* Contract negotiation;
-* Pipeline mgmt;
-* Relationship building
+* **Client Acquisition & Prospecting:** Proactively identify and engage potential enterprise clients through targeted outreach, networking, and industry events to build a robust sales pipeline.
+* **Strategic Discovery & Needs Analysis:** Conduct deep-dive discovery sessions to understand client business goals, pain points, and technical requirements, aligning them with the company's value proposition.
+* **Solution Presentation & Demos:** Deliver tailored product demonstrations and presentations that effectively showcase how the solution addresses specific client challenges and drives ROI.
+* **Contract Negotiation & Closing:** Lead complex contract negotiations, coordinating with legal and finance teams to secure favorable terms while ensuring client satisfaction and timely deal closure.
+* **Relationship Management:** Cultivate long-term relationships with C-level executives and key decision-makers, acting as a trusted advisor throughout the sales cycle and beyond.
+* **Pipeline Forecasting & Reporting:** Maintain accurate and up-to-date sales data in the CRM, providing reliable forecasts and regular updates on deal status to sales leadership.
+
+### Role Variations
+
+* **Enterprise Account Executive:** Focuses on large, complex organizations with longer sales cycles and higher contract values. Requires deep strategic selling skills and the ability to navigate multi-stakeholder decision processes.
+* **Mid-Market Account Executive:** Targets medium-sized businesses with faster sales cycles. Balances volume with deal size and often manages a larger number of opportunities simultaneously.
+* **Strategic Account Executive:** Manages a select group of high-value existing accounts or key prospects. Focuses on deepening relationships, upselling/cross-selling, and strategic partnership development.
+* **Territory Account Executive:** Responsible for a specific geographic region or vertical market. Develops localized strategies and builds networks within the assigned territory to drive market penetration.
 
 ## Average Daily Tasks
 * 09:00 Outreach
