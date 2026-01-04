@@ -3,7 +3,7 @@
 **Role Code:** POLI7002
 
 ## Job Description
-Gov't relations and regulations.
+A strategic advocate representing the company's interests to government bodies and regulatory agencies. The Public Policy Manager monitors legislative developments that could impact the business and crafts strategies to influence policy outcomes. They build coalitions with industry partners and draft position papers to educate policymakers. This role requires navigating complex political landscapes to ensure a favorable operating environment for the company.
 
 ## Responsibilities
 

@@ -3,7 +3,7 @@
 **Role Code:** PROD2002
 
 ## Job Description
-PM for technical products (APIs, Cloud).
+A specialized Product Manager focused on technical platforms, APIs, and developer tools. The Technical Product Manager speaks the language of engineers and translates complex technical capabilities into business value. They define API specifications, manage platform roadmaps, and improve the developer experience. This role requires deep technical understanding to make trade-off decisions and ensure the underlying infrastructure supports future scale and innovation.
 
 ## Responsibilities
 

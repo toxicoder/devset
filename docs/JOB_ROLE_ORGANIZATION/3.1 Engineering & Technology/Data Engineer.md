@@ -3,7 +3,7 @@
 **Role Code:** DATA4002
 
 ## Job Description
-Builds data pipelines and storage.
+A critical technical role responsible for the design, construction, and maintenance of scalable data management systems. The Data Engineer builds robust ETL pipelines to transform raw data into usable formats for analysis and reporting. They optimize data warehousing solutions, ensure data integrity and quality, and implement data governance policies. This role bridges the gap between software engineering and data science, enabling the organization to make data-driven decisions.
 
 ## Responsibilities
 

@@ -3,7 +3,7 @@
 **Role Code:** COMM9005
 
 ## Job Description
-Media relations and internal comms.
+A communications expert responsible for shaping the company's public narrative and managing its reputation. The Communications/PR Manager builds relationships with media outlets, journalists, and influencers to secure positive coverage. They craft press releases, executive talking points, and crisis communication strategies. This role also oversees internal communications to ensure employees are aligned with the company's mission and key initiatives.
 
 ## Responsibilities
 

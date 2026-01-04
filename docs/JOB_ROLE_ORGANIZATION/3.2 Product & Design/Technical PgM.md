@@ -3,7 +3,7 @@
 **Role Code:** TPGM5001
 
 ## Job Description
-Manages complex cross-team programs.
+An organizational leader responsible for driving complex, cross-functional technical initiatives from inception to delivery. The Technical Program Manager (TPM) identifies dependencies, manages risks, and ensures alignment across multiple engineering teams. They establish processes to improve velocity and quality, acting as the glue that holds large-scale programs together. This role is critical for executing on the company's most ambitious technical goals.
 
 ## Responsibilities
 

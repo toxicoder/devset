@@ -3,7 +3,7 @@
 **Role Code:** PROD2001
 
 ## Job Description
-Defines product strategy and roadmap.
+The CEO of the product, responsible for defining the vision, strategy, and roadmap. The Product Manager identifies user needs and market opportunities, prioritizing features that deliver the most value. They rally cross-functional teams—engineering, design, sales, and marketing—to launch successful products. This role requires a balance of strategic thinking, data-driven decision making, and the ability to articulate a compelling narrative.
 
 ## Responsibilities
 

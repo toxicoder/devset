@@ -3,7 +3,7 @@
 **Role Code:** SALE9001
 
 ## Job Description
-Sells products to enterprise clients.
+A strategic sales professional responsible for driving revenue growth by acquiring new enterprise clients. The Account Executive manages the full sales cycle, from prospecting and discovery to negotiation and closing. They build strong relationships with key stakeholders, understanding their business challenges to present tailored solutions. This role requires a consultative selling approach, deep product knowledge, and the ability to exceed ambitious sales targets.
 
 ## Responsibilities
 

@@ -3,7 +3,7 @@
 **Role Code:** DESN3003
 
 ## Job Description
-Writes copy for user interfaces.
+A linguistic expert who shapes the product experience through words. The UX Writer crafts clear, concise, and useful copy for user interfaces, from error messages to onboarding flows. They ensure the product's voice and tone are consistent and align with the brand personality. This role involves close collaboration with designers and researchers to ensure content guides users effectively and enhances usability.
 
 ## Responsibilities
 

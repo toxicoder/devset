@@ -3,7 +3,7 @@
 **Role Code:** SWEN1004
 
 ## Job Description
-Develops native apps for iOS/Android.
+A specialized developer focused on building high-performance native applications for iOS and Android platforms. The Mobile Engineer leverages platform-specific languages like Swift and Kotlin to create fluid, responsive, and feature-rich mobile experiences. They manage the entire app lifecycle, from concept and development to testing and App Store release. This role involves optimizing for battery life, network efficiency, and device fragmentation to reach a broad user base.
 
 ## Responsibilities
 
