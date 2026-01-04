@@ -3,7 +3,7 @@
 **Role Code:** LEGL7001
 
 ## Job Description
-General in-house legal advice.
+A generalist legal role responsible for providing guidance on a broad spectrum of corporate and commercial matters. Corporate Counsel reviews, negotiates, and drafts a variety of commercial contracts, including vendor agreements, sales contracts, and partnership deals. They advise on regulatory compliance, intellectual property protection, and corporate governance. This role involves identifying and mitigating legal risks across the organization and managing relationships with outside counsel when necessary. They act as a business enabler, finding legal pathways to achieve company objectives while protecting the firm's interests.
 
 ## Responsibilities
 
