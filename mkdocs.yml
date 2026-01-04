@@ -73,3 +73,5 @@ nav:
     - TypeScript: style-guides/typescript/typescript-style-guide.md
     - YAML: style-guides/yaml/yaml-style-guide.md
     - Zsh: style-guides/zsh/zsh-style-guide.md
+  - Interview Prep:
+    - Protocol Buffers: interview-prep/protocol-buffers.md
