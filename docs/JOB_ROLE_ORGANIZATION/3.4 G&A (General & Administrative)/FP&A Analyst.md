@@ -3,7 +3,7 @@
 **Role Code:** FINC6001
 
 ## Job Description
-Financial Planning & Analysis.
+A key financial role responsible for budgeting, forecasting, and analysis that supports major corporate decisions. The Financial Planning & Analysis (FP&A) Analyst manages the company's financial model, tracks performance against budget, and analyzes variance to identify risks and opportunities. They partner with department heads to build annual budgets and long-term strategic plans. This role involves complex financial modeling, ROI analysis for new initiatives, and preparing monthly board decks. The FP&A Analyst provides the data-driven insights necessary for the executive team to steer the company's financial health.
 
 ## Responsibilities
 

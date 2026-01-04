@@ -3,7 +3,7 @@
 **Role Code:** LEGL7003
 
 ## Job Description
-Legal advice on HR/Labor.
+A specialized legal role focused on managing the company's employment law risks and compliance. The Employment Counsel advises HR and business leaders on a wide range of labor relations issues, including hiring, performance management, terminations, and compensation. They draft and review employment contracts, non-compete agreements, and employee handbooks to ensure compliance with local, state, and federal laws. This role also oversees immigration and visa matters for global employees. They are proactive in training management on best practices to prevent litigation and maintain a fair workplace.
 
 ## Responsibilities
 

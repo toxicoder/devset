@@ -3,7 +3,7 @@
 **Role Code:** OPS0001
 
 ## Job Description
-Internal consulting/efficiency.
+A high-impact role that acts as an internal consultant to the executive team, driving operational excellence and strategic initiatives. The Strategy & Operations Manager identifies inefficiencies in business processes and designs scalable solutions to improve productivity. They facilitate the annual planning process, including OKR setting and tracking, and prepare materials for board meetings and QBRs. This role involves deep data analysis to support decision-making and leading cross-functional projects that are critical to the company's growth. They are the glue that holds the various functions of the organization together.
 
 ## Responsibilities
 

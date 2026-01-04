@@ -3,7 +3,7 @@
 **Role Code:** FINC6002
 
 ## Job Description
-Head of Accounting operations.
+The senior accounting professional responsible for the accuracy and integrity of the company's financial records. The Controller oversees all accounting operations, including the general ledger, accounts payable/receivable, payroll, and tax compliance. They manage the monthly, quarterly, and annual close processes and prepare financial statements in accordance with GAAP. This role involves establishing and monitoring internal controls to safeguard assets and leading the external audit process. They partner with the CFO to ensure financial transparency and compliance with all regulatory requirements.
 
 ## Responsibilities
 

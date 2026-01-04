@@ -3,7 +3,7 @@
 **Role Code:** PEOP8001
 
 ## Job Description
-Strategic people advisor.
+A strategic advisor to business leaders on all people-related matters. The HR Business Partner (HRBP) aligns human resources strategy with business goals to drive organizational effectiveness. They coach executives and managers on performance management, organizational design, and employee relations. This role involves mediating conflict, fostering a positive and inclusive culture, and managing talent acquisition and succession planning. The HRBP uses data to identify trends and recommend solutions that improve employee engagement and retention. They are the trusted confidant and conscience of the organization.
 
 ## Responsibilities
 
