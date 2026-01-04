@@ -269,6 +269,8 @@ parse_net_conf() {
     local conf=$1
     local type=${conf%%:*}
     local val=${conf#*:}
+    # Trim leading/trailing whitespace
+    val=$(echo "$val" | xargs)
     echo "$val"
 }
 
