@@ -1,0 +1,1651 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://toxicoder.github.io/devset/interview-questions/sql/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>100 SQL Interview Questions and Answers - DevSet</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#100-sql-interview-questions-and-answers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="DevSet" class="md-header__button md-logo" aria-label="DevSet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevSet
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              100 SQL Interview Questions and Answers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Job Role Organization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../style-guides/bash/bash-style-guide/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Style Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DevSet" class="md-nav__button md-logo" aria-label="DevSet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DevSet
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Role Organization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Style Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Style Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/bash/bash-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/cpp/cpp-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/css/css-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/golang/golang-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/java/java-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/json/json-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/kotlin/kotlin-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/markdown/markdown-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/proto/proto-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/python/python-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/rust/rust-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/starlark/starlark-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starlark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/typescript/typescript-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeScript
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/yaml/yaml-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    YAML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../style-guides/zsh/zsh-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zsh
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-sql-questions-1-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic SQL (Questions 1-30)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intermediate-sql-questions-31-70" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intermediate SQL (Questions 31-70)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-sql-questions-71-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced SQL (Questions 71-100)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="100-sql-interview-questions-and-answers">100 SQL Interview Questions and Answers</h1>
+<p>This document contains a comprehensive list of 100 SQL interview questions and answers, categorized by difficulty level.</p>
+<h2 id="basic-sql-questions-1-30">Basic SQL (Questions 1-30)</h2>
+<ol>
+<li>
+<p><strong>What is SQL?</strong></p>
+<ul>
+<li><strong>Answer:</strong> SQL (Structured Query Language) is a standard programming language used to manage and manipulate relational databases. It allows users to query, insert, update, and delete data.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a DBMS?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Database Management System (DBMS) is software that interacts with end-users, applications, and the database itself to capture and analyze the data. Examples include MySQL, PostgreSQL, Oracle, and SQL Server.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is an RDBMS?</strong></p>
+<ul>
+<li><strong>Answer:</strong> RDBMS stands for Relational Database Management System. It is a type of DBMS based on the relational model introduced by E. F. Codd, where data is stored in tables with rows and columns.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Primary Key?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Primary Key is a column or a set of columns that uniquely identifies each row in a table. It must contain unique values and cannot contain NULL values.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Foreign Key?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Foreign Key is a field (or collection of fields) in one table that refers to the Primary Key in another table. It is used to establish a link between two tables.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between CHAR and VARCHAR?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>CHAR</code> is a fixed-length character data type, while <code>VARCHAR</code> is a variable-length character data type. <code>CHAR</code> pads with spaces to the defined length, whereas <code>VARCHAR</code> stores only the characters used plus a length byte.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between DELETE and TRUNCATE?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>DELETE</code> is a DML command used to remove specific rows based on a WHERE clause and can be rolled back. <code>TRUNCATE</code> is a DDL command that removes all rows from a table, resets identity counters, and cannot be rolled back in some RDBMS implementations (though it is transaction-safe in others like PostgreSQL).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between DROP and TRUNCATE?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>DROP</code> removes the table structure and its data entirely from the database. <code>TRUNCATE</code> removes all data but keeps the table structure.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are the different types of SQL commands?</strong></p>
+<ul>
+<li><strong>Answer:</strong><ul>
+<li><strong>DDL (Data Definition Language):</strong> CREATE, ALTER, DROP, TRUNCATE.</li>
+<li><strong>DML (Data Manipulation Language):</strong> INSERT, UPDATE, DELETE.</li>
+<li><strong>DCL (Data Control Language):</strong> GRANT, REVOKE.</li>
+<li><strong>TCL (Transaction Control Language):</strong> COMMIT, ROLLBACK, SAVEPOINT.</li>
+<li><strong>DQL (Data Query Language):</strong> SELECT.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a NULL value?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A NULL value represents missing, unknown, or inapplicable data. It is not the same as zero or an empty string.</li>
+</ul>
+</li>
+<li>
+<p><strong>How do you select all columns from a table?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>SELECT * FROM table_name;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>What is the WHERE clause used for?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>WHERE</code> clause is used to filter records that fulfill a specified condition.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between AND and OR operators?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>AND</code> displays a record if all the conditions separated by AND are TRUE. <code>OR</code> displays a record if any of the conditions separated by OR is TRUE.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the ORDER BY keyword used for?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>ORDER BY</code> keyword is used to sort the result-set in ascending or descending order.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the DISTINCT statement used for?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>SELECT DISTINCT</code> statement is used to return only distinct (different) values.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a JOIN?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A JOIN clause is used to combine rows from two or more tables, based on a related column between them.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are the different types of JOINs?</strong></p>
+<ul>
+<li><strong>Answer:</strong><ul>
+<li><strong>(INNER) JOIN:</strong> Returns records that have matching values in both tables.</li>
+<li><strong>LEFT (OUTER) JOIN:</strong> Returns all records from the left table, and the matched records from the right table.</li>
+<li><strong>RIGHT (OUTER) JOIN:</strong> Returns all records from the right table, and the matched records from the left table.</li>
+<li><strong>FULL (OUTER) JOIN:</strong> Returns all records when there is a match in either left or right table.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Cartesian Product?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Cartesian Product (or Cross Join) occurs when each row from the first table is combined with each row from the second table. It happens when no join condition is specified.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the LIKE operator?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>LIKE</code> operator is used in a WHERE clause to search for a specified pattern in a column.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are Wildcards?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Wildcards are characters used with the LIKE operator. <code>%</code> represents zero, one, or multiple characters. <code>_</code> represents a single character.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the IN operator?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>IN</code> operator allows you to specify multiple values in a WHERE clause. It is a shorthand for multiple OR conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the BETWEEN operator?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>BETWEEN</code> operator selects values within a given range. The values can be numbers, text, or dates.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is an Alias?</strong></p>
+<ul>
+<li><strong>Answer:</strong> SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the GROUP BY statement?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>GROUP BY</code> statement groups rows that have the same values into summary rows, like "find the number of customers in each country".</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the HAVING clause?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>HAVING</code> clause was added to SQL because the <code>WHERE</code> keyword could not be used with aggregate functions. It allows filtering of groups created by <code>GROUP BY</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are Aggregate Functions?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Aggregate functions perform a calculation on a set of values and return a single value. Examples: <code>COUNT()</code>, <code>SUM()</code>, <code>AVG()</code>, <code>MIN()</code>, <code>MAX()</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Constraint?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Constraints are rules enforced on data columns on a table. They are used to limit the type of data that can go into a table.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are common constraints?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>NOT NULL</code>, <code>UNIQUE</code>, <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>, <code>CHECK</code>, <code>DEFAULT</code>, <code>INDEX</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is NOT NULL Constraint?</strong></p>
+<ul>
+<li><strong>Answer:</strong> It ensures that a column cannot accept NULL values.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is UNIQUE Constraint?</strong></p>
+<ul>
+<li><strong>Answer:</strong> It ensures that all values in a column are different.</li>
+</ul>
+</li>
+</ol>
+<h2 id="intermediate-sql-questions-31-70">Intermediate SQL (Questions 31-70)</h2>
+<ol>
+<li>
+<p><strong>What is a Subquery?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Subquery (or Inner Query) is a query within another SQL query and embedded within the WHERE clause.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between WHERE and HAVING?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>WHERE</code> clause filters rows before aggregation (before GROUP BY). <code>HAVING</code> clause filters groups after aggregation (after GROUP BY).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Self Join?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Self Join is a regular join, but the table is joined with itself. It is useful for comparing rows within the same table.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is UNION and UNION ALL?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>UNION</code> combines the result-set of two or more SELECT statements and removes duplicates. <code>UNION ALL</code> does the same but includes duplicate values.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is an Index?</strong></p>
+<ul>
+<li><strong>Answer:</strong> An Index is a database structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between Clustered and Non-Clustered Index?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A <strong>Clustered Index</strong> determines the physical order of data in a table (only one per table). A <strong>Non-Clustered Index</strong> is stored separately from the data rows and contains pointers to the physical data (multiple allowed per table).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a View?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A View is a virtual table based on the result-set of an SQL statement. It contains rows and columns, just like a real table, but usually doesn't store data itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are the advantages of Views?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Views can simplify complex queries, provide security by hiding columns, and present data in a specific format.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Normalization?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Explain 1NF, 2NF, 3NF.</strong></p>
+<ul>
+<li><strong>Answer:</strong><ul>
+<li><strong>1NF (First Normal Form):</strong> Table has atomic values, no repeating groups.</li>
+<li><strong>2NF (Second Normal Form):</strong> In 1NF and all non-key attributes are fully functional dependent on the primary key (no partial dependency).</li>
+<li><strong>3NF (Third Normal Form):</strong> In 2NF and has no transitive dependencies (non-key attributes depend only on the primary key).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Denormalization?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Denormalization is the process of adding redundant data to an already normalized database to improve read performance.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Transaction?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Transaction is a sequence of operations performed as a single logical unit of work. It must adhere to ACID properties.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are ACID properties?</strong></p>
+<ul>
+<li><strong>Answer:</strong><ul>
+<li><strong>Atomicity:</strong> All or nothing.</li>
+<li><strong>Consistency:</strong> Database remains in a valid state.</li>
+<li><strong>Isolation:</strong> Transactions occur independently.</li>
+<li><strong>Durability:</strong> Committed changes are permanent.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Stored Procedure?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Stored Procedure is a prepared SQL code that you can save, so the code can be reused over and over again.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Trigger?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Trigger is a stored procedure in a database that automatically invokes whenever a special event (INSERT, UPDATE, DELETE) occurs in the database.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is SQL Injection?</strong></p>
+<ul>
+<li><strong>Answer:</strong> SQL Injection is a code injection technique where an attacker executes malicious SQL statements that control a web application's database server.</li>
+</ul>
+</li>
+<li>
+<p><strong>How to prevent SQL Injection?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Use prepared statements (parameterized queries), input validation, and stored procedures.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between Count(*) and Count(column_name)?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>COUNT(*)</code> counts all rows including NULLs. <code>COUNT(column_name)</code> counts all rows where the specified column is NOT NULL.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a CTE (Common Table Expression)?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A CTE is a temporary result set that defines a derived table, which can be referenced in a SELECT, INSERT, UPDATE, or DELETE statement. Defined using the <code>WITH</code> clause.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between local and global variables?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Local variables are defined within a function or block and only accessible there. Global variables are accessible throughout the session or system.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the EXISTS operator?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>EXISTS</code> operator is used to test for the existence of any record in a subquery. It returns TRUE if the subquery returns one or more records.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the CASE statement?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>CASE</code> statement goes through conditions and returns a value when the first condition is met (like an if-then-else statement).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the COALESCE function?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>COALESCE</code> returns the first non-null value in a list.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is data integrity?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Data integrity refers to the accuracy and consistency of data stored in a database. It is maintained via constraints.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Cursor?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Cursor is a database object used to retrieve, manipulate, and traverse a result set row-by-row.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are the disadvantages of Cursors?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Cursors are generally slower than set-based operations and consume more memory/network resources.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is an Identity column?</strong></p>
+<ul>
+<li><strong>Answer:</strong> An Identity column is a column in a database table that is made up of values generated by the database. It is often used for Primary Keys.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between CHAR_LENGTH and LENGTH?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>CHAR_LENGTH</code> typically returns the number of characters, while <code>LENGTH</code> might return the number of bytes (implementation dependent).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between RANK(), DENSE_RANK(), and ROW_NUMBER()?</strong></p>
+<ul>
+<li><strong>Answer:</strong><ul>
+<li><code>ROW_NUMBER()</code>: Unique sequential number for each row (1, 2, 3, 4).</li>
+<li><code>RANK()</code>: Ranking with gaps (1, 2, 2, 4).</li>
+<li><code>DENSE_RANK()</code>: Ranking without gaps (1, 2, 2, 3).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Composite Key?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Composite Key is a Primary Key composed of two or more columns.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Candidate Key?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Candidate Key is a column, or set of columns, that can uniquely identify a database record. A Primary Key is selected from Candidate Keys.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is referential integrity?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Referential integrity ensures that the relationship between two tables (Primary Key and Foreign Key) remains consistent.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Schema?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Schema is a collection of database objects (tables, views, indexes, etc.) associated with a database username.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the LIMIT clause?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>LIMIT</code> clause is used to specify the number of records to return. (Syntax varies by RDBMS, e.g., <code>TOP</code> in SQL Server).</li>
+</ul>
+</li>
+<li>
+<p><strong>How to copy data from one table to another?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>INSERT INTO table2 SELECT * FROM table1;</code> or <code>SELECT * INTO newtable FROM oldtable;</code> (syntax varies).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Temporary Table?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Temporary Table is a table that exists temporarily on the database server. It is automatically deleted when the session ends.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Pattern Matching?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Pattern matching is used to search for patterns in strings, typically using <code>LIKE</code> or <code>REGEXP</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between NVL, IFNULL, and ISNULL?</strong></p>
+<ul>
+<li><strong>Answer:</strong> These are functions to replace NULL values, but they are specific to different SQL dialects (Oracle uses NVL, MySQL uses IFNULL, SQL Server uses ISNULL).</li>
+</ul>
+</li>
+<li>
+<p><strong>How do you find duplicate records in a table?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Use <code>GROUP BY</code> on the columns and <code>HAVING COUNT(*) &gt; 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the purpose of the CHECK constraint?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>CHECK</code> constraint limits the value range that can be placed in a column.</li>
+</ul>
+</li>
+</ol>
+<h2 id="advanced-sql-questions-71-100">Advanced SQL (Questions 71-100)</h2>
+<ol>
+<li>
+<p><strong>What are Window Functions?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Window functions perform calculations across a set of table rows that are somehow related to the current row (e.g., <code>OVER()</code>, <code>PARTITION BY</code>). Unlike aggregate functions, they don't collapse rows.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Recursive CTE?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Recursive CTE is a CTE that references itself. It is useful for querying hierarchical data like organizational charts or graph structures.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Database Sharding?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Sharding is a horizontal partition of data in a database or search engine. Each individual partition is referred to as a shard or database shard.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Partitioning?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Partitioning is the division of a logical database or its constituent elements into distinct independent parts. It improves performance and manageability.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between Horizontal and Vertical Scaling?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Horizontal scaling adds more machines to the pool. Vertical scaling adds more power (CPU, RAM) to an existing machine.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is an Execution Plan?</strong></p>
+<ul>
+<li><strong>Answer:</strong> An execution plan is the result of the query optimizer's attempt to calculate the most efficient way to implement a SQL statement.</li>
+</ul>
+</li>
+<li>
+<p><strong>How do you optimize a slow SQL query?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Analyze the execution plan, add proper indexes, avoid <code>SELECT *</code>, use joins instead of subqueries where appropriate, and avoid wildcards at the start of <code>LIKE</code> patterns.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between OLTP and OLAP?</strong></p>
+<ul>
+<li><strong>Answer:</strong><ul>
+<li><strong>OLTP (Online Transaction Processing):</strong> Focuses on transaction processing, data entry, and retrieval (e.g., banking systems).</li>
+<li><strong>OLAP (Online Analytical Processing):</strong> Focuses on data analysis, reporting, and decision making (e.g., data warehouses).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Deadlock?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Deadlock is a situation where two or more transactions are waiting for one another to give up locks.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between Materialized View and View?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A standard View calculates data on-the-fly. A Materialized View pre-calculates and stores the result physically, refreshing it periodically. It is faster for reading but slower for writing.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the MERGE statement?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The <code>MERGE</code> statement (UPSERT) performs INSERT, UPDATE, or DELETE operations on a target table based on the results of a join with a source table.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Isolation Level?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Isolation levels define the degree to which a transaction must be isolated from the data modifications made by other transactions. Levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Phantom Read?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Phantom Read occurs when, in the course of a transaction, two identical queries are executed, and the collection of rows returned by the second query is different from the first (e.g., a new row inserted by another transaction).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Dirty Read?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Dirty Read occurs when a transaction reads data that has not yet been committed by another transaction.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Pivoting?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Pivoting is a technique to rotate data from rows to columns (Cross-Tabulation).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Dynamic SQL?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Dynamic SQL is SQL code that is generated and executed programmatically at runtime.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between function and stored procedure?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Functions must return a value, cannot change database state (usually), and can be used in SELECT statements. Stored procedures may not return a value, can change database state, and cannot be used in SELECT statements.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Surrogate Key?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Surrogate Key is a system-generated unique identifier for a table (like an auto-incrementing integer) that has no business meaning.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Database Normalization vs. De-normalization?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Normalization removes redundancy. De-normalization introduces redundancy to improve read performance.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is B-Tree?</strong></p>
+<ul>
+<li><strong>Answer:</strong> B-Tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time. It is commonly used for database indexes.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is NoSQL?</strong></p>
+<ul>
+<li><strong>Answer:</strong> NoSQL databases are non-relational databases designed for distributed data stores. They provide mechanism for storage and retrieval of data modeled in means other than tabular relations (e.g., Key-Value, Document, Graph).</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the CAP Theorem?</strong></p>
+<ul>
+<li><strong>Answer:</strong> It states that a distributed data store can only guarantee two of the following three: Consistency, Availability, and Partition Tolerance.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between WHERE and ON clause in Joins?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>ON</code> defines the join condition between tables. <code>WHERE</code> filters the result set after the join is performed. For Inner Joins, they are often equivalent, but for Outer Joins, <code>ON</code> filters rows before joining, while <code>WHERE</code> filters after.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Natural Join?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A Natural Join creates an implicit join clause for you based on common columns in two tables.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between UNION and JOIN?</strong></p>
+<ul>
+<li><strong>Answer:</strong> <code>JOIN</code> combines columns from two or more tables horizontally. <code>UNION</code> combines rows from two or more result sets vertically.</li>
+</ul>
+</li>
+<li>
+<p><strong>How to fetch common records from two tables?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Use <code>INTERSECT</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>How to fetch records present in one table but not in another?</strong></p>
+<ul>
+<li><strong>Answer:</strong> Use <code>EXCEPT</code> (or <code>MINUS</code> in Oracle), or <code>LEFT JOIN</code> with <code>WHERE ... IS NULL</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the STRING_AGG (or GROUP_CONCAT) function?</strong></p>
+<ul>
+<li><strong>Answer:</strong> It concatenates values from multiple rows into a single string, usually separated by a specified delimiter.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is a Lateral Join?</strong></p>
+<ul>
+<li><strong>Answer:</strong> A <code>LATERAL</code> join allows a subquery in the FROM clause to reference columns from preceding tables in the FROM clause.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is Query Optimization?</strong></p>
+<ul>
+<li><strong>Answer:</strong> The process of selecting the most efficient way to execute a SQL statement. Techniques include using indexes, analyzing execution plans, and rewriting queries.</li>
+</ul>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.expand", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
