@@ -6,549 +6,529 @@ This guide contains 100+ Java interview questions, ranging from core concepts to
 
 ### 1. What is the difference between JDK, JRE, and JVM?
 
-| Component | Full Name | Role | Contains |
+| Component | Full Form | Description | Contains |
 | :--- | :--- | :--- | :--- |
-| **JVM** | Java Virtual Machine | Executes bytecode. Platform dependent. | Just the execution engine. |
-| **JRE** | Java Runtime Environment | Environment to run Java apps. | JVM + Libraries + Class Loader. |
-| **JDK** | Java Development Kit | Kit to develop Java apps. | JRE + Tools (javac, debugger, javadoc). |
-
-**Candidate Response Paths:**
-
-*   **Path A: Candidate mentions "Platform Independence".**
-    *   *Follow-up:* "Is the JVM itself platform independent?"
-    *   *Answer:* No, the JVM is platform-specific (there is a different JVM for Windows, Linux, Mac). The *bytecode* is platform independent.
-
-### 2. Explain the "Write Once, Run Anywhere" concept.
-
-Java code is compiled into **bytecode** (`.class` files), which is an intermediate language. This bytecode is executed by the JVM, which translates it into machine code specific to the underlying hardware.
+| **JVM** | Java Virtual Machine | The abstract machine that executes Java bytecode. | Just the execution engine. |
+| **JRE** | Java Runtime Environment | The environment required to run Java applications. | JVM + Class Libraries. |
+| **JDK** | Java Development Kit | The kit required to develop and compile Java applications. | JRE + Development Tools (javac, jdb, etc). |
 
 ```mermaid
-graph LR
-    A[Source Code .java] -->|javac| B[Bytecode .class]
-    B -->|JVM Windows| C[Machine Code Windows]
-    B -->|JVM Linux| D[Machine Code Linux]
-    B -->|JVM Mac| E[Machine Code Mac]
+graph TD
+    subgraph JDK
+        subgraph JRE
+            JVM
+            Libraries[Class Libraries]
+        end
+        Tools[Dev Tools: javac, debugger]
+    end
 ```
 
-### 3. What are the main principles of Object-Oriented Programming (OOP)?
+**Candidate Response Paths:**
 
-1.  **Encapsulation:** Wrapping data (variables) and code (methods) together as a single unit.
-2.  **Inheritance:** Mechanism where one class acquires the properties and behaviors of a parent class.
-3.  **Polymorphism:** Ability of an object to take on many forms (Overloading, Overriding).
-4.  **Abstraction:** Hiding internal details and showing only functionality.
+*   **Path A: Candidate focuses on definitions.**
+    *   *Follow-up:* "Can I run a Java program with just the JVM installed?"
+    *   *Answer:* No, you need the JRE which includes the libraries and the JVM.
+*   **Path B: Candidate mentions platform independence.**
+    *   *Follow-up:* "Is the JVM itself platform-independent?"
+    *   *Answer:* No, the JVM is platform-dependent (there are specific JVMs for Windows, Linux, Mac), but it makes Java programs platform-independent.
+
+### 2. Explain the difference between `==` and `equals()`.
+
+*   `==`: Operator that checks for **reference equality** (memory address) for objects, and **value equality** for primitives.
+*   `equals()`: Method in the Object class that checks for **content equality** (logical equality).
 
 **Candidate Response Paths:**
 
-*   **Path A: Candidate confuses Abstraction and Encapsulation.**
-    *   *Follow-up:* "Does a private variable achieve abstraction or encapsulation?"
-    *   *Answer:* Encapsulation (data hiding). Abstraction is about the design (interfaces, abstract classes).
+*   **Path A: Candidate mentions overriding.**
+    *   *Follow-up:* "What happens if I don't override `equals()` in my custom class?"
+    *   *Answer:* It defaults to the implementation in the `Object` class, which uses `==` (reference equality).
+*   **Path B: Candidate mentions String pool.**
+    *   *Follow-up:* "Why does `"abc" == "abc"` return true?"
+    *   *Answer:* Because of String Interning/String Pool, both literals point to the same object.
 
-### 4. What is the difference between `String`, `StringBuilder`, and `StringBuffer`?
+### 3. What are the 4 pillars of Object-Oriented Programming (OOP)?
 
-| Class | Mutable? | Thread-Safe? | Performance | Use Case |
-| :--- | :--- | :--- | :--- | :--- |
-| `String` | No (Immutable) | Yes (Implicitly) | Slow (if modified often) | Constants, Keys |
-| `StringBuffer` | Yes | Yes (Synchronized) | Slower than Builder | Multi-threaded env |
-| `StringBuilder` | Yes | No | Fast | Single-threaded string manipulation |
-
-### 5. Why is the String class Immutable in Java?
-
-*   **Security:** Strings are used for network connections, database URLs, usernames/passwords. If mutable, these could be changed after security checks.
-*   **String Pool:** Immutability allows the String Constant Pool to function (caching), saving memory.
-*   **Thread Safety:** Immutable objects are automatically thread-safe.
-
-### 6. What is the difference between `equals()` and `==`?
-
-*   `==`: Compares **references** (memory addresses) for objects. Compares values for primitives.
-*   `equals()`: A method that compares **content** (logical equality). Default implementation in `Object` uses `==`, so it must be overridden.
+1.  **Encapsulation:** Wrapping data (variables) and code (methods) together as a single unit (Class). Hiding internal details (private).
+2.  **Inheritance:** Mechanism where one class acquires the properties and behaviors of another class.
+3.  **Polymorphism:** The ability to perform a single action in different ways (Overloading & Overriding).
+4.  **Abstraction:** Hiding implementation details and showing only functionality to the user (Interfaces & Abstract Classes).
 
 **Candidate Response Paths:**
 
-*   **Path A: Candidate mentions String Constant Pool.**
-    *   *Follow-up:* "What is the result of `new String("A") == "A"`?"
-    *   *Answer:* `false`. `new` forces a new object on the heap, bypassing the pool for the reference check against the pool literal.
+*   **Path A: Real-world examples.**
+    *   *Follow-up:* "Give me a real-world example of Polymorphism."
+    *   *Answer:* A `Shape` interface with a `draw()` method. `Circle` and `Square` implement it differently. The caller just calls `draw()` without knowing the specific shape.
 
-### 7. What is the difference between Overloading and Overriding?
+### 4. Why is Java not considered "pure" object-oriented?
 
-| Feature | Method Overloading | Method Overriding |
+Because it supports **Primitive Types** (int, char, boolean, etc.) which are not objects.
+
+**Candidate Response Paths:**
+
+*   **Path A: Candidate mentions 'static'.**
+    *   *Follow-up:* "How does the static keyword violate pure OOP?"
+    *   *Answer:* Static methods/variables belong to the class, not an instance. Pure OOP suggests everything is an object interaction.
+
+### 5. What is the difference between an Abstract Class and an Interface?
+
+| Feature | Abstract Class | Interface (Java 8+) |
 | :--- | :--- | :--- |
-| **Binding** | Static (Compile-time) | Dynamic (Runtime) |
-| **Signature** | Must have different parameters. | Must have same signature. |
-| **Scope** | Within the same class. | Parent vs Child class. |
-| **Return Type** | Can change. | Must be same (or covariant). |
-
-### 8. What are Wrapper Classes?
-
-Classes that wrap primitive data types into objects.
-*   `int` -> `Integer`
-*   `char` -> `Character`
-
-**Use Case:** Collections (List, Map) store objects, not primitives.
+| **Methods** | Can have abstract and concrete methods. | Can have abstract, default, and static methods. |
+| **Variables** | Can have final, non-final, static, non-static. | All variables are `public static final` (constants). |
+| **Inheritance** | A class can extend only one class. | A class can implement multiple interfaces. |
+| **Constructor** | Can have constructors. | Cannot have constructors. |
 
 **Candidate Response Paths:**
 
-*   **Path A: Autoboxing.**
-    *   *Follow-up:* "Does Autoboxing have a performance cost?"
-    *   *Answer:* Yes, creating objects is more expensive than using stack-based primitives. Also, `Integer` cache applies only to -128 to 127.
+*   **Path A: Design choice.**
+    *   *Follow-up:* "When would you choose an Abstract Class over an Interface?"
+    *   *Answer:* When you want to share code (state/implementation) among closely related classes, or require non-static / non-final fields.
 
-### 9. What is the difference between an Interface and an Abstract Class?
+### 6. What is the difference between Method Overloading and Method Overriding?
 
-| Feature | Interface (Pre-Java 8) | Abstract Class |
+| Feature | Overloading | Overriding |
 | :--- | :--- | :--- |
-| **Methods** | Only abstract (public). | Abstract and concrete. |
-| **Variables** | `public static final`. | Any type (instance, static). |
-| **Inheritance** | A class can implement multiple. | A class can extend only one. |
-| **Constructor** | No. | Yes. |
+| **Definition** | Same method name, different parameter list (signature). | Same method name and signature in child class. |
+| **Scope** | Within the same class. | Inheritance (Parent vs Child). |
+| **Binding** | Static/Compile-time polymorphism. | Dynamic/Runtime polymorphism. |
 
-*(Note: Java 8+ added default/static methods to Interfaces, blurring the lines, but state (instance variables) remains the key difference).*
+### 7. What is the `static` keyword?
 
-### 10. Explain the `final` keyword.
-
-*   **Final Variable:** Value cannot be changed (constant).
-*   **Final Method:** Cannot be overridden.
-*   **Final Class:** Cannot be inherited (e.g., `String` class).
-
-**Candidate Response Paths:**
-
-*   **Path A: Final reference.**
-    *   *Follow-up:* "If a List is final, can I add elements to it?"
-    *   *Answer:* Yes. The *reference* cannot change (point to a new list), but the object itself is mutable.
-
-### 11. What is the `static` keyword?
-
-Belongs to the class rather than an instance.
-*   **Static Variable:** Shared copy among all instances.
-*   **Static Method:** Can be called without creating an instance. Cannot access instance variables/methods directly.
+It means the member belongs to the type (class) itself, rather than to an instance of that type.
+*   **Static Variable:** Shared among all instances.
+*   **Static Method:** Can be called without creating an object. Cannot access instance variables.
 *   **Static Block:** Executed once when the class is loaded.
 
-### 12. What are the Access Modifiers in Java?
+**Candidate Response Paths:**
 
-| Modifier | Class | Package | Subclass | World |
-| :--- | :--- | :--- | :--- | :--- |
-| `public` | Yes | Yes | Yes | Yes |
-| `protected` | Yes | Yes | Yes | No |
-| `default` (no keyword) | Yes | Yes | No | No |
-| `private` | Yes | No | No | No |
+*   **Path A: Memory management.**
+    *   *Follow-up:* "Where are static variables stored?"
+    *   *Answer:* In the Metaspace (previously PermGen), specifically in the Class definitions.
 
-### 13. What is Checked vs Unchecked Exception?
+### 8. Can we override a `static` method?
 
-*   **Checked Exception:** Checked at compile-time. Must be handled (`try-catch`) or declared (`throws`).
-    *   *Examples:* `IOException`, `SQLException`.
-*   **Unchecked Exception:** Occurs at runtime. Compiler doesn't force handling. Extends `RuntimeException`.
-    *   *Examples:* `NullPointerException`, `ArrayIndexOutOfBoundsException`.
+No. If you define a static method with the same signature in the child class, it is called **Method Hiding**, not overriding. The method called depends on the type of the reference, not the object.
 
-### 14. What is the `finally` block?
+### 9. What is the difference between `final`, `finally`, and `finalize`?
 
-A block that always executes after `try` and `catch`, regardless of whether an exception occurred or not.
-*   **Use Case:** Closing resources (files, DB connections).
+*   `final`: Keyword to apply restrictions.
+    *   **Variable:** Constant.
+    *   **Method:** Cannot be overridden.
+    *   **Class:** Cannot be inherited (e.g., `String`).
+*   `finally`: Block used in Exception Handling. Executes always (with rare exceptions).
+*   `finalize`: Method used for Garbage Collection cleanup (Deprecated in Java 9).
+
+### 10. Why is `String` immutable in Java?
+
+1.  **Security:** Used for network connections, database URLs, usernames/passwords.
+2.  **Synchronization:** Automatically thread-safe.
+3.  **Caching:** String Pool requires immutability to ensure one reference doesn't change the value for others.
+4.  **Hashcode Caching:** The hashcode is calculated once and cached, making it a great key for Maps.
+
+### 11. `String` vs `StringBuilder` vs `StringBuffer`?
+
+| Class | Mutable? | Thread-Safe? | Performance |
+| :--- | :--- | :--- | :--- |
+| `String` | No | Yes (Immutable) | Slow (creates new objects) |
+| `StringBuilder` | Yes | No | Fast |
+| `StringBuffer` | Yes | Yes (Synchronized) | Slower than Builder |
 
 **Candidate Response Paths:**
 
-*   **Path A: When does it NOT execute?**
-    *   *Answer:* `System.exit(0)` or JVM crash.
+*   **Path A: Usage context.**
+    *   *Follow-up:* "When would you use `StringBuffer`?"
+    *   *Answer:* Only in multi-threaded environments where a shared mutable string is being modified. Otherwise, `StringBuilder` is preferred.
 
-### 15. What is `try-with-resources`?
+### 12. Explain the difference between Checked and Unchecked Exceptions.
 
-Introduced in Java 7. Automatically closes resources that implement `AutoCloseable`.
+*   **Checked Exceptions:** Checked at compile-time. Must be handled (`try-catch`) or declared (`throws`).
+    *   *Examples:* `IOException`, `SQLException`.
+*   **Unchecked Exceptions:** Runtime Exceptions. Compiler does not force handling.
+    *   *Examples:* `NullPointerException`, `ArrayIndexOutOfBoundsException`.
+
+**Candidate Response Paths:**
+
+*   **Path A: Design philosophy.**
+    *   *Follow-up:* "When creating a custom exception, which one should you extend?"
+    *   *Answer:* Generally `RuntimeException` (Unchecked) if the client cannot recover from it. `Exception` (Checked) if you expect the client to recover.
+
+### 13. What is the `try-with-resources` statement?
+
+Introduced in Java 7, it allows declaring resources (that implement `AutoCloseable`) inside the `try(...)` parenthesis. It ensures that the resources are closed automatically at the end of the block, replacing the verbose `finally` block pattern.
 
 ```java
 try (BufferedReader br = new BufferedReader(new FileReader(path))) {
     return br.readLine();
-} // br is automatically closed here
+} // br is closed here automatically
 ```
 
-### 16. What is the difference between `throw` and `throws`?
+### 14. Does the `finally` block always execute?
 
-*   `throw`: Used to explicitly throw an exception within a method body.
-    *   `throw new Exception("Error");`
-*   `throws`: Used in method signature to declare that this method might throw specific exceptions.
-    *   `public void method() throws IOException`
+Yes, except in these cases:
+1.  `System.exit()` is called.
+2.  The thread is killed.
+3.  JVM crashes / Power failure.
 
-### 17. Can you override a private or static method?
+### 15. What are Wrapper Classes?
 
-*   **Private:** No. They are not visible to subclasses.
-*   **Static:** No. If you define a static method with the same signature in a subclass, it is **Method Hiding**, not overriding. Run-time polymorphism does not apply.
+Classes that wrap primitive data types into objects.
+*   `int` -> `Integer`
+*   `char` -> `Character`
+*   `double` -> `Double`
 
-### 18. What is the Object class?
+**Candidate Response Paths:**
 
-The root class of the Java class hierarchy. Every class explicitly or implicitly extends `Object`.
-**Key Methods:** `toString()`, `equals()`, `hashCode()`, `getClass()`, `clone()`, `finalize()`, `wait()`, `notify()`.
+*   **Path A: Autoboxing.**
+    *   *Follow-up:* "What is Autoboxing and Unboxing?"
+    *   *Answer:* Automatic conversion between primitives and wrappers by the compiler.
+    *   *Follow-up:* "What is the danger of Unboxing?"
+    *   *Answer:* `NullPointerException` if the wrapper is null.
 
-### 19. What is the contract between `equals()` and `hashCode()`?
+### 16. What is a Marker Interface?
 
-1.  If `a.equals(b)` is true, then `a.hashCode()` must equal `b.hashCode()`.
-2.  If `a.hashCode() == b.hashCode()`, `a` and `b` may or may not be equal (Collision).
-
-**Consequence:** If you override `equals()`, you **must** override `hashCode()`, otherwise Hash-based collections (HashMap, HashSet) will fail to retrieve objects correctly.
-
-### 20. What is a Marker Interface?
-
-An interface with no methods or fields. It provides run-time type information to the JVM or frameworks.
+An interface with no methods or fields. It provides run-time type information about objects so the JVM or compiler can take some special action.
 *   *Examples:* `Serializable`, `Cloneable`, `Remote`.
-*   *Modern approach:* Annotations are often used instead.
+*   *Modern Alternative:* Annotations.
+
+### 17. Explain `public static void main(String[] args)`.
+
+*   `public`: Access modifier, JVM can call it from outside.
+*   `static`: No object needed to call it.
+*   `void`: Returns nothing.
+*   `main`: Identifier name the JVM looks for.
+*   `String[] args`: Command line arguments.
+
+### 18. Can we execute a program without `main` method?
+
+Prior to Java 7, yes, using a static block. In modern Java versions (JDK 7+), No. The JVM explicitly looks for the main method before initializing the class.
+
+### 19. What is "Pass by Value" vs "Pass by Reference"?
+
+Java is strictly **Pass by Value**.
+*   For **primitives**, the actual value is copied.
+*   For **objects**, the *value of the reference* (memory address) is copied. The object itself is not copied, but the new reference points to the same object.
+
+**Candidate Response Paths:**
+
+*   **Path A: Confusion.**
+    *   *Follow-up:* "If I pass an object to a method and modify its field, does the original object change?"
+    *   *Answer:* Yes, because the copy of the reference points to the same heap object.
+    *   *Follow-up:* "If I reassign the object parameter to a `new Object()` inside the method, does the original reference change?"
+    *   *Answer:* No. You only changed the local copy of the reference.
+
+### 20. What is the `super` keyword?
+
+A reference variable used to refer to the immediate parent class object.
+1.  Call parent constructor: `super()`.
+2.  Call parent method: `super.method()`.
+3.  Access parent field: `super.field`.
+
 
 ## Part 2: Collections & Generics (21-40)
 
-### 21. What is the Java Collections Framework hierarchy?
+### 21. What is the difference between Array and ArrayList?
 
-The root interface is `Collection`.
-*   **List:** Ordered, allows duplicates.
-*   **Set:** Unordered (mostly), unique elements.
-*   **Queue:** FIFO (First In First Out).
-*(Note: `Map` is part of the framework but does not extend `Collection`.)*
+| Feature | Array | ArrayList |
+| :--- | :--- | :--- |
+| **Size** | Fixed | Dynamic (Resizes automatically) |
+| **Performance** | Fast (Direct index access) | Slightly slower (due to resizing overhead) |
+| **Primitives** | Can store primitives (int, char). | Stores only Objects (Integer, Character). |
+| **Generics** | No | Yes |
+
+### 22. Explain the hierarchy of the Collection Framework.
 
 ```mermaid
 graph TD
+    Iterable --> Collection
     Collection --> List
     Collection --> Set
     Collection --> Queue
     List --> ArrayList
     List --> LinkedList
+    List --> Vector
     Set --> HashSet
+    Set --> LinkedHashSet
     Set --> TreeSet
     Queue --> PriorityQueue
-    Map --> HashMap
-    Map --> TreeMap
+    Queue --> Deque
 ```
+*(Note: Map is not part of the Collection interface hierarchy, it is separate).*
 
-### 22. Difference between `ArrayList` and `LinkedList`?
+### 23. List vs Set vs Map?
 
-| Feature | ArrayList | LinkedList |
-| :--- | :--- | :--- |
-| **Backing Structure** | Dynamic Array. | Doubly Linked List. |
-| **Access (Get)** | Fast (O(1)). | Slow (O(n)). |
-| **Insertion/Deletion** | Slow (requires shifting) (O(n)). | Fast (pointer change) (O(1) at ends). |
-| **Memory** | Less overhead. | More overhead (stores pointers). |
+*   **List:** Ordered collection. Allows duplicates. Accessed by index.
+*   **Set:** Unordered collection. No duplicates.
+*   **Map:** Key-Value pairs. Unique keys.
 
-### 23. How does `HashMap` work internally?
+### 24. How does `HashSet` check for duplicates?
 
-It uses an array of Nodes (buckets).
-1.  **Hashing:** Calls `hashCode()` on the key to calculate the index.
-2.  **Collision:** If two keys map to the same index, they form a Linked List (or Red-Black Tree in Java 8+ if > 8 nodes) in that bucket.
-3.  **Retrieval:** Traverses the list/tree at the index, calling `equals()` on keys to find the match.
+It uses `hashCode()` and `equals()`.
+1.  Calculates hash code of the object.
+2.  Checks if that hash code exists in the internal bucket.
+3.  If yes, it uses `equals()` to check if the objects are actually identical.
 
 **Candidate Response Paths:**
 
-*   **Path A: Candidate mentions resizing.**
-    *   *Follow-up:* "When does it resize?"
-    *   *Answer:* When `size > capacity * loadFactor` (default 0.75). It doubles the array size and rehashes everything.
+*   **Path A: Internal implementation.**
+    *   *Follow-up:* "What does HashSet use internally to store data?"
+    *   *Answer:* It uses a `HashMap`, storing the element as the Key and a dummy object (`PRESENT`) as the Value.
 
-### 24. Difference between `HashMap` and `Hashtable`?
+### 25. Explain the internal working of `HashMap`.
+
+It uses an array of "Nodes" (buckets). Each node is a Linked List (or Red-Black Tree in Java 8+).
+1.  `put(K, V)` -> Hash(K) -> Index.
+2.  If bucket is empty, add Node.
+3.  If bucket is not empty (Collision), append to Linked List/Tree.
+
+**Candidate Response Paths:**
+
+*   **Path A: Java 8 Improvement.**
+    *   *Follow-up:* "What changed in Java 8 regarding HashMap collisions?"
+    *   *Answer:* When a bucket's linked list grows beyond a threshold (8), it converts to a **Balanced Tree (Red-Black Tree)** to improve worst-case search from O(n) to O(log n).
+
+### 26. `ArrayList` vs `LinkedList`?
+
+*   **ArrayList:** Uses a dynamic array.
+    *   *Get:* O(1)
+    *   *Insert/Delete:* O(n) (needs shifting).
+*   **LinkedList:** Uses a doubly linked list.
+    *   *Get:* O(n) (needs traversal).
+    *   *Insert/Delete:* O(1) (pointer change, assuming you are at the node).
+
+### 27. What is the difference between `HashMap` and `Hashtable`?
 
 | Feature | HashMap | Hashtable |
 | :--- | :--- | :--- |
-| **Thread-Safe** | No. | Yes (Synchronized methods). |
-| **Null Keys/Values** | Allows 1 null key, many null values. | No nulls allowed. |
-| **Performance** | Faster. | Slower (due to locks). |
+| **Thread-Safe** | No | Yes (Synchronized) |
+| **Null Keys/Values** | Allows 1 null key, multiple null values. | Does not allow nulls. |
+| **Performance** | Fast | Slow |
+| **Legacy** | Modern | Legacy (Vector/Stack/Hashtable) |
 
-### 25. Difference between `HashSet` and `TreeSet`?
+### 28. What is `ConcurrentHashMap`?
 
-*   **HashSet:** Uses `HashMap` internally. Unordered. O(1) operations.
-*   **TreeSet:** Uses `TreeMap` (Red-Black Tree). Sorted order. O(log n) operations.
+A thread-safe implementation of Map. Unlike `Hashtable` (which locks the entire map), `ConcurrentHashMap` uses **Bucket-Level Locking** (Segment locking in older versions, CAS + Synchronized on Node in Java 8+). It allows concurrent reads and writes.
 
-### 26. What is the difference between `Comparable` and `Comparator`?
+### 29. What is the difference between `Comparable` and `Comparator`?
 
-*   **Comparable:** "Natural" ordering. Implemented by the class itself (`compareTo(T o)`).
-    *   *Example:* `String`, `Integer`.
-*   **Comparator:** Custom ordering. Implemented in a separate class/lambda (`compare(T o1, T o2)`).
-    *   *Example:* Sort by ID, then by Name.
+*   **Comparable:** Natural ordering. Implemented by the class itself (`implements Comparable<T>`). Override `compareTo()`.
+    *   *Example:* `Collections.sort(list)` uses this.
+*   **Comparator:** Custom ordering. Implemented by a separate class (`implements Comparator<T>`). Override `compare()`.
+    *   *Example:* `Collections.sort(list, new MyComparator())`.
 
-### 27. What is the difference between Fail-Fast and Fail-Safe Iterators?
+### 30. What is a PriorityQueue?
 
-*   **Fail-Fast:** Throws `ConcurrentModificationException` if the collection is modified (add/remove) while iterating. (e.g., `ArrayList`, `HashMap`).
-*   **Fail-Safe:** Iterates over a clone or snapshot. Does not throw exception. (e.g., `CopyOnWriteArrayList`, `ConcurrentHashMap`).
+A queue where elements are ordered based on their priority (Natural ordering or Comparator), not insertion order. The head is always the least element.
+*   *Implementation:* Binary Heap.
+*   *Time Complexity:* Enqueue/Dequeue takes O(log n).
 
-### 28. How do you remove an element from a List while iterating?
+### 31. What is the contract between `hashCode()` and `equals()`?
 
-**Wrong:** Using `list.remove()` inside a for-each loop (throws `ConcurrentModificationException`).
+1.  If two objects are equal according to `equals()`, they MUST have the same `hashCode()`.
+2.  If two objects have the same `hashCode()`, they are NOT necessarily equal (Collision).
 
-**Correct:**
-1.  Use `Iterator.remove()`.
-2.  Use Java 8 `removeIf()`.
+**Candidate Response Paths:**
+
+*   **Path A: Violation consequences.**
+    *   *Follow-up:* "What goes wrong if I override equals but not hashCode?"
+    *   *Answer:* Collections relying on hashing (HashMap, HashSet) will fail to find the object because they look in the wrong bucket.
+
+### 32. What is `fail-fast` vs `fail-safe` iterator?
+
+*   **Fail-Fast:** Throws `ConcurrentModificationException` if the collection is modified while iterating (except via iterator's own remove method).
+    *   *Examples:* ArrayList, HashMap iterators.
+*   **Fail-Safe:** Works on a clone or snapshot of the collection. Does not throw exception.
+    *   *Examples:* `CopyOnWriteArrayList`, `ConcurrentHashMap`.
+
+### 33. What are Generics?
+
+Generics allow types (classes and interfaces) to be parameters when defining classes, interfaces, and methods. It provides **Type Safety** at compile time and eliminates manual casting.
 
 ```java
-Iterator<String> it = list.iterator();
-while(it.hasNext()){
-    if(it.next().equals("A")) it.remove();
-}
+List<String> list = new ArrayList<>();
 ```
 
-### 29. What is Generic Type Erasure?
+### 34. What is Type Erasure?
 
-Generics provide type safety at compile-time. At runtime, the JVM wipes out (erases) the specific type information.
-*   `List<String>` becomes `List` (raw type) or `List<Object>`.
-*   This ensures backward compatibility with older Java versions.
+The process where the compiler removes all generic type information after type checking. At runtime, `List<String>` and `List<Integer>` become just `List`.
+*   *Why?* Backward compatibility with pre-Java 5 code.
 
-### 30. Explain `<? extends T>` vs `<? super T>`.
+### 35. What is the difference between `<? extends T>` and `<? super T>`?
 
-PECS: **Producer Extends, Consumer Super**.
-*   **? extends T:** Upper bound. You can read from it (Producer), but cannot add (except null). Safe to read as T.
-*   **? super T:** Lower bound. You can add to it (Consumer), but reading gives you `Object`.
+*   `<? extends T>`: Upper Bound Wildcard. Accepts T or its subclasses. (Read-only mostly).
+*   `<? super T>`: Lower Bound Wildcard. Accepts T or its superclasses. (Write-allowed).
+*   **PECS Rule:** Producer Extends, Consumer Super.
 
-### 31. What is `PriorityQueue`?
+### 36. Can you add an element to a `List<?>`?
 
-A Queue that processes elements based on priority (Natural ordering or Comparator) rather than FIFO.
-*   Internal structure: Binary Heap.
-*   Head is always the least element.
+No (except `null`). Because the compiler doesn't know what type the list holds, it prevents adding any object to ensure type safety.
 
-### 32. What is `WeakHashMap`?
+### 37. What is `IdentityHashMap`?
 
-A Map where keys are **WeakReferences**. If a key is no longer referenced elsewhere in the program, the entry is eligible for Garbage Collection, even if it exists in the Map.
-*   *Use Case:* Caching where you don't want the cache to prevent GC.
+A map that uses reference equality (`==`) instead of object equality (`equals()`) for keys. Useful for topology preservation in serialization.
 
-### 33. What is `IdentityHashMap`?
+### 38. What is `WeakHashMap`?
 
-A Map that uses reference equality (`==`) instead of object equality (`equals()`) for keys.
-*   Two distinct objects with same content are considered different keys.
+A Map where keys are **WeakReferences**. If a key is no longer referenced elsewhere in the application, the entry is eligible for Garbage Collection. Useful for Caches.
 
-### 34. Can you use `Collections.sort()` on a custom object?
+### 39. How to make a collection Read-Only (Immutable)?
 
-Yes, provided the object implements `Comparable` or you pass a `Comparator`.
+Use `Collections.unmodifiableList(list)`.
+*   *Note:* It returns a view. If the original list changes, the view changes. For a truly immutable independent copy, use `List.copyOf(list)` (Java 10+).
 
-### 35. What is `CopyOnWriteArrayList`?
+### 40. Why doesn't `Map` extend `Collection` interface?
 
-A thread-safe variant of `ArrayList`.
-*   **Mechanism:** Every mutation (add, set) creates a fresh copy of the underlying array.
-*   **Use Case:** Read-heavy, write-rare scenarios (e.g., Listeners list).
-
-### 36. What is the difference between `Array`, `ArrayList` and `Vector`?
-
-*   **Array:** Fixed size. Holds primitives or objects. Fast.
-*   **ArrayList:** Dynamic size. Not thread-safe.
-*   **Vector:** Dynamic size. Thread-safe (Legacy, replaced by ArrayList/CopyOnWriteArrayList).
-
-### 37. What happens if you override `equals()` but not `hashCode()` and use it in a HashMap?
-
-The HashMap will treat two equal objects as different keys because they will likely hash to different buckets (default `hashCode` uses memory address). You will lose data (put one, cannot get it back with another equal instance).
-
-### 38. How to make a collection Read-Only?
-
-`Collections.unmodifiableList(list)`.
-*   Any attempt to modify it throws `UnsupportedOperationException`.
-
-### 39. What is the Diamond Operator `<>`?
-
-Introduced in Java 7 to reduce verbosity.
-*   Before: `List<String> list = new ArrayList<String>();`
-*   After: `List<String> list = new ArrayList<>();`
-Compiler infers the type.
-
-### 40. What is `BlockingQueue`?
-
-A Queue that supports operations that wait for the queue to become non-empty when retrieving an element, and wait for space to become available when storing an element.
-*   **Core for Producer-Consumer pattern.**
-*   *Impl:* `ArrayBlockingQueue`, `LinkedBlockingQueue`.
+Because Map is a key-value pair, while Collection is a group of individual objects. The methods `add(E)` or `iterator()` don't map directly to a Key-Value structure (which has `put(K,V)`, `keySet()`, `entrySet()`).
 
 ## Part 3: Concurrency & Multithreading (41-60)
 
-### 41. What is the difference between Process and Thread?
+### 41. What is the difference between `Process` and `Thread`?
 
-| Feature | Process | Thread |
-| :--- | :--- | :--- |
-| **Memory** | Separate memory space. | Shared memory space (Heap). |
-| **Creation** | Heavyweight. | Lightweight. |
-| **Communication** | IPC (Inter-Process Communication). | Shared variables, wait/notify. |
-| **Crash** | One process crash doesn't affect others. | One thread crash can kill the process. |
+*   **Process:** An instance of a program in execution. Has its own memory space (Heap, Stack). Heavyweight.
+*   **Thread:** A subset of a process. Share the same memory space (Heap) but have their own Stack. Lightweight.
 
-### 42. How do you create a thread in Java?
+### 42. How can we create a Thread in Java?
 
-1.  **Extend `Thread` class.**
-2.  **Implement `Runnable` interface.**
-3.  **Implement `Callable` interface** (Executor Framework).
+1.  **Extending `Thread` class.**
+2.  **Implementing `Runnable` interface.** (Preferred, as it allows extending other classes).
+3.  **Implementing `Callable` interface.** (Returns a value).
+
+### 43. What is the difference between `start()` and `run()`?
+
+*   `start()`: Creates a new thread and then calls `run()` internally.
+*   `run()`: Just executes the method in the *current* thread (no new thread created).
+
+### 44. Explain Thread Lifecycle (States).
+
+1.  **New:** Created but not started.
+2.  **Runnable:** Ready to run (waiting for CPU).
+3.  **Running:** Executing code.
+4.  **Blocked/Waiting:** Waiting for resource or another thread.
+5.  **Terminated:** Finished execution.
+
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Runnable: start()
+    Runnable --> Running: Scheduler
+    Running --> Runnable: yield()
+    Running --> Blocked: sleep()/wait()
+    Blocked --> Runnable: notify()/time out
+    Running --> Terminated: End
+```
+
+### 45. What is Synchronization?
+
+A mechanism to control access of multiple threads to shared resources to prevent data inconsistency (Race Conditions).
+*   **Method Synchronization:** `public synchronized void method() {}`
+*   **Block Synchronization:** `synchronized(this) { ... }`
+
+### 46. What is a "Race Condition"?
+
+A condition where multiple threads access and modify shared data concurrently, and the final result depends on the order of execution (which is unpredictable).
+
+### 47. What is Deadlock?
+
+A situation where two or more threads are blocked forever, waiting for each other.
+*   *Conditions:* Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait.
 
 **Candidate Response Paths:**
 
-*   **Path A: Which is better?**
-    *   *Answer:* `Runnable`/`Callable`. Because Java supports single inheritance only, extending `Thread` blocks you from extending anything else. Also, separates task from runner.
+*   **Path A: Prevention.**
+    *   *Follow-up:* "How can we prevent Deadlock?"
+    *   *Answer:* Eliminate Circular Wait by enforcing a strict order of acquiring locks.
 
-### 43. What is the difference between `Runnable` and `Callable`?
+### 48. `wait()` vs `sleep()`?
 
-*   **Runnable:**
-    *   Method: `void run()`
-    *   Return value: No.
-    *   Exceptions: Cannot throw checked exceptions.
-*   **Callable:**
-    *   Method: `V call()`
-    *   Return value: Yes.
-    *   Exceptions: Can throw checked exceptions.
-
-### 44. What are the thread states (Lifecycle)?
-
-```mermaid
-graph LR
-    New --> Runnable
-    Runnable --> Running
-    Running --> Terminated
-    Running --> Blocked/Waiting
-    Blocked/Waiting --> Runnable
-```
-
-*   **New:** Created but not started.
-*   **Runnable:** Ready to run (waiting for CPU).
-*   **Running:** Executing.
-*   **Blocked/Waiting:** Waiting for lock or IO.
-*   **Terminated:** Finished execution.
-
-### 45. What is the difference between `start()` and `run()`?
-
-*   **start():** Creates a new thread and calls `run()` internally.
-*   **run():** Executes the code in the **current** thread (just a normal method call).
-
-### 46. What is Synchronization?
-
-A mechanism to control access to shared resources by multiple threads to prevent data inconsistency.
-*   **Synchronized Method:** Locks the object instance (`this`) or class (`Class` object for static).
-*   **Synchronized Block:** Locks a specific object.
-
-### 47. What is a Deadlock?
-
-A situation where two or more threads are blocked forever, waiting for each other to release a lock.
-
-**Example:**
-*   Thread 1 locks A, waits for B.
-*   Thread 2 locks B, waits for A.
-
-**How to avoid:**
-*   Acquire locks in a consistent order.
-*   Use `tryLock()` with timeout.
-
-### 48. What is the `volatile` keyword?
-
-It guarantees **visibility**.
-*   The value of a volatile variable is always read from the main memory, not from the thread's local cache.
-*   It also prevents instruction reordering.
-*   *Note:* It does **not** guarantee atomicity (e.g., `i++` is not safe with just volatile).
-
-### 49. What is the difference between `wait()` and `sleep()`?
-
-| Feature | wait() | sleep() |
+| Feature | `wait()` | `sleep()` |
 | :--- | :--- | :--- |
-| **Class** | `Object` class. | `Thread` class. |
-| **Lock** | Releases the lock. | Holds the lock. |
-| **Usage** | Inter-thread communication. | Pause execution. |
-| **Wake up** | `notify()` or `notifyAll()`. | Time expires or interrupt. |
+| **Origin** | `Object` class | `Thread` class |
+| **Lock** | Releases the lock. | Keeps the lock. |
+| **Usage** | Inter-thread communication. | Pausing execution. |
 
-### 50. What is `join()`?
+### 49. What is the `volatile` keyword?
 
-It allows one thread to wait for the completion of another.
-`t1.join()` causes the current thread to pause execution until `t1` terminates.
+It guarantees **Visibility**.
+*   The value of a volatile variable will always be read from the main memory, not from the thread's local cache.
+*   It also prevents instruction reordering.
+*   *Note:* It does NOT guarantee Atomicity (e.g., `count++` is not safe even if `count` is volatile).
+
+### 50. What is `ThreadLocal`?
+
+A class that provides thread-local variables. Each thread accessing the variable has its own, independently initialized copy.
+*   *Usage:* Storing User ID in a web request, Transaction context.
 
 ### 51. What is the Executor Framework?
 
-Introduced in Java 5. It decouples task submission from task execution.
-*   Replaces manual thread creation (`new Thread()`).
-*   Uses **Thread Pools** to reuse threads.
+Introduced in Java 5 (`java.util.concurrent`). It separates task submission from task execution.
+*   **Interfaces:** `Executor`, `ExecutorService`.
+*   **Implementations:** `ThreadPoolExecutor`.
 
-### 52. What are the types of Thread Pools?
+### 52. What is the difference between `Runnable` and `Callable`?
 
-*   **FixedThreadPool:** Fixed number of threads.
-*   **CachedThreadPool:** Creates new threads as needed, reuses idle ones. Unbounded.
-*   **SingleThreadExecutor:** Single worker thread.
-*   **ScheduledThreadPool:** For scheduled/periodic tasks.
+*   **Runnable:** `run()` method returns `void`. Cannot throw checked exceptions.
+*   **Callable:** `call()` method returns `V` (Result). Can throw checked exceptions.
 
-### 53. What is `Future`?
+### 53. What is a `Future`?
 
 Represents the result of an asynchronous computation.
-*   Methods: `isDone()`, `get()` (blocks until result is ready).
+*   `get()`: Retrieves the result (blocks if not ready).
+*   `isDone()`: Checks if task is completed.
 
-### 54. What is `CompletableFuture`?
+### 54. What is the difference between `submit()` and `execute()`?
 
-Introduced in Java 8. It improves `Future` by allowing:
-*   Non-blocking callbacks (`thenApply`, `thenAccept`).
-*   Chaining multiple futures.
-*   Combining futures (`allOf`).
-*   Exception handling.
+*   `execute(Runnable)`: Defined in `Executor`. Returns void. Fire and forget.
+*   `submit(Callable/Runnable)`: Defined in `ExecutorService`. Returns a `Future`.
 
-### 55. What is `ThreadLocal`?
+### 55. What is a "Thread Pool"?
 
-A class that provides thread-local variables. Each thread accessing the variable has its own, independently initialized copy.
-*   *Use Case:* Storing User ID or Transaction ID per thread in a web request.
+A collection of pre-created threads waiting for tasks.
+*   *Benefits:* Reduces overhead of thread creation/destruction. Limits resource usage.
 
-### 56. What are Atomic Variables?
+### 56. Types of Thread Pools in `Executors` class?
 
-Classes in `java.util.concurrent.atomic` (e.g., `AtomicInteger`).
-*   They support lock-free thread-safe operations on single variables.
-*   Use CAS (Compare-And-Swap) hardware primitives.
-*   *Example:* `incrementAndGet()` is a safe alternative to `volatile i++`.
+1.  `newFixedThreadPool(n)`: Fixed number of threads.
+2.  `newCachedThreadPool()`: Creates new threads as needed, reuses idle ones.
+3.  `newSingleThreadExecutor()`: Single worker thread.
+4.  `newScheduledThreadPool(n)`: For scheduled tasks.
 
-### 57. What is the difference between `synchronized` and `ReentrantLock`?
+### 57. What is `CountDownLatch`?
 
-*   **synchronized:** Implicit lock. Automatic unlock (even on exception). Cannot interrupt waiting.
-*   **ReentrantLock:** Explicit lock. Must manually `unlock()` in `finally`.
-    *   Features: `tryLock()`, `lockInterruptibly()`, Fair locking option.
+A synchronizer that allows one or more threads to wait until a set of operations being performed in other threads completes.
+*   *Mechanism:* Initialized with count N. `await()` blocks until count reaches 0. Other threads call `countDown()`.
 
-### 58. What is a CountDownLatch?
+### 58. What is `CyclicBarrier`?
 
-A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.
-*   Initialized with a count (N).
-*   Await threads block until count reaches 0 via `countDown()`.
+A synchronizer that allows a set of threads to all wait for each other to reach a common barrier point.
+*   *Difference from CountDownLatch:* CyclicBarrier can be reused (reset) after the barrier is broken.
 
-### 59. What is a CyclicBarrier?
+### 59. What is `AtomicInteger`?
 
-Similar to CountDownLatch, but allows a set of threads to all wait for each other to reach a common barrier point.
-*   **Reusable:** Unlike CountDownLatch, it can be reset.
+A class in `java.util.concurrent.atomic` that provides atomic operations on `int` using CAS (Compare-And-Swap) machine instructions, without using synchronization.
+*   *Example:* `incrementAndGet()` is atomic.
 
-### 60. What is the Fork/Join Framework?
+### 60. What is "CAS" (Compare-And-Swap)?
 
-Designed for work-stealing parallelism.
-*   **RecursiveTask:** Returns a result.
-*   **RecursiveAction:** No result.
-*   Splits a large task into smaller sub-tasks (Fork), solves them, and combines results (Join).
-*   Used by parallel Streams.
+An optimistic locking technique used in non-blocking algorithms.
+*   *Operation:* "I think the value is A. If it is essentially A, change it to B. If not, tell me the real value and I'll try again."
+*   *Benefit:* Much faster than locks (synchronized) for low contention.
 
 ## Part 4: JVM, Memory & Performance (61-80)
 
-### 61. Explain the JVM Memory Model.
+### 61. Explain the JVM Memory Structure.
 
-| Area | Description | Shared? |
-| :--- | :--- | :--- |
-| **Heap** | Stores Objects. Garbage Collected. | Yes (All threads) |
-| **Stack** | Stores method calls, local variables, primitives. | No (Per thread) |
-| **Method Area** | Stores Class structures, Static variables, Constants. | Yes |
-| **PC Register** | Holds address of current instruction. | No |
-| **Native Method Stack** | For Native methods. | No |
-
-### 62. What is Garbage Collection (GC)?
-
-The process by which JVM automatically frees memory used by objects that are no longer reachable.
-
-**Candidate Response Paths:**
-
-*   **Path A: Explicit GC.**
-    *   *Follow-up:* "Can you force GC?"
-    *   *Answer:* You can suggest it via `System.gc()`, but JVM guarantees nothing.
-
-### 63. How does the Garbage Collector know an object is "garbage"?
-
-**Reachability Analysis.** It starts from **GC Roots** (Stack variables, Static variables, Active threads). Any object not reachable from a GC Root is garbage.
-
-*(Note: Older Reference Counting method is not used due to circular reference issues).*
-
-### 64. What are the different types of GC implementations?
-
-*   **Serial GC:** Single-threaded. (Stop-the-world). Good for small apps.
-*   **Parallel GC:** Multiple threads for GC. High throughput.
-*   **CMS (Concurrent Mark Sweep):** Low latency. Deprecated in Java 9.
-*   **G1 GC (Garbage First):** Splits heap into regions. Balances throughput and latency. Default in newer Java.
-*   **ZGC:** Ultra-low latency (<10ms pauses) for huge heaps.
-
-### 65. What is "Stop-the-World"?
-
-A pause where all application threads are suspended so the GC can safely reclaim memory.
-
-### 66. What is the difference between Minor GC and Major GC?
-
-*   **Minor GC:** Collects the **Young Generation** (Eden + Survivor spaces). Fast.
-*   **Major/Full GC:** Collects the **Old Generation** (and usually Young too). Slow. "Stop-the-world" is longer.
-
-### 67. Explain the Heap Generations (Young, Old, Perm/Metaspace).
-
-1.  **Young Gen:** New objects are allocated here (Eden). Survivors move to S0/S1.
-2.  **Old Gen:** Objects that survive multiple Minor GCs move here.
-3.  **Metaspace (Java 8+):** Replaced PermGen. Stores class metadata. Uses native memory.
+1.  **Heap Memory:** Stores Objects and Class variables. Shared by all threads.
+2.  **Stack Memory:** Stores method calls, local variables, and reference variables. Per-thread.
+3.  **Metaspace (formerly PermGen):** Stores Class definitions, Method metadata, static variables.
+4.  **PC Register:** Current instruction address.
+5.  **Native Method Stack:** For native (C/C++) methods.
 
 ```mermaid
 graph TD
+    JVM[JVM Memory] --> Heap
+    JVM --> Stack
+    JVM --> Metaspace
+    JVM --> PC[PC Register]
+    JVM --> Native[Native Stack]
     Heap --> Young[Young Gen]
     Heap --> Old[Old Gen]
     Young --> Eden
@@ -556,229 +536,262 @@ graph TD
     Young --> S1[Survivor 1]
 ```
 
-### 68. What is a Memory Leak in Java?
+### 62. What is Garbage Collection (GC)?
 
-When objects are no longer needed by the application but are still referenced (e.g., in a static List), preventing GC from removing them.
+The process by which the JVM automatically identifies and removes objects from memory (Heap) that are no longer reachable (referenced) by the application.
 
-**Common Causes:**
-*   Static collections.
-*   Unclosed resources.
-*   Listeners/Callbacks not unregistered.
+### 63. How does the JVM know an object is "garbage"?
 
-### 69. What is a `StackOverflowError`?
+It uses **Reachability Analysis**.
+*   **GC Roots:** Objects that are always accessible (e.g., Local variables in active stack, Static variables, Active threads).
+*   Any object not reachable from a GC Root is considered garbage.
 
-Thrown when the stack size limit is exceeded.
-*   **Cause:** Deep or infinite recursion.
+### 64. Explain the Generational Garbage Collection process.
 
-### 70. What is an `OutOfMemoryError`?
+1.  New objects are created in **Eden** (Young Gen).
+2.  When Eden fills, a **Minor GC** occurs. Alive objects move to **Survivor Space (S0)**.
+3.  Next Minor GC: Alive objects in Eden + S0 move to **S1**. S0 is cleared. S0 and S1 swap roles.
+4.  Objects surviving multiple Minor GC cycles (threshold age) are promoted to **Old Gen**.
+5.  When Old Gen fills, a **Major GC (Full GC)** occurs.
 
-Thrown when the JVM cannot allocate an object because the Heap is full and GC cannot free up space.
-*   **Variations:** Java heap space, Metaspace, GC overhead limit exceeded.
+### 65. What are the different types of Garbage Collectors?
 
-### 71. How do you tune the JVM? (Common Flags)
+1.  **Serial GC:** Single-threaded. (Small apps).
+2.  **Parallel GC:** Multi-threaded for Minor GC. (Throughput-oriented).
+3.  **CMS (Concurrent Mark Sweep):** Minimizes pause times (Deprecated).
+4.  **G1 GC (Garbage First):** Splits heap into regions. Default in Java 9+. Balanced throughput/latency.
+5.  **ZGC:** Ultra-low latency (<10ms).
 
-*   `-Xms`: Initial heap size.
-*   `-Xmx`: Max heap size.
-*   `-XX:+UseG1GC`: Use G1 Collector.
-*   `-Xss`: Stack size per thread.
+### 66. What is a "Memory Leak" in Java?
 
-### 72. What is ClassLoader?
-
-A subsystem of JVM responsible for loading class files at runtime.
-1.  **Bootstrap:** Loads core Java classes (rt.jar).
-2.  **Extension/Platform:** Loads extensions (lib/ext).
-3.  **Application/System:** Loads classes from classpath.
-
-### 73. What is the "Delegation Model" in ClassLoading?
-
-When a ClassLoader is asked to load a class, it delegates the request to its parent first. It only attempts to load if the parent cannot find it.
-*   **Security:** Prevents overriding core classes like `java.lang.String`.
-
-### 74. What is JIT (Just-In-Time) Compiler?
-
-Part of the JVM that compiles bytecode into native machine code *at runtime* to improve performance.
-*   It identifies "hotspots" (frequently executed methods) and compiles them.
-
-### 75. What are Strong, Soft, Weak, and Phantom References?
-
-*   **Strong:** Normal reference (`obj = new Object()`). Never GC'd if reachable.
-*   **Soft:** GC'd only if memory is running low. (Good for caches).
-*   **Weak:** GC'd as soon as the collector sees it (if no strong refs exist). (Good for metadata).
-*   **Phantom:** Enqueued after the object is finalized but before memory is reclaimed.
-
-### 76. What is the difference between `String literal` and `new String()` memory allocation?
-
-*   `String s = "A";` -> Goes to **String Constant Pool** (Heap). Reused.
-*   `String s = new String("A");` -> Goes to **Heap** (Non-pool). New object created every time.
-
-### 77. How does the `finalize()` method work?
-
-Called by GC before destroying the object.
-*   **Deprecated in Java 9.**
-*   **Issues:** Unpredictable, can resurrect objects, performance drag.
-*   **Replacement:** `Cleaner` or `PhantomReference`.
-
-### 78. What is "Escape Analysis"?
-
-A JIT optimization technique. If an object is allocated in a method and its reference never "escapes" (is not returned or assigned to a global), the JVM might:
-*   Allocate it on the **Stack** instead of Heap.
-*   Eliminate locking (Lock Elision).
-
-### 79. What is a Race Condition?
-
-A condition where the system's behavior depends on the sequence or timing of other uncontrollable events (threads).
-*   *Fix:* Synchronization / Atomic Variables.
-
-### 80. What tools do you use for profiling?
-
-*   **VisualVM:** Monitor Heap, Threads, CPU.
-*   **JConsole:** Basic monitoring.
-*   **Java Flight Recorder (JFR):** Low overhead data collection.
-*   **Eclipse MAT:** Analyze Heap Dumps for memory leaks.
-
-## Part 5: Advanced Features, Frameworks & Design Patterns (81-100)
-
-### 81. What is a Functional Interface?
-
-An interface with exactly one abstract method.
-*   **Annotation:** `@FunctionalInterface` (Optional, ensures compiler check).
-*   **Examples:** `Runnable`, `Callable`, `Comparator`, `Predicate`.
-*   **Use:** Enables Lambda Expressions.
-
-### 82. Explain Lambda Expressions.
-
-A short block of code which takes in parameters and returns a value. It is essentially an anonymous function.
-
-```java
-(parameter1, parameter2) -> { code block }
-list.forEach(n -> System.out.println(n));
-```
-
-### 83. What are Streams in Java 8?
-
-A sequence of elements supporting sequential and parallel aggregate operations.
-*   **Intermediate Ops (Lazy):** `filter()`, `map()`, `sorted()`.
-*   **Terminal Ops (Eager):** `collect()`, `forEach()`, `reduce()`.
+A situation where objects are no longer used by the application but are still referenced (e.g., in a static List or Map), preventing the GC from removing them. Eventually leads to `OutOfMemoryError`.
 
 **Candidate Response Paths:**
 
-*   **Path A: Parallel Streams.**
-    *   *Follow-up:* "Is parallel stream always faster?"
-    *   *Answer:* No. For small datasets or tasks with overhead (boxing/unboxing), thread management cost might exceed benefits.
+*   **Path A: Debugging.**
+    *   *Follow-up:* "How do you detect a memory leak?"
+    *   *Answer:* Use a profiler (VisualVM, JProfiler) to analyze Heap Dumps. Look for objects with growing instance counts that shouldn't be growing.
 
-### 84. What is the difference between `map()` and `flatMap()`?
+### 67. What is `StackOverflowError`?
 
-*   `map()`: Transforms one object to another (One-to-One).
-    *   `Stream<List<String>>` -> `Stream<Integer>` (size of list)
-*   `flatMap()`: Flattens nested structures (One-to-Many).
-    *   `Stream<List<String>>` -> `Stream<String>` (all strings from all lists).
+Occurs when the Stack memory is exhausted.
+*   *Cause:* Deep or infinite recursion.
 
-### 85. What is `Optional`?
+### 68. What is `OutOfMemoryError` (OOM)?
 
-A container object which may or may not contain a non-null value.
-*   **Purpose:** To avoid `NullPointerException` and write cleaner code without explicit null checks.
-*   **Methods:** `isPresent()`, `orElse()`, `orElseThrow()`.
+Occurs when the Heap (or Metaspace) is full and GC cannot free up enough space.
+*   *Types:* `Java heap space`, `Metaspace`, `GC Overhead limit exceeded`.
 
-### 86. What is the Singleton Pattern?
+### 69. What is Classloading?
+
+The process of finding and loading class files (`.class`) into the JVM memory at runtime.
+
+### 70. Explain the Classloader Hierarchy.
+
+1.  **Bootstrap Classloader:** Loads core Java classes (`rt.jar`, `java.lang.*`). Native implementation.
+2.  **Platform/Extension Classloader:** Loads extensions (`lib/ext`).
+3.  **Application/System Classloader:** Loads classes from the classpath.
+
+**Candidate Response Paths:**
+
+*   **Path A: Delegation Model.**
+    *   *Follow-up:* "How does the delegation model work?"
+    *   *Answer:* A classloader delegates the search to its parent first. Only if the parent cannot find it, does it try to load it itself.
+
+### 71. What is JIT (Just-In-Time) Compiler?
+
+Part of the JVM execution engine. It compiles "hot" bytecode (frequently executed code) into native machine code at runtime for higher performance, while interpreting the rest.
+
+### 72. What are Soft, Weak, and Phantom References?
+
+*   **Strong Reference:** Default (`obj = new Object()`). Never collected if reachable.
+*   **Soft Reference:** Collected only if JVM is running out of memory. (Good for Caches).
+*   **Weak Reference:** Collected aggressively at the next GC event. (Good for Metadata maps).
+*   **Phantom Reference:** Collected when the object is physically removed. Used for scheduling post-mortem cleanup.
+
+### 73. What is the difference between Heap and Stack memory?
+
+| Feature | Heap | Stack |
+| :--- | :--- | :--- |
+| **Storage** | Objects | Primitives, References, Methods |
+| **Visibility** | Global (All threads) | Local (Per thread) |
+| **Size** | Large | Small |
+| **Speed** | Slower access | Faster access |
+
+### 74. How do you tune JVM Memory?
+
+Using JVM flags:
+*   `-Xms`: Initial Heap Size.
+*   `-Xmx`: Maximum Heap Size.
+*   `-Xss`: Stack Size per thread.
+*   `-XX:MaxMetaspaceSize`: Max Metaspace size.
+
+### 75. What is "String Interning"?
+
+The process of storing only one copy of each distinct string value, which must be immutable.
+`String s = "hello"` places "hello" in the **String Constant Pool** (in Heap).
+`s.intern()` forces a string object into the pool.
+
+### 76. Why is `finalize()` deprecated?
+
+1.  **Unpredictable:** No guarantee when (or if) it will run.
+2.  **Performance:** Adds overhead to object creation and destruction.
+3.  **Security:** Vulnerable to "Finalizer attacks".
+4.  *Alternative:* Use `AutoCloseable` (try-with-resources) or `Cleaner` API.
+
+### 77. What happens if you run a recursive function without a base case?
+
+`StackOverflowError`. Each call adds a frame to the thread's stack until it hits the limit (`-Xss`).
+
+### 78. What is the purpose of the `transient` keyword?
+
+It indicates that a field should **not be serialized**. When an object is deserialized, transient fields are initialized to their default values (null/0).
+
+### 79. What is "Escape Analysis"?
+
+A JIT optimization. If an object is allocated inside a method and its reference never "escapes" that method (i.e., not returned or assigned to a global variable), the JVM might allocate it on the **Stack** instead of the Heap (Stack Allocation), or eliminate the allocation entirely (Scalar Replacement).
+
+### 80. How does the JVM handle Integer Caching?
+
+The JVM caches `Integer` objects for values between -128 and 127.
+`Integer a = 100; Integer b = 100;` -> `a == b` is true.
+`Integer x = 200; Integer y = 200;` -> `x == y` is false (creates new objects).
+
+
+## Part 5: Advanced Features, Frameworks & Design Patterns (81-100)
+
+### 81. What is the Singleton Design Pattern?
 
 A design pattern that ensures a class has only one instance and provides a global point of access to it.
 
-**Thread-Safe Implementation (Double-Checked Locking):**
 ```java
+// Thread-safe Bill Pugh Singleton
 public class Singleton {
-    private static volatile Singleton instance;
-    private Singleton() {} // Private constructor
+    private Singleton() {}
+    private static class Holder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
     public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null) instance = new Singleton();
-            }
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
 }
 ```
 
-### 87. What is the Factory Pattern?
+### 82. What is the Factory Design Pattern?
 
 A creational pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
 
-### 88. What is Dependency Injection (DI)?
+### 83. What is Dependency Injection (DI)?
 
-A design pattern used to implement IoC (Inversion of Control). It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways (Constructor, Setter, Field).
-*   *Main Framework:* Spring.
+A design pattern used to implement IoC (Inversion of Control). It allows the creation of dependent objects outside of a class and provides those objects to a class through different ways (Constructor, Setter, Interface).
 
-### 89. What is Reflection API?
+### 84. What is Reflection?
 
-Allows inspection and modification of classes, interfaces, fields, and methods at runtime, even if they are private.
-*   *Use:* Frameworks (Spring, Hibernate), Testing (JUnit).
-*   *Cons:* Performance overhead, breaks encapsulation.
+An API that is used to examine or modify the behavior of methods, classes, and interfaces at runtime.
+*   *Uses:* IDEs, Debuggers, Test Tools, Spring Framework (DI).
+*   *Drawbacks:* Performance overhead, Security risk, Breaks encapsulation.
 
-### 90. What is Serialization?
+### 85. What are Java Annotations?
 
-The process of converting the state of an object into a byte stream (to save to file or send over network).
-*   **Interface:** `Serializable`.
-*   **serialVersionUID:** Used to verify that the sender and receiver of a serialized object have loaded classes for that object that are compatible.
+Metadata about the program that is not part of the program itself.
+*   *Built-in:* `@Override`, `@Deprecated`, `@SuppressWarnings`.
+*   *Custom:* Created using `@interface`.
 
-### 91. What is the `transient` keyword?
+### 86. What is a Functional Interface?
 
-Variables marked as `transient` are **not serialized**. During deserialization, they are initialized with their default value (e.g., null or 0).
+An interface with exactly one abstract method.
+*   *Annotation:* `@FunctionalInterface`.
+*   *Purpose:* Used as the assignment target for a **Lambda Expression** or Method Reference.
+*   *Examples:* `Runnable`, `Callable`, `Comparator`, `Predicate`.
 
-### 92. What are Java Modules (Project Jigsaw - Java 9)?
+### 87. Explain Java 8 Stream API.
 
-A mechanism to group related packages and resources into a module.
-*   **Descriptor:** `module-info.java`.
-*   **Benefits:** Strong encapsulation (can hide public classes), explicit dependencies, smaller runtime (jlink).
+A sequence of elements supporting sequential and parallel aggregate operations.
+*   **Intermediate Operations (Lazy):** `filter`, `map`, `sorted`.
+*   **Terminal Operations (Eager):** `forEach`, `collect`, `reduce`, `count`.
 
-### 93. What is Inversion of Control (IoC)?
+### 88. What is the difference between `map()` and `flatMap()`?
 
-A principle where the control of flow of a program is inverted: instead of the programmer controlling the flow, an external framework (Container) controls it.
-*   *Example:* Spring Container manages object lifecycle.
+*   `map()`: Transforms each element into another object. One-to-One.
+    *   `List<String>` -> `List<Integer>`
+*   `flatMap()`: Transforms each element into a Stream of objects, then flattens the streams into a single Stream. One-to-Many.
+    *   `List<List<String>>` -> `List<String>`
 
-### 94. What is AOP (Aspect Oriented Programming)?
+### 89. What is `Optional`?
 
-A programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns (logging, security, transaction management).
-*   **Aspect:** The module defined (e.g., Logging).
-*   **Advice:** The action taken (Before, After).
-*   **Pointcut:** Where to apply the advice.
+A container object which may or may not contain a non-null value. It is used to avoid `NullPointerException` and explicit null checks.
+*   *Methods:* `isPresent()`, `ifPresent()`, `orElse()`, `orElseGet()`, `orElseThrow()`.
 
-### 95. What are Annotations?
+### 90. What are Default Methods in Interfaces?
 
-Metadata added to the code. They provide data about a program that is not part of the program itself.
-*   *Built-in:* `@Override`, `@Deprecated`.
-*   *Meta-annotations:* `@Retention`, `@Target`.
+Introduced in Java 8, they allow adding new methods to interfaces without breaking the existing implementation classes.
+*   *Keyword:* `default`.
 
-### 96. What is the difference between `Comparator.comparing()` and `thenComparing()`?
+**Candidate Response Paths:**
 
-*   `comparing()`: Primary sort key.
-*   `thenComparing()`: Secondary sort key (chaining).
-    *   `list.sort(Comparator.comparing(User::getName).thenComparing(User::getAge));`
+*   **Path A: Diamond Problem.**
+    *   *Follow-up:* "What happens if a class implements two interfaces with the same default method?"
+    *   *Answer:* The class fails to compile unless it overrides the method to resolve the conflict.
 
-### 97. What is the difference between `invokedynamic` and other invoke instructions?
+### 91. What are Java Modules (Project Jigsaw)?
 
-*   `invokevirtual`: Standard instance method call.
-*   `invokedynamic`: (Java 7+) Allows the JVM to link a method call dynamically at runtime. Heavily used by Lambdas.
+Introduced in Java 9. A module is a named, self-describing collection of code and data.
+*   *File:* `module-info.java`.
+*   *Keywords:* `module`, `requires`, `exports`.
+*   *Benefit:* Better encapsulation (stronger than packages), reduced runtime image size (`jlink`).
 
-### 98. How does Java handle Memory Leaks in ThreadLocal?
+### 92. What are Java Records?
 
-If `ThreadLocal` variables are not removed (using `remove()`), they stay in the thread's map as long as the thread is alive. In thread pools (Tomcat), threads live forever, leading to memory leaks (Classloader leaks).
+Introduced in Java 14 (Preview) / 16 (Standard). A concise way to declare classes that are transparent holders for immutable data.
+*   *Replaces:* POJOs with boilerplate getters, `equals`, `hashCode`, `toString`.
 
-### 99. What are Records (Java 14+)?
-
-A concise way to create immutable data classes.
 ```java
 public record Point(int x, int y) {}
 ```
-It automatically generates constructor, getters, `equals()`, `hashCode()`, and `toString()`.
 
-### 100. What is Sealed Class (Java 15+)?
+### 93. What is `var` in Java?
 
-Classes that restrict which other classes may extend them.
+Introduced in Java 10. Local Variable Type Inference.
+*   *Usage:* `var list = new ArrayList<String>();`
+*   *Constraint:* Can only be used for local variables with an initializer. Cannot be used for method parameters or return types.
+
+### 94. What is the difference between Serialization and Deserialization?
+
+*   **Serialization:** Converting an object state into a byte stream (to save to file/DB or send over network).
+*   **Deserialization:** Recreating the object from the byte stream.
+
+### 95. What is `serialVersionUID`?
+
+A unique identifier for each class version. It is used during deserialization to verify that the sender and receiver of a serialized object have loaded classes for that object that are compatible with respect to serialization.
+
+### 96. What is the Observer Design Pattern?
+
+A behavioral design pattern where an object (Subject) maintains a list of its dependents (Observers), and notifies them automatically of any state changes.
+*   *Usage:* Event handling systems (GUI), Pub-Sub systems.
+
+### 97. What is Inversion of Control (IoC)?
+
+A principle where the control of objects or portions of a program is transferred to a container or framework.
+*   *Traditional:* Application code calls Library.
+*   *IoC:* Framework calls Application code (e.g., Spring calling your Controller methods).
+
+### 98. What is AOP (Aspect Oriented Programming)?
+
+A programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns (e.g., logging, transaction management, security) from the business logic.
+
+### 99. Explain the "Double-Checked Locking" pattern.
+
+Used to reduce the overhead of acquiring a lock by first testing the locking criterion (the "lock hint") without actually acquiring the lock. Only if the check indicates that locking is required does the actual locking logic proceed.
+*   *Crucial:* The variable must be `volatile`.
+
+### 100. What is a Sealed Class?
+
+Introduced in Java 15 (Preview) / 17 (Standard). It allows a class or interface to restrict which other classes or interfaces may extend or implement it.
+*   *Keywords:* `sealed`, `permits`.
 
 ```java
 public sealed class Shape permits Circle, Square {}
 ```
-*   Allows better control over inheritance hierarchies.
 
 ---
 **End of Interview Questions**
