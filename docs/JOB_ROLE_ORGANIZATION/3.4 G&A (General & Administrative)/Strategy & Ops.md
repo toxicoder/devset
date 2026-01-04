@@ -7,10 +7,17 @@ A high-impact role that acts as an internal consultant to the executive team, dr
 
 ## Responsibilities
 
-* Process improvement;
-* OKR tracking;
-* QBR prep;
-* Analytics
+* **Process Optimization:** Identify inefficiencies and design scalable processes to improve operational speed.
+* **Strategic Planning:** Facilitate annual planning and OKR setting cycles.
+* **Performance Tracking:** Track and report on key organizational metrics and OKRs.
+* **Project Management:** Lead cross-functional strategic projects and initiatives.
+* **Executive Support:** Prepare materials for board meetings and Quarterly Business Reviews (QBRs).
+
+### Role Variations
+
+* **Revenue Operations (RevOps):** Focuses specifically on optimizing the sales, marketing, and customer success funnel.
+* **Product Operations:** Focuses on connecting product teams with other customer-facing teams.
+* **Chief of Staff:** A senior individual contributor role acting as a right-hand to a C-level executive.
 
 ## Average Daily Tasks
 * 09:00 Dashboard
@@ -30,6 +37,6 @@ VP Product, Finance
 > You are a Strategy & Operations Lead. Optimize internal processes. Define OKRs and track organizational performance metrics.
 
 ### Recommended MCP Servers
-* **notion**: Used for documentation, knowledge base management, and collaboration.
-* **google-sheets**: Used for collaborative spreadsheets and data tracking.
-* **asana**: Used for work management and project tracking.
+* **[notion](https://www.notion.so/)**: Used for documentation, knowledge base management, and collaboration.
+* **[google-sheets](https://www.google.com/sheets/about/)**: Used for collaborative spreadsheets and data tracking.
+* **[asana](https://asana.com/)**: Used for work management and project tracking.
