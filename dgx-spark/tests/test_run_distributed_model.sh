@@ -137,5 +137,32 @@ echo "Running test: Image pull failure on one node"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
+# Test 4: Static Analysis for Correct Escaping
+echo "Running test: Static Analysis for Correct Escaping"
+
+# Check for presence of correct pattern (single quoted, escaped dollar)
+# We are looking for the literal string: '\$oauthtoken' in the source file?
+# In the source file, we wrote '\$oauthtoken'.
+# grep -F "'\$oauthtoken'" should match it.
+# Wait, grep -F matches literal string.
+# In source: ... -u '\$oauthtoken' ...
+# grep -F "'\$oauthtoken'" matches '\$oauthtoken'.
+
+if grep -F "'\\\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
+    # Wait, backslash in source needs to be matched.
+    # If source has \, grep needs to see \.
+    # To pass \ to grep, we might need \\.
+    # In double quotes: "'\\\$oauthtoken'" -> "'\$oauthtoken'" (literal backslash dollar).
+    echo "PASS"
+else
+    # Try simpler match
+    if grep -F "'\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
+        echo "PASS"
+    else
+        echo "FAIL: Could not find correct escaping"
+        exit 1
+    fi
+fi
+
 # Cleanup
 rm -rf "$TEST_DIR"
