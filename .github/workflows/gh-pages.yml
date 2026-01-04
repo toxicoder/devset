@@ -27,4 +27,5 @@ jobs:
           python-version: 3.x
       - run: pip install -r requirements.txt
       - run: mkdocs build
+      - run: touch site/.nojekyll
       - run: ghp-import -p -f site
