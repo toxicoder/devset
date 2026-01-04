@@ -29,7 +29,7 @@ This document outlines the coding standards and best practices for TypeScript de
 
 ## Project Configuration
 
-- **Strict Mode**: Always enable `"strict": true` in `tsconfig.json`. This enables a suite of strict type checking options, including `noImplicitAny` and `strictNullChecks`.
+- **Strict Mode**: Always enable `"strict": true` in [`tsconfig.json`](https://www.typescriptlang.org/tsconfig). This enables a suite of strict type checking options, including `noImplicitAny` and `strictNullChecks`.
 - **No Unused Locals/Parameters**: Enable `"noUnusedLocals": true` and `"noUnusedParameters": true` to catch dead code.
 - **Consistent Returns**: Enable `"noImplicitReturns": true` to ensure all code paths in a function return a value.
 
@@ -244,19 +244,19 @@ try {
 
 ## Comments and Documentation
 
-- **JSDoc**: Use JSDoc `/** ... */` for public APIs, interfaces, and complex logic.
+- **JSDoc**: Use [JSDoc](https://jsdoc.app/) `/** ... */` for public APIs, interfaces, and complex logic.
 - **Self-documenting Code**: Prefer expressive variable names and clear structure over redundant comments.
 - **TODOs**: Use `// TODO:` to mark areas for future work.
 
 ## Testing
 
-- **Tools**: Use **Jest** or **Vitest** for unit testing.
+- **Tools**: Use [**Jest**](https://jestjs.io/) or [**Vitest**](https://vitest.dev/) for unit testing.
 - **File Naming**: Test files should be named `*.test.ts` or `*.spec.ts` and co-located with the source file or in a `__tests__` directory.
 - **Descriptive Names**: Use descriptive strings in `describe` and `it`/`test` blocks.
 
 ## Recommended Tools
 
-- **Linter**: **ESLint** with `typescript-eslint`.
-- **Formatter**: **Prettier**. Configure it to run on save.
-- **Compiling**: **tsc** (TypeScript Compiler) or bundlers like **Vite**, **esbuild**, or **Webpack**.
+- **Linter**: [**ESLint**](https://eslint.org/) with [`typescript-eslint`](https://typescript-eslint.io/).
+- **Formatter**: [**Prettier**](https://prettier.io/). Configure it to run on save.
+- **Compiling**: **tsc** (TypeScript Compiler) or bundlers like [**Vite**](https://vitejs.dev/), [**esbuild**](https://esbuild.github.io/), or [**Webpack**](https://webpack.js.org/).
 - **VS Code**: Use the official TypeScript extension and enable strict null checks in the editor.
