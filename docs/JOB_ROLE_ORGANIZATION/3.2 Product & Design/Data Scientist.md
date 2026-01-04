@@ -7,10 +7,17 @@ A strategic analytical role that leverages advanced statistical techniques and m
 
 ## Responsibilities
 
-* ML models;
-* A/B tests;
-* Data mining;
-* Visualizing insights
+* **Predictive Modeling:** Design and implement machine learning models to forecast trends and user behaviors.
+* **Data Analysis:** Perform deep-dive analysis on large datasets to uncover hidden patterns and opportunities.
+* **Experimentation:** Design, execute, and analyze A/B tests to validate hypotheses and optimize product features.
+* **Visualization:** Create compelling data visualizations and dashboards to communicate complex findings to non-technical stakeholders.
+* **Data Strategy:** Collaborate with engineering to define data collection requirements and ensure data quality.
+* **Metric Definition:** Work with product teams to define and track key performance indicators (KPIs) for product success.
+
+### Role Variations
+
+* **Inference Data Scientist:** Focuses on statistical inference, causality, and experimental design to guide strategic decision-making.
+* **Algorithm Data Scientist:** Focuses on building and optimizing production-level machine learning algorithms for features like recommendations or search.
 
 ## Average Daily Tasks
 * 09:30 Pipeline check

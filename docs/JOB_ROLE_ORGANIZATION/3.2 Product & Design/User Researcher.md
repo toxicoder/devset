@@ -7,10 +7,18 @@ An empathetic investigator dedicated to understanding the needs, behaviors, and 
 
 ## Responsibilities
 
-* User interviews;
-* Surveys;
-* Usability studies;
-* Synthesizing data
+* **Study Design:** Design rigorous qualitative and quantitative research studies to answer key business questions.
+* **Data Collection:** Conduct user interviews, usability tests, surveys, and field studies.
+* **Analysis & Synthesis:** Analyze research data to identify patterns, insights, and user pain points.
+* **Reporting:** Present findings to product teams and stakeholders in a compelling and actionable way.
+* **Persona Development:** Create and maintain user personas and journey maps to build empathy within the organization.
+* **Research Ops:** Contribute to the improvement of research operations, such as participant recruiting and knowledge management.
+
+### Role Variations
+
+* **Quantitative Researcher:** Focuses on surveys, log analysis, and statistical modeling to understand user behavior at scale.
+* **Qualitative Researcher:** Focuses on deep-dive interviews, ethnography, and usability testing to understand user motivations.
+* **Market Researcher:** Focuses on market segmentation, competitive landscape, and brand perception studies.
 
 ## Average Daily Tasks
 * 10:00 Interview
