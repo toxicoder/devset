@@ -54,10 +54,6 @@ fi
 SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=10"
 
 # === Model Configuration ===
-declare -A MODEL_IMAGES
-declare -A MODEL_PARAMS # In Billions
-declare -A MODEL_CONTEXT # In K (thousands)
-declare -A MODEL_TYPE # 'chat' or 'vision'
 
 # Defaults
 TP_SIZE=2
