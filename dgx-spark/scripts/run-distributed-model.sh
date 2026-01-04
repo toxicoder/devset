@@ -192,8 +192,8 @@ case "$MODEL_ARG" in
         IMAGE="nvcr.io/nim/deepseek-ai/deepseek-v3.1:latest"
         PARAMS=671; CONTEXT=128
         ;;
-    "alibaba/qwen3-30b-a3b-thinking")
-        IMAGE="nvcr.io/nim/alibaba/qwen3-30b-a3b-thinking:latest"
+    "alibaba/qwen3-30b-a3b-thinking"|"alibaba/qwen3-30b-a3b-thinking-2507")
+        IMAGE="nvcr.io/nim/alibaba/qwen3-30b-a3b-thinking-2507:latest"
         PARAMS=30; CONTEXT=1000
         ;;
     *)
