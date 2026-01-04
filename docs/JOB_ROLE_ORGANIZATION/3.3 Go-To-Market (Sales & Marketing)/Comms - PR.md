@@ -7,9 +7,19 @@ A communications expert responsible for shaping the company's public narrative a
 
 ## Responsibilities
 
-* Press releases;
-* Crisis comms;
-* Executive talking points
+* **Media Relations & Outreach:** Cultivate and maintain strong relationships with key journalists, editors, and influencers in the tech and business sectors to secure high-impact media coverage.
+* **Content Creation & Storytelling:** Draft and edit press releases, blog posts, op-eds, and other communications materials that articulate the company's vision and key messages.
+* **Crisis Communication Management:** Develop and execute comprehensive crisis communication protocols to protect the company's reputation during sensitive situations or negative publicity.
+* **Executive Communications:** Support leadership by preparing talking points, speeches, and presentations for internal all-hands, conferences, and media interviews.
+* **Internal Communications Strategy:** Design and implement internal communication strategies to ensure employees are informed, engaged, and aligned with company goals and culture.
+* **Monitoring & Analysis:** Track media coverage and industry conversations, providing regular reports and insights to leadership on brand sentiment and share of voice.
+
+### Role Variations
+
+* **Corporate Communications Manager:** Focuses on the overall reputation of the company, managing financial communications, M&A announcements, and corporate social responsibility (CSR) initiatives.
+* **Internal Communications Manager:** Dedicated to employee engagement and organizational culture. Manages intranets, newsletters, and internal events to foster a connected workforce.
+* **Product Communications Manager:** Specializes in launching and promoting specific products. Works closely with product marketing to secure reviews and coverage in tech publications.
+* **Crisis Communications Specialist:** A highly specialized role focused on risk assessment, scenario planning, and rapid response to reputational threats.
 
 ## Average Daily Tasks
 * 09:00 News scan

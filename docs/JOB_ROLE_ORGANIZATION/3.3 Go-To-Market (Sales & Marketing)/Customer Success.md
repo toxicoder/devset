@@ -7,10 +7,19 @@ A client-centric role dedicated to ensuring customers realize the full value of 
 
 ## Responsibilities
 
-* Onboarding;
-* Renewals/Upsells;
-* Usage monitoring;
-* QBRs
+* **Customer Onboarding & Adoption:** Lead new customers through a structured onboarding process, ensuring they successfully implement the product and achieve early value realization.
+* **Account Health Monitoring:** Proactively track customer usage metrics and health scores to identify risks, prevent churn, and ensure ongoing satisfaction.
+* **Renewal & Expansion Management:** Manage the renewal process for assigned accounts and identify opportunities for upselling and cross-selling additional features or seats.
+* **Strategic Business Reviews (QBRs):** Conduct regular Quarterly Business Reviews with key stakeholders to demonstrate ROI, discuss product roadmap, and align on future success goals.
+* **Customer Advocacy:** Serve as the voice of the customer within the company, gathering feedback and collaborating with product and engineering teams to drive product improvements.
+* **Training & Enablement:** Provide ongoing training and best practice guidance to help customers maximize their utility of the platform and stay updated on new features.
+
+### Role Variations
+
+* **Enterprise Customer Success Manager:** Manages a small portfolio of high-value strategic accounts. Requires a high-touch, consultative approach and deep understanding of the client's business.
+* **Scale/Tech-Touch CSM:** Manages a large volume of smaller accounts primarily through automated communication, webinars, and self-service resources. Focuses on efficiency and broad adoption.
+* **Onboarding Specialist:** Focuses exclusively on the initial implementation phase, ensuring customers get up and running quickly before handing off to a long-term CSM.
+* **Renewals Manager:** Specializes in the commercial aspect of the relationship, focusing strictly on contract renewals, negotiations, and churn prevention, allowing CSMs to focus on adoption.
 
 ## Average Daily Tasks
 * 09:00 Email triage

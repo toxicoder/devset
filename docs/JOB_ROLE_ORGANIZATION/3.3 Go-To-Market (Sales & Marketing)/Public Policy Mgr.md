@@ -7,9 +7,19 @@ A strategic advocate representing the company's interests to government bodies a
 
 ## Responsibilities
 
-* Lobbying;
-* Analyzing legislation;
-* Drafting position papers
+* **Regulatory Monitoring & Analysis:** Continuously track pending legislation, regulatory changes, and government activities at local, national, and international levels that could impact the business.
+* **Government Relations & Advocacy:** Build and maintain strategic relationships with legislators, regulators, and government officials to advocate for favorable policies and business conditions.
+* **Strategic Policy Development:** Develop comprehensive policy positions and strategies on key issues affecting the industry, such as privacy, data security, and competition.
+* **Coalition Building:** Collaborate with industry associations, think tanks, and civil society organizations to build coalitions and amplify the company's voice on shared policy objectives.
+* **Internal Advisory:** Advise product, legal, and engineering teams on compliance requirements and the potential policy implications of new products or features.
+* **Content Drafting:** Write policy briefs, white papers, regulatory submissions, and op-eds to educate stakeholders and influence the public policy debate.
+
+### Role Variations
+
+* **Regional Policy Manager:** Focuses on a specific geographic region (e.g., APAC, EMEA, North America). Requires deep knowledge of local political systems and cultural nuances.
+* **Tech Policy Analyst:** Specializes in technical policy areas such as AI ethics, cybersecurity standards, or broadband infrastructure. often requires a technical background.
+* **Privacy Policy Manager:** dedicated to data protection and privacy regulations (e.g., GDPR, CCPA). Works closely with the legal and security teams to ensure compliance.
+* **Federal vs. State Policy Manager:** In the US context, roles may be split between focusing on federal issues in D.C. versus state-level legislation across the country.
 
 ## Average Daily Tasks
 * 09:00 Monitoring
