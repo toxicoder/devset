@@ -7,9 +7,18 @@ A specialized Product Manager focused on technical platforms, APIs, and develope
 
 ## Responsibilities
 
-* API spec definition;
-* Developer experience;
-* Platform roadmap
+* **API Strategy:** Define the strategy and specifications for public and internal APIs.
+* **Developer Experience:** Champion the needs of third-party developers, ensuring excellent documentation and tooling.
+* **Technical Requirements:** Work closely with engineering to define technical requirements for complex platform features.
+* **Integration Management:** Manage integrations with partners and third-party services.
+* **Performance Monitoring:** Track and optimize platform performance, reliability, and scalability.
+* **Architecture Alignment:** Ensure product decisions align with the long-term technical architecture and reduce technical debt.
+
+### Role Variations
+
+* **API Product Manager:** Specifically focuses on the design, lifecycle, and monetization of API products.
+* **Cloud Product Manager:** Focuses on cloud infrastructure services and developer platforms.
+* **Security Product Manager:** Focuses on security features, compliance, and risk management products.
 
 ## Average Daily Tasks
 * 10:00 Eng sync

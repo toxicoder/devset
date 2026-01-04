@@ -7,10 +7,18 @@ A linguistic expert who shapes the product experience through words. The UX Writ
 
 ## Responsibilities
 
-* Microcopy;
-* Voice & tone;
-* Error messages;
-* Localization prep
+* **Microcopy Writing:** Craft clear, concise, and helpful text for UI elements like buttons, tooltips, and error messages.
+* **Content Strategy:** Develop content strategies that align with user needs and business goals.
+* **Voice and Tone:** Define and maintain the product's voice and tone guidelines to ensure brand consistency.
+* **Terminology Management:** Establish standard terminology and glossaries to ensure consistency across the product.
+* **Collaboration:** Work closely with designers and product managers to integrate content into the design process early.
+* **Localization Support:** Prepare content for localization and work with translation teams to ensure quality in all languages.
+
+### Role Variations
+
+* **Content Designer:** Focuses on the structural design of content and information architecture.
+* **Technical Writer:** Focuses on writing detailed technical documentation, API guides, and developer portals.
+* **Chatbot/Conversation Designer:** Focuses on writing scripts and logic for conversational interfaces and AI assistants.
 
 ## Average Daily Tasks
 * 10:00 Design review

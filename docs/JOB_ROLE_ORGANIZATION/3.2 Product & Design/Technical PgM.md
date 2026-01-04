@@ -7,10 +7,18 @@ An organizational leader responsible for driving complex, cross-functional techn
 
 ## Responsibilities
 
-* Tracking dependencies;
-* Risk mgmt;
-* Milestone reporting;
-* Facilitation
+* **Program Execution:** Drive the execution of complex, cross-functional technical programs from concept to launch.
+* **Dependency Management:** Identify, track, and resolve dependencies between multiple engineering teams.
+* **Risk Mitigation:** Proactively identify risks and issues, developing mitigation plans to keep programs on track.
+* **Process Improvement:** Establish and optimize engineering processes to improve velocity and quality (e.g., Agile, release management).
+* **Stakeholder Communication:** Provide clear and timely status reporting to leadership and stakeholders.
+* **Resource Planning:** Assist with resource allocation and capacity planning to ensure program goals can be met.
+
+### Role Variations
+
+* **Infrastructure TPM:** Focuses on large-scale infrastructure migrations, data center operations, and reliability initiatives.
+* **Release TPM:** Manages the release lifecycle, ensuring smooth and high-quality software deployments.
+* **Security TPM:** Manages security programs, compliance audits, and vulnerability remediation efforts.
 
 ## Average Daily Tasks
 * 09:00 Reporting

@@ -7,10 +7,18 @@ The CEO of the product, responsible for defining the vision, strategy, and roadm
 
 ## Responsibilities
 
-* Prioritization;
-* Stakeholder alignment;
-* User stories;
-* Market research
+* **Product Strategy:** Define the long-term vision and strategy for the product, aligning with company goals.
+* **Roadmap Management:** Create and maintain a prioritized product roadmap, balancing feature development with technical debt.
+* **Requirement Gathering:** Translate user needs and business requirements into clear user stories and acceptance criteria.
+* **Stakeholder Management:** Align cross-functional teams and stakeholders on product priorities and progress.
+* **Market Analysis:** Conduct market research and competitive analysis to identify opportunities and threats.
+* **Launch Coordination:** Orchestrate product launches, working with marketing, sales, and support to ensure success.
+
+### Role Variations
+
+* **Growth Product Manager:** Focuses on user acquisition, activation, retention, and monetization metrics.
+* **Platform Product Manager:** Focuses on internal tools, APIs, and infrastructure that enable other teams to build effectively.
+* **Core Product Manager:** Focuses on the core value proposition and feature set of the main product.
 
 ## Average Daily Tasks
 * 09:00 Metrics
