@@ -1,14 +1,32 @@
-site_name: Project Documentation
+site_name: DevSet
 site_url: https://toxicoder.github.io/devset/
 
 theme:
   name: material
   features:
-    - navigation.tabs
-    - navigation.sections
+    - content.code.copy
     - navigation.expand
-
-docs_dir: docs
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -22,3 +40,26 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Job Role Organization: JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION.md
+  - Style Guides:
+    - Bash: style-guides/bash/bash-style-guide.md
+    - C++: style-guides/cpp/cpp-style-guide.md
+    - CSS: style-guides/css/css-style-guide.md
+    - Golang: style-guides/golang/golang-style-guide.md
+    - Java: style-guides/java/java-style-guide.md
+    - JSON: style-guides/json/json-style-guide.md
+    - Kotlin: style-guides/kotlin/kotlin-style-guide.md
+    - Markdown: style-guides/markdown/markdown-style-guide.md
+    - Proto: style-guides/proto/proto-style-guide.md
+    - Python: style-guides/python/python-style-guide.md
+    - Rust: style-guides/rust/rust-style-guide.md
+    - Starlark: style-guides/starlark/starlark-style-guide.md
+    - TypeScript: style-guides/typescript/typescript-style-guide.md
+    - YAML: style-guides/yaml/yaml-style-guide.md
+    - Zsh: style-guides/zsh/zsh-style-guide.md
