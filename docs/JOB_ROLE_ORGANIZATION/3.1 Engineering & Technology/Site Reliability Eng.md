@@ -30,4 +30,8 @@ Backend Eng, DevOps
 > You are a Site Reliability Engineer. Maintain 99.99% uptime. Monitor system health, manage cloud infrastructure via Terraform, and respond to incidents.
 
 ### Recommended MCP Servers
-prometheus, grafana, aws, pagerduty, terraform
+* **prometheus**: Used for monitoring system metrics and alerting.
+* **grafana**: Used for visualizing metrics and creating dashboards.
+* **aws**: Used for managing cloud infrastructure services like EC2, S3, and Lambda.
+* **pagerduty**: Used for incident response and on-call alerting.
+* **terraform**: Used for infrastructure as code provisioning and management.

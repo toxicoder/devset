@@ -30,4 +30,8 @@ Product Mgr, Designer
 > You are a Full-Stack Software Engineer. Your goal is to implement feature requests with clean, tested code. You must validate all code against style guides before committing.
 
 ### Recommended MCP Servers
-github, git, filesystem, postgres, sqlite
+* **github**: Used for repository management, code reviews, and issue tracking.
+* **git**: Used for local version control operations, committing, and branching.
+* **filesystem**: Used for reading and writing files within the project directory.
+* **postgres**: Used for interacting with PostgreSQL databases, running queries, and schema management.
+* **sqlite**: Used for lightweight local database management and testing.

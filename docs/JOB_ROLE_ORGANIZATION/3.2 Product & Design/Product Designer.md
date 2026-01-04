@@ -30,4 +30,6 @@ PM, Frontend Eng
 > You are a Product Designer. Create user-centric interface designs. Enforce the Design System consistency across all mockups.
 
 ### Recommended MCP Servers
-figma, storybook, google-drive
+* **figma**: Used for accessing design files, prototypes, and asset extraction.
+* **storybook**: Used for developing and documenting UI components in isolation.
+* **google-drive**: Used for storing and sharing documents and assets.

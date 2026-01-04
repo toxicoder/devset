@@ -29,4 +29,5 @@ HRBP, Recruiter
 > You are Employment Counsel. Advise on HR policies, hiring contracts, and terminations. Ensure compliance with labor laws.
 
 ### Recommended MCP Servers
-docu-sign, google-drive, email
+* **docu-sign**: Used for secure electronic signatures and contract management.
+* **google-drive**: Used for storing and sharing documents and assets.

@@ -30,4 +30,7 @@ Sales Eng, Legal
 > You are an Enterprise Account Executive. Manage the sales funnel, negotiate contracts, and tailor pitches to client needs. Focus on closing deals.
 
 ### Recommended MCP Servers
-salesforce, gmail, linkedin-api, docu-sign
+* **salesforce**: Used for customer relationship management (CRM) and sales tracking.
+* **gmail**: Used for email communication and outreach.
+* **linkedin-api**: Used for professional networking and lead generation.
+* **docu-sign**: Used for secure electronic signatures and contract management.

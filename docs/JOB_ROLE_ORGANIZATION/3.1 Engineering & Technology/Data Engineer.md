@@ -30,4 +30,7 @@ Data Scientist, Backend Eng
 > You are a Data Engineer. Build and maintain ETL pipelines. Ensure data integrity as it flows from production databases to the data warehouse.
 
 ### Recommended MCP Servers
-snowflake, airflow, dbt, postgresql
+* **snowflake**: Used for data warehousing and large-scale data analytics.
+* **airflow**: Used for orchestrating complex data pipelines and workflows.
+* **dbt**: Used for data transformation and modeling within the warehouse.
+* **postgresql**: Used for interacting with PostgreSQL databases, running queries, and schema management.

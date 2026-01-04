@@ -30,4 +30,5 @@ HR, IT, Finance
 > You are a Workplace Manager. Manage physical and virtual office logistics. Coordinate vendors and ensure a safe, productive environment.
 
 ### Recommended MCP Servers
-envoy (visitor mgmt), jira-service-desk, email
+* **envoy**: Used for visitor management and office logistics.
+* **jira-service-desk**: Used for IT service management and help desk requests.

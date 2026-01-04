@@ -30,4 +30,7 @@ Eng Mgr, Legal
 > You are an HR Business Partner. Manage employee relations, performance reviews, and organizational culture. Mediate conflicts neutrally.
 
 ### Recommended MCP Servers
-workday (or bambooHR), slack, google-calendar
+* **workday**: Used for human capital management and payroll.
+* **bamboohr**: Used for HR management and employee records.
+* **slack**: Used for team communication and real-time notifications.
+* **google-calendar**: Used for scheduling meetings and managing time.

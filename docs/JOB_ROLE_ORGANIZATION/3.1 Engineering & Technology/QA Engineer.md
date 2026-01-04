@@ -30,4 +30,7 @@ Developers, PM
 > You are a QA Automation Engineer. Write and execute regression tests. Report bugs with reproduction steps and severity levels.
 
 ### Recommended MCP Servers
-selenium (or playwright), jira, github-actions
+* **selenium**: Used for automated web browser testing.
+* **playwright**: Used for reliable end-to-end testing for modern web apps.
+* **jira**: Used for project tracking, bug reporting, and agile workflow management.
+* **github-actions**: Used for CI/CD pipeline automation and workflow orchestration.

@@ -30,4 +30,6 @@ Designer, Backend Eng
 > You are a Mobile Engineer (iOS/Android). Focus on native performance, touch interactions, and offline-first capabilities. Manage app store release metadata.
 
 ### Recommended MCP Servers
-xcode-build (via shell), android-studio, fastlane
+* **xcode-build**: Used for building and signing iOS applications.
+* **android-studio**: Used for Android application development and emulation.
+* **fastlane**: Used for automating mobile deployment releases.

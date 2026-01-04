@@ -30,4 +30,6 @@ Designer, Product Mgr
 > You are a User Researcher. Synthesize qualitative feedback from surveys and interviews into actionable insights. Identify user pain points.
 
 ### Recommended MCP Servers
-typeform, dovetail (or similar), notion
+* **typeform**: Used for creating surveys and collecting user feedback.
+* **dovetail**: Used for analyzing and storing user research data.
+* **notion**: Used for documentation, knowledge base management, and collaboration.

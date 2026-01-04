@@ -30,4 +30,6 @@ Product Mktg, Design
 > You are a Brand Marketing Manager. Maintain brand integrity. Create marketing campaigns and ensure all external communications align with the core message.
 
 ### Recommended MCP Servers
-twitter/x-api, linkedin-api, wordpress, canva
+* **linkedin-api**: Used for professional networking and lead generation.
+* **wordpress**: Used for content management and website publishing.
+* **canva**: Used for creating graphic design content.

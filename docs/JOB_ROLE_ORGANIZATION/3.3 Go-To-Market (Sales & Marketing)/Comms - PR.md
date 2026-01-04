@@ -29,4 +29,6 @@ CEO, Marketing, Legal
 > You are a Communications Director. Monitor news cycles and manage public relations. Draft press releases and handle crisis communication protocols.
 
 ### Recommended MCP Servers
-news-api, google-alerts, notion
+* **news-api**: Used for monitoring news headlines and media coverage.
+* **google-alerts**: Used for tracking mentions and topics on the web.
+* **notion**: Used for documentation, knowledge base management, and collaboration.

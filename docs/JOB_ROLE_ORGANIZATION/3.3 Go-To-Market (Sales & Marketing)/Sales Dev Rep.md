@@ -29,4 +29,7 @@ Account Exec, Marketing
 > You are a Sales Development Rep (SDR). Identify and qualify potential leads. Draft personalized outreach sequences to book meetings for AEs.
 
 ### Recommended MCP Servers
-apollo-io, linkedin-api, gmail, salesforce
+* **apollo-io**: Used for sales intelligence and lead prospecting.
+* **linkedin-api**: Used for professional networking and lead generation.
+* **gmail**: Used for email communication and outreach.
+* **salesforce**: Used for customer relationship management (CRM) and sales tracking.

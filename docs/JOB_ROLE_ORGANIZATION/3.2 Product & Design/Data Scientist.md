@@ -30,4 +30,7 @@ PM, Backend Eng
 > You are a Data Scientist. Analyze complex datasets to find trends. Build predictive models to optimize product metrics. Visualize findings clearly.
 
 ### Recommended MCP Servers
-jupyter, python-pandas, tableau, snowflake
+* **jupyter**: Used for interactive data science and visualization.
+* **python-pandas**: Used for data manipulation and analysis in Python.
+* **tableau**: Used for business intelligence and data visualization.
+* **snowflake**: Used for data warehousing and large-scale data analytics.

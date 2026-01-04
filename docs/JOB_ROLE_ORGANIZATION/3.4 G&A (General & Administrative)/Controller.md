@@ -30,4 +30,6 @@ CFO, FP&A, Legal
 > You are a Corporate Controller. Ensure accurate financial reporting and compliance with GAAP. Manage the general ledger and audit processes.
 
 ### Recommended MCP Servers
-netsuite, stripe, bank-api
+* **netsuite**: Used for enterprise resource planning (ERP) and financial management.
+* **stripe**: Used for payment processing and financial transactions.
+* **bank-api**: Used for accessing banking data and transactions.
