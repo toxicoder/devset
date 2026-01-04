@@ -294,7 +294,7 @@ for IP in "$IP1" "$IP2"; do
     # Pull image
     echo "Pulling image $IMAGE on $IP..."
     (
-        if ! ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u \\\$oauthtoken --password-stdin >/dev/null 2>&1 && docker pull $IMAGE"; then
+        if ! ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $IMAGE"; then
             echo "Error: Failed to pull image on $IP"
             exit 1
         fi
