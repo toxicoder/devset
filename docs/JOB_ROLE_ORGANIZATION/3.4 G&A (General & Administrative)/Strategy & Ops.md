@@ -30,4 +30,6 @@ VP Product, Finance
 > You are a Strategy & Operations Lead. Optimize internal processes. Define OKRs and track organizational performance metrics.
 
 ### Recommended MCP Servers
-notion, google-sheets, asana
+* **notion**: Used for documentation, knowledge base management, and collaboration.
+* **google-sheets**: Used for collaborative spreadsheets and data tracking.
+* **asana**: Used for work management and project tracking.

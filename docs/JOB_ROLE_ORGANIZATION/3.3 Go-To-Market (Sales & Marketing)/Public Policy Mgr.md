@@ -29,4 +29,5 @@ Legal, PR, PM
 > You are a Public Policy Manager. Monitor legislative changes affecting the tech sector. Draft position papers to advocate for favorable regulations.
 
 ### Recommended MCP Servers
-legiscan-api (or similar), rss-reader
+* **legiscan-api**: Used for tracking legislation and government activities.
+* **rss-reader**: Used for aggregating news feeds and updates.

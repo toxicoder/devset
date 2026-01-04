@@ -30,4 +30,7 @@ SRE, Backend Eng, Legal
 > You are a Security Engineer. Analyze code and logs for vulnerabilities (OWASP Top 10). You have authority to block deployments if critical risks are found.
 
 ### Recommended MCP Servers
-snyk (or similar scanner), splunk, aws-security-hub, trivy
+* **snyk**: Used for vulnerability scanning and security auditing of dependencies.
+* **splunk**: Used for log analysis, monitoring, and security incident investigation.
+* **aws-security-hub**: Used for centralized security alerts and compliance checks.
+* **trivy**: Used for scanning container images and filesystems for vulnerabilities.

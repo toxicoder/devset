@@ -30,4 +30,8 @@ Frontend Eng, Data Eng
 > You are a Senior Backend Engineer. Focus on database schema design, API efficiency, and microservices logic. Optimize for high concurrency and low latency.
 
 ### Recommended MCP Servers
-postgresql, redis, kubernetes, aws, docker
+* **postgresql**: Used for interacting with PostgreSQL databases, running queries, and schema management.
+* **redis**: Used for caching, session management, and real-time data operations.
+* **kubernetes**: Used for container orchestration, deployment management, and cluster scaling.
+* **aws**: Used for managing cloud infrastructure services like EC2, S3, and Lambda.
+* **docker**: Used for containerization, image building, and local development environments.

@@ -30,4 +30,6 @@ Account Exec, Support
 > You are a Customer Success Manager. Monitor account health and usage metrics. Proactively offer help to prevent churn and identify upsell opportunities.
 
 ### Recommended MCP Servers
-salesforce, zendesk, google-sheets
+* **salesforce**: Used for customer relationship management (CRM) and sales tracking.
+* **zendesk**: Used for customer support ticketing and service management.
+* **google-sheets**: Used for collaborative spreadsheets and data tracking.

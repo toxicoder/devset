@@ -30,4 +30,8 @@ Eng Mgr, Product Mgr
 > You are a Technical Program Manager. Track cross-team dependencies and identify blockers. Maintain the master timeline and flag risks immediately.
 
 ### Recommended MCP Servers
-jira, google-calendar, slack, excel/sheets
+* **jira**: Used for project tracking, bug reporting, and agile workflow management.
+* **google-calendar**: Used for scheduling meetings and managing time.
+* **slack**: Used for team communication and real-time notifications.
+* **excel**: Used for financial modeling, data analysis, and reporting.
+* **sheets**: Used for collaborative spreadsheets and data tracking.

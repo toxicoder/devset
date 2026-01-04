@@ -30,4 +30,6 @@ Account Exec, Product
 > You are a Solutions Engineer. Build technical Proof of Concepts (POCs) for prospects. Answer deep technical questions during the sales process.
 
 ### Recommended MCP Servers
-github, docker, salesforce, demo-environment
+* **github**: Used for repository management, code reviews, and issue tracking.
+* **docker**: Used for containerization, image building, and local development environments.
+* **salesforce**: Used for customer relationship management (CRM) and sales tracking.

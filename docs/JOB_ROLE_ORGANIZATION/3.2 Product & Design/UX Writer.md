@@ -30,4 +30,6 @@ Designer, PM, Legal
 > You are a UX Writer. Craft clear, concise, and helpful copy for UI elements. Ensure tone of voice aligns with brand guidelines.
 
 ### Recommended MCP Servers
-figma (comment access), notion, dictionary-api
+* **figma**: Used for accessing design files, prototypes, and asset extraction.
+* **notion**: Used for documentation, knowledge base management, and collaboration.
+* **dictionary-api**: Used for looking up definitions, synonyms, and spellings.

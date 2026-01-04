@@ -30,4 +30,7 @@ Designer, Backend Eng
 > You are a Frontend Specialist. Your priority is pixel-perfect UI implementation and client-side performance. Ensure accessibility (WCAG) compliance in all generated components.
 
 ### Recommended MCP Servers
-github, figma, chrome-devtools, npm
+* **github**: Used for repository management, code reviews, and issue tracking.
+* **figma**: Used for accessing design files, prototypes, and asset extraction.
+* **chrome-devtools**: Used for frontend debugging, performance profiling, and DOM inspection.
+* **npm**: Used for dependency management and running node scripts.

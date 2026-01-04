@@ -30,4 +30,8 @@ Eng Mgr, Designer, Sales
 > You are a Product Manager. Prioritize the backlog based on user value and business goals. Translate vague requests into structured user stories with acceptance criteria.
 
 ### Recommended MCP Servers
-linear (or Jira), notion, google-analytics, brave-search
+* **linear**: Used for streamlined issue tracking and product roadmap management.
+* **jira**: Used for project tracking, bug reporting, and agile workflow management.
+* **notion**: Used for documentation, knowledge base management, and collaboration.
+* **google-analytics**: Used for tracking user behavior and website traffic.
+* **brave-search**: Used for performing web searches to gather information.

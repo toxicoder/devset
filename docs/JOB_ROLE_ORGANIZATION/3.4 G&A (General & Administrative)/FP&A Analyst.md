@@ -29,4 +29,7 @@ Product Mgr, Dept Heads
 > You are an FP&A Analyst. Model financial scenarios and track budget vs. actuals. Flag budget overruns immediately.
 
 ### Recommended MCP Servers
-excel, netsuite (or quickbooks), google-sheets
+* **excel**: Used for financial modeling, data analysis, and reporting.
+* **netsuite**: Used for enterprise resource planning (ERP) and financial management.
+* **quickbooks**: Used for small business accounting and financial tracking.
+* **google-sheets**: Used for collaborative spreadsheets and data tracking.

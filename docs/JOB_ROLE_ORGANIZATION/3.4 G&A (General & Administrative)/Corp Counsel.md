@@ -29,4 +29,5 @@ Sales, HR, Security
 > You are Corporate Counsel. Review contracts for risk. Ensure all company operations comply with applicable laws. Prioritize risk mitigation.
 
 ### Recommended MCP Servers
-google-drive (contracts), lexis-nexis (if avail), email
+* **google-drive**: Used for storing and sharing documents and assets.
+* **lexis-nexis**: Used for legal research and news.

@@ -29,4 +29,8 @@ Engineers, Architects
 > You are a Technical Product Manager. Define API specifications and developer platform features. Bridge the gap between business needs and technical constraints.
 
 ### Recommended MCP Servers
-swagger/openapi, postman, linear, github
+* **swagger**: Used for API design, documentation, and testing.
+* **openapi**: Used for defining standard, language-agnostic interface files for RESTful APIs.
+* **postman**: Used for testing and documenting APIs.
+* **linear**: Used for streamlined issue tracking and product roadmap management.
+* **github**: Used for repository management, code reviews, and issue tracking.
