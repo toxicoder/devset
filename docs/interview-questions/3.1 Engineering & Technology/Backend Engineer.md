@@ -1,1996 +1,1624 @@
-# Interview Questions: Backend Engineer (SWEN1002)
+# Interview Questions: Backend Engineer (ROLE)
 
-This document contains 100 interview questions tailored for the Backend Engineer role. The questions are categorized into five key areas: System Design, Database Management, API Development, Security, and General/Behavioral.
-
-Each question includes rich formatting and candidate response paths to help evaluate depth of knowledge.
+This document contains 100 interview questions tailored for the Backend Engineer role. The questions are designed to assess technical skills, soft skills, and cultural fit.
 
 ---
 
-## 1. Scalability (System Design)
+## 1. Code Review
 
-**Scenario:** Focus on horizontal scaling, load balancers, and caching.
+**Scenario:** Large PRs.
 
-**Question:** How would you design a system to handle 1 million concurrent users?
+**Question:** What is your approach to reviewing a massive Pull Request?
 
-```mermaid
-graph TD
-    User --> LB[Load Balancer]
-    LB --> App1[App Instance 1]
-    LB --> App2[App Instance 2]
-    App1 --> DB[(Database)]
-    App2 --> DB
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
+**Key Concepts:** `Code Quality`, `Process`
 
 ### Candidate Response Paths
-*   **Junior**: Suggests bigger servers (Vertical Scaling).
-*   **Senior**: Suggests horizontal scaling, sharding, and caching layers.
+*   **Junior**: LGTM.
+*   **Senior**: Ask for it to be broken down, or checkout locally to verify.
 
 ---
 
-## 2. Caching Strategies (System Design)
+## 2. Debugging
 
-**Scenario:** Discuss trade-offs between consistency and latency.
+**Scenario:** Production bug.
 
-**Question:** Explain different caching strategies (Write-through, Write-back, Cache-aside).
+**Question:** Production is down. Walk me through your debugging process.
 
-```mermaid
-graph LR
-    App --> Cache
-    Cache -- Miss --> DB
-    Cache -- Hit --> App
-    DB --> Cache
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
+**Key Concepts:** `Troubleshooting`, `Ops`
 
 ### Candidate Response Paths
-*   **Junior**: Mentions caching everything.
-*   **Senior**: Discusses cache invalidation challenges.
+*   **Junior**: Check logs.
+*   **Senior**: Verify impact, Rollback if possible, bisect, fix.
 
 ---
 
-## 3. Microservices vs Monolith (System Design)
+## 3. System Design
 
-**Scenario:** Discuss complexity, team size, and deployment overhead.
+**Scenario:** Scalability.
 
-**Question:** When would you choose a Monolith over Microservices?
+**Question:** Design a URL shortener.
 
-| Feature | Monolith | Microservices |
-|---|---|---|
-| Deploy | Single Artifact | Multiple |
-| Scale | All or nothing | Granular |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
+**Key Concepts:** `System Design`, `Scalability`
 
 ### Candidate Response Paths
-*   **Junior**: Says Microservices are always better.
-*   **Senior**: Recognizes overhead of Microservices for small teams.
+*   **Junior**: Database with auto-increment ID.
+*   **Senior**: Distributed ID generation, hashing, redirection, and analytics.
 
 ---
 
-## 4. Load Balancing (System Design)
+## 4. Testing
 
-**Scenario:** Explain inspection of data packets vs simply forwarding based on IP.
+**Scenario:** TDD.
 
-**Question:** Compare Layer 4 vs Layer 7 Load Balancing.
+**Question:** What is your philosophy on testing? Do you practice TDD?
 
-| Layer | Data | Example |
-|---|---|---|
-| L4 | IP/Port | HAProxy (TCP) |
-| L7 | HTTP Headers | Nginx |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
+**Key Concepts:** `Testing`, `Quality`
 
 ### Candidate Response Paths
-*   **Junior**: Only knows 'Round Robin'.
-*   **Senior**: Discusses Sticky Sessions and Path-based routing.
+*   **Junior**: I test manually.
+*   **Senior**: Pyramid of testing (Unit > Integration > E2E) and pragmatic TDD.
 
 ---
 
-## 5. Message Queues (System Design)
+## 5. Security
 
-**Scenario:** Discuss idempotency and consumer offsets.
+**Scenario:** SQL Injection.
 
-**Question:** How do you ensure message delivery guarantees (At-least-once, Exactly-once) in Kafka?
+**Question:** How do you prevent SQL injection in your code?
 
 ```mermaid
 sequenceDiagram
-    ServiceA->>Kafka: Publish Event
-    Kafka->>ServiceB: Consume Event
-    ServiceB->>DB: Update State
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Assumes messages are never lost.
-*   **Senior**: Discusses Idempotency keys and Offset management.
-
----
-
-## 6. Database Sharding (System Design)
-
-**Scenario:** Discuss re-balancing, cross-shard joins, and complexity.
-
-**Question:** What are the risks associated with Database Sharding?
-
-| Strategy | Pros | Cons |
-|---|---|---|
-| Range | Simple | Hotspots |
-| Hash | Even Distribution | Resharding Pain |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Focuses only on performance gains.
-*   **Senior**: Highlights the difficulty of Cross-shard joins.
-
----
-
-## 7. CAP Theorem (System Design)
-
-**Scenario:** Why CP is preferred over AP for payments.
-
-**Question:** Explain the CAP theorem in the context of a distributed payment system.
-
-```mermaid
-graph TD
-C[Consistency] --- A[Availability]
-A --- P[Partition Tolerance]
-P --- C
-style C fill:#f9f
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Recites definitions.
-*   **Senior**: Explains why you can't have CA in distributed systems.
-
----
-
-## 8. Rate Limiting (System Design)
-
-**Scenario:** Discuss algorithms like Token Bucket vs Leaky Bucket.
-
-**Question:** Design a rate limiter.
-
-| Algorithm | Pros | Cons |
-|---|---|---|
-| Token Bucket | Bursts allowed | Complex |
-| Fixed Window | Simple | Edge cases |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Uses a simple counter.
-*   **Senior**: Discusses Redis based distributed rate limiting.
-
----
-
-## 9. Consistent Hashing (System Design)
-
-**Scenario:** Minimizing cache misses during node addition/removal.
-
-**Question:** Why is consistent hashing important for distributed caching?
-
-```mermaid
-graph LR
-Key --> HashRing
-HashRing --> NodeA
-HashRing --> NodeB
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Unsure.
-*   **Senior**: Explains minimal key remapping.
-
----
-
-## 10. Event Sourcing (System Design)
-
-**Scenario:** Audit trails vs complexity of replaying events.
-
-**Question:** What are the benefits and drawbacks of Event Sourcing?
-
-| Aspect | CRUD | Event Sourcing |
-|---|---|---|
-| State | Current only | History of changes |
-| Complexity | Low | High |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Never heard of it.
-*   **Senior**: Mentions CQRS pattern alongside it.
-
----
-
-## 11. Circuit Breaker (System Design)
-
-**Scenario:** Fail fast mechanism.
-
-**Question:** How does a Circuit Breaker pattern prevent cascading failures?
-
-```mermaid
-stateDiagram-v2
-[*] --> Closed
-Closed --> Open : Failure Threshold
-Open --> HalfOpen : Timeout
-HalfOpen --> Closed : Success
-HalfOpen --> Open : Failure
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: It stops requests.
-*   **Senior**: Discusses fallback mechanisms and self-healing.
-
----
-
-## 12. Service Discovery (System Design)
-
-**Scenario:** DNS vs Sidecars.
-
-**Question:** How do services find each other in a dynamic environment (Kubernetes)?
-
-| Method | Description |
-|---|---|
-| Server-side | LB handles routing |
-| Client-side | Client queries registry |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Hardcoded IPs.
-*   **Senior**: DNS, Consul, or K8s Services.
-
----
-
-## 13. API Gateway (System Design)
-
-**Scenario:** Aggregation, Auth, Rate Limiting.
-
-**Question:** What is the role of an API Gateway in microservices?
-
-```mermaid
-graph TD
-    User --> Gateway
-    Gateway --> ServiceA
-    Gateway --> ServiceB
-    ServiceA --> DB_A
-    ServiceB --> DB_B
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Just a proxy.
-*   **Senior**: Cross-cutting concerns like Auth, Logging, Throttling.
-
----
-
-## 14. Distributed Transactions (System Design)
-
-**Scenario:** Saga Pattern vs 2PC.
-
-**Question:** How do you handle transactions across multiple services?
-
-| Pattern | ACID? | Performance |
-|---|---|---|
-| 2PC | Yes | Slow (Blocking) |
-| Saga | Eventual | Fast |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Use one big database.
-*   **Senior**: Orchestration vs Choreography Sagas.
-
----
-
-## 15. Idempotency (System Design)
-
-**Scenario:** Handling retries safely.
-
-**Question:** Why is idempotency critical in distributed systems?
-
-```python
-def charge_card(order_id):
-  if db.exists(order_id):
-     return
-  payment_provider.charge()
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: So we don't crash.
-*   **Senior**: Preventing double-charging on network timeouts.
-
----
-
-## 16. CDN Usage (System Design)
-
-**Scenario:** Edge computing/caching.
-
-**Question:** When should you use a CDN for dynamic content?
-
-| Content Type | CDN Strategy |
-|---|---|
-| Static | Long TTL |
-| Dynamic | Short TTL / Edge Logic |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Only for images.
-*   **Senior**: Edge Lambda for personalization.
-
----
-
-## 17. WebSockets vs Polling (System Design)
-
-**Scenario:** Real-time bidirectional needs.
-
-**Question:** When to use WebSockets over Long Polling?
-
-| Method | Latency | Overhead |
-|---|---|---|
-| Polling | High | High (Headers) |
-| WebSocket | Low | Low (after handshake) |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Polling is easier.
-*   **Senior**: Chat apps, live tickers.
-
----
-
-## 18. SPOF (System Design)
-
-**Scenario:** Redundancy planning.
-
-**Question:** How do you identify Single Points of Failure?
-
-```mermaid
-graph TD
-User --> LB
-LB --> App
-App --> SingleDB[(DB)]
-style SingleDB fill:#f00
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: When server crashes.
-*   **Senior**: Analyzing architectural diagrams for non-redundant nodes.
-
----
-
-## 19. Leader Election (System Design)
-
-**Scenario:** Consensus algorithms (Raft/Paxos).
-
-**Question:** Explain Leader Election in a distributed cluster.
-
-| Algorithm | Use Case |
-|---|---|
-| Raft | Easier to understand |
-| Paxos | Theoretical standard |
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: The biggest server is leader.
-*   **Senior**: Split-brain scenarios and Quorums.
-
----
-
-## 20. Backpressure (System Design)
-
-**Scenario:** Dropping requests vs Queueing.
-
-**Question:** How do you handle a system under heavy load that cannot process requests fast enough?
-
-```mermaid
-flowchart LR
-Producer --Fast--> Queue
-Queue --Slow--> Consumer
-Consumer --> Drop[Drop if Full]
-```
-
-**Key Concepts:** `Distributed Systems`, `Architecture`
-
-### Candidate Response Paths
-*   **Junior**: Increase memory.
-*   **Senior**: Flow control, dropping traffic, informing sender.
-
----
-
-## 21. ACID Properties (Database)
-
-**Scenario:** Atomicity, Consistency, Isolation, Durability.
-
-**Question:** Explain ACID compliance.
-
-| Property | Description |
-|---|---|
-| Atomicity | All or nothing |
-| Consistency | Valid state transitions |
-| Isolation | Concurrent transaction handling |
-| Durability | Committed data is saved |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Defines acronym.
-*   **Senior**: Explains how WAL enables Durability.
-
----
-
-## 22. Normalization (Database)
-
-**Scenario:** Redundancy vs Read Performance.
-
-**Question:** Why do we normalize databases? When is denormalization better?
-
-| Form | Goal |
-|---|---|
-| 1NF | Atomic values |
-| 3NF | No transitive dependencies |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Always normalize.
-*   **Senior**: Denormalize for read-heavy reporting.
-
----
-
-## 23. Indexing (Database)
-
-**Scenario:** Logarithmic search time.
-
-**Question:** How do B-Tree indexes work?
-
-```mermaid
-graph TD
-Root --> L[Left < 50]
-Root --> R[Right > 50]
-L --> L1[10]
-L --> L2[40]
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Makes queries faster.
-*   **Senior**: Explains branching factor and page reads.
-
----
-
-## 24. N+1 Problem (Database)
-
-**Scenario:** Fetching related data in a loop.
-
-**Question:** What is the N+1 query problem and how do you fix it?
-
-```python
-# Bad
-for user in users:
-  print(user.profile.bio)
-# Good
-users = User.objects.select_related('profile')
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Describes the loop.
-*   **Senior**: Discusses eager loading vs lazy loading.
-
----
-
-## 25. SQL vs NoSQL (Database)
-
-**Scenario:** Graph/Document store vs Relational.
-
-**Question:** Choose a database for a social media feed.
-
-| Metric | SQL | NoSQL |
-|---|---|---|
-| Structure | Structured | Unstructured |
-| Joins | Complex | None/Application-side |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: NoSQL is faster.
-*   **Senior**: Graph DB for relationships, Document for feed content.
-
----
-
-## 26. Transaction Isolation (Database)
-
-**Scenario:** Dirty reads vs Phantom reads.
-
-**Question:** Explain 'Read Committed' vs 'Serializable' isolation levels.
-
-| Level | Dirty Read | Phantom Read |
-|---|---|---|
-| Read Committed | No | Yes |
-| Serializable | No | No |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Unsure.
-*   **Senior**: Trade-off between consistency and concurrency.
-
----
-
-## 27. Replication (Database)
-
-**Scenario:** Write conflicts vs Read scaling.
-
-**Question:** Master-Slave vs Multi-Master replication.
-
-```mermaid
-graph TD
-Master --> Slave1
-Master --> Slave2
-Write --> Master
-Read --> Slave1
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Backup copies.
-*   **Senior**: Async lag and conflict resolution in Multi-Master.
-
----
-
-## 28. Connection Pooling (Database)
-
-**Scenario:** Overhead of TCP handshakes.
-
-**Question:** Why is connection pooling necessary?
-
-```mermaid
-graph LR
-App --Request--> Pool
-Pool --Reuse Conn--> DB
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Saves memory.
-*   **Senior**: Reduces handshake latency and limits max connections.
-
----
-
-## 29. Stored Procedures (Database)
-
-**Scenario:** Performance vs Maintainability.
-
-**Question:** Pros and Cons of business logic in Stored Procedures.
-
-| Aspect | Pros | Cons |
-|---|---|---|
-| Perf | Reduced Network | CPU on DB |
-| Maintenance | Centralized | Hard to Version Control |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: They are faster.
-*   **Senior**: Avoid them to keep logic in app layer (easier to scale).
-
----
-
-## 30. Soft Deletes (Database)
-
-**Scenario:** Is_deleted flag vs Archive table.
-
-**Question:** How to implement Soft Deletes?
-
-```sql
-UPDATE users SET deleted_at = NOW() WHERE id = 1;
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Add a boolean flag.
-*   **Senior**: Discusses impact on unique indexes and query complexity.
-
----
-
-## 31. Database Migration (Database)
-
-**Scenario:** Expand and Contract pattern.
-
-**Question:** How do you perform a zero-downtime schema migration?
-
-```mermaid
-sequenceDiagram
-App->>DB: Write to New & Old Col
-App->>DB: Backfill New Col
-App->>DB: Read New Col
-App->>DB: Remove Old Col
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Run script at night.
-*   **Senior**: Dual writes and phased rollout.
-
----
-
-## 32. Full Text Search (Database)
-
-**Scenario:** Performance difference.
-
-**Question:** Implementing search: LIKE vs Inverted Index (Elasticsearch).
-
-| Method | Speed | Features |
-|---|---|---|
-| LIKE %..% | O(n) | Basic |
-| Inverted Index | O(1) | Fuzzy, Ranking |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Use wildcards.
-*   **Senior**: Lucene based indexing.
-
----
-
-## 33. Clustering (Database)
-
-**Scenario:** Failover strategies.
-
-**Question:** Active-Active vs Active-Passive clustering.
-
-| Mode | Utilization | Failover |
-|---|---|---|
-| Active-Passive | 50% | Slow |
-| Active-Active | 100% | Complex |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Redundancy.
-*   **Senior**: Discusses split-brain and synchronization.
-
----
-
-## 34. Row vs Columnar (Database)
-
-**Scenario:** OLAP vs OLTP.
-
-**Question:** When to use a Columnar database (e.g., Cassandra/Redshift)?
-
-```mermaid
-graph TD
-Row[Row Store] --> OLTP[Transactional]
-Col[Column Store] --> OLAP[Analytics/Aggregates]
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: For big data.
-*   **Senior**: Better compression and aggregation performance.
-
----
-
-## 35. Foreign Keys (Database)
-
-**Scenario:** Constraint checking overhead.
-
-**Question:** Impact of Foreign Keys on insert performance.
-
-| Action | Impact |
-|---|---|
-| Insert | Needs lookup in parent table |
-| Delete | Check cascade rules |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Ensures integrity.
-*   **Senior**: Can cause locking and slow down bulk inserts.
-
----
-
-## 36. Deadlocks (Database)
-
-**Scenario:** Consistent locking order.
-
-**Question:** How do you debug and prevent deadlocks?
-
-```mermaid
-graph TD
-Tx1 --Locks--> A
-Tx1 --Waits--> B
-Tx2 --Locks--> B
-Tx2 --Waits--> A
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Restart database.
-*   **Senior**: Enforce strict ordering of resource acquisition.
-
----
-
-## 37. VACUUM (Postgres) (Database)
-
-**Scenario:** Reclaiming storage from dead tuples.
-
-**Question:** What is the purpose of VACUUM in PostgreSQL?
-
-| Concept | Detail |
-|---|---|
-| MVCC | Creates new row versions |
-| Dead Tuples | Old versions needing cleanup |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Cleans up space.
-*   **Senior**: Prevents transaction ID wraparound and bloating.
-
----
-
-## 38. Partitioning (Database)
-
-**Scenario:** Splitting tables by row vs column.
-
-**Question:** Horizontal Partitioning vs Vertical Partitioning.
-
-| Type | Split By | Use Case |
-|---|---|---|
-| Vertical | Columns | Infrequently accessed blobs |
-| Horizontal | Rows | Time-series data |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Splitting tables.
-*   **Senior**: Partition pruning improvements.
-
----
-
-## 39. Write Amplification (Database)
-
-**Scenario:** LSM Trees issue.
-
-**Question:** What is write amplification in SSDs/Databases?
-
-```mermaid
-graph LR
-Write --> MemTable
-MemTable --> SSTable_L0
-SSTable_L0 --> Merge --> SSTable_L1
-```
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: More writes than needed.
-*   **Senior**: Compaction process in LSM trees causing extra I/O.
-
----
-
-## 40. Time Series (Database)
-
-**Scenario:** TimescaleDB/InfluxDB specific structures.
-
-**Question:** How to store metrics data efficiently?
-
-| Requirement | Solution |
-|---|---|
-| Retention | Auto-expiry policies |
-| Aggregation | Continuous Aggregates |
-
-**Key Concepts:** `SQL`, `Data Modeling`
-
-### Candidate Response Paths
-*   **Junior**: Store in SQL.
-*   **Senior**: Hyper-tables and compression algorithms for time-series.
-
----
-
-## 41. REST Constraints (API)
-
-**Scenario:** Statelessness, Cacheability.
-
-**Question:** What are the key constraints of REST?
-
-| Constraint | Benefit |
-|---|---|
-| Stateless | Scalability |
-| Cacheable | Performance |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: It uses JSON.
-*   **Senior**: HATEOAS and Uniform Interface.
-
----
-
-## 42. GraphQL vs REST (API)
-
-**Scenario:** Over-fetching vs Under-fetching.
-
-**Question:** Why choose GraphQL over REST?
-
-| Feature | REST | GraphQL |
-|---|---|---|
-| Data Fetching | Multiple Endpoints | Single Endpoint |
-| Overfetching | Common | Rare |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: GraphQL is newer.
-*   **Senior**: Type system and single round-trip benefits.
-
----
-
-## 43. HTTP Status Codes (API)
-
-**Scenario:** Unauthenticated vs Unauthorized.
-
-**Question:** Difference between 401 and 403.
-
-| Code | Meaning | Action |
-|---|---|---|
-| 401 | Who are you? | Login |
-| 403 | You can't do that | Request Access |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: They are errors.
-*   **Senior**: Token missing vs Token insufficient permissions.
-
----
-
-## 44. Idempotent Methods (API)
-
-**Scenario:** PUT, DELETE, GET.
-
-**Question:** Which HTTP methods are idempotent?
-
-| Method | Idempotent | Safe |
-|---|---|---|
-| POST | No | No |
-| PUT | Yes | No |
-| GET | Yes | Yes |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: GET.
-*   **Senior**: Explains why POST is not (creation).
-
----
-
-## 45. HATEOAS (API)
-
-**Scenario:** Hypermedia as the Engine of Application State.
-
-**Question:** What is HATEOAS?
-
-```json
-{
-  "id": 1,
-  "links": [
-    {"rel": "self", "href": "/users/1"}
-  ]
-}
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Never heard of it.
-*   **Senior**: Self-discoverable APIs.
-
----
-
-## 46. Versioning (API)
-
-**Scenario:** Breaking changes management.
-
-**Question:** Strategies for API Versioning (URI, Header, Query Param).
-
-| Strategy | Example |
-|---|---|
-| URI | /v1/users |
-| Header | Accept: application/vnd.v1+json |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Change the URL.
-*   **Senior**: Header based is cleaner (content negotiation).
-
----
-
-## 47. Authentication (API)
-
-**Scenario:** Scalability implications.
-
-**Question:** Session vs Token based auth.
-
-```mermaid
-graph LR
-User --> Server
-Server --SessionID--> DB
-Server --JWT--> Stateless
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Cookies.
-*   **Senior**: JWT enables stateless auth across microservices.
-
----
-
-## 48. OAuth2 Flows (API)
-
-**Scenario:** Secure delegation.
-
-**Question:** Explain the Authorization Code flow.
-
-```mermaid
-sequenceDiagram
-User->>AuthServer: Login
-AuthServer->>User: Auth Code
-User->>App: Send Code
-App->>AuthServer: Exchange Code for Token
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Login with Google.
-*   **Senior**: Difference between Implicit (unsafe) and Auth Code flows.
-
----
-
-## 49. Webhooks (API)
-
-**Scenario:** HMAC signatures.
-
-**Question:** How to secure Webhooks?
-
-```python
-signature = hmac.new(secret, body, sha256).hexdigest()
-if signature != header_sig:
-  abort(403)
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Check IP.
-*   **Senior**: Verify payload signature.
-
----
-
-## 50. gRPC (API)
-
-**Scenario:** Protobuf efficiency, HTTP/2.
-
-**Question:** Benefits of gRPC over JSON/HTTP.
-
-| Feature | REST | gRPC |
-|---|---|---|
-| Protocol | HTTP/1.1 | HTTP/2 |
-| Format | JSON (Text) | Protobuf (Binary) |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: It's faster.
-*   **Senior**: Binary serialization and multiplexing.
-
----
-
-## 51. Pagination (API)
-
-**Scenario:** Performance on large datasets.
-
-**Question:** Offset vs Cursor based pagination.
-
-```sql
--- Offset (Slow)
-OFFSET 100000 LIMIT 10
--- Cursor (Fast)
-WHERE id > 100000 LIMIT 10
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Use LIMIT OFFSET.
-*   **Senior**: Keyset pagination avoids scanning skipped rows.
-
----
-
-## 52. CORS (API)
-
-**Scenario:** Pre-flight OPTIONS requests.
-
-**Question:** How does Cross-Origin Resource Sharing work?
-
-```mermaid
-sequenceDiagram
-Browser->>Server: OPTIONS /api/data
-Server->>Browser: 200 OK (Access-Control-Allow-Origin)
-Browser->>Server: GET /api/data
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Browser security error.
-*   **Senior**: Pre-flight checks for non-simple requests.
-
----
-
-## 53. API Documentation (API)
-
-**Scenario:** Contract testing, Client generation.
-
-**Question:** Why is OpenAPI/Swagger important?
-
-```yaml
-paths:
-  /users:
-    get:
-      summary: List users
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: For reading docs.
-*   **Senior**: Auto-generating SDKs and mock servers.
-
----
-
-## 54. Rate Limiting Headers (API)
-
-**Scenario:** X-RateLimit-Remaining.
-
-**Question:** Standard headers for rate limiting.
-
-| Header | Description |
-|---|---|
-| X-RateLimit-Limit | Window Size |
-| X-RateLimit-Reset | Time to reset |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Don't know.
-*   **Senior**: Using headers to programmatically back off.
-
----
-
-## 55. Payload Size (API)
-
-**Scenario:** Multipart vs Presigned URLs.
-
-**Question:** Handling large file uploads in API.
-
-```mermaid
-graph LR
-Client --Get URL--> Server
-Server --PresignedURL--> Client
-Client --Upload--> S3
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Upload to server then S3.
-*   **Senior**: Direct upload to S3 to save server bandwidth.
-
----
-
-## 56. Content Negotiation (API)
-
-**Scenario:** Accept headers.
-
-**Question:** What is content negotiation?
-
-```http
-GET /resource HTTP/1.1
-Accept: application/xml
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Format selection.
-*   **Senior**: Server chooses representation based on client capability.
-
----
-
-## 57. Keep-Alive (API)
-
-**Scenario:** Connection reuse.
-
-**Question:** Importance of HTTP Keep-Alive.
-
-```http
-Connection: keep-alive
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Keeps session active.
-*   **Senior**: Avoids TCP 3-way handshake for subsequent requests.
-
----
-
-## 58. Safe Methods (API)
-
-**Scenario:** No side effects (GET).
-
-**Question:** What defines a 'Safe' HTTP method?
-
-| Method | Safe? |
-|---|---|
-| GET | Yes |
-| DELETE | No |
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Doesn't change data.
-*   **Senior**: Can be cached and prefetched without risk.
-
----
-
-## 59. JSON Patch (API)
-
-**Scenario:** Replace vs Partial Update.
-
-**Question:** PUT vs PATCH.
-
-```json
-// PATCH
-[{"op": "replace", "path": "/email", "value": "new@example.com"}]
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: Both update data.
-*   **Senior**: PUT is idempotent replacement, PATCH is delta update.
-
----
-
-## 60. Soap (API)
-
-**Scenario:** Enterprise legacy integrations.
-
-**Question:** Is SOAP still relevant?
-
-```xml
-<soap:Envelope>...</soap:Envelope>
-```
-
-**Key Concepts:** `HTTP`, `Interface Design`
-
-### Candidate Response Paths
-*   **Junior**: No, it's dead.
-*   **Senior**: Yes, for strict contracts and ACID transactions in banking.
-
----
-
-## 61. SQL Injection (Security)
-
-**Scenario:** Parameterized queries.
-
-**Question:** How to prevent SQL Injection?
-
-```sql
-SELECT * FROM users WHERE name = 'user' OR '1'='1';
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Security`, `Coding`
 
 ### Candidate Response Paths
 *   **Junior**: Sanitize input.
-*   **Senior**: Use Prepared Statements/ORM always.
+*   **Senior**: Use ORMs and parameterized queries.
 
 ---
 
-## 62. XSS (Security)
+## 6. Performance
 
-**Scenario:** Sanitization and CSP.
+**Scenario:** Slow API.
 
-**Question:** Reflected vs Stored XSS.
+**Question:** An API endpoint is slow. How do you optimize it?
 
-```html
-<script>alert('XSS')</script>
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Performance`, `Profiling`
 
 ### Candidate Response Paths
-*   **Junior**: Script injection.
-*   **Senior**: Content Security Policy (CSP) headers.
+*   **Junior**: Add more servers.
+*   **Senior**: Profile the code, check DB queries (N+1), add caching.
 
 ---
 
-## 63. CSRF (Security)
+## 7. Documentation
 
-**Scenario:** Anti-forgery tokens.
+**Scenario:** Legacy code.
 
-**Question:** How to prevent CSRF?
+**Question:** How do you handle working with undocumented legacy code?
 
-```html
-<input type="hidden" name="csrf_token" value="xyz123" />
-```
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Documentation`, `Maintenance`
 
 ### Candidate Response Paths
-*   **Junior**: Don't know.
-*   **Senior**: SameSite cookie attribute and Anti-CSRF tokens.
+*   **Junior**: Rewrite it.
+*   **Senior**: Read code, write tests to characterize behavior, then refactor.
 
 ---
 
-## 64. HTTPS (Security)
+## 8. CI/CD
 
-**Scenario:** Asymmetric vs Symmetric encryption exchange.
+**Scenario:** Deployment.
 
-**Question:** Explain the SSL/TLS handshake.
+**Question:** Describe your ideal CI/CD pipeline.
+
+**Key Concepts:** `DevOps`, `Automation`
+
+### Candidate Response Paths
+*   **Junior**: I ftp files.
+*   **Senior**: Lint -> Test -> Build -> Staging -> Integration Tests -> Production.
+
+---
+
+## 9. Database
+
+**Scenario:** Indexing.
+
+**Question:** When should you add an index to a database column?
+
+**Key Concepts:** `Database`, `Optimization`
+
+### Candidate Response Paths
+*   **Junior**: On every column.
+*   **Senior**: On columns used in WHERE/JOIN/ORDER BY, considering write performance impact.
+
+---
+
+## 10. API Design
+
+**Scenario:** REST vs GraphQL.
+
+**Question:** When would you choose GraphQL over REST?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `API`, `Architecture`
+
+### Candidate Response Paths
+*   **Junior**: GraphQL is new.
+*   **Senior**: To avoid over-fetching/under-fetching and for complex nested data requirements.
+
+---
+
+## 11. Conflict Resolution
+
+**Scenario:** Disagreement with a peer.
+
+**Question:** Tell me about a time you had a significant disagreement with a colleague. How did you resolve it?
+
+**Key Concepts:** `Communication`, `Soft Skills`
+
+### Candidate Response Paths
+*   **Junior**: I told them I was right.
+*   **Senior**: I listened to their perspective, found common ground, and we compromised.
+
+---
+
+## 12. Failure Handling
+
+**Scenario:** A project went wrong.
+
+**Question:** Describe a time you failed. What happened and what did you learn?
+
+**Key Concepts:** `Growth Mindset`, `Resilience`
+
+### Candidate Response Paths
+*   **Junior**: I tried hard but it failed.
+*   **Senior**: I analyzed the root cause, implemented a fix, and shared the learning.
+
+---
+
+## 13. Prioritization
+
+**Scenario:** Too many tasks.
+
+**Question:** How do you prioritize when you have multiple conflicting deadlines?
+
+**Key Concepts:** `Time Management`, `Organization`
+
+### Candidate Response Paths
+*   **Junior**: I work longer hours.
+*   **Senior**: I communicate with stakeholders to adjust expectations and focus on high-impact tasks.
+
+---
+
+## 14. Adaptability
+
+**Scenario:** Changing requirements.
+
+**Question:** How do you handle sudden changes in project scope or direction?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Agility`, `Flexibility`
+
+### Candidate Response Paths
+*   **Junior**: I get frustrated but do it.
+*   **Senior**: I assess the impact, communicate risks, and pivot quickly.
+
+---
+
+## 15. Communication
+
+**Scenario:** Explaining complex topics.
+
+**Question:** Describe a time you had to explain a complex technical/business concept to a non-expert.
 
 ```mermaid
 sequenceDiagram
-Client->>Server: ClientHello
-Server->>Client: ServerHello + Cert
-Client->>Server: Key Exchange
-Client->>Server: Finished (Encrypted)
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Clarity`, `Empathy`
 
 ### Candidate Response Paths
-*   **Junior**: It encrypts data.
-*   **Senior**: Key exchange mechanism and trust chain.
+*   **Junior**: I just said it simpler.
+*   **Senior**: I used analogies and checked for understanding throughout.
 
 ---
 
-## 65. Hashing vs Encryption (Security)
+## 16. Teamwork
 
-**Scenario:** Passwords vs Credit Card numbers.
+**Scenario:** Collaborating with difficult personalities.
 
-**Question:** When to hash and when to encrypt?
+**Question:** How do you handle working with someone who is difficult to work with?
 
-| Type | Reversible? | Use Case |
+**Key Concepts:** `Collaboration`, `EQ`
+
+### Candidate Response Paths
+*   **Junior**: I avoid them.
+*   **Senior**: I try to understand their motivations and find a way to work together effectively.
+
+---
+
+## 17. Innovation
+
+**Scenario:** Improving a process.
+
+**Question:** Tell me about a time you improved a process or workflow.
+
+**Key Concepts:** `Innovation`, `Efficiency`
+
+### Candidate Response Paths
+*   **Junior**: I followed the rules.
+*   **Senior**: I identified a bottleneck, proposed a solution, and measured the improvement.
+
+---
+
+## 18. Feedback
+
+**Scenario:** Receiving constructive criticism.
+
+**Question:** Tell me about a time you received difficult feedback. How did you react?
+
+**Key Concepts:** `Self-awareness`, `Growth`
+
+### Candidate Response Paths
+*   **Junior**: I got defensive.
+*   **Senior**: I listened, asked for examples, and worked on a plan to improve.
+
+---
+
+## 19. Leadership
+
+**Scenario:** Leading without authority.
+
+**Question:** Describe a time you demonstrated leadership when you weren't the formal manager.
+
+**Key Concepts:** `Leadership`, `Influence`
+
+### Candidate Response Paths
+*   **Junior**: I told people what to do.
+*   **Senior**: I rallied the team around a goal and supported them to achieve it.
+
+---
+
+## 20. Decision Making
+
+**Scenario:** Incomplete information.
+
+**Question:** How do you make decisions when you don't have all the data?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Judgment`, `Risk Mgmt`
+
+### Candidate Response Paths
+*   **Junior**: I wait for all data.
+*   **Senior**: I assess the risk, make a call based on available info, and adjust as needed.
+
+---
+
+## 21. Scaling API Design
+
+**Scenario:** Growth.
+
+**Question:** How do you scale API Design as the company grows?
+
+| Metric | Target | Status |
 |---|---|---|
-| Hash | No | Passwords |
-| Encrypt | Yes | PII Data |
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `API Design`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: Hash is better.
-*   **Senior**: Hashing is one-way, Encryption is two-way.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 66. Salt (Security)
+## 22. Scaling Containers
 
-**Scenario:** Rainbow table attacks.
+**Scenario:** Growth.
 
-**Question:** Why do we salt passwords?
+**Question:** How do you scale Containers as the company grows?
 
-```python
-hash(password + salt)
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Containers`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: To make it longer.
-*   **Senior**: Prevents Rainbow Table lookups for common passwords.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 67. JWT Security (Security)
+## 23. Collaboration in Git
 
-**Scenario:** Revocation difficulty, Algorithm confusion.
+**Scenario:** Teamwork.
 
-**Question:** Risks of using JWTs.
+**Question:** How does Git require cross-functional collaboration?
 
-```json
-{
-  "alg": "none",
-  "typ": "JWT"
-}
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Git`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: None.
-*   **Senior**: Hard to revoke, alg: none vulnerability.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 68. DDOS (Security)
+## 24. Start vs Scale for Database Design
 
-**Scenario:** Rate limiting, Blackholing.
+**Scenario:** Context.
 
-**Question:** Mitigation strategies for DDOS.
+**Question:** How does your approach to Database Design differ in a startup vs a large corp?
+
+**Key Concepts:** `Database Design`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 25. Teaching Database Design
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Database Design to a junior team member?
 
 ```mermaid
-graph TD
-Attacker --> WAF
-WAF --Block--> Attacker
-User --> WAF
-WAF --Pass--> Server
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Database Design`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: Block IP.
-*   **Senior**: Anycast, WAF, Scrubbing centers.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 69. Man-in-the-Middle (Security)
+## 26. Metrics for Database Design
 
-**Scenario:** Certificate Pinning, HSTS.
+**Scenario:** Measurement.
 
-**Question:** How to prevent MITM attacks?
+**Question:** How do you measure success in Database Design?
 
-```http
-Strict-Transport-Security: max-age=31536000
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Database Design`, `Analytics`
 
 ### Candidate Response Paths
-*   **Junior**: Use HTTPS.
-*   **Senior**: HSTS and Certificate Pinning.
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
 
 ---
 
-## 70. OWASP Top 10 (Security)
+## 27. Challenges in Debugging
 
-**Scenario:** Injection, Broken Auth, Logging Failures.
+**Scenario:** Problem Solving.
 
-**Question:** Name 3 vulnerabilities from OWASP Top 10.
+**Question:** What are the biggest challenges you've faced regarding Debugging?
 
-| Rank | Vulnerability |
-|---|---|
-| 1 | Broken Access Control |
-| 2 | Cryptographic Failures |
-| 3 | Injection |
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Debugging`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: Hacking.
-*   **Senior**: Lists specific current top 3.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 71. Principal of Least Privilege (Security)
+## 28. Start vs Scale for Serverless
 
-**Scenario:** Granting only necessary permissions.
+**Scenario:** Context.
 
-**Question:** Apply this to database users.
+**Question:** How does your approach to Serverless differ in a startup vs a large corp?
 
-```sql
-GRANT SELECT ON users TO app_reader;
--- NOT GRANT ALL
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
-
-### Candidate Response Paths
-*   **Junior**: Don't give root.
-*   **Senior**: Role-based access control (RBAC).
-
----
-
-## 72. Secrets Management (Security)
-
-**Scenario:** Environment vars, Vault, not git.
-
-**Question:** Where to store API keys?
-
-```bash
-# Bad
-API_KEY='123' in code
-# Good
-API_KEY=os.getenv('KEY')
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
-
-### Candidate Response Paths
-*   **Junior**: .env file.
-*   **Senior**: HashiCorp Vault or AWS Secrets Manager.
-
----
-
-## 73. Input Validation (Security)
-
-**Scenario:** Why whitelist is safer.
-
-**Question:** Whitelisting vs Blacklisting input.
-
-| Approach | Logic | Safety |
+| Metric | Target | Status |
 |---|---|---|
-| Blacklist | Block bad chars | Low |
-| Whitelist | Allow good chars | High |
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Serverless`, `Context`
 
 ### Candidate Response Paths
-*   **Junior**: Block script tags.
-*   **Senior**: Allow only known good characters (e.g. alphanumeric).
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
 
 ---
 
-## 74. Clickjacking (Security)
+## 29. Deep Dive: Performance
 
-**Scenario:** X-Frame-Options.
+**Scenario:** Assessing depth in Performance.
 
-**Question:** How to prevent Clickjacking?
+**Question:** Can you explain Performance in detail and how you have applied it in your past role?
 
-```http
-X-Frame-Options: DENY
+**Key Concepts:** `Performance`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 30. Debugging Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Debugging?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Debugging`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Don't know.
-*   **Senior**: Preventing iframe embedding.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 75. Dependency Scanning (Security)
+## 31. Scaling Serverless
 
-**Scenario:** SCA tools (Snyk, Dependabot).
+**Scenario:** Growth.
 
-**Question:** How to handle vulnerable dependencies?
+**Question:** How do you scale Serverless as the company grows?
 
-```bash
-npm audit fix
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Serverless`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: Update packages.
-*   **Senior**: Automated pipeline scanning with Snyk/Dependabot.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 76. Container Security (Security)
+## 32. Git Best Practices
 
-**Scenario:** Running as non-root.
+**Scenario:** Standardization.
 
-**Question:** Security best practices for Docker.
+**Question:** What are the industry best practices for Git?
 
-```dockerfile
-USER 1001
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
+**Key Concepts:** `Git`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Use official images.
-*   **Senior**: Rootless containers and minimal base images (Alpine/Distroless).
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 77. SSH Keys (Security)
+## 33. Teaching Testing
 
-**Scenario:** Private vs Public key usage.
+**Scenario:** Mentorship.
 
-**Question:** Public Key Infrastructure basics.
+**Question:** How would you teach Testing to a junior team member?
+
+**Key Concepts:** `Testing`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 34. Metrics for CI/CD
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in CI/CD?
+
+**Key Concepts:** `CI/CD`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 35. Ethics in Security
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Security?
 
 ```mermaid
 graph LR
-Private[Private Key] --Sign--> Data
-Data --Verify with Public--> Public[Public Key]
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
-**Key Concepts:** `Cybersecurity`, `OWASP`
-
-### Candidate Response Paths
-*   **Junior**: Passwordless login.
-*   **Senior**: Asymmetric crypto principles.
-
----
-
-## 78. 2FA (Security)
-
-**Scenario:** Time-based One Time Password.
-
-**Question:** TOTP algorithm basics.
-
-```python
-HMAC(Secret, Time / 30)
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
-
-### Candidate Response Paths
-*   **Junior**: Google Authenticator.
-*   **Senior**: Shared secret hashing with time windows.
-
----
-
-## 79. Logging (Security)
-
-**Scenario:** PII, Secrets, Passwords.
-
-**Question:** What should you NEVER log?
-
-| Category | Example |
-|---|---|
-| PII | SSN, Email |
-| Secrets | API Keys, Passwords |
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
-
-### Candidate Response Paths
-*   **Junior**: Passwords.
-*   **Senior**: PII compliance (GDPR) and secrets redaction.
-
----
-
-## 80. Buffer Overflow (Security)
-
-**Scenario:** Unsafe memory manipulation.
-
-**Question:** Why does it happen?
-
-```c
-char buf[10];
-strcpy(buf, "This string is too long");
-```
-
-**Key Concepts:** `Cybersecurity`, `OWASP`
-
-### Candidate Response Paths
-*   **Junior**: Writing too much data.
-*   **Senior**: Overwriting return address in stack frame.
-
----
-
-## 81. SOLID Principles (Coding & General)
-
-**Scenario:** Subtypes must be substitutable for base types.
-
-**Question:** Explain Liskov Substitution Principle.
-
-```python
-# Violation
-class Bird: fly()
-class Ostrich(Bird): fly() # Error
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Recites acronym.
-*   **Senior**: Explains inheritance pitfalls.
-
----
-
-## 82. Design Patterns (Coding & General)
-
-**Scenario:** Global state issues vs convenience.
-
-**Question:** Singleton Pattern: Good or Bad?
-
-```python
-class Singleton:
-    _instance = None
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Good for database connection.
-*   **Senior**: Bad due to hidden dependencies and testing difficulty.
-
----
-
-## 83. Dependency Injection (Coding & General)
-
-**Scenario:** Decoupling and testability.
-
-**Question:** Why use DI?
-
-```python
-# DI
-class Service:
-  def __init__(self, db): ...
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Makes code cleaner.
-*   **Senior**: Inversion of Control for unit testing.
-
----
-
-## 84. Unit Testing (Coding & General)
-
-**Scenario:** Behavior verification vs State verification.
-
-**Question:** Mocking vs Stubbing.
-
-| Term | Definition |
-|---|---|
-| Stub | Canned answer |
-| Mock | Expectation check |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Faking data.
-*   **Senior**: Mocks verify behavior, Stubs provide state.
-
----
-
-## 85. TDD (Coding & General)
-
-**Scenario:** Red-Green-Refactor.
-
-**Question:** Explain the TDD cycle.
-
-```mermaid
-graph TD
-Red[Write Fail Test] --> Green[Write Pass Code]
-Green --> Refactor
-Refactor --> Red
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Write tests first.
-*   **Senior**: Driving design through tests.
-
----
-
-## 86. Code Review (Coding & General)
-
-**Scenario:** Readability, Logic, Tests.
-
-**Question:** What do you look for in a Code Review?
-
-| Priority | Item |
-|---|---|
-| High | Bugs, Security |
-| Low | Formatting (Lint) |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Syntax errors.
-*   **Senior**: Architectural fit and maintainability.
-
----
-
-## 87. Garbage Collection (Coding & General)
-
-**Scenario:** Mark and Sweep.
-
-**Question:** How does GC work generally?
-
-```mermaid
-graph TD
-Roots --> ObjA
-Roots --> ObjB
-ObjA --> ObjC
-ObjD[Unreachable] --> ObjE
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Deletes unused vars.
-*   **Senior**: Reference counting vs Reachability analysis.
-
----
-
-## 88. Threading (Coding & General)
-
-**Scenario:** Two threads accessing shared memory.
-
-**Question:** Race Conditions.
-
-```python
-# Race
-counter += 1
-# Safe
-with lock:
-  counter += 1
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Threads crashing.
-*   **Senior**: Atomicity and Critical Sections.
-
----
-
-## 89. Async/Await (Coding & General)
-
-**Scenario:** Non-blocking I/O.
-
-**Question:** Event Loop basics.
-
-```python
-async def fetch():
-  await db.query()
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: Parallel execution.
-*   **Senior**: Concurrency on single thread (waiting for I/O).
-
----
-
-## 90. Memory Leak (Coding & General)
-
-**Scenario:** Profiling tools.
-
-**Question:** How to detect a memory leak?
-
-```mermaid
-graph LR
-Usage --Time--> LinearGrowth
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
-
-### Candidate Response Paths
-*   **Junior**: App crashes.
-*   **Senior**: Heap profiling and retention paths.
-
----
-
-## 91. Big O Notation (Coding & General)
-
-**Scenario:** Merge sort complexity.
-
-**Question:** Explain O(n log n).
-
-| Complexity | Name | Example |
+| Metric | Target | Status |
 |---|---|---|
-| O(1) | Constant | Hash Lookup |
-| O(n) | Linear | Loop |
-| O(n^2) | Quadratic | Nested Loop |
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Security`, `Ethics`
 
 ### Candidate Response Paths
-*   **Junior**: It's math.
-*   **Senior**: Sorting algorithms complexity.
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---
 
-## 92. Refactoring (Coding & General)
+## 36. Tooling: Cloud
 
-**Scenario:** Code smells, Technical debt.
+**Scenario:** Proficiency.
 
-**Question:** When do you decide to refactor?
+**Question:** How do you utilize Cloud to improve efficiency?
 
-| Signal | Action |
-|---|---|
-| Duplication | DRY |
-| Large Class | Extract Class |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Cloud`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: When code is ugly.
-*   **Senior**: Boy Scout Rule: Leave it better than found.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
 
 ---
 
-## 93. Continuous Integration (Coding & General)
+## 37. Tooling: CI/CD
 
-**Scenario:** Early bug detection.
+**Scenario:** Proficiency.
 
-**Question:** Benefits of CI.
+**Question:** How do you utilize CI/CD to improve efficiency?
+
+**Key Concepts:** `CI/CD`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 38. Scaling Debugging
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Debugging as the company grows?
+
+**Key Concepts:** `Debugging`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 39. Deep Dive: Security
+
+**Scenario:** Assessing depth in Security.
+
+**Question:** Can you explain Security in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Security`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 40. Tooling: Microservices
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Microservices to improve efficiency?
 
 ```mermaid
 graph LR
-Commit --> Build --> Test --> Report
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Microservices`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: Automated building.
-*   **Senior**: Preventing integration hell.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
 
 ---
 
-## 94. Git Flow (Coding & General)
+## 41. Tooling: API Design
 
-**Scenario:** History linearity.
+**Scenario:** Proficiency.
 
-**Question:** Merge vs Rebase.
+**Question:** How do you utilize API Design to improve efficiency?
 
-```mermaid
-graph TD
-A[Master] --> B
-A --> C[Feature]
-C --Merge--> M[Merge Commit]
-C --Rebase--> B'[Replay on B]
-```
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `API Design`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: Rebase is scary.
-*   **Senior**: Rebase for clean history, Merge for preserving context.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
 
 ---
 
-## 95. Immutable Objects (Coding & General)
+## 42. Challenges in Cloud
 
-**Scenario:** Thread safety.
+**Scenario:** Problem Solving.
 
-**Question:** Benefits of Immutability.
+**Question:** What are the biggest challenges you've faced regarding Cloud?
 
-```python
-tuple_data = (1, 2, 3) # Immutable
-list_data = [1, 2, 3] # Mutable
-```
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Cloud`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: Cannot change.
-*   **Senior**: Eliminates side effects and locking needs.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 96. Clean Code (Coding & General)
+## 43. Containers Best Practices
 
-**Scenario:** Self-documenting, Small functions.
+**Scenario:** Standardization.
 
-**Question:** What makes code 'clean'?
+**Question:** What are the industry best practices for Containers?
 
-| Trait | Description |
-|---|---|
-| Naming | Intent-revealing |
-| Size | Small functions |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Containers`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Comments everywhere.
-*   **Senior**: Code reads like prose.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 97. Technical Debt (Coding & General)
+## 44. Start vs Scale for API Design
 
-**Scenario:** Interest on a loan.
+**Scenario:** Context.
 
-**Question:** How to explain Technical Debt to a PM?
+**Question:** How does your approach to API Design differ in a startup vs a large corp?
+
+**Key Concepts:** `API Design`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 45. Future of Microservices
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Microservices heading in the next 5 years?
 
 ```mermaid
 graph LR
-SpeedNow --> Debt
-Debt --Interest--> SlowerLater
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Microservices`, `Vision`
 
 ### Candidate Response Paths
-*   **Junior**: Bad code.
-*   **Senior**: Short term trade-off for speed vs long term maintenance cost.
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---
 
-## 98. Pair Programming (Coding & General)
+## 46. Start vs Scale for Git
 
-**Scenario:** Knowledge sharing vs Exhaustion.
+**Scenario:** Context.
 
-**Question:** Pros and Cons.
+**Question:** How does your approach to Git differ in a startup vs a large corp?
 
-| Role | Action |
-|---|---|
-| Driver | Types code |
-| Navigator | Reviews/Strategizes |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Git`, `Context`
 
 ### Candidate Response Paths
-*   **Junior**: Two people one computer.
-*   **Senior**: Real-time code review and knowledge transfer.
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
 
 ---
 
-## 99. Mentorship (Coding & General)
+## 47. Collaboration in Performance
 
-**Scenario:** Code reviews, Pair programming.
+**Scenario:** Teamwork.
 
-**Question:** How do you mentor juniors?
+**Question:** How does Performance require cross-functional collaboration?
 
-| Method | Outcome |
-|---|---|
-| Socratic | Critical thinking |
-| Spoon-feeding | Dependency |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Performance`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: Tell them answers.
-*   **Senior**: Guiding them to find answers themselves.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 100. Failure Handling (Coding & General)
+## 48. Tooling: Database Design
 
-**Scenario:** Post-mortem culture.
+**Scenario:** Proficiency.
 
-**Question:** Describe a time you brought down production.
+**Question:** How do you utilize Database Design to improve efficiency?
 
-| Step | Action |
-|---|---|
-| Detect | Monitoring |
-| Mitigate | Rollback |
-| Prevent | Fix root cause |
-
-**Key Concepts:** `Software Engineering`, `Best Practices`
+**Key Concepts:** `Database Design`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: I never make mistakes.
-*   **Senior**: Owns the mistake and explains the systemic fix.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 49. Scaling Code Review
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Code Review as the company grows?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Code Review`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 50. Deep Dive: CI/CD
+
+**Scenario:** Assessing depth in CI/CD.
+
+**Question:** Can you explain CI/CD in detail and how you have applied it in your past role?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `CI/CD`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 51. Scaling Database Design
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Database Design as the company grows?
+
+**Key Concepts:** `Database Design`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 52. Challenges in Serverless
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Serverless?
+
+**Key Concepts:** `Serverless`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 53. Mistakes in Containers
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Containers?
+
+**Key Concepts:** `Containers`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 54. Testing Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Testing?
+
+**Key Concepts:** `Testing`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 55. Collaboration in Code Review
+
+**Scenario:** Teamwork.
+
+**Question:** How does Code Review require cross-functional collaboration?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Code Review`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 56. Deep Dive: Documentation
+
+**Scenario:** Assessing depth in Documentation.
+
+**Question:** Can you explain Documentation in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Documentation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 57. Challenges in Accessibility
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Accessibility?
+
+**Key Concepts:** `Accessibility`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 58. Scaling CI/CD
+
+**Scenario:** Growth.
+
+**Question:** How do you scale CI/CD as the company grows?
+
+**Key Concepts:** `CI/CD`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 59. Tooling: Accessibility
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Accessibility to improve efficiency?
+
+**Key Concepts:** `Accessibility`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 60. Collaboration in Security
+
+**Scenario:** Teamwork.
+
+**Question:** How does Security require cross-functional collaboration?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Security`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 61. Future of CI/CD
+
+**Scenario:** Trends.
+
+**Question:** Where do you see CI/CD heading in the next 5 years?
+
+**Key Concepts:** `CI/CD`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 62. Scaling Documentation
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Documentation as the company grows?
+
+**Key Concepts:** `Documentation`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 63. Deep Dive: Git
+
+**Scenario:** Assessing depth in Git.
+
+**Question:** Can you explain Git in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Git`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 64. Start vs Scale for Security
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Security differ in a startup vs a large corp?
+
+**Key Concepts:** `Security`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 65. Start vs Scale for Debugging
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Debugging differ in a startup vs a large corp?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Debugging`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 66. Ethics in Cloud
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Cloud?
+
+**Key Concepts:** `Cloud`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 67. Challenges in Security
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Security?
+
+**Key Concepts:** `Security`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 68. Future of Serverless
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Serverless heading in the next 5 years?
+
+**Key Concepts:** `Serverless`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 69. Mistakes in Documentation
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Documentation?
+
+**Key Concepts:** `Documentation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 70. Security Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Security?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Security`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 71. Mistakes in Code Review
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Code Review?
+
+**Key Concepts:** `Code Review`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 72. Teaching Git
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Git to a junior team member?
+
+**Key Concepts:** `Git`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 73. Start vs Scale for CI/CD
+
+**Scenario:** Context.
+
+**Question:** How does your approach to CI/CD differ in a startup vs a large corp?
+
+**Key Concepts:** `CI/CD`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 74. Teaching Microservices
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Microservices to a junior team member?
+
+**Key Concepts:** `Microservices`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 75. API Design Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for API Design?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `API Design`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 76. Collaboration in Serverless
+
+**Scenario:** Teamwork.
+
+**Question:** How does Serverless require cross-functional collaboration?
+
+**Key Concepts:** `Serverless`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 77. Future of Git
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Git heading in the next 5 years?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Git`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 78. Scaling Cloud
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Cloud as the company grows?
+
+**Key Concepts:** `Cloud`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 79. Scaling Security
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Security as the company grows?
+
+**Key Concepts:** `Security`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 80. Tooling: Performance
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Performance to improve efficiency?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Performance`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 81. Future of Containers
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Containers heading in the next 5 years?
+
+**Key Concepts:** `Containers`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 82. Challenges in Testing
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Testing?
+
+**Key Concepts:** `Testing`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 83. Metrics for Performance
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Performance?
+
+**Key Concepts:** `Performance`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 84. Mistakes in Git
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Git?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Git`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 85. Ethics in Accessibility
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Accessibility?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Accessibility`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 86. Deep Dive: API Design
+
+**Scenario:** Assessing depth in API Design.
+
+**Question:** Can you explain API Design in detail and how you have applied it in your past role?
+
+**Key Concepts:** `API Design`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 87. Future of Accessibility
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Accessibility heading in the next 5 years?
+
+**Key Concepts:** `Accessibility`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 88. Database Design Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Database Design?
+
+**Key Concepts:** `Database Design`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 89. Challenges in Code Review
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Code Review?
+
+**Key Concepts:** `Code Review`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 90. Collaboration in Accessibility
+
+**Scenario:** Teamwork.
+
+**Question:** How does Accessibility require cross-functional collaboration?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Accessibility`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 91. Mistakes in Cloud
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Cloud?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Cloud`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 92. Collaboration in Database Design
+
+**Scenario:** Teamwork.
+
+**Question:** How does Database Design require cross-functional collaboration?
+
+**Key Concepts:** `Database Design`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 93. Tooling: Git
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Git to improve efficiency?
+
+**Key Concepts:** `Git`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 94. Ethics in Microservices
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Microservices?
+
+**Key Concepts:** `Microservices`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 95. Start vs Scale for Testing
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Testing differ in a startup vs a large corp?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Testing`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 96. Future of Performance
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Performance heading in the next 5 years?
+
+**Key Concepts:** `Performance`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 97. Future of Cloud
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Cloud heading in the next 5 years?
+
+**Key Concepts:** `Cloud`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 98. Metrics for Security
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Security?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Security`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 99. Mistakes in Debugging
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Debugging?
+
+**Key Concepts:** `Debugging`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 100. Teaching API Design
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach API Design to a junior team member?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `API Design`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
