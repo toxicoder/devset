@@ -14,6 +14,21 @@
 
 set -euo pipefail
 
+# Error handling and cleanup
+cleanup() {
+    # Kill any child processes of the current shell script
+    jobs -p | xargs -r kill 2>/dev/null || true
+}
+trap cleanup EXIT ERR
+
+# Dependency check
+for cmd in ssh awk grep sed; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "Error: Required command '$cmd' not found."
+        exit 1
+    fi
+done
+
 # === Supported Models List ===
 # 1. meta/llama-3.1-405b-instruct
 # 2. nvidia/nemotron-4-340b-instruct
@@ -42,6 +57,17 @@ fi
 IP1=$1
 IP2=$2
 MODEL_ARG=${3:-"meta/llama-3.1-70b-instruct"}
+
+# Validate IP addresses
+validate_ip() {
+    local ip=$1
+    if [[ ! $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        echo "Error: Invalid IP format '$ip'"
+        exit 1
+    fi
+}
+validate_ip "$IP1"
+validate_ip "$IP2"
 
 # Check for NGC_API_KEY
 if [ -z "${NGC_API_KEY:-}" ]; then
@@ -141,35 +167,22 @@ check_vram_requirements() {
     local c_k=$2
 
     # FP16 Weights: params * 2 bytes
-    local weights_gb=$(echo "$p_b * 2" | bc)
-
-    # KV Cache Estimation (Rough Heuristic)
-    # Assume: layers = p_b, hidden = 4096 (avg), GQA factor reduces by 4x?
-    # KV = 2 * layers * hidden * context * 2 bytes
-    # To keep it simple: Add 0.5 GB per 1B params per 10k context?
-    # Let's use the prompt's formula guidance roughly:
-    # layers approx p_b * 1.5 (for small) or less for huge.
-    # Let's just use a simpler check:
-    # If Params > 120 (240GB) -> Warn
-    # If Context > 200k -> Warn
+    local weights_gb=$(awk -v p="$p_b" 'BEGIN {print p * 2}')
 
     local total_est=$weights_gb
     # Add buffer for KV
     if [ "$c_k" -gt 128 ]; then
         # Huge context adds significant memory
-        local kv_est=$(echo "$c_k * 0.5" | bc) # Very rough: 0.5GB per 1k context? No.
-        # 128k context on 70B is ~40GB. 1M context is ~300GB.
-        # So 1M context (1000k) ~ 300GB.
         # Factor: 0.3 GB per k context.
-        local kv_add=$(echo "$c_k * 0.3" | bc)
-        total_est=$(echo "$total_est + $kv_add" | bc)
+        local kv_add=$(awk -v c="$c_k" 'BEGIN {print c * 0.3}')
+        total_est=$(awk -v t="$total_est" -v k="$kv_add" 'BEGIN {print t + k}')
     else
         # Standard context, assume +20% overhead
-        total_est=$(echo "$total_est * 1.2" | bc)
+        total_est=$(awk -v t="$total_est" 'BEGIN {print t * 1.2}')
     fi
 
     # Round to integer
-    total_est=${total_est%.*}
+    total_est=$(awk -v t="$total_est" 'BEGIN {print int(t)}')
 
     echo "Estimated VRAM Requirement: ~${total_est}GB (Weights + Context)"
 
@@ -220,6 +233,7 @@ get_network_config() {
 
 # 1. Verify Connectivity and Pull Image
 echo "[1/4] Verifying connectivity and pulling image..."
+pids=""
 for IP in "$IP1" "$IP2"; do
     echo "Connecting to $IP..."
     if ! ssh $SSH_OPTS "$IP" "nvidia-smi > /dev/null"; then
@@ -228,9 +242,22 @@ for IP in "$IP1" "$IP2"; do
     fi
     # Pull image
     echo "Pulling image $IMAGE on $IP..."
-    ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u \$oauthtoken --password-stdin >/dev/null 2>&1 && docker pull $IMAGE" &
+    (
+        if ! ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u \$oauthtoken --password-stdin >/dev/null 2>&1 && docker pull $IMAGE"; then
+            echo "Error: Failed to pull image on $IP"
+            exit 1
+        fi
+    ) &
+    pids="$pids $!"
 done
-wait
+
+# Wait for background processes
+for pid in $pids; do
+    if ! wait $pid; then
+        echo "Error: Image pull failed on one or more nodes."
+        exit 1
+    fi
+done
 
 # 2. Detect Network
 echo "[2/4] Detecting high-speed network interfaces..."
@@ -250,6 +277,11 @@ IFACES2=$(parse_net_conf "$NET_CONF_2")
 
 echo "Node 1 Interfaces: $IFACES1"
 echo "Node 2 Interfaces: $IFACES2"
+
+if [[ -z "$IFACES1" ]] || [[ -z "$IFACES2" ]] || [[ "$NET_CONF_1" == *"DETECTED_NONE"* ]] || [[ "$NET_CONF_2" == *"DETECTED_NONE"* ]]; then
+    echo "Warning: Failed to detect high-speed network interfaces on one or both nodes."
+    echo "Ensure IB or OSPF is configured correctly. Proceeding with potential performance degradation..."
+fi
 
 # 3. Cleanup
 echo "[3/4] Cleaning up previous containers..."
@@ -280,19 +312,33 @@ get_nccl_opts() {
 COMMON_ARGS="--gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
 NIM_ENV="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345"
 
+# Launch in parallel
+launch_pids=""
+
 # Worker
 echo "Starting Worker on $IP2..."
 NET_OPTS_2=$(get_nccl_opts "$IFACES2")
-ssh $SSH_OPTS "$IP2" "docker run -d --rm $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=1 $NET_OPTS_2 $IMAGE" &
+(
+    ssh $SSH_OPTS "$IP2" "docker run -d --rm $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=1 $NET_OPTS_2 $IMAGE"
+) &
+launch_pids="$launch_pids $!"
 
 sleep 10
 
 # Head
 echo "Starting Head on $IP1..."
 NET_OPTS_1=$(get_nccl_opts "$IFACES1")
-ssh $SSH_OPTS "$IP1" "docker run -d --rm $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=0 $NET_OPTS_1 $IMAGE" &
+(
+    ssh $SSH_OPTS "$IP1" "docker run -d --rm $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=0 $NET_OPTS_1 $IMAGE"
+) &
+launch_pids="$launch_pids $!"
 
-wait
+for pid in $launch_pids; do
+    if ! wait $pid; then
+        echo "Error: Failed to launch container on one of the nodes."
+        exit 1
+    fi
+done
 
 echo "---------------------------------------------------"
 echo "Distributed NIM launched."
