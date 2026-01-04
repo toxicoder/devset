@@ -14,14 +14,30 @@ A versatile engineering role responsible for the full lifecycle of software deve
 * **Mentorship:** Mentor junior engineers and contribute to engineering culture.
 
 ### Role Variations
-* **Full Stack Engineer:** Balanced focus between frontend and backend technologies.
-* **Generalist:** Adapts to any part of the stack or technology as needed by the business.
-* **Product Engineer:** Heavily focused on product features and user value, often working closely with product and design.
 
-## Average Daily Tasks
+#### Full Stack Engineer
+Balances focus between frontend and backend technologies, enabling them to build complete features independently. They are comfortable jumping between writing React components and designing database schemas, often serving as the bridge between specialized backend and frontend teams.
+**Average Daily Tasks:**
 * 10:00 Standup
-* 11:00 Coding
+* 11:00 Coding (Frontend/Backend mix)
+* 14:00 API Integration testing
 * 15:00 Arch sync
+
+#### Generalist
+Adapts to any part of the stack or technology as needed by the business, favoring breadth over depth. They are the "Swiss Army Knife" of the team, willing to pick up a new language, debug a legacy system, or script infrastructure automation to unblock critical paths.
+**Average Daily Tasks:**
+* 10:00 Standup
+* 11:00 Triage/Bug fixing across stack
+* 13:00 Learning new tool/tech
+* 15:00 Pair programming
+
+#### Product Engineer
+Heavily focused on product features and user value, often working closely with product and design to iterate on user experience. They prioritize rapid prototyping and A/B testing, and care deeply about how the code translates to user satisfaction rather than just technical purity.
+**Average Daily Tasks:**
+* 10:00 Standup
+* 11:00 Feature development
+* 14:00 Design review with UX
+* 15:30 Analytics implementation
 
 ## Common Partners
 Product Mgr, Designer
