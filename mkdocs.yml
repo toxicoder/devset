@@ -46,9 +46,17 @@ plugins:
 
 nav:
   - Home: index.md
+  - Interview Prep:
+    - Data Infrastructure: interview-prep/data-infrastructure.md
+    - Java: interview-prep/java.md
+    - Python: interview-prep/python.md
+    - SQL: interview-prep/sql.md
   - Job Role Organization: JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION.md
   - Interview Prep:
-    - Data Science: interview-prep/data-science.md
+    - Data Analysis: interview-prep/data-analysis.md
+    - Java: interview-prep/java.md
+    - Python: interview-prep/python.md
+    - SQL: interview-prep/sql.md
   - Style Guides:
     - Bash: style-guides/bash/bash-style-guide.md
     - C++: style-guides/cpp/cpp-style-guide.md
@@ -65,3 +73,5 @@ nav:
     - TypeScript: style-guides/typescript/typescript-style-guide.md
     - YAML: style-guides/yaml/yaml-style-guide.md
     - Zsh: style-guides/zsh/zsh-style-guide.md
+  - Interview Prep:
+    - Protocol Buffers: interview-prep/protocol-buffers.md
