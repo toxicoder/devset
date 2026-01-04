@@ -30,7 +30,7 @@ This document outlines the coding standards and best practices for Python develo
 ## Code Layout
 
 - **Indentation**: Use 4 spaces per indentation level. Do not use tabs.
-- **Line Length**: Limit all lines to a maximum of 88 characters (consistent with Black formatter).
+- **Line Length**: Limit all lines to a maximum of 88 characters (consistent with [Black](https://github.com/psf/black) formatter).
 - **Blank Lines**:
     - Top-level functions and classes: 2 blank lines.
     - Method definitions inside a class: 1 blank line.
@@ -161,19 +161,19 @@ except ValueError as e:
 
 ## Logging
 
-- **Library**: Use the standard `logging` library.
+- **Library**: Use the standard [`logging`](https://docs.python.org/3/library/logging.html) library.
 - **Levels**: Use appropriate logging levels (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`).
 - **Configuration**: Do not configure logging in libraries; leave it to the application.
 - **Messages**: Include context in log messages. Use placeholders `%s` or f-strings (be mindful of performance in high-throughput loops if using f-strings eagerly).
 
 ## Testing
 
-- **Framework**: Use `pytest`.
+- **Framework**: Use [`pytest`](https://docs.pytest.org/).
 - **Structure**: Mirror the source code directory structure in the `tests/` directory.
 - **Naming**: `test_*.py` for files, `test_*` for functions.
 - **Fixtures**: Use `pytest` fixtures for setup and teardown.
-- **Coverage**: Aim for high test coverage. Use `pytest-cov`.
-- **Mocking**: Use `unittest.mock` or `pytest-mock` to isolate units.
+- **Coverage**: Aim for high test coverage. Use [`pytest-cov`](https://pytest-cov.readthedocs.io/).
+- **Mocking**: Use [`unittest.mock`](https://docs.python.org/3/library/unittest.mock.html) or [`pytest-mock`](https://pytest-mock.readthedocs.io/) to isolate units.
 
 ## Security
 
@@ -190,9 +190,9 @@ except ValueError as e:
 
 ## Recommended Tools
 
-- **Formatter**: `black` (uncompromising code formatter).
-- **Linter**: `ruff` (extremely fast Python linter) or `pylint`.
-- **Type Checker**: `mypy` or `pyright`.
-- **Import Sorter**: `isort` (often integrated into ruff).
-- **Package Manager**: `poetry` or `uv` for dependency management.
-- **Pre-commit**: Use `pre-commit` hooks to enforce style before committing.
+- **Formatter**: [`black`](https://github.com/psf/black) (uncompromising code formatter).
+- **Linter**: [`ruff`](https://github.com/astral-sh/ruff) (extremely fast Python linter) or [`pylint`](https://pylint.readthedocs.io/).
+- **Type Checker**: [`mypy`](https://mypy-lang.org/) or [`pyright`](https://github.com/microsoft/pyright).
+- **Import Sorter**: [`isort`](https://pycqa.github.io/isort/) (often integrated into ruff).
+- **Package Manager**: [`poetry`](https://python-poetry.org/) or [`uv`](https://github.com/astral-sh/uv) for dependency management.
+- **Pre-commit**: Use [`pre-commit`](https://pre-commit.com/) hooks to enforce style before committing.

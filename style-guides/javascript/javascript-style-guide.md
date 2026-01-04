@@ -23,7 +23,7 @@ This document outlines the coding standards and best practices for JavaScript de
 
 ## General Principles
 
-- **ECMAScript Standards**: Write modern JavaScript, targeting the latest stable ECMAScript versions. Use transpilers (like Babel) only if legacy browser support is strictly required.
+- **ECMAScript Standards**: Write modern JavaScript, targeting the latest stable ECMAScript versions. Use transpilers (like [Babel](https://babeljs.io/)) only if legacy browser support is strictly required.
 - **Consistency**: Consistency is key. If you edit existing code, follow the existing style.
 - **Readability**: Code is read much more often than it is written. Prioritize clarity over cleverness.
 - **Functional Style**: Prefer pure functions and immutability where possible. Avoid side effects.
@@ -60,7 +60,7 @@ This document outlines the coding standards and best practices for JavaScript de
 
 ## Documentation and Comments
 
-- **JSDoc**: Use JSDoc for documenting functions, classes, and complex logic.
+- **JSDoc**: Use [JSDoc](https://jsdoc.app/) for documenting functions, classes, and complex logic.
 - **Inline Comments**: Use `//` for single-line comments. Explain *why*, not *what*.
 - **Block Comments**: Use `/* ... */` for multi-line comments.
 - **TODOs**: Use `TODO(User):` to mark areas for improvement.
@@ -179,7 +179,7 @@ async function loadData() {
 
 ## Testing
 
-- **Framework**: Use a modern testing framework like Jest, Vitest, or Mocha.
+- **Framework**: Use a modern testing framework like [Jest](https://jestjs.io/), [Vitest](https://vitest.dev/), or [Mocha](https://mochajs.org/).
 - **Unit Tests**: Write unit tests for all utility functions and components.
 - **Integration Tests**: Write integration tests for API interactions and flows.
 - **Mocks**: Mock external dependencies to keep tests fast and deterministic.
@@ -187,7 +187,7 @@ async function loadData() {
 
 ## Security
 
-- **XSS**: Be wary of Cross-Site Scripting. Sanitize user input before rendering it to the DOM. Avoid `innerHTML` or `dangerouslySetInnerHTML` unless absolutely necessary and input is sanitized (e.g., with DOMPurify).
+- **XSS**: Be wary of Cross-Site Scripting. Sanitize user input before rendering it to the DOM. Avoid `innerHTML` or `dangerouslySetInnerHTML` unless absolutely necessary and input is sanitized (e.g., with [DOMPurify](https://github.com/cure53/DOMPurify)).
 - **Dependencies**: Regularly audit dependencies (`npm audit`) for vulnerabilities.
 - **Sensitive Data**: Never commit secrets or keys to the repository.
 
@@ -203,7 +203,7 @@ const street = user?.address?.street ?? 'Unknown Street';
 
 ## Recommended Tools
 
-- **Linter**: `ESLint`. Use standard configs like `eslint-config-airbnb-base` or `eslint-config-standard`.
-- **Formatter**: `Prettier`. Integrate with ESLint to avoid conflicts.
+- **Linter**: [`ESLint`](https://eslint.org/). Use standard configs like [`eslint-config-airbnb-base`](https://www.npmjs.com/package/eslint-config-airbnb-base) or [`eslint-config-standard`](https://www.npmjs.com/package/eslint-config-standard).
+- **Formatter**: [`Prettier`](https://prettier.io/). Integrate with ESLint to avoid conflicts.
 - **Type Checking**: While this is a JS guide, consider using JSDoc with TypeScript checking (`// @ts-check`) or migrating to TypeScript for larger projects.
-- **Bundler**: `Vite`, `Webpack`, or `Rollup`.
+- **Bundler**: [`Vite`](https://vitejs.dev/), [`Webpack`](https://webpack.js.org/), or [`Rollup`](https://rollupjs.org/).

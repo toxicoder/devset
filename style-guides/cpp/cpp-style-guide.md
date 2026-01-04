@@ -87,7 +87,7 @@ void do_something(int a, int b) {
 
 ## Documentation and Comments
 
-- **Style**: Use Doxygen-compatible comments (`///` or `/** ... */`).
+- **Style**: Use [Doxygen](https://doxygen.nl/)-compatible comments (`///` or `/** ... */`).
 - **Files**: Top of file comment explaining the file's purpose.
 - **Classes/Functions**: Document public APIs, including parameters, return values, exceptions, and thread safety.
 - **Implementation**: Comment complex logic explaining *why*, not *what*.
@@ -150,14 +150,14 @@ class Widget {
 - **Exceptions**: Use exceptions for error handling, not control flow.
 - **Standard Exceptions**: Throw standard exceptions (`std::runtime_error`, `std::invalid_argument`) or derive from them.
 - **Noexcept**: Ensure destructors, swap functions, and move operations do not throw.
-- **Alternatives**: For expected failures (e.g., "file not found"), consider `std::optional` or `std::expected` (C++23) over exceptions to indicate "no value".
+- **Alternatives**: For expected failures (e.g., "file not found"), consider `std::optional` or [`std::expected`](https://en.cppreference.com/w/cpp/utility/expected) (C++23) over exceptions to indicate "no value".
 
 ## Concurrency
 
 - **Standard Library**: Use `std::thread`, `std::mutex`, `std::condition_variable`.
 - **Locks**: Use `std::lock_guard` or `std::unique_lock` for RAII-style locking. Never manually `lock()` and `unlock()`.
 - **Atomics**: Use `std::atomic` for simple shared flags or counters.
-- **Data Races**: Ensure all shared data is protected. Use tools like ThreadSanitizer.
+- **Data Races**: Ensure all shared data is protected. Use tools like [ThreadSanitizer](https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual).
 - **Async**: Prefer `std::async` for simple tasks returning a value (`std::future`).
 
 ## Templates and Generic Programming
@@ -196,15 +196,15 @@ T add(T a, T b) {
 
 ## Testing
 
-- **Framework**: Use Google Test (GTest) or Catch2.
+- **Framework**: Use [Google Test (GTest)](https://github.com/google/googletest) or [Catch2](https://github.com/catchorg/Catch2).
 - **Unit Tests**: Write unit tests for all public interfaces.
 - **Coverage**: Aim for high test coverage.
 - **Structure**: Keep tests in a separate directory (e.g., `tests/`) or alongside source (e.g., `_test.cpp`).
 
 ## Recommended Tools
 
-- **Formatter**: `clang-format`. Check in a `.clang-format` file.
-- **Linter**: `clang-tidy` for static analysis and modernizing code.
-- **Build System**: CMake is the industry standard.
+- **Formatter**: [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html). Check in a `.clang-format` file.
+- **Linter**: [`clang-tidy`](https://clang.llvm.org/extra/clang-tidy/) for static analysis and modernizing code.
+- **Build System**: [CMake](https://cmake.org/) is the industry standard.
 - **Compiler**: Enable warnings: `-Wall -Wextra -Werror -pedantic`.
-- **Sanitizers**: Use AddressSanitizer (ASan) and UndefinedBehaviorSanitizer (UBSan) during development/CI.
+- **Sanitizers**: Use [AddressSanitizer (ASan)](https://github.com/google/sanitizers/wiki/AddressSanitizer) and [UndefinedBehaviorSanitizer (UBSan)](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html) during development/CI.
