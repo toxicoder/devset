@@ -16,13 +16,24 @@ setup_mocks() {
     cat << 'EOF' > "$TEST_DIR/ssh"
 #!/bin/bash
 # echo "Mock ssh called with: $@" >> "$TEST_DIR/ssh.log"
-if [[ "$*" == *"nvidia-smi"* ]]; then
+ARGS="$*"
+
+if [[ "$ARGS" == *"nvidia-smi"* ]]; then
     exit 0
-elif [[ "$*" == *"docker login"* ]]; then
+elif [[ "$ARGS" == *"docker login"* ]]; then
+    # Image pull simulation
+    if [[ -n "${MOCK_SSH_FAIL_PULL_IP:-}" ]] && [[ "$ARGS" == *"${MOCK_SSH_FAIL_PULL_IP}"* ]]; then
+        echo "Mocking pull failure on $MOCK_SSH_FAIL_PULL_IP"
+        exit 1
+    fi
+    if [[ -n "${MOCK_SSH_DELAY_PULL_IP:-}" ]] && [[ "$ARGS" == *"${MOCK_SSH_DELAY_PULL_IP}"* ]]; then
+        sleep 2
+    fi
     exit 0
-elif [[ "$*" == *"docker pull"* ]]; then
+elif [[ "$ARGS" == *"docker pull"* ]]; then
+    # Note: script usually chains login and pull, so 'docker login' block catches it.
     exit 0
-elif [[ "$*" == *"vtysh"* ]]; then
+elif [[ "$ARGS" == *"vtysh"* ]]; then
     echo "Neighbor ID     Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL"
     echo "10.0.0.2          1 Full/Backup       34.123s 10.0.0.2        eth0:100               0     0     0"
     exit 0
@@ -100,6 +111,31 @@ if [ $? -eq 1 ]; then
 else
     echo "FAIL: Script should exit 1 on missing args"
 fi
+
+# Test 3: Image pull failure on one node
+echo "Running test: Image pull failure on one node"
+(
+    export MOCK_SSH_FAIL_PULL_IP="10.0.0.2"
+    export MOCK_SSH_DELAY_PULL_IP="10.0.0.1"
+    export NGC_API_KEY="test-key"
+    # Capture output to check for error message
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "Error: Image pull failed on one or more nodes"; then
+            echo "PASS"
+        else
+             echo "FAIL: Expected error message not found. Output:"
+             echo "$OUTPUT"
+             exit 1
+        fi
+    else
+        echo "FAIL: Script should exit 1 on image pull failure. Exit code: $EXIT_CODE"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
 
 # Cleanup
 rm -rf "$TEST_DIR"
