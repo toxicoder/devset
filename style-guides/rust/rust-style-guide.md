@@ -29,7 +29,7 @@ This document outlines the coding standards and best practices for Rust developm
 
 ## Code Layout
 
-- **Formatting**: Use `rustfmt` with default settings. Do not manually format code in ways that `rustfmt` would undo.
+- **Formatting**: Use [`rustfmt`](https://github.com/rust-lang/rustfmt) with default settings. Do not manually format code in ways that `rustfmt` would undo.
 - **Indentation**: Use 4 spaces for indentation.
 - **Line Length**: Limit lines to 100 characters (default `rustfmt` setting).
 - **Braces**: Use K&R style braces (1tbs). Opening brace on the same line, closing brace on its own line.
@@ -117,8 +117,8 @@ pub fn div(a: i32, b: i32) -> i32 {
 - **Option**: Use `Option<T>` for values that may be absent.
 - **Unwrap/Expect**: Avoid `unwrap()` in production code. Use `expect("reason")` if you are certain it cannot fail (and explaining why helps). In tests, `unwrap()` is acceptable.
 - **Error Types**:
-    - For libraries: Define custom error enums using `thiserror`. Expose a public `Error` type.
-    - For applications: Use `anyhow` for easy error handling and context propagation.
+    - For libraries: Define custom error enums using [`thiserror`](https://github.com/dtolnay/thiserror). Expose a public `Error` type.
+    - For applications: Use [`anyhow`](https://github.com/dtolnay/anyhow) for easy error handling and context propagation.
 - **Question Mark**: Use the `?` operator for error propagation.
 - **Panics**: Only panic for unrecoverable errors (bugs, violated invariants).
 
@@ -142,7 +142,7 @@ fn read_config(path: &str) -> Result<String> {
 
 - **Send/Sync**: Understand `Send` (safe to move to another thread) and `Sync` (safe to share between threads). Most types are automatically both.
 - **Async/Await**: Use `async`/`await` for I/O-bound tasks.
-- **Runtimes**: We prefer `tokio` as the standard async runtime.
+- **Runtimes**: We prefer [`tokio`](https://tokio.rs/) as the standard async runtime.
 - **Channels**: Use channels (`tokio::sync::mpsc`) for message passing between tasks instead of sharing memory.
 - **Blocking**: Never block an async thread. Use `tokio::task::spawn_blocking` for CPU-intensive or blocking synchronous operations.
 
@@ -179,23 +179,23 @@ unsafe {
 
 - **Unit Tests**: Write unit tests for all private and public logic. Keep them in the same file as the code.
 - **Integration Tests**: Test the public API in `tests/`.
-- **Property-Based Testing**: Consider `proptest` for testing a wide range of inputs.
-- **Mocking**: Use `mockall` for mocking traits in tests.
+- **Property-Based Testing**: Consider [`proptest`](https://github.com/proptest-rs/proptest) for testing a wide range of inputs.
+- **Mocking**: Use [`mockall`](https://github.com/asomers/mockall) for mocking traits in tests.
 - **Doctests**: Ensure examples in documentation compile and pass.
 
 ## Dependencies
 
 - **Selection**: Choose well-maintained, popular crates (check downloads, recent updates).
-- **Audit**: Use `cargo audit` to check for security vulnerabilities.
+- **Audit**: Use [`cargo audit`](https://github.com/rustsec/rustsec/tree/main/cargo-audit) to check for security vulnerabilities.
 - **Features**: Disable unused features to reduce compile times and binary size (`default-features = false`).
 - **Heavy Dependencies**: Be cautious with heavy dependencies like `serde`, `tokio`, `syn`. Only include what you need.
 
 ## Recommended Tools
 
-- **Format**: `rustfmt` (standard formatter).
-- **Lint**: `clippy` (catch common mistakes and improve code). Run `cargo clippy` in CI.
+- **Format**: [`rustfmt`](https://github.com/rust-lang/rustfmt) (standard formatter).
+- **Lint**: [`clippy`](https://github.com/rust-lang/rust-clippy) (catch common mistakes and improve code). Run `cargo clippy` in CI.
 - **Check**: `cargo check` (fast compilation check).
 - **Test**: `cargo test`.
 - **Audit**: `cargo audit` (security).
-- **Expand**: `cargo expand` (view macro expansion).
-- **IDE**: `rust-analyzer` (LSP).
+- **Expand**: [`cargo expand`](https://github.com/dtolnay/cargo-expand) (view macro expansion).
+- **IDE**: [`rust-analyzer`](https://rust-analyzer.github.io/) (LSP).

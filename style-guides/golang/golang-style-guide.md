@@ -23,12 +23,12 @@ This document outlines the coding standards and best practices for Go (Golang) d
 - **Simplicity**: Go is designed to be simple. Avoid over-engineering.
 - **Readability**: Clear code is better than clever code.
 - **Orthogonality**: Keep concepts independent.
-- **Idiomatic Go**: Follow established conventions (e.g., Effective Go, Go Code Review Comments).
+- **Idiomatic Go**: Follow established conventions (e.g., [Effective Go](https://go.dev/doc/effective_go), [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)).
 - **Explicit Dependencies**: Avoid magic or implicit behavior.
 
 ## Formatting
 
-- **gofmt**: All code must be formatted with `gofmt` (or `goimports`). This is non-negotiable.
+- **gofmt**: All code must be formatted with [`gofmt`](https://pkg.go.dev/cmd/gofmt) (or [`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports)). This is non-negotiable.
 - **Line Length**: Go has no strict line length limit, but avoid excessively long lines. Break long lines logically.
 - **Imports**:
     - Group imports into standard library, third-party, and local packages.
@@ -102,7 +102,7 @@ This document outlines the coding standards and best practices for Go (Golang) d
 
 ## Testing
 
-- **Package**: Use the standard `testing` package.
+- **Package**: Use the standard [`testing`](https://pkg.go.dev/testing) package.
 - **Naming**: Test files must end with `_test.go`. Test functions must start with `Test`.
 - **Table-Driven Tests**: Use table-driven tests for covering multiple scenarios efficiently.
     ```go
@@ -150,9 +150,9 @@ This document outlines the coding standards and best practices for Go (Golang) d
 
 ## Linting and Tooling
 
-- **Linter**: Use `golangci-lint` with a robust configuration.
+- **Linter**: Use [`golangci-lint`](https://golangci-lint.run/) with a robust configuration.
     - Enabled linters: `govet`, `staticcheck`, `errcheck`, `ineffassign`, `gocyclo`, `gocritic`, `revive`.
-- **Editor Integration**: Use `gopls` (Go Language Server) for autocomplete, formatting, and refactoring.
+- **Editor Integration**: Use [`gopls`](https://github.com/golang/tools/blob/master/gopls/README.md) (Go Language Server) for autocomplete, formatting, and refactoring.
 
 ## Common Mistakes and Gotchas
 
