@@ -7,9 +7,17 @@ A key financial role responsible for budgeting, forecasting, and analysis that s
 
 ## Responsibilities
 
-* Forecasting revenue;
-* Budget variance;
-* ROI modeling
+* **Budgeting & Forecasting:** Partner with department heads to build annual budgets and update quarterly forecasts.
+* **Variance Analysis:** Track performance against budget and analyze variances to identify trends.
+* **Financial Modeling:** Build complex financial models to support strategic decision-making and ROI analysis.
+* **Management Reporting:** Prepare monthly board decks and management reports with actionable insights.
+* **Strategic Planning:** Support long-term strategic planning initiatives with data-driven analysis.
+
+### Role Variations
+
+* **Strategic Finance Analyst:** Focuses on M&A, capital raising, and long-term corporate strategy.
+* **Commercial Finance Analyst:** Partners closely with Sales/Revenue teams to model deal pricing and commissions.
+* **Corporate FP&A Analyst:** Focuses on consolidation of company-wide financials and board reporting.
 
 ## Average Daily Tasks
 * 09:00 Reports
@@ -29,7 +37,7 @@ Product Mgr, Dept Heads
 > You are an FP&A Analyst. Model financial scenarios and track budget vs. actuals. Flag budget overruns immediately.
 
 ### Recommended MCP Servers
-* **excel**: Used for financial modeling, data analysis, and reporting.
-* **netsuite**: Used for enterprise resource planning (ERP) and financial management.
-* **quickbooks**: Used for small business accounting and financial tracking.
-* **google-sheets**: Used for collaborative spreadsheets and data tracking.
+* **[excel](https://www.microsoft.com/en-us/microsoft-365/excel)**: Used for financial modeling, data analysis, and reporting.
+* **[netsuite](https://www.netsuite.com/)**: Used for enterprise resource planning (ERP) and financial management.
+* **[quickbooks](https://quickbooks.intuit.com/)**: Used for small business accounting and financial tracking.
+* **[google-sheets](https://www.google.com/sheets/about/)**: Used for collaborative spreadsheets and data tracking.

@@ -7,10 +7,17 @@ An operational role dedicated to creating a productive, safe, and engaging physi
 
 ## Responsibilities
 
-* Space planning;
-* Vendor mgmt;
-* Office safety;
-* Employee exp
+* **Facilities Management:** Oversee daily office operations, maintenance, and repairs.
+* **Space Planning:** Manage office layout, desk assignments, and moves to optimize space usage.
+* **Vendor Management:** Negotiate and manage contracts with service providers (cleaning, catering, security).
+* **Health & Safety:** Ensure the workplace meets health and safety standards and regulations.
+* **Employee Experience:** Organize events and initiatives to foster a positive and engaging office culture.
+
+### Role Variations
+
+* **Office Manager:** Focuses more on administrative support, reception, and general office coordination.
+* **Real Estate Manager:** Focuses on lease negotiations, site selection, and construction projects.
+* **Remote Workplace Manager:** Focuses on equipping and engaging a distributed/remote workforce.
 
 ## Average Daily Tasks
 * 08:30 Site walk
@@ -30,5 +37,5 @@ HR, IT, Finance
 > You are a Workplace Manager. Manage physical and virtual office logistics. Coordinate vendors and ensure a safe, productive environment.
 
 ### Recommended MCP Servers
-* **envoy**: Used for visitor management and office logistics.
-* **jira-service-desk**: Used for IT service management and help desk requests.
+* **[envoy](https://envoy.com/)**: Used for visitor management and office logistics.
+* **[jira-service-desk](https://www.atlassian.com/software/jira/service-management)**: Used for IT service management and help desk requests.

@@ -7,10 +7,17 @@ The senior accounting professional responsible for the accuracy and integrity of
 
 ## Responsibilities
 
-* Financial reporting;
-* Audits;
-* Internal controls;
-* Closing books
+* **Financial Reporting:** Prepare accurate and timely financial statements in accordance with GAAP.
+* **Audit Management:** Lead the external audit process and serve as the primary liaison with auditors.
+* **Internal Controls:** Establish and monitor internal controls to safeguard assets and ensure compliance.
+* **Month-End Close:** Manage the monthly, quarterly, and annual close processes efficiently.
+* **Tax Compliance:** Oversee tax filings and ensure compliance with local, state, and federal regulations.
+
+### Role Variations
+
+* **Assistant Controller:** Focuses on day-to-day accounting operations and supports the Controller in closing books.
+* **Corporate Controller:** Focuses on high-level consolidation and reporting for multiple entities.
+* **Plant Controller:** Focuses on manufacturing costs, inventory valuation, and plant performance.
 
 ## Average Daily Tasks
 * 09:00 Ledger review
@@ -30,6 +37,6 @@ CFO, FP&A, Legal
 > You are a Corporate Controller. Ensure accurate financial reporting and compliance with GAAP. Manage the general ledger and audit processes.
 
 ### Recommended MCP Servers
-* **netsuite**: Used for enterprise resource planning (ERP) and financial management.
-* **stripe**: Used for payment processing and financial transactions.
-* **bank-api**: Used for accessing banking data and transactions.
+* **[netsuite](https://www.netsuite.com/)**: Used for enterprise resource planning (ERP) and financial management.
+* **[stripe](https://stripe.com/)**: Used for payment processing and financial transactions.
+* **[bank-api](https://www.chase.com/)**: Used for accessing banking data and transactions.

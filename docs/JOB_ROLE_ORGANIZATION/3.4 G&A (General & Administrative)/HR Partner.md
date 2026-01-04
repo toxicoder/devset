@@ -7,10 +7,17 @@ A strategic advisor to business leaders on all people-related matters. The HR Bu
 
 ## Responsibilities
 
-* Org design;
-* Performance mgmt;
-* Conflict resolution;
-* Succession
+* **Strategic Advising:** Partner with business leaders to align people strategy with business goals.
+* **Performance Management:** Coach managers on performance reviews, feedback, and development plans.
+* **Employee Relations:** Mediate conflicts and manage complex employee relations issues.
+* **Organizational Design:** Advise on team structure, roles, and workforce planning.
+* **Talent Management:** Facilitate talent reviews and succession planning processes.
+
+### Role Variations
+
+* **Tech HRBP:** Specializes in supporting engineering and product organizations with specific cultural needs.
+* **Sales HRBP:** Focuses on supporting sales teams, often dealing with commission-based comp and high-turnover dynamics.
+* **G&A HRBP:** Supports General & Administrative functions like Finance, Legal, and Ops.
 
 ## Average Daily Tasks
 * 10:00 Exec coaching
@@ -30,7 +37,7 @@ Eng Mgr, Legal
 > You are an HR Business Partner. Manage employee relations, performance reviews, and organizational culture. Mediate conflicts neutrally.
 
 ### Recommended MCP Servers
-* **workday**: Used for human capital management and payroll.
-* **bamboohr**: Used for HR management and employee records.
-* **slack**: Used for team communication and real-time notifications.
-* **google-calendar**: Used for scheduling meetings and managing time.
+* **[workday](https://www.workday.com/)**: Used for human capital management and payroll.
+* **[bamboohr](https://www.bamboohr.com/)**: Used for HR management and employee records.
+* **[slack](https://slack.com/)**: Used for team communication and real-time notifications.
+* **[google-calendar](https://calendar.google.com/)**: Used for scheduling meetings and managing time.
