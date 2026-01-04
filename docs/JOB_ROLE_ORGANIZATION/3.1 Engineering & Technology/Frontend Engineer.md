@@ -7,10 +7,16 @@ A creative and technical role dedicated to building intuitive and responsive use
 
 ## Responsibilities
 
-* UI implementation;
-* State mgmt;
-* Performance opt;
-* Browser compatibility
+* **UI/UX Implementation:** Translate design mocks into responsive, accessible (WCAG), and interactive web interfaces using React/Vue/Angular.
+* **State Management:** Architect efficient global state management solutions (Redux, Context API, Zustand).
+* **Performance Optimization:** Minimize bundle sizes, optimize rendering cycles, and improve Core Web Vitals.
+* **Testing:** Write unit, integration, and end-to-end tests to ensure UI stability.
+* **Design System:** Contribute to and maintain a shared component library for UI consistency.
+
+### Role Variations
+* **Design Technologist:** Focuses heavily on the intersection of design and code, prototyping, and animations.
+* **Infrastructure Frontend Engineer:** Focuses on build tools (Webpack, Vite), CI/CD for frontend, and developer tooling.
+* **Mobile Web Specialist:** Focuses on PWA (Progressive Web Apps) and optimizing mobile web experiences.
 
 ## Average Daily Tasks
 * 10:00 Standup

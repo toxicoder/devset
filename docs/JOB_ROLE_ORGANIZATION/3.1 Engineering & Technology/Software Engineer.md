@@ -7,10 +7,16 @@ A versatile engineering role responsible for the full lifecycle of software deve
 
 ## Responsibilities
 
-* Writing code;
-* Code reviews;
-* System design;
-* Debugging
+* **Full-Stack Development:** Build features across the stack, from database interactions to frontend UI.
+* **Code Quality:** Write clean, testable, and maintainable code following best practices and style guides.
+* **Technical Design:** Participate in RFCs and design reviews for new systems and features.
+* **Collaboration:** Work effectively in agile teams with Product Managers and Designers.
+* **Mentorship:** Mentor junior engineers and contribute to engineering culture.
+
+### Role Variations
+* **Full Stack Engineer:** Balanced focus between frontend and backend technologies.
+* **Generalist:** Adapts to any part of the stack or technology as needed by the business.
+* **Product Engineer:** Heavily focused on product features and user value, often working closely with product and design.
 
 ## Average Daily Tasks
 * 10:00 Standup

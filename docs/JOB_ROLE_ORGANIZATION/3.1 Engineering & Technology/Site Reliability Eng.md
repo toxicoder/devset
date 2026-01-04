@@ -7,10 +7,16 @@ A hybrid role combining software engineering and systems administration to build
 
 ## Responsibilities
 
-* Cloud infra mgmt;
-* Automating pipelines;
-* Incident response;
-* Capacity planning
+* **Infrastructure as Code:** Provision and manage cloud resources using Terraform or CloudFormation.
+* **Observability:** Implement monitoring, logging, and tracing to ensure system visibility (Prometheus, Grafana).
+* **Reliability Engineering:** Define SLOs/SLIs and implement error budgets. Conduct post-incident reviews (post-mortems).
+* **Automation:** Automate repetitive operational tasks and build robust CI/CD pipelines.
+* **Scalability:** Plan for capacity growth and auto-scaling strategies to handle traffic spikes.
+
+### Role Variations
+* **DevOps Engineer:** Focuses more on the development pipeline and developer tools than strictly reliability metrics.
+* **Cloud Architect:** Focuses on high-level cloud strategy and architecture design.
+* **NOC Engineer:** Focuses on real-time monitoring and immediate incident triage.
 
 ## Average Daily Tasks
 * 10:00 On-call handoff

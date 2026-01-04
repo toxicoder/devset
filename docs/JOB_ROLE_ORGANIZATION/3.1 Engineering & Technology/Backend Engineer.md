@@ -7,10 +7,16 @@ A specialized engineering role focused on the server-side logic, database manage
 
 ## Responsibilities
 
-* API development;
-* DB optimization;
-* Microservices;
-* Server maintenance
+* **API Development:** Design, document, and implement RESTful and GraphQL APIs. Ensure security and versioning.
+* **Database Management:** Schema design, query optimization, and migration management for Relational (PostgreSQL) and NoSQL databases.
+* **System Architecture:** Design and maintain microservices and serverless architectures.
+* **Performance Tuning:** Monitor application performance, identify bottlenecks, and implement caching strategies (Redis).
+* **Security:** Implement authentication (OAuth2, JWT) and authorization mechanisms. Ensure data protection at rest and in transit.
+
+### Role Variations
+* **API Specialist:** Focuses heavily on interface design, documentation (OpenAPI), and integration with third-party services.
+* **Platform Engineer:** Focuses on internal tooling, developer experience, and core infrastructure libraries.
+* **Database Reliability Engineer:** Specializes in database performance, backup/recovery strategies, and high availability.
 
 ## Average Daily Tasks
 * 10:00 Standup
