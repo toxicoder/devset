@@ -47,6 +47,11 @@ plugins:
 nav:
   - Home: index.md
   - Job Role Organization: JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION.md
+  - Interview Prep:
+    - Data Analysis: interview-prep/data-analysis.md
+    - Java: interview-prep/java.md
+    - Python: interview-prep/python.md
+    - SQL: interview-prep/sql.md
   - Style Guides:
     - Bash: style-guides/bash/bash-style-guide.md
     - C++: style-guides/cpp/cpp-style-guide.md
