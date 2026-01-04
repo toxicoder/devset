@@ -1,5 +1,7 @@
 # devset
 
+[**View Documentation on GitHub Pages**](https://toxicoder.github.io/devset/)
+
 ## Project Overview
 
 This repository serves as a comprehensive collection of development tools, templates, and best practices for initializing and maintaining code repositories. It provides a standardized foundation for projects to ensure consistency, quality, and maintainability.
