@@ -49,110 +49,110 @@ plugins:
 nav:
   - Home: index.md
   - Job Role Organization:
-      - Overview: JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION.md
+      - Overview: job_roles/job_role_organization.md
       - 3.0 Executive Leadership:
-          - CEO: JOB_ROLE_ORGANIZATION/3.0 Executive Leadership/CEO.md
-          - CFO: JOB_ROLE_ORGANIZATION/3.0 Executive Leadership/CFO.md
-          - CLO: JOB_ROLE_ORGANIZATION/3.0 Executive Leadership/CLO.md
-          - CPO: JOB_ROLE_ORGANIZATION/3.0 Executive Leadership/CPO.md
-          - CRO: JOB_ROLE_ORGANIZATION/3.0 Executive Leadership/CRO.md
-          - CTO: JOB_ROLE_ORGANIZATION/3.0 Executive Leadership/CTO.md
+          - CEO: job_roles/executive_leadership/ceo.md
+          - CFO: job_roles/executive_leadership/cfo.md
+          - CLO: job_roles/executive_leadership/clo.md
+          - CPO: job_roles/executive_leadership/cpo.md
+          - CRO: job_roles/executive_leadership/cro.md
+          - CTO: job_roles/executive_leadership/cto.md
       - 3.1 Engineering & Technology:
-          - VP of Engineering: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/VP of Engineering.md
-          - Director of App Dev: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Director of App Dev.md
-          - Director of Infrastructure: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Director of Infrastructure.md
-          - Backend Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Backend Engineer.md
-          - Data Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Data Engineer.md
-          - Frontend Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Frontend Engineer.md
-          - Mobile Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Mobile Engineer.md
-          - QA Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/QA Engineer.md
-          - Security Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Security Engineer.md
-          - Site Reliability Eng: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Site Reliability Eng.md
-          - Software Engineer: JOB_ROLE_ORGANIZATION/3.1 Engineering & Technology/Software Engineer.md
+          - VP of Engineering: job_roles/engineering__technology/vp_of_engineering.md
+          - Director of App Dev: job_roles/engineering__technology/director_of_app_dev.md
+          - Director of Infrastructure: job_roles/engineering__technology/director_of_infrastructure.md
+          - Backend Engineer: job_roles/engineering__technology/backend_engineer.md
+          - Data Engineer: job_roles/engineering__technology/data_engineer.md
+          - Frontend Engineer: job_roles/engineering__technology/frontend_engineer.md
+          - Mobile Engineer: job_roles/engineering__technology/mobile_engineer.md
+          - QA Engineer: job_roles/engineering__technology/qa_engineer.md
+          - Security Engineer: job_roles/engineering__technology/security_engineer.md
+          - Site Reliability Eng: job_roles/engineering__technology/site_reliability_eng.md
+          - Software Engineer: job_roles/engineering__technology/software_engineer.md
       - 3.2 Product & Design:
-          - VP of Product: JOB_ROLE_ORGANIZATION/3.2 Product & Design/VP of Product.md
-          - VP of Design: JOB_ROLE_ORGANIZATION/3.2 Product & Design/VP of Design.md
-          - Data Scientist: JOB_ROLE_ORGANIZATION/3.2 Product & Design/Data Scientist.md
-          - Product Designer: JOB_ROLE_ORGANIZATION/3.2 Product & Design/Product Designer.md
-          - Product Manager: JOB_ROLE_ORGANIZATION/3.2 Product & Design/Product Manager.md
-          - Technical PM: JOB_ROLE_ORGANIZATION/3.2 Product & Design/Technical PM.md
-          - Technical PgM: JOB_ROLE_ORGANIZATION/3.2 Product & Design/Technical PgM.md
-          - UX Writer: JOB_ROLE_ORGANIZATION/3.2 Product & Design/UX Writer.md
-          - User Researcher: JOB_ROLE_ORGANIZATION/3.2 Product & Design/User Researcher.md
+          - VP of Product: job_roles/product__design/vp_of_product.md
+          - VP of Design: job_roles/product__design/vp_of_design.md
+          - Data Scientist: job_roles/product__design/data_scientist.md
+          - Product Designer: job_roles/product__design/product_designer.md
+          - Product Manager: job_roles/product__design/product_manager.md
+          - Technical PM: job_roles/product__design/technical_pm.md
+          - Technical PgM: job_roles/product__design/technical_pgm.md
+          - UX Writer: job_roles/product__design/ux_writer.md
+          - User Researcher: job_roles/product__design/user_researcher.md
       - 3.3 Go-To-Market (Sales & Marketing):
-          - VP of Marketing: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/VP of Marketing.md
-          - VP of Sales: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/VP of Sales.md
-          - Account Executive: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Account Executive.md
-          - Brand Marketing: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Brand Marketing.md
-          - Comms - PR: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Comms - PR.md
-          - Customer Success: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Customer Success.md
-          - Public Policy Mgr: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Public Policy Mgr.md
-          - Sales Dev Rep: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Sales Dev Rep.md
-          - Solutions Eng: JOB_ROLE_ORGANIZATION/3.3 Go-To-Market (Sales & Marketing)/Solutions Eng.md
+          - VP of Marketing: job_roles/go_to_market_sales__marketing/vp_of_marketing.md
+          - VP of Sales: job_roles/go_to_market_sales__marketing/vp_of_sales.md
+          - Account Executive: job_roles/go_to_market_sales__marketing/account_executive.md
+          - Brand Marketing: job_roles/go_to_market_sales__marketing/brand_marketing.md
+          - Comms - PR: job_roles/go_to_market_sales__marketing/comms_pr.md
+          - Customer Success: job_roles/go_to_market_sales__marketing/customer_success.md
+          - Public Policy Mgr: job_roles/go_to_market_sales__marketing/public_policy_mgr.md
+          - Sales Dev Rep: job_roles/go_to_market_sales__marketing/sales_dev_rep.md
+          - Solutions Eng: job_roles/go_to_market_sales__marketing/solutions_eng.md
       - 3.4 G&A (General & Administrative):
-          - VP of Finance: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/VP of Finance.md
-          - VP of People: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/VP of People.md
-          - Controller: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/Controller.md
-          - Corp Counsel: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/Corp Counsel.md
-          - Employment Counsel: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/Employment Counsel.md
-          - FP&A Analyst: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/FP&A Analyst.md
-          - HR Partner: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/HR Partner.md
-          - Strategy & Ops: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/Strategy & Ops.md
-          - Workplace Mgr: JOB_ROLE_ORGANIZATION/3.4 G&A (General & Administrative)/Workplace Mgr.md
+          - VP of Finance: job_roles/ga_general__administrative/vp_of_finance.md
+          - VP of People: job_roles/ga_general__administrative/vp_of_people.md
+          - Controller: job_roles/ga_general__administrative/controller.md
+          - Corp Counsel: job_roles/ga_general__administrative/corp_counsel.md
+          - Employment Counsel: job_roles/ga_general__administrative/employment_counsel.md
+          - FP&A Analyst: job_roles/ga_general__administrative/fpa_analyst.md
+          - HR Partner: job_roles/ga_general__administrative/hr_partner.md
+          - Strategy & Ops: job_roles/ga_general__administrative/strategy__ops.md
+          - Workplace Mgr: job_roles/ga_general__administrative/workplace_mgr.md
       - 4. Specialized Squads:
-          - AI Ethics & Safety: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/AI Ethics & Safety.md
-          - Accessibility (A11y): JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Accessibility (A11y).md
-          - Acquisition (SEO): JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Acquisition (SEO).md
-          - Cloud Migration Squad: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Cloud Migration Squad.md
-          - Data Platform: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Data Platform.md
-          - Developer Experience: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Developer Experience.md
-          - Enterprise Launch: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Enterprise Launch.md
-          - Event Strategy: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Event Strategy.md
-          - IPO Audit Ready: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/IPO Audit Ready.md
-          - Internationalization: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Internationalization.md
-          - Mobile Platform: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Mobile Platform.md
-          - Monetization: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Monetization.md
-          - Privacy (GDPR): JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Privacy (GDPR).md
-          - Security Red Team: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Security Red Team.md
-          - Strategic Partner: JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Strategic Partner.md
-          - Sustainability (ESG): JOB_ROLE_ORGANIZATION/4. Specialized Squads (Cross-Functional Teams)/Sustainability (ESG).md
+          - AI Ethics & Safety: job_roles/4._specialized_squads_cross_functional_teams/ai_ethics__safety.md
+          - Accessibility (A11y): job_roles/4._specialized_squads_cross_functional_teams/accessibility_a11y.md
+          - Acquisition (SEO): job_roles/4._specialized_squads_cross_functional_teams/acquisition_seo.md
+          - Cloud Migration Squad: job_roles/4._specialized_squads_cross_functional_teams/cloud_migration_squad.md
+          - Data Platform: job_roles/4._specialized_squads_cross_functional_teams/data_platform.md
+          - Developer Experience: job_roles/4._specialized_squads_cross_functional_teams/developer_experience.md
+          - Enterprise Launch: job_roles/4._specialized_squads_cross_functional_teams/enterprise_launch.md
+          - Event Strategy: job_roles/4._specialized_squads_cross_functional_teams/event_strategy.md
+          - IPO Audit Ready: job_roles/4._specialized_squads_cross_functional_teams/ipo_audit_ready.md
+          - Internationalization: job_roles/4._specialized_squads_cross_functional_teams/internationalization.md
+          - Mobile Platform: job_roles/4._specialized_squads_cross_functional_teams/mobile_platform.md
+          - Monetization: job_roles/4._specialized_squads_cross_functional_teams/monetization.md
+          - Privacy (GDPR): job_roles/4._specialized_squads_cross_functional_teams/privacy_gdpr.md
+          - Security Red Team: job_roles/4._specialized_squads_cross_functional_teams/security_red_team.md
+          - Strategic Partner: job_roles/4._specialized_squads_cross_functional_teams/strategic_partner.md
+          - Sustainability (ESG): job_roles/4._specialized_squads_cross_functional_teams/sustainability_esg.md
   - Interview Questions:
-      - Backend Engineer: interview-questions/3.1 Engineering & Technology/Backend Engineer.md
-      - Data Analysis: interview-questions/data-analysis.md
-      - Data Engineering: interview-questions/data-engineering.md
-      - Data Infrastructure: interview-questions/data-infrastructure.md
-      - Data Science: interview-questions/data-science.md
-      - Frontend Engineer: interview-questions/3.1 Engineering & Technology/Frontend Engineer.md
-      - Golang: interview-questions/golang.md
-      - Java: interview-questions/java.md
-      - JavaScript: interview-questions/javascript.md
-      - Kotlin: interview-questions/kotlin.md
-      - Protocol Buffers: interview-questions/protocol-buffers.md
-      - Python: interview-questions/python.md
-      - Software Engineering: interview-questions/software-engineering.md
-      - SQL: interview-questions/sql.md
-      - System Design: interview-questions/system-design.md
-      - TypeScript: interview-questions/typescript.md
+      - Backend Engineer: interview_questions/engineering__technology/backend_engineer.md
+      - Data Analysis: interview_questions/data_analysis.md
+      - Data Engineering: interview_questions/data_engineering.md
+      - Data Infrastructure: interview_questions/data_infrastructure.md
+      - Data Science: interview_questions/data_science.md
+      - Frontend Engineer: interview_questions/engineering__technology/frontend_engineer.md
+      - Golang: interview_questions/golang.md
+      - Java: interview_questions/java.md
+      - JavaScript: interview_questions/javascript.md
+      - Kotlin: interview_questions/kotlin.md
+      - Protocol Buffers: interview_questions/protocol_buffers.md
+      - Python: interview_questions/python.md
+      - Software Engineering: interview_questions/software_engineering.md
+      - SQL: interview_questions/sql.md
+      - System Design: interview_questions/system_design.md
+      - TypeScript: interview_questions/typescript.md
   - Style Guides:
-      - Bash: style-guides/bash/bash-style-guide.md
-      - C++: style-guides/cpp/cpp-style-guide.md
-      - CSS: style-guides/css/css-style-guide.md
-      - Golang: style-guides/golang/golang-style-guide.md
-      - HTML: style-guides/html/html-style-guide.md
-      - Java: style-guides/java/java-style-guide.md
-      - JavaScript: style-guides/javascript/javascript-style-guide.md
-      - JSON: style-guides/json/json-style-guide.md
-      - Kotlin: style-guides/kotlin/kotlin-style-guide.md
-      - Markdown: style-guides/markdown/markdown-style-guide.md
-      - Proto: style-guides/proto/proto-style-guide.md
-      - Python: style-guides/python/python-style-guide.md
-      - Rust: style-guides/rust/rust-style-guide.md
-      - SQL: style-guides/sql/sql-style-guide.md
-      - Starlark: style-guides/starlark/starlark-style-guide.md
-      - TypeScript: style-guides/typescript/typescript-style-guide.md
-      - YAML: style-guides/yaml/yaml-style-guide.md
-      - Zsh: style-guides/zsh/zsh-style-guide.md
+      - Bash: style_guides/bash/bash_style_guide.md
+      - C++: style_guides/cpp/cpp_style_guide.md
+      - CSS: style_guides/css/css_style_guide.md
+      - Golang: style_guides/golang/golang_style_guide.md
+      - HTML: style_guides/html/html_style_guide.md
+      - Java: style_guides/java/java_style_guide.md
+      - JavaScript: style_guides/javascript/javascript_style_guide.md
+      - JSON: style_guides/json/json_style_guide.md
+      - Kotlin: style_guides/kotlin/kotlin_style_guide.md
+      - Markdown: style_guides/markdown/markdown_style_guide.md
+      - Proto: style_guides/proto/proto_style_guide.md
+      - Python: style_guides/python/python_style_guide.md
+      - Rust: style_guides/rust/rust_style_guide.md
+      - SQL: style_guides/sql/sql_style_guide.md
+      - Starlark: style_guides/starlark/starlark_style_guide.md
+      - TypeScript: style_guides/typescript/typescript_style_guide.md
+      - YAML: style_guides/yaml/yaml_style_guide.md
+      - Zsh: style_guides/zsh/zsh_style_guide.md
   - Architecture Decision Records:
       - Template: adr/template.md
-      - Example (Architecture Decision): adr/0001-example-architecture-decision.md
+      - Example (Architecture Decision): adr/0001_example_architecture_decision.md
   - Technical Design Doc: technical_design_doc.md
