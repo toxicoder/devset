@@ -7,5 +7,6 @@ Welcome to the official documentation for the project.
 - [Technical Design Document](technical_design_doc.md)
 - [Job Role Organization](JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION.md)
 - [Architecture Decision Records (ADR)](adr/0001-example-architecture-decision.md)
+- [SQL Interview Prep](interview-prep/sql.md)
 
 Please navigate using the sidebar for more sections.
