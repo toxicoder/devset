@@ -7,10 +7,16 @@ A quality-focused role responsible for ensuring the reliability and stability of
 
 ## Responsibilities
 
-* Writing test scripts;
-* Automated testing;
-* Bug tracking;
-* Release validation
+* **Test Planning:** Create comprehensive test plans and strategies for new features and releases.
+* **Test Automation:** Develop and maintain automated test suites (Selenium, Playwright) for regression testing.
+* **Manual Testing:** Perform exploratory testing to find edge cases and usability issues.
+* **Bug Lifecycle:** Report, track, and verify bugs using issue tracking systems (Jira).
+* **Release Sign-off:** Validate release candidates and provide go/no-go decisions based on quality metrics.
+
+### Role Variations
+* **SDET (Software Development Engineer in Test):** Focuses primarily on writing code for testing frameworks and tools.
+* **Performance Tester:** Focuses on load testing, stress testing, and benchmarking system performance.
+* **Security Tester:** Focuses on identifying security vulnerabilities and conducting penetration testing.
 
 ## Average Daily Tasks
 * 09:00 Triage bugs

@@ -7,10 +7,16 @@ A vital role dedicated to safeguarding the organization's information systems an
 
 ## Responsibilities
 
-* Pen testing;
-* Vuln scanning;
-* Security audits;
-* Incident response
+* **Vulnerability Management:** Conduct regular scans and penetration tests to identify and remediate security weaknesses.
+* **Security Architecture:** Design secure systems and review architecture for potential risks.
+* **Incident Response:** Lead investigations into security breaches and implement containment and recovery plans.
+* **Compliance:** Ensure adherence to industry standards (SOC2, ISO 27001) and regulatory requirements.
+* **DevSecOps:** Integrate security practices and tools into the CI/CD pipeline.
+
+### Role Variations
+* **AppSec Engineer:** Focuses specifically on application security, code reviews, and secure coding practices.
+* **Cloud Security Engineer:** Focuses on securing cloud infrastructure (AWS/Azure/GCP) and IAM policies.
+* **Blue Team/Red Team:** Specializes in defense (monitoring, response) or offense (simulated attacks).
 
 ## Average Daily Tasks
 * 09:00 Log review

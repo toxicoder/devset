@@ -7,10 +7,16 @@ A critical technical role responsible for the design, construction, and maintena
 
 ## Responsibilities
 
-* ETL creation;
-* Data warehousing;
-* Query opt;
-* Data governance
+* **Pipeline Development:** Build and maintain scalable ETL/ELT pipelines using tools like Airflow and dbt.
+* **Data Warehousing:** Design and optimize data warehouse schemas (Snowflake, BigQuery) for analytical queries.
+* **Data Quality & Governance:** Implement checks for data accuracy, consistency, and privacy compliance (GDPR/CCPA).
+* **Streaming Infrastructure:** Manage real-time data ingestion using Kafka or Kinesis.
+* **Collaboration:** Work with Data Scientists to prepare datasets for machine learning models.
+
+### Role Variations
+* **Analytics Engineer:** Bridges the gap between data engineering and analysis, focusing on dbt models and BI tool integration.
+* **Big Data Engineer:** Focuses on distributed computing frameworks (Spark, Hadoop) and processing massive datasets.
+* **Machine Learning Engineer:** Focuses on deploying and monitoring ML models and pipelines (MLOps).
 
 ## Average Daily Tasks
 * 10:00 Pipeline check

@@ -7,10 +7,16 @@ A specialized developer focused on building high-performance native applications
 
 ## Responsibilities
 
-* Swift/Kotlin coding;
-* App Store deploy;
-* Touch opt;
-* Device testing
+* **Native Development:** Build high-performance iOS (Swift) and Android (Kotlin) applications.
+* **Platform Integration:** Integrate with native device features (Camera, GPS, Bluetooth) and platform APIs.
+* **App Lifecycle Management:** Manage the build, signing, and submission process for the App Store and Google Play.
+* **Performance & Battery:** Optimize app performance, memory usage, and battery consumption.
+* **Offline Capability:** Implement local storage and synchronization logic for offline-first experiences.
+
+### Role Variations
+* **iOS Specialist:** Deep expertise in the Apple ecosystem (UIKit, SwiftUI, Combine).
+* **Android Specialist:** Deep expertise in the Android ecosystem (Jetpack Compose, Coroutines).
+* **Cross-Platform Engineer:** Focuses on frameworks like React Native or Flutter to build for multiple platforms.
 
 ## Average Daily Tasks
 * 10:00 Standup
