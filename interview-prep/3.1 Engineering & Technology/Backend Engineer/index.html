@@ -1,0 +1,6358 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://toxicoder.github.io/devset/interview-prep/3.1%20Engineering%20%26%20Technology/Backend%20Engineer/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Interview Questions: Backend Engineer (SWEN1002) - DevSet</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#interview-questions-backend-engineer-swen1002" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="DevSet" class="md-header__button md-logo" aria-label="DevSet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DevSet
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Interview Questions: Backend Engineer (SWEN1002)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../data-infrastructure/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Interview Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Job Role Organization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../data-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Interview Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../style-guides/bash/bash-style-guide/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Style Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../protocol-buffers/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Interview Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="DevSet" class="md-nav__button md-logo" aria-label="DevSet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DevSet
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interview Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../JOB_ROLE_ORGANIZATION/JOB_ROLE_ORGANIZATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Role Organization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interview Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Style Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Style Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/bash/bash-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/cpp/cpp-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C++
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/css/css-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/golang/golang-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/java/java-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/json/json-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/kotlin/kotlin-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/markdown/markdown-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/proto/proto-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/python/python-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/rust/rust-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/starlark/starlark-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starlark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/typescript/typescript-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeScript
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/yaml/yaml-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    YAML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../style-guides/zsh/zsh-style-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zsh
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interview Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../protocol-buffers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Buffers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-scalability-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Scalability (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Scalability (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-caching-strategies-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Caching Strategies (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Caching Strategies (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-microservices-vs-monolith-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Microservices vs Monolith (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Microservices vs Monolith (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-load-balancing-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Load Balancing (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Load Balancing (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-message-queues-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Message Queues (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Message Queues (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-database-sharding-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Database Sharding (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Database Sharding (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cap-theorem-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. CAP Theorem (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. CAP Theorem (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-rate-limiting-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Rate Limiting (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Rate Limiting (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-consistent-hashing-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Consistent Hashing (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Consistent Hashing (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-event-sourcing-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Event Sourcing (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Event Sourcing (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-circuit-breaker-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Circuit Breaker (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Circuit Breaker (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-service-discovery-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Service Discovery (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Service Discovery (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-api-gateway-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. API Gateway (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. API Gateway (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-distributed-transactions-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Distributed Transactions (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Distributed Transactions (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-idempotency-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Idempotency (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Idempotency (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-cdn-usage-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. CDN Usage (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. CDN Usage (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-websockets-vs-polling-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. WebSockets vs Polling (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. WebSockets vs Polling (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-spof-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. SPOF (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. SPOF (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-leader-election-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Leader Election (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Leader Election (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-backpressure-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Backpressure (System Design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. Backpressure (System Design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-acid-properties-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. ACID Properties (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21. ACID Properties (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-normalization-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Normalization (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="22. Normalization (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-indexing-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Indexing (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="23. Indexing (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-n1-problem-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. N+1 Problem (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="24. N+1 Problem (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-sql-vs-nosql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. SQL vs NoSQL (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="25. SQL vs NoSQL (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-transaction-isolation-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Transaction Isolation (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="26. Transaction Isolation (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-replication-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Replication (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="27. Replication (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-connection-pooling-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Connection Pooling (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="28. Connection Pooling (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-stored-procedures-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Stored Procedures (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="29. Stored Procedures (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-soft-deletes-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Soft Deletes (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="30. Soft Deletes (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-database-migration-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Database Migration (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="31. Database Migration (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-full-text-search-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. Full Text Search (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="32. Full Text Search (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-clustering-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33. Clustering (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33. Clustering (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-row-vs-columnar-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34. Row vs Columnar (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34. Row vs Columnar (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-foreign-keys-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35. Foreign Keys (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="35. Foreign Keys (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-deadlocks-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        36. Deadlocks (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="36. Deadlocks (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-vacuum-postgres-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        37. VACUUM (Postgres) (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="37. VACUUM (Postgres) (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-partitioning-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        38. Partitioning (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="38. Partitioning (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-write-amplification-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        39. Write Amplification (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="39. Write Amplification (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-time-series-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        40. Time Series (Database)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="40. Time Series (Database)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-rest-constraints-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        41. REST Constraints (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="41. REST Constraints (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-graphql-vs-rest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        42. GraphQL vs REST (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="42. GraphQL vs REST (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-http-status-codes-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        43. HTTP Status Codes (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="43. HTTP Status Codes (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-idempotent-methods-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        44. Idempotent Methods (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="44. Idempotent Methods (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-hateoas-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        45. HATEOAS (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="45. HATEOAS (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-versioning-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        46. Versioning (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="46. Versioning (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-authentication-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        47. Authentication (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="47. Authentication (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48-oauth2-flows-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        48. OAuth2 Flows (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="48. OAuth2 Flows (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49-webhooks-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        49. Webhooks (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="49. Webhooks (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-grpc-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        50. gRPC (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="50. gRPC (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-pagination-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        51. Pagination (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="51. Pagination (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-cors-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        52. CORS (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="52. CORS (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-api-documentation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        53. API Documentation (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="53. API Documentation (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-rate-limiting-headers-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        54. Rate Limiting Headers (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="54. Rate Limiting Headers (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-payload-size-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        55. Payload Size (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="55. Payload Size (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-content-negotiation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        56. Content Negotiation (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="56. Content Negotiation (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-keep-alive-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        57. Keep-Alive (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="57. Keep-Alive (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58-safe-methods-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        58. Safe Methods (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="58. Safe Methods (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#59-json-patch-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        59. JSON Patch (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="59. JSON Patch (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-soap-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        60. Soap (API)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="60. Soap (API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-sql-injection-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        61. SQL Injection (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="61. SQL Injection (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-xss-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        62. XSS (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="62. XSS (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-csrf-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        63. CSRF (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="63. CSRF (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-https-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        64. HTTPS (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="64. HTTPS (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-hashing-vs-encryption-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        65. Hashing vs Encryption (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="65. Hashing vs Encryption (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-salt-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        66. Salt (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="66. Salt (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67-jwt-security-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        67. JWT Security (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="67. JWT Security (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68-ddos-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        68. DDOS (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="68. DDOS (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#69-man-in-the-middle-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        69. Man-in-the-Middle (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="69. Man-in-the-Middle (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#70-owasp-top-10-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        70. OWASP Top 10 (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="70. OWASP Top 10 (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_69" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-principal-of-least-privilege-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        71. Principal of Least Privilege (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="71. Principal of Least Privilege (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_70" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-secrets-management-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        72. Secrets Management (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="72. Secrets Management (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-input-validation-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        73. Input Validation (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="73. Input Validation (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74-clickjacking-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        74. Clickjacking (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="74. Clickjacking (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75-dependency-scanning-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        75. Dependency Scanning (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="75. Dependency Scanning (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76-container-security-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        76. Container Security (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="76. Container Security (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77-ssh-keys-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        77. SSH Keys (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="77. SSH Keys (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#78-2fa-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        78. 2FA (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="78. 2FA (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#79-logging-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        79. Logging (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="79. Logging (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#80-buffer-overflow-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        80. Buffer Overflow (Security)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="80. Buffer Overflow (Security)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_79" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-solid-principles-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        81. SOLID Principles (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="81. SOLID Principles (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-design-patterns-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        82. Design Patterns (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="82. Design Patterns (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-dependency-injection-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        83. Dependency Injection (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="83. Dependency Injection (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84-unit-testing-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        84. Unit Testing (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="84. Unit Testing (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85-tdd-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        85. TDD (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="85. TDD (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#86-code-review-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        86. Code Review (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="86. Code Review (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87-garbage-collection-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        87. Garbage Collection (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="87. Garbage Collection (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#88-threading-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        88. Threading (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="88. Threading (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#89-asyncawait-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        89. Async/Await (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="89. Async/Await (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#90-memory-leak-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        90. Memory Leak (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="90. Memory Leak (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-big-o-notation-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        91. Big O Notation (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="91. Big O Notation (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_90" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-refactoring-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        92. Refactoring (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="92. Refactoring (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-continuous-integration-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        93. Continuous Integration (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="93. Continuous Integration (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-git-flow-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        94. Git Flow (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="94. Git Flow (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95-immutable-objects-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        95. Immutable Objects (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="95. Immutable Objects (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96-clean-code-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        96. Clean Code (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="96. Clean Code (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97-technical-debt-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        97. Technical Debt (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="97. Technical Debt (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_96" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#98-pair-programming-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        98. Pair Programming (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="98. Pair Programming (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_97" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#99-mentorship-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        99. Mentorship (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="99. Mentorship (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_98" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#100-failure-handling-coding-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        100. Failure Handling (Coding &amp; General)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="100. Failure Handling (Coding &amp; General)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-response-paths_99" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate Response Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="interview-questions-backend-engineer-swen1002">Interview Questions: Backend Engineer (SWEN1002)</h1>
+<p>This document contains 100 interview questions tailored for the Backend Engineer role. The questions are categorized into five key areas: System Design, Database Management, API Development, Security, and General/Behavioral.</p>
+<p>Each question includes rich formatting and candidate response paths to help evaluate depth of knowledge.</p>
+<hr />
+<h2 id="1-scalability-system-design">1. Scalability (System Design)</h2>
+<p><strong>Scenario:</strong> Focus on horizontal scaling, load balancers, and caching.</p>
+<p><strong>Question:</strong> How would you design a system to handle 1 million concurrent users?</p>
+<pre class="mermaid"><code>graph TD
+    User --&gt; LB[Load Balancer]
+    LB --&gt; App1[App Instance 1]
+    LB --&gt; App2[App Instance 2]
+    App1 --&gt; DB[(Database)]
+    App2 --&gt; DB</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Suggests bigger servers (Vertical Scaling).</li>
+<li><strong>Senior</strong>: Suggests horizontal scaling, sharding, and caching layers.</li>
+</ul>
+<hr />
+<h2 id="2-caching-strategies-system-design">2. Caching Strategies (System Design)</h2>
+<p><strong>Scenario:</strong> Discuss trade-offs between consistency and latency.</p>
+<p><strong>Question:</strong> Explain different caching strategies (Write-through, Write-back, Cache-aside).</p>
+<pre class="mermaid"><code>graph LR
+    App --&gt; Cache
+    Cache -- Miss --&gt; DB
+    Cache -- Hit --&gt; App
+    DB --&gt; Cache</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_1">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Mentions caching everything.</li>
+<li><strong>Senior</strong>: Discusses cache invalidation challenges.</li>
+</ul>
+<hr />
+<h2 id="3-microservices-vs-monolith-system-design">3. Microservices vs Monolith (System Design)</h2>
+<p><strong>Scenario:</strong> Discuss complexity, team size, and deployment overhead.</p>
+<p><strong>Question:</strong> When would you choose a Monolith over Microservices?</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Monolith</th>
+<th>Microservices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deploy</td>
+<td>Single Artifact</td>
+<td>Multiple</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>All or nothing</td>
+<td>Granular</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_2">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Says Microservices are always better.</li>
+<li><strong>Senior</strong>: Recognizes overhead of Microservices for small teams.</li>
+</ul>
+<hr />
+<h2 id="4-load-balancing-system-design">4. Load Balancing (System Design)</h2>
+<p><strong>Scenario:</strong> Explain inspection of data packets vs simply forwarding based on IP.</p>
+<p><strong>Question:</strong> Compare Layer 4 vs Layer 7 Load Balancing.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Data</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L4</td>
+<td>IP/Port</td>
+<td>HAProxy (TCP)</td>
+</tr>
+<tr>
+<td>L7</td>
+<td>HTTP Headers</td>
+<td>Nginx</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_3">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Only knows 'Round Robin'.</li>
+<li><strong>Senior</strong>: Discusses Sticky Sessions and Path-based routing.</li>
+</ul>
+<hr />
+<h2 id="5-message-queues-system-design">5. Message Queues (System Design)</h2>
+<p><strong>Scenario:</strong> Discuss idempotency and consumer offsets.</p>
+<p><strong>Question:</strong> How do you ensure message delivery guarantees (At-least-once, Exactly-once) in Kafka?</p>
+<pre class="mermaid"><code>sequenceDiagram
+    ServiceA-&gt;&gt;Kafka: Publish Event
+    Kafka-&gt;&gt;ServiceB: Consume Event
+    ServiceB-&gt;&gt;DB: Update State</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_4">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Assumes messages are never lost.</li>
+<li><strong>Senior</strong>: Discusses Idempotency keys and Offset management.</li>
+</ul>
+<hr />
+<h2 id="6-database-sharding-system-design">6. Database Sharding (System Design)</h2>
+<p><strong>Scenario:</strong> Discuss re-balancing, cross-shard joins, and complexity.</p>
+<p><strong>Question:</strong> What are the risks associated with Database Sharding?</p>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Range</td>
+<td>Simple</td>
+<td>Hotspots</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>Even Distribution</td>
+<td>Resharding Pain</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_5">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Focuses only on performance gains.</li>
+<li><strong>Senior</strong>: Highlights the difficulty of Cross-shard joins.</li>
+</ul>
+<hr />
+<h2 id="7-cap-theorem-system-design">7. CAP Theorem (System Design)</h2>
+<p><strong>Scenario:</strong> Why CP is preferred over AP for payments.</p>
+<p><strong>Question:</strong> Explain the CAP theorem in the context of a distributed payment system.</p>
+<pre class="mermaid"><code>graph TD
+C[Consistency] --- A[Availability]
+A --- P[Partition Tolerance]
+P --- C
+style C fill:#f9f</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_6">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Recites definitions.</li>
+<li><strong>Senior</strong>: Explains why you can't have CA in distributed systems.</li>
+</ul>
+<hr />
+<h2 id="8-rate-limiting-system-design">8. Rate Limiting (System Design)</h2>
+<p><strong>Scenario:</strong> Discuss algorithms like Token Bucket vs Leaky Bucket.</p>
+<p><strong>Question:</strong> Design a rate limiter.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Token Bucket</td>
+<td>Bursts allowed</td>
+<td>Complex</td>
+</tr>
+<tr>
+<td>Fixed Window</td>
+<td>Simple</td>
+<td>Edge cases</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_7">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Uses a simple counter.</li>
+<li><strong>Senior</strong>: Discusses Redis based distributed rate limiting.</li>
+</ul>
+<hr />
+<h2 id="9-consistent-hashing-system-design">9. Consistent Hashing (System Design)</h2>
+<p><strong>Scenario:</strong> Minimizing cache misses during node addition/removal.</p>
+<p><strong>Question:</strong> Why is consistent hashing important for distributed caching?</p>
+<pre class="mermaid"><code>graph LR
+Key --&gt; HashRing
+HashRing --&gt; NodeA
+HashRing --&gt; NodeB</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_8">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Unsure.</li>
+<li><strong>Senior</strong>: Explains minimal key remapping.</li>
+</ul>
+<hr />
+<h2 id="10-event-sourcing-system-design">10. Event Sourcing (System Design)</h2>
+<p><strong>Scenario:</strong> Audit trails vs complexity of replaying events.</p>
+<p><strong>Question:</strong> What are the benefits and drawbacks of Event Sourcing?</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>CRUD</th>
+<th>Event Sourcing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State</td>
+<td>Current only</td>
+<td>History of changes</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_9">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Never heard of it.</li>
+<li><strong>Senior</strong>: Mentions CQRS pattern alongside it.</li>
+</ul>
+<hr />
+<h2 id="11-circuit-breaker-system-design">11. Circuit Breaker (System Design)</h2>
+<p><strong>Scenario:</strong> Fail fast mechanism.</p>
+<p><strong>Question:</strong> How does a Circuit Breaker pattern prevent cascading failures?</p>
+<pre class="mermaid"><code>stateDiagram-v2
+[*] --&gt; Closed
+Closed --&gt; Open : Failure Threshold
+Open --&gt; HalfOpen : Timeout
+HalfOpen --&gt; Closed : Success
+HalfOpen --&gt; Open : Failure</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_10">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: It stops requests.</li>
+<li><strong>Senior</strong>: Discusses fallback mechanisms and self-healing.</li>
+</ul>
+<hr />
+<h2 id="12-service-discovery-system-design">12. Service Discovery (System Design)</h2>
+<p><strong>Scenario:</strong> DNS vs Sidecars.</p>
+<p><strong>Question:</strong> How do services find each other in a dynamic environment (Kubernetes)?</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server-side</td>
+<td>LB handles routing</td>
+</tr>
+<tr>
+<td>Client-side</td>
+<td>Client queries registry</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_11">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Hardcoded IPs.</li>
+<li><strong>Senior</strong>: DNS, Consul, or K8s Services.</li>
+</ul>
+<hr />
+<h2 id="13-api-gateway-system-design">13. API Gateway (System Design)</h2>
+<p><strong>Scenario:</strong> Aggregation, Auth, Rate Limiting.</p>
+<p><strong>Question:</strong> What is the role of an API Gateway in microservices?</p>
+<pre class="mermaid"><code>graph TD
+    User --&gt; Gateway
+    Gateway --&gt; ServiceA
+    Gateway --&gt; ServiceB
+    ServiceA --&gt; DB_A
+    ServiceB --&gt; DB_B</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_12">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Just a proxy.</li>
+<li><strong>Senior</strong>: Cross-cutting concerns like Auth, Logging, Throttling.</li>
+</ul>
+<hr />
+<h2 id="14-distributed-transactions-system-design">14. Distributed Transactions (System Design)</h2>
+<p><strong>Scenario:</strong> Saga Pattern vs 2PC.</p>
+<p><strong>Question:</strong> How do you handle transactions across multiple services?</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>ACID?</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2PC</td>
+<td>Yes</td>
+<td>Slow (Blocking)</td>
+</tr>
+<tr>
+<td>Saga</td>
+<td>Eventual</td>
+<td>Fast</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_13">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Use one big database.</li>
+<li><strong>Senior</strong>: Orchestration vs Choreography Sagas.</li>
+</ul>
+<hr />
+<h2 id="15-idempotency-system-design">15. Idempotency (System Design)</h2>
+<p><strong>Scenario:</strong> Handling retries safely.</p>
+<p><strong>Question:</strong> Why is idempotency critical in distributed systems?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">charge_card</span><span class="p">(</span><span class="n">order_id</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">order_id</span><span class="p">):</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>     <span class="k">return</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  <span class="n">payment_provider</span><span class="o">.</span><span class="n">charge</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_14">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: So we don't crash.</li>
+<li><strong>Senior</strong>: Preventing double-charging on network timeouts.</li>
+</ul>
+<hr />
+<h2 id="16-cdn-usage-system-design">16. CDN Usage (System Design)</h2>
+<p><strong>Scenario:</strong> Edge computing/caching.</p>
+<p><strong>Question:</strong> When should you use a CDN for dynamic content?</p>
+<table>
+<thead>
+<tr>
+<th>Content Type</th>
+<th>CDN Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static</td>
+<td>Long TTL</td>
+</tr>
+<tr>
+<td>Dynamic</td>
+<td>Short TTL / Edge Logic</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_15">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Only for images.</li>
+<li><strong>Senior</strong>: Edge Lambda for personalization.</li>
+</ul>
+<hr />
+<h2 id="17-websockets-vs-polling-system-design">17. WebSockets vs Polling (System Design)</h2>
+<p><strong>Scenario:</strong> Real-time bidirectional needs.</p>
+<p><strong>Question:</strong> When to use WebSockets over Long Polling?</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Latency</th>
+<th>Overhead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Polling</td>
+<td>High</td>
+<td>High (Headers)</td>
+</tr>
+<tr>
+<td>WebSocket</td>
+<td>Low</td>
+<td>Low (after handshake)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_16">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Polling is easier.</li>
+<li><strong>Senior</strong>: Chat apps, live tickers.</li>
+</ul>
+<hr />
+<h2 id="18-spof-system-design">18. SPOF (System Design)</h2>
+<p><strong>Scenario:</strong> Redundancy planning.</p>
+<p><strong>Question:</strong> How do you identify Single Points of Failure?</p>
+<pre class="mermaid"><code>graph TD
+User --&gt; LB
+LB --&gt; App
+App --&gt; SingleDB[(DB)]
+style SingleDB fill:#f00</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_17">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: When server crashes.</li>
+<li><strong>Senior</strong>: Analyzing architectural diagrams for non-redundant nodes.</li>
+</ul>
+<hr />
+<h2 id="19-leader-election-system-design">19. Leader Election (System Design)</h2>
+<p><strong>Scenario:</strong> Consensus algorithms (Raft/Paxos).</p>
+<p><strong>Question:</strong> Explain Leader Election in a distributed cluster.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raft</td>
+<td>Easier to understand</td>
+</tr>
+<tr>
+<td>Paxos</td>
+<td>Theoretical standard</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_18">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: The biggest server is leader.</li>
+<li><strong>Senior</strong>: Split-brain scenarios and Quorums.</li>
+</ul>
+<hr />
+<h2 id="20-backpressure-system-design">20. Backpressure (System Design)</h2>
+<p><strong>Scenario:</strong> Dropping requests vs Queueing.</p>
+<p><strong>Question:</strong> How do you handle a system under heavy load that cannot process requests fast enough?</p>
+<pre class="mermaid"><code>flowchart LR
+Producer --Fast--&gt; Queue
+Queue --Slow--&gt; Consumer
+Consumer --&gt; Drop[Drop if Full]</code></pre>
+<p><strong>Key Concepts:</strong> <code>Distributed Systems</code>, <code>Architecture</code></p>
+<h3 id="candidate-response-paths_19">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Increase memory.</li>
+<li><strong>Senior</strong>: Flow control, dropping traffic, informing sender.</li>
+</ul>
+<hr />
+<h2 id="21-acid-properties-database">21. ACID Properties (Database)</h2>
+<p><strong>Scenario:</strong> Atomicity, Consistency, Isolation, Durability.</p>
+<p><strong>Question:</strong> Explain ACID compliance.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atomicity</td>
+<td>All or nothing</td>
+</tr>
+<tr>
+<td>Consistency</td>
+<td>Valid state transitions</td>
+</tr>
+<tr>
+<td>Isolation</td>
+<td>Concurrent transaction handling</td>
+</tr>
+<tr>
+<td>Durability</td>
+<td>Committed data is saved</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_20">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Defines acronym.</li>
+<li><strong>Senior</strong>: Explains how WAL enables Durability.</li>
+</ul>
+<hr />
+<h2 id="22-normalization-database">22. Normalization (Database)</h2>
+<p><strong>Scenario:</strong> Redundancy vs Read Performance.</p>
+<p><strong>Question:</strong> Why do we normalize databases? When is denormalization better?</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1NF</td>
+<td>Atomic values</td>
+</tr>
+<tr>
+<td>3NF</td>
+<td>No transitive dependencies</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_21">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Always normalize.</li>
+<li><strong>Senior</strong>: Denormalize for read-heavy reporting.</li>
+</ul>
+<hr />
+<h2 id="23-indexing-database">23. Indexing (Database)</h2>
+<p><strong>Scenario:</strong> Logarithmic search time.</p>
+<p><strong>Question:</strong> How do B-Tree indexes work?</p>
+<pre class="mermaid"><code>graph TD
+Root --&gt; L[Left &lt; 50]
+Root --&gt; R[Right &gt; 50]
+L --&gt; L1[10]
+L --&gt; L2[40]</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_22">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Makes queries faster.</li>
+<li><strong>Senior</strong>: Explains branching factor and page reads.</li>
+</ul>
+<hr />
+<h2 id="24-n1-problem-database">24. N+1 Problem (Database)</h2>
+<p><strong>Scenario:</strong> Fetching related data in a loop.</p>
+<p><strong>Question:</strong> What is the N+1 query problem and how do you fix it?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Bad</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">bio</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Good</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_23">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Describes the loop.</li>
+<li><strong>Senior</strong>: Discusses eager loading vs lazy loading.</li>
+</ul>
+<hr />
+<h2 id="25-sql-vs-nosql-database">25. SQL vs NoSQL (Database)</h2>
+<p><strong>Scenario:</strong> Graph/Document store vs Relational.</p>
+<p><strong>Question:</strong> Choose a database for a social media feed.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>SQL</th>
+<th>NoSQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structure</td>
+<td>Structured</td>
+<td>Unstructured</td>
+</tr>
+<tr>
+<td>Joins</td>
+<td>Complex</td>
+<td>None/Application-side</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_24">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: NoSQL is faster.</li>
+<li><strong>Senior</strong>: Graph DB for relationships, Document for feed content.</li>
+</ul>
+<hr />
+<h2 id="26-transaction-isolation-database">26. Transaction Isolation (Database)</h2>
+<p><strong>Scenario:</strong> Dirty reads vs Phantom reads.</p>
+<p><strong>Question:</strong> Explain 'Read Committed' vs 'Serializable' isolation levels.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Dirty Read</th>
+<th>Phantom Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read Committed</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_25">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Unsure.</li>
+<li><strong>Senior</strong>: Trade-off between consistency and concurrency.</li>
+</ul>
+<hr />
+<h2 id="27-replication-database">27. Replication (Database)</h2>
+<p><strong>Scenario:</strong> Write conflicts vs Read scaling.</p>
+<p><strong>Question:</strong> Master-Slave vs Multi-Master replication.</p>
+<pre class="mermaid"><code>graph TD
+Master --&gt; Slave1
+Master --&gt; Slave2
+Write --&gt; Master
+Read --&gt; Slave1</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_26">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Backup copies.</li>
+<li><strong>Senior</strong>: Async lag and conflict resolution in Multi-Master.</li>
+</ul>
+<hr />
+<h2 id="28-connection-pooling-database">28. Connection Pooling (Database)</h2>
+<p><strong>Scenario:</strong> Overhead of TCP handshakes.</p>
+<p><strong>Question:</strong> Why is connection pooling necessary?</p>
+<pre class="mermaid"><code>graph LR
+App --Request--&gt; Pool
+Pool --Reuse Conn--&gt; DB</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_27">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Saves memory.</li>
+<li><strong>Senior</strong>: Reduces handshake latency and limits max connections.</li>
+</ul>
+<hr />
+<h2 id="29-stored-procedures-database">29. Stored Procedures (Database)</h2>
+<p><strong>Scenario:</strong> Performance vs Maintainability.</p>
+<p><strong>Question:</strong> Pros and Cons of business logic in Stored Procedures.</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perf</td>
+<td>Reduced Network</td>
+<td>CPU on DB</td>
+</tr>
+<tr>
+<td>Maintenance</td>
+<td>Centralized</td>
+<td>Hard to Version Control</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_28">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: They are faster.</li>
+<li><strong>Senior</strong>: Avoid them to keep logic in app layer (easier to scale).</li>
+</ul>
+<hr />
+<h2 id="30-soft-deletes-database">30. Soft Deletes (Database)</h2>
+<p><strong>Scenario:</strong> Is_deleted flag vs Archive table.</p>
+<p><strong>Question:</strong> How to implement Soft Deletes?</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">deleted_at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_29">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Add a boolean flag.</li>
+<li><strong>Senior</strong>: Discusses impact on unique indexes and query complexity.</li>
+</ul>
+<hr />
+<h2 id="31-database-migration-database">31. Database Migration (Database)</h2>
+<p><strong>Scenario:</strong> Expand and Contract pattern.</p>
+<p><strong>Question:</strong> How do you perform a zero-downtime schema migration?</p>
+<pre class="mermaid"><code>sequenceDiagram
+App-&gt;&gt;DB: Write to New &amp; Old Col
+App-&gt;&gt;DB: Backfill New Col
+App-&gt;&gt;DB: Read New Col
+App-&gt;&gt;DB: Remove Old Col</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_30">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Run script at night.</li>
+<li><strong>Senior</strong>: Dual writes and phased rollout.</li>
+</ul>
+<hr />
+<h2 id="32-full-text-search-database">32. Full Text Search (Database)</h2>
+<p><strong>Scenario:</strong> Performance difference.</p>
+<p><strong>Question:</strong> Implementing search: LIKE vs Inverted Index (Elasticsearch).</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Speed</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LIKE %..%</td>
+<td>O(n)</td>
+<td>Basic</td>
+</tr>
+<tr>
+<td>Inverted Index</td>
+<td>O(1)</td>
+<td>Fuzzy, Ranking</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_31">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Use wildcards.</li>
+<li><strong>Senior</strong>: Lucene based indexing.</li>
+</ul>
+<hr />
+<h2 id="33-clustering-database">33. Clustering (Database)</h2>
+<p><strong>Scenario:</strong> Failover strategies.</p>
+<p><strong>Question:</strong> Active-Active vs Active-Passive clustering.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Utilization</th>
+<th>Failover</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Active-Passive</td>
+<td>50%</td>
+<td>Slow</td>
+</tr>
+<tr>
+<td>Active-Active</td>
+<td>100%</td>
+<td>Complex</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_32">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Redundancy.</li>
+<li><strong>Senior</strong>: Discusses split-brain and synchronization.</li>
+</ul>
+<hr />
+<h2 id="34-row-vs-columnar-database">34. Row vs Columnar (Database)</h2>
+<p><strong>Scenario:</strong> OLAP vs OLTP.</p>
+<p><strong>Question:</strong> When to use a Columnar database (e.g., Cassandra/Redshift)?</p>
+<pre class="mermaid"><code>graph TD
+Row[Row Store] --&gt; OLTP[Transactional]
+Col[Column Store] --&gt; OLAP[Analytics/Aggregates]</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_33">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: For big data.</li>
+<li><strong>Senior</strong>: Better compression and aggregation performance.</li>
+</ul>
+<hr />
+<h2 id="35-foreign-keys-database">35. Foreign Keys (Database)</h2>
+<p><strong>Scenario:</strong> Constraint checking overhead.</p>
+<p><strong>Question:</strong> Impact of Foreign Keys on insert performance.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert</td>
+<td>Needs lookup in parent table</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Check cascade rules</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_34">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Ensures integrity.</li>
+<li><strong>Senior</strong>: Can cause locking and slow down bulk inserts.</li>
+</ul>
+<hr />
+<h2 id="36-deadlocks-database">36. Deadlocks (Database)</h2>
+<p><strong>Scenario:</strong> Consistent locking order.</p>
+<p><strong>Question:</strong> How do you debug and prevent deadlocks?</p>
+<pre class="mermaid"><code>graph TD
+Tx1 --Locks--&gt; A
+Tx1 --Waits--&gt; B
+Tx2 --Locks--&gt; B
+Tx2 --Waits--&gt; A</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_35">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Restart database.</li>
+<li><strong>Senior</strong>: Enforce strict ordering of resource acquisition.</li>
+</ul>
+<hr />
+<h2 id="37-vacuum-postgres-database">37. VACUUM (Postgres) (Database)</h2>
+<p><strong>Scenario:</strong> Reclaiming storage from dead tuples.</p>
+<p><strong>Question:</strong> What is the purpose of VACUUM in PostgreSQL?</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MVCC</td>
+<td>Creates new row versions</td>
+</tr>
+<tr>
+<td>Dead Tuples</td>
+<td>Old versions needing cleanup</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_36">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Cleans up space.</li>
+<li><strong>Senior</strong>: Prevents transaction ID wraparound and bloating.</li>
+</ul>
+<hr />
+<h2 id="38-partitioning-database">38. Partitioning (Database)</h2>
+<p><strong>Scenario:</strong> Splitting tables by row vs column.</p>
+<p><strong>Question:</strong> Horizontal Partitioning vs Vertical Partitioning.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Split By</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vertical</td>
+<td>Columns</td>
+<td>Infrequently accessed blobs</td>
+</tr>
+<tr>
+<td>Horizontal</td>
+<td>Rows</td>
+<td>Time-series data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_37">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Splitting tables.</li>
+<li><strong>Senior</strong>: Partition pruning improvements.</li>
+</ul>
+<hr />
+<h2 id="39-write-amplification-database">39. Write Amplification (Database)</h2>
+<p><strong>Scenario:</strong> LSM Trees issue.</p>
+<p><strong>Question:</strong> What is write amplification in SSDs/Databases?</p>
+<pre class="mermaid"><code>graph LR
+Write --&gt; MemTable
+MemTable --&gt; SSTable_L0
+SSTable_L0 --&gt; Merge --&gt; SSTable_L1</code></pre>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_38">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: More writes than needed.</li>
+<li><strong>Senior</strong>: Compaction process in LSM trees causing extra I/O.</li>
+</ul>
+<hr />
+<h2 id="40-time-series-database">40. Time Series (Database)</h2>
+<p><strong>Scenario:</strong> TimescaleDB/InfluxDB specific structures.</p>
+<p><strong>Question:</strong> How to store metrics data efficiently?</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retention</td>
+<td>Auto-expiry policies</td>
+</tr>
+<tr>
+<td>Aggregation</td>
+<td>Continuous Aggregates</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>SQL</code>, <code>Data Modeling</code></p>
+<h3 id="candidate-response-paths_39">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Store in SQL.</li>
+<li><strong>Senior</strong>: Hyper-tables and compression algorithms for time-series.</li>
+</ul>
+<hr />
+<h2 id="41-rest-constraints-api">41. REST Constraints (API)</h2>
+<p><strong>Scenario:</strong> Statelessness, Cacheability.</p>
+<p><strong>Question:</strong> What are the key constraints of REST?</p>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stateless</td>
+<td>Scalability</td>
+</tr>
+<tr>
+<td>Cacheable</td>
+<td>Performance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_40">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: It uses JSON.</li>
+<li><strong>Senior</strong>: HATEOAS and Uniform Interface.</li>
+</ul>
+<hr />
+<h2 id="42-graphql-vs-rest-api">42. GraphQL vs REST (API)</h2>
+<p><strong>Scenario:</strong> Over-fetching vs Under-fetching.</p>
+<p><strong>Question:</strong> Why choose GraphQL over REST?</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>REST</th>
+<th>GraphQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Fetching</td>
+<td>Multiple Endpoints</td>
+<td>Single Endpoint</td>
+</tr>
+<tr>
+<td>Overfetching</td>
+<td>Common</td>
+<td>Rare</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_41">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: GraphQL is newer.</li>
+<li><strong>Senior</strong>: Type system and single round-trip benefits.</li>
+</ul>
+<hr />
+<h2 id="43-http-status-codes-api">43. HTTP Status Codes (API)</h2>
+<p><strong>Scenario:</strong> Unauthenticated vs Unauthorized.</p>
+<p><strong>Question:</strong> Difference between 401 and 403.</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>Who are you?</td>
+<td>Login</td>
+</tr>
+<tr>
+<td>403</td>
+<td>You can't do that</td>
+<td>Request Access</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_42">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: They are errors.</li>
+<li><strong>Senior</strong>: Token missing vs Token insufficient permissions.</li>
+</ul>
+<hr />
+<h2 id="44-idempotent-methods-api">44. Idempotent Methods (API)</h2>
+<p><strong>Scenario:</strong> PUT, DELETE, GET.</p>
+<p><strong>Question:</strong> Which HTTP methods are idempotent?</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Idempotent</th>
+<th>Safe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_43">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: GET.</li>
+<li><strong>Senior</strong>: Explains why POST is not (creation).</li>
+</ul>
+<hr />
+<h2 id="45-hateoas-api">45. HATEOAS (API)</h2>
+<p><strong>Scenario:</strong> Hypermedia as the Engine of Application State.</p>
+<p><strong>Question:</strong> What is HATEOAS?</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;rel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;self&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;href&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users/1&quot;</span><span class="p">}</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_44">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Never heard of it.</li>
+<li><strong>Senior</strong>: Self-discoverable APIs.</li>
+</ul>
+<hr />
+<h2 id="46-versioning-api">46. Versioning (API)</h2>
+<p><strong>Scenario:</strong> Breaking changes management.</p>
+<p><strong>Question:</strong> Strategies for API Versioning (URI, Header, Query Param).</p>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URI</td>
+<td>/v1/users</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>Accept: application/vnd.v1+json</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_45">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Change the URL.</li>
+<li><strong>Senior</strong>: Header based is cleaner (content negotiation).</li>
+</ul>
+<hr />
+<h2 id="47-authentication-api">47. Authentication (API)</h2>
+<p><strong>Scenario:</strong> Scalability implications.</p>
+<p><strong>Question:</strong> Session vs Token based auth.</p>
+<pre class="mermaid"><code>graph LR
+User --&gt; Server
+Server --SessionID--&gt; DB
+Server --JWT--&gt; Stateless</code></pre>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_46">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Cookies.</li>
+<li><strong>Senior</strong>: JWT enables stateless auth across microservices.</li>
+</ul>
+<hr />
+<h2 id="48-oauth2-flows-api">48. OAuth2 Flows (API)</h2>
+<p><strong>Scenario:</strong> Secure delegation.</p>
+<p><strong>Question:</strong> Explain the Authorization Code flow.</p>
+<pre class="mermaid"><code>sequenceDiagram
+User-&gt;&gt;AuthServer: Login
+AuthServer-&gt;&gt;User: Auth Code
+User-&gt;&gt;App: Send Code
+App-&gt;&gt;AuthServer: Exchange Code for Token</code></pre>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_47">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Login with Google.</li>
+<li><strong>Senior</strong>: Difference between Implicit (unsafe) and Auth Code flows.</li>
+</ul>
+<hr />
+<h2 id="49-webhooks-api">49. Webhooks (API)</h2>
+<p><strong>Scenario:</strong> HMAC signatures.</p>
+<p><strong>Question:</strong> How to secure Webhooks?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">if</span> <span class="n">signature</span> <span class="o">!=</span> <span class="n">header_sig</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_48">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Check IP.</li>
+<li><strong>Senior</strong>: Verify payload signature.</li>
+</ul>
+<hr />
+<h2 id="50-grpc-api">50. gRPC (API)</h2>
+<p><strong>Scenario:</strong> Protobuf efficiency, HTTP/2.</p>
+<p><strong>Question:</strong> Benefits of gRPC over JSON/HTTP.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>REST</th>
+<th>gRPC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protocol</td>
+<td>HTTP/1.1</td>
+<td>HTTP/2</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>JSON (Text)</td>
+<td>Protobuf (Binary)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_49">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: It's faster.</li>
+<li><strong>Senior</strong>: Binary serialization and multiplexing.</li>
+</ul>
+<hr />
+<h2 id="51-pagination-api">51. Pagination (API)</h2>
+<p><strong>Scenario:</strong> Performance on large datasets.</p>
+<p><strong>Question:</strong> Offset vs Cursor based pagination.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">-- Offset (Slow)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">OFFSET</span><span class="w"> </span><span class="mi">100000</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">-- Cursor (Fast)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100000</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_50">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Use LIMIT OFFSET.</li>
+<li><strong>Senior</strong>: Keyset pagination avoids scanning skipped rows.</li>
+</ul>
+<hr />
+<h2 id="52-cors-api">52. CORS (API)</h2>
+<p><strong>Scenario:</strong> Pre-flight OPTIONS requests.</p>
+<p><strong>Question:</strong> How does Cross-Origin Resource Sharing work?</p>
+<pre class="mermaid"><code>sequenceDiagram
+Browser-&gt;&gt;Server: OPTIONS /api/data
+Server-&gt;&gt;Browser: 200 OK (Access-Control-Allow-Origin)
+Browser-&gt;&gt;Server: GET /api/data</code></pre>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_51">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Browser security error.</li>
+<li><strong>Senior</strong>: Pre-flight checks for non-simple requests.</li>
+</ul>
+<hr />
+<h2 id="53-api-documentation-api">53. API Documentation (API)</h2>
+<p><strong>Scenario:</strong> Contract testing, Client generation.</p>
+<p><strong>Question:</strong> Why is OpenAPI/Swagger important?</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">paths</span><span class="p">:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">/users</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">get</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List users</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_52">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: For reading docs.</li>
+<li><strong>Senior</strong>: Auto-generating SDKs and mock servers.</li>
+</ul>
+<hr />
+<h2 id="54-rate-limiting-headers-api">54. Rate Limiting Headers (API)</h2>
+<p><strong>Scenario:</strong> X-RateLimit-Remaining.</p>
+<p><strong>Question:</strong> Standard headers for rate limiting.</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X-RateLimit-Limit</td>
+<td>Window Size</td>
+</tr>
+<tr>
+<td>X-RateLimit-Reset</td>
+<td>Time to reset</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_53">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Don't know.</li>
+<li><strong>Senior</strong>: Using headers to programmatically back off.</li>
+</ul>
+<hr />
+<h2 id="55-payload-size-api">55. Payload Size (API)</h2>
+<p><strong>Scenario:</strong> Multipart vs Presigned URLs.</p>
+<p><strong>Question:</strong> Handling large file uploads in API.</p>
+<pre class="mermaid"><code>graph LR
+Client --Get URL--&gt; Server
+Server --PresignedURL--&gt; Client
+Client --Upload--&gt; S3</code></pre>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_54">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Upload to server then S3.</li>
+<li><strong>Senior</strong>: Direct upload to S3 to save server bandwidth.</li>
+</ul>
+<hr />
+<h2 id="56-content-negotiation-api">56. Content Negotiation (API)</h2>
+<p><strong>Scenario:</strong> Accept headers.</p>
+<p><strong>Question:</strong> What is content negotiation?</p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nf">GET</span> <span class="nn">/resource</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="na">Accept</span><span class="o">:</span> <span class="l">application/xml</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_55">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Format selection.</li>
+<li><strong>Senior</strong>: Server chooses representation based on client capability.</li>
+</ul>
+<hr />
+<h2 id="57-keep-alive-api">57. Keep-Alive (API)</h2>
+<p><strong>Scenario:</strong> Connection reuse.</p>
+<p><strong>Question:</strong> Importance of HTTP Keep-Alive.</p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="err">Connection: keep-alive</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_56">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Keeps session active.</li>
+<li><strong>Senior</strong>: Avoids TCP 3-way handshake for subsequent requests.</li>
+</ul>
+<hr />
+<h2 id="58-safe-methods-api">58. Safe Methods (API)</h2>
+<p><strong>Scenario:</strong> No side effects (GET).</p>
+<p><strong>Question:</strong> What defines a 'Safe' HTTP method?</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Safe?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_57">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Doesn't change data.</li>
+<li><strong>Senior</strong>: Can be cached and prefetched without risk.</li>
+</ul>
+<hr />
+<h2 id="59-json-patch-api">59. JSON Patch (API)</h2>
+<p><strong>Scenario:</strong> Replace vs Partial Update.</p>
+<p><strong>Question:</strong> PUT vs PATCH.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// PATCH</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">[{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;replace&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/email&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new@example.com&quot;</span><span class="p">}]</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_58">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Both update data.</li>
+<li><strong>Senior</strong>: PUT is idempotent replacement, PATCH is delta update.</li>
+</ul>
+<hr />
+<h2 id="60-soap-api">60. Soap (API)</h2>
+<p><strong>Scenario:</strong> Enterprise legacy integrations.</p>
+<p><strong>Question:</strong> Is SOAP still relevant?</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">&lt;soap:Envelope&gt;</span>...<span class="nt">&lt;/soap:Envelope&gt;</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>HTTP</code>, <code>Interface Design</code></p>
+<h3 id="candidate-response-paths_59">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: No, it's dead.</li>
+<li><strong>Senior</strong>: Yes, for strict contracts and ACID transactions in banking.</li>
+</ul>
+<hr />
+<h2 id="61-sql-injection-security">61. SQL Injection (Security)</h2>
+<p><strong>Scenario:</strong> Parameterized queries.</p>
+<p><strong>Question:</strong> How to prevent SQL Injection?</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">;</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_60">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Sanitize input.</li>
+<li><strong>Senior</strong>: Use Prepared Statements/ORM always.</li>
+</ul>
+<hr />
+<h2 id="62-xss-security">62. XSS (Security)</h2>
+<p><strong>Scenario:</strong> Sanitization and CSP.</p>
+<p><strong>Question:</strong> Reflected vs Stored XSS.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;XSS&#39;</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_61">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Script injection.</li>
+<li><strong>Senior</strong>: Content Security Policy (CSP) headers.</li>
+</ul>
+<hr />
+<h2 id="63-csrf-security">63. CSRF (Security)</h2>
+<p><strong>Scenario:</strong> Anti-forgery tokens.</p>
+<p><strong>Question:</strong> How to prevent CSRF?</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;csrf_token&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;xyz123&quot;</span> <span class="p">/&gt;</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_62">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Don't know.</li>
+<li><strong>Senior</strong>: SameSite cookie attribute and Anti-CSRF tokens.</li>
+</ul>
+<hr />
+<h2 id="64-https-security">64. HTTPS (Security)</h2>
+<p><strong>Scenario:</strong> Asymmetric vs Symmetric encryption exchange.</p>
+<p><strong>Question:</strong> Explain the SSL/TLS handshake.</p>
+<pre class="mermaid"><code>sequenceDiagram
+Client-&gt;&gt;Server: ClientHello
+Server-&gt;&gt;Client: ServerHello + Cert
+Client-&gt;&gt;Server: Key Exchange
+Client-&gt;&gt;Server: Finished (Encrypted)</code></pre>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_63">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: It encrypts data.</li>
+<li><strong>Senior</strong>: Key exchange mechanism and trust chain.</li>
+</ul>
+<hr />
+<h2 id="65-hashing-vs-encryption-security">65. Hashing vs Encryption (Security)</h2>
+<p><strong>Scenario:</strong> Passwords vs Credit Card numbers.</p>
+<p><strong>Question:</strong> When to hash and when to encrypt?</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Reversible?</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hash</td>
+<td>No</td>
+<td>Passwords</td>
+</tr>
+<tr>
+<td>Encrypt</td>
+<td>Yes</td>
+<td>PII Data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_64">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Hash is better.</li>
+<li><strong>Senior</strong>: Hashing is one-way, Encryption is two-way.</li>
+</ul>
+<hr />
+<h2 id="66-salt-security">66. Salt (Security)</h2>
+<p><strong>Scenario:</strong> Rainbow table attacks.</p>
+<p><strong>Question:</strong> Why do we salt passwords?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">hash</span><span class="p">(</span><span class="n">password</span> <span class="o">+</span> <span class="n">salt</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_65">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: To make it longer.</li>
+<li><strong>Senior</strong>: Prevents Rainbow Table lookups for common passwords.</li>
+</ul>
+<hr />
+<h2 id="67-jwt-security-security">67. JWT Security (Security)</h2>
+<p><strong>Scenario:</strong> Revocation difficulty, Algorithm confusion.</p>
+<p><strong>Question:</strong> Risks of using JWTs.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nt">&quot;typ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_66">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: None.</li>
+<li><strong>Senior</strong>: Hard to revoke, alg: none vulnerability.</li>
+</ul>
+<hr />
+<h2 id="68-ddos-security">68. DDOS (Security)</h2>
+<p><strong>Scenario:</strong> Rate limiting, Blackholing.</p>
+<p><strong>Question:</strong> Mitigation strategies for DDOS.</p>
+<pre class="mermaid"><code>graph TD
+Attacker --&gt; WAF
+WAF --Block--&gt; Attacker
+User --&gt; WAF
+WAF --Pass--&gt; Server</code></pre>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_67">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Block IP.</li>
+<li><strong>Senior</strong>: Anycast, WAF, Scrubbing centers.</li>
+</ul>
+<hr />
+<h2 id="69-man-in-the-middle-security">69. Man-in-the-Middle (Security)</h2>
+<p><strong>Scenario:</strong> Certificate Pinning, HSTS.</p>
+<p><strong>Question:</strong> How to prevent MITM attacks?</p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="err">Strict-Transport-Security: max-age=31536000</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_68">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Use HTTPS.</li>
+<li><strong>Senior</strong>: HSTS and Certificate Pinning.</li>
+</ul>
+<hr />
+<h2 id="70-owasp-top-10-security">70. OWASP Top 10 (Security)</h2>
+<p><strong>Scenario:</strong> Injection, Broken Auth, Logging Failures.</p>
+<p><strong>Question:</strong> Name 3 vulnerabilities from OWASP Top 10.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Vulnerability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Broken Access Control</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cryptographic Failures</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Injection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_69">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Hacking.</li>
+<li><strong>Senior</strong>: Lists specific current top 3.</li>
+</ul>
+<hr />
+<h2 id="71-principal-of-least-privilege-security">71. Principal of Least Privilege (Security)</h2>
+<p><strong>Scenario:</strong> Granting only necessary permissions.</p>
+<p><strong>Question:</strong> Apply this to database users.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_reader</span><span class="p">;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1">-- NOT GRANT ALL</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_70">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Don't give root.</li>
+<li><strong>Senior</strong>: Role-based access control (RBAC).</li>
+</ul>
+<hr />
+<h2 id="72-secrets-management-security">72. Secrets Management (Security)</h2>
+<p><strong>Scenario:</strong> Environment vars, Vault, not git.</p>
+<p><strong>Question:</strong> Where to store API keys?</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Bad</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">API_KEY</span><span class="o">=</span><span class="s1">&#39;123&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>code
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># Good</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nv">API_KEY</span><span class="o">=</span>os.getenv<span class="o">(</span><span class="s1">&#39;KEY&#39;</span><span class="o">)</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_71">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: .env file.</li>
+<li><strong>Senior</strong>: HashiCorp Vault or AWS Secrets Manager.</li>
+</ul>
+<hr />
+<h2 id="73-input-validation-security">73. Input Validation (Security)</h2>
+<p><strong>Scenario:</strong> Why whitelist is safer.</p>
+<p><strong>Question:</strong> Whitelisting vs Blacklisting input.</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Logic</th>
+<th>Safety</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blacklist</td>
+<td>Block bad chars</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Whitelist</td>
+<td>Allow good chars</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_72">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Block script tags.</li>
+<li><strong>Senior</strong>: Allow only known good characters (e.g. alphanumeric).</li>
+</ul>
+<hr />
+<h2 id="74-clickjacking-security">74. Clickjacking (Security)</h2>
+<p><strong>Scenario:</strong> X-Frame-Options.</p>
+<p><strong>Question:</strong> How to prevent Clickjacking?</p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="err">X-Frame-Options: DENY</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_73">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Don't know.</li>
+<li><strong>Senior</strong>: Preventing iframe embedding.</li>
+</ul>
+<hr />
+<h2 id="75-dependency-scanning-security">75. Dependency Scanning (Security)</h2>
+<p><strong>Scenario:</strong> SCA tools (Snyk, Dependabot).</p>
+<p><strong>Question:</strong> How to handle vulnerable dependencies?</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>npm<span class="w"> </span>audit<span class="w"> </span>fix
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_74">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Update packages.</li>
+<li><strong>Senior</strong>: Automated pipeline scanning with Snyk/Dependabot.</li>
+</ul>
+<hr />
+<h2 id="76-container-security-security">76. Container Security (Security)</h2>
+<p><strong>Scenario:</strong> Running as non-root.</p>
+<p><strong>Question:</strong> Security best practices for Docker.</p>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">USER</span><span class="w"> </span><span class="s">1001</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_75">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Use official images.</li>
+<li><strong>Senior</strong>: Rootless containers and minimal base images (Alpine/Distroless).</li>
+</ul>
+<hr />
+<h2 id="77-ssh-keys-security">77. SSH Keys (Security)</h2>
+<p><strong>Scenario:</strong> Private vs Public key usage.</p>
+<p><strong>Question:</strong> Public Key Infrastructure basics.</p>
+<pre class="mermaid"><code>graph LR
+Private[Private Key] --Sign--&gt; Data
+Data --Verify with Public--&gt; Public[Public Key]</code></pre>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_76">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Passwordless login.</li>
+<li><strong>Senior</strong>: Asymmetric crypto principles.</li>
+</ul>
+<hr />
+<h2 id="78-2fa-security">78. 2FA (Security)</h2>
+<p><strong>Scenario:</strong> Time-based One Time Password.</p>
+<p><strong>Question:</strong> TOTP algorithm basics.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">HMAC</span><span class="p">(</span><span class="n">Secret</span><span class="p">,</span> <span class="n">Time</span> <span class="o">/</span> <span class="mi">30</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_77">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Google Authenticator.</li>
+<li><strong>Senior</strong>: Shared secret hashing with time windows.</li>
+</ul>
+<hr />
+<h2 id="79-logging-security">79. Logging (Security)</h2>
+<p><strong>Scenario:</strong> PII, Secrets, Passwords.</p>
+<p><strong>Question:</strong> What should you NEVER log?</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PII</td>
+<td>SSN, Email</td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td>API Keys, Passwords</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_78">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Passwords.</li>
+<li><strong>Senior</strong>: PII compliance (GDPR) and secrets redaction.</li>
+</ul>
+<hr />
+<h2 id="80-buffer-overflow-security">80. Buffer Overflow (Security)</h2>
+<p><strong>Scenario:</strong> Unsafe memory manipulation.</p>
+<p><strong>Question:</strong> Why does it happen?</p>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">strcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;This string is too long&quot;</span><span class="p">);</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Cybersecurity</code>, <code>OWASP</code></p>
+<h3 id="candidate-response-paths_79">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Writing too much data.</li>
+<li><strong>Senior</strong>: Overwriting return address in stack frame.</li>
+</ul>
+<hr />
+<h2 id="81-solid-principles-coding-general">81. SOLID Principles (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Subtypes must be substitutable for base types.</p>
+<p><strong>Question:</strong> Explain Liskov Substitution Principle.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Violation</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Bird</span><span class="p">:</span> <span class="n">fly</span><span class="p">()</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Ostrich</span><span class="p">(</span><span class="n">Bird</span><span class="p">):</span> <span class="n">fly</span><span class="p">()</span> <span class="c1"># Error</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_80">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Recites acronym.</li>
+<li><strong>Senior</strong>: Explains inheritance pitfalls.</li>
+</ul>
+<hr />
+<h2 id="82-design-patterns-coding-general">82. Design Patterns (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Global state issues vs convenience.</p>
+<p><strong>Question:</strong> Singleton Pattern: Good or Bad?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Singleton</span><span class="p">:</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>            <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_81">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Good for database connection.</li>
+<li><strong>Senior</strong>: Bad due to hidden dependencies and testing difficulty.</li>
+</ul>
+<hr />
+<h2 id="83-dependency-injection-coding-general">83. Dependency Injection (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Decoupling and testability.</p>
+<p><strong>Question:</strong> Why use DI?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># DI</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Service</span><span class="p">:</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>  <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span> <span class="o">...</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_82">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Makes code cleaner.</li>
+<li><strong>Senior</strong>: Inversion of Control for unit testing.</li>
+</ul>
+<hr />
+<h2 id="84-unit-testing-coding-general">84. Unit Testing (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Behavior verification vs State verification.</p>
+<p><strong>Question:</strong> Mocking vs Stubbing.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stub</td>
+<td>Canned answer</td>
+</tr>
+<tr>
+<td>Mock</td>
+<td>Expectation check</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_83">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Faking data.</li>
+<li><strong>Senior</strong>: Mocks verify behavior, Stubs provide state.</li>
+</ul>
+<hr />
+<h2 id="85-tdd-coding-general">85. TDD (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Red-Green-Refactor.</p>
+<p><strong>Question:</strong> Explain the TDD cycle.</p>
+<pre class="mermaid"><code>graph TD
+Red[Write Fail Test] --&gt; Green[Write Pass Code]
+Green --&gt; Refactor
+Refactor --&gt; Red</code></pre>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_84">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Write tests first.</li>
+<li><strong>Senior</strong>: Driving design through tests.</li>
+</ul>
+<hr />
+<h2 id="86-code-review-coding-general">86. Code Review (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Readability, Logic, Tests.</p>
+<p><strong>Question:</strong> What do you look for in a Code Review?</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High</td>
+<td>Bugs, Security</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>Formatting (Lint)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_85">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Syntax errors.</li>
+<li><strong>Senior</strong>: Architectural fit and maintainability.</li>
+</ul>
+<hr />
+<h2 id="87-garbage-collection-coding-general">87. Garbage Collection (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Mark and Sweep.</p>
+<p><strong>Question:</strong> How does GC work generally?</p>
+<pre class="mermaid"><code>graph TD
+Roots --&gt; ObjA
+Roots --&gt; ObjB
+ObjA --&gt; ObjC
+ObjD[Unreachable] --&gt; ObjE</code></pre>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_86">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Deletes unused vars.</li>
+<li><strong>Senior</strong>: Reference counting vs Reachability analysis.</li>
+</ul>
+<hr />
+<h2 id="88-threading-coding-general">88. Threading (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Two threads accessing shared memory.</p>
+<p><strong>Question:</strong> Race Conditions.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Race</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="c1"># Safe</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>  <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_87">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Threads crashing.</li>
+<li><strong>Senior</strong>: Atomicity and Critical Sections.</li>
+</ul>
+<hr />
+<h2 id="89-asyncawait-coding-general">89. Async/Await (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Non-blocking I/O.</p>
+<p><strong>Question:</strong> Event Loop basics.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">():</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>  <span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_88">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Parallel execution.</li>
+<li><strong>Senior</strong>: Concurrency on single thread (waiting for I/O).</li>
+</ul>
+<hr />
+<h2 id="90-memory-leak-coding-general">90. Memory Leak (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Profiling tools.</p>
+<p><strong>Question:</strong> How to detect a memory leak?</p>
+<pre class="mermaid"><code>graph LR
+Usage --Time--&gt; LinearGrowth</code></pre>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_89">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: App crashes.</li>
+<li><strong>Senior</strong>: Heap profiling and retention paths.</li>
+</ul>
+<hr />
+<h2 id="91-big-o-notation-coding-general">91. Big O Notation (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Merge sort complexity.</p>
+<p><strong>Question:</strong> Explain O(n log n).</p>
+<table>
+<thead>
+<tr>
+<th>Complexity</th>
+<th>Name</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O(1)</td>
+<td>Constant</td>
+<td>Hash Lookup</td>
+</tr>
+<tr>
+<td>O(n)</td>
+<td>Linear</td>
+<td>Loop</td>
+</tr>
+<tr>
+<td>O(n^2)</td>
+<td>Quadratic</td>
+<td>Nested Loop</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_90">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: It's math.</li>
+<li><strong>Senior</strong>: Sorting algorithms complexity.</li>
+</ul>
+<hr />
+<h2 id="92-refactoring-coding-general">92. Refactoring (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Code smells, Technical debt.</p>
+<p><strong>Question:</strong> When do you decide to refactor?</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duplication</td>
+<td>DRY</td>
+</tr>
+<tr>
+<td>Large Class</td>
+<td>Extract Class</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_91">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: When code is ugly.</li>
+<li><strong>Senior</strong>: Boy Scout Rule: Leave it better than found.</li>
+</ul>
+<hr />
+<h2 id="93-continuous-integration-coding-general">93. Continuous Integration (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Early bug detection.</p>
+<p><strong>Question:</strong> Benefits of CI.</p>
+<pre class="mermaid"><code>graph LR
+Commit --&gt; Build --&gt; Test --&gt; Report</code></pre>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_92">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Automated building.</li>
+<li><strong>Senior</strong>: Preventing integration hell.</li>
+</ul>
+<hr />
+<h2 id="94-git-flow-coding-general">94. Git Flow (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> History linearity.</p>
+<p><strong>Question:</strong> Merge vs Rebase.</p>
+<pre class="mermaid"><code>graph TD
+A[Master] --&gt; B
+A --&gt; C[Feature]
+C --Merge--&gt; M[Merge Commit]
+C --Rebase--&gt; B'[Replay on B]</code></pre>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_93">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Rebase is scary.</li>
+<li><strong>Senior</strong>: Rebase for clean history, Merge for preserving context.</li>
+</ul>
+<hr />
+<h2 id="95-immutable-objects-coding-general">95. Immutable Objects (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Thread safety.</p>
+<p><strong>Question:</strong> Benefits of Immutability.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">tuple_data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Immutable</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">list_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1"># Mutable</span>
+</span></code></pre></div>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_94">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Cannot change.</li>
+<li><strong>Senior</strong>: Eliminates side effects and locking needs.</li>
+</ul>
+<hr />
+<h2 id="96-clean-code-coding-general">96. Clean Code (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Self-documenting, Small functions.</p>
+<p><strong>Question:</strong> What makes code 'clean'?</p>
+<table>
+<thead>
+<tr>
+<th>Trait</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naming</td>
+<td>Intent-revealing</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Small functions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_95">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Comments everywhere.</li>
+<li><strong>Senior</strong>: Code reads like prose.</li>
+</ul>
+<hr />
+<h2 id="97-technical-debt-coding-general">97. Technical Debt (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Interest on a loan.</p>
+<p><strong>Question:</strong> How to explain Technical Debt to a PM?</p>
+<pre class="mermaid"><code>graph LR
+SpeedNow --&gt; Debt
+Debt --Interest--&gt; SlowerLater</code></pre>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_96">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Bad code.</li>
+<li><strong>Senior</strong>: Short term trade-off for speed vs long term maintenance cost.</li>
+</ul>
+<hr />
+<h2 id="98-pair-programming-coding-general">98. Pair Programming (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Knowledge sharing vs Exhaustion.</p>
+<p><strong>Question:</strong> Pros and Cons.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Driver</td>
+<td>Types code</td>
+</tr>
+<tr>
+<td>Navigator</td>
+<td>Reviews/Strategizes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_97">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Two people one computer.</li>
+<li><strong>Senior</strong>: Real-time code review and knowledge transfer.</li>
+</ul>
+<hr />
+<h2 id="99-mentorship-coding-general">99. Mentorship (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Code reviews, Pair programming.</p>
+<p><strong>Question:</strong> How do you mentor juniors?</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socratic</td>
+<td>Critical thinking</td>
+</tr>
+<tr>
+<td>Spoon-feeding</td>
+<td>Dependency</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_98">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: Tell them answers.</li>
+<li><strong>Senior</strong>: Guiding them to find answers themselves.</li>
+</ul>
+<hr />
+<h2 id="100-failure-handling-coding-general">100. Failure Handling (Coding &amp; General)</h2>
+<p><strong>Scenario:</strong> Post-mortem culture.</p>
+<p><strong>Question:</strong> Describe a time you brought down production.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Detect</td>
+<td>Monitoring</td>
+</tr>
+<tr>
+<td>Mitigate</td>
+<td>Rollback</td>
+</tr>
+<tr>
+<td>Prevent</td>
+<td>Fix root cause</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts:</strong> <code>Software Engineering</code>, <code>Best Practices</code></p>
+<h3 id="candidate-response-paths_99">Candidate Response Paths</h3>
+<ul>
+<li><strong>Junior</strong>: I never make mistakes.</li>
+<li><strong>Senior</strong>: Owns the mistake and explains the systemic fix.</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "navigation.expand", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
