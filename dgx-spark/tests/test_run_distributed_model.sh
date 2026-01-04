@@ -1,0 +1,105 @@
+#!/bin/bash
+# Test script for run-distributed-model.sh
+
+TEST_DIR=$(mktemp -d)
+# Resolving absolute path to the script properly
+# The test is in dgx-spark/tests/
+# The script is in dgx-spark/scripts/
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_SCRIPT="$SCRIPT_DIR/../scripts/run-distributed-model.sh"
+
+# Mock utilities
+setup_mocks() {
+    export PATH="$TEST_DIR:$PATH"
+
+    # Mock ssh
+    cat << 'EOF' > "$TEST_DIR/ssh"
+#!/bin/bash
+# echo "Mock ssh called with: $@" >> "$TEST_DIR/ssh.log"
+if [[ "$*" == *"nvidia-smi"* ]]; then
+    exit 0
+elif [[ "$*" == *"docker login"* ]]; then
+    exit 0
+elif [[ "$*" == *"docker pull"* ]]; then
+    exit 0
+elif [[ "$*" == *"vtysh"* ]]; then
+    echo "Neighbor ID     Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL"
+    echo "10.0.0.2          1 Full/Backup       34.123s 10.0.0.2        eth0:100               0     0     0"
+    exit 0
+elif [[ "$*" == *"ibdev2netdev"* ]]; then
+    echo "mlx5_0 port 1 ==> ib0 (Up)"
+    exit 0
+elif [[ "$*" == *"docker rm"* ]]; then
+    exit 0
+elif [[ "$*" == *"docker run"* ]]; then
+    echo "container_id"
+    exit 0
+elif [[ "$*" == *"docker logs"* ]]; then
+    echo "Mock logs"
+    exit 0
+else
+    # Default success
+    exit 0
+fi
+EOF
+    chmod +x "$TEST_DIR/ssh"
+
+    # Mock bc (legacy, we might remove usage but keep mock for now)
+    cat << 'EOF' > "$TEST_DIR/bc"
+#!/bin/bash
+read -r input
+if [[ "$input" == *"*"* ]]; then
+   # Return a safe dummy value for calculation
+   echo 10
+else
+   echo 0
+fi
+EOF
+    chmod +x "$TEST_DIR/bc"
+
+    # Mock docker (if called locally, though script calls it via ssh usually)
+    # The script calls docker via ssh, but if it checked for local docker, we'd mock it.
+    # We will mock it just in case.
+    cat << 'EOF' > "$TEST_DIR/docker"
+#!/bin/bash
+exit 0
+EOF
+    chmod +x "$TEST_DIR/docker"
+}
+
+run_test() {
+    local desc="$1"
+    shift
+    echo "Running test: $desc"
+
+    # Run in subshell to avoid env pollution
+    (
+        export NGC_API_KEY="test-key"
+        "$@"
+    )
+    local status=$?
+    if [ $status -eq 0 ]; then
+        echo "PASS"
+    else
+        echo "FAIL"
+    fi
+}
+
+setup_mocks
+
+echo "Target Script: $TARGET_SCRIPT"
+
+# Test 1: Basic execution with arguments
+run_test "Basic execution" "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct"
+
+# Test 2: Missing arguments
+echo "Running test: Missing arguments"
+( "$TARGET_SCRIPT" 2>/dev/null )
+if [ $? -eq 1 ]; then
+    echo "PASS"
+else
+    echo "FAIL: Script should exit 1 on missing args"
+fi
+
+# Cleanup
+rm -rf "$TEST_DIR"
