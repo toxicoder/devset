@@ -357,7 +357,7 @@ def get_role_category(role_path):
         if "counsel" in role_path_lower or "legal" in role_path_lower:
             return "Legal"
         return "Universal" # Ops/Workplace
-    elif "4._specialized_squads_cross_functional_teams" in role_path_lower:
+    elif "specialized_squads_cross_functional_teams" in role_path_lower:
         return "Universal" # specialized squads use mixed
     return "Universal"
 
