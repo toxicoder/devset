@@ -696,7 +696,7 @@ function _launch_distributed_service() {
   # Common Docker Args
   local common_args="$PLATFORM_ARG --runtime=nvidia --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
   # Add NIM_SERVER_HTTP_HOST=0.0.0.0 for safety
-  local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0 $EXTRA_NIM_ENV"
+  local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0 -e TRITON_PTXAS_PATH=/usr/local/cuda/bin/ptxas $EXTRA_NIM_ENV"
 
   # Launch in parallel
   local launch_pids=()
