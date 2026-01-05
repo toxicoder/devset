@@ -233,11 +233,10 @@ sequenceDiagram
 **Question:** Describe a time you had to explain a complex technical/business concept to a non-expert.
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `Clarity`, `Empathy`
@@ -326,333 +325,26 @@ sequenceDiagram
 
 ---
 
-## 21. Start vs Scale for Employer Branding
+## 21. Mistakes in Performance
 
-**Scenario:** Context.
+**Scenario:** Learning.
 
-**Question:** How does your approach to Employer Branding differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Employer Branding`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 22. Scaling Culture
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Culture as the company grows?
-
-**Key Concepts:** `Culture`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 23. Deep Dive: Offboarding
-
-**Scenario:** Assessing depth in Offboarding.
-
-**Question:** Can you explain Offboarding in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Offboarding`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 24. Future of Recruiting
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Recruiting heading in the next 5 years?
-
-**Key Concepts:** `Recruiting`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 25. Collaboration in Employer Branding
-
-**Scenario:** Teamwork.
-
-**Question:** How does Employer Branding require cross-functional collaboration?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Employer Branding`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 26. Challenges in Employee Relations
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Employee Relations?
-
-**Key Concepts:** `Employee Relations`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 27. Scaling Performance
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Performance as the company grows?
-
-**Key Concepts:** `Performance`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 28. Tooling: Engagement
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Engagement to improve efficiency?
+**Question:** What common mistakes do people make with Performance?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Engagement`, `Productivity`
+**Key Concepts:** `Performance`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 29. Deep Dive: HRIS
-
-**Scenario:** Assessing depth in HRIS.
-
-**Question:** Can you explain HRIS in detail and how you have applied it in your past role?
-
-**Key Concepts:** `HRIS`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 30. Deep Dive: Engagement
-
-**Scenario:** Assessing depth in Engagement.
-
-**Question:** Can you explain Engagement in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Engagement`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 31. Deep Dive: Compliance
-
-**Scenario:** Assessing depth in Compliance.
-
-**Question:** Can you explain Compliance in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Compliance`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 32. Collaboration in HRIS
-
-**Scenario:** Teamwork.
-
-**Question:** How does HRIS require cross-functional collaboration?
-
-**Key Concepts:** `HRIS`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 33. Scaling Employee Relations
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Employee Relations as the company grows?
-
-**Key Concepts:** `Employee Relations`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 34. Performance Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Performance?
-
-**Key Concepts:** `Performance`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 35. Start vs Scale for Employee Relations
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Employee Relations differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Employee Relations`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 36. Teaching Benefits
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Benefits to a junior team member?
-
-**Key Concepts:** `Benefits`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 37. Ethics in Benefits
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Benefits?
-
-**Key Concepts:** `Benefits`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 38. Scaling Benefits
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Benefits as the company grows?
-
-**Key Concepts:** `Benefits`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 39. Tooling: Compensation
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Compensation to improve efficiency?
-
-**Key Concepts:** `Compensation`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 40. Challenges in Culture
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Culture?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Culture`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 41. Employer Branding Best Practices
+## 22. Employer Branding Best Practices
 
 **Scenario:** Standardization.
 
@@ -666,32 +358,27 @@ sequenceDiagram
 
 ---
 
-## 42. Tooling: Compliance
+## 23. Ethics in Onboarding
 
-**Scenario:** Proficiency.
+**Scenario:** Ethics.
 
-**Question:** How do you utilize Compliance to improve efficiency?
+**Question:** What are the ethical considerations regarding Onboarding?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Compliance`, `Productivity`
+**Key Concepts:** `Onboarding`, `Ethics`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---
 
-## 43. Challenges in DEI
+## 24. Challenges in Benefits
 
 **Scenario:** Problem Solving.
 
-**Question:** What are the biggest challenges you've faced regarding DEI?
+**Question:** What are the biggest challenges you've faced regarding Benefits?
 
-**Key Concepts:** `DEI`, `Problem Solving`
+**Key Concepts:** `Benefits`, `Problem Solving`
 
 ### Candidate Response Paths
 *   **Junior**: It was hard.
@@ -699,107 +386,11 @@ sequenceDiagram
 
 ---
 
-## 44. Tooling: Recruiting
+## 25. Deep Dive: Compensation
 
-**Scenario:** Proficiency.
+**Scenario:** Assessing depth in Compensation.
 
-**Question:** How do you utilize Recruiting to improve efficiency?
-
-**Key Concepts:** `Recruiting`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 45. Scaling Training
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Training as the company grows?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Training`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 46. Tooling: DEI
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize DEI to improve efficiency?
-
-**Key Concepts:** `DEI`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 47. Mistakes in Recruiting
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Recruiting?
-
-**Key Concepts:** `Recruiting`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 48. Deep Dive: DEI
-
-**Scenario:** Assessing depth in DEI.
-
-**Question:** Can you explain DEI in detail and how you have applied it in your past role?
-
-**Key Concepts:** `DEI`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 49. Collaboration in Engagement
-
-**Scenario:** Teamwork.
-
-**Question:** How does Engagement require cross-functional collaboration?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Engagement`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 50. Metrics for Benefits
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Benefits?
+**Question:** Can you explain Compensation in detail and how you have applied it in your past role?
 
 ```mermaid
 sequenceDiagram
@@ -809,21 +400,54 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Benefits`, `Analytics`
+**Key Concepts:** `Compensation`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
 
 ---
 
-## 51. Metrics for Employer Branding
+## 26. Teaching Offboarding
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Offboarding to a junior team member?
+
+**Key Concepts:** `Offboarding`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 27. Future of Engagement
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Engagement heading in the next 5 years?
+
+**Key Concepts:** `Engagement`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 28. Metrics for Employee Relations
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Employer Branding?
+**Question:** How do you measure success in Employee Relations?
 
-**Key Concepts:** `Employer Branding`, `Analytics`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Employee Relations`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -831,49 +455,21 @@ sequenceDiagram
 
 ---
 
-## 52. Challenges in Onboarding
+## 29. Ethics in Recruiting
 
-**Scenario:** Problem Solving.
+**Scenario:** Ethics.
 
-**Question:** What are the biggest challenges you've faced regarding Onboarding?
+**Question:** What are the ethical considerations regarding Recruiting?
 
-**Key Concepts:** `Onboarding`, `Problem Solving`
+**Key Concepts:** `Recruiting`, `Ethics`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---
 
-## 53. Mistakes in HRIS
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with HRIS?
-
-**Key Concepts:** `HRIS`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 54. Mistakes in Onboarding
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Onboarding?
-
-**Key Concepts:** `Onboarding`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 55. Compensation Best Practices
+## 30. Compensation Best Practices
 
 **Scenario:** Standardization.
 
@@ -894,18 +490,27 @@ graph LR
 
 ---
 
-## 56. Collaboration in Training
+## 31. Deep Dive: Performance
+
+**Scenario:** Assessing depth in Performance.
+
+**Question:** Can you explain Performance in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Performance`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 32. Collaboration in Performance
 
 **Scenario:** Teamwork.
 
-**Question:** How does Training require cross-functional collaboration?
+**Question:** How does Performance require cross-functional collaboration?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Training`, `Collaboration`
+**Key Concepts:** `Performance`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -913,76 +518,13 @@ graph LR
 
 ---
 
-## 57. Challenges in Employer Branding
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Employer Branding?
-
-**Key Concepts:** `Employer Branding`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 58. Mistakes in Training
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Training?
-
-**Key Concepts:** `Training`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 59. Collaboration in Recruiting
-
-**Scenario:** Teamwork.
-
-**Question:** How does Recruiting require cross-functional collaboration?
-
-**Key Concepts:** `Recruiting`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 60. Metrics for Offboarding
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Offboarding?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Offboarding`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 61. Tooling: Performance
+## 33. Tooling: Benefits
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Performance to improve efficiency?
+**Question:** How do you utilize Benefits to improve efficiency?
 
-**Key Concepts:** `Performance`, `Productivity`
+**Key Concepts:** `Benefits`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -990,89 +532,76 @@ graph LR
 
 ---
 
-## 62. Teaching Performance
+## 34. Scaling Benefits
 
-**Scenario:** Mentorship.
+**Scenario:** Growth.
 
-**Question:** How would you teach Performance to a junior team member?
+**Question:** How do you scale Benefits as the company grows?
 
-**Key Concepts:** `Performance`, `Mentorship`
+**Key Concepts:** `Benefits`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 63. Challenges in Internal Comms
+## 35. Future of Offboarding
 
-**Scenario:** Problem Solving.
+**Scenario:** Trends.
 
-**Question:** What are the biggest challenges you've faced regarding Internal Comms?
+**Question:** Where do you see Offboarding heading in the next 5 years?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Internal Comms`, `Problem Solving`
+**Key Concepts:** `Offboarding`, `Vision`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---
 
-## 64. Metrics for DEI
+## 36. Mistakes in Internal Comms
 
-**Scenario:** Measurement.
+**Scenario:** Learning.
 
-**Question:** How do you measure success in DEI?
+**Question:** What common mistakes do people make with Internal Comms?
 
-**Key Concepts:** `DEI`, `Analytics`
+**Key Concepts:** `Internal Comms`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 65. Metrics for Training
+## 37. Scaling HRIS
 
-**Scenario:** Measurement.
+**Scenario:** Growth.
 
-**Question:** How do you measure success in Training?
+**Question:** How do you scale HRIS as the company grows?
 
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Training`, `Analytics`
+**Key Concepts:** `HRIS`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 66. Culture Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Culture?
-
-**Key Concepts:** `Culture`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 67. Future of Internal Comms
+## 38. Future of Internal Comms
 
 **Scenario:** Trends.
 
@@ -1086,13 +615,34 @@ graph LR
 
 ---
 
-## 68. Scaling Compensation
+## 39. Deep Dive: Training
+
+**Scenario:** Assessing depth in Training.
+
+**Question:** Can you explain Training in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Training`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 40. Scaling Compliance
 
 **Scenario:** Growth.
 
-**Question:** How do you scale Compensation as the company grows?
+**Question:** How do you scale Compliance as the company grows?
 
-**Key Concepts:** `Compensation`, `Scale`
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Compliance`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -1100,62 +650,40 @@ graph LR
 
 ---
 
-## 69. Start vs Scale for Benefits
+## 41. Mistakes in Employer Branding
 
-**Scenario:** Context.
+**Scenario:** Learning.
 
-**Question:** How does your approach to Benefits differ in a startup vs a large corp?
+**Question:** What common mistakes do people make with Employer Branding?
 
-**Key Concepts:** `Benefits`, `Context`
+**Key Concepts:** `Employer Branding`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 70. Scaling Engagement
+## 42. Challenges in Performance
 
-**Scenario:** Growth.
+**Scenario:** Problem Solving.
 
-**Question:** How do you scale Engagement as the company grows?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
+**Question:** What are the biggest challenges you've faced regarding Performance?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Engagement`, `Scale`
+**Key Concepts:** `Performance`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 71. Scaling Onboarding
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Onboarding as the company grows?
-
-**Key Concepts:** `Onboarding`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 72. Scaling Recruiting
+## 43. Scaling Recruiting
 
 **Scenario:** Growth.
 
@@ -1169,132 +697,48 @@ sequenceDiagram
 
 ---
 
-## 73. Challenges in Engagement
+## 44. Mistakes in Benefits
 
-**Scenario:** Problem Solving.
+**Scenario:** Learning.
 
-**Question:** What are the biggest challenges you've faced regarding Engagement?
+**Question:** What common mistakes do people make with Benefits?
 
-**Key Concepts:** `Engagement`, `Problem Solving`
+**Key Concepts:** `Benefits`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 74. Challenges in Benefits
+## 45. Scaling Employer Branding
 
-**Scenario:** Problem Solving.
+**Scenario:** Growth.
 
-**Question:** What are the biggest challenges you've faced regarding Benefits?
-
-**Key Concepts:** `Benefits`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 75. Metrics for Engagement
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Engagement?
+**Question:** How do you scale Employer Branding as the company grows?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
-**Key Concepts:** `Engagement`, `Analytics`
+**Key Concepts:** `Employer Branding`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 76. Benefits Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Benefits?
-
-**Key Concepts:** `Benefits`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 77. Deep Dive: Employer Branding
-
-**Scenario:** Assessing depth in Employer Branding.
-
-**Question:** Can you explain Employer Branding in detail and how you have applied it in your past role?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Employer Branding`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 78. Internal Comms Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Internal Comms?
-
-**Key Concepts:** `Internal Comms`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 79. Teaching HRIS
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach HRIS to a junior team member?
-
-**Key Concepts:** `HRIS`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 80. Tooling: Offboarding
+## 46. Tooling: HRIS
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Offboarding to improve efficiency?
+**Question:** How do you utilize HRIS to improve efficiency?
 
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Offboarding`, `Productivity`
+**Key Concepts:** `HRIS`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -1302,35 +746,199 @@ sequenceDiagram
 
 ---
 
-## 81. Metrics for Performance
+## 47. Collaboration in Recruiting
 
-**Scenario:** Measurement.
+**Scenario:** Teamwork.
 
-**Question:** How do you measure success in Performance?
+**Question:** How does Recruiting require cross-functional collaboration?
 
-**Key Concepts:** `Performance`, `Analytics`
+**Key Concepts:** `Recruiting`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 82. Start vs Scale for Compensation
+## 48. Tooling: DEI
 
-**Scenario:** Context.
+**Scenario:** Proficiency.
 
-**Question:** How does your approach to Compensation differ in a startup vs a large corp?
+**Question:** How do you utilize DEI to improve efficiency?
 
-**Key Concepts:** `Compensation`, `Context`
+**Key Concepts:** `DEI`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
 
 ---
 
-## 83. Start vs Scale for Offboarding
+## 49. Challenges in HRIS
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding HRIS?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `HRIS`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 50. Mistakes in Compensation
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Compensation?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Compensation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 51. Mistakes in Training
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Training?
+
+**Key Concepts:** `Training`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 52. Onboarding Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Onboarding?
+
+**Key Concepts:** `Onboarding`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 53. Deep Dive: Internal Comms
+
+**Scenario:** Assessing depth in Internal Comms.
+
+**Question:** Can you explain Internal Comms in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Internal Comms`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 54. Mistakes in Offboarding
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Offboarding?
+
+**Key Concepts:** `Offboarding`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 55. Challenges in Compensation
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Compensation?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Compensation`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 56. Teaching Compliance
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Compliance to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Compliance`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 57. Tooling: Culture
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Culture to improve efficiency?
+
+**Key Concepts:** `Culture`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 58. Compliance Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Compliance?
+
+**Key Concepts:** `Compliance`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 59. Start vs Scale for Offboarding
 
 **Scenario:** Context.
 
@@ -1344,30 +952,11 @@ sequenceDiagram
 
 ---
 
-## 84. Start vs Scale for Culture
+## 60. Teaching Onboarding
 
-**Scenario:** Context.
+**Scenario:** Mentorship.
 
-**Question:** How does your approach to Culture differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Culture`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 85. Future of Offboarding
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Offboarding heading in the next 5 years?
+**Question:** How would you teach Onboarding to a junior team member?
 
 ```mermaid
 graph LR
@@ -1376,21 +965,21 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Offboarding`, `Vision`
+**Key Concepts:** `Onboarding`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 86. Start vs Scale for DEI
+## 61. Start vs Scale for Engagement
 
 **Scenario:** Context.
 
-**Question:** How does your approach to DEI differ in a startup vs a large corp?
+**Question:** How does your approach to Engagement differ in a startup vs a large corp?
 
-**Key Concepts:** `DEI`, `Context`
+**Key Concepts:** `Engagement`, `Context`
 
 ### Candidate Response Paths
 *   **Junior**: It's the same.
@@ -1398,63 +987,46 @@ graph LR
 
 ---
 
-## 87. Teaching Employer Branding
+## 62. Scaling Training
 
-**Scenario:** Mentorship.
+**Scenario:** Growth.
 
-**Question:** How would you teach Employer Branding to a junior team member?
+**Question:** How do you scale Training as the company grows?
 
-**Key Concepts:** `Employer Branding`, `Mentorship`
+**Key Concepts:** `Training`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 88. Metrics for HRIS
+## 63. Start vs Scale for Recruiting
 
-**Scenario:** Measurement.
+**Scenario:** Context.
 
-**Question:** How do you measure success in HRIS?
+**Question:** How does your approach to Recruiting differ in a startup vs a large corp?
 
-**Key Concepts:** `HRIS`, `Analytics`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Recruiting`, `Context`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
 
 ---
 
-## 89. Tooling: Onboarding
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Onboarding to improve efficiency?
-
-**Key Concepts:** `Onboarding`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 90. Future of Benefits
+## 64. Future of Recruiting
 
 **Scenario:** Trends.
 
-**Question:** Where do you see Benefits heading in the next 5 years?
+**Question:** Where do you see Recruiting heading in the next 5 years?
 
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Benefits`, `Vision`
+**Key Concepts:** `Recruiting`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -1462,151 +1034,7 @@ sequenceDiagram
 
 ---
 
-## 91. Tooling: Internal Comms
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Internal Comms to improve efficiency?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Internal Comms`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 92. Mistakes in Engagement
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Engagement?
-
-**Key Concepts:** `Engagement`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 93. Future of Compensation
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Compensation heading in the next 5 years?
-
-**Key Concepts:** `Compensation`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 94. Collaboration in Benefits
-
-**Scenario:** Teamwork.
-
-**Question:** How does Benefits require cross-functional collaboration?
-
-**Key Concepts:** `Benefits`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 95. Challenges in Compensation
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Compensation?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Compensation`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 96. Metrics for Compensation
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Compensation?
-
-**Key Concepts:** `Compensation`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 97. Ethics in Offboarding
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Offboarding?
-
-**Key Concepts:** `Offboarding`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 98. Teaching Culture
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Culture to a junior team member?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Culture`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 99. Ethics in Compensation
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Compensation?
-
-**Key Concepts:** `Compensation`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 100. Challenges in Training
+## 65. Challenges in Training
 
 **Scenario:** Problem Solving.
 
@@ -1625,5 +1053,573 @@ sequenceDiagram
 ### Candidate Response Paths
 *   **Junior**: It was hard.
 *   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 66. Future of Onboarding
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Onboarding heading in the next 5 years?
+
+**Key Concepts:** `Onboarding`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 67. Metrics for Onboarding
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Onboarding?
+
+**Key Concepts:** `Onboarding`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 68. Tooling: Employer Branding
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Employer Branding to improve efficiency?
+
+**Key Concepts:** `Employer Branding`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 69. Ethics in Offboarding
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Offboarding?
+
+**Key Concepts:** `Offboarding`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 70. Start vs Scale for Employer Branding
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Employer Branding differ in a startup vs a large corp?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Employer Branding`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 71. Start vs Scale for Compensation
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Compensation differ in a startup vs a large corp?
+
+**Key Concepts:** `Compensation`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 72. Teaching HRIS
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach HRIS to a junior team member?
+
+**Key Concepts:** `HRIS`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 73. Start vs Scale for DEI
+
+**Scenario:** Context.
+
+**Question:** How does your approach to DEI differ in a startup vs a large corp?
+
+**Key Concepts:** `DEI`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 74. Tooling: Employee Relations
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Employee Relations to improve efficiency?
+
+**Key Concepts:** `Employee Relations`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 75. Deep Dive: Employee Relations
+
+**Scenario:** Assessing depth in Employee Relations.
+
+**Question:** Can you explain Employee Relations in detail and how you have applied it in your past role?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Employee Relations`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 76. Future of Training
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Training heading in the next 5 years?
+
+**Key Concepts:** `Training`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 77. Start vs Scale for HRIS
+
+**Scenario:** Context.
+
+**Question:** How does your approach to HRIS differ in a startup vs a large corp?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `HRIS`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 78. Start vs Scale for Employee Relations
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Employee Relations differ in a startup vs a large corp?
+
+**Key Concepts:** `Employee Relations`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 79. Recruiting Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Recruiting?
+
+**Key Concepts:** `Recruiting`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 80. Deep Dive: Culture
+
+**Scenario:** Assessing depth in Culture.
+
+**Question:** Can you explain Culture in detail and how you have applied it in your past role?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Culture`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 81. Future of Culture
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Culture heading in the next 5 years?
+
+**Key Concepts:** `Culture`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 82. Future of Performance
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Performance heading in the next 5 years?
+
+**Key Concepts:** `Performance`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 83. Mistakes in Compliance
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Compliance?
+
+**Key Concepts:** `Compliance`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 84. Deep Dive: Recruiting
+
+**Scenario:** Assessing depth in Recruiting.
+
+**Question:** Can you explain Recruiting in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Recruiting`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 85. Collaboration in Training
+
+**Scenario:** Teamwork.
+
+**Question:** How does Training require cross-functional collaboration?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Training`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 86. Metrics for Training
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Training?
+
+**Key Concepts:** `Training`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 87. Teaching Internal Comms
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Internal Comms to a junior team member?
+
+**Key Concepts:** `Internal Comms`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 88. Teaching Employee Relations
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Employee Relations to a junior team member?
+
+**Key Concepts:** `Employee Relations`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 89. Future of Compensation
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Compensation heading in the next 5 years?
+
+**Key Concepts:** `Compensation`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 90. Start vs Scale for Training
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Training differ in a startup vs a large corp?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Training`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 91. Offboarding Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Offboarding?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Offboarding`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 92. Deep Dive: Engagement
+
+**Scenario:** Assessing depth in Engagement.
+
+**Question:** Can you explain Engagement in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Engagement`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 93. Metrics for Benefits
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Benefits?
+
+**Key Concepts:** `Benefits`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 94. Ethics in Performance
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Performance?
+
+**Key Concepts:** `Performance`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 95. Engagement Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Engagement?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Engagement`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 96. Teaching Culture
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Culture to a junior team member?
+
+**Key Concepts:** `Culture`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 97. Scaling Performance
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Performance as the company grows?
+
+**Key Concepts:** `Performance`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 98. Internal Comms Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Internal Comms?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Internal Comms`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 99. Teaching Compensation
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Compensation to a junior team member?
+
+**Key Concepts:** `Compensation`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 100. Teaching Training
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Training to a junior team member?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Training`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---

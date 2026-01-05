@@ -311,10 +311,11 @@ sequenceDiagram
 **Question:** How do you make decisions when you don't have all the data?
 
 ```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
 **Key Concepts:** `Judgment`, `Risk Mgmt`
@@ -325,18 +326,46 @@ graph LR
 
 ---
 
-## 21. Start vs Scale for Information Arch
+## 21. Future of Typography
 
-**Scenario:** Context.
+**Scenario:** Trends.
 
-**Question:** How does your approach to Information Arch differ in a startup vs a large corp?
+**Question:** Where do you see Typography heading in the next 5 years?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Information Arch`, `Context`
+**Key Concepts:** `Typography`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 22. Mobile Design Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Mobile Design?
+
+**Key Concepts:** `Mobile Design`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 23. Start vs Scale for User Testing
+
+**Scenario:** Context.
+
+**Question:** How does your approach to User Testing differ in a startup vs a large corp?
+
+**Key Concepts:** `User Testing`, `Context`
 
 ### Candidate Response Paths
 *   **Junior**: It's the same.
@@ -344,53 +373,25 @@ graph LR
 
 ---
 
-## 22. Tooling: Wireframing
+## 24. Mistakes in Wireframing
 
-**Scenario:** Proficiency.
+**Scenario:** Learning.
 
-**Question:** How do you utilize Wireframing to improve efficiency?
+**Question:** What common mistakes do people make with Wireframing?
 
-**Key Concepts:** `Wireframing`, `Productivity`
+**Key Concepts:** `Wireframing`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 23. Deep Dive: Usability
+## 25. Challenges in Color Theory
 
-**Scenario:** Assessing depth in Usability.
+**Scenario:** Problem Solving.
 
-**Question:** Can you explain Usability in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Usability`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 24. Deep Dive: Layout
-
-**Scenario:** Assessing depth in Layout.
-
-**Question:** Can you explain Layout in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Layout`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 25. Start vs Scale for Layout
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Layout differ in a startup vs a large corp?
+**Question:** What are the biggest challenges you've faced regarding Color Theory?
 
 ```mermaid
 sequenceDiagram
@@ -399,6 +400,184 @@ sequenceDiagram
     A->>B: Action
     B-->>A: Result
 ```
+
+**Key Concepts:** `Color Theory`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 26. Ethics in Wireframing
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Wireframing?
+
+**Key Concepts:** `Wireframing`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 27. Ethics in Web Design
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Web Design?
+
+**Key Concepts:** `Web Design`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 28. Collaboration in Figma
+
+**Scenario:** Teamwork.
+
+**Question:** How does Figma require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Figma`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 29. Collaboration in Design Systems
+
+**Scenario:** Teamwork.
+
+**Question:** How does Design Systems require cross-functional collaboration?
+
+**Key Concepts:** `Design Systems`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 30. Scaling Animation
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Animation as the company grows?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Animation`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 31. Teaching Mobile Design
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Mobile Design to a junior team member?
+
+**Key Concepts:** `Mobile Design`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 32. Mistakes in User Testing
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with User Testing?
+
+**Key Concepts:** `User Testing`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 33. Scaling Web Design
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Web Design as the company grows?
+
+**Key Concepts:** `Web Design`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 34. Start vs Scale for Typography
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Typography differ in a startup vs a large corp?
+
+**Key Concepts:** `Typography`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 35. Challenges in Usability
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Usability?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Usability`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 36. Start vs Scale for Layout
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Layout differ in a startup vs a large corp?
 
 **Key Concepts:** `Layout`, `Context`
 
@@ -408,72 +587,53 @@ sequenceDiagram
 
 ---
 
-## 26. Metrics for Accessibility
+## 37. Ethics in Typography
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Typography?
+
+**Key Concepts:** `Typography`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 38. Scaling Typography
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Typography as the company grows?
+
+**Key Concepts:** `Typography`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 39. Start vs Scale for Prototyping
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Prototyping differ in a startup vs a large corp?
+
+**Key Concepts:** `Prototyping`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 40. Metrics for Layout
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Accessibility?
-
-**Key Concepts:** `Accessibility`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 27. Collaboration in Prototyping
-
-**Scenario:** Teamwork.
-
-**Question:** How does Prototyping require cross-functional collaboration?
-
-**Key Concepts:** `Prototyping`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 28. Deep Dive: Typography
-
-**Scenario:** Assessing depth in Typography.
-
-**Question:** Can you explain Typography in detail and how you have applied it in your past role?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Typography`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 29. Deep Dive: Interaction Design
-
-**Scenario:** Assessing depth in Interaction Design.
-
-**Question:** Can you explain Interaction Design in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Interaction Design`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 30. Metrics for Usability
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Usability?
+**Question:** How do you measure success in Layout?
 
 ```mermaid
 graph LR
@@ -482,7 +642,7 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Usability`, `Analytics`
+**Key Concepts:** `Layout`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -490,55 +650,32 @@ graph LR
 
 ---
 
-## 31. Start vs Scale for Mobile Design
+## 41. Metrics for Web Design
 
-**Scenario:** Context.
+**Scenario:** Measurement.
 
-**Question:** How does your approach to Mobile Design differ in a startup vs a large corp?
+**Question:** How do you measure success in Web Design?
 
-**Key Concepts:** `Mobile Design`, `Context`
+**Key Concepts:** `Web Design`, `Analytics`
 
 ### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
 
 ---
 
-## 32. Future of User Testing
-
-**Scenario:** Trends.
-
-**Question:** Where do you see User Testing heading in the next 5 years?
-
-**Key Concepts:** `User Testing`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 33. Start vs Scale for Accessibility
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Accessibility differ in a startup vs a large corp?
-
-**Key Concepts:** `Accessibility`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 34. Ethics in Information Arch
+## 42. Ethics in Usability
 
 **Scenario:** Ethics.
 
-**Question:** What are the ethical considerations regarding Information Arch?
+**Question:** What are the ethical considerations regarding Usability?
 
-**Key Concepts:** `Information Arch`, `Ethics`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Usability`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -546,11 +683,39 @@ graph LR
 
 ---
 
-## 35. Tooling: Interaction Design
+## 43. Mistakes in Typography
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Typography?
+
+**Key Concepts:** `Typography`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 44. Tooling: Layout
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Interaction Design to improve efficiency?
+**Question:** How do you utilize Layout to improve efficiency?
+
+**Key Concepts:** `Layout`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 45. Mistakes in Color Theory
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Color Theory?
 
 ```mermaid
 sequenceDiagram
@@ -560,40 +725,90 @@ sequenceDiagram
     B-->>A: Result
 ```
 
+**Key Concepts:** `Color Theory`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 46. Typography Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Typography?
+
+**Key Concepts:** `Typography`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 47. Collaboration in Accessibility
+
+**Scenario:** Teamwork.
+
+**Question:** How does Accessibility require cross-functional collaboration?
+
+**Key Concepts:** `Accessibility`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 48. Deep Dive: Typography
+
+**Scenario:** Assessing depth in Typography.
+
+**Question:** Can you explain Typography in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Typography`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 49. Teaching Accessibility
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Accessibility to a junior team member?
+
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Interaction Design`, `Productivity`
+**Key Concepts:** `Accessibility`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 36. Tooling: Information Arch
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Information Arch to improve efficiency?
-
-**Key Concepts:** `Information Arch`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 37. Ethics in Color Theory
+## 50. Ethics in Design Systems
 
 **Scenario:** Ethics.
 
-**Question:** What are the ethical considerations regarding Color Theory?
+**Question:** What are the ethical considerations regarding Design Systems?
 
-**Key Concepts:** `Color Theory`, `Ethics`
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Design Systems`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -601,7 +816,49 @@ sequenceDiagram
 
 ---
 
-## 38. Start vs Scale for Animation
+## 51. Start vs Scale for Figma
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Figma differ in a startup vs a large corp?
+
+**Key Concepts:** `Figma`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 52. Tooling: Usability
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Usability to improve efficiency?
+
+**Key Concepts:** `Usability`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 53. Future of Usability
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Usability heading in the next 5 years?
+
+**Key Concepts:** `Usability`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 54. Start vs Scale for Animation
 
 **Scenario:** Context.
 
@@ -615,13 +872,130 @@ sequenceDiagram
 
 ---
 
-## 39. Tooling: Figma
+## 55. Collaboration in Information Arch
+
+**Scenario:** Teamwork.
+
+**Question:** How does Information Arch require cross-functional collaboration?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Information Arch`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 56. Mistakes in Figma
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Figma?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Figma`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 57. Metrics for Usability
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Usability?
+
+**Key Concepts:** `Usability`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 58. Design Systems Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Design Systems?
+
+**Key Concepts:** `Design Systems`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 59. Metrics for Mobile Design
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Mobile Design?
+
+**Key Concepts:** `Mobile Design`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 60. Layout Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Layout?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Layout`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 61. Challenges in Layout
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Layout?
+
+**Key Concepts:** `Layout`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 62. Tooling: Design Systems
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Figma to improve efficiency?
+**Question:** How do you utilize Design Systems to improve efficiency?
 
-**Key Concepts:** `Figma`, `Productivity`
+**Key Concepts:** `Design Systems`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -629,7 +1003,604 @@ sequenceDiagram
 
 ---
 
-## 40. Metrics for Figma
+## 63. Color Theory Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Color Theory?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Color Theory`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 64. Ethics in Accessibility
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Accessibility?
+
+**Key Concepts:** `Accessibility`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 65. Usability Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Usability?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Usability`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 66. Tooling: Accessibility
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Accessibility to improve efficiency?
+
+**Key Concepts:** `Accessibility`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 67. User Testing Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for User Testing?
+
+**Key Concepts:** `User Testing`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 68. Collaboration in Interaction Design
+
+**Scenario:** Teamwork.
+
+**Question:** How does Interaction Design require cross-functional collaboration?
+
+**Key Concepts:** `Interaction Design`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 69. Mistakes in Mobile Design
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Mobile Design?
+
+**Key Concepts:** `Mobile Design`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 70. Scaling Information Arch
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Information Arch as the company grows?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Information Arch`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 71. Deep Dive: Information Arch
+
+**Scenario:** Assessing depth in Information Arch.
+
+**Question:** Can you explain Information Arch in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Information Arch`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 72. Mistakes in Prototyping
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Prototyping?
+
+**Key Concepts:** `Prototyping`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 73. Future of User Testing
+
+**Scenario:** Trends.
+
+**Question:** Where do you see User Testing heading in the next 5 years?
+
+**Key Concepts:** `User Testing`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 74. Challenges in User Testing
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding User Testing?
+
+**Key Concepts:** `User Testing`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 75. Teaching Design Systems
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Design Systems to a junior team member?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Design Systems`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 76. Tooling: Web Design
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Web Design to improve efficiency?
+
+**Key Concepts:** `Web Design`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 77. Mistakes in Usability
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Usability?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Usability`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 78. Tooling: Mobile Design
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Mobile Design to improve efficiency?
+
+**Key Concepts:** `Mobile Design`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 79. Collaboration in User Testing
+
+**Scenario:** Teamwork.
+
+**Question:** How does User Testing require cross-functional collaboration?
+
+**Key Concepts:** `User Testing`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 80. Challenges in Accessibility
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Accessibility?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Accessibility`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 81. Start vs Scale for Usability
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Usability differ in a startup vs a large corp?
+
+**Key Concepts:** `Usability`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 82. Prototyping Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Prototyping?
+
+**Key Concepts:** `Prototyping`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 83. Information Arch Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Information Arch?
+
+**Key Concepts:** `Information Arch`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 84. Teaching Prototyping
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Prototyping to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Prototyping`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 85. Teaching Interaction Design
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Interaction Design to a junior team member?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Interaction Design`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 86. Teaching Figma
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Figma to a junior team member?
+
+**Key Concepts:** `Figma`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 87. Future of Prototyping
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Prototyping heading in the next 5 years?
+
+**Key Concepts:** `Prototyping`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 88. Deep Dive: Layout
+
+**Scenario:** Assessing depth in Layout.
+
+**Question:** Can you explain Layout in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Layout`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 89. Deep Dive: Figma
+
+**Scenario:** Assessing depth in Figma.
+
+**Question:** Can you explain Figma in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Figma`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 90. Ethics in User Testing
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding User Testing?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `User Testing`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 91. Deep Dive: Web Design
+
+**Scenario:** Assessing depth in Web Design.
+
+**Question:** Can you explain Web Design in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Web Design`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 92. Deep Dive: Prototyping
+
+**Scenario:** Assessing depth in Prototyping.
+
+**Question:** Can you explain Prototyping in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Prototyping`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 93. Mistakes in Design Systems
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Design Systems?
+
+**Key Concepts:** `Design Systems`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 94. Tooling: Typography
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Typography to improve efficiency?
+
+**Key Concepts:** `Typography`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 95. Scaling User Testing
+
+**Scenario:** Growth.
+
+**Question:** How do you scale User Testing as the company grows?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `User Testing`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 96. Start vs Scale for Web Design
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Web Design differ in a startup vs a large corp?
+
+**Key Concepts:** `Web Design`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 97. Tooling: Interaction Design
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Interaction Design to improve efficiency?
+
+**Key Concepts:** `Interaction Design`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 98. Teaching Usability
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Usability to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Usability`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 99. Ethics in Figma
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Figma?
+
+**Key Concepts:** `Figma`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 100. Metrics for Figma
 
 **Scenario:** Measurement.
 
@@ -647,981 +1618,5 @@ graph LR
 ### Candidate Response Paths
 *   **Junior**: I guess.
 *   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 41. Future of Typography
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Typography heading in the next 5 years?
-
-**Key Concepts:** `Typography`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 42. Start vs Scale for Usability
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Usability differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Usability`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 43. Deep Dive: Accessibility
-
-**Scenario:** Assessing depth in Accessibility.
-
-**Question:** Can you explain Accessibility in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Accessibility`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 44. Teaching Web Design
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Web Design to a junior team member?
-
-**Key Concepts:** `Web Design`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 45. Future of Interaction Design
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Interaction Design heading in the next 5 years?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Interaction Design`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 46. Collaboration in Typography
-
-**Scenario:** Teamwork.
-
-**Question:** How does Typography require cross-functional collaboration?
-
-**Key Concepts:** `Typography`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 47. Metrics for Interaction Design
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Interaction Design?
-
-**Key Concepts:** `Interaction Design`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 48. Mistakes in Animation
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Animation?
-
-**Key Concepts:** `Animation`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 49. Metrics for Color Theory
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Color Theory?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Color Theory`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 50. Metrics for Layout
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Layout?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Layout`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 51. Layout Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Layout?
-
-**Key Concepts:** `Layout`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 52. Challenges in Accessibility
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Accessibility?
-
-**Key Concepts:** `Accessibility`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 53. Metrics for Animation
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Animation?
-
-**Key Concepts:** `Animation`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 54. Typography Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Typography?
-
-**Key Concepts:** `Typography`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 55. Mistakes in Figma
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Figma?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Figma`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 56. Metrics for Information Arch
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Information Arch?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Information Arch`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 57. Start vs Scale for Design Systems
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Design Systems differ in a startup vs a large corp?
-
-**Key Concepts:** `Design Systems`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 58. Collaboration in Color Theory
-
-**Scenario:** Teamwork.
-
-**Question:** How does Color Theory require cross-functional collaboration?
-
-**Key Concepts:** `Color Theory`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 59. Future of Design Systems
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Design Systems heading in the next 5 years?
-
-**Key Concepts:** `Design Systems`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 60. Deep Dive: Prototyping
-
-**Scenario:** Assessing depth in Prototyping.
-
-**Question:** Can you explain Prototyping in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Prototyping`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 61. Collaboration in Figma
-
-**Scenario:** Teamwork.
-
-**Question:** How does Figma require cross-functional collaboration?
-
-**Key Concepts:** `Figma`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 62. Challenges in Figma
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Figma?
-
-**Key Concepts:** `Figma`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 63. Tooling: Prototyping
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Prototyping to improve efficiency?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Prototyping`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 64. Ethics in Wireframing
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Wireframing?
-
-**Key Concepts:** `Wireframing`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 65. Deep Dive: Wireframing
-
-**Scenario:** Assessing depth in Wireframing.
-
-**Question:** Can you explain Wireframing in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Wireframing`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 66. Mistakes in Design Systems
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Design Systems?
-
-**Key Concepts:** `Design Systems`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 67. Scaling Wireframing
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Wireframing as the company grows?
-
-**Key Concepts:** `Wireframing`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 68. Mistakes in Mobile Design
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Mobile Design?
-
-**Key Concepts:** `Mobile Design`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 69. Teaching Figma
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Figma to a junior team member?
-
-**Key Concepts:** `Figma`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 70. Start vs Scale for Typography
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Typography differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Typography`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 71. Mistakes in User Testing
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with User Testing?
-
-**Key Concepts:** `User Testing`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 72. Collaboration in Design Systems
-
-**Scenario:** Teamwork.
-
-**Question:** How does Design Systems require cross-functional collaboration?
-
-**Key Concepts:** `Design Systems`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 73. Challenges in Design Systems
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Design Systems?
-
-**Key Concepts:** `Design Systems`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 74. Teaching Accessibility
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Accessibility to a junior team member?
-
-**Key Concepts:** `Accessibility`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 75. Future of Color Theory
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Color Theory heading in the next 5 years?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Color Theory`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 76. Future of Accessibility
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Accessibility heading in the next 5 years?
-
-**Key Concepts:** `Accessibility`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 77. Start vs Scale for Color Theory
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Color Theory differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Color Theory`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 78. Challenges in Wireframing
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Wireframing?
-
-**Key Concepts:** `Wireframing`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 79. Start vs Scale for Figma
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Figma differ in a startup vs a large corp?
-
-**Key Concepts:** `Figma`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 80. Ethics in Design Systems
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Design Systems?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Design Systems`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 81. Mistakes in Typography
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Typography?
-
-**Key Concepts:** `Typography`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 82. Scaling Design Systems
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Design Systems as the company grows?
-
-**Key Concepts:** `Design Systems`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 83. Scaling Layout
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Layout as the company grows?
-
-**Key Concepts:** `Layout`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 84. Ethics in Interaction Design
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Interaction Design?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Interaction Design`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 85. Animation Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Animation?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Animation`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 86. Challenges in Mobile Design
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Mobile Design?
-
-**Key Concepts:** `Mobile Design`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 87. Teaching Typography
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Typography to a junior team member?
-
-**Key Concepts:** `Typography`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 88. Challenges in Layout
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Layout?
-
-**Key Concepts:** `Layout`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 89. Scaling Usability
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Usability as the company grows?
-
-**Key Concepts:** `Usability`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 90. Future of Information Arch
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Information Arch heading in the next 5 years?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Information Arch`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 91. Mistakes in Layout
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Layout?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Layout`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 92. Future of Mobile Design
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Mobile Design heading in the next 5 years?
-
-**Key Concepts:** `Mobile Design`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 93. Start vs Scale for Interaction Design
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Interaction Design differ in a startup vs a large corp?
-
-**Key Concepts:** `Interaction Design`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 94. Deep Dive: Mobile Design
-
-**Scenario:** Assessing depth in Mobile Design.
-
-**Question:** Can you explain Mobile Design in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Mobile Design`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 95. Collaboration in Accessibility
-
-**Scenario:** Teamwork.
-
-**Question:** How does Accessibility require cross-functional collaboration?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Accessibility`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 96. Tooling: Web Design
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Web Design to improve efficiency?
-
-**Key Concepts:** `Web Design`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 97. Deep Dive: Web Design
-
-**Scenario:** Assessing depth in Web Design.
-
-**Question:** Can you explain Web Design in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Web Design`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 98. Ethics in Animation
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Animation?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Animation`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 99. Future of Web Design
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Web Design heading in the next 5 years?
-
-**Key Concepts:** `Web Design`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 100. Scaling Accessibility
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Accessibility as the company grows?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Accessibility`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
 
 ---

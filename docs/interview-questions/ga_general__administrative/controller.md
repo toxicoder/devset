@@ -67,10 +67,11 @@ This document contains 100 interview questions tailored for the controller role.
 **Question:** How do you identify cost saving opportunities?
 
 ```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
 **Key Concepts:** `Efficiency`, `Analysis`
@@ -309,11 +310,10 @@ sequenceDiagram
 **Question:** How do you make decisions when you don't have all the data?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `Judgment`, `Risk Mgmt`
@@ -324,142 +324,18 @@ sequenceDiagram
 
 ---
 
-## 21. Collaboration in GAAP
-
-**Scenario:** Teamwork.
-
-**Question:** How does GAAP require cross-functional collaboration?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `GAAP`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 22. Tooling: Procurement
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Procurement to improve efficiency?
-
-**Key Concepts:** `Procurement`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 23. Collaboration in Auditing
-
-**Scenario:** Teamwork.
-
-**Question:** How does Auditing require cross-functional collaboration?
-
-**Key Concepts:** `Auditing`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 24. Future of FP&A
-
-**Scenario:** Trends.
-
-**Question:** Where do you see FP&A heading in the next 5 years?
-
-**Key Concepts:** `FP&A`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 25. Deep Dive: Financial Modeling
-
-**Scenario:** Assessing depth in Financial Modeling.
-
-**Question:** Can you explain Financial Modeling in detail and how you have applied it in your past role?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Financial Modeling`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 26. Deep Dive: Expense Mgmt
-
-**Scenario:** Assessing depth in Expense Mgmt.
-
-**Question:** Can you explain Expense Mgmt in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Expense Mgmt`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 27. Future of Payroll
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Payroll heading in the next 5 years?
-
-**Key Concepts:** `Payroll`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 28. Scaling Financial Modeling
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Financial Modeling as the company grows?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Financial Modeling`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 29. Start vs Scale for GAAP
+## 21. Start vs Scale for FP&A
 
 **Scenario:** Context.
 
-**Question:** How does your approach to GAAP differ in a startup vs a large corp?
+**Question:** How does your approach to FP&A differ in a startup vs a large corp?
 
-**Key Concepts:** `GAAP`, `Context`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `FP&A`, `Context`
 
 ### Candidate Response Paths
 *   **Junior**: It's the same.
@@ -467,49 +343,13 @@ graph LR
 
 ---
 
-## 30. Ethics in Valuation
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Valuation?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Valuation`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 31. Start vs Scale for ERP
-
-**Scenario:** Context.
-
-**Question:** How does your approach to ERP differ in a startup vs a large corp?
-
-**Key Concepts:** `ERP`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 32. Teaching Expense Mgmt
+## 22. Teaching Auditing
 
 **Scenario:** Mentorship.
 
-**Question:** How would you teach Expense Mgmt to a junior team member?
+**Question:** How would you teach Auditing to a junior team member?
 
-**Key Concepts:** `Expense Mgmt`, `Mentorship`
+**Key Concepts:** `Auditing`, `Mentorship`
 
 ### Candidate Response Paths
 *   **Junior**: Send them a link.
@@ -517,756 +357,7 @@ sequenceDiagram
 
 ---
 
-## 33. Collaboration in Cash Flow
-
-**Scenario:** Teamwork.
-
-**Question:** How does Cash Flow require cross-functional collaboration?
-
-**Key Concepts:** `Cash Flow`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 34. Auditing Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Auditing?
-
-**Key Concepts:** `Auditing`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 35. Teaching Tax
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Tax to a junior team member?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Tax`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 36. Collaboration in Expense Mgmt
-
-**Scenario:** Teamwork.
-
-**Question:** How does Expense Mgmt require cross-functional collaboration?
-
-**Key Concepts:** `Expense Mgmt`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 37. Deep Dive: Forecasting
-
-**Scenario:** Assessing depth in Forecasting.
-
-**Question:** Can you explain Forecasting in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Forecasting`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 38. Scaling Payroll
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Payroll as the company grows?
-
-**Key Concepts:** `Payroll`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 39. Challenges in Financial Modeling
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Financial Modeling?
-
-**Key Concepts:** `Financial Modeling`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 40. Start vs Scale for Forecasting
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Forecasting differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Forecasting`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 41. Future of Cap Table
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Cap Table heading in the next 5 years?
-
-**Key Concepts:** `Cap Table`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 42. Teaching Cap Table
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Cap Table to a junior team member?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Cap Table`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 43. Teaching Payroll
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Payroll to a junior team member?
-
-**Key Concepts:** `Payroll`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 44. Start vs Scale for Valuation
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Valuation differ in a startup vs a large corp?
-
-**Key Concepts:** `Valuation`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 45. Deep Dive: ERP
-
-**Scenario:** Assessing depth in ERP.
-
-**Question:** Can you explain ERP in detail and how you have applied it in your past role?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `ERP`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 46. Future of Excel
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Excel heading in the next 5 years?
-
-**Key Concepts:** `Excel`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 47. Metrics for Forecasting
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Forecasting?
-
-**Key Concepts:** `Forecasting`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 48. Metrics for Expense Mgmt
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Expense Mgmt?
-
-**Key Concepts:** `Expense Mgmt`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 49. Metrics for Valuation
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Valuation?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Valuation`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 50. Scaling Procurement
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Procurement as the company grows?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Procurement`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 51. Challenges in FP&A
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding FP&A?
-
-**Key Concepts:** `FP&A`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 52. Ethics in Payroll
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Payroll?
-
-**Key Concepts:** `Payroll`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 53. Challenges in ERP
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding ERP?
-
-**Key Concepts:** `ERP`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 54. Mistakes in FP&A
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with FP&A?
-
-**Key Concepts:** `FP&A`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 55. Deep Dive: Payroll
-
-**Scenario:** Assessing depth in Payroll.
-
-**Question:** Can you explain Payroll in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Payroll`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 56. Deep Dive: Valuation
-
-**Scenario:** Assessing depth in Valuation.
-
-**Question:** Can you explain Valuation in detail and how you have applied it in your past role?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Valuation`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 57. Tooling: GAAP
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize GAAP to improve efficiency?
-
-**Key Concepts:** `GAAP`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 58. Teaching FP&A
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach FP&A to a junior team member?
-
-**Key Concepts:** `FP&A`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 59. Tooling: Compliance
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Compliance to improve efficiency?
-
-**Key Concepts:** `Compliance`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 60. Collaboration in Cap Table
-
-**Scenario:** Teamwork.
-
-**Question:** How does Cap Table require cross-functional collaboration?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Cap Table`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 61. Tooling: ERP
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize ERP to improve efficiency?
-
-**Key Concepts:** `ERP`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 62. Future of GAAP
-
-**Scenario:** Trends.
-
-**Question:** Where do you see GAAP heading in the next 5 years?
-
-**Key Concepts:** `GAAP`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 63. Deep Dive: GAAP
-
-**Scenario:** Assessing depth in GAAP.
-
-**Question:** Can you explain GAAP in detail and how you have applied it in your past role?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `GAAP`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 64. Deep Dive: Excel
-
-**Scenario:** Assessing depth in Excel.
-
-**Question:** Can you explain Excel in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Excel`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 65. Start vs Scale for Cash Flow
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Cash Flow differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Cash Flow`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 66. Start vs Scale for Payroll
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Payroll differ in a startup vs a large corp?
-
-**Key Concepts:** `Payroll`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 67. Scaling Auditing
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Auditing as the company grows?
-
-**Key Concepts:** `Auditing`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 68. Ethics in Auditing
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Auditing?
-
-**Key Concepts:** `Auditing`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 69. Future of Valuation
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Valuation heading in the next 5 years?
-
-**Key Concepts:** `Valuation`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 70. Start vs Scale for Expense Mgmt
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Expense Mgmt differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Expense Mgmt`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 71. Teaching Cash Flow
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Cash Flow to a junior team member?
-
-**Key Concepts:** `Cash Flow`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 72. Metrics for GAAP
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in GAAP?
-
-**Key Concepts:** `GAAP`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 73. Teaching Valuation
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Valuation to a junior team member?
-
-**Key Concepts:** `Valuation`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 74. Mistakes in Forecasting
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Forecasting?
-
-**Key Concepts:** `Forecasting`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 75. Ethics in GAAP
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding GAAP?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `GAAP`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 76. Future of Procurement
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Procurement heading in the next 5 years?
-
-**Key Concepts:** `Procurement`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 77. Challenges in Expense Mgmt
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Expense Mgmt?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Expense Mgmt`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 78. Collaboration in Forecasting
-
-**Scenario:** Teamwork.
-
-**Question:** How does Forecasting require cross-functional collaboration?
-
-**Key Concepts:** `Forecasting`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 79. Deep Dive: Procurement
+## 23. Deep Dive: Procurement
 
 **Scenario:** Assessing depth in Procurement.
 
@@ -1280,131 +371,13 @@ sequenceDiagram
 
 ---
 
-## 80. Ethics in Procurement
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Procurement?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Procurement`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 81. Metrics for ERP
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in ERP?
-
-**Key Concepts:** `ERP`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 82. Metrics for Cap Table
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Cap Table?
-
-**Key Concepts:** `Cap Table`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 83. Ethics in FP&A
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding FP&A?
-
-**Key Concepts:** `FP&A`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 84. Future of Cash Flow
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Cash Flow heading in the next 5 years?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Cash Flow`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 85. Future of Financial Modeling
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Financial Modeling heading in the next 5 years?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Financial Modeling`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 86. Tooling: Cash Flow
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Cash Flow to improve efficiency?
-
-**Key Concepts:** `Cash Flow`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 87. Teaching Compliance
+## 24. Teaching FP&A
 
 **Scenario:** Mentorship.
 
-**Question:** How would you teach Compliance to a junior team member?
+**Question:** How would you teach FP&A to a junior team member?
 
-**Key Concepts:** `Compliance`, `Mentorship`
+**Key Concepts:** `FP&A`, `Mentorship`
 
 ### Candidate Response Paths
 *   **Junior**: Send them a link.
@@ -1412,121 +385,11 @@ sequenceDiagram
 
 ---
 
-## 88. Mistakes in Compliance
+## 25. Teaching Forecasting
 
-**Scenario:** Learning.
+**Scenario:** Mentorship.
 
-**Question:** What common mistakes do people make with Compliance?
-
-**Key Concepts:** `Compliance`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 89. Challenges in Payroll
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Payroll?
-
-**Key Concepts:** `Payroll`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 90. Mistakes in Cash Flow
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Cash Flow?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Cash Flow`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 91. Ethics in Tax
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Tax?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Tax`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 92. Start vs Scale for Auditing
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Auditing differ in a startup vs a large corp?
-
-**Key Concepts:** `Auditing`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 93. Deep Dive: Tax
-
-**Scenario:** Assessing depth in Tax.
-
-**Question:** Can you explain Tax in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Tax`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 94. Future of Expense Mgmt
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Expense Mgmt heading in the next 5 years?
-
-**Key Concepts:** `Expense Mgmt`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 95. Metrics for Auditing
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Auditing?
+**Question:** How would you teach Forecasting to a junior team member?
 
 ```mermaid
 sequenceDiagram
@@ -1536,29 +399,62 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Auditing`, `Analytics`
+**Key Concepts:** `Forecasting`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 96. Deep Dive: Auditing
+## 26. Challenges in GAAP
 
-**Scenario:** Assessing depth in Auditing.
+**Scenario:** Problem Solving.
 
-**Question:** Can you explain Auditing in detail and how you have applied it in your past role?
+**Question:** What are the biggest challenges you've faced regarding GAAP?
 
-**Key Concepts:** `Auditing`, `Experience`
+**Key Concepts:** `GAAP`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 97. Ethics in Forecasting
+## 27. FP&A Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for FP&A?
+
+**Key Concepts:** `FP&A`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 28. Future of Procurement
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Procurement heading in the next 5 years?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Procurement`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 29. Ethics in Forecasting
 
 **Scenario:** Ethics.
 
@@ -1572,26 +468,56 @@ sequenceDiagram
 
 ---
 
-## 98. Valuation Best Practices
+## 30. Teaching Payroll
 
-**Scenario:** Standardization.
+**Scenario:** Mentorship.
 
-**Question:** What are the industry best practices for Valuation?
+**Question:** How would you teach Payroll to a junior team member?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
 
-**Key Concepts:** `Valuation`, `Standards`
+**Key Concepts:** `Payroll`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 99. Ethics in Cap Table
+## 31. Teaching Valuation
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Valuation to a junior team member?
+
+**Key Concepts:** `Valuation`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 32. Future of ERP
+
+**Scenario:** Trends.
+
+**Question:** Where do you see ERP heading in the next 5 years?
+
+**Key Concepts:** `ERP`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 33. Ethics in Cap Table
 
 **Scenario:** Ethics.
 
@@ -1605,11 +531,107 @@ sequenceDiagram
 
 ---
 
-## 100. Forecasting Best Practices
+## 34. Teaching GAAP
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach GAAP to a junior team member?
+
+**Key Concepts:** `GAAP`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 35. Metrics for Cap Table
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Cap Table?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Cap Table`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 36. Tooling: Cash Flow
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Cash Flow to improve efficiency?
+
+**Key Concepts:** `Cash Flow`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 37. Scaling Cap Table
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Cap Table as the company grows?
+
+**Key Concepts:** `Cap Table`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 38. Scaling Tax
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Tax as the company grows?
+
+**Key Concepts:** `Tax`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 39. Start vs Scale for Financial Modeling
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Financial Modeling differ in a startup vs a large corp?
+
+**Key Concepts:** `Financial Modeling`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 40. Auditing Best Practices
 
 **Scenario:** Standardization.
 
-**Question:** What are the industry best practices for Forecasting?
+**Question:** What are the industry best practices for Auditing?
 
 ```mermaid
 sequenceDiagram
@@ -1619,10 +641,988 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Forecasting`, `Standards`
+**Key Concepts:** `Auditing`, `Standards`
 
 ### Candidate Response Paths
 *   **Junior**: List a few.
 *   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 41. Challenges in Tax
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Tax?
+
+**Key Concepts:** `Tax`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 42. Deep Dive: Compliance
+
+**Scenario:** Assessing depth in Compliance.
+
+**Question:** Can you explain Compliance in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Compliance`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 43. Challenges in Forecasting
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Forecasting?
+
+**Key Concepts:** `Forecasting`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 44. Deep Dive: Tax
+
+**Scenario:** Assessing depth in Tax.
+
+**Question:** Can you explain Tax in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Tax`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 45. Teaching Tax
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Tax to a junior team member?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Tax`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 46. Collaboration in Valuation
+
+**Scenario:** Teamwork.
+
+**Question:** How does Valuation require cross-functional collaboration?
+
+**Key Concepts:** `Valuation`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 47. Scaling Financial Modeling
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Financial Modeling as the company grows?
+
+**Key Concepts:** `Financial Modeling`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 48. Collaboration in FP&A
+
+**Scenario:** Teamwork.
+
+**Question:** How does FP&A require cross-functional collaboration?
+
+**Key Concepts:** `FP&A`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 49. Scaling Valuation
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Valuation as the company grows?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Valuation`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 50. Challenges in Expense Mgmt
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Expense Mgmt?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Expense Mgmt`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 51. Metrics for Payroll
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Payroll?
+
+**Key Concepts:** `Payroll`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 52. Future of Forecasting
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Forecasting heading in the next 5 years?
+
+**Key Concepts:** `Forecasting`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 53. Mistakes in ERP
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with ERP?
+
+**Key Concepts:** `ERP`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 54. Tooling: FP&A
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize FP&A to improve efficiency?
+
+**Key Concepts:** `FP&A`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 55. Scaling Forecasting
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Forecasting as the company grows?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Forecasting`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 56. Challenges in ERP
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding ERP?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `ERP`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 57. Cap Table Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Cap Table?
+
+**Key Concepts:** `Cap Table`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 58. Challenges in Procurement
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Procurement?
+
+**Key Concepts:** `Procurement`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 59. Challenges in Valuation
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Valuation?
+
+**Key Concepts:** `Valuation`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 60. Mistakes in Compliance
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Compliance?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Compliance`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 61. Collaboration in Financial Modeling
+
+**Scenario:** Teamwork.
+
+**Question:** How does Financial Modeling require cross-functional collaboration?
+
+**Key Concepts:** `Financial Modeling`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 62. Mistakes in Valuation
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Valuation?
+
+**Key Concepts:** `Valuation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 63. Mistakes in FP&A
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with FP&A?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `FP&A`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 64. Start vs Scale for Cash Flow
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Cash Flow differ in a startup vs a large corp?
+
+**Key Concepts:** `Cash Flow`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 65. Ethics in Excel
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Excel?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Excel`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 66. Cash Flow Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Cash Flow?
+
+**Key Concepts:** `Cash Flow`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 67. Start vs Scale for Tax
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Tax differ in a startup vs a large corp?
+
+**Key Concepts:** `Tax`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 68. Tooling: Financial Modeling
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Financial Modeling to improve efficiency?
+
+**Key Concepts:** `Financial Modeling`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 69. Deep Dive: FP&A
+
+**Scenario:** Assessing depth in FP&A.
+
+**Question:** Can you explain FP&A in detail and how you have applied it in your past role?
+
+**Key Concepts:** `FP&A`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 70. Challenges in Payroll
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Payroll?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Payroll`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 71. ERP Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for ERP?
+
+**Key Concepts:** `ERP`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 72. Scaling Procurement
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Procurement as the company grows?
+
+**Key Concepts:** `Procurement`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 73. Ethics in GAAP
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding GAAP?
+
+**Key Concepts:** `GAAP`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 74. Tooling: Excel
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Excel to improve efficiency?
+
+**Key Concepts:** `Excel`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 75. Mistakes in Cap Table
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Cap Table?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Cap Table`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 76. Payroll Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Payroll?
+
+**Key Concepts:** `Payroll`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 77. Tax Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Tax?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Tax`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 78. Future of Financial Modeling
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Financial Modeling heading in the next 5 years?
+
+**Key Concepts:** `Financial Modeling`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 79. Ethics in Financial Modeling
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Financial Modeling?
+
+**Key Concepts:** `Financial Modeling`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 80. Collaboration in GAAP
+
+**Scenario:** Teamwork.
+
+**Question:** How does GAAP require cross-functional collaboration?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `GAAP`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 81. Tooling: ERP
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize ERP to improve efficiency?
+
+**Key Concepts:** `ERP`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 82. Teaching Financial Modeling
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Financial Modeling to a junior team member?
+
+**Key Concepts:** `Financial Modeling`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 83. Start vs Scale for Auditing
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Auditing differ in a startup vs a large corp?
+
+**Key Concepts:** `Auditing`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 84. Future of Excel
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Excel heading in the next 5 years?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Excel`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 85. Tooling: Auditing
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Auditing to improve efficiency?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Auditing`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 86. Future of GAAP
+
+**Scenario:** Trends.
+
+**Question:** Where do you see GAAP heading in the next 5 years?
+
+**Key Concepts:** `GAAP`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 87. Ethics in FP&A
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding FP&A?
+
+**Key Concepts:** `FP&A`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 88. Mistakes in Auditing
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Auditing?
+
+**Key Concepts:** `Auditing`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 89. Mistakes in Excel
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Excel?
+
+**Key Concepts:** `Excel`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 90. Tooling: Cap Table
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Cap Table to improve efficiency?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Cap Table`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 91. Start vs Scale for Excel
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Excel differ in a startup vs a large corp?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Excel`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 92. Start vs Scale for Procurement
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Procurement differ in a startup vs a large corp?
+
+**Key Concepts:** `Procurement`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 93. Metrics for Forecasting
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Forecasting?
+
+**Key Concepts:** `Forecasting`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 94. Collaboration in Procurement
+
+**Scenario:** Teamwork.
+
+**Question:** How does Procurement require cross-functional collaboration?
+
+**Key Concepts:** `Procurement`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 95. Deep Dive: Cash Flow
+
+**Scenario:** Assessing depth in Cash Flow.
+
+**Question:** Can you explain Cash Flow in detail and how you have applied it in your past role?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Cash Flow`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 96. Expense Mgmt Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Expense Mgmt?
+
+**Key Concepts:** `Expense Mgmt`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 97. Future of Tax
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Tax heading in the next 5 years?
+
+**Key Concepts:** `Tax`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 98. Metrics for Financial Modeling
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Financial Modeling?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Financial Modeling`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 99. Compliance Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Compliance?
+
+**Key Concepts:** `Compliance`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 100. Future of Expense Mgmt
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Expense Mgmt heading in the next 5 years?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Expense Mgmt`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---

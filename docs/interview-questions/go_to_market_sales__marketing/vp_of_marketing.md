@@ -67,11 +67,10 @@ This document contains 100 interview questions tailored for the vp_of_marketing 
 **Question:** How does your social media strategy differ for B2B vs B2C?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `Social`, `Strategy`
@@ -324,18 +323,60 @@ graph LR
 
 ---
 
-## 21. Mistakes in Copywriting
+## 21. Teaching PR
 
-**Scenario:** Learning.
+**Scenario:** Mentorship.
 
-**Question:** What common mistakes do people make with Copywriting?
+**Question:** How would you teach PR to a junior team member?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Copywriting`, `Experience`
+**Key Concepts:** `PR`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 22. Scaling Social Media
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Social Media as the company grows?
+
+**Key Concepts:** `Social Media`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 23. Deep Dive: Community Mgmt
+
+**Scenario:** Assessing depth in Community Mgmt.
+
+**Question:** Can you explain Community Mgmt in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Community Mgmt`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 24. Mistakes in Community Mgmt
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Community Mgmt?
+
+**Key Concepts:** `Community Mgmt`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Doing it wrong.
@@ -343,11 +384,19 @@ graph LR
 
 ---
 
-## 22. Metrics for Social Media
+## 25. Metrics for Social Media
 
 **Scenario:** Measurement.
 
 **Question:** How do you measure success in Social Media?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
 
 **Key Concepts:** `Social Media`, `Analytics`
 
@@ -357,39 +406,72 @@ graph LR
 
 ---
 
-## 23. Future of Community Mgmt
+## 26. Deep Dive: Podcasting
 
-**Scenario:** Trends.
+**Scenario:** Assessing depth in Podcasting.
 
-**Question:** Where do you see Community Mgmt heading in the next 5 years?
+**Question:** Can you explain Podcasting in detail and how you have applied it in your past role?
 
-**Key Concepts:** `Community Mgmt`, `Vision`
+**Key Concepts:** `Podcasting`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
 
 ---
 
-## 24. Challenges in PPC
+## 27. Brand Best Practices
 
-**Scenario:** Problem Solving.
+**Scenario:** Standardization.
 
-**Question:** What are the biggest challenges you've faced regarding PPC?
+**Question:** What are the industry best practices for Brand?
 
-**Key Concepts:** `PPC`, `Problem Solving`
+**Key Concepts:** `Brand`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 25. Ethics in Video Mktg
+## 28. Mistakes in Email Marketing
 
-**Scenario:** Ethics.
+**Scenario:** Learning.
 
-**Question:** What are the ethical considerations regarding Video Mktg?
+**Question:** What common mistakes do people make with Email Marketing?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Email Marketing`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 29. Scaling Copywriting
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Copywriting as the company grows?
+
+**Key Concepts:** `Copywriting`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 30. Webinars Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Webinars?
 
 ```mermaid
 sequenceDiagram
@@ -399,35 +481,21 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Video Mktg`, `Ethics`
+**Key Concepts:** `Webinars`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 26. Metrics for Webinars
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Webinars?
-
-**Key Concepts:** `Webinars`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 27. Teaching Video Mktg
+## 31. Teaching Analytics
 
 **Scenario:** Mentorship.
 
-**Question:** How would you teach Video Mktg to a junior team member?
+**Question:** How would you teach Analytics to a junior team member?
 
-**Key Concepts:** `Video Mktg`, `Mentorship`
+**Key Concepts:** `Analytics`, `Mentorship`
 
 ### Candidate Response Paths
 *   **Junior**: Send them a link.
@@ -435,32 +503,41 @@ sequenceDiagram
 
 ---
 
-## 28. Metrics for Podcasting
+## 32. Tooling: Video Mktg
 
-**Scenario:** Measurement.
+**Scenario:** Proficiency.
 
-**Question:** How do you measure success in Podcasting?
+**Question:** How do you utilize Video Mktg to improve efficiency?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Podcasting`, `Analytics`
+**Key Concepts:** `Video Mktg`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
 
 ---
 
-## 29. Collaboration in Social Media
+## 33. Scaling Analytics
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Analytics as the company grows?
+
+**Key Concepts:** `Analytics`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 34. Collaboration in Brand
 
 **Scenario:** Teamwork.
 
-**Question:** How does Social Media require cross-functional collaboration?
+**Question:** How does Brand require cross-functional collaboration?
 
-**Key Concepts:** `Social Media`, `Collaboration`
+**Key Concepts:** `Brand`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -468,11 +545,11 @@ sequenceDiagram
 
 ---
 
-## 30. Future of Video Mktg
+## 35. Tooling: Social Media
 
-**Scenario:** Trends.
+**Scenario:** Proficiency.
 
-**Question:** Where do you see Video Mktg heading in the next 5 years?
+**Question:** How do you utilize Social Media to improve efficiency?
 
 ```mermaid
 sequenceDiagram
@@ -482,7 +559,136 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Video Mktg`, `Vision`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Social Media`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 36. Content Marketing Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Content Marketing?
+
+**Key Concepts:** `Content Marketing`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 37. Challenges in Brand
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Brand?
+
+**Key Concepts:** `Brand`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 38. Mistakes in Video Mktg
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Video Mktg?
+
+**Key Concepts:** `Video Mktg`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 39. Metrics for PPC
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in PPC?
+
+**Key Concepts:** `PPC`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 40. Challenges in PR
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding PR?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `PR`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 41. Mistakes in PR
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with PR?
+
+**Key Concepts:** `PR`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 42. Mistakes in Content Marketing
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Content Marketing?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Content Marketing`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 43. Future of PR
+
+**Scenario:** Trends.
+
+**Question:** Where do you see PR heading in the next 5 years?
+
+**Key Concepts:** `PR`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -490,7 +696,7 @@ sequenceDiagram
 
 ---
 
-## 31. Deep Dive: PR
+## 44. Deep Dive: PR
 
 **Scenario:** Assessing depth in PR.
 
@@ -504,27 +710,34 @@ sequenceDiagram
 
 ---
 
-## 32. Future of Content Marketing
+## 45. Ethics in Video Mktg
 
-**Scenario:** Trends.
+**Scenario:** Ethics.
 
-**Question:** Where do you see Content Marketing heading in the next 5 years?
+**Question:** What are the ethical considerations regarding Video Mktg?
 
-**Key Concepts:** `Content Marketing`, `Vision`
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Video Mktg`, `Ethics`
 
 ### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---
 
-## 33. Start vs Scale for Influencer Mktg
+## 46. Start vs Scale for PR
 
 **Scenario:** Context.
 
-**Question:** How does your approach to Influencer Mktg differ in a startup vs a large corp?
+**Question:** How does your approach to PR differ in a startup vs a large corp?
 
-**Key Concepts:** `Influencer Mktg`, `Context`
+**Key Concepts:** `PR`, `Context`
 
 ### Candidate Response Paths
 *   **Junior**: It's the same.
@@ -532,25 +745,135 @@ sequenceDiagram
 
 ---
 
-## 34. Tooling: Copywriting
+## 47. Challenges in Content Marketing
 
-**Scenario:** Proficiency.
+**Scenario:** Problem Solving.
 
-**Question:** How do you utilize Copywriting to improve efficiency?
+**Question:** What are the biggest challenges you've faced regarding Content Marketing?
 
-**Key Concepts:** `Copywriting`, `Productivity`
+**Key Concepts:** `Content Marketing`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 35. Future of PPC
+## 48. Challenges in Influencer Mktg
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Influencer Mktg?
+
+**Key Concepts:** `Influencer Mktg`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 49. Ethics in PR
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding PR?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `PR`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 50. Mistakes in Events
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Events?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Events`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 51. Future of SEO
 
 **Scenario:** Trends.
 
-**Question:** Where do you see PPC heading in the next 5 years?
+**Question:** Where do you see SEO heading in the next 5 years?
+
+**Key Concepts:** `SEO`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 52. Deep Dive: Webinars
+
+**Scenario:** Assessing depth in Webinars.
+
+**Question:** Can you explain Webinars in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Webinars`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 53. Collaboration in Analytics
+
+**Scenario:** Teamwork.
+
+**Question:** How does Analytics require cross-functional collaboration?
+
+**Key Concepts:** `Analytics`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 54. PR Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for PR?
+
+**Key Concepts:** `PR`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 55. Metrics for Events
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Events?
 
 ```mermaid
 sequenceDiagram
@@ -559,6 +882,131 @@ sequenceDiagram
     A->>B: Action
     B-->>A: Result
 ```
+
+**Key Concepts:** `Events`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 56. Collaboration in Video Mktg
+
+**Scenario:** Teamwork.
+
+**Question:** How does Video Mktg require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Video Mktg`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 57. Metrics for Webinars
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Webinars?
+
+**Key Concepts:** `Webinars`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 58. Collaboration in Podcasting
+
+**Scenario:** Teamwork.
+
+**Question:** How does Podcasting require cross-functional collaboration?
+
+**Key Concepts:** `Podcasting`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 59. Challenges in Webinars
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Webinars?
+
+**Key Concepts:** `Webinars`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 60. Teaching Influencer Mktg
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Influencer Mktg to a junior team member?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Influencer Mktg`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 61. Ethics in SEO
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding SEO?
+
+**Key Concepts:** `SEO`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 62. Start vs Scale for Email Marketing
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Email Marketing differ in a startup vs a large corp?
+
+**Key Concepts:** `Email Marketing`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 63. Future of PPC
+
+**Scenario:** Trends.
+
+**Question:** Where do you see PPC heading in the next 5 years?
 
 | Metric | Target | Status |
 |---|---|---|
@@ -573,380 +1021,13 @@ sequenceDiagram
 
 ---
 
-## 36. Scaling Content Marketing
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Content Marketing as the company grows?
-
-**Key Concepts:** `Content Marketing`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 37. Social Media Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Social Media?
-
-**Key Concepts:** `Social Media`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 38. Start vs Scale for Brand
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Brand differ in a startup vs a large corp?
-
-**Key Concepts:** `Brand`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 39. Metrics for Video Mktg
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Video Mktg?
-
-**Key Concepts:** `Video Mktg`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 40. Tooling: Podcasting
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Podcasting to improve efficiency?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Podcasting`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 41. Deep Dive: Influencer Mktg
-
-**Scenario:** Assessing depth in Influencer Mktg.
-
-**Question:** Can you explain Influencer Mktg in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Influencer Mktg`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 42. Metrics for SEO
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in SEO?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `SEO`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 43. Start vs Scale for Video Mktg
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Video Mktg differ in a startup vs a large corp?
-
-**Key Concepts:** `Video Mktg`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 44. Metrics for Copywriting
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Copywriting?
-
-**Key Concepts:** `Copywriting`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 45. Teaching Events
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Events to a junior team member?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Events`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 46. Ethics in Content Marketing
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Content Marketing?
-
-**Key Concepts:** `Content Marketing`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 47. SEO Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for SEO?
-
-**Key Concepts:** `SEO`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 48. Mistakes in PR
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with PR?
-
-**Key Concepts:** `PR`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 49. Copywriting Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Copywriting?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Copywriting`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 50. Teaching PPC
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach PPC to a junior team member?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `PPC`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 51. Events Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Events?
-
-**Key Concepts:** `Events`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 52. Challenges in PR
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding PR?
-
-**Key Concepts:** `PR`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 53. Start vs Scale for PR
-
-**Scenario:** Context.
-
-**Question:** How does your approach to PR differ in a startup vs a large corp?
-
-**Key Concepts:** `PR`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 54. Teaching Influencer Mktg
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Influencer Mktg to a junior team member?
-
-**Key Concepts:** `Influencer Mktg`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 55. Teaching Webinars
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Webinars to a junior team member?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Webinars`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 56. Metrics for Influencer Mktg
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Influencer Mktg?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Influencer Mktg`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 57. Teaching Community Mgmt
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Community Mgmt to a junior team member?
-
-**Key Concepts:** `Community Mgmt`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 58. Mistakes in SEO
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with SEO?
-
-**Key Concepts:** `SEO`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 59. Future of PR
+## 64. Future of Social Media
 
 **Scenario:** Trends.
 
-**Question:** Where do you see PR heading in the next 5 years?
+**Question:** Where do you see Social Media heading in the next 5 years?
 
-**Key Concepts:** `PR`, `Vision`
+**Key Concepts:** `Social Media`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -954,11 +1035,11 @@ sequenceDiagram
 
 ---
 
-## 60. Tooling: PR
+## 65. Tooling: Content Marketing
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize PR to improve efficiency?
+**Question:** How do you utilize Content Marketing to improve efficiency?
 
 ```mermaid
 sequenceDiagram
@@ -968,7 +1049,7 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `PR`, `Productivity`
+**Key Concepts:** `Content Marketing`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -976,213 +1057,7 @@ sequenceDiagram
 
 ---
 
-## 61. Mistakes in PPC
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with PPC?
-
-**Key Concepts:** `PPC`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 62. Challenges in Video Mktg
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Video Mktg?
-
-**Key Concepts:** `Video Mktg`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 63. Mistakes in Webinars
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Webinars?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Webinars`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 64. Ethics in Events
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Events?
-
-**Key Concepts:** `Events`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 65. Scaling Analytics
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Analytics as the company grows?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Analytics`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 66. Teaching Copywriting
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Copywriting to a junior team member?
-
-**Key Concepts:** `Copywriting`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 67. Teaching Social Media
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Social Media to a junior team member?
-
-**Key Concepts:** `Social Media`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 68. Mistakes in Events
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Events?
-
-**Key Concepts:** `Events`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 69. Collaboration in PPC
-
-**Scenario:** Teamwork.
-
-**Question:** How does PPC require cross-functional collaboration?
-
-**Key Concepts:** `PPC`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 70. Tooling: Influencer Mktg
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Influencer Mktg to improve efficiency?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Influencer Mktg`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 71. Scaling Social Media
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Social Media as the company grows?
-
-**Key Concepts:** `Social Media`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 72. Scaling Influencer Mktg
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Influencer Mktg as the company grows?
-
-**Key Concepts:** `Influencer Mktg`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 73. Influencer Mktg Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Influencer Mktg?
-
-**Key Concepts:** `Influencer Mktg`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 74. Teaching Email Marketing
+## 66. Teaching Email Marketing
 
 **Scenario:** Mentorship.
 
@@ -1196,186 +1071,13 @@ graph LR
 
 ---
 
-## 75. Collaboration in Analytics
-
-**Scenario:** Teamwork.
-
-**Question:** How does Analytics require cross-functional collaboration?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Analytics`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 76. Tooling: Email Marketing
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Email Marketing to improve efficiency?
-
-**Key Concepts:** `Email Marketing`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 77. Collaboration in Brand
-
-**Scenario:** Teamwork.
-
-**Question:** How does Brand require cross-functional collaboration?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Brand`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 78. Email Marketing Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Email Marketing?
-
-**Key Concepts:** `Email Marketing`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 79. Start vs Scale for Email Marketing
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Email Marketing differ in a startup vs a large corp?
-
-**Key Concepts:** `Email Marketing`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 80. Metrics for Analytics
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Analytics?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Analytics`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 81. Podcasting Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Podcasting?
-
-**Key Concepts:** `Podcasting`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 82. Mistakes in Email Marketing
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Email Marketing?
-
-**Key Concepts:** `Email Marketing`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 83. Tooling: Community Mgmt
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Community Mgmt to improve efficiency?
-
-**Key Concepts:** `Community Mgmt`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 84. Future of Email Marketing
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Email Marketing heading in the next 5 years?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Email Marketing`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 85. Ethics in PPC
+## 67. Ethics in Social Media
 
 **Scenario:** Ethics.
 
-**Question:** What are the ethical considerations regarding PPC?
+**Question:** What are the ethical considerations regarding Social Media?
 
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `PPC`, `Ethics`
+**Key Concepts:** `Social Media`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -1383,67 +1085,39 @@ sequenceDiagram
 
 ---
 
-## 86. Mistakes in Social Media
+## 68. Influencer Mktg Best Practices
 
-**Scenario:** Learning.
+**Scenario:** Standardization.
 
-**Question:** What common mistakes do people make with Social Media?
+**Question:** What are the industry best practices for Influencer Mktg?
 
-**Key Concepts:** `Social Media`, `Experience`
+**Key Concepts:** `Influencer Mktg`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 87. Deep Dive: Email Marketing
-
-**Scenario:** Assessing depth in Email Marketing.
-
-**Question:** Can you explain Email Marketing in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Email Marketing`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 88. Metrics for PPC
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in PPC?
-
-**Key Concepts:** `PPC`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 89. Scaling SEO
-
-**Scenario:** Growth.
-
-**Question:** How do you scale SEO as the company grows?
-
-**Key Concepts:** `SEO`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 90. Teaching Content Marketing
+## 69. Teaching Events
 
 **Scenario:** Mentorship.
 
-**Question:** How would you teach Content Marketing to a junior team member?
+**Question:** How would you teach Events to a junior team member?
+
+**Key Concepts:** `Events`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 70. Scaling Influencer Mktg
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Influencer Mktg as the company grows?
 
 ```mermaid
 sequenceDiagram
@@ -1453,26 +1127,12 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Content Marketing`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 91. Scaling PR
-
-**Scenario:** Growth.
-
-**Question:** How do you scale PR as the company grows?
-
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `PR`, `Scale`
+**Key Concepts:** `Influencer Mktg`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -1480,70 +1140,21 @@ sequenceDiagram
 
 ---
 
-## 92. Future of Copywriting
+## 71. Scaling Video Mktg
 
-**Scenario:** Trends.
+**Scenario:** Growth.
 
-**Question:** Where do you see Copywriting heading in the next 5 years?
+**Question:** How do you scale Video Mktg as the company grows?
 
-**Key Concepts:** `Copywriting`, `Vision`
+**Key Concepts:** `Video Mktg`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 93. Deep Dive: SEO
-
-**Scenario:** Assessing depth in SEO.
-
-**Question:** Can you explain SEO in detail and how you have applied it in your past role?
-
-**Key Concepts:** `SEO`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 94. Future of Events
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Events heading in the next 5 years?
-
-**Key Concepts:** `Events`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 95. Challenges in Events
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Events?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Events`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 96. Challenges in SEO
+## 72. Challenges in SEO
 
 **Scenario:** Problem Solving.
 
@@ -1557,32 +1168,27 @@ graph LR
 
 ---
 
-## 97. Metrics for Content Marketing
+## 73. Start vs Scale for Podcasting
 
-**Scenario:** Measurement.
+**Scenario:** Context.
 
-**Question:** How do you measure success in Content Marketing?
+**Question:** How does your approach to Podcasting differ in a startup vs a large corp?
 
-**Key Concepts:** `Content Marketing`, `Analytics`
+**Key Concepts:** `Podcasting`, `Context`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
 
 ---
 
-## 98. Deep Dive: Webinars
+## 74. Deep Dive: Social Media
 
-**Scenario:** Assessing depth in Webinars.
+**Scenario:** Assessing depth in Social Media.
 
-**Question:** Can you explain Webinars in detail and how you have applied it in your past role?
+**Question:** Can you explain Social Media in detail and how you have applied it in your past role?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Webinars`, `Experience`
+**Key Concepts:** `Social Media`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Basic definition.
@@ -1590,7 +1196,209 @@ graph LR
 
 ---
 
-## 99. Collaboration in Copywriting
+## 75. Collaboration in Community Mgmt
+
+**Scenario:** Teamwork.
+
+**Question:** How does Community Mgmt require cross-functional collaboration?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Community Mgmt`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 76. Teaching Podcasting
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Podcasting to a junior team member?
+
+**Key Concepts:** `Podcasting`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 77. Ethics in Analytics
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Analytics?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Analytics`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 78. Future of Analytics
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Analytics heading in the next 5 years?
+
+**Key Concepts:** `Analytics`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 79. Ethics in Content Marketing
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Content Marketing?
+
+**Key Concepts:** `Content Marketing`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 80. Email Marketing Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Email Marketing?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Email Marketing`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 81. Start vs Scale for Influencer Mktg
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Influencer Mktg differ in a startup vs a large corp?
+
+**Key Concepts:** `Influencer Mktg`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 82. Challenges in Social Media
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Social Media?
+
+**Key Concepts:** `Social Media`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 83. Ethics in Community Mgmt
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Community Mgmt?
+
+**Key Concepts:** `Community Mgmt`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 84. Teaching Community Mgmt
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Community Mgmt to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Community Mgmt`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 85. Mistakes in Analytics
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Analytics?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Analytics`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 86. Scaling Community Mgmt
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Community Mgmt as the company grows?
+
+**Key Concepts:** `Community Mgmt`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 87. Collaboration in Copywriting
 
 **Scenario:** Teamwork.
 
@@ -1604,11 +1412,122 @@ graph LR
 
 ---
 
-## 100. Challenges in Copywriting
+## 88. Community Mgmt Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Community Mgmt?
+
+**Key Concepts:** `Community Mgmt`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 89. Ethics in Events
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Events?
+
+**Key Concepts:** `Events`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 90. Challenges in Community Mgmt
 
 **Scenario:** Problem Solving.
 
-**Question:** What are the biggest challenges you've faced regarding Copywriting?
+**Question:** What are the biggest challenges you've faced regarding Community Mgmt?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Community Mgmt`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 91. Start vs Scale for Community Mgmt
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Community Mgmt differ in a startup vs a large corp?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Community Mgmt`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 92. Teaching Social Media
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Social Media to a junior team member?
+
+**Key Concepts:** `Social Media`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 93. Challenges in Podcasting
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Podcasting?
+
+**Key Concepts:** `Podcasting`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 94. Scaling PR
+
+**Scenario:** Growth.
+
+**Question:** How do you scale PR as the company grows?
+
+**Key Concepts:** `PR`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 95. Social Media Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Social Media?
 
 ```mermaid
 graph LR
@@ -1617,10 +1536,93 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Copywriting`, `Problem Solving`
+**Key Concepts:** `Social Media`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 96. Deep Dive: PPC
+
+**Scenario:** Assessing depth in PPC.
+
+**Question:** Can you explain PPC in detail and how you have applied it in your past role?
+
+**Key Concepts:** `PPC`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 97. Deep Dive: Email Marketing
+
+**Scenario:** Assessing depth in Email Marketing.
+
+**Question:** Can you explain Email Marketing in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Email Marketing`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 98. Future of Events
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Events heading in the next 5 years?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Events`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 99. Metrics for SEO
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in SEO?
+
+**Key Concepts:** `SEO`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 100. Scaling PPC
+
+**Scenario:** Growth.
+
+**Question:** How do you scale PPC as the company grows?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `PPC`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---

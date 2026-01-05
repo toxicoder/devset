@@ -150,10 +150,11 @@ sequenceDiagram
 **Question:** How do you manage a fully distributed engineering team effectively?
 
 ```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
 **Key Concepts:** `Remote`, `Management`
@@ -324,103 +325,40 @@ graph LR
 
 ---
 
-## 21. Deep Dive: OKRs
+## 21. Mistakes in Remote Work
 
-**Scenario:** Assessing depth in OKRs.
+**Scenario:** Learning.
 
-**Question:** Can you explain OKRs in detail and how you have applied it in your past role?
+**Question:** What common mistakes do people make with Remote Work?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `OKRs`, `Experience`
+**Key Concepts:** `Remote Work`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 22. Scrum Best Practices
+## 22. Collaboration in Velocity
 
-**Scenario:** Standardization.
+**Scenario:** Teamwork.
 
-**Question:** What are the industry best practices for Scrum?
+**Question:** How does Velocity require cross-functional collaboration?
 
-**Key Concepts:** `Scrum`, `Standards`
+**Key Concepts:** `Velocity`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 23. Challenges in Mentorship
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Mentorship?
-
-**Key Concepts:** `Mentorship`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 24. Deep Dive: Hiring
-
-**Scenario:** Assessing depth in Hiring.
-
-**Question:** Can you explain Hiring in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Hiring`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 25. Metrics for Scrum
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Scrum?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Scrum`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 26. Metrics for Career Ladders
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Career Ladders?
-
-**Key Concepts:** `Career Ladders`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 27. Hiring Best Practices
+## 23. Hiring Best Practices
 
 **Scenario:** Standardization.
 
@@ -434,122 +372,25 @@ graph LR
 
 ---
 
-## 28. Mistakes in OKRs
+## 24. Metrics for Scrum
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Scrum?
+
+**Key Concepts:** `Scrum`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 25. Mistakes in Vendor Mgmt
 
 **Scenario:** Learning.
 
-**Question:** What common mistakes do people make with OKRs?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `OKRs`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 29. Scaling Agile
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Agile as the company grows?
-
-**Key Concepts:** `Agile`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 30. Deep Dive: Budgeting
-
-**Scenario:** Assessing depth in Budgeting.
-
-**Question:** Can you explain Budgeting in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Budgeting`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 31. Agile Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Agile?
-
-**Key Concepts:** `Agile`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 32. Challenges in Hiring
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Hiring?
-
-**Key Concepts:** `Hiring`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 33. Mistakes in Incident Mgmt
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Incident Mgmt?
-
-**Key Concepts:** `Incident Mgmt`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 34. Deep Dive: Onboarding
-
-**Scenario:** Assessing depth in Onboarding.
-
-**Question:** Can you explain Onboarding in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Onboarding`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 35. Deep Dive: Career Ladders
-
-**Scenario:** Assessing depth in Career Ladders.
-
-**Question:** Can you explain Career Ladders in detail and how you have applied it in your past role?
+**Question:** What common mistakes do people make with Vendor Mgmt?
 
 ```mermaid
 graph LR
@@ -558,12 +399,21 @@ graph LR
     B --No--> D[End]
 ```
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
+**Key Concepts:** `Vendor Mgmt`, `Experience`
 
-**Key Concepts:** `Career Ladders`, `Experience`
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 26. Deep Dive: Velocity
+
+**Scenario:** Assessing depth in Velocity.
+
+**Question:** Can you explain Velocity in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Velocity`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Basic definition.
@@ -571,7 +421,75 @@ graph LR
 
 ---
 
-## 36. Collaboration in Budgeting
+## 27. Ethics in Velocity
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Velocity?
+
+**Key Concepts:** `Velocity`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 28. Challenges in Budgeting
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Budgeting?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Budgeting`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 29. Tooling: Scrum
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Scrum to improve efficiency?
+
+**Key Concepts:** `Scrum`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 30. Mentorship Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Mentorship?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Mentorship`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 31. Collaboration in Budgeting
 
 **Scenario:** Teamwork.
 
@@ -585,13 +503,27 @@ graph LR
 
 ---
 
-## 37. Future of Scrum
+## 32. Budgeting Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Budgeting?
+
+**Key Concepts:** `Budgeting`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 33. Future of Hiring
 
 **Scenario:** Trends.
 
-**Question:** Where do you see Scrum heading in the next 5 years?
+**Question:** Where do you see Hiring heading in the next 5 years?
 
-**Key Concepts:** `Scrum`, `Vision`
+**Key Concepts:** `Hiring`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -599,122 +531,25 @@ graph LR
 
 ---
 
-## 38. Scaling Tech Debt
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Tech Debt as the company grows?
-
-**Key Concepts:** `Tech Debt`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 39. Metrics for OKRs
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in OKRs?
-
-**Key Concepts:** `OKRs`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 40. Collaboration in Career Ladders
-
-**Scenario:** Teamwork.
-
-**Question:** How does Career Ladders require cross-functional collaboration?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Career Ladders`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 41. Scaling Incident Mgmt
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Incident Mgmt as the company grows?
-
-**Key Concepts:** `Incident Mgmt`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 42. Teaching Onboarding
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Onboarding to a junior team member?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Onboarding`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 43. Teaching Kanban
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Kanban to a junior team member?
-
-**Key Concepts:** `Kanban`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 44. Tooling: Mentorship
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Mentorship to improve efficiency?
-
-**Key Concepts:** `Mentorship`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 45. Ethics in Onboarding
+## 34. Ethics in Mentorship
 
 **Scenario:** Ethics.
 
-**Question:** What are the ethical considerations regarding Onboarding?
+**Question:** What are the ethical considerations regarding Mentorship?
+
+**Key Concepts:** `Mentorship`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 35. Mistakes in Onboarding
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Onboarding?
 
 ```mermaid
 graph LR
@@ -723,209 +558,20 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Onboarding`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 46. Ethics in OKRs
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding OKRs?
-
-**Key Concepts:** `OKRs`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 47. Kanban Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Kanban?
-
-**Key Concepts:** `Kanban`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 48. Scaling OKRs
-
-**Scenario:** Growth.
-
-**Question:** How do you scale OKRs as the company grows?
-
-**Key Concepts:** `OKRs`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 49. Collaboration in Remote Work
-
-**Scenario:** Teamwork.
-
-**Question:** How does Remote Work require cross-functional collaboration?
-
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Remote Work`, `Collaboration`
+**Key Concepts:** `Onboarding`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 50. Challenges in Velocity
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Velocity?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Velocity`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 51. Future of Remote Work
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Remote Work heading in the next 5 years?
-
-**Key Concepts:** `Remote Work`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 52. Challenges in Remote Work
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Remote Work?
-
-**Key Concepts:** `Remote Work`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 53. Start vs Scale for Velocity
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Velocity differ in a startup vs a large corp?
-
-**Key Concepts:** `Velocity`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 54. Collaboration in Incident Mgmt
-
-**Scenario:** Teamwork.
-
-**Question:** How does Incident Mgmt require cross-functional collaboration?
-
-**Key Concepts:** `Incident Mgmt`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 55. Teaching Incident Mgmt
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Incident Mgmt to a junior team member?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Incident Mgmt`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 56. Scaling Remote Work
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Remote Work as the company grows?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Remote Work`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 57. Career Ladders Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Career Ladders?
-
-**Key Concepts:** `Career Ladders`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 58. Challenges in Onboarding
+## 36. Challenges in Onboarding
 
 **Scenario:** Problem Solving.
 
@@ -939,154 +585,21 @@ sequenceDiagram
 
 ---
 
-## 59. Mistakes in Mentorship
+## 37. Teaching Mentorship
 
-**Scenario:** Learning.
+**Scenario:** Mentorship.
 
-**Question:** What common mistakes do people make with Mentorship?
+**Question:** How would you teach Mentorship to a junior team member?
 
-**Key Concepts:** `Mentorship`, `Experience`
+**Key Concepts:** `Mentorship`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 60. Scaling Vendor Mgmt
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Vendor Mgmt as the company grows?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Vendor Mgmt`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 61. Scaling Career Ladders
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Career Ladders as the company grows?
-
-**Key Concepts:** `Career Ladders`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 62. Ethics in Vendor Mgmt
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Vendor Mgmt?
-
-**Key Concepts:** `Vendor Mgmt`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 63. Scaling Onboarding
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Onboarding as the company grows?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Onboarding`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 64. Start vs Scale for Kanban
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Kanban differ in a startup vs a large corp?
-
-**Key Concepts:** `Kanban`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 65. Challenges in Career Ladders
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Career Ladders?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Career Ladders`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 66. Tooling: Tech Debt
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Tech Debt to improve efficiency?
-
-**Key Concepts:** `Tech Debt`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 67. Ethics in Kanban
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Kanban?
-
-**Key Concepts:** `Kanban`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 68. Ethics in Career Ladders
+## 38. Ethics in Career Ladders
 
 **Scenario:** Ethics.
 
@@ -1100,7 +613,7 @@ sequenceDiagram
 
 ---
 
-## 69. Teaching Career Ladders
+## 39. Teaching Career Ladders
 
 **Scenario:** Mentorship.
 
@@ -1114,26 +627,67 @@ sequenceDiagram
 
 ---
 
-## 70. Ethics in Performance Reviews
+## 40. Start vs Scale for Incident Mgmt
 
-**Scenario:** Ethics.
+**Scenario:** Context.
 
-**Question:** What are the ethical considerations regarding Performance Reviews?
+**Question:** How does your approach to Incident Mgmt differ in a startup vs a large corp?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
+
+**Key Concepts:** `Incident Mgmt`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 41. Start vs Scale for Agile
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Agile differ in a startup vs a large corp?
+
+**Key Concepts:** `Agile`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 42. Teaching Velocity
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Velocity to a junior team member?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Performance Reviews`, `Ethics`
+**Key Concepts:** `Velocity`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 43. Ethics in OKRs
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding OKRs?
+
+**Key Concepts:** `OKRs`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -1141,21 +695,7 @@ sequenceDiagram
 
 ---
 
-## 71. Mentorship Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Mentorship?
-
-**Key Concepts:** `Mentorship`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 72. Start vs Scale for Performance Reviews
+## 44. Start vs Scale for Performance Reviews
 
 **Scenario:** Context.
 
@@ -1169,39 +709,11 @@ sequenceDiagram
 
 ---
 
-## 73. Mistakes in Velocity
+## 45. Ethics in Incident Mgmt
 
-**Scenario:** Learning.
+**Scenario:** Ethics.
 
-**Question:** What common mistakes do people make with Velocity?
-
-**Key Concepts:** `Velocity`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 74. Future of Budgeting
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Budgeting heading in the next 5 years?
-
-**Key Concepts:** `Budgeting`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 75. Mistakes in Onboarding
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Onboarding?
+**Question:** What are the ethical considerations regarding Incident Mgmt?
 
 ```mermaid
 sequenceDiagram
@@ -1211,117 +723,7 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Onboarding`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 76. Scaling Budgeting
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Budgeting as the company grows?
-
-**Key Concepts:** `Budgeting`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 77. Tooling: Career Ladders
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Career Ladders to improve efficiency?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Career Ladders`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 78. Challenges in Incident Mgmt
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Incident Mgmt?
-
-**Key Concepts:** `Incident Mgmt`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 79. Challenges in Vendor Mgmt
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Vendor Mgmt?
-
-**Key Concepts:** `Vendor Mgmt`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 80. Mistakes in Career Ladders
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Career Ladders?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Career Ladders`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 81. Collaboration in Vendor Mgmt
-
-**Scenario:** Teamwork.
-
-**Question:** How does Vendor Mgmt require cross-functional collaboration?
-
-**Key Concepts:** `Vendor Mgmt`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 82. Ethics in Hiring
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Hiring?
-
-**Key Concepts:** `Hiring`, `Ethics`
+**Key Concepts:** `Incident Mgmt`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -1329,76 +731,21 @@ graph LR
 
 ---
 
-## 83. Challenges in Agile
+## 46. Metrics for Mentorship
 
-**Scenario:** Problem Solving.
+**Scenario:** Measurement.
 
-**Question:** What are the biggest challenges you've faced regarding Agile?
+**Question:** How do you measure success in Mentorship?
 
-**Key Concepts:** `Agile`, `Problem Solving`
+**Key Concepts:** `Mentorship`, `Analytics`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
 
 ---
 
-## 84. Ethics in Scrum
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Scrum?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Scrum`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 85. Scaling Velocity
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Velocity as the company grows?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Velocity`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 86. Start vs Scale for OKRs
-
-**Scenario:** Context.
-
-**Question:** How does your approach to OKRs differ in a startup vs a large corp?
-
-**Key Concepts:** `OKRs`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 87. Mistakes in Scrum
+## 47. Mistakes in Scrum
 
 **Scenario:** Learning.
 
@@ -1412,13 +759,32 @@ sequenceDiagram
 
 ---
 
-## 88. Scaling Performance Reviews
+## 48. Deep Dive: Scrum
+
+**Scenario:** Assessing depth in Scrum.
+
+**Question:** Can you explain Scrum in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Scrum`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 49. Scaling Scrum
 
 **Scenario:** Growth.
 
-**Question:** How do you scale Performance Reviews as the company grows?
+**Question:** How do you scale Scrum as the company grows?
 
-**Key Concepts:** `Performance Reviews`, `Scale`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Scrum`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -1426,132 +792,34 @@ sequenceDiagram
 
 ---
 
-## 89. Start vs Scale for Budgeting
+## 50. Ethics in Scrum
 
-**Scenario:** Context.
+**Scenario:** Ethics.
 
-**Question:** How does your approach to Budgeting differ in a startup vs a large corp?
-
-**Key Concepts:** `Budgeting`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 90. Deep Dive: Mentorship
-
-**Scenario:** Assessing depth in Mentorship.
-
-**Question:** Can you explain Mentorship in detail and how you have applied it in your past role?
+**Question:** What are the ethical considerations regarding Scrum?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
-**Key Concepts:** `Mentorship`, `Experience`
+**Key Concepts:** `Scrum`, `Ethics`
 
 ### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---
 
-## 91. Future of Hiring
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Hiring heading in the next 5 years?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Hiring`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 92. Teaching Scrum
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Scrum to a junior team member?
-
-**Key Concepts:** `Scrum`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 93. Teaching Performance Reviews
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Performance Reviews to a junior team member?
-
-**Key Concepts:** `Performance Reviews`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 94. Incident Mgmt Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Incident Mgmt?
-
-**Key Concepts:** `Incident Mgmt`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 95. Deep Dive: Velocity
-
-**Scenario:** Assessing depth in Velocity.
-
-**Question:** Can you explain Velocity in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Velocity`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 96. Tooling: Budgeting
+## 51. Tooling: Agile
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Budgeting to improve efficiency?
+**Question:** How do you utilize Agile to improve efficiency?
 
-**Key Concepts:** `Budgeting`, `Productivity`
+**Key Concepts:** `Agile`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -1559,7 +827,236 @@ sequenceDiagram
 
 ---
 
-## 97. Tooling: Hiring
+## 52. Teaching Remote Work
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Remote Work to a junior team member?
+
+**Key Concepts:** `Remote Work`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 53. Mistakes in Agile
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Agile?
+
+**Key Concepts:** `Agile`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 54. Future of Velocity
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Velocity heading in the next 5 years?
+
+**Key Concepts:** `Velocity`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 55. Scaling Onboarding
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Onboarding as the company grows?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Onboarding`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 56. Deep Dive: Remote Work
+
+**Scenario:** Assessing depth in Remote Work.
+
+**Question:** Can you explain Remote Work in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Remote Work`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 57. Deep Dive: Agile
+
+**Scenario:** Assessing depth in Agile.
+
+**Question:** Can you explain Agile in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Agile`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 58. Tooling: Performance Reviews
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Performance Reviews to improve efficiency?
+
+**Key Concepts:** `Performance Reviews`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 59. Vendor Mgmt Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Vendor Mgmt?
+
+**Key Concepts:** `Vendor Mgmt`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 60. Start vs Scale for Mentorship
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Mentorship differ in a startup vs a large corp?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Mentorship`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 61. Tech Debt Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Tech Debt?
+
+**Key Concepts:** `Tech Debt`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 62. Deep Dive: Vendor Mgmt
+
+**Scenario:** Assessing depth in Vendor Mgmt.
+
+**Question:** Can you explain Vendor Mgmt in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Vendor Mgmt`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 63. Collaboration in Kanban
+
+**Scenario:** Teamwork.
+
+**Question:** How does Kanban require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Kanban`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 64. Future of Incident Mgmt
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Incident Mgmt heading in the next 5 years?
+
+**Key Concepts:** `Incident Mgmt`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 65. Scaling Career Ladders
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Career Ladders as the company grows?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Career Ladders`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 66. Tooling: Hiring
 
 **Scenario:** Proficiency.
 
@@ -1573,44 +1070,53 @@ sequenceDiagram
 
 ---
 
-## 98. Deep Dive: Kanban
-
-**Scenario:** Assessing depth in Kanban.
-
-**Question:** Can you explain Kanban in detail and how you have applied it in your past role?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Kanban`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 99. Metrics for Velocity
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Velocity?
-
-**Key Concepts:** `Velocity`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 100. Mistakes in Kanban
+## 67. Mistakes in Career Ladders
 
 **Scenario:** Learning.
 
-**Question:** What common mistakes do people make with Kanban?
+**Question:** What common mistakes do people make with Career Ladders?
+
+**Key Concepts:** `Career Ladders`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 68. Tooling: Remote Work
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Remote Work to improve efficiency?
+
+**Key Concepts:** `Remote Work`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 69. Start vs Scale for Hiring
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Hiring differ in a startup vs a large corp?
+
+**Key Concepts:** `Hiring`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 70. Deep Dive: Onboarding
+
+**Scenario:** Assessing depth in Onboarding.
+
+**Question:** Can you explain Onboarding in detail and how you have applied it in your past role?
 
 ```mermaid
 sequenceDiagram
@@ -1620,10 +1126,501 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Kanban`, `Experience`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Onboarding`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 71. Metrics for Kanban
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Kanban?
+
+**Key Concepts:** `Kanban`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 72. Start vs Scale for Onboarding
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Onboarding differ in a startup vs a large corp?
+
+**Key Concepts:** `Onboarding`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 73. Ethics in Vendor Mgmt
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Vendor Mgmt?
+
+**Key Concepts:** `Vendor Mgmt`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 74. Metrics for Career Ladders
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Career Ladders?
+
+**Key Concepts:** `Career Ladders`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 75. Future of Performance Reviews
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Performance Reviews heading in the next 5 years?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Performance Reviews`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 76. Future of Onboarding
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Onboarding heading in the next 5 years?
+
+**Key Concepts:** `Onboarding`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 77. Challenges in Career Ladders
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Career Ladders?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Career Ladders`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 78. Velocity Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Velocity?
+
+**Key Concepts:** `Velocity`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 79. Start vs Scale for Scrum
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Scrum differ in a startup vs a large corp?
+
+**Key Concepts:** `Scrum`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 80. Challenges in Kanban
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Kanban?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Kanban`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 81. Future of Kanban
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Kanban heading in the next 5 years?
+
+**Key Concepts:** `Kanban`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 82. Teaching OKRs
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach OKRs to a junior team member?
+
+**Key Concepts:** `OKRs`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 83. Collaboration in Incident Mgmt
+
+**Scenario:** Teamwork.
+
+**Question:** How does Incident Mgmt require cross-functional collaboration?
+
+**Key Concepts:** `Incident Mgmt`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 84. Mistakes in Performance Reviews
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Performance Reviews?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Performance Reviews`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Doing it wrong.
 *   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 85. Mistakes in Incident Mgmt
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Incident Mgmt?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Incident Mgmt`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 86. Challenges in Incident Mgmt
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Incident Mgmt?
+
+**Key Concepts:** `Incident Mgmt`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 87. Tooling: Budgeting
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Budgeting to improve efficiency?
+
+**Key Concepts:** `Budgeting`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 88. Scaling Budgeting
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Budgeting as the company grows?
+
+**Key Concepts:** `Budgeting`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 89. Tooling: Onboarding
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Onboarding to improve efficiency?
+
+**Key Concepts:** `Onboarding`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 90. Future of Remote Work
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Remote Work heading in the next 5 years?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Remote Work`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 91. Collaboration in Tech Debt
+
+**Scenario:** Teamwork.
+
+**Question:** How does Tech Debt require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Tech Debt`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 92. Mistakes in Tech Debt
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Tech Debt?
+
+**Key Concepts:** `Tech Debt`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 93. Scaling Mentorship
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Mentorship as the company grows?
+
+**Key Concepts:** `Mentorship`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 94. Deep Dive: Career Ladders
+
+**Scenario:** Assessing depth in Career Ladders.
+
+**Question:** Can you explain Career Ladders in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Career Ladders`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 95. Scaling Remote Work
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Remote Work as the company grows?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Remote Work`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 96. Teaching Tech Debt
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Tech Debt to a junior team member?
+
+**Key Concepts:** `Tech Debt`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 97. Scaling Kanban
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Kanban as the company grows?
+
+**Key Concepts:** `Kanban`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 98. Metrics for Budgeting
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Budgeting?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Budgeting`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 99. Agile Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Agile?
+
+**Key Concepts:** `Agile`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 100. Teaching Performance Reviews
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Performance Reviews to a junior team member?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Performance Reviews`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---

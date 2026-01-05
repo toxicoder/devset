@@ -150,11 +150,10 @@ sequenceDiagram
 **Question:** When would you choose GraphQL over REST?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `API`, `Architecture`
@@ -233,11 +232,10 @@ sequenceDiagram
 **Question:** Describe a time you had to explain a complex technical/business concept to a non-expert.
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `Clarity`, `Empathy`
@@ -325,206 +323,18 @@ graph LR
 
 ---
 
-## 21. Teaching Testing
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Testing to a junior team member?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Testing`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 22. Metrics for Cloud
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Cloud?
-
-**Key Concepts:** `Cloud`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 23. Mistakes in Testing
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Testing?
-
-**Key Concepts:** `Testing`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 24. Challenges in Containers
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Containers?
-
-**Key Concepts:** `Containers`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 25. Metrics for Testing
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Testing?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Testing`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 26. Deep Dive: CI/CD
-
-**Scenario:** Assessing depth in CI/CD.
-
-**Question:** Can you explain CI/CD in detail and how you have applied it in your past role?
-
-**Key Concepts:** `CI/CD`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 27. Scaling Serverless
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Serverless as the company grows?
-
-**Key Concepts:** `Serverless`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 28. Start vs Scale for CI/CD
-
-**Scenario:** Context.
-
-**Question:** How does your approach to CI/CD differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `CI/CD`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 29. Challenges in Security
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Security?
-
-**Key Concepts:** `Security`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 30. Teaching Accessibility
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Accessibility to a junior team member?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Accessibility`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 31. Collaboration in Serverless
-
-**Scenario:** Teamwork.
-
-**Question:** How does Serverless require cross-functional collaboration?
-
-**Key Concepts:** `Serverless`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 32. Scaling Accessibility
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Accessibility as the company grows?
-
-**Key Concepts:** `Accessibility`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 33. Future of Debugging
+## 21. Future of Testing
 
 **Scenario:** Trends.
 
-**Question:** Where do you see Debugging heading in the next 5 years?
+**Question:** Where do you see Testing heading in the next 5 years?
 
-**Key Concepts:** `Debugging`, `Vision`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Testing`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -532,400 +342,7 @@ graph LR
 
 ---
 
-## 34. Collaboration in Security
-
-**Scenario:** Teamwork.
-
-**Question:** How does Security require cross-functional collaboration?
-
-**Key Concepts:** `Security`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 35. Ethics in Accessibility
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Accessibility?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Accessibility`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 36. Start vs Scale for Debugging
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Debugging differ in a startup vs a large corp?
-
-**Key Concepts:** `Debugging`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 37. Containers Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Containers?
-
-**Key Concepts:** `Containers`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 38. Ethics in Debugging
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Debugging?
-
-**Key Concepts:** `Debugging`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 39. Metrics for Security
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Security?
-
-**Key Concepts:** `Security`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 40. Challenges in Testing
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Testing?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Testing`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 41. Scaling Performance
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Performance as the company grows?
-
-**Key Concepts:** `Performance`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 42. Collaboration in Database Design
-
-**Scenario:** Teamwork.
-
-**Question:** How does Database Design require cross-functional collaboration?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Database Design`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 43. Collaboration in Containers
-
-**Scenario:** Teamwork.
-
-**Question:** How does Containers require cross-functional collaboration?
-
-**Key Concepts:** `Containers`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 44. Deep Dive: Testing
-
-**Scenario:** Assessing depth in Testing.
-
-**Question:** Can you explain Testing in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Testing`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 45. Metrics for Git
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Git?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Git`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 46. Collaboration in Code Review
-
-**Scenario:** Teamwork.
-
-**Question:** How does Code Review require cross-functional collaboration?
-
-**Key Concepts:** `Code Review`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 47. Future of Serverless
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Serverless heading in the next 5 years?
-
-**Key Concepts:** `Serverless`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 48. Mistakes in Accessibility
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Accessibility?
-
-**Key Concepts:** `Accessibility`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 49. Future of Performance
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Performance heading in the next 5 years?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Performance`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 50. Teaching Microservices
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Microservices to a junior team member?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Microservices`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 51. Future of Documentation
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Documentation heading in the next 5 years?
-
-**Key Concepts:** `Documentation`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 52. Deep Dive: API Design
-
-**Scenario:** Assessing depth in API Design.
-
-**Question:** Can you explain API Design in detail and how you have applied it in your past role?
-
-**Key Concepts:** `API Design`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 53. Tooling: API Design
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize API Design to improve efficiency?
-
-**Key Concepts:** `API Design`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 54. Ethics in Containers
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Containers?
-
-**Key Concepts:** `Containers`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 55. Scaling Microservices
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Microservices as the company grows?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Microservices`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 56. Teaching API Design
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach API Design to a junior team member?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `API Design`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 57. Challenges in Serverless
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Serverless?
-
-**Key Concepts:** `Serverless`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 58. Challenges in Database Design
+## 22. Challenges in Database Design
 
 **Scenario:** Problem Solving.
 
@@ -939,13 +356,48 @@ sequenceDiagram
 
 ---
 
-## 59. Collaboration in Documentation
+## 23. Challenges in Git
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Git?
+
+**Key Concepts:** `Git`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 24. Start vs Scale for Performance
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Performance differ in a startup vs a large corp?
+
+**Key Concepts:** `Performance`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 25. Collaboration in Cloud
 
 **Scenario:** Teamwork.
 
-**Question:** How does Documentation require cross-functional collaboration?
+**Question:** How does Cloud require cross-functional collaboration?
 
-**Key Concepts:** `Documentation`, `Collaboration`
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Cloud`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -953,11 +405,72 @@ sequenceDiagram
 
 ---
 
-## 60. Ethics in Security
+## 26. Start vs Scale for CI/CD
 
-**Scenario:** Ethics.
+**Scenario:** Context.
 
-**Question:** What are the ethical considerations regarding Security?
+**Question:** How does your approach to CI/CD differ in a startup vs a large corp?
+
+**Key Concepts:** `CI/CD`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 27. Cloud Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Cloud?
+
+**Key Concepts:** `Cloud`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 28. Collaboration in Performance
+
+**Scenario:** Teamwork.
+
+**Question:** How does Performance require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Performance`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 29. Challenges in CI/CD
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding CI/CD?
+
+**Key Concepts:** `CI/CD`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 30. Collaboration in Microservices
+
+**Scenario:** Teamwork.
+
+**Question:** How does Microservices require cross-functional collaboration?
 
 ```mermaid
 sequenceDiagram
@@ -967,7 +480,63 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Security`, `Ethics`
+**Key Concepts:** `Microservices`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 31. Collaboration in Database Design
+
+**Scenario:** Teamwork.
+
+**Question:** How does Database Design require cross-functional collaboration?
+
+**Key Concepts:** `Database Design`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 32. Tooling: Database Design
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Database Design to improve efficiency?
+
+**Key Concepts:** `Database Design`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 33. Collaboration in Security
+
+**Scenario:** Teamwork.
+
+**Question:** How does Security require cross-functional collaboration?
+
+**Key Concepts:** `Security`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 34. Ethics in Microservices
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Microservices?
+
+**Key Concepts:** `Microservices`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -975,7 +544,450 @@ sequenceDiagram
 
 ---
 
-## 61. Deep Dive: Documentation
+## 35. Scaling API Design
+
+**Scenario:** Growth.
+
+**Question:** How do you scale API Design as the company grows?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `API Design`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 36. Future of Database Design
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Database Design heading in the next 5 years?
+
+**Key Concepts:** `Database Design`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 37. Ethics in Performance
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Performance?
+
+**Key Concepts:** `Performance`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 38. Collaboration in Testing
+
+**Scenario:** Teamwork.
+
+**Question:** How does Testing require cross-functional collaboration?
+
+**Key Concepts:** `Testing`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 39. Metrics for Code Review
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Code Review?
+
+**Key Concepts:** `Code Review`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 40. Mistakes in Code Review
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Code Review?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Code Review`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 41. Collaboration in Code Review
+
+**Scenario:** Teamwork.
+
+**Question:** How does Code Review require cross-functional collaboration?
+
+**Key Concepts:** `Code Review`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 42. Deep Dive: Accessibility
+
+**Scenario:** Assessing depth in Accessibility.
+
+**Question:** Can you explain Accessibility in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Accessibility`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 43. Debugging Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Debugging?
+
+**Key Concepts:** `Debugging`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 44. Ethics in Database Design
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Database Design?
+
+**Key Concepts:** `Database Design`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 45. Teaching Database Design
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Database Design to a junior team member?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Database Design`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 46. Scaling Containers
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Containers as the company grows?
+
+**Key Concepts:** `Containers`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 47. Start vs Scale for Containers
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Containers differ in a startup vs a large corp?
+
+**Key Concepts:** `Containers`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 48. Ethics in CI/CD
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding CI/CD?
+
+**Key Concepts:** `CI/CD`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 49. Mistakes in Accessibility
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Accessibility?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Accessibility`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 50. Challenges in Microservices
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Microservices?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Microservices`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 51. Ethics in Containers
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Containers?
+
+**Key Concepts:** `Containers`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 52. Start vs Scale for Serverless
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Serverless differ in a startup vs a large corp?
+
+**Key Concepts:** `Serverless`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 53. Scaling Serverless
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Serverless as the company grows?
+
+**Key Concepts:** `Serverless`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 54. Tooling: Debugging
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Debugging to improve efficiency?
+
+**Key Concepts:** `Debugging`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 55. Mistakes in Containers
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Containers?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Containers`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 56. Mistakes in Microservices
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Microservices?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Microservices`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 57. Challenges in Accessibility
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Accessibility?
+
+**Key Concepts:** `Accessibility`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 58. Future of Performance
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Performance heading in the next 5 years?
+
+**Key Concepts:** `Performance`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 59. Database Design Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Database Design?
+
+**Key Concepts:** `Database Design`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 60. Tooling: Testing
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Testing to improve efficiency?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Testing`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 61. Security Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Security?
+
+**Key Concepts:** `Security`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 62. Deep Dive: Documentation
 
 **Scenario:** Assessing depth in Documentation.
 
@@ -989,58 +1001,44 @@ sequenceDiagram
 
 ---
 
-## 62. CI/CD Best Practices
+## 63. Challenges in Debugging
 
-**Scenario:** Standardization.
+**Scenario:** Problem Solving.
 
-**Question:** What are the industry best practices for CI/CD?
-
-**Key Concepts:** `CI/CD`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 63. Ethics in Git
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Git?
+**Question:** What are the biggest challenges you've faced regarding Debugging?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Git`, `Ethics`
+**Key Concepts:** `Debugging`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 64. Mistakes in Containers
+## 64. Deep Dive: CI/CD
 
-**Scenario:** Learning.
+**Scenario:** Assessing depth in CI/CD.
 
-**Question:** What common mistakes do people make with Containers?
+**Question:** Can you explain CI/CD in detail and how you have applied it in your past role?
 
-**Key Concepts:** `Containers`, `Experience`
+**Key Concepts:** `CI/CD`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
 
 ---
 
-## 65. Start vs Scale for Performance
+## 65. Scaling Debugging
 
-**Scenario:** Context.
+**Scenario:** Growth.
 
-**Question:** How does your approach to Performance differ in a startup vs a large corp?
+**Question:** How do you scale Debugging as the company grows?
 
 ```mermaid
 sequenceDiagram
@@ -1050,7 +1048,35 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Performance`, `Context`
+**Key Concepts:** `Debugging`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 66. Teaching Cloud
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Cloud to a junior team member?
+
+**Key Concepts:** `Cloud`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 67. Start vs Scale for Git
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Git differ in a startup vs a large corp?
+
+**Key Concepts:** `Git`, `Context`
 
 ### Candidate Response Paths
 *   **Junior**: It's the same.
@@ -1058,27 +1084,27 @@ sequenceDiagram
 
 ---
 
-## 66. Deep Dive: Accessibility
+## 68. Mistakes in Database Design
 
-**Scenario:** Assessing depth in Accessibility.
+**Scenario:** Learning.
 
-**Question:** Can you explain Accessibility in detail and how you have applied it in your past role?
+**Question:** What common mistakes do people make with Database Design?
 
-**Key Concepts:** `Accessibility`, `Experience`
+**Key Concepts:** `Database Design`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
 
 ---
 
-## 67. Metrics for Microservices
+## 69. Metrics for Serverless
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Microservices?
+**Question:** How do you measure success in Serverless?
 
-**Key Concepts:** `Microservices`, `Analytics`
+**Key Concepts:** `Serverless`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -1086,21 +1112,76 @@ sequenceDiagram
 
 ---
 
-## 68. Tooling: Performance
+## 70. Metrics for Testing
 
-**Scenario:** Proficiency.
+**Scenario:** Measurement.
 
-**Question:** How do you utilize Performance to improve efficiency?
+**Question:** How do you measure success in Testing?
 
-**Key Concepts:** `Performance`, `Productivity`
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Testing`, `Analytics`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
 
 ---
 
-## 69. Tooling: CI/CD
+## 71. Deep Dive: API Design
+
+**Scenario:** Assessing depth in API Design.
+
+**Question:** Can you explain API Design in detail and how you have applied it in your past role?
+
+**Key Concepts:** `API Design`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 72. Deep Dive: Cloud
+
+**Scenario:** Assessing depth in Cloud.
+
+**Question:** Can you explain Cloud in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Cloud`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 73. Teaching Git
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Git to a junior team member?
+
+**Key Concepts:** `Git`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 74. Tooling: CI/CD
 
 **Scenario:** Proficiency.
 
@@ -1114,94 +1195,11 @@ sequenceDiagram
 
 ---
 
-## 70. Challenges in API Design
+## 75. Testing Best Practices
 
-**Scenario:** Problem Solving.
+**Scenario:** Standardization.
 
-**Question:** What are the biggest challenges you've faced regarding API Design?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `API Design`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 71. Scaling Code Review
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Code Review as the company grows?
-
-**Key Concepts:** `Code Review`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 72. Tooling: Git
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Git to improve efficiency?
-
-**Key Concepts:** `Git`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 73. Tooling: Security
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Security to improve efficiency?
-
-**Key Concepts:** `Security`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 74. Mistakes in Cloud
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Cloud?
-
-**Key Concepts:** `Cloud`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 75. Ethics in Performance
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Performance?
+**Question:** What are the industry best practices for Testing?
 
 ```mermaid
 sequenceDiagram
@@ -1211,40 +1209,21 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Performance`, `Ethics`
+**Key Concepts:** `Testing`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
 
 ---
 
-## 76. Collaboration in Cloud
-
-**Scenario:** Teamwork.
-
-**Question:** How does Cloud require cross-functional collaboration?
-
-**Key Concepts:** `Cloud`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 77. Ethics in Serverless
+## 76. Ethics in Code Review
 
 **Scenario:** Ethics.
 
-**Question:** What are the ethical considerations regarding Serverless?
+**Question:** What are the ethical considerations regarding Code Review?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Serverless`, `Ethics`
+**Key Concepts:** `Code Review`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -1252,27 +1231,18 @@ sequenceDiagram
 
 ---
 
-## 78. Tooling: Cloud
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Cloud to improve efficiency?
-
-**Key Concepts:** `Cloud`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 79. Teaching Containers
+## 77. Teaching Performance
 
 **Scenario:** Mentorship.
 
-**Question:** How would you teach Containers to a junior team member?
+**Question:** How would you teach Performance to a junior team member?
 
-**Key Concepts:** `Containers`, `Mentorship`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Performance`, `Mentorship`
 
 ### Candidate Response Paths
 *   **Junior**: Send them a link.
@@ -1280,24 +1250,53 @@ sequenceDiagram
 
 ---
 
-## 80. Collaboration in Microservices
+## 78. Mistakes in Debugging
 
-**Scenario:** Teamwork.
+**Scenario:** Learning.
 
-**Question:** How does Microservices require cross-functional collaboration?
+**Question:** What common mistakes do people make with Debugging?
 
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Microservices`, `Collaboration`
+**Key Concepts:** `Debugging`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 79. Scaling Microservices
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Microservices as the company grows?
+
+**Key Concepts:** `Microservices`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 80. Future of Documentation
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Documentation heading in the next 5 years?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Documentation`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---
 
@@ -1315,27 +1314,13 @@ graph LR
 
 ---
 
-## 82. Deep Dive: Cloud
-
-**Scenario:** Assessing depth in Cloud.
-
-**Question:** Can you explain Cloud in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Cloud`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 83. Tooling: Serverless
+## 82. Tooling: Git
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Serverless to improve efficiency?
+**Question:** How do you utilize Git to improve efficiency?
 
-**Key Concepts:** `Serverless`, `Productivity`
+**Key Concepts:** `Git`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -1343,16 +1328,80 @@ graph LR
 
 ---
 
-## 84. Deep Dive: Containers
+## 83. Scaling Documentation
 
-**Scenario:** Assessing depth in Containers.
+**Scenario:** Growth.
 
-**Question:** Can you explain Containers in detail and how you have applied it in your past role?
+**Question:** How do you scale Documentation as the company grows?
+
+**Key Concepts:** `Documentation`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 84. API Design Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for API Design?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `API Design`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 85. Tooling: Security
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Security to improve efficiency?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Security`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 86. Challenges in Code Review
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Code Review?
+
+**Key Concepts:** `Code Review`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 87. Deep Dive: Containers
+
+**Scenario:** Assessing depth in Containers.
+
+**Question:** Can you explain Containers in detail and how you have applied it in your past role?
 
 **Key Concepts:** `Containers`, `Experience`
 
@@ -1362,224 +1411,11 @@ graph LR
 
 ---
 
-## 85. Ethics in API Design
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding API Design?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `API Design`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 86. Challenges in Accessibility
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Accessibility?
-
-**Key Concepts:** `Accessibility`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 87. Future of Testing
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Testing heading in the next 5 years?
-
-**Key Concepts:** `Testing`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 88. Future of Security
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Security heading in the next 5 years?
-
-**Key Concepts:** `Security`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 89. Metrics for CI/CD
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in CI/CD?
-
-**Key Concepts:** `CI/CD`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 90. Challenges in Git
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Git?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Git`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 91. Tooling: Accessibility
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Accessibility to improve efficiency?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Accessibility`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 92. Teaching Cloud
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Cloud to a junior team member?
-
-**Key Concepts:** `Cloud`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 93. Metrics for Code Review
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Code Review?
-
-**Key Concepts:** `Code Review`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 94. Collaboration in API Design
-
-**Scenario:** Teamwork.
-
-**Question:** How does API Design require cross-functional collaboration?
-
-**Key Concepts:** `API Design`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 95. Microservices Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Microservices?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Microservices`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 96. Scaling Security
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Security as the company grows?
-
-**Key Concepts:** `Security`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 97. Ethics in Documentation
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Documentation?
-
-**Key Concepts:** `Documentation`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 98. Start vs Scale for Testing
+## 88. Start vs Scale for Testing
 
 **Scenario:** Context.
 
 **Question:** How does your approach to Testing differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
 
 **Key Concepts:** `Testing`, `Context`
 
@@ -1589,25 +1425,191 @@ graph LR
 
 ---
 
-## 99. Start vs Scale for Code Review
+## 89. Teaching Debugging
 
-**Scenario:** Context.
+**Scenario:** Mentorship.
 
-**Question:** How does your approach to Code Review differ in a startup vs a large corp?
+**Question:** How would you teach Debugging to a junior team member?
 
-**Key Concepts:** `Code Review`, `Context`
+**Key Concepts:** `Debugging`, `Mentorship`
 
 ### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
 
 ---
 
-## 100. Start vs Scale for Cloud
+## 90. Git Best Practices
 
-**Scenario:** Context.
+**Scenario:** Standardization.
 
-**Question:** How does your approach to Cloud differ in a startup vs a large corp?
+**Question:** What are the industry best practices for Git?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Git`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 91. Scaling Cloud
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Cloud as the company grows?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Cloud`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 92. Tooling: Documentation
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Documentation to improve efficiency?
+
+**Key Concepts:** `Documentation`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 93. Metrics for Accessibility
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Accessibility?
+
+**Key Concepts:** `Accessibility`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 94. Deep Dive: Git
+
+**Scenario:** Assessing depth in Git.
+
+**Question:** Can you explain Git in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Git`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 95. Collaboration in Git
+
+**Scenario:** Teamwork.
+
+**Question:** How does Git require cross-functional collaboration?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Git`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 96. Future of Microservices
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Microservices heading in the next 5 years?
+
+**Key Concepts:** `Microservices`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 97. Future of Accessibility
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Accessibility heading in the next 5 years?
+
+**Key Concepts:** `Accessibility`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 98. Teaching Containers
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Containers to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Containers`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 99. Challenges in Security
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Security?
+
+**Key Concepts:** `Security`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 100. Future of Cloud
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Cloud heading in the next 5 years?
 
 ```mermaid
 graph LR
@@ -1616,10 +1618,10 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Cloud`, `Context`
+**Key Concepts:** `Cloud`, `Vision`
 
 ### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---
