@@ -22,7 +22,7 @@ cleanup() {
 trap cleanup EXIT ERR
 
 # Dependency check
-for cmd in ssh awk grep sed; do
+for cmd in ssh awk grep sed nc; do
     if ! command -v "$cmd" &> /dev/null; then
         echo "Error: Required command '$cmd' not found."
         exit 1
@@ -301,39 +301,6 @@ get_network_config() {
     fi
 }
 
-# 1. Verify Connectivity and Pull Image
-echo "[1/4] Verifying connectivity and pulling image..."
-pids=""
-for IP in "$IP1" "$IP2"; do
-    echo "Connecting to $IP..."
-    if ! ssh $SSH_OPTS "$IP" "nvidia-smi > /dev/null"; then
-        echo "Error: Unable to connect to $IP or nvidia-smi failed."
-        exit 1
-    fi
-    # Pull image
-    echo "Pulling image $IMAGE on $IP..."
-    (
-        if ! ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
-            echo "Error: Failed to pull image on $IP"
-            exit 1
-        fi
-    ) &
-    pids="$pids $!"
-done
-
-# Wait for background processes
-for pid in $pids; do
-    if ! wait $pid; then
-        echo "Error: Image pull failed on one or more nodes."
-        exit 1
-    fi
-done
-
-# 2. Detect Network
-echo "[2/4] Detecting high-speed network interfaces..."
-NET_CONF_1=$(get_network_config "$IP1")
-NET_CONF_2=$(get_network_config "$IP2")
-
 # Helper to parse the detection result
 parse_net_conf() {
     local conf=$1
@@ -344,6 +311,26 @@ parse_net_conf() {
     echo "$val"
 }
 
+# Helper to get IP from interface
+get_ip_from_iface() {
+    local ip_host=$1
+    local iface_list=$2
+    # Take the first interface if multiple
+    local iface=$(echo "$iface_list" | cut -d',' -f1)
+
+    if [ -z "$iface" ]; then
+        return 1
+    fi
+
+    # Get IP
+    ssh $SSH_OPTS "$ip_host" "ip -4 addr show $iface | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1"
+}
+
+# 1. Detect Network
+echo "[1/4] Detecting high-speed network interfaces..."
+NET_CONF_1=$(get_network_config "$IP1")
+NET_CONF_2=$(get_network_config "$IP2")
+
 IFACES1=$(parse_net_conf "$NET_CONF_1")
 IFACES2=$(parse_net_conf "$NET_CONF_2")
 
@@ -353,6 +340,93 @@ echo "Node 2 Interfaces: $IFACES2"
 if [[ -z "$IFACES1" ]] || [[ -z "$IFACES2" ]] || [[ "$NET_CONF_1" == *"DETECTED_NONE"* ]] || [[ "$NET_CONF_2" == *"DETECTED_NONE"* ]]; then
     echo "Warning: Failed to detect high-speed network interfaces on one or both nodes."
     echo "Ensure IB or OSPF is configured correctly. Proceeding with potential performance degradation..."
+fi
+
+# 2. Verify Connectivity and Pull Image
+echo "[2/4] Verifying connectivity and pulling image..."
+# Verify connectivity
+for IP in "$IP1" "$IP2"; do
+    echo "Connecting to $IP..."
+    if ! ssh $SSH_OPTS "$IP" "nvidia-smi > /dev/null"; then
+        echo "Error: Unable to connect to $IP or nvidia-smi failed."
+        exit 1
+    fi
+done
+
+# Pull Image Logic
+# 1. Pull on Head Node (IP1)
+echo "Pulling image $IMAGE on Head Node ($IP1)..."
+if ! ssh $SSH_OPTS "$IP1" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
+    echo "Error: Failed to pull image on $IP1"
+    exit 1
+fi
+
+# 2. Check Worker Node (IP2)
+echo "Checking image on Worker Node ($IP2)..."
+if ssh $SSH_OPTS "$IP2" "docker image inspect $IMAGE > /dev/null 2>&1"; then
+    echo "Image already exists on $IP2."
+else
+    echo "Image missing on $IP2."
+    TRANSFER_SUCCESS=0
+
+    # Try High Speed Transfer
+    if [ -n "$IFACES2" ]; then
+        FAST_IP2=$(get_ip_from_iface "$IP2" "$IFACES2")
+        if [ -n "$FAST_IP2" ] && \
+           ssh $SSH_OPTS "$IP1" "command -v nc >/dev/null" && \
+           ssh $SSH_OPTS "$IP2" "command -v nc >/dev/null"; then
+
+            echo "Detected High-Speed IP for $IP2: $FAST_IP2"
+            TRANSFER_PORT=12346
+
+            # Determine nc options for auto-close
+            NC_OPTS=""
+            if ssh $SSH_OPTS "$IP1" "nc -h 2>&1 | grep -q -- -N"; then
+                NC_OPTS="-N"
+            elif ssh $SSH_OPTS "$IP1" "nc -h 2>&1 | grep -q -- -q"; then
+                NC_OPTS="-q 0"
+            fi
+            # If no options found, we proceed without (could hang if strict, but timeout is not easily available via ssh without 'timeout' cmd)
+
+            echo "Starting P2P transfer from $IP1 to $IP2..."
+
+            # Start Listener on IP2
+            (
+                ssh $SSH_OPTS "$IP2" "nc -l -p $TRANSFER_PORT | docker load"
+            ) &
+            LISTENER_PID=$!
+
+            sleep 5
+
+            # Start Sender on IP1
+            if ssh $SSH_OPTS "$IP1" "docker save $IMAGE | nc $NC_OPTS $FAST_IP2 $TRANSFER_PORT"; then
+                echo "Transfer command finished."
+            else
+                echo "Transfer command failed."
+            fi
+
+            # Wait for listener
+            if wait $LISTENER_PID; then
+                echo "Image transfer successful."
+                TRANSFER_SUCCESS=1
+            else
+                echo "Image transfer failed (Listener exit code)."
+            fi
+        else
+             echo "Could not resolve IP for interface $IFACES2 on $IP2 or 'nc' missing."
+        fi
+    else
+        echo "No high-speed interface detected on $IP2."
+    fi
+
+    # Fallback
+    if [ "$TRANSFER_SUCCESS" -eq 0 ]; then
+        echo "Falling back to downloading image on $IP2..."
+        if ! ssh $SSH_OPTS "$IP2" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
+            echo "Error: Failed to pull image on $IP2"
+            exit 1
+        fi
+    fi
 fi
 
 # 3. Cleanup

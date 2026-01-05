@@ -40,6 +40,17 @@ elif [[ "$ARGS" == *"docker login"* ]]; then
 elif [[ "$ARGS" == *"docker pull"* ]]; then
     # Note: script usually chains login and pull, so 'docker login' block catches it.
     exit 0
+elif [[ "$ARGS" == *"docker image inspect"* ]]; then
+    if [[ -n "${MOCK_IMAGE_MISSING}" ]]; then
+        exit 1
+    fi
+    # Default: image exists (exit 0)
+    exit 0
+elif [[ "$ARGS" == *"nc -l"* ]] || [[ "$ARGS" == *"nc -N"* ]] || [[ "$ARGS" == *"nc "* ]]; then
+    if [[ -n "${MOCK_TRANSFER_FAIL}" ]]; then
+        exit 1
+    fi
+    exit 0
 elif [[ "$ARGS" == *"vtysh"* ]]; then
     echo "Neighbor ID     Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL"
     echo "10.0.0.2          1 Full/Backup       34.123s 10.0.0.2        eth0:100               0     0     0"
@@ -84,6 +95,13 @@ EOF
 exit 0
 EOF
     chmod +x "$TEST_DIR/docker"
+
+    # Mock nc (netcat) - for dependency check
+    cat << 'EOF' > "$TEST_DIR/nc"
+#!/bin/bash
+exit 0
+EOF
+    chmod +x "$TEST_DIR/nc"
 }
 
 run_test() {
@@ -121,17 +139,19 @@ else
 fi
 
 # Test 3: Image pull failure on one node
-echo "Running test: Image pull failure on one node"
+echo "Running test: Image pull failure on one node (with transfer failure)"
 (
     export MOCK_SSH_FAIL_PULL_IP="10.0.0.2"
     export MOCK_SSH_DELAY_PULL_IP="10.0.0.1"
+    export MOCK_IMAGE_MISSING=1
+    export MOCK_TRANSFER_FAIL=1
     export NGC_API_KEY="test-key"
     # Capture output to check for error message
     OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
-        if echo "$OUTPUT" | grep -q "Error: Image pull failed on one or more nodes"; then
+        if echo "$OUTPUT" | grep -q "Error: Failed to pull image on 10.0.0.2"; then
             echo "PASS"
         else
              echo "FAIL: Expected error message not found. Output:"
@@ -140,6 +160,30 @@ echo "Running test: Image pull failure on one node"
         fi
     else
         echo "FAIL: Script should exit 1 on image pull failure. Exit code: $EXIT_CODE"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 7: P2P Transfer Success
+echo "Running test: P2P Transfer Success"
+(
+    export MOCK_IMAGE_MISSING=1
+    export NGC_API_KEY="test-key"
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        if echo "$OUTPUT" | grep -q "Image transfer successful"; then
+            echo "PASS"
+        else
+            echo "FAIL: Did not find transfer success message. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script exited with error. Output:"
+        echo "$OUTPUT"
         exit 1
     fi
 )
