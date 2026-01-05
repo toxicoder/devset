@@ -334,34 +334,35 @@ def generate_markdown(role_name, role_code, questions):
 # --- Main Logic ---
 
 def get_role_category(role_path):
-    if "3.0 Executive" in role_path:
+    role_path_lower = role_path.lower()
+    if "executive_leadership" in role_path_lower:
         return "Executive"
-    elif "3.1 Engineering" in role_path:
-        if "Manager" in role_path or "VP" in role_path or "Director" in role_path:
+    elif "engineering__technology" in role_path_lower:
+        if "manager" in role_path_lower or "vp" in role_path_lower or "director" in role_path_lower:
             return "Engineering_Mgmt"
         return "Engineering_IC"
-    elif "3.2 Product" in role_path:
-        if "Design" in role_path or "UX" in role_path:
+    elif "product__design" in role_path_lower:
+        if "design" in role_path_lower or "ux" in role_path_lower:
             return "Design"
         return "Product"
-    elif "3.3 Go-To-Market" in role_path:
-        if "Marketing" in role_path or "Brand" in role_path or "Comms" in role_path:
+    elif "go_to_market_sales__marketing" in role_path_lower:
+        if "marketing" in role_path_lower or "brand" in role_path_lower or "comms" in role_path_lower:
             return "Marketing"
         return "Sales"
-    elif "3.4 G&A" in role_path:
-        if "Finance" in role_path or "FP&A" in role_path or "Controller" in role_path:
+    elif "ga_general__administrative" in role_path_lower:
+        if "finance" in role_path_lower or "fpa" in role_path_lower or "controller" in role_path_lower:
             return "Finance"
-        if "People" in role_path or "HR" in role_path:
+        if "people" in role_path_lower or "hr" in role_path_lower:
             return "People"
-        if "Counsel" in role_path or "Legal" in role_path:
+        if "counsel" in role_path_lower or "legal" in role_path_lower:
             return "Legal"
         return "Universal" # Ops/Workplace
-    elif "4. Specialized" in role_path:
+    elif "4._specialized_squads_cross_functional_teams" in role_path_lower:
         return "Universal" # specialized squads use mixed
     return "Universal"
 
 def main():
-    role_dir = "docs/JOB_ROLE_ORGANIZATION"
+    role_dir = "docs/job_roles"
     output_dir = "docs/interview-questions"
 
     # We DO NOT skip files anymore. We overwrite everything to ensure consistency and coverage.
