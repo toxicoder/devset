@@ -58,6 +58,9 @@ elif [[ "$ARGS" == *"vtysh"* ]]; then
 elif [[ "$*" == *"ibdev2netdev"* ]]; then
     echo "mlx5_0 port 1 ==> ib0 (Up)"
     exit 0
+elif [[ "$ARGS" == *"ip -4 addr show"* ]]; then
+    echo "inet 192.168.1.5/24"
+    exit 0
 elif [[ "$*" == *"docker rm"* ]]; then
     exit 0
 elif [[ "$*" == *"docker run"* ]]; then
@@ -102,6 +105,31 @@ EOF
 exit 0
 EOF
     chmod +x "$TEST_DIR/nc"
+
+    # Mock sleep to speed up tests
+    cat << 'EOF' > "$TEST_DIR/sleep"
+#!/bin/bash
+# Do nothing to speed up tests
+exit 0
+EOF
+    chmod +x "$TEST_DIR/sleep"
+
+    # Mock curl for health check
+    cat << 'EOF' > "$TEST_DIR/curl"
+#!/bin/bash
+# Mock health check response
+if [[ "$*" == *"http://"*"/v1/health/ready"* ]]; then
+    if [[ -n "${MOCK_HEALTH_FAIL}" ]]; then
+        echo "000" # Simulate failure
+        exit 7 # Connection refused
+    fi
+    # Default success (200 OK)
+    echo "200"
+    exit 0
+fi
+exit 0
+EOF
+    chmod +x "$TEST_DIR/curl"
 }
 
 run_test() {
@@ -267,6 +295,37 @@ echo "Running test: Verify Network and Port Configuration"
     fi
 )
 
+if [ $? -eq 0 ]; then
+    echo "PASS"
+else
+    echo "FAIL"
+fi
+
+# Test 8: Health Check Implementation
+echo "Running test: Health Check Implementation"
+(
+    export NGC_API_KEY="test-key"
+    # Success case
+    if "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null 2>&1; then
+        echo "Health Check Success: PASS"
+    else
+        echo "Health Check Success: FAIL"
+        exit 1
+    fi
+
+    # Fail case (Timeout)
+    # We set MOCK_HEALTH_FAIL which makes our mock curl return failure
+    export MOCK_HEALTH_FAIL=1
+    # We expect the script to fail after retries
+    # To avoid long wait in test, script should have a reasonable timeout or check interval
+    # Here we just check if it eventually fails
+    if "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null 2>&1; then
+        echo "Health Check Failure: FAIL (Should have failed)"
+        exit 1
+    else
+        echo "Health Check Failure: PASS"
+    fi
+)
 if [ $? -eq 0 ]; then
     echo "PASS"
 else

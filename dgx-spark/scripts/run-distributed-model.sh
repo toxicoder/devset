@@ -25,7 +25,7 @@ cleanup() {
 trap cleanup EXIT ERR
 
 # Dependency check
-for cmd in ssh awk grep sed nc; do
+for cmd in ssh awk grep sed nc curl; do
     if ! command -v "$cmd" &> /dev/null; then
         echo "Error: Required command '$cmd' not found."
         exit 1
@@ -183,7 +183,7 @@ case "$MODEL_ARG" in
         PARAMS=12; CONTEXT=32
         IS_VISION=1
         ;;
-    "nvidia/nemotron-3-nano-30b-a3b")
+    "nvidia/nemotron-3-nano-30b-a3b"|"nvidia/nemotron-3-nano")
         IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano-30b-a3b:latest"
         PARAMS=30; CONTEXT=1000
         ;;
@@ -489,13 +489,49 @@ for pid in $launch_pids; do
     fi
 done
 
-echo "---------------------------------------------------"
-echo "Distributed NIM launched."
-if [ "$IS_VISION" -eq 1 ]; then
-    echo "Endpoint: http://$IP1:8000/v1/images/generations (or model specific)"
+# 5. Health Check
+wait_for_health() {
+    local ip=$1
+    local port=8000
+    local max_retries=60 # 5 minutes (5s sleep)
+    local count=0
+
+    echo "Waiting for NIM service to be ready on $ip:$port..."
+    while [ $count -lt $max_retries ]; do
+        # Check /v1/health/ready
+        local status
+        status=$(curl -s -o /dev/null -w "%{http_code}" "http://$ip:$port/v1/health/ready" || echo "000")
+
+        if [ "$status" == "200" ]; then
+            echo "Service is ready!"
+            return 0
+        fi
+
+        count=$((count + 1))
+        if [ $((count % 5)) -eq 0 ]; then
+             echo "Waiting... ($count/$max_retries) - Status: $status"
+        fi
+        sleep 5
+    done
+
+    echo "Error: Timeout waiting for service to be ready."
+    echo "Logs from Head Node ($ip):"
+    ssh $SSH_OPTS "$ip" "docker logs --tail 20 nim-distributed"
+    return 1
+}
+
+if wait_for_health "$IP1"; then
+    echo "---------------------------------------------------"
+    echo "Distributed NIM launched."
+    if [ "$IS_VISION" -eq 1 ]; then
+        echo "Endpoint: http://$IP1:8000/v1/images/generations (or model specific)"
+    else
+        echo "Endpoint: http://$IP1:8000/v1/chat/completions"
+    fi
+    echo "Logs Node 1: ssh $IP1 'docker logs -f nim-distributed'"
+    echo "Logs Node 2: ssh $IP2 'docker logs -f nim-distributed'"
+    echo "---------------------------------------------------"
 else
-    echo "Endpoint: http://$IP1:8000/v1/chat/completions"
+    echo "Startup failed."
+    exit 1
 fi
-echo "Logs Node 1: ssh $IP1 'docker logs -f nim-distributed'"
-echo "Logs Node 2: ssh $IP2 'docker logs -f nim-distributed'"
-echo "---------------------------------------------------"
