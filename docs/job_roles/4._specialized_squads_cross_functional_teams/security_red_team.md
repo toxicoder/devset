@@ -89,4 +89,4 @@ Ethical hacking squad finding vulnerabilities in our own products.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/security_red_team.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/security_red_team.md)**: Comprehensive questions and answers for this role.

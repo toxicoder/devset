@@ -72,4 +72,4 @@ Reviews ML models for bias and toxicity.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/ai_ethics__safety.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/ai_ethics__safety.md)**: Comprehensive questions and answers for this role.

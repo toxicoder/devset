@@ -89,4 +89,4 @@ Maintains core mobile architecture used by feature squads.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/mobile_platform.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/mobile_platform.md)**: Comprehensive questions and answers for this role.

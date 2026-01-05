@@ -90,4 +90,4 @@ Prepares financial systems for public markets/audits.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/ipo_audit_ready.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/ipo_audit_ready.md)**: Comprehensive questions and answers for this role.

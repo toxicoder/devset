@@ -91,4 +91,4 @@ Tracks carbon footprint and green initiatives.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/sustainability_esg.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/sustainability_esg.md)**: Comprehensive questions and answers for this role.
