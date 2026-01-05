@@ -1,6 +1,6 @@
-# Interview Questions: CLO (ROLE)
+# Interview Questions: clo (ROLE)
 
-This document contains 100 interview questions tailored for the CLO role. The questions are designed to assess technical skills, soft skills, and cultural fit.
+This document contains 100 interview questions tailored for the clo role. The questions are designed to assess technical skills, soft skills, and cultural fit.
 
 ---
 
@@ -67,10 +67,11 @@ This document contains 100 interview questions tailored for the CLO role. The qu
 **Question:** What do you look for when hiring a VP/Director reporting to you?
 
 ```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
 **Key Concepts:** `Hiring`, `Leadership`
@@ -149,11 +150,10 @@ graph LR
 **Question:** How do you lead the organization through a major strategic pivot?
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `Change Mgmt`, `Communication`
@@ -232,11 +232,10 @@ sequenceDiagram
 **Question:** Describe a time you had to explain a complex technical/business concept to a non-expert.
 
 ```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
 ```
 
 **Key Concepts:** `Clarity`, `Empathy`
@@ -344,41 +343,27 @@ sequenceDiagram
 
 ---
 
-## 22. Tooling: Crisis Comms
+## 22. Scaling Risk Management
 
-**Scenario:** Proficiency.
+**Scenario:** Growth.
 
-**Question:** How do you utilize Crisis Comms to improve efficiency?
+**Question:** How do you scale Risk Management as the company grows?
 
-**Key Concepts:** `Crisis Comms`, `Productivity`
+**Key Concepts:** `Risk Management`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 23. Challenges in Crisis Comms
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Crisis Comms?
-
-**Key Concepts:** `Crisis Comms`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 24. Metrics for ESG
+## 23. Metrics for Public Speaking
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in ESG?
+**Question:** How do you measure success in Public Speaking?
 
-**Key Concepts:** `ESG`, `Analytics`
+**Key Concepts:** `Public Speaking`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -386,144 +371,13 @@ sequenceDiagram
 
 ---
 
-## 25. Collaboration in Crisis Comms
-
-**Scenario:** Teamwork.
-
-**Question:** How does Crisis Comms require cross-functional collaboration?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Crisis Comms`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 26. Metrics for Investor Relations
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Investor Relations?
-
-**Key Concepts:** `Investor Relations`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 27. Ethics in Public Speaking
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Public Speaking?
-
-**Key Concepts:** `Public Speaking`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 28. Deep Dive: Culture
-
-**Scenario:** Assessing depth in Culture.
-
-**Question:** Can you explain Culture in detail and how you have applied it in your past role?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Culture`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 29. Tooling: Org Design
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Org Design to improve efficiency?
-
-**Key Concepts:** `Org Design`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 30. Teaching Crisis Comms
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Crisis Comms to a junior team member?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Crisis Comms`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 31. Start vs Scale for Compensation Strategy
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Compensation Strategy differ in a startup vs a large corp?
-
-**Key Concepts:** `Compensation Strategy`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 32. Metrics for Org Design
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Org Design?
-
-**Key Concepts:** `Org Design`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 33. Future of Change Management
+## 24. Future of Digital Transformation
 
 **Scenario:** Trends.
 
-**Question:** Where do you see Change Management heading in the next 5 years?
+**Question:** Where do you see Digital Transformation heading in the next 5 years?
 
-**Key Concepts:** `Change Management`, `Vision`
+**Key Concepts:** `Digital Transformation`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -531,229 +385,21 @@ graph LR
 
 ---
 
-## 34. Scaling M&A
-
-**Scenario:** Growth.
-
-**Question:** How do you scale M&A as the company grows?
-
-**Key Concepts:** `M&A`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 35. Challenges in IPO
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding IPO?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `IPO`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 36. Change Management Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Change Management?
-
-**Key Concepts:** `Change Management`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 37. Scaling ESG
-
-**Scenario:** Growth.
-
-**Question:** How do you scale ESG as the company grows?
-
-**Key Concepts:** `ESG`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 38. Start vs Scale for IPO
-
-**Scenario:** Context.
-
-**Question:** How does your approach to IPO differ in a startup vs a large corp?
-
-**Key Concepts:** `IPO`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 39. Org Design Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Org Design?
-
-**Key Concepts:** `Org Design`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 40. Challenges in Risk Management
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Risk Management?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Risk Management`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 41. Metrics for IPO
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in IPO?
-
-**Key Concepts:** `IPO`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 42. Tooling: Global Expansion
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Global Expansion to improve efficiency?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Global Expansion`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 43. Mistakes in Compensation Strategy
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Compensation Strategy?
-
-**Key Concepts:** `Compensation Strategy`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 44. Mistakes in IPO
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with IPO?
-
-**Key Concepts:** `IPO`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 45. Start vs Scale for Public Speaking
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Public Speaking differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Public Speaking`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 46. Future of Crisis Comms
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Crisis Comms heading in the next 5 years?
-
-**Key Concepts:** `Crisis Comms`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 47. Collaboration in Global Expansion
+## 25. Collaboration in M&A
 
 **Scenario:** Teamwork.
 
-**Question:** How does Global Expansion require cross-functional collaboration?
+**Question:** How does M&A require cross-functional collaboration?
 
-**Key Concepts:** `Global Expansion`, `Collaboration`
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `M&A`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -761,89 +407,7 @@ sequenceDiagram
 
 ---
 
-## 48. Collaboration in Culture
-
-**Scenario:** Teamwork.
-
-**Question:** How does Culture require cross-functional collaboration?
-
-**Key Concepts:** `Culture`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 49. Global Expansion Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Global Expansion?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Global Expansion`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 50. Ethics in Risk Management
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Risk Management?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Risk Management`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 51. Scaling Compensation Strategy
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Compensation Strategy as the company grows?
-
-**Key Concepts:** `Compensation Strategy`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 52. Challenges in Public Speaking
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Public Speaking?
-
-**Key Concepts:** `Public Speaking`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 53. Deep Dive: IPO
+## 26. Deep Dive: IPO
 
 **Scenario:** Assessing depth in IPO.
 
@@ -857,33 +421,11 @@ graph LR
 
 ---
 
-## 54. Tooling: Risk Management
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Risk Management to improve efficiency?
-
-**Key Concepts:** `Risk Management`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 55. Tooling: Culture
+## 27. Tooling: Culture
 
 **Scenario:** Proficiency.
 
 **Question:** How do you utilize Culture to improve efficiency?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
 
 **Key Concepts:** `Culture`, `Productivity`
 
@@ -893,154 +435,44 @@ sequenceDiagram
 
 ---
 
-## 56. Teaching Global Expansion
+## 28. Start vs Scale for Change Management
 
-**Scenario:** Mentorship.
+**Scenario:** Context.
 
-**Question:** How would you teach Global Expansion to a junior team member?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Global Expansion`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 57. Challenges in Org Design
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Org Design?
-
-**Key Concepts:** `Org Design`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 58. Challenges in Board Mgmt
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Board Mgmt?
-
-**Key Concepts:** `Board Mgmt`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 59. Public Speaking Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Public Speaking?
-
-**Key Concepts:** `Public Speaking`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 60. Mistakes in Org Design
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Org Design?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Org Design`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 61. Teaching Risk Management
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Risk Management to a junior team member?
-
-**Key Concepts:** `Risk Management`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 62. Metrics for Risk Management
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Risk Management?
-
-**Key Concepts:** `Risk Management`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 63. Ethics in Capital Allocation
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Capital Allocation?
+**Question:** How does your approach to Change Management differ in a startup vs a large corp?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Capital Allocation`, `Ethics`
+**Key Concepts:** `Change Management`, `Context`
 
 ### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
 
 ---
 
-## 64. Future of Capital Allocation
+## 29. Collaboration in Investor Relations
 
-**Scenario:** Trends.
+**Scenario:** Teamwork.
 
-**Question:** Where do you see Capital Allocation heading in the next 5 years?
+**Question:** How does Investor Relations require cross-functional collaboration?
 
-**Key Concepts:** `Capital Allocation`, `Vision`
+**Key Concepts:** `Investor Relations`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 65. Deep Dive: Org Design
+## 30. Scaling Public Speaking
 
-**Scenario:** Assessing depth in Org Design.
+**Scenario:** Growth.
 
-**Question:** Can you explain Org Design in detail and how you have applied it in your past role?
+**Question:** How do you scale Public Speaking as the company grows?
 
 ```mermaid
 sequenceDiagram
@@ -1050,15 +482,29 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Org Design`, `Experience`
+**Key Concepts:** `Public Speaking`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 66. Mistakes in Investor Relations
+## 31. Ethics in Compensation Strategy
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Compensation Strategy?
+
+**Key Concepts:** `Compensation Strategy`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 32. Mistakes in Investor Relations
 
 **Scenario:** Learning.
 
@@ -1072,13 +518,27 @@ sequenceDiagram
 
 ---
 
-## 67. Mistakes in Capital Allocation
+## 33. Challenges in Risk Management
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Risk Management?
+
+**Key Concepts:** `Risk Management`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 34. Mistakes in ESG
 
 **Scenario:** Learning.
 
-**Question:** What common mistakes do people make with Capital Allocation?
+**Question:** What common mistakes do people make with ESG?
 
-**Key Concepts:** `Capital Allocation`, `Experience`
+**Key Concepts:** `ESG`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Doing it wrong.
@@ -1086,25 +546,101 @@ sequenceDiagram
 
 ---
 
-## 68. Scaling Board Mgmt
+## 35. Metrics for Crisis Comms
 
-**Scenario:** Growth.
+**Scenario:** Measurement.
 
-**Question:** How do you scale Board Mgmt as the company grows?
+**Question:** How do you measure success in Crisis Comms?
 
-**Key Concepts:** `Board Mgmt`, `Scale`
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Crisis Comms`, `Analytics`
 
 ### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
 
 ---
 
-## 69. Crisis Comms Best Practices
+## 36. Ethics in Crisis Comms
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Crisis Comms?
+
+**Key Concepts:** `Crisis Comms`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 37. Future of Capital Allocation
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Capital Allocation heading in the next 5 years?
+
+**Key Concepts:** `Capital Allocation`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 38. Teaching Crisis Comms
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Crisis Comms to a junior team member?
+
+**Key Concepts:** `Crisis Comms`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 39. Challenges in Investor Relations
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Investor Relations?
+
+**Key Concepts:** `Investor Relations`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 40. Crisis Comms Best Practices
 
 **Scenario:** Standardization.
 
 **Question:** What are the industry best practices for Crisis Comms?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
 
 **Key Concepts:** `Crisis Comms`, `Standards`
 
@@ -1114,25 +650,32 @@ sequenceDiagram
 
 ---
 
-## 70. Scaling Risk Management
+## 41. Challenges in ESG
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding ESG?
+
+**Key Concepts:** `ESG`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 42. Scaling Capital Allocation
 
 **Scenario:** Growth.
 
-**Question:** How do you scale Risk Management as the company grows?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
+**Question:** How do you scale Capital Allocation as the company grows?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Risk Management`, `Scale`
+**Key Concepts:** `Capital Allocation`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -1140,7 +683,7 @@ graph LR
 
 ---
 
-## 71. Teaching Board Mgmt
+## 43. Teaching Board Mgmt
 
 **Scenario:** Mentorship.
 
@@ -1154,103 +697,7 @@ graph LR
 
 ---
 
-## 72. Metrics for Board Mgmt
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Board Mgmt?
-
-**Key Concepts:** `Board Mgmt`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 73. Metrics for Crisis Comms
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Crisis Comms?
-
-**Key Concepts:** `Crisis Comms`, `Analytics`
-
-### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
-
----
-
-## 74. Future of Risk Management
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Risk Management heading in the next 5 years?
-
-**Key Concepts:** `Risk Management`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 75. Start vs Scale for Culture
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Culture differ in a startup vs a large corp?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Culture`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 76. Start vs Scale for Capital Allocation
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Capital Allocation differ in a startup vs a large corp?
-
-**Key Concepts:** `Capital Allocation`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 77. Compensation Strategy Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Compensation Strategy?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Compensation Strategy`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 78. Mistakes in Public Speaking
+## 44. Mistakes in Public Speaking
 
 **Scenario:** Learning.
 
@@ -1264,25 +711,11 @@ graph LR
 
 ---
 
-## 79. Risk Management Best Practices
+## 45. Collaboration in Compensation Strategy
 
-**Scenario:** Standardization.
+**Scenario:** Teamwork.
 
-**Question:** What are the industry best practices for Risk Management?
-
-**Key Concepts:** `Risk Management`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 80. Ethics in Org Design
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Org Design?
+**Question:** How does Compensation Strategy require cross-functional collaboration?
 
 ```mermaid
 sequenceDiagram
@@ -1292,140 +725,15 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Org Design`, `Ethics`
+**Key Concepts:** `Compensation Strategy`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 81. Scaling Culture
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Culture as the company grows?
-
-**Key Concepts:** `Culture`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 82. Teaching Public Speaking
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Public Speaking to a junior team member?
-
-**Key Concepts:** `Public Speaking`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 83. Challenges in Capital Allocation
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Capital Allocation?
-
-**Key Concepts:** `Capital Allocation`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 84. Start vs Scale for Crisis Comms
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Crisis Comms differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Crisis Comms`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 85. Teaching Org Design
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Org Design to a junior team member?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Org Design`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 86. Mistakes in Crisis Comms
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Crisis Comms?
-
-**Key Concepts:** `Crisis Comms`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 87. Mistakes in M&A
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with M&A?
-
-**Key Concepts:** `M&A`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 88. Challenges in Change Management
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Change Management?
-
-**Key Concepts:** `Change Management`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 89. Deep Dive: Digital Transformation
+## 46. Deep Dive: Digital Transformation
 
 **Scenario:** Assessing depth in Digital Transformation.
 
@@ -1439,11 +747,135 @@ sequenceDiagram
 
 ---
 
-## 90. Scaling Crisis Comms
+## 47. Challenges in M&A
 
-**Scenario:** Growth.
+**Scenario:** Problem Solving.
 
-**Question:** How do you scale Crisis Comms as the company grows?
+**Question:** What are the biggest challenges you've faced regarding M&A?
+
+**Key Concepts:** `M&A`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 48. Collaboration in IPO
+
+**Scenario:** Teamwork.
+
+**Question:** How does IPO require cross-functional collaboration?
+
+**Key Concepts:** `IPO`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 49. Tooling: Crisis Comms
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Crisis Comms to improve efficiency?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Crisis Comms`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 50. Metrics for ESG
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in ESG?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `ESG`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 51. Ethics in IPO
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding IPO?
+
+**Key Concepts:** `IPO`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 52. Board Mgmt Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Board Mgmt?
+
+**Key Concepts:** `Board Mgmt`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 53. Metrics for Board Mgmt
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Board Mgmt?
+
+**Key Concepts:** `Board Mgmt`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 54. Challenges in Crisis Comms
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Crisis Comms?
+
+**Key Concepts:** `Crisis Comms`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 55. Start vs Scale for Compensation Strategy
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Compensation Strategy differ in a startup vs a large corp?
 
 ```mermaid
 sequenceDiagram
@@ -1453,6 +885,53 @@ sequenceDiagram
     B-->>A: Result
 ```
 
+**Key Concepts:** `Compensation Strategy`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 56. Deep Dive: Compensation Strategy
+
+**Scenario:** Assessing depth in Compensation Strategy.
+
+**Question:** Can you explain Compensation Strategy in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Compensation Strategy`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 57. Mistakes in Digital Transformation
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Digital Transformation?
+
+**Key Concepts:** `Digital Transformation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 58. Scaling Crisis Comms
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Crisis Comms as the company grows?
+
 **Key Concepts:** `Crisis Comms`, `Scale`
 
 ### Candidate Response Paths
@@ -1461,44 +940,33 @@ sequenceDiagram
 
 ---
 
-## 91. IPO Best Practices
+## 59. Scaling Org Design
 
-**Scenario:** Standardization.
+**Scenario:** Growth.
 
-**Question:** What are the industry best practices for IPO?
+**Question:** How do you scale Org Design as the company grows?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `IPO`, `Standards`
+**Key Concepts:** `Org Design`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 92. Ethics in Global Expansion
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Global Expansion?
-
-**Key Concepts:** `Global Expansion`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 93. Deep Dive: Capital Allocation
+## 60. Deep Dive: Capital Allocation
 
 **Scenario:** Assessing depth in Capital Allocation.
 
 **Question:** Can you explain Capital Allocation in detail and how you have applied it in your past role?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
 
 **Key Concepts:** `Capital Allocation`, `Experience`
 
@@ -1508,7 +976,282 @@ sequenceDiagram
 
 ---
 
-## 94. Scaling Investor Relations
+## 61. Tooling: Global Expansion
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Global Expansion to improve efficiency?
+
+**Key Concepts:** `Global Expansion`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 62. Deep Dive: Culture
+
+**Scenario:** Assessing depth in Culture.
+
+**Question:** Can you explain Culture in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Culture`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 63. Capital Allocation Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Capital Allocation?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Capital Allocation`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 64. Org Design Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Org Design?
+
+**Key Concepts:** `Org Design`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 65. Tooling: Org Design
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Org Design to improve efficiency?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Org Design`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 66. Start vs Scale for Capital Allocation
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Capital Allocation differ in a startup vs a large corp?
+
+**Key Concepts:** `Capital Allocation`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 67. M&A Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for M&A?
+
+**Key Concepts:** `M&A`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 68. Deep Dive: Crisis Comms
+
+**Scenario:** Assessing depth in Crisis Comms.
+
+**Question:** Can you explain Crisis Comms in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Crisis Comms`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 69. Challenges in Culture
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Culture?
+
+**Key Concepts:** `Culture`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 70. Mistakes in Capital Allocation
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Capital Allocation?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Capital Allocation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 71. Ethics in Board Mgmt
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Board Mgmt?
+
+**Key Concepts:** `Board Mgmt`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 72. Collaboration in ESG
+
+**Scenario:** Teamwork.
+
+**Question:** How does ESG require cross-functional collaboration?
+
+**Key Concepts:** `ESG`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 73. Future of Org Design
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Org Design heading in the next 5 years?
+
+**Key Concepts:** `Org Design`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 74. Collaboration in Public Speaking
+
+**Scenario:** Teamwork.
+
+**Question:** How does Public Speaking require cross-functional collaboration?
+
+**Key Concepts:** `Public Speaking`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 75. Scaling M&A
+
+**Scenario:** Growth.
+
+**Question:** How do you scale M&A as the company grows?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `M&A`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 76. Tooling: Capital Allocation
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Capital Allocation to improve efficiency?
+
+**Key Concepts:** `Capital Allocation`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 77. Teaching Investor Relations
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Investor Relations to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Investor Relations`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 78. Scaling Investor Relations
 
 **Scenario:** Growth.
 
@@ -1522,11 +1265,25 @@ sequenceDiagram
 
 ---
 
-## 95. Start vs Scale for Org Design
+## 79. Mistakes in Risk Management
 
-**Scenario:** Context.
+**Scenario:** Learning.
 
-**Question:** How does your approach to Org Design differ in a startup vs a large corp?
+**Question:** What common mistakes do people make with Risk Management?
+
+**Key Concepts:** `Risk Management`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 80. Deep Dive: Change Management
+
+**Scenario:** Assessing depth in Change Management.
+
+**Question:** Can you explain Change Management in detail and how you have applied it in your past role?
 
 ```mermaid
 sequenceDiagram
@@ -1536,54 +1293,118 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Org Design`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 96. Mistakes in Change Management
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Change Management?
-
 **Key Concepts:** `Change Management`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
 
 ---
 
-## 97. Future of Global Expansion
+## 81. Scaling IPO
 
-**Scenario:** Trends.
+**Scenario:** Growth.
 
-**Question:** Where do you see Global Expansion heading in the next 5 years?
+**Question:** How do you scale IPO as the company grows?
 
-**Key Concepts:** `Global Expansion`, `Vision`
+**Key Concepts:** `IPO`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 98. Tooling: Compensation Strategy
+## 82. Metrics for IPO
 
-**Scenario:** Proficiency.
+**Scenario:** Measurement.
 
-**Question:** How do you utilize Compensation Strategy to improve efficiency?
+**Question:** How do you measure success in IPO?
+
+**Key Concepts:** `IPO`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 83. IPO Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for IPO?
+
+**Key Concepts:** `IPO`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 84. Challenges in Capital Allocation
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Capital Allocation?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Compensation Strategy`, `Productivity`
+**Key Concepts:** `Capital Allocation`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 85. Challenges in Compensation Strategy
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Compensation Strategy?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Compensation Strategy`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 86. Metrics for Investor Relations
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Investor Relations?
+
+**Key Concepts:** `Investor Relations`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 87. Tooling: Change Management
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Change Management to improve efficiency?
+
+**Key Concepts:** `Change Management`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -1591,13 +1412,27 @@ sequenceDiagram
 
 ---
 
-## 99. Mistakes in Global Expansion
+## 88. Collaboration in Board Mgmt
+
+**Scenario:** Teamwork.
+
+**Question:** How does Board Mgmt require cross-functional collaboration?
+
+**Key Concepts:** `Board Mgmt`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 89. Mistakes in Board Mgmt
 
 **Scenario:** Learning.
 
-**Question:** What common mistakes do people make with Global Expansion?
+**Question:** What common mistakes do people make with Board Mgmt?
 
-**Key Concepts:** `Global Expansion`, `Experience`
+**Key Concepts:** `Board Mgmt`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Doing it wrong.
@@ -1605,11 +1440,93 @@ sequenceDiagram
 
 ---
 
-## 100. Scaling IPO
+## 90. Mistakes in Culture
 
-**Scenario:** Growth.
+**Scenario:** Learning.
 
-**Question:** How do you scale IPO as the company grows?
+**Question:** What common mistakes do people make with Culture?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Culture`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 91. Metrics for Risk Management
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Risk Management?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Risk Management`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 92. Mistakes in Org Design
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Org Design?
+
+**Key Concepts:** `Org Design`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 93. Deep Dive: M&A
+
+**Scenario:** Assessing depth in M&A.
+
+**Question:** Can you explain M&A in detail and how you have applied it in your past role?
+
+**Key Concepts:** `M&A`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 94. Collaboration in Change Management
+
+**Scenario:** Teamwork.
+
+**Question:** How does Change Management require cross-functional collaboration?
+
+**Key Concepts:** `Change Management`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 95. Culture Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Culture?
 
 ```mermaid
 sequenceDiagram
@@ -1619,10 +1536,92 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `IPO`, `Scale`
+**Key Concepts:** `Culture`, `Standards`
 
 ### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 96. Challenges in Org Design
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Org Design?
+
+**Key Concepts:** `Org Design`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 97. Teaching Risk Management
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Risk Management to a junior team member?
+
+**Key Concepts:** `Risk Management`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 98. Start vs Scale for Investor Relations
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Investor Relations differ in a startup vs a large corp?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Investor Relations`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 99. Deep Dive: Public Speaking
+
+**Scenario:** Assessing depth in Public Speaking.
+
+**Question:** Can you explain Public Speaking in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Public Speaking`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 100. Ethics in ESG
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding ESG?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `ESG`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---

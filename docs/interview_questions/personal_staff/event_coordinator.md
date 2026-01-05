@@ -4,84 +4,7 @@ This document contains 100 interview questions tailored for the event_coordinato
 
 ---
 
-## 1. Discretion
-
-**Scenario:** Overhearing sensitive info.
-
-**Question:** How do you handle overhearing confidential or sensitive information about the principal?
-
-**Key Concepts:** `Privacy`, `Discretion`
-
-### Candidate Response Paths
-*   **Junior**: I ignore it.
-*   **Senior**: I maintain absolute confidentiality and act as if I heard nothing unless it impacts safety.
-
----
-
-## 2. Anticipation
-
-**Scenario:** Principal is busy.
-
-**Question:** How do you anticipate the needs of the principal before they ask?
-
-**Key Concepts:** `Proactivity`, `Service`
-
-### Candidate Response Paths
-*   **Junior**: I wait for instructions.
-*   **Senior**: I learn their routines and preferences to have everything ready in advance.
-
----
-
-## 3. Adaptability
-
-**Scenario:** Last minute change.
-
-**Question:** The schedule changes completely 10 minutes before an event. What do you do?
-
-**Key Concepts:** `Adaptability`, `Composure`
-
-### Candidate Response Paths
-*   **Junior**: Panic.
-*   **Senior**: Calmly execute the contingency plan and inform relevant parties.
-
----
-
-## 4. Vendor Management
-
-**Scenario:** Poor service.
-
-**Question:** A vendor is not delivering to the expected standard. How do you handle it?
-
-**Key Concepts:** `Vendor Mgmt`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: Complain to the principal.
-*   **Senior**: Address it directly with the vendor, demand correction, or source a replacement.
-
----
-
-## 5. Service Mindset
-
-**Scenario:** Difficult request.
-
-**Question:** The principal asks for something nearly impossible. How do you respond?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Resourcefulness`, `Can-do`
-
-### Candidate Response Paths
-*   **Junior**: Say no.
-*   **Senior**: I say 'I will see what I can do' and exhaust every avenue to make it happen.
-
----
-
-## 6. Conflict Resolution
+## 1. Conflict Resolution
 
 **Scenario:** Disagreement with a peer.
 
@@ -95,16 +18,11 @@ graph LR
 
 ---
 
-## 7. Failure Handling
+## 2. Failure Handling
 
 **Scenario:** A project went wrong.
 
 **Question:** Describe a time you failed. What happened and what did you learn?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
 
 **Key Concepts:** `Growth Mindset`, `Resilience`
 
@@ -114,7 +32,7 @@ graph LR
 
 ---
 
-## 8. Prioritization
+## 3. Prioritization
 
 **Scenario:** Too many tasks.
 
@@ -128,7 +46,7 @@ graph LR
 
 ---
 
-## 9. Adaptability
+## 4. Adaptability
 
 **Scenario:** Changing requirements.
 
@@ -142,7 +60,7 @@ graph LR
 
 ---
 
-## 10. Communication
+## 5. Communication
 
 **Scenario:** Explaining complex topics.
 
@@ -164,7 +82,7 @@ sequenceDiagram
 
 ---
 
-## 11. Teamwork
+## 6. Teamwork
 
 **Scenario:** Collaborating with difficult personalities.
 
@@ -178,11 +96,16 @@ sequenceDiagram
 
 ---
 
-## 12. Innovation
+## 7. Innovation
 
 **Scenario:** Improving a process.
 
 **Question:** Tell me about a time you improved a process or workflow.
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
 
 **Key Concepts:** `Innovation`, `Efficiency`
 
@@ -192,7 +115,7 @@ sequenceDiagram
 
 ---
 
-## 13. Feedback
+## 8. Feedback
 
 **Scenario:** Receiving constructive criticism.
 
@@ -206,16 +129,11 @@ sequenceDiagram
 
 ---
 
-## 14. Leadership
+## 9. Leadership
 
 **Scenario:** Leading without authority.
 
 **Question:** Describe a time you demonstrated leadership when you weren't the formal manager.
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
 
 **Key Concepts:** `Leadership`, `Influence`
 
@@ -225,7 +143,7 @@ sequenceDiagram
 
 ---
 
-## 15. Decision Making
+## 10. Decision Making
 
 **Scenario:** Incomplete information.
 
@@ -247,13 +165,27 @@ sequenceDiagram
 
 ---
 
-## 16. Tooling: Luxury Standards
+## 11. Future of Feedback
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Feedback heading in the next 5 years?
+
+**Key Concepts:** `Feedback`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 12. Tooling: Conflict
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Luxury Standards to improve efficiency?
+**Question:** How do you utilize Conflict to improve efficiency?
 
-**Key Concepts:** `Luxury Standards`, `Productivity`
+**Key Concepts:** `Conflict`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -261,159 +193,13 @@ sequenceDiagram
 
 ---
 
-## 17. Future of Security
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Security heading in the next 5 years?
-
-**Key Concepts:** `Security`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 18. Mistakes in Protocol
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Protocol?
-
-**Key Concepts:** `Protocol`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 19. Deep Dive: Crisis Mgmt
-
-**Scenario:** Assessing depth in Crisis Mgmt.
-
-**Question:** Can you explain Crisis Mgmt in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Crisis Mgmt`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 20. Future of Protocol
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Protocol heading in the next 5 years?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Protocol`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 21. Collaboration in Hospitality
-
-**Scenario:** Teamwork.
-
-**Question:** How does Hospitality require cross-functional collaboration?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Hospitality`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 22. Ethics in Vendor Negotiation
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Vendor Negotiation?
-
-**Key Concepts:** `Vendor Negotiation`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 23. Collaboration in Scheduling
-
-**Scenario:** Teamwork.
-
-**Question:** How does Scheduling require cross-functional collaboration?
-
-**Key Concepts:** `Scheduling`, `Collaboration`
-
-### Candidate Response Paths
-*   **Junior**: I talk to people.
-*   **Senior**: Alignment with other depts and shared goals.
-
----
-
-## 24. Ethics in Luxury Standards
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Luxury Standards?
-
-**Key Concepts:** `Luxury Standards`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 25. Teaching Scheduling
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Scheduling to a junior team member?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Scheduling`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 26. Scaling Vendor Negotiation
+## 13. Scaling Feedback
 
 **Scenario:** Growth.
 
-**Question:** How do you scale Vendor Negotiation as the company grows?
+**Question:** How do you scale Feedback as the company grows?
 
-**Key Concepts:** `Vendor Negotiation`, `Scale`
+**Key Concepts:** `Feedback`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -421,46 +207,18 @@ graph LR
 
 ---
 
-## 27. Teaching Relationship Mgmt
+## 14. Collaboration in Innovation
 
-**Scenario:** Mentorship.
+**Scenario:** Teamwork.
 
-**Question:** How would you teach Relationship Mgmt to a junior team member?
-
-**Key Concepts:** `Relationship Mgmt`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 28. Future of Crisis Mgmt
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Crisis Mgmt heading in the next 5 years?
+**Question:** How does Innovation require cross-functional collaboration?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Crisis Mgmt`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 29. Collaboration in Security
-
-**Scenario:** Teamwork.
-
-**Question:** How does Security require cross-functional collaboration?
-
-**Key Concepts:** `Security`, `Collaboration`
+**Key Concepts:** `Innovation`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -468,89 +226,11 @@ graph LR
 
 ---
 
-## 30. Logistics Best Practices
+## 15. Future of Time Management
 
-**Scenario:** Standardization.
+**Scenario:** Trends.
 
-**Question:** What are the industry best practices for Logistics?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Logistics`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 31. Ethics in Hospitality
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Hospitality?
-
-**Key Concepts:** `Hospitality`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 32. Event Planning Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Event Planning?
-
-**Key Concepts:** `Event Planning`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 33. Deep Dive: Hospitality
-
-**Scenario:** Assessing depth in Hospitality.
-
-**Question:** Can you explain Hospitality in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Hospitality`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 34. Vendor Negotiation Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Vendor Negotiation?
-
-**Key Concepts:** `Vendor Negotiation`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 35. Collaboration in Relationship Mgmt
-
-**Scenario:** Teamwork.
-
-**Question:** How does Relationship Mgmt require cross-functional collaboration?
+**Question:** Where do you see Time Management heading in the next 5 years?
 
 ```mermaid
 graph LR
@@ -559,12 +239,21 @@ graph LR
     B --No--> D[End]
 ```
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
+**Key Concepts:** `Time Management`, `Vision`
 
-**Key Concepts:** `Relationship Mgmt`, `Collaboration`
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 16. Collaboration in Teamwork
+
+**Scenario:** Teamwork.
+
+**Question:** How does Teamwork require cross-functional collaboration?
+
+**Key Concepts:** `Teamwork`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -572,109 +261,13 @@ graph LR
 
 ---
 
-## 36. Future of Relationship Mgmt
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Relationship Mgmt heading in the next 5 years?
-
-**Key Concepts:** `Relationship Mgmt`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 37. Mistakes in Relationship Mgmt
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Relationship Mgmt?
-
-**Key Concepts:** `Relationship Mgmt`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 38. Deep Dive: Security
-
-**Scenario:** Assessing depth in Security.
-
-**Question:** Can you explain Security in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Security`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 39. Future of Travel Planning
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Travel Planning heading in the next 5 years?
-
-**Key Concepts:** `Travel Planning`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 40. Challenges in Protocol
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Protocol?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Protocol`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 41. Start vs Scale for Confidentiality
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Confidentiality differ in a startup vs a large corp?
-
-**Key Concepts:** `Confidentiality`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 42. Ethics in Logistics
+## 17. Ethics in Conflict
 
 **Scenario:** Ethics.
 
-**Question:** What are the ethical considerations regarding Logistics?
+**Question:** What are the ethical considerations regarding Conflict?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Logistics`, `Ethics`
+**Key Concepts:** `Conflict`, `Ethics`
 
 ### Candidate Response Paths
 *   **Junior**: Be nice.
@@ -682,109 +275,13 @@ graph LR
 
 ---
 
-## 43. Mistakes in Inventory Mgmt
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Inventory Mgmt?
-
-**Key Concepts:** `Inventory Mgmt`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 44. Ethics in Relationship Mgmt
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Relationship Mgmt?
-
-**Key Concepts:** `Relationship Mgmt`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 45. Future of Hospitality
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Hospitality heading in the next 5 years?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Hospitality`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 46. Scaling Protocol
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Protocol as the company grows?
-
-**Key Concepts:** `Protocol`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 47. Future of Etiquette
-
-**Scenario:** Trends.
-
-**Question:** Where do you see Etiquette heading in the next 5 years?
-
-**Key Concepts:** `Etiquette`, `Vision`
-
-### Candidate Response Paths
-*   **Junior**: It will get better.
-*   **Senior**: Emerging trends, AI impact, and market shifts.
-
----
-
-## 48. Teaching Luxury Standards
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Luxury Standards to a junior team member?
-
-**Key Concepts:** `Luxury Standards`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 49. Metrics for Event Planning
+## 18. Metrics for Teamwork
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Event Planning?
+**Question:** How do you measure success in Teamwork?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Event Planning`, `Analytics`
+**Key Concepts:** `Teamwork`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -792,20 +289,35 @@ graph LR
 
 ---
 
-## 50. Scaling Scheduling
+## 19. Metrics for Conflict
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Conflict?
+
+**Key Concepts:** `Conflict`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 20. Scaling Integrity
 
 **Scenario:** Growth.
 
-**Question:** How do you scale Scheduling as the company grows?
+**Question:** How do you scale Integrity as the company grows?
 
 ```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
 ```
 
-**Key Concepts:** `Scheduling`, `Scale`
+**Key Concepts:** `Integrity`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -813,13 +325,18 @@ graph LR
 
 ---
 
-## 51. Tooling: Security
+## 21. Tooling: Problem Solving
 
 **Scenario:** Proficiency.
 
-**Question:** How do you utilize Security to improve efficiency?
+**Question:** How do you utilize Problem Solving to improve efficiency?
 
-**Key Concepts:** `Security`, `Productivity`
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Problem Solving`, `Productivity`
 
 ### Candidate Response Paths
 *   **Junior**: I use it daily.
@@ -827,82 +344,27 @@ graph LR
 
 ---
 
-## 52. Tooling: Travel Planning
+## 22. Collaboration in Learning
 
-**Scenario:** Proficiency.
+**Scenario:** Teamwork.
 
-**Question:** How do you utilize Travel Planning to improve efficiency?
+**Question:** How does Learning require cross-functional collaboration?
 
-**Key Concepts:** `Travel Planning`, `Productivity`
+**Key Concepts:** `Learning`, `Collaboration`
 
 ### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
 
 ---
 
-## 53. Scaling Inventory Mgmt
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Inventory Mgmt as the company grows?
-
-**Key Concepts:** `Inventory Mgmt`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 54. Scaling Logistics
-
-**Scenario:** Growth.
-
-**Question:** How do you scale Logistics as the company grows?
-
-**Key Concepts:** `Logistics`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 55. Ethics in Scheduling
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Scheduling?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Scheduling`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 56. Metrics for Logistics
+## 23. Metrics for Empathy
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Logistics?
+**Question:** How do you measure success in Empathy?
 
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Logistics`, `Analytics`
+**Key Concepts:** `Empathy`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -910,53 +372,25 @@ sequenceDiagram
 
 ---
 
-## 57. Challenges in Etiquette
+## 24. Deep Dive: Adaptability
 
-**Scenario:** Problem Solving.
+**Scenario:** Assessing depth in Adaptability.
 
-**Question:** What are the biggest challenges you've faced regarding Etiquette?
+**Question:** Can you explain Adaptability in detail and how you have applied it in your past role?
 
-**Key Concepts:** `Etiquette`, `Problem Solving`
+**Key Concepts:** `Adaptability`, `Experience`
 
 ### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
 
 ---
 
-## 58. Privacy Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Privacy?
-
-**Key Concepts:** `Privacy`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 59. Tooling: Crisis Mgmt
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Crisis Mgmt to improve efficiency?
-
-**Key Concepts:** `Crisis Mgmt`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 60. Future of Logistics
+## 25. Future of Resilience
 
 **Scenario:** Trends.
 
-**Question:** Where do you see Logistics heading in the next 5 years?
+**Question:** Where do you see Resilience heading in the next 5 years?
 
 ```mermaid
 sequenceDiagram
@@ -966,7 +400,7 @@ sequenceDiagram
     B-->>A: Result
 ```
 
-**Key Concepts:** `Logistics`, `Vision`
+**Key Concepts:** `Resilience`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -974,27 +408,60 @@ sequenceDiagram
 
 ---
 
-## 61. Scaling Confidentiality
+## 26. Challenges in Feedback
 
-**Scenario:** Growth.
+**Scenario:** Problem Solving.
 
-**Question:** How do you scale Confidentiality as the company grows?
+**Question:** What are the biggest challenges you've faced regarding Feedback?
 
-**Key Concepts:** `Confidentiality`, `Scale`
+**Key Concepts:** `Feedback`, `Problem Solving`
 
 ### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
 
 ---
 
-## 62. Metrics for Security
+## 27. Teaching Conflict
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Conflict to a junior team member?
+
+**Key Concepts:** `Conflict`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 28. Collaboration in Feedback
+
+**Scenario:** Teamwork.
+
+**Question:** How does Feedback require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Feedback`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 29. Metrics for Focus
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Security?
+**Question:** How do you measure success in Focus?
 
-**Key Concepts:** `Security`, `Analytics`
+**Key Concepts:** `Focus`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -1002,44 +469,11 @@ sequenceDiagram
 
 ---
 
-## 63. Scaling Luxury Standards
+## 30. Collaboration in Leadership
 
-**Scenario:** Growth.
+**Scenario:** Teamwork.
 
-**Question:** How do you scale Luxury Standards as the company grows?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Luxury Standards`, `Scale`
-
-### Candidate Response Paths
-*   **Junior**: Hire more people.
-*   **Senior**: Process automation, documentation, and leverage.
-
----
-
-## 64. Start vs Scale for Event Planning
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Event Planning differ in a startup vs a large corp?
-
-**Key Concepts:** `Event Planning`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 65. Challenges in Travel Planning
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Travel Planning?
+**Question:** How does Leadership require cross-functional collaboration?
 
 ```mermaid
 graph LR
@@ -1048,251 +482,7 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Travel Planning`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 66. Start vs Scale for Hospitality
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Hospitality differ in a startup vs a large corp?
-
-**Key Concepts:** `Hospitality`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 67. Start vs Scale for Etiquette
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Etiquette differ in a startup vs a large corp?
-
-**Key Concepts:** `Etiquette`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 68. Deep Dive: Protocol
-
-**Scenario:** Assessing depth in Protocol.
-
-**Question:** Can you explain Protocol in detail and how you have applied it in your past role?
-
-**Key Concepts:** `Protocol`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 69. Mistakes in Logistics
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Logistics?
-
-**Key Concepts:** `Logistics`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 70. Deep Dive: Confidentiality
-
-**Scenario:** Assessing depth in Confidentiality.
-
-**Question:** Can you explain Confidentiality in detail and how you have applied it in your past role?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Confidentiality`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Basic definition.
-*   **Senior**: Deep practical application and nuances.
-
----
-
-## 71. Challenges in Vendor Negotiation
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Vendor Negotiation?
-
-**Key Concepts:** `Vendor Negotiation`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 72. Travel Planning Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Travel Planning?
-
-**Key Concepts:** `Travel Planning`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 73. Challenges in Scheduling
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Scheduling?
-
-**Key Concepts:** `Scheduling`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 74. Challenges in Hospitality
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Hospitality?
-
-**Key Concepts:** `Hospitality`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 75. Start vs Scale for Inventory Mgmt
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Inventory Mgmt differ in a startup vs a large corp?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Inventory Mgmt`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 76. Teaching Hospitality
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Hospitality to a junior team member?
-
-**Key Concepts:** `Hospitality`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 77. Start vs Scale for Protocol
-
-**Scenario:** Context.
-
-**Question:** How does your approach to Protocol differ in a startup vs a large corp?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Protocol`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 78. Challenges in Confidentiality
-
-**Scenario:** Problem Solving.
-
-**Question:** What are the biggest challenges you've faced regarding Confidentiality?
-
-**Key Concepts:** `Confidentiality`, `Problem Solving`
-
-### Candidate Response Paths
-*   **Junior**: It was hard.
-*   **Senior**: Specific examples of obstacles and strategies to overcome them.
-
----
-
-## 79. Tooling: Confidentiality
-
-**Scenario:** Proficiency.
-
-**Question:** How do you utilize Confidentiality to improve efficiency?
-
-**Key Concepts:** `Confidentiality`, `Productivity`
-
-### Candidate Response Paths
-*   **Junior**: I use it daily.
-*   **Senior**: Advanced features and automation.
-
----
-
-## 80. Collaboration in Travel Planning
-
-**Scenario:** Teamwork.
-
-**Question:** How does Travel Planning require cross-functional collaboration?
-
-```mermaid
-sequenceDiagram
-    participant A as User
-    participant B as System
-    A->>B: Action
-    B-->>A: Result
-```
-
-**Key Concepts:** `Travel Planning`, `Collaboration`
+**Key Concepts:** `Leadership`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -1300,13 +490,95 @@ sequenceDiagram
 
 ---
 
-## 81. Metrics for Hospitality
+## 31. Challenges in Innovation
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Innovation?
+
+**Key Concepts:** `Innovation`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 32. Conflict Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Conflict?
+
+**Key Concepts:** `Conflict`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 33. Collaboration in Empathy
+
+**Scenario:** Teamwork.
+
+**Question:** How does Empathy require cross-functional collaboration?
+
+**Key Concepts:** `Empathy`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 34. Deep Dive: Empathy
+
+**Scenario:** Assessing depth in Empathy.
+
+**Question:** Can you explain Empathy in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Empathy`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 35. Collaboration in Focus
+
+**Scenario:** Teamwork.
+
+**Question:** How does Focus require cross-functional collaboration?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Focus`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 36. Metrics for Communication
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Hospitality?
+**Question:** How do you measure success in Communication?
 
-**Key Concepts:** `Hospitality`, `Analytics`
+**Key Concepts:** `Communication`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -1314,13 +586,553 @@ sequenceDiagram
 
 ---
 
-## 82. Future of Luxury Standards
+## 37. Deep Dive: Innovation
+
+**Scenario:** Assessing depth in Innovation.
+
+**Question:** Can you explain Innovation in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Innovation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 38. Scaling Resilience
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Resilience as the company grows?
+
+**Key Concepts:** `Resilience`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 39. Start vs Scale for Empathy
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Empathy differ in a startup vs a large corp?
+
+**Key Concepts:** `Empathy`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 40. Mistakes in Empathy
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Empathy?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Empathy`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 41. Challenges in Teamwork
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Teamwork?
+
+**Key Concepts:** `Teamwork`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 42. Deep Dive: Problem Solving
+
+**Scenario:** Assessing depth in Problem Solving.
+
+**Question:** Can you explain Problem Solving in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Problem Solving`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 43. Ethics in Learning
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Learning?
+
+**Key Concepts:** `Learning`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 44. Teaching Integrity
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Integrity to a junior team member?
+
+**Key Concepts:** `Integrity`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 45. Start vs Scale for Leadership
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Leadership differ in a startup vs a large corp?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Leadership`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 46. Deep Dive: Motivation
+
+**Scenario:** Assessing depth in Motivation.
+
+**Question:** Can you explain Motivation in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Motivation`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 47. Scaling Empathy
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Empathy as the company grows?
+
+**Key Concepts:** `Empathy`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 48. Deep Dive: Leadership
+
+**Scenario:** Assessing depth in Leadership.
+
+**Question:** Can you explain Leadership in detail and how you have applied it in your past role?
+
+**Key Concepts:** `Leadership`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 49. Mistakes in Leadership
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Leadership?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Leadership`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 50. Communication Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Communication?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Communication`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 51. Metrics for Time Management
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Time Management?
+
+**Key Concepts:** `Time Management`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 52. Metrics for Integrity
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Integrity?
+
+**Key Concepts:** `Integrity`, `Analytics`
+
+### Candidate Response Paths
+*   **Junior**: I guess.
+*   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 53. Innovation Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Innovation?
+
+**Key Concepts:** `Innovation`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 54. Teaching Leadership
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Leadership to a junior team member?
+
+**Key Concepts:** `Leadership`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 55. Start vs Scale for Innovation
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Innovation differ in a startup vs a large corp?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Innovation`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 56. Deep Dive: Teamwork
+
+**Scenario:** Assessing depth in Teamwork.
+
+**Question:** Can you explain Teamwork in detail and how you have applied it in your past role?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Teamwork`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Basic definition.
+*   **Senior**: Deep practical application and nuances.
+
+---
+
+## 57. Ethics in Feedback
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Feedback?
+
+**Key Concepts:** `Feedback`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 58. Teaching Focus
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Focus to a junior team member?
+
+**Key Concepts:** `Focus`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 59. Teaching Time Management
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Time Management to a junior team member?
+
+**Key Concepts:** `Time Management`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 60. Collaboration in Communication
+
+**Scenario:** Teamwork.
+
+**Question:** How does Communication require cross-functional collaboration?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Communication`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 61. Ethics in Motivation
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Motivation?
+
+**Key Concepts:** `Motivation`, `Ethics`
+
+### Candidate Response Paths
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
+
+---
+
+## 62. Collaboration in Problem Solving
+
+**Scenario:** Teamwork.
+
+**Question:** How does Problem Solving require cross-functional collaboration?
+
+**Key Concepts:** `Problem Solving`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 63. Scaling Conflict
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Conflict as the company grows?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Conflict`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 64. Mistakes in Problem Solving
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Problem Solving?
+
+**Key Concepts:** `Problem Solving`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 65. Challenges in Empathy
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Empathy?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Empathy`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 66. Focus Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Focus?
+
+**Key Concepts:** `Focus`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 67. Mistakes in Communication
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Communication?
+
+**Key Concepts:** `Communication`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 68. Mistakes in Learning
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Learning?
+
+**Key Concepts:** `Learning`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 69. Mistakes in Feedback
+
+**Scenario:** Learning.
+
+**Question:** What common mistakes do people make with Feedback?
+
+**Key Concepts:** `Feedback`, `Experience`
+
+### Candidate Response Paths
+*   **Junior**: Doing it wrong.
+*   **Senior**: Subtle pitfalls and how to avoid them.
+
+---
+
+## 70. Future of Adaptability
 
 **Scenario:** Trends.
 
-**Question:** Where do you see Luxury Standards heading in the next 5 years?
+**Question:** Where do you see Adaptability heading in the next 5 years?
 
-**Key Concepts:** `Luxury Standards`, `Vision`
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Adaptability`, `Vision`
 
 ### Candidate Response Paths
 *   **Junior**: It will get better.
@@ -1328,13 +1140,77 @@ sequenceDiagram
 
 ---
 
-## 83. Deep Dive: Event Planning
+## 71. Future of Innovation
 
-**Scenario:** Assessing depth in Event Planning.
+**Scenario:** Trends.
 
-**Question:** Can you explain Event Planning in detail and how you have applied it in your past role?
+**Question:** Where do you see Innovation heading in the next 5 years?
 
-**Key Concepts:** `Event Planning`, `Experience`
+**Key Concepts:** `Innovation`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 72. Challenges in Integrity
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Integrity?
+
+**Key Concepts:** `Integrity`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 73. Start vs Scale for Communication
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Communication differ in a startup vs a large corp?
+
+**Key Concepts:** `Communication`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 74. Leadership Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Leadership?
+
+**Key Concepts:** `Leadership`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 75. Deep Dive: Resilience
+
+**Scenario:** Assessing depth in Resilience.
+
+**Question:** Can you explain Resilience in detail and how you have applied it in your past role?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Resilience`, `Experience`
 
 ### Candidate Response Paths
 *   **Junior**: Basic definition.
@@ -1342,30 +1218,72 @@ sequenceDiagram
 
 ---
 
-## 84. Metrics for Protocol
+## 76. Start vs Scale for Integrity
 
-**Scenario:** Measurement.
+**Scenario:** Context.
 
-**Question:** How do you measure success in Protocol?
+**Question:** How does your approach to Integrity differ in a startup vs a large corp?
+
+**Key Concepts:** `Integrity`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 77. Ethics in Adaptability
+
+**Scenario:** Ethics.
+
+**Question:** What are the ethical considerations regarding Adaptability?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Protocol`, `Analytics`
+**Key Concepts:** `Adaptability`, `Ethics`
 
 ### Candidate Response Paths
-*   **Junior**: I guess.
-*   **Senior**: Specific KPIs and leading/lagging indicators.
+*   **Junior**: Be nice.
+*   **Senior**: Privacy, bias, and societal impact.
 
 ---
 
-## 85. Collaboration in Privacy
+## 78. Start vs Scale for Conflict
 
-**Scenario:** Teamwork.
+**Scenario:** Context.
 
-**Question:** How does Privacy require cross-functional collaboration?
+**Question:** How does your approach to Conflict differ in a startup vs a large corp?
+
+**Key Concepts:** `Conflict`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 79. Adaptability Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Adaptability?
+
+**Key Concepts:** `Adaptability`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 80. Challenges in Motivation
+
+**Scenario:** Problem Solving.
+
+**Question:** What are the biggest challenges you've faced regarding Motivation?
 
 ```mermaid
 graph LR
@@ -1374,7 +1292,35 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Privacy`, `Collaboration`
+**Key Concepts:** `Motivation`, `Problem Solving`
+
+### Candidate Response Paths
+*   **Junior**: It was hard.
+*   **Senior**: Specific examples of obstacles and strategies to overcome them.
+
+---
+
+## 81. Future of Problem Solving
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Problem Solving heading in the next 5 years?
+
+**Key Concepts:** `Problem Solving`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
+
+---
+
+## 82. Collaboration in Resilience
+
+**Scenario:** Teamwork.
+
+**Question:** How does Resilience require cross-functional collaboration?
+
+**Key Concepts:** `Resilience`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -1382,13 +1328,53 @@ graph LR
 
 ---
 
-## 86. Scaling Privacy
+## 83. Start vs Scale for Time Management
+
+**Scenario:** Context.
+
+**Question:** How does your approach to Time Management differ in a startup vs a large corp?
+
+**Key Concepts:** `Time Management`, `Context`
+
+### Candidate Response Paths
+*   **Junior**: It's the same.
+*   **Senior**: Speed/Chaos vs Process/Stability.
+
+---
+
+## 84. Collaboration in Adaptability
+
+**Scenario:** Teamwork.
+
+**Question:** How does Adaptability require cross-functional collaboration?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Adaptability`, `Collaboration`
+
+### Candidate Response Paths
+*   **Junior**: I talk to people.
+*   **Senior**: Alignment with other depts and shared goals.
+
+---
+
+## 85. Scaling Innovation
 
 **Scenario:** Growth.
 
-**Question:** How do you scale Privacy as the company grows?
+**Question:** How do you scale Innovation as the company grows?
 
-**Key Concepts:** `Privacy`, `Scale`
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Innovation`, `Scale`
 
 ### Candidate Response Paths
 *   **Junior**: Hire more people.
@@ -1396,158 +1382,41 @@ graph LR
 
 ---
 
-## 87. Mistakes in Crisis Mgmt
+## 86. Tooling: Adaptability
 
-**Scenario:** Learning.
+**Scenario:** Proficiency.
 
-**Question:** What common mistakes do people make with Crisis Mgmt?
+**Question:** How do you utilize Adaptability to improve efficiency?
 
-**Key Concepts:** `Crisis Mgmt`, `Experience`
+**Key Concepts:** `Adaptability`, `Productivity`
 
 ### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
 
 ---
 
-## 88. Start vs Scale for Crisis Mgmt
+## 87. Scaling Adaptability
 
-**Scenario:** Context.
+**Scenario:** Growth.
 
-**Question:** How does your approach to Crisis Mgmt differ in a startup vs a large corp?
+**Question:** How do you scale Adaptability as the company grows?
 
-**Key Concepts:** `Crisis Mgmt`, `Context`
+**Key Concepts:** `Adaptability`, `Scale`
 
 ### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
 
 ---
 
-## 89. Teaching Vendor Negotiation
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Vendor Negotiation to a junior team member?
-
-**Key Concepts:** `Vendor Negotiation`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 90. Protocol Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Protocol?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Protocol`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 91. Luxury Standards Best Practices
-
-**Scenario:** Standardization.
-
-**Question:** What are the industry best practices for Luxury Standards?
-
-| Metric | Target | Status |
-|---|---|---|
-| KPI 1 | 100% | Green |
-| KPI 2 | < 5% | Yellow |
-
-**Key Concepts:** `Luxury Standards`, `Standards`
-
-### Candidate Response Paths
-*   **Junior**: List a few.
-*   **Senior**: Discusses why they are best practices and when to break them.
-
----
-
-## 92. Mistakes in Event Planning
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Event Planning?
-
-**Key Concepts:** `Event Planning`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 93. Mistakes in Hospitality
-
-**Scenario:** Learning.
-
-**Question:** What common mistakes do people make with Hospitality?
-
-**Key Concepts:** `Hospitality`, `Experience`
-
-### Candidate Response Paths
-*   **Junior**: Doing it wrong.
-*   **Senior**: Subtle pitfalls and how to avoid them.
-
----
-
-## 94. Ethics in Crisis Mgmt
-
-**Scenario:** Ethics.
-
-**Question:** What are the ethical considerations regarding Crisis Mgmt?
-
-**Key Concepts:** `Crisis Mgmt`, `Ethics`
-
-### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
-
----
-
-## 95. Teaching Privacy
-
-**Scenario:** Mentorship.
-
-**Question:** How would you teach Privacy to a junior team member?
-
-```mermaid
-graph LR
-    A[Start] --> B{Decision}
-    B --Yes--> C[Action]
-    B --No--> D[End]
-```
-
-**Key Concepts:** `Privacy`, `Mentorship`
-
-### Candidate Response Paths
-*   **Junior**: Send them a link.
-*   **Senior**: Structured learning path and hands-on practice.
-
----
-
-## 96. Metrics for Relationship Mgmt
+## 88. Metrics for Adaptability
 
 **Scenario:** Measurement.
 
-**Question:** How do you measure success in Relationship Mgmt?
+**Question:** How do you measure success in Adaptability?
 
-**Key Concepts:** `Relationship Mgmt`, `Analytics`
+**Key Concepts:** `Adaptability`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
@@ -1555,32 +1424,95 @@ graph LR
 
 ---
 
-## 97. Ethics in Event Planning
+## 89. Future of Motivation
 
-**Scenario:** Ethics.
+**Scenario:** Trends.
 
-**Question:** What are the ethical considerations regarding Event Planning?
+**Question:** Where do you see Motivation heading in the next 5 years?
 
-**Key Concepts:** `Event Planning`, `Ethics`
+**Key Concepts:** `Motivation`, `Vision`
 
 ### Candidate Response Paths
-*   **Junior**: Be nice.
-*   **Senior**: Privacy, bias, and societal impact.
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---
 
-## 98. Collaboration in Event Planning
+## 90. Integrity Best Practices
 
-**Scenario:** Teamwork.
+**Scenario:** Standardization.
 
-**Question:** How does Event Planning require cross-functional collaboration?
+**Question:** What are the industry best practices for Integrity?
+
+```mermaid
+graph LR
+    A[Start] --> B{Decision}
+    B --Yes--> C[Action]
+    B --No--> D[End]
+```
+
+**Key Concepts:** `Integrity`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 91. Teaching Empathy
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Empathy to a junior team member?
 
 | Metric | Target | Status |
 |---|---|---|
 | KPI 1 | 100% | Green |
 | KPI 2 | < 5% | Yellow |
 
-**Key Concepts:** `Event Planning`, `Collaboration`
+**Key Concepts:** `Empathy`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 92. Teaching Resilience
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Resilience to a junior team member?
+
+**Key Concepts:** `Resilience`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 93. Resilience Best Practices
+
+**Scenario:** Standardization.
+
+**Question:** What are the industry best practices for Resilience?
+
+**Key Concepts:** `Resilience`, `Standards`
+
+### Candidate Response Paths
+*   **Junior**: List a few.
+*   **Senior**: Discusses why they are best practices and when to break them.
+
+---
+
+## 94. Collaboration in Conflict
+
+**Scenario:** Teamwork.
+
+**Question:** How does Conflict require cross-functional collaboration?
+
+**Key Concepts:** `Conflict`, `Collaboration`
 
 ### Candidate Response Paths
 *   **Junior**: I talk to people.
@@ -1588,25 +1520,11 @@ graph LR
 
 ---
 
-## 99. Start vs Scale for Relationship Mgmt
+## 95. Teaching Feedback
 
-**Scenario:** Context.
+**Scenario:** Mentorship.
 
-**Question:** How does your approach to Relationship Mgmt differ in a startup vs a large corp?
-
-**Key Concepts:** `Relationship Mgmt`, `Context`
-
-### Candidate Response Paths
-*   **Junior**: It's the same.
-*   **Senior**: Speed/Chaos vs Process/Stability.
-
----
-
-## 100. Metrics for Crisis Mgmt
-
-**Scenario:** Measurement.
-
-**Question:** How do you measure success in Crisis Mgmt?
+**Question:** How would you teach Feedback to a junior team member?
 
 ```mermaid
 graph LR
@@ -1615,10 +1533,93 @@ graph LR
     B --No--> D[End]
 ```
 
-**Key Concepts:** `Crisis Mgmt`, `Analytics`
+**Key Concepts:** `Feedback`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 96. Scaling Time Management
+
+**Scenario:** Growth.
+
+**Question:** How do you scale Time Management as the company grows?
+
+**Key Concepts:** `Time Management`, `Scale`
+
+### Candidate Response Paths
+*   **Junior**: Hire more people.
+*   **Senior**: Process automation, documentation, and leverage.
+
+---
+
+## 97. Tooling: Integrity
+
+**Scenario:** Proficiency.
+
+**Question:** How do you utilize Integrity to improve efficiency?
+
+**Key Concepts:** `Integrity`, `Productivity`
+
+### Candidate Response Paths
+*   **Junior**: I use it daily.
+*   **Senior**: Advanced features and automation.
+
+---
+
+## 98. Teaching Teamwork
+
+**Scenario:** Mentorship.
+
+**Question:** How would you teach Teamwork to a junior team member?
+
+| Metric | Target | Status |
+|---|---|---|
+| KPI 1 | 100% | Green |
+| KPI 2 | < 5% | Yellow |
+
+**Key Concepts:** `Teamwork`, `Mentorship`
+
+### Candidate Response Paths
+*   **Junior**: Send them a link.
+*   **Senior**: Structured learning path and hands-on practice.
+
+---
+
+## 99. Metrics for Feedback
+
+**Scenario:** Measurement.
+
+**Question:** How do you measure success in Feedback?
+
+**Key Concepts:** `Feedback`, `Analytics`
 
 ### Candidate Response Paths
 *   **Junior**: I guess.
 *   **Senior**: Specific KPIs and leading/lagging indicators.
+
+---
+
+## 100. Future of Focus
+
+**Scenario:** Trends.
+
+**Question:** Where do you see Focus heading in the next 5 years?
+
+```mermaid
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Action
+    B-->>A: Result
+```
+
+**Key Concepts:** `Focus`, `Vision`
+
+### Candidate Response Paths
+*   **Junior**: It will get better.
+*   **Senior**: Emerging trends, AI impact, and market shifts.
 
 ---

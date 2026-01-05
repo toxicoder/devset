@@ -363,7 +363,7 @@ def get_role_category(role_path):
 
 def main():
     role_dir = "docs/job_roles"
-    output_dir = "docs/interview-questions"
+    output_dir = "docs/interview_questions"
 
     # We DO NOT skip files anymore. We overwrite everything to ensure consistency and coverage.
 
@@ -373,6 +373,9 @@ def main():
                 role_path = os.path.join(root, file)
                 rel_dir = os.path.relpath(root, role_dir)
 
+                # Cleanup directory name: lowercase and single underscore
+                rel_dir = rel_dir.lower().replace("__", "_")
+
                 # Determine Category
                 category = get_role_category(os.path.join(rel_dir, file))
 
@@ -380,13 +383,16 @@ def main():
                 role_name = file.replace(".md", "")
                 role_code = "ROLE" # Placeholder
 
+                # Cleanup filename: lowercase and single underscore
+                clean_filename = file.lower().replace("__", "_")
+
                 questions = get_question_bank(category, 100)
 
                 # Ensure output directory exists
                 target_dir = os.path.join(output_dir, rel_dir)
                 os.makedirs(target_dir, exist_ok=True)
 
-                target_file = os.path.join(target_dir, file)
+                target_file = os.path.join(target_dir, clean_filename)
 
                 markdown = generate_markdown(role_name, role_code, questions)
 
