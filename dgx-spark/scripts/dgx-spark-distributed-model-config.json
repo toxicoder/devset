@@ -1,0 +1,5 @@
+{
+    "ip1": "10.0.0.1",
+    "ip2": "10.0.0.2",
+    "model": "nvidia/nemotron-3-nano"
+}
