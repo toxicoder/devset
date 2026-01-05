@@ -246,7 +246,7 @@ case "$MODEL_ARG" in
     CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
     TP_SIZE=1
     PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
-    EXTRA_NIM_ENV="-e NIM_GPU_MEMORY_UTILIZATION=0.40"
+    EXTRA_NIM_ENV=""
     ;;
   "nvidia/nemotron-3-nano-30b-a3b")
     IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano-30b-a3b:latest"
@@ -254,7 +254,7 @@ case "$MODEL_ARG" in
     CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
     TP_SIZE=1
     PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
-    EXTRA_NIM_ENV="-e NIM_GPU_MEMORY_UTILIZATION=0.40"
+    EXTRA_NIM_ENV=""
     ;;
   "meta/llama-4-scout")
     IMAGE="nvcr.io/nim/meta/llama-4-scout:latest"

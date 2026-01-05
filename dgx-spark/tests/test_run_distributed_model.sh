@@ -292,8 +292,8 @@ else
     echo "FAIL"
 fi
 
-# Test 8: Verify Memory Constraints for Nemotron Nano
-echo "Running test: Verify Memory Constraints for Nemotron Nano"
+# Test 8: Verify Removal of Memory Constraints for Nemotron Nano
+echo "Running test: Verify Removal of Memory Constraints for Nemotron Nano"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
@@ -302,12 +302,12 @@ echo "Running test: Verify Memory Constraints for Nemotron Nano"
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
     if echo "$LOG_CONTENT" | grep -q "NIM_GPU_MEMORY_UTILIZATION=0.40"; then
-        echo "PASS"
-    else
-        echo "FAIL: Did not find NIM_GPU_MEMORY_UTILIZATION=0.40"
+        echo "FAIL: Found NIM_GPU_MEMORY_UTILIZATION=0.40, expected it to be removed."
         echo "Log content:"
         echo "$LOG_CONTENT"
         exit 1
+    else
+        echo "PASS"
     fi
 )
 if [ $? -ne 0 ]; then exit 1; fi
