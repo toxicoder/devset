@@ -106,37 +106,37 @@ docs:
   - title: 4. Specialized Squads
     children:
     - title: AI Ethics & Safety
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/ai_ethics__safety/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/ai_ethics__safety/
     - title: Accessibility (A11y)
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/accessibility_a11y/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/accessibility_a11y/
     - title: Acquisition (SEO)
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/acquisition_seo/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/acquisition_seo/
     - title: Cloud Migration Squad
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/cloud_migration_squad/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/cloud_migration_squad/
     - title: Data Platform
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/data_platform/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/data_platform/
     - title: Developer Experience
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/developer_experience/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/developer_experience/
     - title: Enterprise Launch
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/enterprise_launch/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/enterprise_launch/
     - title: Event Strategy
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/event_strategy/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/event_strategy/
     - title: IPO Audit Ready
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/ipo_audit_ready/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/ipo_audit_ready/
     - title: Internationalization
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/internationalization/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/internationalization/
     - title: Mobile Platform
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/mobile_platform/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/mobile_platform/
     - title: Monetization
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/monetization/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/monetization/
     - title: Privacy (GDPR)
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/privacy_gdpr/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/privacy_gdpr/
     - title: Security Red Team
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/security_red_team/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/security_red_team/
     - title: Strategic Partner
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/strategic_partner/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/strategic_partner/
     - title: Sustainability (ESG)
-      url: /docs/job_roles/4._specialized_squads_cross_functional_teams/sustainability_esg/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/sustainability_esg/
 - title: Interview Questions
   children:
   - title: Backend Engineer
