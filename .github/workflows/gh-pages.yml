@@ -18,14 +18,31 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+
       - name: Configure Git Credentials
         run: |
           git config --global user.name github-actions[bot]
           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - uses: actions/setup-python@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: pip install -r requirements.txt
-      - run: mkdocs build
-      - run: touch site/.nojekyll
-      - run: ghp-import -p -f site
+
+      - name: Install ghp-import
+        run: pip install ghp-import
+
+      - name: Deploy
+        run: ghp-import -n -p -f _site
