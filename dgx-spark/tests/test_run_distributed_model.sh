@@ -1,7 +1,7 @@
 #!/bin/bash
 # Test script for run-distributed-model.sh
 
-TEST_DIR=$(mktemp -d)
+export TEST_DIR=$(mktemp -d)
 # Resolving absolute path to the script properly
 # The test is in dgx-spark/tests/
 # The script is in dgx-spark/scripts/
@@ -43,6 +43,7 @@ elif [[ "$*" == *"ibdev2netdev"* ]]; then
 elif [[ "$*" == *"docker rm"* ]]; then
     exit 0
 elif [[ "$*" == *"docker run"* ]]; then
+    echo "docker run called with args: $*" >> "$TEST_DIR/docker_run.log"
     echo "container_id"
     exit 0
 elif [[ "$*" == *"docker logs"* ]]; then
@@ -139,20 +140,7 @@ if [ $? -ne 0 ]; then exit 1; fi
 
 # Test 4: Static Analysis for Correct Escaping
 echo "Running test: Static Analysis for Correct Escaping"
-
-# Check for presence of correct pattern (single quoted, escaped dollar)
-# We are looking for the literal string: '\$oauthtoken' in the source file?
-# In the source file, we wrote '\$oauthtoken'.
-# grep -F "'\$oauthtoken'" should match it.
-# Wait, grep -F matches literal string.
-# In source: ... -u '\$oauthtoken' ...
-# grep -F "'\$oauthtoken'" matches '\$oauthtoken'.
-
 if grep -F "'\\\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
-    # Wait, backslash in source needs to be matched.
-    # If source has \, grep needs to see \.
-    # To pass \ to grep, we might need \\.
-    # In double quotes: "'\\\$oauthtoken'" -> "'\$oauthtoken'" (literal backslash dollar).
     echo "PASS"
 else
     # Try simpler match
@@ -162,6 +150,57 @@ else
         echo "FAIL: Could not find correct escaping"
         exit 1
     fi
+fi
+
+# Test 5: Verify Network and Port Configuration
+echo "Running test: Verify Network and Port Configuration"
+(
+    # Clean previous logs
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+
+    # Check log
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    # Check for --network host
+    if echo "$LOG_CONTENT" | grep -q "\-\-network host"; then
+        echo "Check --network host: OK"
+    else
+        echo "Check --network host: FAIL"
+        echo "$LOG_CONTENT"
+        exit 1
+    fi
+
+    # Check for UVICORN_HOST=0.0.0.0
+    if echo "$LOG_CONTENT" | grep -q "UVICORN_HOST=0.0.0.0"; then
+        echo "Check UVICORN_HOST: OK"
+    else
+        echo "Check UVICORN_HOST: FAIL"
+        exit 1
+    fi
+
+    # Check for HOST=0.0.0.0
+    if echo "$LOG_CONTENT" | grep -q "HOST=0.0.0.0"; then
+        echo "Check HOST: OK"
+    else
+        echo "Check HOST: FAIL"
+        exit 1
+    fi
+
+    # Check for NIM_HTTP_API_PORT=8000
+    if echo "$LOG_CONTENT" | grep -q "NIM_HTTP_API_PORT=8000"; then
+        echo "Check NIM_HTTP_API_PORT: OK"
+    else
+        echo "Check NIM_HTTP_API_PORT: FAIL"
+        exit 1
+    fi
+)
+
+if [ $? -eq 0 ]; then
+    echo "PASS"
+else
+    echo "FAIL"
 fi
 
 # Cleanup
