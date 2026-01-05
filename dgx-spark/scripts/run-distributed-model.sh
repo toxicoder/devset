@@ -43,11 +43,12 @@ done
 # 8. deepseek-ai/deepseek-v3
 # 9. stabilityai/stable-diffusion-3.5-large
 # 10. nvidia/nemotron-nano-12b-v2-vl
+# 11. nvidia/nemotron-3-nano
 #
 # Context-Heavy Models:
-# 11. nvidia/nemotron-3-nano-30b-a3b
-# 12. meta/llama-4-scout
-# 13. deepseek-ai/deepseek-v3.1
+# 12. nvidia/nemotron-3-nano-30b-a3b
+# 13. meta/llama-4-scout
+# 14. deepseek-ai/deepseek-v3.1
 # 14. alibaba/qwen3-30b-a3b-thinking
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -183,9 +184,13 @@ case "$MODEL_ARG" in
         PARAMS=12; CONTEXT=32
         IS_VISION=1
         ;;
+    "nvidia/nemotron-3-nano")
+        IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano:latest"
+        PARAMS=30; CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
+        ;;
     "nvidia/nemotron-3-nano-30b-a3b")
         IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano-30b-a3b:latest"
-        PARAMS=30; CONTEXT=1000
+        PARAMS=30; CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
         ;;
     "meta/llama-4-scout")
         IMAGE="nvcr.io/nim/meta/llama-4-scout:latest"
@@ -496,12 +501,21 @@ done
 wait_for_service() {
     local ip=$1
     local port=8000
-    local retries=30 # 30 * 10s = 5 minutes
+    local retries=90 # 90 * 10s = 15 minutes
     local wait_time=10
 
     echo "Waiting for service to be ready at http://$ip:$port..."
 
     for ((i=1; i<=retries; i++)); do
+        # Check if container is still running
+        if ! ssh $SSH_OPTS "$ip" "docker ps | grep -q nim-distributed"; then
+             echo ""
+             echo "Error: Container nim-distributed is no longer running on $ip."
+             echo "Fetching last 50 lines of logs:"
+             ssh $SSH_OPTS "$ip" "docker logs --tail 50 nim-distributed"
+             return 1
+        fi
+
         # Try checking health endpoint
         if curl -s -o /dev/null -m 5 "http://$ip:$port/v1/health/ready"; then
             echo "Service is ready!"

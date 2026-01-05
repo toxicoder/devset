@@ -102,6 +102,14 @@ EOF
 exit 0
 EOF
     chmod +x "$TEST_DIR/nc"
+
+    # Mock curl
+    cat << 'EOF' > "$TEST_DIR/curl"
+#!/bin/bash
+# Mock successful health check
+exit 0
+EOF
+    chmod +x "$TEST_DIR/curl"
 }
 
 run_test() {
