@@ -184,6 +184,7 @@ fi
 TP_SIZE=2
 PP_SIZE=1
 IS_VISION=0
+EXTRA_NIM_ENV=""
 
 # Mapping Logic
 case "$MODEL_ARG" in
@@ -245,6 +246,7 @@ case "$MODEL_ARG" in
     CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
     TP_SIZE=1
     PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
+    EXTRA_NIM_ENV="-e NIM_GPU_MEMORY_UTILIZATION=0.40"
     ;;
   "nvidia/nemotron-3-nano-30b-a3b")
     IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano-30b-a3b:latest"
@@ -252,6 +254,7 @@ case "$MODEL_ARG" in
     CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
     TP_SIZE=1
     PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
+    EXTRA_NIM_ENV="-e NIM_GPU_MEMORY_UTILIZATION=0.40"
     ;;
   "meta/llama-4-scout")
     IMAGE="nvcr.io/nim/meta/llama-4-scout:latest"
@@ -594,7 +597,7 @@ function _get_nccl_opts() {
 # Common Docker Args
 readonly COMMON_ARGS="$PLATFORM_ARG --runtime=nvidia --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
 # Add NIM_SERVER_HTTP_HOST=0.0.0.0 for safety
-readonly NIM_ENV="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
+readonly NIM_ENV="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0 $EXTRA_NIM_ENV"
 
 # Launch in parallel
 launch_pids=()
