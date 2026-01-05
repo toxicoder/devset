@@ -15,6 +15,6 @@ defaults:
 - scope:
     path: ''
   values:
-    layout: doc
+    layout: default
     sidebar:
       nav: "docs"
