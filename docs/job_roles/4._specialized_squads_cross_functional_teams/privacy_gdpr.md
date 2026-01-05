@@ -90,4 +90,4 @@ Ensures legal data handling and compliance tools.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/privacy_gdpr.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/privacy_gdpr.md)**: Comprehensive questions and answers for this role.

@@ -90,4 +90,4 @@ Moving legacy systems to public cloud. Focus on "lift and shift" and refactoring
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/cloud_migration_squad.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/cloud_migration_squad.md)**: Comprehensive questions and answers for this role.

@@ -90,4 +90,4 @@ Building internal tools and CI/CD pipelines to make other engineers faster.
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/4._specialized_squads_cross_functional_teams/developer_experience.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/specialized_squads_cross_functional_teams/developer_experience.md)**: Comprehensive questions and answers for this role.
