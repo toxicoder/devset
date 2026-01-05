@@ -2,6 +2,9 @@
 
 # NVIDIA DGX Spark - Distributed NIM Launcher
 #
+# Installation:
+#   curl -O https://raw.githubusercontent.com/toxicoder/devset/main/dgx-spark/scripts/run-distributed-model.sh && chmod +x run-distributed-model.sh
+#
 # This script spins up a distributed NVIDIA NIM across two DGX Spark nodes.
 # It supports various high-parameter LLMs and Multimodal models, optimizing for
 # high-speed interconnects (OSPF/IB) and distributed tensor parallelism.
