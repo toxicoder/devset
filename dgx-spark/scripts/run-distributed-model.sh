@@ -18,6 +18,16 @@
 set -euo pipefail
 
 # Error handling and cleanup
+#
+# Description:
+#   Cleans up background jobs and child processes when the script exits or errors.
+#   Triggered by EXIT and ERR traps.
+#
+# Arguments:
+#   None
+#
+# Returns:
+#   None (Side effect: kills child processes)
 function cleanup() {
   # Kill any child processes of the current shell script
   jobs -p | xargs -r kill 2>/dev/null || true
@@ -57,6 +67,18 @@ readonly CONFIG_FILE="$SCRIPT_DIR/dgx-spark-distributed-model-config.json"
 # SSH options
 readonly SSH_OPTS=(-o StrictHostKeyChecking=no -o ConnectTimeout=10)
 
+# Internal: Read configuration
+#
+# Description:
+#   Reads the IP addresses and model name from the persistent JSON configuration file.
+#   Sets the global variables IP1, IP2, and MODEL_ARG.
+#   Exits with error if the config file is missing or invalid.
+#
+# Arguments:
+#   None (Reads global CONFIG_FILE)
+#
+# Returns:
+#   None (Sets global variables)
 function _read_config() {
   if [[ ! -f "$CONFIG_FILE" ]]; then
     printf "Error: Config file not found at %s\n" "$CONFIG_FILE" >&2
@@ -73,6 +95,17 @@ function _read_config() {
   fi
 }
 
+# Internal: Write configuration
+#
+# Description:
+#   Writes the current configuration (IP1, IP2, MODEL_ARG) to the JSON configuration file.
+#   Allows resuming the session later with 'start' or 'stop' commands.
+#
+# Arguments:
+#   None (Reads global IP1, IP2, MODEL_ARG)
+#
+# Returns:
+#   None (Writes to filesystem)
 function _write_config() {
   cat >"$CONFIG_FILE" <<EOF
 {
@@ -117,7 +150,17 @@ elif [[ "$MODE" == "setup" ]]; then
   _write_config
 fi
 
-# Validate IP addresses
+# Internal: Validate IP Address
+#
+# Description:
+#   Validates that the provided string is in a valid IPv4 format (X.X.X.X).
+#   Exits the script if the IP is invalid.
+#
+# Arguments:
+#   $1: The IP address string to validate.
+#
+# Returns:
+#   None (Exits on failure)
 function _validate_ip() {
   local ip="$1"
   if [[ ! "$ip" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
@@ -247,6 +290,19 @@ printf "Type: %s\n" "$TYPE_STR"
 printf "%s\n" "================================================"
 
 # === VRAM Estimation Check ===
+
+# Internal: Check VRAM requirements
+#
+# Description:
+#   Estimates the required VRAM for the selected model based on parameter count and context size.
+#   Warns the user if the estimated usage exceeds the capacity of a dual DGX Spark cluster (256GB).
+#
+# Arguments:
+#   $1: Model parameters in billions.
+#   $2: Context window size in thousands of tokens.
+#
+# Returns:
+#   None (Prints status/warnings)
 function _check_vram_requirements() {
   local p_b="$1"
   local c_k="$2"
@@ -304,6 +360,19 @@ else
 fi
 
 # === Network Detection ===
+
+# Internal: Detect high-speed network interfaces
+#
+# Description:
+#   Attempts to detect available high-speed network interfaces (e.g., InfiniBand, Ethernet) on a remote node.
+#   First tries OSPF neighbor detection via 'vtysh'.
+#   Falls back to 'ibdev2netdev' if OSPF data is unavailable.
+#
+# Arguments:
+#   $1: The IP address of the node to check.
+#
+# Returns:
+#   A formatted string: "DETECTED_MULTI:<ifaces>", "DETECTED_SINGLE:<iface>", or "DETECTED_NONE"
 function _get_network_config() {
   local ip="$1"
   # NEW: OSPF Autodetection
@@ -337,7 +406,17 @@ function _get_network_config() {
   fi
 }
 
-# Helper to parse the detection result
+# Internal: Parse network configuration
+#
+# Description:
+#   Extracts the interface name(s) from the detection result string.
+#   Strips the prefix (e.g., "DETECTED_SINGLE:") and whitespace.
+#
+# Arguments:
+#   $1: The raw detection string.
+#
+# Returns:
+#   The clean interface name(s).
 function _parse_net_conf() {
   local conf="$1"
   local type="${conf%%:*}"
@@ -347,7 +426,18 @@ function _parse_net_conf() {
   printf "%s" "$val"
 }
 
-# Helper to get IP from interface
+# Internal: Get IP from interface
+#
+# Description:
+#   Resolves the IPv4 address associated with a specific network interface on a remote node.
+#   Uses 'ip addr show' via SSH.
+#
+# Arguments:
+#   $1: The remote host IP/hostname.
+#   $2: The interface name (or comma-separated list, first one is used).
+#
+# Returns:
+#   The detected IP address, or error if not found.
 function _get_ip_from_iface() {
   local ip_host="$1"
   local iface_list="$2"
@@ -476,6 +566,16 @@ done
 printf "[4/4] Launching NIM containers...\n"
 
 # Prepare ENV vars for network
+#
+# Description:
+#   Generates the necessary Docker environment arguments for NCCL/GLOO based on network interfaces.
+#   Enables multi-rail optimizations if multiple interfaces are detected.
+#
+# Arguments:
+#   $1: Comma-separated list of interface names.
+#
+# Returns:
+#   A string containing Docker env vars (e.g., "-e NCCL_SOCKET_IFNAME=...").
 function _get_nccl_opts() {
   local ifaces="$1"
   local opts=""
@@ -527,6 +627,18 @@ for pid in "${launch_pids[@]}"; do
 done
 
 # === Health Check ===
+
+# Internal: Wait for service readiness
+#
+# Description:
+#   Polls the service health endpoint to determine when the NIM is fully ready to accept requests.
+#   Also monitors container status to fail fast if the container crashes.
+#
+# Arguments:
+#   $1: IP address of the head node.
+#
+# Returns:
+#   0 on success, 1 on failure/timeout.
 function _wait_for_service() {
   local ip="$1"
   local port=8000
