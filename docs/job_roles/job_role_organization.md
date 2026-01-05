@@ -187,6 +187,11 @@ graph TD
     PERS --> SHOP[Stylist]
     PERS --> EDU[Tutor]
     PERS --> SEC[Security]
+    PERS --> CFO[Family Office]
+    PERS --> LEGAL[Legal]
+    PERS --> DR[Medical]
+    PERS --> PA[Personal Asst]
+    PERS --> SPEC[Specialist]
 
     classDef cat fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
 ```
@@ -283,6 +288,11 @@ graph TD
 | Personal Shopper | PERS0007 | Curates image, wardrobe, and gifting. | • Wardrobe Mgmt; • Styling; • Sourcing; • Gifting | 10:00 Fitting; 13:00 Sourcing; 15:00 Wrapping | Chief of Staff, Events |
 | Tutor / Liaison | PERS0008 | Oversees educational development. | • Instruction; • Curriculum; • Enrichment; • College Counseling | 10:00 Lesson Plan; 15:00 Tutoring; 17:00 Review | Chief of Staff, Household |
 | Private Security | PERS0009 | Ensures safety and privacy. | • Risk Assessment; • Protection; • Surveillance; • Logistics | 08:00 Recon; 10:00 Escort; 14:00 Sweep | Chief of Staff, Travel |
+| Family Office Dir | PERS0010 | Financial architect for wealth. | • Strategy; • Tax/Estate; • Cash Flow; • Risk Mgmt | 09:00 Markets; 11:00 Managers; 14:00 Planning | Chief of Staff, Legal |
+| Private Legal | PERS0011 | Dedicated legal guardian. | • Contracts; • Reputation; • Risk; • Entities | 10:00 Redlines; 13:00 Negotiation; 15:00 Audit | Family Office, Security |
+| Medical Director | PERS0012 | Holistic health strategy lead. | • Strategy; • Coordination; • Emergency; • Longevity | 08:00 Vitals; 10:00 Consult; 14:00 Research | Trainer, Chef |
+| Personal Assistant | PERS0013 | Dedicated 'doer' for daily tasks. | • Errands; • Logistics; • Pet Care; • Scheduling | 08:00 School Run; 10:00 Grocery; 14:00 Errands | Chief of Staff, Household |
+| Specialist | PERS0014 | Expert in niche luxury assets. | • Acquisition; • Collection Mgmt; • Advisory; • Logistics | 10:00 Auction; 12:00 Catalog; 14:00 Advisory | Family Office, Household |
 
 # 4. Specialized Squads (Cross-Functional Teams)
 
@@ -511,3 +521,8 @@ Focus: Lifestyle management, household operations, and personal efficiency.
 | [PERS0007](#35-personal-staff) | Stylist_Agent | You are the Personal Shopper. Curate the wardrobe and manage gifting. Ensure the principal always looks their best. | [notion](https://www.notion.so/), [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/) | ChiefOfStaff_Agent, Event_Agent |
 | [PERS0008](#35-personal-staff) | Tutor_Agent | You are the Tutor. Oversee educational development and new skill acquisition. | [google-calendar](https://workspace.google.com/products/calendar/), [notion](https://www.notion.so/) | ChiefOfStaff_Agent, HouseMgr_Agent |
 | [PERS0009](#35-personal-staff) | Security_Agent | You are the Private Security Detail. Assess risks and provide close protection. Ensure physical and digital safety. | [google-maps](https://www.google.com/maps), [slack](https://slack.com/), [notion](https://www.notion.so/) | ChiefOfStaff_Agent, Travel_Agent |
+| [PERS0010](#35-personal-staff) | CFO_Personal_Agent | You are the Family Office Director. Manage investment strategy, tax, and estate planning. Preserve generational wealth. | [excel](https://www.microsoft.com/en-us/microsoft-365/excel), [notion](https://www.notion.so/), [gmail](https://www.google.com/gmail/) | ChiefOfStaff_Agent, Legal_Personal_Agent |
+| [PERS0011](#35-personal-staff) | Legal_Personal_Agent | You are the Private Legal Counsel. Protect the principal's legal interests, privacy, and reputation. Review all contracts. | [google-drive](https://www.google.com/drive/), [gmail](https://www.google.com/gmail/), [docu-sign](https://www.docusign.com/) | CFO_Personal_Agent, Security_Agent |
+| [PERS0012](#35-personal-staff) | Doctor_Agent | You are the Medical Director. Coordinate holistic health care and longevity strategies. Ensure immediate medical access. | [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/), [notion](https://www.notion.so/) | Trainer_Agent, Chef_Agent |
+| [PERS0013](#35-personal-staff) | PA_General_Agent | You are the Personal Assistant. Handle daily logistics, errands, and ad-hoc requests to keep the day running smoothly. | [google-calendar](https://workspace.google.com/products/calendar/), [google-maps](https://www.google.com/maps), [todoist](https://todoist.com/) | ChiefOfStaff_Agent, HouseMgr_Agent |
+| [PERS0014](#35-personal-staff) | Specialist_Agent | You are a Specialist Consultant (Art, Cars, Wine). Manage the acquisition, care, and curation of the collection. | [notion](https://www.notion.so/), [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/) | CFO_Personal_Agent, HouseMgr_Agent |
