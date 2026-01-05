@@ -280,7 +280,7 @@ function _configure_model() {
       CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
       TP_SIZE=1
       PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
-      EXTRA_NIM_ENV=""
+      EXTRA_NIM_ENV="-e VLLM_ATTENTION_BACKEND=FLASHINFER"
       ;;
     "nvidia/nemotron-3-nano-30b-a3b")
       IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano-30b-a3b:latest"
@@ -288,7 +288,7 @@ function _configure_model() {
       CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
       TP_SIZE=1
       PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
-      EXTRA_NIM_ENV=""
+      EXTRA_NIM_ENV="-e VLLM_ATTENTION_BACKEND=FLASHINFER"
       ;;
     "meta/llama-4-scout")
       IMAGE="nvcr.io/nim/meta/llama-4-scout:latest"
