@@ -99,7 +99,7 @@ if [ "$MODE" == "stop" ]; then
     read_config
     echo "Stopping distributed model on $IP1 and $IP2..."
     for IP in "$IP1" "$IP2"; do
-        ssh $SSH_OPTS "$IP" "docker rm -f nim-distributed || true"
+        ssh $SSH_OPTS "$IP" "docker rm -f nim-distributed >/dev/null 2>&1 || true"
     done
     echo "Stopped."
     exit 0
@@ -339,7 +339,7 @@ fi
 # 3. Cleanup
 echo "[3/4] Cleaning up previous containers..."
 for IP in "$IP1" "$IP2"; do
-    ssh $SSH_OPTS "$IP" "docker rm -f nim-distributed || true"
+    ssh $SSH_OPTS "$IP" "docker rm -f nim-distributed >/dev/null 2>&1 || true"
 done
 
 # 4. Launch
