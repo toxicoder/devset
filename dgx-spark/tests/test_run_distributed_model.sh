@@ -18,7 +18,14 @@ setup_mocks() {
 # echo "Mock ssh called with: $@" >> "$TEST_DIR/ssh.log"
 ARGS="$*"
 
-if [[ "$ARGS" == *"nvidia-smi"* ]]; then
+if [[ "$ARGS" == *"uname -m"* ]]; then
+    if [[ -n "${MOCK_ARCH}" ]]; then
+        echo "${MOCK_ARCH}"
+    else
+        echo "x86_64"
+    fi
+    exit 0
+elif [[ "$ARGS" == *"nvidia-smi"* ]]; then
     exit 0
 elif [[ "$ARGS" == *"docker login"* ]]; then
     # Image pull simulation
@@ -151,6 +158,25 @@ else
         exit 1
     fi
 fi
+
+# Test 6: ARM64 Architecture Detection
+echo "Running test: ARM64 Architecture Detection"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    export MOCK_ARCH="aarch64"
+    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+    # Verify we did NOT find --platform linux/amd64
+    if echo "$LOG_CONTENT" | grep -q "\-\-platform linux/amd64"; then
+        echo "FAIL: Found --platform linux/amd64 on ARM64 host"
+        exit 1
+    else
+        echo "PASS"
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
 
 # Test 5: Verify Network and Port Configuration
 echo "Running test: Verify Network and Port Configuration"

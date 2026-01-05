@@ -248,6 +248,25 @@ check_vram_requirements() {
 
 check_vram_requirements $PARAMS $CONTEXT
 
+# === Architecture Detection ===
+# Detects architecture on the head node to determine if platform override is needed.
+ARCH=$(ssh $SSH_OPTS "$IP1" "uname -m" 2>/dev/null)
+# Trim whitespace
+ARCH=$(echo "$ARCH" | xargs)
+echo "Detected architecture on $IP1: $ARCH"
+
+PLATFORM_ARG=""
+if [ "$ARCH" == "x86_64" ]; then
+    PLATFORM_ARG="--platform linux/amd64"
+elif [ "$ARCH" == "aarch64" ]; then
+    echo "ARM64 detected. Using native architecture (no platform override)."
+    PLATFORM_ARG=""
+else
+    # Fallback/Unknown - stick to legacy behavior
+    echo "Unknown architecture: $ARCH. Defaulting to linux/amd64."
+    PLATFORM_ARG="--platform linux/amd64"
+fi
+
 # === Network Detection ===
 get_network_config() {
     local ip=$1
@@ -294,7 +313,7 @@ for IP in "$IP1" "$IP2"; do
     # Pull image
     echo "Pulling image $IMAGE on $IP..."
     (
-        if ! ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull --platform linux/amd64 $IMAGE"; then
+        if ! ssh $SSH_OPTS "$IP" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
             echo "Error: Failed to pull image on $IP"
             exit 1
         fi
@@ -362,7 +381,7 @@ get_nccl_opts() {
 }
 
 # Common Docker Args
-COMMON_ARGS="--platform linux/amd64 --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
+COMMON_ARGS="$PLATFORM_ARG --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
 NIM_ENV="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000"
 
 # Launch in parallel
