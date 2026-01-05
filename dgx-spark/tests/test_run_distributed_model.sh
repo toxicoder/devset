@@ -67,6 +67,9 @@ elif [[ "$*" == *"docker run"* ]]; then
 elif [[ "$*" == *"docker logs"* ]]; then
     echo "Mock logs"
     exit 0
+elif [[ "$ARGS" == *"ip -4 addr show"* ]]; then
+    echo "inet 10.0.0.2"
+    exit 0
 else
     # Default success
     exit 0
@@ -271,6 +274,14 @@ echo "Running test: Verify Network and Port Configuration"
         echo "Check NIM_HTTP_API_PORT: OK"
     else
         echo "Check NIM_HTTP_API_PORT: FAIL"
+        exit 1
+    fi
+
+    # Check for --runtime=nvidia
+    if echo "$LOG_CONTENT" | grep -q "\-\-runtime=nvidia"; then
+        echo "Check --runtime=nvidia: OK"
+    else
+        echo "Check --runtime=nvidia: FAIL"
         exit 1
     fi
 )
