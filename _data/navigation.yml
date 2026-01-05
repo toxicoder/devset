@@ -22,93 +22,93 @@ docs:
   - title: 3.1 Engineering & Technology
     children:
     - title: VP of Engineering
-      url: /docs/job_roles/engineering__technology/vp_of_engineering/
+      url: /docs/job_roles/engineering_technology/vp_of_engineering/
     - title: Director of App Dev
-      url: /docs/job_roles/engineering__technology/director_of_app_dev/
+      url: /docs/job_roles/engineering_technology/director_of_app_dev/
     - title: Director of Infrastructure
-      url: /docs/job_roles/engineering__technology/director_of_infrastructure/
+      url: /docs/job_roles/engineering_technology/director_of_infrastructure/
     - title: Backend Engineer
-      url: /docs/job_roles/engineering__technology/backend_engineer/
+      url: /docs/job_roles/engineering_technology/backend_engineer/
     - title: Data Engineer
-      url: /docs/job_roles/engineering__technology/data_engineer/
+      url: /docs/job_roles/engineering_technology/data_engineer/
     - title: Frontend Engineer
-      url: /docs/job_roles/engineering__technology/frontend_engineer/
+      url: /docs/job_roles/engineering_technology/frontend_engineer/
     - title: Mobile Engineer
-      url: /docs/job_roles/engineering__technology/mobile_engineer/
+      url: /docs/job_roles/engineering_technology/mobile_engineer/
     - title: QA Engineer
-      url: /docs/job_roles/engineering__technology/qa_engineer/
+      url: /docs/job_roles/engineering_technology/qa_engineer/
     - title: Security Engineer
-      url: /docs/job_roles/engineering__technology/security_engineer/
+      url: /docs/job_roles/engineering_technology/security_engineer/
     - title: Site Reliability Eng
-      url: /docs/job_roles/engineering__technology/site_reliability_eng/
+      url: /docs/job_roles/engineering_technology/site_reliability_eng/
     - title: Software Engineer
-      url: /docs/job_roles/engineering__technology/software_engineer/
+      url: /docs/job_roles/engineering_technology/software_engineer/
   - title: 3.2 Product & Design
     children:
     - title: VP of Product
-      url: /docs/job_roles/product__design/vp_of_product/
+      url: /docs/job_roles/product_design/vp_of_product/
     - title: VP of Design
-      url: /docs/job_roles/product__design/vp_of_design/
+      url: /docs/job_roles/product_design/vp_of_design/
     - title: Data Scientist
-      url: /docs/job_roles/product__design/data_scientist/
+      url: /docs/job_roles/product_design/data_scientist/
     - title: Product Designer
-      url: /docs/job_roles/product__design/product_designer/
+      url: /docs/job_roles/product_design/product_designer/
     - title: Product Manager
-      url: /docs/job_roles/product__design/product_manager/
+      url: /docs/job_roles/product_design/product_manager/
     - title: Technical PM
-      url: /docs/job_roles/product__design/technical_pm/
+      url: /docs/job_roles/product_design/technical_pm/
     - title: Technical PgM
-      url: /docs/job_roles/product__design/technical_pgm/
+      url: /docs/job_roles/product_design/technical_pgm/
     - title: UX Writer
-      url: /docs/job_roles/product__design/ux_writer/
+      url: /docs/job_roles/product_design/ux_writer/
     - title: User Researcher
-      url: /docs/job_roles/product__design/user_researcher/
+      url: /docs/job_roles/product_design/user_researcher/
   - title: 3.3 Go-To-Market (Sales & Marketing)
     children:
     - title: VP of Marketing
-      url: /docs/job_roles/go_to_market_sales__marketing/vp_of_marketing/
+      url: /docs/job_roles/go_to_market_sales_marketing/vp_of_marketing/
     - title: VP of Sales
-      url: /docs/job_roles/go_to_market_sales__marketing/vp_of_sales/
+      url: /docs/job_roles/go_to_market_sales_marketing/vp_of_sales/
     - title: Account Executive
-      url: /docs/job_roles/go_to_market_sales__marketing/account_executive/
+      url: /docs/job_roles/go_to_market_sales_marketing/account_executive/
     - title: Brand Marketing
-      url: /docs/job_roles/go_to_market_sales__marketing/brand_marketing/
+      url: /docs/job_roles/go_to_market_sales_marketing/brand_marketing/
     - title: Comms - PR
-      url: /docs/job_roles/go_to_market_sales__marketing/comms_pr/
+      url: /docs/job_roles/go_to_market_sales_marketing/comms_pr/
     - title: Customer Success
-      url: /docs/job_roles/go_to_market_sales__marketing/customer_success/
+      url: /docs/job_roles/go_to_market_sales_marketing/customer_success/
     - title: Public Policy Mgr
-      url: /docs/job_roles/go_to_market_sales__marketing/public_policy_mgr/
+      url: /docs/job_roles/go_to_market_sales_marketing/public_policy_mgr/
     - title: Sales Dev Rep
-      url: /docs/job_roles/go_to_market_sales__marketing/sales_dev_rep/
+      url: /docs/job_roles/go_to_market_sales_marketing/sales_dev_rep/
     - title: Solutions Eng
-      url: /docs/job_roles/go_to_market_sales__marketing/solutions_eng/
+      url: /docs/job_roles/go_to_market_sales_marketing/solutions_eng/
   - title: 3.4 G&A (General & Administrative)
     children:
     - title: VP of Finance
-      url: /docs/job_roles/ga_general__administrative/vp_of_finance/
+      url: /docs/job_roles/ga_general_administrative/vp_of_finance/
     - title: VP of People
-      url: /docs/job_roles/ga_general__administrative/vp_of_people/
+      url: /docs/job_roles/ga_general_administrative/vp_of_people/
     - title: Controller
-      url: /docs/job_roles/ga_general__administrative/controller/
+      url: /docs/job_roles/ga_general_administrative/controller/
     - title: Corp Counsel
-      url: /docs/job_roles/ga_general__administrative/corp_counsel/
+      url: /docs/job_roles/ga_general_administrative/corp_counsel/
     - title: Employment Counsel
-      url: /docs/job_roles/ga_general__administrative/employment_counsel/
+      url: /docs/job_roles/ga_general_administrative/employment_counsel/
     - title: FP&A Analyst
-      url: /docs/job_roles/ga_general__administrative/fpa_analyst/
+      url: /docs/job_roles/ga_general_administrative/fpa_analyst/
     - title: HR Partner
-      url: /docs/job_roles/ga_general__administrative/hr_partner/
+      url: /docs/job_roles/ga_general_administrative/hr_partner/
     - title: Strategy & Ops
-      url: /docs/job_roles/ga_general__administrative/strategy__ops/
+      url: /docs/job_roles/ga_general_administrative/strategy_ops/
     - title: Workplace Mgr
-      url: /docs/job_roles/ga_general__administrative/workplace_mgr/
+      url: /docs/job_roles/ga_general_administrative/workplace_mgr/
   - title: 4. Specialized Squads
     children:
     - title: AI Ethics & Safety
-      url: /docs/job_roles/specialized_squads_cross_functional_teams/ai_ethics__safety/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/ai_ethics_safety/
     - title: Accessibility (A11y)
-      url: /docs/job_roles/specialized_squads_cross_functional_teams/accessibility_a11y/
+      url: /docs/job_roles/specialized_squads_cross_functional_teams/accessibility/
     - title: Acquisition (SEO)
       url: /docs/job_roles/specialized_squads_cross_functional_teams/acquisition_seo/
     - title: Cloud Migration Squad
@@ -140,7 +140,7 @@ docs:
 - title: Interview Questions
   children:
   - title: Backend Engineer
-    url: /docs/interview_questions/engineering__technology/backend_engineer/
+    url: /docs/interview_questions/engineering_technology/backend_engineer/
   - title: Data Analysis
     url: /docs/interview_questions/data_analysis/
   - title: Data Engineering
@@ -150,7 +150,7 @@ docs:
   - title: Data Science
     url: /docs/interview_questions/data_science/
   - title: Frontend Engineer
-    url: /docs/interview_questions/engineering__technology/frontend_engineer/
+    url: /docs/interview_questions/engineering_technology/frontend_engineer/
   - title: Golang
     url: /docs/interview_questions/golang/
   - title: Java
