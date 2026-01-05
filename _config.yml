@@ -16,3 +16,5 @@ defaults:
     path: ''
   values:
     layout: default
+    sidebar:
+      nav: "docs"
