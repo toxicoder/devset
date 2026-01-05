@@ -70,3 +70,4 @@ htmlcov/
 
 # Local development files
 .local/
+_site/
