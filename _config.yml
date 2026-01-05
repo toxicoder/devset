@@ -1,0 +1,17 @@
+title: DevSet
+description: Development Standards and Tooling
+url: https://toxicoder.github.io
+baseurl: /devset
+theme: materialistic-jekyll-theme
+remote_theme: toxicoder/materialistic-jekyll
+plugins:
+- jekyll-remote-theme
+- jekyll-optional-front-matter
+theme_settings:
+  palette: palette-1
+permalink: pretty
+defaults:
+- scope:
+    path: ''
+  values:
+    layout: default
