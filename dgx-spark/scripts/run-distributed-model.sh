@@ -25,7 +25,7 @@ cleanup() {
 trap cleanup EXIT ERR
 
 # Dependency check
-for cmd in ssh awk grep sed nc; do
+for cmd in ssh awk grep sed nc curl; do
     if ! command -v "$cmd" &> /dev/null; then
         echo "Error: Required command '$cmd' not found."
         exit 1
@@ -459,7 +459,8 @@ get_nccl_opts() {
 
 # Common Docker Args
 COMMON_ARGS="$PLATFORM_ARG --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
-NIM_ENV="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000"
+# Add NIM_SERVER_HTTP_HOST=0.0.0.0 for safety
+NIM_ENV="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
 
 # Launch in parallel
 launch_pids=""
@@ -468,7 +469,8 @@ launch_pids=""
 echo "Starting Worker on $IP2..."
 NET_OPTS_2=$(get_nccl_opts "$IFACES2")
 (
-    ssh $SSH_OPTS "$IP2" "docker run -d --rm $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=1 $NET_OPTS_2 $IMAGE"
+    # Removed --rm so logs persist
+    ssh $SSH_OPTS "$IP2" "docker run -d $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=1 $NET_OPTS_2 $IMAGE"
 ) &
 launch_pids="$launch_pids $!"
 
@@ -478,7 +480,8 @@ sleep 10
 echo "Starting Head on $IP1..."
 NET_OPTS_1=$(get_nccl_opts "$IFACES1")
 (
-    ssh $SSH_OPTS "$IP1" "docker run -d --rm $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=0 $NET_OPTS_1 $IMAGE"
+    # Removed --rm so logs persist
+    ssh $SSH_OPTS "$IP1" "docker run -d $COMMON_ARGS $NIM_ENV -e NIM_NODE_RANK=0 $NET_OPTS_1 $IMAGE"
 ) &
 launch_pids="$launch_pids $!"
 
@@ -488,6 +491,34 @@ for pid in $launch_pids; do
         exit 1
     fi
 done
+
+# === Health Check ===
+wait_for_service() {
+    local ip=$1
+    local port=8000
+    local retries=30 # 30 * 10s = 5 minutes
+    local wait_time=10
+
+    echo "Waiting for service to be ready at http://$ip:$port..."
+
+    for ((i=1; i<=retries; i++)); do
+        # Try checking health endpoint
+        if curl -s -o /dev/null -m 5 "http://$ip:$port/v1/health/ready"; then
+            echo "Service is ready!"
+            return 0
+        fi
+        echo -n "."
+        sleep $wait_time
+    done
+
+    echo ""
+    echo "Warning: Service did not become ready after $((retries * wait_time)) seconds."
+    echo "It might still be loading, or it failed to start."
+    echo "Check logs on the head node for details."
+    return 1
+}
+
+wait_for_service "$IP1"
 
 echo "---------------------------------------------------"
 echo "Distributed NIM launched."
