@@ -312,5 +312,23 @@ echo "Running test: Verify Removal of Memory Constraints for Nemotron Nano"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
+# Test 9: Verify VLLM_ATTENTION_BACKEND for Nemotron Nano
+echo "Running test: Verify VLLM_ATTENTION_BACKEND for Nemotron Nano"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    if echo "$LOG_CONTENT" | grep -q "VLLM_ATTENTION_BACKEND=FLASHINFER"; then
+        echo "PASS"
+    else
+        echo "FAIL: Did not find VLLM_ATTENTION_BACKEND=FLASHINFER for Nemotron Nano."
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
 # Cleanup
 rm -rf "$TEST_DIR"
