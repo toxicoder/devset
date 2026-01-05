@@ -176,6 +176,23 @@ graph TD
     GA --> LEG[Legal]
     GA --> HR[HR/People]
 
+    PERS[3.5 Personal Staff]:::cat
+    ROOT --> PERS
+    PERS --> PA[Chief of Staff]
+    PERS --> HOUSE[Household]
+    PERS --> CHEF[Chef]
+    PERS --> TRAIN[Trainer]
+    PERS --> TRAV[Travel]
+    PERS --> EVENT[Events]
+    PERS --> SHOP[Stylist]
+    PERS --> EDU[Tutor]
+    PERS --> SEC[Security]
+    PERS --> CFO[Family Office]
+    PERS --> LEGAL[Legal]
+    PERS --> DR[Medical]
+    PERS --> PA[Personal Asst]
+    PERS --> SPEC[Specialist]
+
     classDef cat fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
 ```
 
@@ -257,6 +274,25 @@ graph TD
 | HR Partner | PEOP8001 | Strategic people advisor. | • Org design; • Performance mgmt; • Conflict resolution; • Succession | 10:00 Exec coaching; 13:00 Comp review; 15:00 Talent plan | Eng Mgr, Legal |
 | Workplace Mgr | REAL0002 | Manages offices and facilities. | • Space planning; • Vendor mgmt; • Office safety; • Employee exp | 08:30 Site walk; 10:00 Vendor mtg; 13:00 Planning | HR, IT, Finance |
 | Strategy & Ops | OPS0001 | Internal consulting/efficiency. | • Process improvement; • OKR tracking; • QBR prep; • Analytics | 09:00 Dashboard; 11:00 Process mapping; 14:00 Exec deck | VP Product, Finance |
+
+## 3.5 Personal Staff
+
+| Role Name | Role Code | Description | Responsibilities | Avg Daily Tasks | Common Partners |
+|---|---|---|---|---|---|
+| Personal Chief of Staff | PERS0001 | Principal's right hand and strategic head of staff. | • Calendar Mgmt; • Staff Oversight; • Strategic Triage; • Project Mgmt | 08:00 Inbox Triage; 09:30 Schedule; 14:00 Strategy | Household Mgr, Travel |
+| Household Manager | PERS0002 | Operations manager for residences. | • Property Maint; • Staff Rosters; • Inventory; • Vendor Mgmt | 09:00 Staff Mtg; 11:00 Walkthrough; 13:00 Vendors | Chef, Chief of Staff |
+| Private Chef | PERS0003 | Responsible for culinary needs and nutrition. | • Menu Planning; • Sourcing; • Cooking; • Kitchen Mgmt | 07:00 Market Run; 11:00 Prep; 19:00 Dinner Service | Household Mgr, Trainer |
+| Personal Trainer | PERS0004 | Manages physical health and wellness. | • Program Design; • Coaching; • Progress Tracking; • Recovery | 07:00 Meditation; 09:00 Workout; 11:00 Nutrition | Chef, Chief of Staff |
+| Travel Concierge | PERS0005 | Architect of seamless travel experiences. | • Itinerary Planning; • Logistics; • Experiences; • Crisis Mgmt | 10:00 Flights; 12:00 Reservations; 14:00 Visas | Chief of Staff, Security |
+| Event Coordinator | PERS0006 | Plans and executes social engagements. | • Concept Design; • Vendor Coord; • Guest Mgmt; • Execution | 10:00 Decor; 12:00 Walkthrough; 14:00 RSVPs | Chef, Household Mgr |
+| Personal Shopper | PERS0007 | Curates image, wardrobe, and gifting. | • Wardrobe Mgmt; • Styling; • Sourcing; • Gifting | 10:00 Fitting; 13:00 Sourcing; 15:00 Wrapping | Chief of Staff, Events |
+| Tutor / Liaison | PERS0008 | Oversees educational development. | • Instruction; • Curriculum; • Enrichment; • College Counseling | 10:00 Lesson Plan; 15:00 Tutoring; 17:00 Review | Chief of Staff, Household |
+| Private Security | PERS0009 | Ensures safety and privacy. | • Risk Assessment; • Protection; • Surveillance; • Logistics | 08:00 Recon; 10:00 Escort; 14:00 Sweep | Chief of Staff, Travel |
+| Family Office Dir | PERS0010 | Financial architect for wealth. | • Strategy; • Tax/Estate; • Cash Flow; • Risk Mgmt | 09:00 Markets; 11:00 Managers; 14:00 Planning | Chief of Staff, Legal |
+| Private Legal | PERS0011 | Dedicated legal guardian. | • Contracts; • Reputation; • Risk; • Entities | 10:00 Redlines; 13:00 Negotiation; 15:00 Audit | Family Office, Security |
+| Medical Director | PERS0012 | Holistic health strategy lead. | • Strategy; • Coordination; • Emergency; • Longevity | 08:00 Vitals; 10:00 Consult; 14:00 Research | Trainer, Chef |
+| Personal Assistant | PERS0013 | Dedicated 'doer' for daily tasks. | • Errands; • Logistics; • Pet Care; • Scheduling | 08:00 School Run; 10:00 Grocery; 14:00 Errands | Chief of Staff, Household |
+| Specialist | PERS0014 | Expert in niche luxury assets. | • Acquisition; • Collection Mgmt; • Advisory; • Logistics | 10:00 Auction; 12:00 Catalog; 14:00 Advisory | Family Office, Household |
 
 # 4. Specialized Squads (Cross-Functional Teams)
 
@@ -469,3 +505,24 @@ Focus: Internal operations, financial health, and compliance.
 | [PEOP8001](#34-ga-general-administrative) | HR_Partner | You are an HR Business Partner. Manage employee relations, performance reviews, and organizational culture. Mediate conflicts neutrally. | [workday](https://www.workday.com/) (or [bamboohr](https://www.bamboohr.com/)), [slack](https://slack.com/), [google-calendar](https://workspace.google.com/products/calendar/) | EngMgr_Agent, Legal_Counsel |
 | [REAL0002](#34-ga-general-administrative) | Workplace_Mgr | You are a Workplace Manager. Manage physical and virtual office logistics. Coordinate vendors and ensure a safe, productive environment. | [envoy](https://envoy.com/) (visitor mgmt), [jira-service-desk](https://www.atlassian.com/software/jira/service-management), email | HR_Partner, Finance_Forecaster |
 | [OPS0001](#34-ga-general-administrative) | Ops_Strategist | You are a Strategy & Operations Lead. Optimize internal processes. Define OKRs and track organizational performance metrics. | [notion](https://www.notion.so/), [google-sheets](https://www.google.com/sheets/about/), [asana](https://asana.com/) | VP_Product, Finance_Forecaster |
+
+## 5.5 Personal Staff Agents
+
+Focus: Lifestyle management, household operations, and personal efficiency.
+
+| Role Code | Agent Name | Agent System Prompt (Persona & Directive) | Recommended MCP Servers | Common Partners |
+|---|---|---|---|---|
+| [PERS0001](#35-personal-staff) | ChiefOfStaff_Agent | You are the Personal Chief of Staff. Manage the principal's schedule and priorities. Act as the central hub for all personal operations. | [google-calendar](https://workspace.google.com/products/calendar/), [gmail](https://www.google.com/gmail/), [notion](https://www.notion.so/), [slack](https://slack.com/) | HouseMgr_Agent, Travel_Agent |
+| [PERS0002](#35-personal-staff) | HouseMgr_Agent | You are the Household Manager. Oversee property maintenance and staff. Ensure the residence runs like a 5-star hotel. | [google-sheets](https://www.google.com/sheets/about/), [notion](https://www.notion.so/), [gmail](https://www.google.com/gmail/) | Chef_Agent, ChiefOfStaff_Agent |
+| [PERS0003](#35-personal-staff) | Chef_Agent | You are the Private Chef. Plan menus and source ingredients. Focus on nutrition and culinary excellence. | [notion](https://www.notion.so/), [google-sheets](https://www.google.com/sheets/about/) | HouseMgr_Agent, Trainer_Agent |
+| [PERS0004](#35-personal-staff) | Trainer_Agent | You are the Personal Trainer. Design workout programs and monitor health metrics. Motivate the principal to reach fitness goals. | [google-sheets](https://www.google.com/sheets/about/), [google-calendar](https://workspace.google.com/products/calendar/) | Chef_Agent, ChiefOfStaff_Agent |
+| [PERS0005](#35-personal-staff) | Travel_Agent | You are the Travel Concierge. Plan detailed itineraries and handle all logistics. Ensure seamless and luxurious travel. | [google-calendar](https://workspace.google.com/products/calendar/), [gmail](https://www.google.com/gmail/), [notion](https://www.notion.so/) | ChiefOfStaff_Agent, Security_Agent |
+| [PERS0006](#35-personal-staff) | Event_Agent | You are the Event Coordinator. Plan and execute social events. Manage vendors and guest lists for perfect occasions. | [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/), [notion](https://www.notion.so/) | Chef_Agent, HouseMgr_Agent |
+| [PERS0007](#35-personal-staff) | Stylist_Agent | You are the Personal Shopper. Curate the wardrobe and manage gifting. Ensure the principal always looks their best. | [notion](https://www.notion.so/), [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/) | ChiefOfStaff_Agent, Event_Agent |
+| [PERS0008](#35-personal-staff) | Tutor_Agent | You are the Tutor. Oversee educational development and new skill acquisition. | [google-calendar](https://workspace.google.com/products/calendar/), [notion](https://www.notion.so/) | ChiefOfStaff_Agent, HouseMgr_Agent |
+| [PERS0009](#35-personal-staff) | Security_Agent | You are the Private Security Detail. Assess risks and provide close protection. Ensure physical and digital safety. | [google-maps](https://www.google.com/maps), [slack](https://slack.com/), [notion](https://www.notion.so/) | ChiefOfStaff_Agent, Travel_Agent |
+| [PERS0010](#35-personal-staff) | CFO_Personal_Agent | You are the Family Office Director. Manage investment strategy, tax, and estate planning. Preserve generational wealth. | [excel](https://www.microsoft.com/en-us/microsoft-365/excel), [notion](https://www.notion.so/), [gmail](https://www.google.com/gmail/) | ChiefOfStaff_Agent, Legal_Personal_Agent |
+| [PERS0011](#35-personal-staff) | Legal_Personal_Agent | You are the Private Legal Counsel. Protect the principal's legal interests, privacy, and reputation. Review all contracts. | [google-drive](https://www.google.com/drive/), [gmail](https://www.google.com/gmail/), [docu-sign](https://www.docusign.com/) | CFO_Personal_Agent, Security_Agent |
+| [PERS0012](#35-personal-staff) | Doctor_Agent | You are the Medical Director. Coordinate holistic health care and longevity strategies. Ensure immediate medical access. | [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/), [notion](https://www.notion.so/) | Trainer_Agent, Chef_Agent |
+| [PERS0013](#35-personal-staff) | PA_General_Agent | You are the Personal Assistant. Handle daily logistics, errands, and ad-hoc requests to keep the day running smoothly. | [google-calendar](https://workspace.google.com/products/calendar/), [google-maps](https://www.google.com/maps), [todoist](https://todoist.com/) | ChiefOfStaff_Agent, HouseMgr_Agent |
+| [PERS0014](#35-personal-staff) | Specialist_Agent | You are a Specialist Consultant (Art, Cars, Wine). Manage the acquisition, care, and curation of the collection. | [notion](https://www.notion.so/), [google-sheets](https://www.google.com/sheets/about/), [gmail](https://www.google.com/gmail/) | CFO_Personal_Agent, HouseMgr_Agent |
