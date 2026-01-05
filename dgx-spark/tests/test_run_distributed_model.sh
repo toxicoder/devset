@@ -172,6 +172,15 @@ echo "Running test: Verify Network and Port Configuration"
         exit 1
     fi
 
+    # Check for --runtime=nvidia
+    if echo "$LOG_CONTENT" | grep -q "\-\-runtime=nvidia"; then
+        echo "Check --runtime=nvidia: OK"
+    else
+        echo "Check --runtime=nvidia: FAIL"
+        echo "$LOG_CONTENT"
+        exit 1
+    fi
+
     # Check for UVICORN_HOST=0.0.0.0
     if echo "$LOG_CONTENT" | grep -q "UVICORN_HOST=0.0.0.0"; then
         echo "Check UVICORN_HOST: OK"
