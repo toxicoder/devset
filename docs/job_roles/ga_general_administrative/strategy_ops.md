@@ -96,4 +96,4 @@ VP Product, Finance
 
 ## Recommended Reading
 
-*   **[Interview Preparation Guide](../../interview_questions/ga_general_administrative/strategy__ops.md)**: Comprehensive questions and answers for this role.
+*   **[Interview Preparation Guide](../../interview_questions/ga_general_administrative/strategy_ops.md)**: Comprehensive questions and answers for this role.
