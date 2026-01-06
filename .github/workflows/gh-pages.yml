@@ -4,6 +4,11 @@ on:
   push:
     branches: ["gh-pages"]
   workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug logging'
+        required: false
+        default: 'false'
 
 permissions:
   contents: read
@@ -34,7 +39,9 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
-        run: bundle exec jekyll build -s docs -d _site
+        run: |
+          bundle exec jekyll build -s docs -d _site/docs
+          touch _site/docs/.nojekyll
         env:
           JEKYLL_ENV: production
 
