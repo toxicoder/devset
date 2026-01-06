@@ -29,22 +29,19 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-          bundler-cache: true
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
-        # Source is in docs/, output to _site/docs to match baseurl
+      - name: Copy Gemfile to docs
         run: |
-          bundle exec jekyll build -s docs -d _site/docs
-          touch _site/docs/.nojekyll
-        env:
-          JEKYLL_ENV: production
+          cp Gemfile docs/
+          cp Gemfile.lock docs/
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./docs
+          destination: ./_site/docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
