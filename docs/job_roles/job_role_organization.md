@@ -63,8 +63,8 @@ graph TD
     %% --- Layer 3: Talent Pools (Individual Roles) ---
     subgraph "Talent Pools (The Resources)"
         %% Engineering Resources
-        DIR_INFRA --> R_SREL(SREL1005: SRE):::role
-        DIR_INFRA --> R_SEC(SEC1001: Security Eng):::role
+        DIR_INFRA --> R_SREL(SREL1001: SRE):::role
+        DIR_INFRA --> R_SEC(SREL1004: Security Eng):::role
         DIR_APP --> R_BACK(SWEN1002: Backend Eng):::role
         DIR_APP --> R_FRONT(SWEN1003: Frontend Eng):::role
 
@@ -212,17 +212,17 @@ graph TD
 | Role Name | Role Code | Description | Responsibilities | Avg Daily Tasks | Common Partners |
 |---|---|---|---|---|---|
 | VP of Engineering | SWEN0001 | Leads engineering org, execution, and delivery. | • Engineering Delivery; • Team Building; • Culture; • Process Improvement | 09:00 Recruiting; 11:00 Org Design; 14:00 All-Hands | CTO, VP Product |
-| Dir. Infrastructure | SWEN0002 | Oversees foundational systems and cloud infra. | • Platform Strategy; • Reliability; • Security; • Cost Mgmt | 09:00 Cost Review; 11:00 Terraform; 14:00 Vendor Mtg | VP Eng, CTO |
-| Dir. App Dev | SWEN0003 | Leads app dev teams (Backend, Frontend, Mobile). | • Product Delivery; • Architecture; • Tech Debt; • Dev Experience | 09:00 Standup Review; 11:00 Roadmap Sync; 14:00 Release Plan | VP Eng, VP Product |
+| Dir. Infrastructure | SREL0003 | Oversees foundational systems and cloud infra. | • Platform Strategy; • Reliability; • Security; • Cost Mgmt | 09:00 Cost Review; 11:00 Terraform; 14:00 Vendor Mtg | VP Eng, CTO |
+| Dir. App Dev | SWEN0004 | Leads app dev teams (Backend, Frontend, Mobile). | • Product Delivery; • Architecture; • Tech Debt; • Dev Experience | 09:00 Standup Review; 11:00 Roadmap Sync; 14:00 Release Plan | VP Eng, VP Product |
 | Engineering Manager | SWEN0005 | Leads a squad or team of engineers. | • People Mgmt; • Delivery; • Hiring; • Process Health | 09:30 1:1s; 11:00 Standup; 14:00 Hiring Interview | Product Mgr, Designer |
 | Software Engineer | SWEN1001 | Generalist engineer building core applications. | • Writing code; • Code reviews; • System design; • Debugging | 10:00 Standup; 11:00 Coding; 15:00 Arch sync | Product Mgr, Designer |
 | Backend Engineer | SWEN1002 | Builds server-side logic and databases. | • API development; • DB optimization; • Microservices; • Server maintenance | 10:00 Standup; 11:00 API design; 14:00 DB migration | Frontend Eng, Data Eng |
 | Frontend Engineer | SWEN1003 | Builds client-side UI (Web/Mobile). | • UI implementation; • State mgmt; • Performance opt; • Browser compatibility | 10:00 Standup; 11:00 React coding; 14:00 Pixel review | Designer, Backend Eng |
 | Mobile Engineer | SWEN1004 | Develops native apps for iOS/Android. | • Swift/Kotlin coding; • App Store deploy; • Touch opt; • Device testing | 10:00 Standup; 11:00 Feature dev; 15:00 Build release | Designer, Backend Eng |
-| Security Engineer | SEC1001 | Protects infrastructure and data. | • Pen testing; • Vuln scanning; • Security audits; • Incident response | 09:00 Log review; 11:00 Threat modeling; 14:00 Patching | SRE, Backend Eng, Legal |
+| QA Engineer | SWEN1006 | Ensures software quality through testing. | • Writing test scripts; • Automated testing; • Bug tracking; • Release validation | 09:00 Triage bugs; 11:00 Writing tests; 14:00 Regression | Developers, PM |
+| Security Engineer | SREL1004 | Protects infrastructure and data. | • Pen testing; • Vuln scanning; • Security audits; • Incident response | 09:00 Log review; 11:00 Threat modeling; 14:00 Patching | SRE, Backend Eng, Legal |
 | QA Engineer | QA1001 | Ensures software quality through testing. | • Writing test scripts; • Automated testing; • Bug tracking; • Release validation | 09:00 Triage bugs; 11:00 Writing tests; 14:00 Regression | Developers, PM |
-| Site Reliability Eng | SREL1005 | Ensures uptime and scalability. | • Cloud infra mgmt; • Automating pipelines; • Incident response; • Capacity planning | 10:00 On-call handoff; 11:00 Automation; 14:00 Post-mortem | Backend Eng, DevOps |
-| Data Engineer | DATA4002 | Builds data pipelines and storage. | • ETL creation; • Data warehousing; • Query opt; • Data governance | 10:00 Pipeline check; 11:00 Schema design; 14:00 SQL tuning | Data Scientist, Backend Eng |
+| Site Reliability Eng | SREL1001 | Ensures uptime and scalability. | • Cloud infra mgmt; • Automating pipelines; • Incident response; • Capacity planning | 10:00 On-call handoff; 11:00 Automation; 14:00 Post-mortem | Backend Eng, DevOps |
 
 ## 3.2 Product & Design
 
@@ -331,9 +331,9 @@ graph LR
 
 | Squad Name | Purpose | Composition (Role & Headcount) |
 |---|---|---|
-| Cloud Migration Squad | Moving legacy systems to public cloud. Focus on "lift and shift" and refactoring. | • SREL1005 (3); • SWEN1002 (4); • TPGM5001 (1); • SEC1001 (1) |
+| Cloud Migration Squad | Moving legacy systems to public cloud. Focus on "lift and shift" and refactoring. | • SREL1001 (3); • SWEN1002 (4); • TPGM5001 (1); • SREL1004 (1) |
 | Developer Experience | Building internal tools and CI/CD pipelines to make other engineers faster. | • SWEN1001 (3); • PROD2002 (1); • DESN3001 (1); • DESN3003 (1) |
-| Security Red Team | Ethical hacking squad finding vulnerabilities in our own products. | • SEC1001 (3); • SWEN1002 (1); • TPGM5001 (1) |
+| Security Red Team | Ethical hacking squad finding vulnerabilities in our own products. | • SREL1004 (3); • SWEN1002 (1); • TPGM5001 (1) |
 | Mobile Platform | Maintains core mobile architecture used by feature squads. | • SWEN1004 (4); • SWEN1002 (1); • PROD2002 (1) |
 | Data Platform | Builds the Data Lake and ETL pipelines. | • DATA4002 (4); • SWEN1002 (2); • PROD2001 (1) |
 
@@ -342,8 +342,8 @@ graph LR
 | Squad Name | Purpose | Composition (Role & Headcount) |
 |---|---|---|
 | Acquisition (SEO) | Optimizing website/landing pages for organic traffic. | • SWEN1003 (3); • PROD2001 (1); • DATA4001 (1); • MKTG9003 (1) |
-| Monetization | Owns payment flows, pricing pages, and billing. | • SWEN1002 (3); • SWEN1003 (2); • PROD2001 (1); • FINC6002 (1); • QA1001 (1) |
-| Accessibility (A11y) | Ensures WCAG compliance across products. | • DESN3001 (1); • SWEN1003 (2); • LEGL7001 (1); • QA1001 (1) |
+| Monetization | Owns payment flows, pricing pages, and billing. | • SWEN1002 (3); • SWEN1003 (2); • PROD2001 (1); • FINC6002 (1); • SWEN1006 (1) |
+| Accessibility (A11y) | Ensures WCAG compliance across products. | • DESN3001 (1); • SWEN1003 (2); • LEGL7001 (1); • SWEN1006 (1) |
 | Internationalization | Adapting product for global markets (Lang/Currency). | • TPGM5001 (1); • SWEN1003 (2); • DESN3003 (1); • PROD2001 (1) |
 
 ## 4.3 Business & Corporate Support
@@ -355,7 +355,7 @@ graph LR
 | Event Strategy | Plans major annual conferences. | • MKTG9003 (3); • COMM9005 (2); • DESN3004 (2); • REAL0003 (1) |
 | Privacy (GDPR) | Ensures legal data handling and compliance tools. | • LEGL7004 (1); • TPGM5001 (1); • SWEN1002 (3); • DATA4002 (1) |
 | AI Ethics & Safety | Reviews ML models for bias and toxicity. | • RSCH3002 (2); • DATA4001 (2); • POLI7002 (1); • LEGL7001 (1) |
-| Sustainability (ESG) | Tracks carbon footprint and green initiatives. | • OPS0001 (1); • REAL0002 (1); • FINC6001 (1); • COMM9005 (1); • SREL1005 (1) |
+| Sustainability (ESG) | Tracks carbon footprint and green initiatives. | • OPS0001 (1); • REAL0002 (1); • FINC6001 (1); • COMM9005 (1); • SREL1001 (1) |
 | IPO / Audit Ready | Prepares financial systems for public markets/audits. | • FINC6002 (2); • FINC6001 (2); • LEGL7001 (1); • SWEN1001 (1) |
 
 ## 5. Organizational Matrix (Headcount Allocation)
@@ -367,9 +367,9 @@ This matrix defines the permanent headcount allocation for each role within the 
 | SWEN1002 | Backend Eng | 4 | 0 | 1 | 1 | 2 | 0 | 3 | 0 | 0 | 2 | 0 | 0 | 3 | 0 | 0 | 0 | 16 |
 | SWEN1003 | Frontend Eng | 0 | 0 | 0 | 0 | 0 | 3 | 2 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 |
 | SWEN1004 | Mobile Eng | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
-| SREL1005 | Site Reliability | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 4 |
-| QA1001 | QA Engineer | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 |
-| SEC1001 | Security Eng | 1 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
+| SREL1001 | Site Reliability | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 4 |
+| SWEN1006 | QA Engineer | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 |
+| SREL1004 | Security Eng | 1 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
 | DATA4001 | Data Scientist | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 3 |
 | DATA4002 | Data Engineer | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 5 |
 | PROD2001 | Product Mgr (Gen) | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 |
@@ -436,16 +436,16 @@ Focus: Code execution, infrastructure management, and system security.
 | Role Code | Agent Name | Agent System Prompt (Persona & Directive) | Recommended MCP Servers | Common Partners |
 |---|---|---|---|---|
 | [SWEN0001](#31-engineering-technology) | VPEng_Agent | You are the VP of Engineering. Lead engineering org, delivery, and culture. Optimize SDLC and build high-performing teams. | [greenhouse](https://www.greenhouse.io/), [linear](https://linear.app/), [github](https://github.com/), [slack](https://slack.com/) | CTO_Agent, VP_Product_Agent |
-| [SWEN0002](#31-engineering-technology) | DirInfra_Agent | You are the Director of Infrastructure. Oversee cloud, SRE, and security. Ensure platform stability and cost efficiency. | [aws](https://aws.amazon.com/), [terraform](https://www.terraform.io/), [pagerduty](https://www.pagerduty.com/), [datadog](https://www.datadoghq.com/) | VPEng_Agent, CTO_Agent |
-| [SWEN0003](#31-engineering-technology) | DirAppDev_Agent | You are the Director of App Dev. Lead backend, frontend, and mobile teams. Focus on product delivery and architecture. | [github](https://github.com/), [linear](https://linear.app/), [sentry](https://sentry.io/), [figma](https://www.figma.com/) | VPEng_Agent, DirInfra_Agent |
+| [SREL0003](#31-engineering-technology) | DirInfra_Agent | You are the Director of Infrastructure. Oversee cloud, SRE, and security. Ensure platform stability and cost efficiency. | [aws](https://aws.amazon.com/), [terraform](https://www.terraform.io/), [pagerduty](https://www.pagerduty.com/), [datadog](https://www.datadoghq.com/) | VPEng_Agent, CTO_Agent |
+| [SWEN0004](#31-engineering-technology) | DirAppDev_Agent | You are the Director of App Dev. Lead backend, frontend, and mobile teams. Focus on product delivery and architecture. | [github](https://github.com/), [linear](https://linear.app/), [sentry](https://sentry.io/), [figma](https://www.figma.com/) | VPEng_Agent, DirInfra_Agent |
 | [SWEN0005](#31-engineering-technology) | EngMgr_Agent | You are an Engineering Manager. Lead a squad, manage people, and ensure delivery. Unblock your team and facilitate growth. | [linear](https://linear.app/), [github](https://github.com/), [slack](https://slack.com/), [google-calendar](https://workspace.google.com/products/calendar/) | Product_Visionary, DirAppDev_Agent |
 | [SWEN1001](#31-engineering-technology) | CoreDev_Agent | You are a Full-Stack Software Engineer. Your goal is to implement feature requests with clean, tested code. You must validate all code against style guides before committing. | [github](https://github.com/), [git](https://git-scm.com/), [filesystem](https://en.wikipedia.org/wiki/File_system), [postgres](https://www.postgresql.org/), [sqlite](https://www.sqlite.org/) | Product_Agent, Designer_Agent |
 | [SWEN1002](#31-engineering-technology) | Backend_Architect | You are a Senior Backend Engineer. Focus on database schema design, API efficiency, and microservices logic. Optimize for high concurrency and low latency. | [postgresql](https://www.postgresql.org/), [redis](https://redis.io/), [kubernetes](https://kubernetes.io/), [aws](https://aws.amazon.com/), [docker](https://www.docker.com/) | Frontend_Agent, DataEng_Agent |
 | [SWEN1003](#31-engineering-technology) | Frontend_Builder | You are a Frontend Specialist. Your priority is pixel-perfect UI implementation and client-side performance. Ensure accessibility (WCAG) compliance in all generated components. | [github](https://github.com/), [figma](https://www.figma.com/), [chrome-devtools](https://developer.chrome.com/docs/devtools/), [npm](https://www.npmjs.com/) | Designer_Agent, Backend_Architect |
 | [SWEN1004](#31-engineering-technology) | Mobile_Dev_Agent | You are a Mobile Engineer (iOS/Android). Focus on native performance, touch interactions, and offline-first capabilities. Manage app store release metadata. | xcode-build (via shell), [android-studio](https://developer.android.com/studio), [fastlane](https://fastlane.tools/) | Designer_Agent, Backend_Architect |
-| [SEC1001](#31-engineering-technology) | SecOps_Guardian | You are a Security Engineer. Analyze code and logs for vulnerabilities (OWASP Top 10). You have authority to block deployments if critical risks are found. | [snyk](https://snyk.io/) (or similar scanner), [splunk](https://www.splunk.com/), [aws-security-hub](https://aws.amazon.com/security-hub/), [trivy](https://trivy.dev/) | SRE_Agent, Backend_Architect, Legal_Counsel |
-| [QA1001](#31-engineering-technology) | Quality_Bot | You are a QA Automation Engineer. Write and execute regression tests. Report bugs with reproduction steps and severity levels. | [selenium](https://www.selenium.dev/) (or [playwright](https://playwright.dev/)), [jira](https://www.atlassian.com/software/jira), [github-actions](https://github.com/features/actions) | CoreDev_Agent, Product_Agent |
-| [SREL1005](#31-engineering-technology) | SRE_Commander | You are a Site Reliability Engineer. Maintain 99.99% uptime. Monitor system health, manage cloud infrastructure via Terraform, and respond to incidents. | [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [aws](https://aws.amazon.com/), [pagerduty](https://www.pagerduty.com/), [terraform](https://www.terraform.io/) | Backend_Architect, SecOps_Guardian |
+| [SREL1004](#31-engineering-technology) | SecOps_Guardian | You are a Security Engineer. Analyze code and logs for vulnerabilities (OWASP Top 10). You have authority to block deployments if critical risks are found. | [snyk](https://snyk.io/) (or similar scanner), [splunk](https://www.splunk.com/), [aws-security-hub](https://aws.amazon.com/security-hub/), [trivy](https://trivy.dev/) | SRE_Agent, Backend_Architect, Legal_Counsel |
+| [SWEN1006](#31-engineering-technology) | Quality_Bot | You are a QA Automation Engineer. Write and execute regression tests. Report bugs with reproduction steps and severity levels. | [selenium](https://www.selenium.dev/) (or [playwright](https://playwright.dev/)), [jira](https://www.atlassian.com/software/jira), [github-actions](https://github.com/features/actions) | CoreDev_Agent, Product_Agent |
+| [SREL1001](#31-engineering-technology) | SRE_Commander | You are a Site Reliability Engineer. Maintain 99.99% uptime. Monitor system health, manage cloud infrastructure via Terraform, and respond to incidents. | [prometheus](https://prometheus.io/), [grafana](https://grafana.com/), [aws](https://aws.amazon.com/), [pagerduty](https://www.pagerduty.com/), [terraform](https://www.terraform.io/) | Backend_Architect, SecOps_Guardian |
 | [DATA4002](#31-engineering-technology) | DataPipe_Builder | You are a Data Engineer. Build and maintain ETL pipelines. Ensure data integrity as it flows from production databases to the data warehouse. | [snowflake](https://www.snowflake.com/), [airflow](https://airflow.apache.org/), [dbt](https://www.getdbt.com/), [postgresql](https://www.postgresql.org/) | DataSci_Agent, Backend_Architect |
 
 ## 5.2 Product & Design Agents
