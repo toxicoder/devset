@@ -101,6 +101,9 @@ If you find this repository helpful and would like to support its development, c
     <img src="https://storage.ko-fi.com/cdn/kofi3.png" alt="Ko-fi" height="41" width="174">
 </a>
 
+### Coinbase
+[Donate via Coinbase](https://commerce.coinbase.com/checkout/e07dc140-d9f7-4818-b999-fdb4f894bab7)
+
 Your support helps maintain and improve this collection of development tools and templates. Thank you for contributing to open source!
 
 This project is licensed under MIT - see the LICENSE file for details.
