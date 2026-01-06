@@ -91,16 +91,22 @@ function _check_dependencies() {
 #   None (Reads global CONFIG_FILE)
 #
 # Returns:
-#   None (Sets global variables)
+#   None (Sets global variables IP1, IP2, MODEL_ARG)
 function _read_config() {
   if [[ ! -f "$CONFIG_FILE" ]]; then
     printf "Error: Config file not found at %s\n" "$CONFIG_FILE" >&2
     exit 1
   fi
   # We need to assign to globals here as this reads into the script scope
-  IP1=$(grep '"ip1":' "$CONFIG_FILE" | head -n1 | awk -F'"' '{print $4}')
-  IP2=$(grep '"ip2":' "$CONFIG_FILE" | head -n1 | awk -F'"' '{print $4}')
-  MODEL_ARG=$(grep '"model":' "$CONFIG_FILE" | head -n1 | awk -F'"' '{print $4}')
+  IP1=$(grep '"ip1":' "$CONFIG_FILE" |
+    head -n1 |
+    awk -F'"' '{print $4}')
+  IP2=$(grep '"ip2":' "$CONFIG_FILE" |
+    head -n1 |
+    awk -F'"' '{print $4}')
+  MODEL_ARG=$(grep '"model":' "$CONFIG_FILE" |
+    head -n1 |
+    awk -F'"' '{print $4}')
 
   if [[ -z "$IP1" || -z "$IP2" || -z "$MODEL_ARG" ]]; then
     printf "Error: Failed to parse config file.\n" >&2
@@ -115,7 +121,7 @@ function _read_config() {
 #   Allows resuming the session later with 'start' or 'stop' commands.
 #
 # Arguments:
-#   None (Reads global IP1, IP2, MODEL_ARG)
+#   None (Reads globals: IP1, IP2, MODEL_ARG)
 #
 # Returns:
 #   None (Writes to filesystem)
@@ -228,7 +234,7 @@ function _validate_ip() {
 #   Verifies that the NGC_API_KEY environment variable is set.
 #
 # Arguments:
-#   None
+#   None (Checks environment variable NGC_API_KEY)
 #
 # Returns:
 #   None (Exits if missing)
@@ -281,10 +287,10 @@ EOF
 #   Uses the embedded "Top 20" model registry.
 #
 # Arguments:
-#   None (Uses global MODEL_ARG, QUANT_OVERRIDE)
+#   None (Uses globals: MODEL_ARG, QUANT_OVERRIDE, FORCE)
 #
 # Returns:
-#   None (Sets global configuration variables)
+#   None (Sets globals: IMAGE, TP_SIZE, PP_SIZE, IS_VISION, EXTRA_NIM_ENV)
 function _configure_model() {
   # Defaults
   TP_SIZE=2
@@ -321,7 +327,8 @@ function _configure_model() {
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
       # Basic defaults
     else
-      printf "Error: Model '%s' not found in the strictly supported Top 20 registry.\n" "$MODEL_ARG" >&2
+      printf "Error: Model '%s' not found in the strictly supported Top 20 registry.\n" \
+        "$MODEL_ARG" >&2
       printf "Use --force to bypass this restriction (not recommended).\n" >&2
       exit 1
     fi
@@ -337,7 +344,7 @@ function _configure_model() {
   # Inject Quantization if not fp16/bf16 default, or if it's a "Mega" model constraint
   # NIM usually uses NIM_QUANTIZATION or NIM_MODEL_PROFILE.
   if [[ "$quant_to_use" != "fp16" && "$quant_to_use" != "bf16" ]]; then
-     EXTRA_NIM_ENV="$EXTRA_NIM_ENV -e NIM_QUANTIZATION=$quant_to_use"
+    EXTRA_NIM_ENV="$EXTRA_NIM_ENV -e NIM_QUANTIZATION=$quant_to_use"
   fi
 
   printf "=== NVIDIA DGX Spark Distributed NIM Launcher ===\n"
@@ -361,6 +368,8 @@ function _configure_model() {
 #
 # Arguments:
 #   $1: Model parameters in billions (approx).
+#   $2: Context length (unused/reserved).
+#   Uses globals: IP1, IP2, SSH_OPTS, FORCE.
 #
 # Returns:
 #   None
@@ -373,9 +382,13 @@ function _check_vram_requirements() {
 
   # Query VRAM on both nodes
   local vram1
-  vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null | awk '{s+=$1} END {print s}')
+  vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" \
+    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null |
+    awk '{s+=$1} END {print s}')
   local vram2
-  vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null | awk '{s+=$1} END {print s}')
+  vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" \
+    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null |
+    awk '{s+=$1} END {print s}')
 
   # Default to 0 if failed
   vram1=${vram1:-0}
@@ -391,14 +404,15 @@ function _check_vram_requirements() {
   local params_num="${params:-0}"
   if awk -v p="$params_num" 'BEGIN {exit !(p > 200)}'; then
     if awk -v t="$total_gb" 'BEGIN {exit !(t < 250)}'; then
-        printf "CRITICAL WARNING: Model size (~%sB) is large for detected VRAM (%.2f GB).\n" "$params_num" "$total_gb"
-        printf "Ensure you are using Quantization (FP8/FP4) via --quant.\n"
-        if [[ "$FORCE" -eq 1 ]]; then
-            printf "Force enabled. Proceeding despite memory risks...\n"
-        else
-            printf "Aborting to prevent potential crash. Use --force to override.\n" >&2
-            exit 1
-        fi
+      printf "CRITICAL WARNING: Model size (~%sB) is large for detected VRAM (%.2f GB).\n" \
+        "$params_num" "$total_gb"
+      printf "Ensure you are using Quantization (FP8/FP4) via --quant.\n"
+      if [[ "$FORCE" -eq 1 ]]; then
+        printf "Force enabled. Proceeding despite memory risks...\n"
+      else
+        printf "Aborting to prevent potential crash. Use --force to override.\n" >&2
+        exit 1
+      fi
     fi
   fi
 }
@@ -411,7 +425,7 @@ function _check_vram_requirements() {
 #   if required).
 #
 # Arguments:
-#   None (Uses global IP1)
+#   None (Uses globals: IP1, SSH_OPTS)
 #
 # Returns:
 #   None (Sets global PLATFORM_ARG)
@@ -444,6 +458,7 @@ function _detect_architecture() {
 #
 # Arguments:
 #   $1: The IP address of the node to check.
+#   Uses globals: SSH_OPTS.
 #
 # Returns:
 #   A formatted string: "DETECTED_MULTI:<ifaces>", "DETECTED_SINGLE:<iface>", or "DETECTED_NONE"
@@ -452,10 +467,17 @@ function _get_network_config() {
   # NEW: OSPF Autodetection
   # 1. Try to detect OSPF neighbors via vtysh
   local ospf_neighbors
-  if ospf_neighbors=$(ssh "${SSH_OPTS[@]}" "$ip" "sudo vtysh -c 'show ip ospf neighbor' 2>/dev/null"); then
+  if ospf_neighbors=$(ssh "${SSH_OPTS[@]}" "$ip" \
+    "sudo vtysh -c 'show ip ospf neighbor' 2>/dev/null"); then
     # Parse for 'Full' state and get interface (col 6)
     local ifaces
-    ifaces=$(echo "$ospf_neighbors" | grep "Full" | awk '{print $6}' | sort | uniq | tr '\n' ',' | sed 's/,$//')
+    ifaces=$(echo "$ospf_neighbors" |
+      grep "Full" |
+      awk '{print $6}' |
+      sort |
+      uniq |
+      tr '\n' ',' |
+      sed 's/,$//')
 
     if [[ -n "$ifaces" ]]; then
       # Check if we have multiple
@@ -471,7 +493,8 @@ function _get_network_config() {
 
   # 2. Fallback to ibdev2netdev
   local iface
-  iface=$(ssh "${SSH_OPTS[@]}" "$ip" "ibdev2netdev 2>/dev/null | grep 'Up' | awk -F'==> ' '{print \$2}' | awk '{print \$1}' | head -n 1")
+  iface=$(ssh "${SSH_OPTS[@]}" "$ip" \
+    "ibdev2netdev 2>/dev/null | grep 'Up' | awk -F'==> ' '{print \$2}' | awk '{print \$1}' | head -n 1")
 
   if [[ -n "$iface" ]]; then
     printf "DETECTED_SINGLE: %s" "$iface"
@@ -508,6 +531,7 @@ function _parse_net_conf() {
 # Arguments:
 #   $1: The remote host IP/hostname.
 #   $2: The interface name (or comma-separated list, first one is used).
+#   Uses globals: SSH_OPTS.
 #
 # Returns:
 #   The detected IP address, or error if not found.
@@ -523,7 +547,8 @@ function _get_ip_from_iface() {
   fi
 
   # Get IP
-  ssh "${SSH_OPTS[@]}" "$ip_host" "ip -4 addr show $iface | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1"
+  ssh "${SSH_OPTS[@]}" "$ip_host" \
+    "ip -4 addr show $iface | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1"
 }
 
 # Internal: Detect network
@@ -534,22 +559,23 @@ function _get_ip_from_iface() {
 #   Sets global variables NET_CONF_1, NET_CONF_2, IFACES1, and IFACES2.
 #
 # Arguments:
-#   None (Uses global IP1, IP2)
+#   None (Uses globals: IP1, IP2, SSH_OPTS)
 #
 # Returns:
-#   None (Sets globals)
+#   None (Sets globals: NET_CONF_1, NET_CONF_2, IFACES1, IFACES2)
 function _detect_network() {
   printf "[1/4] Detecting high-speed network interfaces...\n"
 
   # Pre-flight check for IB tools and Link State
   if ssh "${SSH_OPTS[@]}" "$IP1" "command -v ib_write_bw >/dev/null"; then
-     printf "  [+] ib_write_bw detected.\n"
+    printf "  [+] ib_write_bw detected.\n"
   else
-     printf "  [-] ib_write_bw not found.\n"
+    printf "  [-] ib_write_bw not found.\n"
   fi
 
   # Check /sys/class/infiniband for active links
-  if ssh "${SSH_OPTS[@]}" "$IP1" "find /sys/class/infiniband -name 'state' -print0 2>/dev/null | xargs -0 grep -l 'ACTIVE' >/dev/null"; then
+  if ssh "${SSH_OPTS[@]}" "$IP1" \
+    "find /sys/class/infiniband -name 'state' -print0 2>/dev/null | xargs -0 grep -l 'ACTIVE' >/dev/null"; then
     printf "  [+] Active InfiniBand links detected via sysfs.\n"
   else
     printf "  [-] No ACTIVE InfiniBand links found in /sys/class/infiniband.\n"
@@ -576,7 +602,7 @@ function _detect_network() {
 #   Checks SSH connectivity and NVIDIA driver status (nvidia-smi) on both nodes.
 #
 # Arguments:
-#   None (Uses global IP1, IP2)
+#   None (Uses globals: IP1, IP2, SSH_OPTS)
 #
 # Returns:
 #   None (Exits on failure)
@@ -600,34 +626,37 @@ function _verify_connectivity() {
 #   Attempts a high-performance P2P transfer (pigz + mbuffer/nc) from the head node if missing.
 #
 # Arguments:
-#   None (Uses global IP1, IP2, IMAGE, IFACES2, PLATFORM_ARG, NGC_API_KEY)
+#   None (Uses globals: IP1, IP2, IMAGE, IFACES2, PLATFORM_ARG, NGC_API_KEY, SSH_OPTS)
 #
 # Returns:
 #   None (Exits on failure)
 function _ensure_image_present() {
   # 1. Pull on Head Node (IP1)
   printf "Pulling image %s on Head Node (%s)...\n" "$IMAGE" "$IP1"
-  if ! ssh "${SSH_OPTS[@]}" "$IP1" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
+  if ! ssh "${SSH_OPTS[@]}" "$IP1" \
+    "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
     printf "Error: Failed to pull image on %s\n" "$IP1" >&2
     exit 1
   fi
 
   # Get Image ID from Head Node
   local id_head
-  id_head=$(ssh "${SSH_OPTS[@]}" "$IP1" "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
+  id_head=$(ssh "${SSH_OPTS[@]}" "$IP1" \
+    "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
 
   # 2. Check Worker Node (IP2)
   printf "Checking image on Worker Node (%s)...\n" "$IP2"
   local id_worker
-  id_worker=$(ssh "${SSH_OPTS[@]}" "$IP2" "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
+  id_worker=$(ssh "${SSH_OPTS[@]}" "$IP2" \
+    "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
 
   if [[ -n "$id_worker" && "$id_head" == "$id_worker" ]]; then
     printf "Image already exists and matches on %s.\n" "$IP2"
   else
     if [[ -z "$id_worker" ]]; then
-       printf "Image missing on %s.\n" "$IP2"
+      printf "Image missing on %s.\n" "$IP2"
     else
-       printf "Image hash mismatch on %s. Updating...\n" "$IP2"
+      printf "Image hash mismatch on %s. Updating...\n" "$IP2"
     fi
 
     local transfer_success=0
@@ -651,7 +680,7 @@ function _ensure_image_present() {
         elif ssh "${SSH_OPTS[@]}" "$IP1" "nc -h 2>&1 | grep -q -- -q"; then
           nc_opts="-q 1"
         else
-           nc_opts="-q 1"
+          nc_opts="-q 1"
         fi
 
         printf "Starting High-Performance P2P transfer from %s to %s...\n" "$IP1" "$IP2"
@@ -659,16 +688,16 @@ function _ensure_image_present() {
         # Check for mbuffer
         local use_mbuffer=0
         if ssh "${SSH_OPTS[@]}" "$IP1" "command -v mbuffer >/dev/null" && \
-           ssh "${SSH_OPTS[@]}" "$IP2" "command -v mbuffer >/dev/null"; then
-           use_mbuffer=1
-           printf "Enabled mbuffer for buffer optimization.\n"
+          ssh "${SSH_OPTS[@]}" "$IP2" "command -v mbuffer >/dev/null"; then
+          use_mbuffer=1
+          printf "Enabled mbuffer for buffer optimization.\n"
         fi
 
         # Start Listener on IP2
         # Command: nc -l -p PORT | pigz -d | docker load
         local recv_cmd="nc -l -p $transfer_port"
         if [[ "$use_mbuffer" -eq 1 ]]; then
-            recv_cmd="nc -l -p $transfer_port | mbuffer -m 1G"
+          recv_cmd="nc -l -p $transfer_port | mbuffer -m 1G"
         fi
         (
           ssh "${SSH_OPTS[@]}" "$IP2" "$recv_cmd | pigz -d | docker load"
@@ -681,7 +710,7 @@ function _ensure_image_present() {
         # Command: docker save IMG | pigz -c -1 | nc IP PORT
         local send_cmd="docker save $IMAGE | pigz -c -1"
         if [[ "$use_mbuffer" -eq 1 ]]; then
-             send_cmd="docker save $IMAGE | pigz -c -1 | mbuffer -m 1G"
+          send_cmd="docker save $IMAGE | pigz -c -1 | mbuffer -m 1G"
         fi
 
         if ssh "${SSH_OPTS[@]}" "$IP1" "$send_cmd | nc $nc_opts $fast_ip2 $transfer_port"; then
@@ -707,7 +736,8 @@ function _ensure_image_present() {
     # Fallback
     if [[ "$transfer_success" -eq 0 ]]; then
       printf "Falling back to downloading image on %s...\n" "$IP2"
-      if ! ssh "${SSH_OPTS[@]}" "$IP2" "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
+      if ! ssh "${SSH_OPTS[@]}" "$IP2" \
+        "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
         printf "Error: Failed to pull image on %s\n" "$IP2" >&2
         exit 1
       fi
@@ -721,14 +751,15 @@ function _ensure_image_present() {
 #   Removes any existing containers named 'nim-distributed' on both nodes.
 #
 # Arguments:
-#   None (Uses global IP1, IP2)
+#   None (Uses globals: IP1, IP2, SSH_OPTS)
 #
 # Returns:
 #   None
 function _cleanup_existing_containers() {
   printf "[3/4] Cleaning up previous containers...\n"
   for ip in "$IP1" "$IP2"; do
-    ssh "${SSH_OPTS[@]}" "$ip" "docker rm -f nim-distributed >/dev/null 2>&1 || true"
+    ssh "${SSH_OPTS[@]}" "$ip" \
+      "docker rm -f nim-distributed >/dev/null 2>&1 || true"
   done
 }
 
@@ -769,7 +800,9 @@ function _get_nccl_opts() {
 #   Supports --dry-run mode.
 #
 # Arguments:
-#   None (Uses many global configuration variables)
+#   None (Uses many globals: IP1, IP2, IMAGE, MODEL_ARG, TP_SIZE, PP_SIZE,
+#         NGC_API_KEY, SSH_OPTS, DRY_RUN, PLATFORM_ARG, EXTRA_NIM_ENV,
+#         IFACES1, IFACES2)
 #
 # Returns:
 #   None (Exits on launch failure)
@@ -778,9 +811,28 @@ function _launch_distributed_service() {
 
   # Common Docker Args
   # Added -v $HOME/.nim_logs:/opt/nim/logs as requested
-  local common_args="$PLATFORM_ARG --runtime=nvidia --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache -v $HOME/.nim_logs:/opt/nim/logs"
+  local common_args
+  common_args="$PLATFORM_ARG --runtime=nvidia --gpus all --network host"
+  common_args="$common_args --ipc=host --name nim-distributed --shm-size=16g"
+  common_args="$common_args -v ~/.cache/nim:/opt/nim/.cache"
+  common_args="$common_args -v $HOME/.nim_logs:/opt/nim/logs"
+
   # Add NIM_SERVER_HTTP_HOST=0.0.0.0 for safety
-  local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0 -e TRITON_PTXAS_PATH=/usr/local/cuda/bin/ptxas $EXTRA_NIM_ENV"
+  local nim_env
+  nim_env="-e NGC_API_KEY=$NGC_API_KEY"
+  nim_env="$nim_env -e NIM_SERVED_MODEL_NAME=$MODEL_ARG"
+  nim_env="$nim_env -e NIM_MULTI_NODE=1"
+  nim_env="$nim_env -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE"
+  nim_env="$nim_env -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE"
+  nim_env="$nim_env -e NIM_NUM_WORKERS=2"
+  nim_env="$nim_env -e MASTER_ADDR=$IP1"
+  nim_env="$nim_env -e MASTER_PORT=12345"
+  nim_env="$nim_env -e UVICORN_HOST=0.0.0.0"
+  nim_env="$nim_env -e HOST=0.0.0.0"
+  nim_env="$nim_env -e NIM_HTTP_API_PORT=8000"
+  nim_env="$nim_env -e NIM_SERVER_HTTP_HOST=0.0.0.0"
+  nim_env="$nim_env -e TRITON_PTXAS_PATH=/usr/local/cuda/bin/ptxas"
+  nim_env="$nim_env $EXTRA_NIM_ENV"
 
   # Prepare commands
   local net_opts_2
@@ -843,6 +895,7 @@ function _launch_distributed_service() {
 #
 # Arguments:
 #   $1: IP address of the head node.
+#   Uses globals: SSH_OPTS, DRY_RUN.
 #
 # Returns:
 #   0 on success, 1 on failure/timeout.
@@ -853,8 +906,8 @@ function _wait_for_service() {
   local wait_time=10
 
   if [[ "$DRY_RUN" -eq 1 ]]; then
-      printf "Dry run: Skipping health check.\n"
-      return 0
+    printf "Dry run: Skipping health check.\n"
+    return 0
   fi
 
   printf "Waiting for service to be ready at http://%s:%s...\n" "$ip" "$port"
@@ -870,7 +923,9 @@ function _wait_for_service() {
 
     # Try checking health endpoint with python parsing
     # We use curl to fetch JSON, then python to check .data.ready == true
-    if ssh "${SSH_OPTS[@]}" "$ip" "curl -s -m 5 http://localhost:$port/v1/health/ready | python3 -c \"import sys, json; sys.exit(0 if json.load(sys.stdin).get('data', {}).get('ready') == True else 1)\" 2>/dev/null"; then
+    if ssh "${SSH_OPTS[@]}" "$ip" \
+      "curl -s -m 5 http://localhost:$port/v1/health/ready \
+      | python3 -c \"import sys, json; sys.exit(0 if json.load(sys.stdin).get('data', {}).get('ready') == True else 1)\" 2>/dev/null"; then
       printf "Service is ready!\n"
       return 0
     fi
@@ -901,7 +956,8 @@ function main() {
   if [[ "$MODE" == "stop" ]]; then
     printf "Stopping distributed model on %s and %s...\n" "$IP1" "$IP2"
     for ip in "$IP1" "$IP2"; do
-      ssh "${SSH_OPTS[@]}" "$ip" "docker rm -f nim-distributed >/dev/null 2>&1 || true"
+      ssh "${SSH_OPTS[@]}" "$ip" \
+        "docker rm -f nim-distributed >/dev/null 2>&1 || true"
     done
     printf "Stopped.\n"
     exit 0
