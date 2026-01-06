@@ -85,16 +85,16 @@ https://github.com/toxicoder/devset
 
 If you find this repository helpful and would like to support its development, consider making a donation:
 
+### GitHub Sponsors
+[![Sponsor](https://img.shields.io/badge/Sponsor-%23EA4AAA?style=for-the-badge&logo=github)](https://github.com/sponsors/toxicoder)
+
 ### Buy Me a Coffee
 <a href="https://www.buymeacoffee.com/toxicoder" target="_blank">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174">
 </a>
 
 ### PayPal
-[![PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BFJREUDZMPZDN)
-
-### GitHub Sponsors
-[![Sponsor](https://img.shields.io/badge/Sponsor-%23EA4AAA?style=for-the-badge&logo=github)](https://github.com/sponsors/toxicoder)
+[![PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=LSHNL8YLSU3W6)
 
 ### Ko-fi
 <a href="https://ko-fi.com/toxicoder" target="_blank">
