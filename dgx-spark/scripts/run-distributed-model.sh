@@ -100,13 +100,13 @@ function _read_config() {
   # We need to assign to globals here as this reads into the script scope
   IP1=$(grep '"ip1":' "$CONFIG_FILE" |
     head -n1 |
-    awk -F'"' '{print $4}')
+    awk -F'"' '{print $4}' || true)
   IP2=$(grep '"ip2":' "$CONFIG_FILE" |
     head -n1 |
-    awk -F'"' '{print $4}')
+    awk -F'"' '{print $4}' || true)
   MODEL_ARG=$(grep '"model":' "$CONFIG_FILE" |
     head -n1 |
-    awk -F'"' '{print $4}')
+    awk -F'"' '{print $4}' || true)
 
   if [[ -z "$IP1" || -z "$IP2" || -z "$MODEL_ARG" ]]; then
     printf "Error: Failed to parse config file.\n" >&2
@@ -304,7 +304,7 @@ function _configure_model() {
   # Look up model in registry
   # We match either the ID (e.g., mega-1) or the Image Tag (e.g., meta/llama-3.1-405b-instruct)
   local model_data
-  model_data=$(_get_model_registry | grep -F "$MODEL_ARG" | head -n 1)
+  model_data=$(_get_model_registry | grep -F "$MODEL_ARG" | head -n 1 || true)
 
   if [[ -n "$model_data" ]]; then
     # Parse pipe-delimited data
@@ -477,7 +477,7 @@ function _get_network_config() {
       sort |
       uniq |
       tr '\n' ',' |
-      sed 's/,$//')
+      sed 's/,$//' || true)
 
     if [[ -n "$ifaces" ]]; then
       # Check if we have multiple

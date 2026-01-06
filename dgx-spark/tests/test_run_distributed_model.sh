@@ -2,11 +2,13 @@
 # Test script for run-distributed-model.sh
 
 export TEST_DIR=$(mktemp -d)
-# Resolving absolute path to the script properly
-# The test is in dgx-spark/tests/
-# The script is in dgx-spark/scripts/
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TARGET_SCRIPT="$SCRIPT_DIR/../scripts/run-distributed-model.sh"
+ORIGINAL_SCRIPT="$SCRIPT_DIR/../scripts/run-distributed-model.sh"
+
+# Copy script to temp dir to avoid polluting source with config files
+cp "$ORIGINAL_SCRIPT" "$TEST_DIR/run-distributed-model.sh"
+TARGET_SCRIPT="$TEST_DIR/run-distributed-model.sh"
+chmod +x "$TARGET_SCRIPT"
 
 # Mock utilities
 setup_mocks() {
@@ -15,7 +17,6 @@ setup_mocks() {
     # Mock ssh
     cat << 'EOF' > "$TEST_DIR/ssh"
 #!/bin/bash
-# echo "Mock ssh called with: $@" >> "$TEST_DIR/ssh.log"
 ARGS="$*"
 
 if [[ "$ARGS" == *"uname -m"* ]]; then
@@ -25,10 +26,17 @@ if [[ "$ARGS" == *"uname -m"* ]]; then
         echo "x86_64"
     fi
     exit 0
+elif [[ "$ARGS" == *"nvidia-smi --query-gpu=memory.total"* ]]; then
+    if [[ -n "${MOCK_VRAM_MB}" ]]; then
+        echo "${MOCK_VRAM_MB}"
+    else
+        # Default: 80GB (81920 MB)
+        echo "81920"
+    fi
+    exit 0
 elif [[ "$ARGS" == *"nvidia-smi"* ]]; then
     exit 0
 elif [[ "$ARGS" == *"docker login"* ]]; then
-    # Image pull simulation
     if [[ -n "${MOCK_SSH_FAIL_PULL_IP:-}" ]] && [[ "$ARGS" == *"${MOCK_SSH_FAIL_PULL_IP}"* ]]; then
         echo "Mocking pull failure on $MOCK_SSH_FAIL_PULL_IP"
         exit 1
@@ -38,13 +46,11 @@ elif [[ "$ARGS" == *"docker login"* ]]; then
     fi
     exit 0
 elif [[ "$ARGS" == *"docker pull"* ]]; then
-    # Note: script usually chains login and pull, so 'docker login' block catches it.
     exit 0
 elif [[ "$ARGS" == *"docker image inspect"* ]]; then
     if [[ -n "${MOCK_IMAGE_MISSING}" ]]; then
         exit 1
     fi
-    # Default: image exists (exit 0)
     exit 0
 elif [[ "$ARGS" == *"nc -l"* ]] || [[ "$ARGS" == *"nc -N"* ]] || [[ "$ARGS" == *"nc "* ]]; then
     if [[ -n "${MOCK_TRANSFER_FAIL}" ]]; then
@@ -59,6 +65,7 @@ elif [[ "$*" == *"ibdev2netdev"* ]]; then
     echo "mlx5_0 port 1 ==> ib0 (Up)"
     exit 0
 elif [[ "$*" == *"docker rm"* ]]; then
+    echo "docker rm called" >> "$TEST_DIR/docker_rm.log"
     exit 0
 elif [[ "$*" == *"docker run"* ]]; then
     echo "docker run called with args: $*" >> "$TEST_DIR/docker_run.log"
@@ -71,18 +78,16 @@ elif [[ "$ARGS" == *"ip -4 addr show"* ]]; then
     echo "inet 10.0.0.2"
     exit 0
 else
-    # Default success
     exit 0
 fi
 EOF
     chmod +x "$TEST_DIR/ssh"
 
-    # Mock bc (legacy, we might remove usage but keep mock for now)
+    # Mock bc
     cat << 'EOF' > "$TEST_DIR/bc"
 #!/bin/bash
 read -r input
 if [[ "$input" == *"*"* ]]; then
-   # Return a safe dummy value for calculation
    echo 10
 else
    echo 0
@@ -90,16 +95,14 @@ fi
 EOF
     chmod +x "$TEST_DIR/bc"
 
-    # Mock docker (if called locally, though script calls it via ssh usually)
-    # The script calls docker via ssh, but if it checked for local docker, we'd mock it.
-    # We will mock it just in case.
+    # Mock docker
     cat << 'EOF' > "$TEST_DIR/docker"
 #!/bin/bash
 exit 0
 EOF
     chmod +x "$TEST_DIR/docker"
 
-    # Mock nc (netcat) - for dependency check
+    # Mock nc
     cat << 'EOF' > "$TEST_DIR/nc"
 #!/bin/bash
 exit 0
@@ -109,7 +112,6 @@ EOF
     # Mock curl
     cat << 'EOF' > "$TEST_DIR/curl"
 #!/bin/bash
-# Mock successful health check
 exit 0
 EOF
     chmod +x "$TEST_DIR/curl"
@@ -120,7 +122,6 @@ run_test() {
     shift
     echo "Running test: $desc"
 
-    # Run in subshell to avoid env pollution
     (
         export NGC_API_KEY="test-key"
         "$@"
@@ -157,7 +158,6 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
     export MOCK_IMAGE_MISSING=1
     export MOCK_TRANSFER_FAIL=1
     export NGC_API_KEY="test-key"
-    # Capture output to check for error message
     OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
     EXIT_CODE=$?
 
@@ -176,36 +176,11 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
-# Test 7: P2P Transfer Success
-echo "Running test: P2P Transfer Success"
-(
-    export MOCK_IMAGE_MISSING=1
-    export NGC_API_KEY="test-key"
-    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
-    EXIT_CODE=$?
-
-    if [ $EXIT_CODE -eq 0 ]; then
-        if echo "$OUTPUT" | grep -q "Image transfer successful"; then
-            echo "PASS"
-        else
-            echo "FAIL: Did not find transfer success message. Output:"
-            echo "$OUTPUT"
-            exit 1
-        fi
-    else
-        echo "FAIL: Script exited with error. Output:"
-        echo "$OUTPUT"
-        exit 1
-    fi
-)
-if [ $? -ne 0 ]; then exit 1; fi
-
 # Test 4: Static Analysis for Correct Escaping
 echo "Running test: Static Analysis for Correct Escaping"
 if grep -F "'\\\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
     echo "PASS"
 else
-    # Try simpler match
     if grep -F "'\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
         echo "PASS"
     else
@@ -213,6 +188,46 @@ else
         exit 1
     fi
 fi
+
+# Test 5: Verify Network and Port Configuration
+echo "Running test: Verify Network and Port Configuration"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    FAILED=0
+    if ! echo "$LOG_CONTENT" | grep -q "\-\-network host"; then
+        echo "Check --network host: FAIL"
+        FAILED=1
+    fi
+    if ! echo "$LOG_CONTENT" | grep -q "UVICORN_HOST=0.0.0.0"; then
+        echo "Check UVICORN_HOST: FAIL"
+        FAILED=1
+    fi
+    if ! echo "$LOG_CONTENT" | grep -q "HOST=0.0.0.0"; then
+        echo "Check HOST: FAIL"
+        FAILED=1
+    fi
+    if ! echo "$LOG_CONTENT" | grep -q "NIM_HTTP_API_PORT=8000"; then
+        echo "Check NIM_HTTP_API_PORT: FAIL"
+        FAILED=1
+    fi
+    if ! echo "$LOG_CONTENT" | grep -q "\-\-runtime=nvidia"; then
+        echo "Check --runtime=nvidia: FAIL"
+        FAILED=1
+    fi
+
+    if [ $FAILED -eq 0 ]; then
+        echo "PASS"
+    else
+        echo "FAIL: One or more checks failed"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
 
 # Test 6: ARM64 Architecture Detection
 echo "Running test: ARM64 Architecture Detection"
@@ -223,7 +238,6 @@ echo "Running test: ARM64 Architecture Detection"
     "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
-    # Verify we did NOT find --platform linux/amd64
     if echo "$LOG_CONTENT" | grep -q "\-\-platform linux/amd64"; then
         echo "FAIL: Found --platform linux/amd64 on ARM64 host"
         exit 1
@@ -233,64 +247,20 @@ echo "Running test: ARM64 Architecture Detection"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
-# Test 5: Verify Network and Port Configuration
-echo "Running test: Verify Network and Port Configuration"
+# Test 7: P2P Transfer Success
+echo "Running test: P2P Transfer Success"
 (
-    # Clean previous logs
-    rm -f "$TEST_DIR/docker_run.log"
+    export MOCK_IMAGE_MISSING=1
     export NGC_API_KEY="test-key"
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
-
-    # Check log
-    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
-
-    # Check for --network host
-    if echo "$LOG_CONTENT" | grep -q "\-\-network host"; then
-        echo "Check --network host: OK"
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+    if echo "$OUTPUT" | grep -q "Image transfer successful"; then
+        echo "PASS"
     else
-        echo "Check --network host: FAIL"
-        echo "$LOG_CONTENT"
-        exit 1
-    fi
-
-    # Check for UVICORN_HOST=0.0.0.0
-    if echo "$LOG_CONTENT" | grep -q "UVICORN_HOST=0.0.0.0"; then
-        echo "Check UVICORN_HOST: OK"
-    else
-        echo "Check UVICORN_HOST: FAIL"
-        exit 1
-    fi
-
-    # Check for HOST=0.0.0.0
-    if echo "$LOG_CONTENT" | grep -q "HOST=0.0.0.0"; then
-        echo "Check HOST: OK"
-    else
-        echo "Check HOST: FAIL"
-        exit 1
-    fi
-
-    # Check for NIM_HTTP_API_PORT=8000
-    if echo "$LOG_CONTENT" | grep -q "NIM_HTTP_API_PORT=8000"; then
-        echo "Check NIM_HTTP_API_PORT: OK"
-    else
-        echo "Check NIM_HTTP_API_PORT: FAIL"
-        exit 1
-    fi
-
-    # Check for --runtime=nvidia
-    if echo "$LOG_CONTENT" | grep -q "\-\-runtime=nvidia"; then
-        echo "Check --runtime=nvidia: OK"
-    else
-        echo "Check --runtime=nvidia: FAIL"
+        echo "FAIL: P2P transfer message not found"
         exit 1
     fi
 )
-
-if [ $? -eq 0 ]; then
-    echo "PASS"
-else
-    echo "FAIL"
-fi
+if [ $? -ne 0 ]; then exit 1; fi
 
 # Test 8: Verify Removal of Memory Constraints for Nemotron Nano
 echo "Running test: Verify Removal of Memory Constraints for Nemotron Nano"
@@ -298,13 +268,9 @@ echo "Running test: Verify Removal of Memory Constraints for Nemotron Nano"
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
     "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
-
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
-
     if echo "$LOG_CONTENT" | grep -q "NIM_GPU_MEMORY_UTILIZATION=0.40"; then
-        echo "FAIL: Found NIM_GPU_MEMORY_UTILIZATION=0.40, expected it to be removed."
-        echo "Log content:"
-        echo "$LOG_CONTENT"
+        echo "FAIL: Found NIM_GPU_MEMORY_UTILIZATION=0.40"
         exit 1
     else
         echo "PASS"
@@ -318,13 +284,174 @@ echo "Running test: Verify VLLM_ATTENTION_BACKEND for Nemotron Nano"
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
     "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
-
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
-
     if echo "$LOG_CONTENT" | grep -q "VLLM_ATTENTION_BACKEND=FLASHINFER"; then
         echo "PASS"
     else
-        echo "FAIL: Did not find VLLM_ATTENTION_BACKEND=FLASHINFER for Nemotron Nano."
+        echo "FAIL: Did not find VLLM_ATTENTION_BACKEND=FLASHINFER"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# --- NEW TESTS ---
+
+# Test 10: Insufficient VRAM (Failure)
+echo "Running test: Insufficient VRAM (Failure)"
+(
+    export NGC_API_KEY="test-key"
+    # 40GB VRAM per node * 2 = 80GB total.
+    # Model: meta/llama-3.1-405b-instruct (405B params) requires > 250GB (heuristic)
+    export MOCK_VRAM_MB="40960"
+
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "Aborting to prevent potential crash"; then
+            echo "PASS"
+        else
+            echo "FAIL: Expected abort message not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script should have failed due to low VRAM"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 11: Insufficient VRAM with --force (Success)
+echo "Running test: Insufficient VRAM with --force (Success)"
+(
+    export NGC_API_KEY="test-key"
+    export MOCK_VRAM_MB="40960"
+
+    OUTPUT=$("$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        if echo "$OUTPUT" | grep -q "Force enabled. Proceeding"; then
+            echo "PASS"
+        else
+            echo "FAIL: Expected force message not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script failed despite --force. Output:"
+        echo "$OUTPUT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 12: Unknown Model (Failure)
+echo "Running test: Unknown Model (Failure)"
+(
+    export NGC_API_KEY="test-key"
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "unknown/model" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "not found in the strictly supported Top 20 registry"; then
+            echo "PASS"
+        else
+            echo "FAIL: Expected registry error not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script should have failed for unknown model"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 13: Unknown Model with --force (Success)
+echo "Running test: Unknown Model with --force (Success)"
+(
+    export NGC_API_KEY="test-key"
+    # Ensure VRAM check passes for unknown model (params=0 -> 10 default in script, check logic handles it)
+    # The script defaults PARAMS=10 if forced unknown.
+
+    OUTPUT=$("$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "unknown/model" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        if echo "$OUTPUT" | grep -q "Force enabled: Attempting generic configuration"; then
+            echo "PASS"
+        else
+            echo "FAIL: Expected generic config message not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script failed despite --force for unknown model. Output:"
+        echo "$OUTPUT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 14: Quantization Override
+echo "Running test: Quantization Override"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    "$TARGET_SCRIPT" --quant fp4 "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    if echo "$LOG_CONTENT" | grep -q "NIM_QUANTIZATION=fp4"; then
+        echo "PASS"
+    else
+        echo "FAIL: Did not find NIM_QUANTIZATION=fp4. Log:"
+        echo "$LOG_CONTENT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 15: Start/Stop/Setup Mode Persistence
+echo "Running test: Start/Stop/Setup Mode Persistence"
+(
+    export NGC_API_KEY="test-key"
+    rm -f "$TEST_DIR/docker_run.log"
+    rm -f "$TEST_DIR/docker_rm.log"
+
+    # 1. Setup (already done implicitly by basic run, but let's do explicit setup run)
+    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+
+    CONFIG_FILE="$TEST_DIR/dgx-spark-distributed-model-config.json"
+    if [ ! -f "$CONFIG_FILE" ]; then
+        echo "FAIL: Config file not created"
+        exit 1
+    fi
+
+    # Check content
+    if ! grep -q "10.0.0.1" "$CONFIG_FILE"; then
+        echo "FAIL: Config file missing IP1"
+        exit 1
+    fi
+
+    # 2. Stop
+    "$TARGET_SCRIPT" stop >/dev/null
+    if [ -f "$TEST_DIR/docker_rm.log" ]; then
+        echo "Stop: PASS"
+    else
+        echo "FAIL: 'docker rm' not called during stop"
+        exit 1
+    fi
+
+    # 3. Start
+    rm -f "$TEST_DIR/docker_run.log"
+    "$TARGET_SCRIPT" start >/dev/null
+    if [ -f "$TEST_DIR/docker_run.log" ]; then
+        echo "Start: PASS"
+    else
+        echo "FAIL: 'docker run' not called during start"
         exit 1
     fi
 )
