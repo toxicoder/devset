@@ -300,9 +300,9 @@ if [ $? -ne 0 ]; then exit 1; fi
 echo "Running test: Insufficient VRAM (Failure)"
 (
     export NGC_API_KEY="test-key"
-    # 40GB VRAM per node * 2 = 80GB total.
-    # Model: meta/llama-3.1-405b-instruct (405B params) requires > 250GB (heuristic)
-    export MOCK_VRAM_MB="40960"
+    # 110GB VRAM per node * 2 = 220GB total.
+    # Model: meta/llama-3.1-405b-instruct (405B params) requires > 230GB (heuristic)
+    export MOCK_VRAM_MB="112640" # 110 * 1024
 
     OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
     EXIT_CODE=$?
@@ -316,7 +316,50 @@ echo "Running test: Insufficient VRAM (Failure)"
             exit 1
         fi
     else
-        echo "FAIL: Script should have failed due to low VRAM"
+        echo "FAIL: Script should have failed due to low VRAM (220GB detected). Exit code: $EXIT_CODE"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 10b: VRAM Warning Threshold Relaxation (Success)
+echo "Running test: VRAM Warning Threshold Relaxation (Success at 240GB)"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    # 120GB VRAM per node * 2 = 240GB total.
+    # Model: meta/llama-3.1-405b-instruct (405B params) requires > 230GB.
+    # Previous limit was 250GB, so this would have failed. Now it should pass.
+    export MOCK_VRAM_MB="122880" # 120 * 1024
+
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        echo "PASS"
+    else
+        echo "FAIL: Script failed despite sufficient VRAM (240GB detected). Output:"
+        echo "$OUTPUT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 16: NCCL_IB_GID_INDEX Override
+echo "Running test: NCCL_IB_GID_INDEX Override"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    export NCCL_IB_GID_INDEX=5
+    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    if echo "$LOG_CONTENT" | grep -q "NCCL_IB_GID_INDEX=5"; then
+        echo "PASS"
+    else
+        echo "FAIL: Did not find NCCL_IB_GID_INDEX=5. Log:"
+        echo "$LOG_CONTENT"
         exit 1
     fi
 )
