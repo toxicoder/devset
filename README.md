@@ -81,7 +81,7 @@ devset - A collection of development tools and templates
 https://github.com/toxicoder/devset
 ```
 
-## Support This Project
+## Support My Projects
 
 If you find this repository helpful and would like to support its development, consider making a donation:
 
