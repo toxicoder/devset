@@ -102,7 +102,7 @@ If you find this repository helpful and would like to support its development, c
 </a>
 
 ### Coinbase
-[Donate via Coinbase](https://commerce.coinbase.com/checkout/e07dc140-d9f7-4818-b999-fdb4f894bab7)
+[![Donate via Coinbase](https://img.shields.io/badge/Donate%20via-Coinbase-0052FF?style=for-the-badge&logo=coinbase&logoColor=white)](https://commerce.coinbase.com/checkout/e07dc140-d9f7-4818-b999-fdb4f894bab7)
 
 Your support helps maintain and improve this collection of development tools and templates. Thank you for contributing to open source!
 
