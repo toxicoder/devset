@@ -765,6 +765,41 @@ function _cleanup_existing_containers() {
   done
 }
 
+# Internal: Free system memory
+#
+# Description:
+#   Prompts the user to free system RAM (drop caches) on both nodes.
+#   This is useful for ensuring maximum available memory for model loading.
+#
+# Arguments:
+#   None (Uses globals: IP1, IP2, SSH_OPTS)
+#
+# Returns:
+#   None
+function _free_system_memory() {
+  # Skip if dry run
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    printf "Dry run: Skipping memory clear prompt.\n"
+    return
+  fi
+
+  printf "\n[Memory Optimization]\n"
+  printf "Do you want to clear system RAM (drop caches) on all nodes to free up memory? [y/N] "
+  read -r response
+  if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    printf "Clearing caches on %s and %s...\n" "$IP1" "$IP2"
+    for ip in "$IP1" "$IP2"; do
+      if ssh "${SSH_OPTS[@]}" "$ip" "sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'"; then
+        printf "  [+] Caches dropped on %s.\n" "$ip"
+      else
+        printf "  [-] Failed to drop caches on %s (check sudo permissions).\n" "$ip"
+      fi
+    done
+  else
+    printf "Skipping memory clear.\n"
+  fi
+}
+
 # Prepare ENV vars for network
 #
 # Description:
@@ -989,6 +1024,7 @@ function main() {
   _ensure_image_present
 
   _cleanup_existing_containers
+  _free_system_memory
   _launch_distributed_service
 
   _wait_for_service "$IP1"

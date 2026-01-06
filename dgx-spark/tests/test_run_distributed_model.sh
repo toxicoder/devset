@@ -124,7 +124,8 @@ run_test() {
 
     (
         export NGC_API_KEY="test-key"
-        "$@"
+        # Default to 'n' for interactive prompt in tests
+        echo "n" | "$@"
     )
     local status=$?
     if [ $status -eq 0 ]; then
@@ -194,7 +195,7 @@ echo "Running test: Verify Network and Port Configuration"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -235,7 +236,7 @@ echo "Running test: ARM64 Architecture Detection"
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
     export MOCK_ARCH="aarch64"
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
     if echo "$LOG_CONTENT" | grep -q "\-\-platform linux/amd64"; then
@@ -252,7 +253,7 @@ echo "Running test: P2P Transfer Success"
 (
     export MOCK_IMAGE_MISSING=1
     export NGC_API_KEY="test-key"
-    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
     if echo "$OUTPUT" | grep -q "Image transfer successful"; then
         echo "PASS"
     else
@@ -267,7 +268,7 @@ echo "Running test: Verify Removal of Memory Constraints for Nemotron Nano"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
     if echo "$LOG_CONTENT" | grep -q "NIM_GPU_MEMORY_UTILIZATION=0.40"; then
         echo "FAIL: Found NIM_GPU_MEMORY_UTILIZATION=0.40"
@@ -283,7 +284,7 @@ echo "Running test: Verify VLLM_ATTENTION_BACKEND for Nemotron Nano"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "nvidia/nemotron-3-nano" >/dev/null
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
     if echo "$LOG_CONTENT" | grep -q "VLLM_ATTENTION_BACKEND=FLASHINFER"; then
         echo "PASS"
@@ -304,7 +305,7 @@ echo "Running test: Insufficient VRAM (Failure)"
     # Model: meta/llama-3.1-405b-instruct (405B params) requires > 230GB (heuristic)
     export MOCK_VRAM_MB="112640" # 110 * 1024
 
-    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
@@ -332,7 +333,7 @@ echo "Running test: VRAM Warning Threshold Relaxation (Success at 240GB)"
     # Previous limit was 250GB, so this would have failed. Now it should pass.
     export MOCK_VRAM_MB="122880" # 120 * 1024
 
-    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 0 ]; then
@@ -351,7 +352,7 @@ echo "Running test: NCCL_IB_GID_INDEX Override"
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
     export NCCL_IB_GID_INDEX=5
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -371,7 +372,7 @@ echo "Running test: Insufficient VRAM with --force (Success)"
     export NGC_API_KEY="test-key"
     export MOCK_VRAM_MB="40960"
 
-    OUTPUT=$("$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "meta/llama-3.1-405b-instruct" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 0 ]; then
@@ -394,7 +395,7 @@ if [ $? -ne 0 ]; then exit 1; fi
 echo "Running test: Unknown Model (Failure)"
 (
     export NGC_API_KEY="test-key"
-    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "unknown/model" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "unknown/model" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
@@ -419,7 +420,7 @@ echo "Running test: Unknown Model with --force (Success)"
     # Ensure VRAM check passes for unknown model (params=0 -> 10 default in script, check logic handles it)
     # The script defaults PARAMS=10 if forced unknown.
 
-    OUTPUT=$("$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "unknown/model" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "unknown/model" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 0 ]; then
@@ -443,7 +444,7 @@ echo "Running test: Quantization Override"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    "$TARGET_SCRIPT" --quant fp4 "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" --quant fp4 "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -465,7 +466,7 @@ echo "Running test: Start/Stop/Setup Mode Persistence"
     rm -f "$TEST_DIR/docker_rm.log"
 
     # 1. Setup (already done implicitly by basic run, but let's do explicit setup run)
-    "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
 
     CONFIG_FILE="$TEST_DIR/dgx-spark-distributed-model-config.json"
     if [ ! -f "$CONFIG_FILE" ]; then
@@ -480,6 +481,7 @@ echo "Running test: Start/Stop/Setup Mode Persistence"
     fi
 
     # 2. Stop
+    # Stop mode does not prompt for memory clear
     "$TARGET_SCRIPT" stop >/dev/null
     if [ -f "$TEST_DIR/docker_rm.log" ]; then
         echo "Stop: PASS"
@@ -490,11 +492,28 @@ echo "Running test: Start/Stop/Setup Mode Persistence"
 
     # 3. Start
     rm -f "$TEST_DIR/docker_run.log"
-    "$TARGET_SCRIPT" start >/dev/null
+    echo "n" | "$TARGET_SCRIPT" start >/dev/null
     if [ -f "$TEST_DIR/docker_run.log" ]; then
         echo "Start: PASS"
     else
         echo "FAIL: 'docker run' not called during start"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 17: Memory Clear Prompt (Success)
+echo "Running test: Memory Clear Prompt (Success)"
+(
+    export NGC_API_KEY="test-key"
+    # Pipe 'y' to prompt
+    OUTPUT=$(echo "y" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+
+    if echo "$OUTPUT" | grep -q "Clearing caches on"; then
+        echo "PASS"
+    else
+        echo "FAIL: Did not find cache clearing message. Output:"
+        echo "$OUTPUT"
         exit 1
     fi
 )
