@@ -4,6 +4,11 @@ on:
   push:
     branches: ["gh-pages"]
   workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug logging'
+        required: false
+        default: 'false'
 
 permissions:
   contents: read

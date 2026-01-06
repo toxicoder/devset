@@ -18,3 +18,9 @@ defaults:
     layout: default
     sidebar:
       nav: "docs"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
