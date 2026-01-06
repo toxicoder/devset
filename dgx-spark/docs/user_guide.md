@@ -56,6 +56,31 @@ To stop the running containers on both nodes:
 ./run-distributed-model.sh stop
 ```
 
+## Usage Examples
+
+Here are some common scenarios with options populated:
+
+### Dry Run (Preview Commands)
+To generate and view the Docker run commands without actually executing them (useful for validation):
+
+```bash
+./run-distributed-model.sh --dry-run 192.168.1.10 192.168.1.11 meta/llama-3.1-70b-instruct
+```
+
+### Force Quantization (FP8)
+To deploy the model with FP8 quantization to reduce VRAM usage or increase performance:
+
+```bash
+./run-distributed-model.sh --quant fp8 192.168.1.10 192.168.1.11 meta/llama-3.1-405b-instruct
+```
+
+### Force Unsupported Model
+To deploy a model that is not in the built-in "Top 20" registry, bypassing safety checks:
+
+```bash
+./run-distributed-model.sh --force 192.168.1.10 192.168.1.11 nvcr.io/nim/custom/model:latest
+```
+
 ## Command Reference
 
 ### Options
