@@ -212,5 +212,6 @@
   "interview-questions/3.1 Engineering & Technology/Frontend Engineer.md": "interview_questions/engineering__technology/frontend_engineer.md",
   "interview-questions/3.1 Engineering & Technology/VP of Engineering.md": "interview_questions/engineering__technology/vp_of_engineering.md",
   "interview-questions/3.1 Engineering & Technology/Security Engineer.md": "interview_questions/engineering__technology/security_engineer.md",
-  "interview-questions/3.1 Engineering & Technology/Data Engineer.md": "interview_questions/engineering__technology/data_engineer.md"
+  "interview-questions/3.1 Engineering & Technology/Data Engineer.md": "interview_questions/engineering__technology/data_engineer.md",
+  "dgx-spark/docs/user_guide.md": "dgx-spark/docs/user_guide.md"
 }
