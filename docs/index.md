@@ -1,3 +1,9 @@
+---
+layout: default
+sidebar:
+  nav: "docs"
+---
+
 # Welcome to Project Documentation
 
 Welcome to the official documentation for the project.
