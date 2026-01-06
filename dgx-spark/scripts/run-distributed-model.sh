@@ -72,7 +72,7 @@ trap cleanup EXIT ERR
 # Returns:
 #   None (Exits on failure)
 function _check_dependencies() {
-  for cmd in ssh awk grep sed nc curl pigz; do
+  for cmd in ssh awk grep sed nc curl pigz python3; do
     if ! command -v "$cmd" &>/dev/null; then
       printf "Error: Required command '%s' not found.\n" "$cmd" >&2
       exit 1
@@ -97,19 +97,22 @@ function _read_config() {
     printf "Error: Config file not found at %s\n" "$CONFIG_FILE" >&2
     exit 1
   fi
-  # We need to assign to globals here as this reads into the script scope
-  IP1=$(grep '"ip1":' "$CONFIG_FILE" |
-    head -n1 |
-    awk -F'"' '{print $4}' || true)
-  IP2=$(grep '"ip2":' "$CONFIG_FILE" |
-    head -n1 |
-    awk -F'"' '{print $4}' || true)
-  MODEL_ARG=$(grep '"model":' "$CONFIG_FILE" |
-    head -n1 |
-    awk -F'"' '{print $4}' || true)
+
+  # Python parsing
+  local config_values
+  config_values=$(python3 -c "import sys, json; data=json.load(open(sys.argv[1])); print(f\"{data.get('ip1','')}|{data.get('ip2','')}|{data.get('model','')}\")" "$CONFIG_FILE")
+
+  if [[ $? -ne 0 ]]; then
+     printf "Error: Failed to parse config file with python.\n" >&2
+     exit 1
+  fi
+
+  IP1=$(echo "$config_values" | cut -d'|' -f1)
+  IP2=$(echo "$config_values" | cut -d'|' -f2)
+  MODEL_ARG=$(echo "$config_values" | cut -d'|' -f3)
 
   if [[ -z "$IP1" || -z "$IP2" || -z "$MODEL_ARG" ]]; then
-    printf "Error: Failed to parse config file.\n" >&2
+    printf "Error: Invalid config file (missing fields).\n" >&2
     exit 1
   fi
 }
@@ -276,7 +279,6 @@ efficient-4|microsoft/phi-3.5-moe-instruct|2|1|fp16|42|0|
 special-1|allenai/molmo-72b-0924|2|1|fp16|72|1|
 special-2|nvidia/nemotron-4-reward|2|1|fp16|340|0|
 special-3|meta/llama-guard-3-8b|1|1|fp16|8|0|
-nvidia/nemotron-3-nano|nvidia/nemotron-3-nano|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16
 EOF
 }
 
@@ -400,10 +402,10 @@ function _check_vram_requirements() {
 
   printf "Total Cluster VRAM Detected: %.2f GB\n" "$total_gb"
 
-  # Simple heuristic: If model > 200B params and total < 250GB, abort
+  # Simple heuristic: If model > 200B params and total < 230GB, abort
   local params_num="${params:-0}"
   if awk -v p="$params_num" 'BEGIN {exit !(p > 200)}'; then
-    if awk -v t="$total_gb" 'BEGIN {exit !(t < 250)}'; then
+    if awk -v t="$total_gb" 'BEGIN {exit !(t < 230)}'; then
       printf "CRITICAL WARNING: Model size (~%sB) is large for detected VRAM (%.2f GB).\n" \
         "$params_num" "$total_gb"
       printf "Ensure you are using Quantization (FP8/FP4) via --quant.\n"
@@ -713,7 +715,7 @@ function _ensure_image_present() {
           send_cmd="docker save $IMAGE | pigz -c -1 | mbuffer -m 1G"
         fi
 
-        if ssh "${SSH_OPTS[@]}" "$IP1" "$send_cmd | nc $nc_opts $fast_ip2 $transfer_port"; then
+        if ssh "${SSH_OPTS[@]}" "$IP1" "$send_cmd | nc -w 60 $nc_opts $fast_ip2 $transfer_port"; then
           printf "Transfer command finished.\n"
         else
           printf "Transfer command failed.\n"
@@ -778,7 +780,7 @@ function _cleanup_existing_containers() {
 function _get_nccl_opts() {
   local ifaces="$1"
   # Default NCCL optimizations for 400Gbps IB/RoCE
-  local opts="-e NCCL_IB_DISABLE=0 -e NCCL_IB_GID_INDEX=3 -e NCCL_CROSS_NIC=1"
+  local opts="-e NCCL_IB_DISABLE=0 -e NCCL_IB_GID_INDEX=${NCCL_IB_GID_INDEX:-3} -e NCCL_CROSS_NIC=1"
 
   if [[ -n "$ifaces" ]]; then
     opts="$opts -e NCCL_SOCKET_IFNAME=$ifaces -e GLOO_SOCKET_IFNAME=$ifaces"
@@ -878,6 +880,17 @@ function _launch_distributed_service() {
     if ! wait "$pid"; then
       printf "Error: Failed to launch container on one of the nodes.\n" >&2
       exit 1
+    fi
+  done
+
+  # Verify containers are running
+  sleep 5
+  printf "Verifying containers are running...\n"
+  for ip in "$IP1" "$IP2"; do
+    if ! ssh "${SSH_OPTS[@]}" "$ip" "docker ps | grep -q nim-distributed"; then
+       printf "Error: Container nim-distributed failed to start or crashed on %s.\n" "$ip" >&2
+       ssh "${SSH_OPTS[@]}" "$ip" "docker logs --tail 20 nim-distributed"
+       exit 1
     fi
   done
 
