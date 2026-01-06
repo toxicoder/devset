@@ -39,6 +39,9 @@ IFACES1=""
 IFACES2=""
 NET_CONF_1=""
 NET_CONF_2=""
+QUANT_OVERRIDE=""
+DRY_RUN=0
+FORCE=0
 
 # Error handling and cleanup
 #
@@ -69,7 +72,7 @@ trap cleanup EXIT ERR
 # Returns:
 #   None (Exits on failure)
 function _check_dependencies() {
-  for cmd in ssh awk grep sed nc curl; do
+  for cmd in ssh awk grep sed nc curl pigz; do
     if ! command -v "$cmd" &>/dev/null; then
       printf "Error: Required command '%s' not found.\n" "$cmd" >&2
       exit 1
@@ -139,6 +142,36 @@ EOF
 # Returns:
 #   None (Sets global variables or exits)
 function _parse_arguments() {
+  # Parse flags
+  while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+      --dry-run)
+        DRY_RUN=1
+        shift
+        ;;
+      --force)
+        FORCE=1
+        shift
+        ;;
+      --quant)
+        if [[ -z "${2:-}" ]]; then
+          printf "Error: --quant requires an argument (e.g., fp8, fp4, int8)\n" >&2
+          exit 1
+        fi
+        QUANT_OVERRIDE="$2"
+        shift 2
+        ;;
+      -*)
+        printf "Error: Unknown option %s\n" "$1" >&2
+        exit 1
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+
+  # Parse commands/positional args
   if [[ "$#" -eq 1 && "$1" == "stop" ]]; then
     MODE="stop"
   elif [[ "$#" -eq 1 && "$1" == "start" ]]; then
@@ -147,9 +180,13 @@ function _parse_arguments() {
     MODE="setup"
   else
     printf "Usage:\n"
-    printf "  %s <IP1> <IP2> [<MODEL_NAME>]  (First run / Setup)\n" "$0"
-    printf "  %s start                       (Start using saved config)\n" "$0"
-    printf "  %s stop                        (Stop using saved config)\n" "$0"
+    printf "  %s [OPTIONS] <IP1> <IP2> [<MODEL_NAME>]  (First run / Setup)\n" "$0"
+    printf "  %s [OPTIONS] start                       (Start using saved config)\n" "$0"
+    printf "  %s [OPTIONS] stop                        (Stop using saved config)\n" "$0"
+    printf "\nOptions:\n"
+    printf "  --dry-run         Print commands without executing\n"
+    printf "  --force           Bypass safety checks (Registry, VRAM)\n"
+    printf "  --quant <fmt>     Force quantization (fp4, fp8, etc.)\n"
     exit 1
   fi
 
@@ -203,174 +240,166 @@ function _check_api_key() {
   fi
 }
 
+# Internal: Get Model Registry
+#
+# Description:
+#   Returns the "Top 20" model registry data as a pipe-delimited list.
+#   Format: ModelID|ImageTag|TP|PP|DefaultQuant|Params(B)|IsVision|ExtraEnv
+#
+# Returns:
+#   String (Heredoc)
+function _get_model_registry() {
+  cat <<EOF
+mega-1|meta/llama-3.1-405b-instruct|2|1|fp4|405|0|
+mega-2|nvidia/nemotron-4-340b-instruct|2|1|fp4|340|0|
+mega-3|deepseek-ai/deepseek-v2.5|2|1|fp8|236|0|
+mega-4|mistralai/mistral-large-instruct-2407|2|1|fp8|123|0|
+large-1|mistralai/mixtral-8x22b-instruct-v0.1|2|1|fp8|141|0|
+large-2|cohere/command-r-plus-08-2024|2|1|fp16|104|0|
+large-3|meta/llama-3.2-90b-vision-instruct|2|1|fp16|90|1|
+large-4|alibaba/qwen2-vl-72b-instruct|2|1|fp16|72|1|
+workhorse-1|meta/llama-3.1-70b-instruct|2|1|fp16|70|0|
+workhorse-2|nvidia/llama-3.1-nemotron-70b-instruct|2|1|fp16|70|0|
+workhorse-3|alibaba/qwen2.5-72b-instruct|2|1|fp16|72|0|
+workhorse-4|deepseek-ai/deepseek-coder-v2-instruct|2|1|fp16|16|0|
+workhorse-5|mistralai/pixtral-large-2411|2|1|fp8|124|1|
+efficient-1|google/gemma-2-27b-it|2|1|fp16|27|0|
+efficient-2|nvidia/nemotron-3-nano-30b-a3b|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16
+efficient-3|bigcode/starcoder2-15b|2|1|fp16|15|0|
+efficient-4|microsoft/phi-3.5-moe-instruct|2|1|fp16|42|0|
+special-1|allenai/molmo-72b-0924|2|1|fp16|72|1|
+special-2|nvidia/nemotron-4-reward|2|1|fp16|340|0|
+special-3|meta/llama-guard-3-8b|1|1|fp16|8|0|
+nvidia/nemotron-3-nano|nvidia/nemotron-3-nano|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16
+EOF
+}
+
 # Internal: Configure model parameters
 #
 # Description:
-#   Maps the model argument to the corresponding image, parameters, context size,
-#   and parallelism settings.
+#   Maps the model argument to the corresponding image, parameters, and parallelism settings.
+#   Uses the embedded "Top 20" model registry.
 #
 # Arguments:
-#   None (Uses global MODEL_ARG)
+#   None (Uses global MODEL_ARG, QUANT_OVERRIDE)
 #
 # Returns:
 #   None (Sets global configuration variables)
 function _configure_model() {
-  # Defaults are already set globally, but reset here for clarity if needed
+  # Defaults
   TP_SIZE=2
   PP_SIZE=1
   IS_VISION=0
   EXTRA_NIM_ENV=""
+  PARAMS=10
+  CONTEXT=128
+  local default_quant="fp16"
 
-  case "$MODEL_ARG" in
-    "meta/llama-3.1-405b-instruct")
-      IMAGE="nvcr.io/nim/meta/llama-3.1-405b-instruct:latest"
-      PARAMS=405
-      CONTEXT=128
-      ;;
-    "nvidia/nemotron-4-340b-instruct")
-      IMAGE="nvcr.io/nim/nvidia/nemotron-4-340b-instruct:latest"
-      PARAMS=340
-      CONTEXT=128
-      ;;
-    "mistralai/mixtral-8x22b-instruct-v0.1")
-      IMAGE="nvcr.io/nim/mistralai/mixtral-8x22b-instruct-v0.1:latest"
-      PARAMS=141
-      CONTEXT=64
-      ;;
-    "meta/llama-3.1-70b-instruct")
-      IMAGE="nvcr.io/nim/meta/llama-3.1-70b-instruct:latest"
-      PARAMS=70
-      CONTEXT=128
-      ;;
-    "nvidia/llama-3.1-nemotron-70b-instruct")
-      IMAGE="nvcr.io/nim/nvidia/llama-3.1-nemotron-70b-instruct:latest"
-      PARAMS=70
-      CONTEXT=128
-      ;;
-    "alibaba/qwen2.5-72b-instruct")
-      IMAGE="nvcr.io/nim/alibaba/qwen2.5-72b-instruct:latest"
-      PARAMS=72
-      CONTEXT=128
-      ;;
-    "mistralai/mistral-large-instruct-2407")
-      IMAGE="nvcr.io/nim/mistralai/mistral-large-instruct-2407:latest"
-      PARAMS=123
-      CONTEXT=128
-      ;;
-    "deepseek-ai/deepseek-v3")
-      IMAGE="nvcr.io/nim/deepseek-ai/deepseek-v3:latest"
-      PARAMS=230
-      CONTEXT=128
-      ;;
-    "stabilityai/stable-diffusion-3.5-large")
-      IMAGE="nvcr.io/nim/stabilityai/stable-diffusion-3.5-large:latest"
-      PARAMS=8
-      CONTEXT=4 # Small context for vision usually
-      IS_VISION=1
-      ;;
-    "nvidia/nemotron-nano-12b-v2-vl")
-      IMAGE="nvcr.io/nim/nvidia/nemotron-nano-12b-v2-vl:latest"
-      PARAMS=12
-      CONTEXT=32
-      IS_VISION=1
-      ;;
-    "nvidia/nemotron-3-nano")
-      IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano:latest"
-      PARAMS=30
-      CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
-      TP_SIZE=1
-      PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
-      EXTRA_NIM_ENV="-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16"
-      ;;
-    "nvidia/nemotron-3-nano-30b-a3b")
-      IMAGE="nvcr.io/nim/nvidia/nemotron-3-nano-30b-a3b:latest"
-      PARAMS=30
-      CONTEXT=32 # Mamba arch (low memory footprint), supports 1M
-      TP_SIZE=1
-      PP_SIZE=2 # Mamba / Small model prefer PP or Single over TP
-      EXTRA_NIM_ENV="-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16"
-      ;;
-    "meta/llama-4-scout")
-      IMAGE="nvcr.io/nim/meta/llama-4-scout:latest"
-      PARAMS=109
-      CONTEXT=10000
-      ;;
-    "deepseek-ai/deepseek-v3.1")
-      IMAGE="nvcr.io/nim/deepseek-ai/deepseek-v3.1:latest"
-      PARAMS=671
-      CONTEXT=128
-      ;;
-    "alibaba/qwen3-30b-a3b-thinking" | "alibaba/qwen3-30b-a3b-thinking-2507")
-      IMAGE="nvcr.io/nim/alibaba/qwen3-30b-a3b-thinking-2507:latest"
-      PARAMS=30
-      CONTEXT=1000
-      ;;
-    *)
-      printf "Unknown model: %s\n" "$MODEL_ARG"
-      printf "Using provided name as image name suffix or custom mapping not found.\n"
-      printf "Defaulting to generic configuration.\n"
+  # Look up model in registry
+  # We match either the ID (e.g., mega-1) or the Image Tag (e.g., meta/llama-3.1-405b-instruct)
+  local model_data
+  model_data=$(_get_model_registry | grep -F "$MODEL_ARG" | head -n 1)
+
+  if [[ -n "$model_data" ]]; then
+    # Parse pipe-delimited data
+    # format: id|image|tp|pp|quant|params|is_vision|extra
+    IMAGE="nvcr.io/nim/$(echo "$model_data" | cut -d'|' -f2):latest"
+    TP_SIZE=$(echo "$model_data" | cut -d'|' -f3)
+    PP_SIZE=$(echo "$model_data" | cut -d'|' -f4)
+    default_quant=$(echo "$model_data" | cut -d'|' -f5)
+    PARAMS=$(echo "$model_data" | cut -d'|' -f6)
+    IS_VISION=$(echo "$model_data" | cut -d'|' -f7)
+    local extra
+    extra=$(echo "$model_data" | cut -d'|' -f8)
+    if [[ -n "$extra" ]]; then
+      EXTRA_NIM_ENV="$extra"
+    fi
+  else
+    if [[ "$FORCE" -eq 1 ]]; then
+      printf "Warning: Model '%s' not found in Top 20 registry.\n" "$MODEL_ARG"
+      printf "Force enabled: Attempting generic configuration...\n"
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
-      PARAMS=10
-      CONTEXT=4 # Safe defaults to avoid warning
-      ;;
-  esac
+      # Basic defaults
+    else
+      printf "Error: Model '%s' not found in the strictly supported Top 20 registry.\n" "$MODEL_ARG" >&2
+      printf "Use --force to bypass this restriction (not recommended).\n" >&2
+      exit 1
+    fi
+  fi
+
+  # Quantization Injection
+  local quant_to_use="$default_quant"
+  if [[ -n "$QUANT_OVERRIDE" ]]; then
+    quant_to_use="$QUANT_OVERRIDE"
+    printf "Quantization override: %s\n" "$quant_to_use"
+  fi
+
+  # Inject Quantization if not fp16/bf16 default, or if it's a "Mega" model constraint
+  # NIM usually uses NIM_QUANTIZATION or NIM_MODEL_PROFILE.
+  if [[ "$quant_to_use" != "fp16" && "$quant_to_use" != "bf16" ]]; then
+     EXTRA_NIM_ENV="$EXTRA_NIM_ENV -e NIM_QUANTIZATION=$quant_to_use"
+  fi
 
   printf "=== NVIDIA DGX Spark Distributed NIM Launcher ===\n"
   printf "Nodes: %s (Head), %s (Worker)\n" "$IP1" "$IP2"
   printf "Model: %s\n" "$MODEL_ARG"
   printf "Image: %s\n" "$IMAGE"
-  local type_str="LLM"
+  printf "TP: %s, PP: %s, Quant: %s\n" "$TP_SIZE" "$PP_SIZE" "$quant_to_use"
   if [[ "$IS_VISION" -eq 1 ]]; then
-    type_str="Vision/Multimodal"
+    printf "Type: Vision/Multimodal\n"
+  else
+    printf "Type: LLM\n"
   fi
-  printf "Type: %s\n" "$type_str"
   printf "%s\n" "================================================"
 }
 
 # Internal: Check VRAM requirements
 #
 # Description:
-#   Estimates the required VRAM for the selected model based on parameter count and context size.
-#   Warns the user if the estimated usage exceeds the capacity of a dual DGX Spark cluster (256GB).
+#   Checks if the cluster has enough VRAM for the selected model.
+#   Queries actual VRAM from nodes via nvidia-smi.
 #
 # Arguments:
-#   $1: Model parameters in billions.
-#   $2: Context window size in thousands of tokens.
+#   $1: Model parameters in billions (approx).
 #
 # Returns:
-#   None (Prints status/warnings)
+#   None
 function _check_vram_requirements() {
-  local p_b="$1"
-  local c_k="$2"
+  local params="$1"
+  # Unused context arg
+  shift
 
-  # FP16 Weights: params * 2 bytes
-  local weights_gb
-  weights_gb=$(awk -v p="$p_b" 'BEGIN {print p * 2}')
+  printf "[Check] verifying VRAM capacity...\n"
 
-  local total_est="$weights_gb"
-  # Add buffer for KV
-  if [[ "$c_k" -gt 128 ]]; then
-    # Huge context adds significant memory
-    # Factor: 0.3 GB per k context.
-    local kv_add
-    kv_add=$(awk -v c="$c_k" 'BEGIN {print c * 0.3}')
-    total_est=$(awk -v t="$total_est" -v k="$kv_add" 'BEGIN {print t + k}')
-  else
-    # Standard context, assume +20% overhead
-    total_est=$(awk -v t="$total_est" 'BEGIN {print t * 1.2}')
-  fi
+  # Query VRAM on both nodes
+  local vram1
+  vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null | awk '{s+=$1} END {print s}')
+  local vram2
+  vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null | awk '{s+=$1} END {print s}')
 
-  # Round to integer
-  total_est=$(awk -v t="$total_est" 'BEGIN {print int(t)}')
+  # Default to 0 if failed
+  vram1=${vram1:-0}
+  vram2=${vram2:-0}
 
-  printf "Estimated VRAM Requirement: ~%sGB (Weights + Context)\n" "$total_est"
+  # Convert MB to GB
+  local total_gb
+  total_gb=$(awk -v v1="$vram1" -v v2="$vram2" 'BEGIN {print (v1 + v2) / 1024}')
 
-  if [[ "$total_est" -gt 256 ]]; then
-    printf "WARNING: Estimated VRAM usage (%s GB) exceeds the 256GB total capacity of a dual DGX Spark cluster.\n" "$total_est"
-    printf "         Performance may be degraded (swapping) or initialization may fail.\n"
-    printf "         Ensure your cluster supports this model size (e.g., FP8/FP4 quantization).\n"
-  else
-    printf "VRAM Check: OK (<256GB)\n"
+  printf "Total Cluster VRAM Detected: %.2f GB\n" "$total_gb"
+
+  # Simple heuristic: If model > 200B params and total < 250GB, abort
+  local params_num="${params:-0}"
+  if awk -v p="$params_num" 'BEGIN {exit !(p > 200)}'; then
+    if awk -v t="$total_gb" 'BEGIN {exit !(t < 250)}'; then
+        printf "CRITICAL WARNING: Model size (~%sB) is large for detected VRAM (%.2f GB).\n" "$params_num" "$total_gb"
+        printf "Ensure you are using Quantization (FP8/FP4) via --quant.\n"
+        if [[ "$FORCE" -eq 1 ]]; then
+            printf "Force enabled. Proceeding despite memory risks...\n"
+        else
+            printf "Aborting to prevent potential crash. Use --force to override.\n" >&2
+            exit 1
+        fi
+    fi
   fi
 }
 
@@ -501,6 +530,7 @@ function _get_ip_from_iface() {
 #
 # Description:
 #   Orchestrates the detection of high-speed network interfaces for both nodes.
+#   Performs pre-flight checks for IB tools.
 #   Sets global variables NET_CONF_1, NET_CONF_2, IFACES1, and IFACES2.
 #
 # Arguments:
@@ -510,6 +540,21 @@ function _get_ip_from_iface() {
 #   None (Sets globals)
 function _detect_network() {
   printf "[1/4] Detecting high-speed network interfaces...\n"
+
+  # Pre-flight check for IB tools and Link State
+  if ssh "${SSH_OPTS[@]}" "$IP1" "command -v ib_write_bw >/dev/null"; then
+     printf "  [+] ib_write_bw detected.\n"
+  else
+     printf "  [-] ib_write_bw not found.\n"
+  fi
+
+  # Check /sys/class/infiniband for active links
+  if ssh "${SSH_OPTS[@]}" "$IP1" "find /sys/class/infiniband -name 'state' -print0 2>/dev/null | xargs -0 grep -l 'ACTIVE' >/dev/null"; then
+    printf "  [+] Active InfiniBand links detected via sysfs.\n"
+  else
+    printf "  [-] No ACTIVE InfiniBand links found in /sys/class/infiniband.\n"
+  fi
+
   NET_CONF_1=$(_get_network_config "$IP1")
   NET_CONF_2=$(_get_network_config "$IP2")
 
@@ -551,8 +596,8 @@ function _verify_connectivity() {
 # Description:
 #   Ensures the required Docker image is present on both nodes.
 #   Pulls the image on the head node first.
-#   Checks the worker node and attempts a P2P transfer from the head node if missing
-#   and a high-speed link is available. Falls back to downloading from the registry.
+#   Checks the worker node for existence AND digest match.
+#   Attempts a high-performance P2P transfer (pigz + mbuffer/nc) from the head node if missing.
 #
 # Arguments:
 #   None (Uses global IP1, IP2, IMAGE, IFACES2, PLATFORM_ARG, NGC_API_KEY)
@@ -567,12 +612,24 @@ function _ensure_image_present() {
     exit 1
   fi
 
+  # Get Image ID from Head Node
+  local id_head
+  id_head=$(ssh "${SSH_OPTS[@]}" "$IP1" "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
+
   # 2. Check Worker Node (IP2)
   printf "Checking image on Worker Node (%s)...\n" "$IP2"
-  if ssh "${SSH_OPTS[@]}" "$IP2" "docker image inspect $IMAGE > /dev/null 2>&1"; then
-    printf "Image already exists on %s.\n" "$IP2"
+  local id_worker
+  id_worker=$(ssh "${SSH_OPTS[@]}" "$IP2" "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
+
+  if [[ -n "$id_worker" && "$id_head" == "$id_worker" ]]; then
+    printf "Image already exists and matches on %s.\n" "$IP2"
   else
-    printf "Image missing on %s.\n" "$IP2"
+    if [[ -z "$id_worker" ]]; then
+       printf "Image missing on %s.\n" "$IP2"
+    else
+       printf "Image hash mismatch on %s. Updating...\n" "$IP2"
+    fi
+
     local transfer_success=0
 
     # Try High Speed Transfer
@@ -580,10 +637,11 @@ function _ensure_image_present() {
       local fast_ip2
       fast_ip2=$(_get_ip_from_iface "$IP2" "$IFACES2")
       if [[ -n "$fast_ip2" ]] &&
-        ssh "${SSH_OPTS[@]}" "$IP1" "command -v nc >/dev/null" &&
-        ssh "${SSH_OPTS[@]}" "$IP2" "command -v nc >/dev/null"; then
+        ssh "${SSH_OPTS[@]}" "$IP1" "command -v nc >/dev/null && command -v pigz >/dev/null" &&
+        ssh "${SSH_OPTS[@]}" "$IP2" "command -v nc >/dev/null && command -v pigz >/dev/null"; then
 
         printf "Detected High-Speed IP for %s: %s\n" "$IP2" "$fast_ip2"
+        printf "Using pigz for parallel compression.\n"
         local transfer_port=12346
 
         # Determine nc options for auto-close
@@ -591,21 +649,42 @@ function _ensure_image_present() {
         if ssh "${SSH_OPTS[@]}" "$IP1" "nc -h 2>&1 | grep -q -- -N"; then
           nc_opts="-N"
         elif ssh "${SSH_OPTS[@]}" "$IP1" "nc -h 2>&1 | grep -q -- -q"; then
-          nc_opts="-q 0"
+          nc_opts="-q 1"
+        else
+           nc_opts="-q 1"
         fi
 
-        printf "Starting P2P transfer from %s to %s...\n" "$IP1" "$IP2"
+        printf "Starting High-Performance P2P transfer from %s to %s...\n" "$IP1" "$IP2"
+
+        # Check for mbuffer
+        local use_mbuffer=0
+        if ssh "${SSH_OPTS[@]}" "$IP1" "command -v mbuffer >/dev/null" && \
+           ssh "${SSH_OPTS[@]}" "$IP2" "command -v mbuffer >/dev/null"; then
+           use_mbuffer=1
+           printf "Enabled mbuffer for buffer optimization.\n"
+        fi
 
         # Start Listener on IP2
+        # Command: nc -l -p PORT | pigz -d | docker load
+        local recv_cmd="nc -l -p $transfer_port"
+        if [[ "$use_mbuffer" -eq 1 ]]; then
+            recv_cmd="nc -l -p $transfer_port | mbuffer -m 1G"
+        fi
         (
-          ssh "${SSH_OPTS[@]}" "$IP2" "nc -l -p $transfer_port | docker load"
+          ssh "${SSH_OPTS[@]}" "$IP2" "$recv_cmd | pigz -d | docker load"
         ) &
         local listener_pid=$!
 
         sleep 5
 
         # Start Sender on IP1
-        if ssh "${SSH_OPTS[@]}" "$IP1" "docker save $IMAGE | nc $nc_opts $fast_ip2 $transfer_port"; then
+        # Command: docker save IMG | pigz -c -1 | nc IP PORT
+        local send_cmd="docker save $IMAGE | pigz -c -1"
+        if [[ "$use_mbuffer" -eq 1 ]]; then
+             send_cmd="docker save $IMAGE | pigz -c -1 | mbuffer -m 1G"
+        fi
+
+        if ssh "${SSH_OPTS[@]}" "$IP1" "$send_cmd | nc $nc_opts $fast_ip2 $transfer_port"; then
           printf "Transfer command finished.\n"
         else
           printf "Transfer command failed.\n"
@@ -619,7 +698,7 @@ function _ensure_image_present() {
           printf "Image transfer failed (Listener exit code).\n"
         fi
       else
-        printf "Could not resolve IP for interface %s on %s or 'nc' missing.\n" "$IFACES2" "$IP2"
+        printf "Could not resolve IP for interface %s on %s or 'nc'/'pigz' missing.\n" "$IFACES2" "$IP2"
       fi
     else
       printf "No high-speed interface detected on %s.\n" "$IP2"
@@ -658,6 +737,7 @@ function _cleanup_existing_containers() {
 # Description:
 #   Generates the necessary Docker environment arguments for NCCL/GLOO based on network interfaces.
 #   Enables multi-rail optimizations if multiple interfaces are detected.
+#   Exports high-performance NCCL/IB variables.
 #
 # Arguments:
 #   $1: Comma-separated list of interface names.
@@ -666,9 +746,11 @@ function _cleanup_existing_containers() {
 #   A string containing Docker env vars (e.g., "-e NCCL_SOCKET_IFNAME=...").
 function _get_nccl_opts() {
   local ifaces="$1"
-  local opts=""
+  # Default NCCL optimizations for 400Gbps IB/RoCE
+  local opts="-e NCCL_IB_DISABLE=0 -e NCCL_IB_GID_INDEX=3 -e NCCL_CROSS_NIC=1"
+
   if [[ -n "$ifaces" ]]; then
-    opts="-e NCCL_SOCKET_IFNAME=$ifaces -e GLOO_SOCKET_IFNAME=$ifaces"
+    opts="$opts -e NCCL_SOCKET_IFNAME=$ifaces -e GLOO_SOCKET_IFNAME=$ifaces"
     if [[ "$ifaces" == *","* ]]; then
       # Multi-rail detected
       # Assuming equal HCAs, e.g., mlx5_0, mlx5_1 corresponding to interfaces
@@ -684,6 +766,7 @@ function _get_nccl_opts() {
 # Description:
 #   Launches the NIM containers on both nodes in parallel.
 #   Configures environment variables, network settings, and volume mounts.
+#   Supports --dry-run mode.
 #
 # Arguments:
 #   None (Uses many global configuration variables)
@@ -694,20 +777,37 @@ function _launch_distributed_service() {
   printf "[4/4] Launching NIM containers...\n"
 
   # Common Docker Args
-  local common_args="$PLATFORM_ARG --runtime=nvidia --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache"
+  # Added -v $HOME/.nim_logs:/opt/nim/logs as requested
+  local common_args="$PLATFORM_ARG --runtime=nvidia --gpus all --network host --ipc=host --name nim-distributed --shm-size=16g -v ~/.cache/nim:/opt/nim/.cache -v $HOME/.nim_logs:/opt/nim/logs"
   # Add NIM_SERVER_HTTP_HOST=0.0.0.0 for safety
   local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_PIPELINE_PARALLEL_SIZE=$PP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_HTTP_API_PORT=8000 -e NIM_SERVER_HTTP_HOST=0.0.0.0 -e TRITON_PTXAS_PATH=/usr/local/cuda/bin/ptxas $EXTRA_NIM_ENV"
+
+  # Prepare commands
+  local net_opts_2
+  net_opts_2=$(_get_nccl_opts "$IFACES2")
+  local worker_cmd="docker run -d $common_args $nim_env -e NIM_NODE_RANK=1 $net_opts_2 $IMAGE"
+
+  local net_opts_1
+  net_opts_1=$(_get_nccl_opts "$IFACES1")
+  local head_cmd="docker run -d $common_args $nim_env -e NIM_NODE_RANK=0 $net_opts_1 $IMAGE"
+
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    printf "\n--- DRY RUN: Commands to be executed ---\n"
+    printf "Worker (%s):\n%s\n\n" "$IP2" "$worker_cmd"
+    printf "Head (%s):\n%s\n" "$IP1" "$head_cmd"
+    printf "----------------------------------------\n"
+    return
+  fi
 
   # Launch in parallel
   local launch_pids=()
 
   # Worker
   printf "Starting Worker on %s...\n" "$IP2"
-  local net_opts_2
-  net_opts_2=$(_get_nccl_opts "$IFACES2")
   (
-    # Removed --rm so logs persist
-    ssh "${SSH_OPTS[@]}" "$IP2" "docker run -d $common_args $nim_env -e NIM_NODE_RANK=1 $net_opts_2 $IMAGE"
+    # Create logs dir
+    ssh "${SSH_OPTS[@]}" "$IP2" "mkdir -p ~/.nim_logs"
+    ssh "${SSH_OPTS[@]}" "$IP2" "$worker_cmd"
   ) &
   launch_pids+=("$!")
 
@@ -715,11 +815,10 @@ function _launch_distributed_service() {
 
   # Head
   printf "Starting Head on %s...\n" "$IP1"
-  local net_opts_1
-  net_opts_1=$(_get_nccl_opts "$IFACES1")
   (
-    # Removed --rm so logs persist
-    ssh "${SSH_OPTS[@]}" "$IP1" "docker run -d $common_args $nim_env -e NIM_NODE_RANK=0 $net_opts_1 $IMAGE"
+    # Create logs dir
+    ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p ~/.nim_logs"
+    ssh "${SSH_OPTS[@]}" "$IP1" "$head_cmd"
   ) &
   launch_pids+=("$!")
 
@@ -729,6 +828,10 @@ function _launch_distributed_service() {
       exit 1
     fi
   done
+
+  # Start background tailing of logs on Head node
+  printf "Tailing logs on Head node (%s) in background...\n" "$IP1"
+  ssh "${SSH_OPTS[@]}" "$IP1" "docker logs -f nim-distributed" &
 }
 
 # Internal: Wait for service readiness
@@ -736,6 +839,7 @@ function _launch_distributed_service() {
 # Description:
 #   Polls the service health endpoint to determine when the NIM is fully ready to accept requests.
 #   Also monitors container status to fail fast if the container crashes.
+#   Uses Python for robust JSON parsing.
 #
 # Arguments:
 #   $1: IP address of the head node.
@@ -748,6 +852,11 @@ function _wait_for_service() {
   local retries=90 # 90 * 10s = 15 minutes
   local wait_time=10
 
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+      printf "Dry run: Skipping health check.\n"
+      return 0
+  fi
+
   printf "Waiting for service to be ready at http://%s:%s...\n" "$ip" "$port"
 
   for ((i = 1; i <= retries; i++)); do
@@ -759,8 +868,9 @@ function _wait_for_service() {
       return 1
     fi
 
-    # Try checking health endpoint
-    if curl -s -o /dev/null -m 5 "http://$ip:$port/v1/health/ready"; then
+    # Try checking health endpoint with python parsing
+    # We use curl to fetch JSON, then python to check .data.ready == true
+    if ssh "${SSH_OPTS[@]}" "$ip" "curl -s -m 5 http://localhost:$port/v1/health/ready | python3 -c \"import sys, json; sys.exit(0 if json.load(sys.stdin).get('data', {}).get('ready') == True else 1)\" 2>/dev/null"; then
       printf "Service is ready!\n"
       return 0
     fi
