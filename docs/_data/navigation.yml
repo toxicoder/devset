@@ -40,7 +40,7 @@ docs:
     - title: Security Engineer
       url: /job_roles/engineering_technology/security_engineer/
     - title: Site Reliability Eng
-      url: /job_roles/engineering_technology/site_reliability_eng/
+      url: /job_roles/engineering_technology/site_reliability_engineer/
     - title: Software Engineer
       url: /job_roles/engineering_technology/software_engineer/
   - title: 3.2 Product & Design
@@ -216,4 +216,4 @@ docs:
   - title: Example (Architecture Decision)
     url: /adr/0001_example_architecture_decision/
 - title: Technical Design Doc
-  url: /technical_design_doc/
+  url: /technical_design_document/
