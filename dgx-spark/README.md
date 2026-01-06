@@ -60,3 +60,7 @@ curl -X 'POST' \
 ## Configuration
 
 The script defaults to using `meta/llama-3.1-70b-instruct` as it is the optimal "large" model that benefits from the 256GB combined memory of two DGX Spark nodes (70B FP16 ~140GB VRAM).
+
+## Documentation
+
+For detailed usage instructions, including advanced configuration, supported models, and troubleshooting, please refer to the [User Guide](docs/user_guide.md).
