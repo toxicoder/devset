@@ -302,23 +302,29 @@ function _check_api_key() {
 #   String (Heredoc)
 function _get_model_registry() {
   cat <<EOF
-mega-1|meta/llama-3.1-405b-instruct|2|1|fp4|405|0|
-mega-2|nvidia/nemotron-4-340b-instruct|2|1|fp4|340|0|
-mega-3|deepseek-ai/deepseek-v3|2|1|fp8|671|0|-e NIM_MODEL_PROFILE=deepseek-v3
-mega-4|mistralai/mistral-large-2411|2|1|fp8|123|0|
-large-1|meta/llama-3.2-90b-vision-instruct|2|1|fp8|90|1|
-large-2|google/gemma-3-27b-it|2|1|fp16|27|1|
-large-3|alibaba/qwen2-vl-72b-instruct|2|1|fp16|72|1|
+reasoning-1|deepseek-ai/deepseek-r1|2|1|fp4|671|0|-e NIM_MODEL_PROFILE=deepseek-r1
+reasoning-2|alibaba/qwen3-30b-thinking|2|1|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER
+reasoning-3|microsoft/phi-4-reasoning|1|1|fp16|14|0|
+mega-1|meta/llama-4-405b-instruct|2|1|fp4|405|0|
+mega-2|meta/llama-3.1-405b-instruct|2|1|fp4|405|0|
+mega-3|deepseek-ai/deepseek-v3|2|1|fp4|671|0|-e NIM_MODEL_PROFILE=deepseek-v3
+mega-4|nvidia/nemotron-4-340b-instruct|2|1|fp4|340|0|
+large-1|mistralai/mistral-large-2411|2|1|fp8|123|0|
+large-2|alibaba/qwen3-235b-moe-instruct|2|1|fp4|235|0|
+large-3|meta/llama-3.2-90b-vision-instruct|2|1|fp8|90|1|
 large-4|cohere/command-r-plus-08-2024|2|1|fp16|104|0|
-workhorse-1|meta/llama-3.1-70b-instruct|2|1|fp16|70|0|
-workhorse-2|nvidia/llama-3.1-nemotron-70b-instruct|2|1|fp16|70|0|
+workhorse-1|meta/llama-3.3-70b-instruct|2|1|fp16|70|0|
+workhorse-2|meta/llama-4-maverick-instruct|2|1|fp16|70|0|
 workhorse-3|alibaba/qwen2.5-72b-instruct|2|1|fp16|72|0|
-workhorse-4|deepseek-ai/deepseek-coder-v2-instruct|2|1|fp16|230|0|
+workhorse-4|nvidia/llama-3.1-nemotron-70b-instruct|2|1|fp16|70|0|
 workhorse-5|mistralai/pixtral-large-2411|2|1|fp8|124|1|
-efficient-1|google/gemma-2-27b-it|2|1|fp16|27|0|
-efficient-2|nvidia/nemotron-3-nano-30b-a3b|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16
-efficient-3|alibaba/qwen3-30b-a3b-thinking|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER
-efficient-4|microsoft/phi-4-mini-instruct|1|1|fp16|14|0|
+coding-1|deepseek-ai/deepseek-coder-v2-instruct|2|1|fp4|236|0|
+coding-2|mistralai/codestral-2501|1|1|fp16|22|0|
+efficient-1|meta/llama-4-scout-instruct|1|1|fp16|15|0|
+efficient-2|google/gemma-3-27b-it|2|1|fp16|27|1|
+efficient-3|microsoft/phi-4-mini-instruct|1|1|fp16|14|0|
+efficient-4|google/gemma-2-27b-it|2|1|fp16|27|0|
+efficient-5|nvidia/nemotron-3-nano-30b-a3b|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16
 special-1|allenai/molmo-72b-0924|2|1|fp16|72|1|
 special-2|nvidia/nemotron-super-49b-reward|2|1|fp16|49|0|
 special-3|meta/llama-guard-3-8b|1|1|fp16|8|0|
