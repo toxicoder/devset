@@ -445,12 +445,12 @@ function _check_vram_requirements() {
   # Query VRAM on both nodes
   local vram1
   vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" \
-    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" |
-    awk '{s+=$1} END {print s}')
+    "PATH=\$PATH:/usr/local/cuda/bin:/usr/bin nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null |
+    awk '{s+=$1} END {print s+0}')
   local vram2
   vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" \
-    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" |
-    awk '{s+=$1} END {print s}')
+    "PATH=\$PATH:/usr/local/cuda/bin:/usr/bin nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null |
+    awk '{s+=$1} END {print s+0}')
 
   vram1=${vram1:-0}
   vram2=${vram2:-0}
@@ -465,7 +465,7 @@ function _check_vram_requirements() {
      else
          printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
          printf "Debug Info (Head Node %s):\n" "$IP1"
-         ssh "${SSH_OPTS[@]}" "$IP1" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
+         ssh "${SSH_OPTS[@]}" "$IP1" "PATH=\$PATH:/usr/local/cuda/bin:/usr/bin nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
          exit 1
      fi
   fi
@@ -674,8 +674,8 @@ function _verify_connectivity() {
 function _ensure_image_present() {
   # 1. Pull on Head Node
   printf "Pulling image %s on Head Node (%s)...\n" "$IMAGE" "$IP1"
-  if ! ssh "${SSH_OPTS[@]}" "$IP1" \
-    "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
+  if ! echo "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP1" \
+    "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
     printf "Error: Failed to pull image on %s\n" "$IP1" >&2
     exit 1
   fi
@@ -724,8 +724,8 @@ function _ensure_image_present() {
 
   # Fallback Download
   printf "Downloading image on %s...\n" "$IP2"
-  if ! ssh "${SSH_OPTS[@]}" "$IP2" \
-    "echo '$NGC_API_KEY' | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
+  if ! echo "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP2" \
+    "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
     printf "Error: Failed to pull image on %s\n" "$IP2" >&2
     exit 1
   fi
