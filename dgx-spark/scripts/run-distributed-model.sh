@@ -751,11 +751,14 @@ function _align_platform_with_image() {
 
   if [[ -n "$img_arch" ]]; then
      if [[ "$img_arch" == "amd64" && "$PLATFORM_ARG" == *"--platform linux/arm64"* ]]; then
-        printf "Warning: Image is amd64, but host is arm64. Switching platform to linux/amd64.\n"
-        PLATFORM_ARG="--platform linux/amd64"
+        printf "Error: Image architecture (%s) is incompatible with Host architecture (arm64).\n" "$img_arch" >&2
+        printf "NVIDIA NIM containers do not support cross-architecture emulation with GPU access.\n" >&2
+        printf "Please select a model image compatible with aarch64 (ARM64).\n" >&2
+        exit 1
      elif [[ "$img_arch" == "arm64" && "$PLATFORM_ARG" == *"--platform linux/amd64"* ]]; then
-        printf "Warning: Image is arm64, but host is x86_64. Switching platform to linux/arm64.\n"
-        PLATFORM_ARG="--platform linux/arm64"
+        printf "Error: Image architecture (%s) is incompatible with Host architecture (x86_64).\n" "$img_arch" >&2
+        printf "Please select a model image compatible with x86_64 (AMD64).\n" >&2
+        exit 1
      fi
   fi
 }
