@@ -156,9 +156,9 @@ function _parse_arguments() {
     MODE="setup"
   else
     printf "Usage:\n"
-    printf "  %s [OPTIONS] <IP1> <IP2> [<MODEL_NAME>]  (First run / Setup)\n" "$0"
-    printf "  %s [OPTIONS] start                       (Start using saved config)\n" "$0"
-    printf "  %s [OPTIONS] stop                        (Stop using saved config)\n" "$0"
+    printf "  %s [OPTIONS] <IP1> <IP2> [<MODEL_NAME|HF_URL>]  (First run / Setup)\n" "$0"
+    printf "  %s [OPTIONS] start                              (Start using saved config)\n" "$0"
+    printf "  %s [OPTIONS] stop                               (Stop using saved config)\n" "$0"
     printf "\nOptions:\n"
     printf "  --dry-run             Print commands without executing\n"
     printf "  --force               Bypass safety checks\n"
@@ -251,6 +251,15 @@ function _configure_model() {
   CONTEXT=128
   local default_quant="fp16"
 
+  # Check for Hugging Face URL
+  if [[ "$MODEL_ARG" =~ ^https://huggingface.co/ ]]; then
+    local stripped="${MODEL_ARG#https://huggingface.co/}"
+    # Extract Organization/Repo from URL (stripping subpaths like /tree/main)
+    HF_MODEL_ID=$(echo "$stripped" | cut -d'/' -f1,2)
+    MODEL_ARG="$HF_MODEL_ID"
+    printf "Detected Hugging Face URL. Extracted Model ID: %s\n" "$HF_MODEL_ID"
+  fi
+
   # Look up model
   local model_data
   model_data=$(_get_model_registry | grep -F "$MODEL_ARG" | head -n 1 || true)
@@ -270,10 +279,10 @@ function _configure_model() {
     extra=$(echo "$model_data" | cut -d'|' -f8)
     if [[ -n "$extra" ]]; then EXTRA_NIM_ENV="$extra"; fi
   else
-    if [[ "$FORCE" -eq 1 ]]; then
+    if [[ "$FORCE" -eq 1 || -n "$HF_MODEL_ID" ]]; then
       printf "Warning: Model '%s' not found in registry. Using as custom image.\n" "$MODEL_ARG"
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
-      HF_MODEL_ID="$MODEL_ARG" # Assume user passed HF ID
+      if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
     else
       printf "Error: Model '%s' not found in the supported registry.\n" "$MODEL_ARG" >&2
       exit 1
