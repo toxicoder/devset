@@ -213,6 +213,31 @@ echo "Running test: VRAM Detection Failure (0 GB)"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
+# Test 11c: VRAM Detection Failure (0 GB) with --force
+echo "Running test: VRAM Detection Failure (0 GB) with --force"
+(
+    export NGC_API_KEY="test-key"
+    export MOCK_VRAM_MB="0" # Simulating 0 VRAM
+
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --force "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        if echo "$OUTPUT" | grep -q "Force enabled, proceeding..."; then
+             echo "PASS"
+        else
+             echo "FAIL: Expected force warning not found. Output:"
+             echo "$OUTPUT"
+             exit 1
+        fi
+    else
+        echo "FAIL: Script should succeed with --force even if VRAM is 0. Exit code: $EXIT_CODE"
+        echo "$OUTPUT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
 # Test 4: Static Analysis for Correct Escaping
 echo "Running test: Static Analysis for Correct Escaping"
 if grep -F "'\\\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then

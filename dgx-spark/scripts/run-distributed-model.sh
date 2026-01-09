@@ -460,10 +460,14 @@ function _check_vram_requirements() {
   total_gb=$(awk -v v1="$vram1" -v v2="$vram2" 'BEGIN {print (v1 + v2) / 1024}')
 
   if awk -v t="$total_gb" 'BEGIN {exit !(t <= 0)}'; then
-     printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
-     printf "Debug Info (Head Node %s):\n" "$IP1"
-     ssh "${SSH_OPTS[@]}" "$IP1" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
-     exit 1
+     if [[ "$FORCE" -eq 1 ]]; then
+         printf "Warning: VRAM detection failed (Total: 0.00 GB). Force enabled, proceeding...\n" >&2
+     else
+         printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
+         printf "Debug Info (Head Node %s):\n" "$IP1"
+         ssh "${SSH_OPTS[@]}" "$IP1" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
+         exit 1
+     fi
   fi
 
   printf "Total Cluster VRAM Detected: %.2f GB\n" "$total_gb"
