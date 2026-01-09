@@ -731,6 +731,35 @@ function _ensure_image_present() {
   fi
 }
 
+# Internal: Align platform with image
+#
+# Description:
+#   Checks the actual architecture of the pulled image and updates PLATFORM_ARG
+#   to match it. This prevents "platform mismatch" errors during 'docker run'
+#   if the image architecture differs from the host architecture (e.g., running
+#   amd64 images on arm64 hosts).
+#
+# Arguments:
+#   None (Uses globals: IP1, IMAGE, PLATFORM_ARG)
+#
+# Returns:
+#   None (Updates global PLATFORM_ARG)
+function _align_platform_with_image() {
+  local img_arch
+  img_arch=$(ssh "${SSH_OPTS[@]}" "$IP1" "docker inspect -f '{{.Architecture}}' $IMAGE" 2>/dev/null)
+  img_arch=$(printf "%s" "$img_arch" | xargs)
+
+  if [[ -n "$img_arch" ]]; then
+     if [[ "$img_arch" == "amd64" && "$PLATFORM_ARG" == *"--platform linux/arm64"* ]]; then
+        printf "Warning: Image is amd64, but host is arm64. Switching platform to linux/amd64.\n"
+        PLATFORM_ARG="--platform linux/amd64"
+     elif [[ "$img_arch" == "arm64" && "$PLATFORM_ARG" == *"--platform linux/amd64"* ]]; then
+        printf "Warning: Image is arm64, but host is x86_64. Switching platform to linux/arm64.\n"
+        PLATFORM_ARG="--platform linux/arm64"
+     fi
+  fi
+}
+
 # Internal: Cleanup existing containers
 #
 # Description:
@@ -930,6 +959,7 @@ function main() {
   _detect_network
   _verify_connectivity
   _ensure_image_present
+  _align_platform_with_image
 
   _cleanup_existing_containers
   _launch_distributed_service
