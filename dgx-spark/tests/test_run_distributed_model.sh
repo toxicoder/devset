@@ -140,7 +140,7 @@ setup_mocks
 echo "Target Script: $TARGET_SCRIPT"
 
 # Test 1: Basic execution with arguments
-run_test "Basic execution" "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct"
+run_test "Basic execution" "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct"
 
 # Test 2: Missing arguments
 echo "Running test: Missing arguments"
@@ -159,7 +159,7 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
     export MOCK_IMAGE_MISSING=1
     export MOCK_TRANSFER_FAIL=1
     export NGC_API_KEY="test-key"
-    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+    OUTPUT=$("$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
@@ -195,7 +195,7 @@ echo "Running test: Verify Network and Port Configuration"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -236,7 +236,7 @@ echo "Running test: ARM64 Architecture Detection"
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
     export MOCK_ARCH="aarch64"
-    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
     if echo "$LOG_CONTENT" | grep -q "\-\-platform linux/amd64"; then
@@ -253,7 +253,7 @@ echo "Running test: P2P Transfer Success"
 (
     export MOCK_IMAGE_MISSING=1
     export NGC_API_KEY="test-key"
-    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" 2>&1)
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
     if echo "$OUTPUT" | grep -q "Using High-Speed P2P Transfer"; then
         echo "PASS"
     else
@@ -382,7 +382,7 @@ echo "Running test: Quantization Override"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    echo "n" | "$TARGET_SCRIPT" --quant fp4 "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" --quant fp4 "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -404,7 +404,7 @@ echo "Running test: Start/Stop/Setup Mode Persistence"
     rm -f "$TEST_DIR/docker_rm.log"
 
     # 1. Setup (already done implicitly by basic run, but let's do explicit setup run)
-    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     CONFIG_FILE="$TEST_DIR/dgx-spark-distributed-model-config.json"
     if [ ! -f "$CONFIG_FILE" ]; then
@@ -444,7 +444,7 @@ echo "Running test: Engine Override"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    echo "n" | "$TARGET_SCRIPT" --engine vllm "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" --engine vllm "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -462,7 +462,7 @@ echo "Running test: W&B Key"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    echo "n" | "$TARGET_SCRIPT" --wandb-key my-key "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" --wandb-key my-key "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
@@ -480,7 +480,7 @@ echo "Running test: Speculative Decoding"
 (
     rm -f "$TEST_DIR/docker_run.log"
     export NGC_API_KEY="test-key"
-    echo "n" | "$TARGET_SCRIPT" --speculative "10.0.0.1" "10.0.0.2" "meta/llama-3.1-70b-instruct" >/dev/null
+    echo "n" | "$TARGET_SCRIPT" --speculative "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
 
