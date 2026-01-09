@@ -177,6 +177,7 @@ function _parse_arguments() {
     IP1="$1"
     IP2="$2"
     MODEL_ARG="${3:-"meta/llama-3.1-70b-instruct"}"
+    MODEL_ARG=$(echo "$MODEL_ARG" | tr '[:upper:]' '[:lower:]')
     _write_config
   fi
 }
