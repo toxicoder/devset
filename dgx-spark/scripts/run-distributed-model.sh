@@ -445,11 +445,11 @@ function _check_vram_requirements() {
   # Query VRAM on both nodes
   local vram1
   vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" \
-    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null |
+    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" |
     awk '{s+=$1} END {print s}')
   local vram2
   vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" \
-    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" 2>/dev/null |
+    "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" |
     awk '{s+=$1} END {print s}')
 
   vram1=${vram1:-0}
@@ -458,6 +458,13 @@ function _check_vram_requirements() {
   # Convert MB to GB
   local total_gb
   total_gb=$(awk -v v1="$vram1" -v v2="$vram2" 'BEGIN {print (v1 + v2) / 1024}')
+
+  if awk -v t="$total_gb" 'BEGIN {exit !(t <= 0)}'; then
+     printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
+     printf "Debug Info (Head Node %s):\n" "$IP1"
+     ssh "${SSH_OPTS[@]}" "$IP1" "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
+     exit 1
+  fi
 
   printf "Total Cluster VRAM Detected: %.2f GB\n" "$total_gb"
 
@@ -508,7 +515,7 @@ function _detect_architecture() {
     PLATFORM_ARG="--platform linux/amd64"
   elif [[ "$arch" == "aarch64" ]]; then
     printf "ARM64 detected. Using native architecture.\n"
-    PLATFORM_ARG=""
+    PLATFORM_ARG="--platform linux/arm64"
   else
     PLATFORM_ARG="--platform linux/amd64"
   fi
@@ -869,6 +876,21 @@ function _wait_for_service() {
 
   printf "[5/5] Waiting for service readiness (http://%s:8000)...\n" "$ip"
   for ((i = 1; i <= 60; i++)); do
+    # Check if container is running
+    local container_running
+    container_running=$(ssh "${SSH_OPTS[@]}" "$ip" "docker inspect -f '{{.State.Running}}' nim-distributed" 2>/dev/null || echo "false")
+
+    # Trim whitespace just in case
+    container_running=$(echo "$container_running" | xargs)
+
+    if [[ "$container_running" != "true" ]]; then
+       printf "\nError: Container 'nim-distributed' crashed or stopped!\n" >&2
+       printf "%s\n" "--- Last 20 lines of logs ---"
+       ssh "${SSH_OPTS[@]}" "$ip" "docker logs --tail 20 nim-distributed" || true
+       printf "%s\n" "-----------------------------"
+       return 1
+    fi
+
     if ssh "${SSH_OPTS[@]}" "$ip" \
       "curl -s -m 5 http://localhost:8000/v1/health/ready | python3 -c \"import sys, json; sys.exit(0 if json.load(sys.stdin).get('data', {}).get('ready') == True else 1)\" 2>/dev/null"; then
       printf "Service is ready!\n"
