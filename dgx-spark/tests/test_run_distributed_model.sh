@@ -47,6 +47,13 @@ elif [[ "$ARGS" == *"docker login"* ]]; then
     exit 0
 elif [[ "$ARGS" == *"docker pull"* ]]; then
     exit 0
+elif [[ "$ARGS" == *"docker inspect -f '{{.State.Running}}'"* ]]; then
+    if [[ -n "${MOCK_CONTAINER_CRASH}" ]]; then
+        echo "false"
+    else
+        echo "true"
+    fi
+    exit 0
 elif [[ "$ARGS" == *"docker inspect"* ]]; then
     if [[ -n "${MOCK_IMAGE_MISSING}" ]]; then
         exit 1
@@ -177,6 +184,35 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
+# Test 11b: VRAM Detection Failure (0 GB)
+echo "Running test: VRAM Detection Failure (0 GB)"
+(
+    export NGC_API_KEY="test-key"
+    export MOCK_VRAM_MB="0" # Simulating 0 VRAM
+
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "VRAM detection failed (Total: 0.00 GB)"; then
+            if echo "$OUTPUT" | grep -q "Debug Info"; then
+               echo "PASS"
+            else
+               echo "FAIL: Debug info not printed."
+               exit 1
+            fi
+        else
+            echo "FAIL: Expected VRAM failure message not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script should fail when VRAM is 0. Exit code: $EXIT_CODE"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
 # Test 4: Static Analysis for Correct Escaping
 echo "Running test: Static Analysis for Correct Escaping"
 if grep -F "'\\\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
@@ -239,11 +275,11 @@ echo "Running test: ARM64 Architecture Detection"
     echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
 
     LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
-    if echo "$LOG_CONTENT" | grep -q "\-\-platform linux/amd64"; then
-        echo "FAIL: Found --platform linux/amd64 on ARM64 host"
-        exit 1
-    else
+    if echo "$LOG_CONTENT" | grep -q "\-\-platform linux/arm64"; then
         echo "PASS"
+    else
+        echo "FAIL: Did not find --platform linux/arm64 on ARM64 host. Found: $LOG_CONTENT"
+        exit 1
     fi
 )
 if [ $? -ne 0 ]; then exit 1; fi
@@ -488,6 +524,31 @@ echo "Running test: Speculative Decoding"
         echo "PASS"
     else
         echo "FAIL: Did not find Speculative Decoding mode"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 21: Fail Fast on Container Crash
+echo "Running test: Fail Fast on Container Crash"
+(
+    export NGC_API_KEY="test-key"
+    export MOCK_CONTAINER_CRASH=1
+
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "Container 'nim-distributed' crashed or stopped"; then
+            echo "PASS"
+        else
+            echo "FAIL: Crash message not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script did not fail on container crash. Exit code: $EXIT_CODE"
+        echo "Output: $OUTPUT"
         exit 1
     fi
 )
