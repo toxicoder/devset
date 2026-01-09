@@ -26,6 +26,11 @@ if [[ "$ARGS" == *"uname -m"* ]]; then
         echo "x86_64"
     fi
     exit 0
+elif [[ "$ARGS" == *"docker inspect -f '{{.Architecture}}'"* ]]; then
+    if [[ -n "${MOCK_IMG_ARCH:-}" ]]; then
+        echo "${MOCK_IMG_ARCH}"
+    fi
+    exit 0
 elif [[ "$ARGS" == *"nvidia-smi --query-gpu=memory.total"* ]]; then
     if [[ -n "${MOCK_VRAM_MB}" ]]; then
         echo "${MOCK_VRAM_MB}"
@@ -179,6 +184,31 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
         fi
     else
         echo "FAIL: Script should exit 1 on image pull failure. Exit code: $EXIT_CODE"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 22: Platform Mismatch (ARM64 Host, AMD64 Image) - Should Fail
+echo "Running test: Platform Mismatch Failure"
+(
+    export NGC_API_KEY="test-key"
+    export MOCK_ARCH="aarch64"
+    export MOCK_IMG_ARCH="amd64"
+
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "Image architecture (amd64) is incompatible with Host architecture (arm64)"; then
+            echo "PASS"
+        else
+            echo "FAIL: Expected mismatch error not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script should have failed on platform mismatch. Exit code: $EXIT_CODE"
         exit 1
     fi
 )
