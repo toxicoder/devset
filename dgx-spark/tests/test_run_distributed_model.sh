@@ -163,7 +163,7 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
-        if echo "$OUTPUT" | grep -q "Error: Failed to pull image on 10.0.0.2"; then
+        if echo "$OUTPUT" | grep -q "Failed to pull image on 10.0.0.2"; then
             echo "PASS"
         else
              echo "FAIL: Expected error message not found. Output:"
@@ -362,7 +362,7 @@ echo "Running test: Unknown Model with --force (Success)"
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 0 ]; then
-        if echo "$OUTPUT" | grep -q "Warning: Model 'unknown/model' not found in registry"; then
+        if echo "$OUTPUT" | grep -q "Model 'unknown/model' not found in registry"; then
             echo "PASS"
         else
             echo "FAIL: Expected generic config message not found. Output:"
