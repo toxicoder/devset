@@ -1,5 +1,6 @@
 {
-    "ip1": "192.168.1.10",
-    "ip2": "192.168.1.11",
-    "model": "meta/llama-3.1-70b-instruct"
+    "ip1": "10.0.0.1",
+    "ip2": "10.0.0.2",
+    "model": "meta/llama-3.3-70b-instruct",
+    "engine": "trt-llm"
 }
