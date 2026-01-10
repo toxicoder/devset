@@ -625,6 +625,48 @@ function _remote_mkdir() {
          printf "Sudo access confirmed. Fixing permissions...\n"
          ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(id -u):\$(id -g) $dirs"
      else
+         printf "Sudo failed. Attempting Docker-based permission fix...\n"
+
+         # Fallback: Use Docker to chown directories.
+         # This handles cases where directories (e.g., ~/models) were created by Docker as root in previous runs.
+         local fix_image="${IMAGE:-alpine}"
+
+         # Remote script to fix permissions
+         local remote_script="
+           export PATH=\$PATH:/usr/bin:/usr/local/bin
+           dirs='$dirs'
+           uid=\$(id -u)
+           gid=\$(id -g)
+           img='$fix_image'
+
+           for d in \$dirs; do
+             # Expand tilde
+             eval d=\"\$d\"
+
+             # Identify target to fix: if dir exists (root owned?), fix it. If not, fix parent.
+             target=\"\$d\"
+             if [ ! -d \"\$target\" ]; then
+                target=\$(dirname \"\$target\")
+             fi
+
+             if [ -d \"\$target\" ]; then
+                 # Mount parent of target to allow chown of target
+                 mount_dir=\$(dirname \"\$target\")
+                 base_name=\$(basename \"\$target\")
+
+                 echo \"Fixing permissions on \$target via Docker...\"
+                 docker run --rm -v \"\$mount_dir\":/work \"\$img\" chown -R \"\$uid:\$gid\" \"/work/\$base_name\" 2>/dev/null || true
+             fi
+           done
+         "
+
+         if ssh "${SSH_OPTS[@]}" "$ip" "$remote_script"; then
+             if ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs"; then
+                 printf "Permissions fixed via Docker. mkdir succeeded.\n"
+                 return 0
+             fi
+         fi
+
          printf "Error: Cannot create directories and passwordless sudo is not available.\n" >&2
          printf "Please ensure user has permissions to create: %s\n" "$dirs" >&2
          exit 1
