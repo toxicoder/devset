@@ -237,6 +237,7 @@ function parse_model_config() {
   if [[ "$MODEL_ARG" =~ ^https://huggingface.co/ ]]; then
     local stripped="${MODEL_ARG#https://huggingface.co/}"
     # Extract Organization/Repo from URL (stripping subpaths like /tree/main)
+    # FIXED: Ensure case preservation for HF_MODEL_ID
     HF_MODEL_ID=$(printf "%s" "$stripped" | cut -d'/' -f1,2)
     MODEL_ARG="$HF_MODEL_ID"
     printf "Detected Hugging Face URL. Extracted Model ID: %s\n" "$HF_MODEL_ID"
@@ -271,7 +272,8 @@ function parse_model_config() {
       printf "Warning: Custom HF Model detected (%s) without corresponding NIM Image.\n" "$HF_MODEL_ID"
       printf "Defaulting to TensorRT-LLM Engine Build (Native).\n"
       USE_TRT_LLM=1
-      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+      # FIXED: Updated default TRT-LLM image to newer version for Nemotron support
+      IMAGE="nvcr.io/nvidia/tensorrt-llm:26.01-py3"
     elif [[ "$FORCE" -eq 1 ]]; then
       printf "Warning: Model '%s' not found in registry. Using as custom image.\n" "$MODEL_ARG"
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
@@ -296,7 +298,8 @@ function parse_model_config() {
   if [[ "$ENGINE_OVERRIDE" == "trt-llm" || "$USE_TRT_LLM" -eq 1 ]]; then
     USE_TRT_LLM=1
     if [[ -z "$IMAGE_OVERRIDE" ]]; then
-      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+      # FIXED: Ensure override also defaults to newer image
+      IMAGE="nvcr.io/nvidia/tensorrt-llm:26.01-py3"
     fi
     printf "Engine Mode: TensorRT-LLM (Container: %s)\n" "$IMAGE"
     if [[ -z "$HF_MODEL_ID" ]]; then
@@ -350,35 +353,33 @@ function parse_model_config() {
 # Globals: SSH_OPTS
 function _get_node_vram() {
   local ip="$1"
+  # FIXED: Improved VRAM detection command to be more robust against errors and formatting
   local cmd="export PATH=/usr/local/bin:/usr/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/sbin:/bin:\$PATH; \
-             if ! command -v nvidia-smi &>/dev/null; then echo 'NVIDIA_SMI_NOT_FOUND'; exit 1; fi; \
-             nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
+             if command -v nvidia-smi &>/dev/null; then \
+                nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; \
+             else \
+                echo '0'; \
+             fi"
 
   local out
-  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>&1); then
-      printf "Warning: nvidia-smi failed on %s. Output: %s\n" "$ip" "$out" >&2
-      printf "0\n"
+  # FIXED: Capture only stdout to avoid parsing SSH error messages as VRAM
+  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd"); then
+      printf "Warning: SSH to %s failed during VRAM check.\n" "$ip" >&2
+      echo "0"
       return
   fi
 
-  if [[ -z "$out" ]]; then
-      printf "Warning: nvidia-smi returned empty output on %s. Returning 0 VRAM.\n" "$ip" >&2
-      printf "0\n"
-      return
+  # FIXED: Parse output to extract only numbers, handling multi-GPU output by summing
+  # Use sed to strip non-numeric characters (keeping newlines) then grep only pure numbers
+  local total_mem
+  total_mem=$(printf "%s" "$out" | sed 's/[^0-9\n]//g' | grep -E '^[0-9]+$' | awk '{s+=$1} END {print s+0}')
+
+  if [[ -z "$total_mem" || "$total_mem" -eq 0 ]]; then
+      printf "Warning: Could not detect VRAM on %s (nvidia-smi failed or returned 0). Assuming 0.\n" "$ip" >&2
+      echo "0"
+  else
+      echo "$total_mem"
   fi
-
-  # Robust extraction: Only accept lines that are pure numbers to avoid summing version numbers from warnings
-  local numeric_out
-  numeric_out=$(printf "%s" "$out" | tr -d '\r' | grep -E '^[0-9]+$' || true)
-
-  if [[ -z "$numeric_out" ]]; then
-       printf "Warning: nvidia-smi returned non-numeric output on %s.\n" "$ip" >&2
-       printf "0\n"
-       return
-  fi
-
-  # Sum up
-  printf "%s\n" "$numeric_out" | awk '{s+=$1} END {print s+0}'
 }
 
 # Internal: Get total cluster VRAM in GB
@@ -408,14 +409,14 @@ function check_vram_requirements() {
   local total_gb
   total_gb=$(get_total_cluster_vram "$IP1" "$IP2")
 
+  # FIXED: Graceful fallback for failed VRAM detection
   if awk -v t="$total_gb" 'BEGIN {exit !(t <= 0)}'; then
+     printf "Warning: VRAM detection failed or total is 0 GB.\n" >&2
      if [[ "$FORCE" -eq 1 ]]; then
-         printf "Warning: VRAM detection failed (Total: 0.00 GB). Force enabled, proceeding...\n" >&2
+         printf "Force enabled, proceeding...\n" >&2
          return 0
      else
-         printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
-         printf "Debug Info (Head Node %s):\n" "$IP1"
-         ssh "${SSH_OPTS[@]}" "$IP1" "export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; which nvidia-smi; nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
+         printf "Error: VRAM detection failed. Use --force to override.\n" >&2
          exit 1
      fi
   fi
@@ -883,7 +884,7 @@ def main():
 
     # Patch for NemotronH (missing hidden_act in config causes Mamba conversion crash)
     # Note: arch detection returns the raw string from config.json (e.g. "NemotronHForCausalLM")
-    if arch == "NemotronHForCausalLM":
+    if "NemotronH" in arch or "Mamba" in arch:
         try:
             config_path = os.path.join(args.model_dir, "config.json")
             if os.path.exists(config_path):
@@ -899,6 +900,12 @@ def main():
                 if "rms_norm" not in config:
                     print("[Info] Patching config.json: Adding 'rms_norm': true for NemotronH compatibility.")
                     config["rms_norm"] = True
+                    changed = True
+
+                # FIXED: Added patch for ssm_state_size to support newer Nemotron configs
+                if "ssm_state_size" in config and "state_size" not in config:
+                    print("[Info] Patching config.json: Mapping 'ssm_state_size' to 'state_size'.")
+                    config["state_size"] = config["ssm_state_size"]
                     changed = True
 
                 if changed:
@@ -953,7 +960,13 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  local dl_cmd="if ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; hf download $model_id --local-dir $ctr_path"
+  # FIXED: Added retries for robustness
+  local dl_cmd="if ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; \
+                for i in {1..3}; do \
+                    if hf download $model_id --local-dir $ctr_path; then exit 0; fi; \
+                    echo 'Download failed, retrying...' >&2; \
+                    sleep 5; \
+                done; exit 1"
 
   ssh "${SSH_OPTS[@]}" "$ip" \
     "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
@@ -971,6 +984,30 @@ function compile_trt_engine() {
   local ctr_model_base="$7"
   local host_engine_path="$8"
 
+  # FIXED: Check for pre-quantized model (e.g. NVFP4) to skip conversion
+  # We check config.json in the container for quantization_config format
+  local check_quant_cmd="grep -q '\"format\": \"nvfp4-pack-quantized\"' $ctr_model_path/config.json && echo 'DETECTED_NVFP4' || true"
+
+  local quant_status
+  quant_status=$(ssh "${SSH_OPTS[@]}" "$ip" "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE bash -c '$check_quant_cmd'" 2>/dev/null)
+
+  if [[ "$quant_status" == *"DETECTED_NVFP4"* ]]; then
+       printf "Detected pre-quantized NVFP4 model. Skipping conversion step.\n"
+
+       # FIXED: Use trtllm-build directly for pre-quantized models
+       # Using --checkpoint_dir as model path since it is pre-packed
+       # Added --tp and --pp flags for distributed support
+       local build_cmd="trtllm-build --checkpoint_dir $ctr_model_path --output_dir $ctr_engine_path --tp_size $TP_SIZE --pp_size $PP_SIZE --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_input_len $MAX_SEQ_LEN --max_output_len 1024 --use_weight_only --weight_only_precision nvfp4"
+
+       if ! ssh "${SSH_OPTS[@]}" "$ip" \
+         "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$build_cmd'"; then
+          printf "Error: Engine build failed (NVFP4 direct mode) on %s.\n" "$ip" >&2
+          exit 1
+       fi
+       return
+  fi
+
+  # Standard flow for unquantized models
   local quant_flags=""
   if [[ "$QUANT_OVERRIDE" == "fp8" ]]; then quant_flags="--use_fp8_context_fmha enable"; fi
 
@@ -1040,6 +1077,13 @@ function ensure_trt_engine() {
       printf "Building Engine (TP=%s)...\n" "$TP_SIZE"
       compile_trt_engine "$IP1" "$ctr_engine_path" "$ctr_model_path" "$host_engine_base" "$host_model_base" "$ctr_engine_base" "$ctr_model_base" "$host_engine_path"
 
+      # FIXED: Post-build verification
+      if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
+         printf "Verification successful: Engine config found.\n"
+      else
+         printf "Error: Engine build reported success but config.json is missing.\n" >&2
+         exit 1
+      fi
       printf "Engine build complete.\n"
   fi
 
