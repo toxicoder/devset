@@ -690,5 +690,29 @@ echo "Running test: Fail Fast on Container Crash"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
+# Test 22: Garbage VRAM Output (Graceful Failure)
+echo "Running test: Garbage VRAM Output (Graceful Failure)"
+(
+    export NGC_API_KEY="test-key"
+    export MOCK_VRAM_MB="CUDA_ERROR_UNKNOWN"
+
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 1 ]; then
+        if echo "$OUTPUT" | grep -q "Warning: nvidia-smi returned non-numeric output"; then
+            echo "PASS"
+        else
+            echo "FAIL: Expected non-numeric warning not found. Output:"
+            echo "$OUTPUT"
+            exit 1
+        fi
+    else
+        echo "FAIL: Script should fail on garbage VRAM output. Exit code: $EXIT_CODE"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
 # Cleanup
 rm -rf "$TEST_DIR"
