@@ -99,13 +99,13 @@ function _read_config() {
      exit 1
   fi
 
-  IP1=$(echo "$config_values" | cut -d'|' -f1)
-  IP2=$(echo "$config_values" | cut -d'|' -f2)
-  MODEL_ARG=$(echo "$config_values" | cut -d'|' -f3)
+  IP1=$(printf "%s" "$config_values" | cut -d'|' -f1)
+  IP2=$(printf "%s" "$config_values" | cut -d'|' -f2)
+  MODEL_ARG=$(printf "%s" "$config_values" | cut -d'|' -f3)
   local saved_engine
-  saved_engine=$(echo "$config_values" | cut -d'|' -f4)
+  saved_engine=$(printf "%s" "$config_values" | cut -d'|' -f4)
   local saved_image
-  saved_image=$(echo "$config_values" | cut -d'|' -f5)
+  saved_image=$(printf "%s" "$config_values" | cut -d'|' -f5)
 
   if [[ -n "$saved_engine" && -z "$ENGINE_OVERRIDE" ]]; then
     ENGINE_OVERRIDE="$saved_engine"
@@ -188,7 +188,7 @@ function _parse_arguments() {
     IP1="$1"
     IP2="$2"
     MODEL_ARG="${3:-"meta/llama-3.1-70b-instruct"}"
-    MODEL_ARG=$(echo "$MODEL_ARG" | tr '[:upper:]' '[:lower:]')
+    MODEL_ARG=$(printf "%s" "$MODEL_ARG" | tr '[:upper:]' '[:lower:]')
     _write_config
   fi
 }
@@ -267,7 +267,7 @@ function _configure_model() {
   if [[ "$MODEL_ARG" =~ ^https://huggingface.co/ ]]; then
     local stripped="${MODEL_ARG#https://huggingface.co/}"
     # Extract Organization/Repo from URL (stripping subpaths like /tree/main)
-    HF_MODEL_ID=$(echo "$stripped" | cut -d'/' -f1,2)
+    HF_MODEL_ID=$(printf "%s" "$stripped" | cut -d'/' -f1,2)
     MODEL_ARG="$HF_MODEL_ID"
     printf "Detected Hugging Face URL. Extracted Model ID: %s\n" "$HF_MODEL_ID"
   fi
@@ -279,16 +279,16 @@ function _configure_model() {
   if [[ -n "$model_data" ]]; then
     # Parse data
     local nim_tag
-    nim_tag=$(echo "$model_data" | cut -d'|' -f2)
+    nim_tag=$(printf "%s" "$model_data" | cut -d'|' -f2)
     IMAGE="nvcr.io/nim/${nim_tag}:latest"
-    TP_SIZE=$(echo "$model_data" | cut -d'|' -f3)
-    PP_SIZE=$(echo "$model_data" | cut -d'|' -f4)
-    default_quant=$(echo "$model_data" | cut -d'|' -f5)
-    PARAMS=$(echo "$model_data" | cut -d'|' -f6)
-    IS_VISION=$(echo "$model_data" | cut -d'|' -f7)
-    HF_MODEL_ID=$(echo "$model_data" | cut -d'|' -f9)
+    TP_SIZE=$(printf "%s" "$model_data" | cut -d'|' -f3)
+    PP_SIZE=$(printf "%s" "$model_data" | cut -d'|' -f4)
+    default_quant=$(printf "%s" "$model_data" | cut -d'|' -f5)
+    PARAMS=$(printf "%s" "$model_data" | cut -d'|' -f6)
+    IS_VISION=$(printf "%s" "$model_data" | cut -d'|' -f7)
+    HF_MODEL_ID=$(printf "%s" "$model_data" | cut -d'|' -f9)
     local extra
-    extra=$(echo "$model_data" | cut -d'|' -f8)
+    extra=$(printf "%s" "$model_data" | cut -d'|' -f8)
     if [[ -n "$extra" ]]; then EXTRA_NIM_ENV="$extra"; fi
   else
     if [[ -n "$IMAGE_OVERRIDE" ]]; then
@@ -314,7 +314,7 @@ function _configure_model() {
 
   # Sanitize HF_MODEL_ID to prevent filesystem issues
   if [[ -n "$HF_MODEL_ID" ]]; then
-    HF_MODEL_ID=$(echo "$HF_MODEL_ID" | tr -cd '[:alnum:]_.-/')
+    HF_MODEL_ID=$(printf "%s" "$HF_MODEL_ID" | tr -cd '[:alnum:]_.-/')
   fi
 
   # Image Override (Precedence over registry unless TRT-LLM forced)
@@ -374,18 +374,18 @@ function _configure_model() {
 function _get_node_vram() {
   local ip="$1"
   local cmd="export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; \
-             if ! command -v nvidia-smi &>/dev/null; then echo 'MISSING'; exit 0; fi; \
+             if ! command -v nvidia-smi &>/dev/null; then printf 'MISSING\n'; exit 0; fi; \
              nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
 
   local out
   out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>/dev/null)
 
   if [[ "$out" == *"MISSING"* ]]; then
-      echo "MISSING"
+      printf "MISSING\n"
       return
   fi
   # Sum up (multi-gpu)
-  echo "$out" | awk '{s+=$1} END {print s+0}'
+  printf "%s\n" "$out" | awk '{s+=$1} END {print s+0}'
 }
 
 # Internal: Check VRAM requirements
@@ -466,7 +466,7 @@ function _get_network_config() {
   if ospf_neighbors=$(ssh "${SSH_OPTS[@]}" "$ip" \
     "sudo vtysh -c 'show ip ospf neighbor' 2>/dev/null"); then
     local ifaces
-    ifaces=$(echo "$ospf_neighbors" | grep "Full" | awk '{print $6}' | sort | uniq | tr '\n' ',' | sed 's/,$//' || true)
+    ifaces=$(printf "%s" "$ospf_neighbors" | grep "Full" | awk '{print $6}' | sort | uniq | tr '\n' ',' | sed 's/,$//' || true)
     if [[ -n "$ifaces" ]]; then
       if [[ "$ifaces" == *","* ]]; then
         printf "DETECTED_MULTI: %s" "$ifaces"
@@ -537,7 +537,7 @@ function _get_ip_from_iface() {
   local ip_host="$1"
   local iface_list="$2"
   local iface
-  iface=$(echo "$iface_list" | cut -d',' -f1)
+  iface=$(printf "%s" "$iface_list" | cut -d',' -f1)
 
   if [[ -z "$iface" ]]; then return 1; fi
 
@@ -548,7 +548,7 @@ function _get_ip_from_iface() {
 # Internal: Ensure image present (with P2P)
 function _ensure_image_present() {
   printf "Pulling image %s on Head Node (%s)...\n" "$IMAGE" "$IP1"
-  if ! echo "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP1" \
+  if ! printf "%s" "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP1" \
     "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
     printf "Error: Failed to pull image on %s\n" "$IP1" >&2; exit 1
   fi
@@ -590,7 +590,7 @@ function _ensure_image_present() {
 
   # Fallback
   printf "Downloading image on %s...\n" "$IP2"
-  if ! echo "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP2" \
+  if ! printf "%s" "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP2" \
     "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
     printf "Error: Failed to pull image on %s\n" "$IP2" >&2; exit 1
   fi
@@ -641,7 +641,9 @@ function _generate_converter_script() {
   # We write the python script to a temp file then cat it to remote
   # This script attempts to find the correct convert_checkpoint.py based on config.json
 
-  cat <<'PYTHON_SCRIPT' > /tmp/convert_heuristic.py
+  local temp_script
+  temp_script=$(mktemp)
+  cat <<'PYTHON_SCRIPT' > "$temp_script"
 import os
 import sys
 import json
@@ -850,8 +852,8 @@ if __name__ == "__main__":
 PYTHON_SCRIPT
 
   # Transfer to remote
-  ssh "${SSH_OPTS[@]}" "$ip" "cat > $path" < /tmp/convert_heuristic.py
-  rm -f /tmp/convert_heuristic.py
+  ssh "${SSH_OPTS[@]}" "$ip" "cat > $path" < "$temp_script"
+  rm -f "$temp_script"
 }
 
 # Internal: Build TRT Engine (TRT-LLM Mode Only)
@@ -867,7 +869,7 @@ function _ensure_trt_engine() {
   fi
   set -x
   local safe_model_id
-  safe_model_id=$(echo "$HF_MODEL_ID" | tr '/' '--')
+  safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
 
   # Host paths (for mkdir, existence checks, and tar)
   local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
@@ -972,7 +974,7 @@ function _launch_distributed_service() {
 
   if [[ "$USE_TRT_LLM" -eq 1 ]]; then
       container_name="trt-llm-distributed"
-      local safe_model_id=$(echo "$HF_MODEL_ID" | tr '/' '--')
+      local safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
       local engine_path="/engines/$safe_model_id"
       local hf_env=""
       if [[ -n "${HF_TOKEN:-}" ]]; then hf_env="-e HF_TOKEN=$HF_TOKEN"; fi
@@ -1058,7 +1060,7 @@ function _wait_for_service() {
   printf "[5/5] Waiting for service (http://%s:8000)...\n" "$ip"
   for ((i = 1; i <= 60; i++)); do
     local state
-    state=$(ssh "${SSH_OPTS[@]}" "$ip" "docker inspect -f '{{.State.Running}}' $container_name" 2>/dev/null || echo "false")
+    state=$(ssh "${SSH_OPTS[@]}" "$ip" "docker inspect -f '{{.State.Running}}' $container_name" 2>/dev/null || printf "false\n")
     if [[ "$state" != "true" ]]; then
        printf "Error: Container '%s' crashed or stopped!\n" "$container_name" >&2
        ssh "${SSH_OPTS[@]}" "$ip" "docker logs --tail 20 $container_name" || true
