@@ -611,11 +611,23 @@ def find_examples_dir():
     candidates = [
         "/app/tensorrt_llm/examples",
         "/workspace/tensorrt_llm/examples",
-        "/usr/local/lib/python3.10/dist-packages/tensorrt_llm/examples"
+        "/usr/local/lib/python3.12/dist-packages/tensorrt_llm/examples", # Py3.12
+        "/usr/local/lib/python3.10/dist-packages/tensorrt_llm/examples"  # Py3.10
     ]
+
+    # Try to find via site-packages dynamically
+    try:
+        import site
+        for p in site.getsitepackages():
+            candidates.append(os.path.join(p, "tensorrt_llm", "examples"))
+    except:
+        pass
+
     for c in candidates:
         if os.path.exists(c):
-            return c
+             # Validate content (look for common examples to ensure it's the right dir)
+             if os.path.exists(os.path.join(c, "llama")) or os.path.exists(os.path.join(c, "gpt")):
+                 return c
     return None
 
 def detect_architecture(model_dir):
@@ -644,7 +656,7 @@ def get_script_for_arch(arch, examples_dir):
         "falcon": "falcon", "baichuan": "baichuan", "gemma": "gemma",
         "phi": "phi", "whisper": "whisper",
         "nemotron": "gpt", # Default assumption for older Nemotron
-        "nemotronh": "mamba", # Hypothesis: Hybrid Mamba
+        "nemotronh": "mamba", # Hybrid Mamba
         "mamba": "mamba"
     }
 
@@ -678,6 +690,9 @@ def main():
     examples_dir = find_examples_dir()
     if not examples_dir:
         print("[Error] Could not find tensorrt_llm/examples directory.")
+        # Debug info
+        print(f"[Debug] Checked paths.")
+        print(f"[Debug] Py Version: {sys.version}")
         sys.exit(1)
 
     arch = detect_architecture(args.model_dir)
@@ -690,6 +705,11 @@ def main():
     script = get_script_for_arch(arch, examples_dir)
     if not script:
         print(f"[Error] No conversion script found for {arch}")
+        print(f"[Debug] Examples Directory: {examples_dir}")
+        try:
+            print(f"[Debug] Contents: {os.listdir(examples_dir)}")
+        except:
+            pass
         sys.exit(1)
 
     print(f"[Info] Using conversion script: {script}")
