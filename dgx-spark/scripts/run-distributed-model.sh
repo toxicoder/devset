@@ -350,15 +350,20 @@ function parse_model_config() {
 # Globals: SSH_OPTS
 function _get_node_vram() {
   local ip="$1"
-  local cmd="export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; \
-             if ! command -v nvidia-smi &>/dev/null; then printf 'MISSING\n'; exit 0; fi; \
+  local cmd="export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin:\$PATH; \
+             if ! command -v nvidia-smi &>/dev/null; then exit 1; fi; \
              nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
 
   local out
-  out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>/dev/null)
+  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>/dev/null); then
+      printf "Warning: nvidia-smi failed or not found on %s. Returning 0 VRAM.\n" "$ip" >&2
+      printf "0\n"
+      return
+  fi
 
-  if [[ "$out" == *"MISSING"* ]]; then
-      printf "MISSING\n"
+  if [[ -z "$out" ]]; then
+      printf "Warning: nvidia-smi returned empty output on %s. Returning 0 VRAM.\n" "$ip" >&2
+      printf "0\n"
       return
   fi
   # Sum up (multi-gpu)
@@ -376,18 +381,7 @@ function get_total_cluster_vram() {
   local vram1 vram2
 
   vram1=$(_get_node_vram "$ip1")
-  if [[ "$vram1" == "MISSING" ]]; then
-      printf "Error: nvidia-smi not found on Head Node (%s).\n" "$ip1" >&2
-      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
-      exit 1
-  fi
-
   vram2=$(_get_node_vram "$ip2")
-  if [[ "$vram2" == "MISSING" ]]; then
-      printf "Error: nvidia-smi not found on Worker Node (%s).\n" "$ip2" >&2
-      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
-      exit 1
-  fi
 
   awk -v v1="${vram1:-0}" -v v2="${vram2:-0}" 'BEGIN {print (v1 + v2) / 1024}'
 }
@@ -406,6 +400,7 @@ function check_vram_requirements() {
   if awk -v t="$total_gb" 'BEGIN {exit !(t <= 0)}'; then
      if [[ "$FORCE" -eq 1 ]]; then
          printf "Warning: VRAM detection failed (Total: 0.00 GB). Force enabled, proceeding...\n" >&2
+         return 0
      else
          printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
          printf "Debug Info (Head Node %s):\n" "$IP1"
@@ -803,12 +798,11 @@ def get_script_for_arch(arch, examples_dir):
         "chatglm": "chatglm", "qwen": "qwen", "qwen2": "llama",
         "falcon": "falcon", "baichuan": "baichuan", "gemma": "gemma",
         "phi": "phi", "whisper": "whisper",
-        "nemotron": "gpt", # Default assumption for older Nemotron
-        "nemotronh": "mamba", # Hybrid Mamba
+        "nemotron": "gpt",
+        "nemotronh": "mamba",
         "mamba": "mamba"
     }
 
-    # Helper to check both legacy and v1.0+ paths
     def check_path(subdir):
         # Legacy: examples/{arch}/convert_checkpoint.py
         p1 = os.path.join(examples_dir, subdir, "convert_checkpoint.py")
@@ -818,29 +812,36 @@ def get_script_for_arch(arch, examples_dir):
         if os.path.exists(p2): return p2
         return None
 
-    # 1. Exact mapping (Prioritize longer keys to handle shadowing e.g. nemotronh vs nemotron)
+    # 1. Exact mapping
     for k in sorted(mapping.keys(), key=len, reverse=True):
-        v = mapping[k]
         if k in arch:
+            v = mapping[k]
             res = check_path(v)
             if res: return res
+            if k == "nemotronh":
+                 print(f"[Info] NemotronH converter '{v}' not found, trying Llama...")
+                 res = check_path("llama")
+                 if res: return res
 
     # 2. Directory match
-    # Check root examples/
-    for d in os.listdir(examples_dir):
-        if d in arch:
-            p = os.path.join(examples_dir, d, "convert_checkpoint.py")
-            if os.path.exists(p): return p
+    print(f"[Info] Specific mapping not found or missing for {arch}, trying fuzzy search...")
 
-    # Check examples/models/
-    models_dir = os.path.join(examples_dir, "models")
-    if os.path.exists(models_dir):
-        for d in os.listdir(models_dir):
-            if d in arch:
-                 p = os.path.join(models_dir, d, "convert_checkpoint.py")
+    def search_dir(d):
+        if not os.path.exists(d): return None
+        for item in os.listdir(d):
+             if item.lower() in arch or arch in item.lower():
+                 p = os.path.join(d, item, "convert_checkpoint.py")
                  if os.path.exists(p): return p
+        return None
+
+    res = search_dir(examples_dir)
+    if res: return res
+
+    res = search_dir(os.path.join(examples_dir, "models"))
+    if res: return res
 
     # 3. Fallback to llama
+    print(f"[Warning] No specific conversion script found for {arch}. Using Universal Fallback (Llama).")
     res = check_path("llama")
     if res: return res
 
@@ -857,7 +858,6 @@ def main():
     examples_dir, checked_paths = find_examples_dir()
     if not examples_dir:
         print("[Error] Could not find tensorrt_llm/examples directory.")
-        # Debug info
         print(f"[Debug] Checked paths: {checked_paths}")
         print(f"[Debug] Py Version: {sys.version}")
         sys.exit(1)
@@ -908,7 +908,7 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks=False"
+  local dl_cmd="if ! command -v huggingface-cli &>/dev/null && ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; if command -v hf &>/dev/null; then hf download $model_id --local-dir $ctr_path --local-dir-use-symlinks=False; else huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks=False; fi"
 
   ssh "${SSH_OPTS[@]}" "$ip" \
     "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
