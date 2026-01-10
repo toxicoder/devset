@@ -891,9 +891,18 @@ def main():
                 with open(config_path, 'r') as f:
                     config = json.load(f)
 
+                changed = False
                 if "hidden_act" not in config:
                     print("[Info] Patching config.json: Adding 'hidden_act': 'silu' for NemotronH compatibility.")
                     config["hidden_act"] = "silu"
+                    changed = True
+
+                if "rms_norm" not in config:
+                    print("[Info] Patching config.json: Adding 'rms_norm': true for NemotronH compatibility.")
+                    config["rms_norm"] = True
+                    changed = True
+
+                if changed:
                     with open(config_path, 'w') as f:
                         json.dump(config, f, indent=2)
         except Exception as e:
