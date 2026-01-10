@@ -350,7 +350,7 @@ function parse_model_config() {
 # Globals: SSH_OPTS
 function _get_node_vram() {
   local ip="$1"
-  local cmd="export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin:\$PATH; \
+  local cmd="export PATH=/usr/local/bin:/usr/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/sbin:/bin:\$PATH; \
              if ! command -v nvidia-smi &>/dev/null; then echo 'NVIDIA_SMI_NOT_FOUND'; exit 1; fi; \
              nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
 
@@ -367,11 +367,12 @@ function _get_node_vram() {
       return
   fi
 
-  # Robust extraction: grep -oE '[0-9]+' strips non-numeric text/warnings
+  # Robust extraction: Only accept lines that are pure numbers to avoid summing version numbers from warnings
   local numeric_out
-  numeric_out=$(printf "%s" "$out" | grep -oE '[0-9]+' || true)
+  numeric_out=$(printf "%s" "$out" | grep -E '^[0-9]+$' || true)
 
   if [[ -z "$numeric_out" ]]; then
+       printf "Warning: nvidia-smi returned non-numeric output on %s.\n" "$ip" >&2
        printf "0\n"
        return
   fi
@@ -802,6 +803,10 @@ def detect_architecture(model_dir):
 
 def get_script_for_arch(arch, examples_dir):
     arch = arch.lower()
+    for suffix in ["forcausallm", "model", "config"]:
+        if arch.endswith(suffix):
+            arch = arch[:-len(suffix)]
+
     mapping = {
         "llama": "llama", "mistral": "llama", "mixtral": "llama",
         "gpt": "gpt", "gptj": "gptj", "gptneox": "gptneox",
@@ -916,7 +921,7 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks False"
+  local dl_cmd="if ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; hf download $model_id --local-dir $ctr_path --local-dir-use-symlinks False"
 
   ssh "${SSH_OPTS[@]}" "$ip" \
     "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
@@ -945,8 +950,11 @@ function compile_trt_engine() {
 
   local build_cmd="trtllm-build --checkpoint_dir $ckpt_dir --output_dir $ctr_engine_path --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
 
-  ssh "${SSH_OPTS[@]}" "$ip" \
-     "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$convert_cmd && $build_cmd && rm -rf $ckpt_dir'"
+  if ! ssh "${SSH_OPTS[@]}" "$ip" \
+     "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$convert_cmd && $build_cmd && rm -rf $ckpt_dir'"; then
+      printf "Error: TensorRT Engine Compilation Failed on %s.\n" "$ip" >&2
+      exit 1
+  fi
 }
 
 # Internal: Sync Engine to Worker
