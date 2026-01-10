@@ -370,14 +370,44 @@ function _configure_model() {
   printf "TP: %s, PP: %s, Quant: %s\n" "$TP_SIZE" "$PP_SIZE" "$quant_to_use"
 }
 
+# Internal: Helper to get node VRAM with robust error checking
+function _get_node_vram() {
+  local ip="$1"
+  local cmd="export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; \
+             if ! command -v nvidia-smi &>/dev/null; then echo 'MISSING'; exit 0; fi; \
+             nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
+
+  local out
+  out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>/dev/null)
+
+  if [[ "$out" == *"MISSING"* ]]; then
+      echo "MISSING"
+      return
+  fi
+  # Sum up (multi-gpu)
+  echo "$out" | awk '{s+=$1} END {print s+0}'
+}
+
 # Internal: Check VRAM requirements
 function _check_vram_requirements() {
   local params="$1"
   printf "[Check] verifying VRAM capacity...\n"
+
   local vram1
-  vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" "export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; if command -v nvidia-smi &>/dev/null; then nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; else echo 0; fi" 2>/dev/null | awk '{s+=$1} END {print s+0}')
+  vram1=$(_get_node_vram "$IP1")
+  if [[ "$vram1" == "MISSING" ]]; then
+      printf "Error: nvidia-smi not found on Head Node (%s).\n" "$IP1" >&2
+      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
+      exit 1
+  fi
+
   local vram2
-  vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" "export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; if command -v nvidia-smi &>/dev/null; then nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; else echo 0; fi" 2>/dev/null | awk '{s+=$1} END {print s+0}')
+  vram2=$(_get_node_vram "$IP2")
+  if [[ "$vram2" == "MISSING" ]]; then
+      printf "Error: nvidia-smi not found on Worker Node (%s).\n" "$IP2" >&2
+      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
+      exit 1
+  fi
 
   local total_gb
   total_gb=$(awk -v v1="${vram1:-0}" -v v2="${vram2:-0}" 'BEGIN {print (v1 + v2) / 1024}')
@@ -589,10 +619,17 @@ function _remote_mkdir() {
   local out
   # Try normal mkdir first, capturing output for debug
   if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs" 2>&1); then
-     printf "Warning: mkdir failed on %s. Output: %s. Attempting with sudo...\n" "$ip" "$out"
-     # Try with sudo and fix ownership
-     # Added -t to force pseudo-terminal for sudo password prompt
-     ssh -t "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(whoami) $dirs"
+     printf "Warning: mkdir failed on %s. Output: %s.\n" "$ip" "$out"
+
+     # Try sudo non-interactive
+     if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true" 2>/dev/null; then
+         printf "Sudo access confirmed. Fixing permissions...\n"
+         ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(id -u):\$(id -g) $dirs"
+     else
+         printf "Error: Cannot create directories and passwordless sudo is not available.\n" >&2
+         printf "Please ensure user has permissions to create: %s\n" "$dirs" >&2
+         exit 1
+     fi
   fi
 }
 
@@ -858,7 +895,8 @@ function _ensure_trt_engine() {
 
       # Use the container to download
       # Ensure huggingface-cli is available (prefer over 'hf' which may be incompatible)
-      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U 'huggingface_hub[cli]'; fi; huggingface-cli download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks False"
+      # Fix: Escaped quoting for huggingface_hub[cli] and argument usage
+      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; huggingface-cli download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks=False"
       ssh "${SSH_OPTS[@]}" "$IP1" \
         "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_model_base:$ctr_model_base $IMAGE bash -c '$dl_cmd'"
 

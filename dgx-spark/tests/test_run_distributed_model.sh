@@ -347,9 +347,20 @@ else
     if grep -F "'\$oauthtoken'" "$TARGET_SCRIPT" >/dev/null; then
         echo "PASS"
     else
-        echo "FAIL: Could not find correct escaping"
+        echo "FAIL: Could not find correct escaping for oauthtoken"
         exit 1
     fi
+fi
+
+# Test 4b: Static Analysis for ZSH Safe huggingface_hub[cli] escaping
+echo "Running test: Static Analysis for huggingface_hub[cli] escaping"
+if grep -qF 'pip install -U "huggingface_hub[cli]"' "$TARGET_SCRIPT"; then
+    echo "PASS"
+elif grep -qF 'pip install -U \"huggingface_hub[cli]\"' "$TARGET_SCRIPT"; then
+    echo "PASS"
+else
+    echo "FAIL: huggingface_hub[cli] not correctly escaped with double quotes"
+    exit 1
 fi
 
 # Test 5: Verify Network and Port Configuration
@@ -425,8 +436,7 @@ echo "Running test: P2P Transfer Success"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
-# Test 8: Verify Removal of Memory Constraints for Nemotron Nano
-# (Note: In improved script, logic is slightly different, but let's check VLLM backend)
+# Test 8: Verify VLLM Backend for Nemotron Nano
 echo "Running test: Verify VLLM Backend for Nemotron Nano"
 (
     rm -f "$TEST_DIR/docker_run.log"
