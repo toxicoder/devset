@@ -641,7 +641,9 @@ function _remote_mkdir() {
 
            for d in \$dirs; do
              # Expand tilde
-             eval d=\"\$d\"
+             if [[ \"\$d\" == \"~\"* ]]; then
+               d=\"\${HOME}\${d:1}\"
+             fi
 
              # Identify target to fix: if dir exists (root owned?), fix it. If not, fix parent.
              target=\"\$d\"
@@ -660,7 +662,7 @@ function _remote_mkdir() {
            done
          "
 
-         if ssh "${SSH_OPTS[@]}" "$ip" "$remote_script"; then
+         if printf "%s" "$remote_script" | ssh "${SSH_OPTS[@]}" "$ip" "bash -s"; then
              if ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs"; then
                  printf "Permissions fixed via Docker. mkdir succeeded.\n"
                  return 0
