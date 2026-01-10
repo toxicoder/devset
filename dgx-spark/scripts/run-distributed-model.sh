@@ -367,15 +367,23 @@ function _get_node_vram() {
       return
   fi
 
-  # Validate numeric output (multi-gpu output is newline separated numbers)
-  if ! [[ "$out" =~ ^[0-9[:space:]]+$ ]]; then
-      printf "Warning: nvidia-smi returned non-numeric output on %s: %s\n" "$ip" "$out" >&2
-      printf "0\n"
-      return
+  # Filter out non-numeric lines (like [N/A])
+  local numeric_out
+  numeric_out=$(printf "%s" "$out" | grep -E '^[0-9]+$' || true)
+
+  if [[ -z "$numeric_out" ]]; then
+       # If original output was not empty and NOT just [N/A] lines, warn.
+       # If it was [N/A], we suppress warning as requested.
+       local non_na_garbage=$(printf "%s" "$out" | grep -vF "[N/A]" | grep -vE '^[[:space:]]*$' || true)
+       if [[ -n "$non_na_garbage" ]]; then
+           printf "Warning: nvidia-smi returned non-numeric output on %s: %s\n" "$ip" "$out" >&2
+       fi
+       printf "0\n"
+       return
   fi
 
   # Sum up (multi-gpu)
-  printf "%s\n" "$out" | awk '{s+=$1} END {print s+0}'
+  printf "%s\n" "$numeric_out" | awk '{s+=$1} END {print s+0}'
 }
 
 # Internal: Get total cluster VRAM in GB
@@ -916,7 +924,7 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  local dl_cmd="if ! command -v huggingface-cli &>/dev/null && ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; if command -v hf &>/dev/null; then hf download $model_id --local-dir $ctr_path --local-dir-use-symlinks False; else huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks False; fi"
+  local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks False"
 
   ssh "${SSH_OPTS[@]}" "$ip" \
     "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
