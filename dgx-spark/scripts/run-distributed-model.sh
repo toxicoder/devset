@@ -188,7 +188,6 @@ function _parse_arguments() {
     IP1="$1"
     IP2="$2"
     MODEL_ARG="${3:-"meta/llama-3.1-70b-instruct"}"
-    MODEL_ARG=$(printf "%s" "$MODEL_ARG" | tr '[:upper:]' '[:lower:]')
     _write_config
   fi
 }
@@ -274,7 +273,7 @@ function _configure_model() {
 
   # Look up model
   local model_data
-  model_data=$(_get_model_registry | grep -F "$MODEL_ARG" | head -n 1 || true)
+  model_data=$(_get_model_registry | grep -F -i "$MODEL_ARG" | head -n 1 || true)
 
   if [[ -n "$model_data" ]]; then
     # Parse data
@@ -314,7 +313,7 @@ function _configure_model() {
 
   # Sanitize HF_MODEL_ID to prevent filesystem issues
   if [[ -n "$HF_MODEL_ID" ]]; then
-    HF_MODEL_ID=$(printf "%s" "$HF_MODEL_ID" | tr -cd '[:alnum:]_.-/')
+    HF_MODEL_ID=$(printf "%s" "$HF_MODEL_ID" | tr -cd '[:alnum:]_./-')
   fi
 
   # Image Override (Precedence over registry unless TRT-LLM forced)
