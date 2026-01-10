@@ -882,6 +882,23 @@ def main():
 
     print(f"[Info] Detected Architecture: {arch}")
 
+    # Patch for NemotronH (missing hidden_act in config causes Mamba conversion crash)
+    # Note: arch detection returns the raw string from config.json (e.g. "NemotronHForCausalLM")
+    if arch == "NemotronHForCausalLM":
+        try:
+            config_path = os.path.join(args.model_dir, "config.json")
+            if os.path.exists(config_path):
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+
+                if "hidden_act" not in config:
+                    print("[Info] Patching config.json: Adding 'hidden_act': 'silu' for NemotronH compatibility.")
+                    config["hidden_act"] = "silu"
+                    with open(config_path, 'w') as f:
+                        json.dump(config, f, indent=2)
+        except Exception as e:
+            print(f"[Warning] Failed to patch config.json: {e}")
+
     script = get_script_for_arch(arch, examples_dir)
     if not script:
         print(f"[Error] No conversion script found for {arch}")
