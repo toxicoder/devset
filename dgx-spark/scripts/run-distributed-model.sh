@@ -369,7 +369,7 @@ function _get_node_vram() {
 
   # Robust extraction: Only accept lines that are pure numbers to avoid summing version numbers from warnings
   local numeric_out
-  numeric_out=$(printf "%s" "$out" | grep -E '^[0-9]+$' || true)
+  numeric_out=$(printf "%s" "$out" | tr -d '\r' | grep -E '^[0-9]+$' || true)
 
   if [[ -z "$numeric_out" ]]; then
        printf "Warning: nvidia-smi returned non-numeric output on %s.\n" "$ip" >&2
@@ -804,8 +804,7 @@ def detect_architecture(model_dir):
 def get_script_for_arch(arch, examples_dir):
     arch = arch.lower()
     for suffix in ["forcausallm", "model", "config"]:
-        if arch.endswith(suffix):
-            arch = arch[:-len(suffix)]
+        arch = arch.replace(suffix, "")
 
     mapping = {
         "llama": "llama", "mistral": "llama", "mixtral": "llama",
@@ -927,7 +926,14 @@ def main():
            "--pp_size", str(args.pp_size)]
 
     print(f"[Exec] {' '.join(cmd)}")
-    subprocess.check_call(cmd)
+    try:
+        subprocess.check_call(cmd)
+    except subprocess.CalledProcessError as e:
+        print(f"[Error] Conversion script failed with exit code {e.returncode}")
+        sys.exit(e.returncode)
+    except Exception as e:
+        print(f"[Error] Unexpected error during conversion: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
