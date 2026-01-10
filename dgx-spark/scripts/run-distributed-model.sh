@@ -591,6 +591,130 @@ function _remote_mkdir() {
   fi
 }
 
+# Internal: Generate Heuristic Conversion Script (Python)
+function _generate_converter_script() {
+  local ip="$1"
+  local path="$2"
+
+  # We write the python script to a temp file then cat it to remote
+  # This script attempts to find the correct convert_checkpoint.py based on config.json
+
+  cat <<'PYTHON_SCRIPT' > /tmp/convert_heuristic.py
+import os
+import sys
+import json
+import subprocess
+import argparse
+
+def find_examples_dir():
+    # Standard locations in NVIDIA containers
+    candidates = [
+        "/app/tensorrt_llm/examples",
+        "/workspace/tensorrt_llm/examples",
+        "/usr/local/lib/python3.10/dist-packages/tensorrt_llm/examples"
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+def detect_architecture(model_dir):
+    config_path = os.path.join(model_dir, "config.json")
+    if not os.path.exists(config_path):
+        return None
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        # Check architectures list
+        if "architectures" in config and config["architectures"]:
+            return config["architectures"][0]
+        # Fallback: check model_type
+        if "model_type" in config:
+            return config["model_type"]
+    except:
+        return None
+    return None
+
+def get_script_for_arch(arch, examples_dir):
+    arch = arch.lower()
+    mapping = {
+        "llama": "llama", "mistral": "llama", "mixtral": "llama",
+        "gpt": "gpt", "gptj": "gptj", "gptneox": "gptneox",
+        "chatglm": "chatglm", "qwen": "qwen", "qwen2": "llama",
+        "falcon": "falcon", "baichuan": "baichuan", "gemma": "gemma",
+        "phi": "phi", "whisper": "whisper",
+        "nemotron": "gpt", # Default assumption for older Nemotron
+        "nemotronh": "mamba", # Hypothesis: Hybrid Mamba
+        "mamba": "mamba"
+    }
+
+    # 1. Exact mapping (Prioritize longer keys to handle shadowing e.g. nemotronh vs nemotron)
+    for k in sorted(mapping.keys(), key=len, reverse=True):
+        v = mapping[k]
+        if k in arch:
+            p = os.path.join(examples_dir, v, "convert_checkpoint.py")
+            if os.path.exists(p): return p
+
+    # 2. Directory match
+    for d in os.listdir(examples_dir):
+        if d in arch:
+            p = os.path.join(examples_dir, d, "convert_checkpoint.py")
+            if os.path.exists(p): return p
+
+    # 3. Fallback to llama
+    p = os.path.join(examples_dir, "llama", "convert_checkpoint.py")
+    if os.path.exists(p): return p
+
+    return None
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_dir", required=True)
+    parser.add_argument("--output_dir", required=True)
+    parser.add_argument("--tp_size", default="1")
+    parser.add_argument("--pp_size", default="1")
+    args, unknown = parser.parse_known_args()
+
+    examples_dir = find_examples_dir()
+    if not examples_dir:
+        print("[Error] Could not find tensorrt_llm/examples directory.")
+        sys.exit(1)
+
+    arch = detect_architecture(args.model_dir)
+    if not arch:
+        print("[Warning] Could not detect architecture. Defaulting to Llama.")
+        arch = "llama"
+
+    print(f"[Info] Detected Architecture: {arch}")
+
+    script = get_script_for_arch(arch, examples_dir)
+    if not script:
+        print(f"[Error] No conversion script found for {arch}")
+        sys.exit(1)
+
+    print(f"[Info] Using conversion script: {script}")
+
+    cmd = [sys.executable, script,
+           "--model_dir", args.model_dir,
+           "--output_dir", args.output_dir,
+           "--tp_size", str(args.tp_size),
+           "--pp_size", str(args.pp_size)]
+
+    # Add dtype defaults if needed (many scripts default to float16)
+    # If the user supplied extra arguments, we might need them, but here we keep it simple.
+
+    print(f"[Exec] {' '.join(cmd)}")
+    subprocess.check_call(cmd)
+
+if __name__ == "__main__":
+    main()
+PYTHON_SCRIPT
+
+  # Transfer to remote
+  ssh "${SSH_OPTS[@]}" "$ip" "cat > $path" < /tmp/convert_heuristic.py
+  rm -f /tmp/convert_heuristic.py
+}
+
 # Internal: Build TRT Engine (TRT-LLM Mode Only)
 function _ensure_trt_engine() {
   if [[ "$USE_TRT_LLM" -eq 0 ]]; then return; fi
@@ -644,7 +768,11 @@ function _ensure_trt_engine() {
       # New TRT-LLM uses 'trtllm-build' command
       # Step 2a: Convert Checkpoint (Required for TRT-LLM v0.9+)
       local ckpt_dir="$ctr_engine_path/ckpt"
-      local convert_cmd="trtllm-convert-checkpoint --model_dir $ctr_model_path --output_dir $ckpt_dir --tp_size $TP_SIZE --pp_size $PP_SIZE"
+
+      # Generate helper script on head node
+      _generate_converter_script "$IP1" "$host_engine_path/convert_heuristic.py"
+
+      local convert_cmd="python3 $ctr_engine_path/convert_heuristic.py --model_dir $ctr_model_path --output_dir $ckpt_dir --tp_size $TP_SIZE --pp_size $PP_SIZE"
 
       # Step 2b: Build Engine
       local build_cmd="trtllm-build --checkpoint_dir $ckpt_dir --output_dir $ctr_engine_path --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
