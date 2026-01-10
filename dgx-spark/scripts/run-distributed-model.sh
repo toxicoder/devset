@@ -355,7 +355,7 @@ function _get_node_vram() {
              nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
 
   local out
-  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd"); then
+  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>&1); then
       printf "Warning: nvidia-smi failed on %s. Output: %s\n" "$ip" "$out" >&2
       printf "0\n"
       return
@@ -367,22 +367,16 @@ function _get_node_vram() {
       return
   fi
 
-  # Filter out non-numeric lines (like [N/A])
+  # Robust extraction: grep -oE '[0-9]+' strips non-numeric text/warnings
   local numeric_out
-  numeric_out=$(printf "%s" "$out" | grep -E '^[0-9]+$' || true)
+  numeric_out=$(printf "%s" "$out" | grep -oE '[0-9]+' || true)
 
   if [[ -z "$numeric_out" ]]; then
-       # If original output was not empty and NOT just [N/A] lines, warn.
-       # If it was [N/A], we suppress warning as requested.
-       local non_na_garbage=$(printf "%s" "$out" | grep -vF "[N/A]" | grep -vE '^[[:space:]]*$' || true)
-       if [[ -n "$non_na_garbage" ]]; then
-           printf "Warning: nvidia-smi returned non-numeric output on %s: %s\n" "$ip" "$out" >&2
-       fi
        printf "0\n"
        return
   fi
 
-  # Sum up (multi-gpu)
+  # Sum up
   printf "%s\n" "$numeric_out" | awk '{s+=$1} END {print s+0}'
 }
 
@@ -819,48 +813,46 @@ def get_script_for_arch(arch, examples_dir):
         "mamba": "mamba"
     }
 
-    def check_path(subdir):
-        # Legacy: examples/{arch}/convert_checkpoint.py
-        p1 = os.path.join(examples_dir, subdir, "convert_checkpoint.py")
-        if os.path.exists(p1): return p1
-        # v1.0+: examples/models/{arch}/convert_checkpoint.py
-        p2 = os.path.join(examples_dir, "models", subdir, "convert_checkpoint.py")
-        if os.path.exists(p2): return p2
+    target_subdir = mapping.get(arch, arch)
+
+    print(f"[Info] Looking for converter for architecture '{arch}' (mapped to '{target_subdir}')...")
+
+    candidates = []
+    # Recursive search
+    for root, dirs, files in os.walk(examples_dir):
+        if "convert_checkpoint.py" in files:
+            full_path = os.path.join(root, "convert_checkpoint.py")
+            candidates.append(full_path)
+
+    if not candidates:
+        print(f"[Error] No convert_checkpoint.py scripts found in {examples_dir}")
         return None
 
-    # 1. Exact mapping
-    for k in sorted(mapping.keys(), key=len, reverse=True):
-        if k in arch:
-            v = mapping[k]
-            res = check_path(v)
-            if res: return res
-            if k == "nemotronh":
-                 print(f"[Info] NemotronH converter '{v}' not found, trying Llama...")
-                 res = check_path("llama")
-                 if res: return res
+    # Strategy 1: Match mapped directory name (parent dir)
+    for c in candidates:
+        parent = os.path.basename(os.path.dirname(c)).lower()
+        if parent == target_subdir:
+            return c
 
-    # 2. Directory match
-    print(f"[Info] Specific mapping not found or missing for {arch}, trying fuzzy search...")
+    # Strategy 2: Fuzzy match parent dir with arch
+    for c in candidates:
+        parent = os.path.basename(os.path.dirname(c)).lower()
+        if arch in parent or parent in arch:
+            return c
 
-    def search_dir(d):
-        if not os.path.exists(d): return None
-        for item in os.listdir(d):
-             if item.lower() in arch or arch in item.lower():
-                 p = os.path.join(d, item, "convert_checkpoint.py")
-                 if os.path.exists(p): return p
-        return None
+    # Strategy 3: Universal Fallback (Llama)
+    print("[Warning] Specific converter not found. Attempting Universal Fallback (Llama)...")
+    for c in candidates:
+        parent = os.path.basename(os.path.dirname(c)).lower()
+        if parent == "llama":
+            print(f"[Info] Using fallback: {c}")
+            return c
 
-    res = search_dir(examples_dir)
-    if res: return res
-
-    res = search_dir(os.path.join(examples_dir, "models"))
-    if res: return res
-
-    # 3. Fallback to llama
-    print(f"[Warning] No specific conversion script found for {arch}. Using Universal Fallback (Llama).")
-    res = check_path("llama")
-    if res: return res
-
+    # Failure
+    print("[Error] Could not find a suitable conversion script.")
+    print("[Debug] Found the following conversion scripts:")
+    for c in candidates:
+        print(f" - {c}")
     return None
 
 def main():
