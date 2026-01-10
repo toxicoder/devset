@@ -312,6 +312,11 @@ function _configure_model() {
     fi
   fi
 
+  # Sanitize HF_MODEL_ID to prevent filesystem issues
+  if [[ -n "$HF_MODEL_ID" ]]; then
+    HF_MODEL_ID=$(echo "$HF_MODEL_ID" | tr -cd '[:alnum:]_.-/')
+  fi
+
   # Image Override (Precedence over registry unless TRT-LLM forced)
   if [[ -n "$IMAGE_OVERRIDE" ]]; then
     IMAGE="$IMAGE_OVERRIDE"
@@ -370,9 +375,9 @@ function _check_vram_requirements() {
   local params="$1"
   printf "[Check] verifying VRAM capacity...\n"
   local vram1
-  vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" "export PATH=\$PATH:/usr/local/cuda/bin:/usr/bin:/usr/local/nvidia/bin; if command -v nvidia-smi &>/dev/null; then nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; else echo 0; fi" 2>/dev/null | awk '{s+=$1} END {print s+0}')
+  vram1=$(ssh "${SSH_OPTS[@]}" "$IP1" "export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; if command -v nvidia-smi &>/dev/null; then nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; else echo 0; fi" 2>/dev/null | awk '{s+=$1} END {print s+0}')
   local vram2
-  vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" "export PATH=\$PATH:/usr/local/cuda/bin:/usr/bin:/usr/local/nvidia/bin; if command -v nvidia-smi &>/dev/null; then nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; else echo 0; fi" 2>/dev/null | awk '{s+=$1} END {print s+0}')
+  vram2=$(ssh "${SSH_OPTS[@]}" "$IP2" "export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; if command -v nvidia-smi &>/dev/null; then nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; else echo 0; fi" 2>/dev/null | awk '{s+=$1} END {print s+0}')
 
   local total_gb
   total_gb=$(awk -v v1="${vram1:-0}" -v v2="${vram2:-0}" 'BEGIN {print (v1 + v2) / 1024}')
@@ -383,7 +388,7 @@ function _check_vram_requirements() {
      else
          printf "Error: VRAM detection failed (Total: %.2f GB).\n" "$total_gb" >&2
          printf "Debug Info (Head Node %s):\n" "$IP1"
-         ssh "${SSH_OPTS[@]}" "$IP1" "export PATH=\$PATH:/usr/local/cuda/bin:/usr/bin:/usr/local/nvidia/bin; which nvidia-smi; nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
+         ssh "${SSH_OPTS[@]}" "$IP1" "export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; which nvidia-smi; nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits" || true
          exit 1
      fi
   fi
@@ -823,6 +828,7 @@ function _ensure_trt_engine() {
       printf "Would execute: trtllm-build --checkpoint_dir /models/... --output_dir /engines/... \n"
       return
   fi
+  set -x
   local safe_model_id
   safe_model_id=$(echo "$HF_MODEL_ID" | tr '/' '--')
 
@@ -851,10 +857,10 @@ function _ensure_trt_engine() {
       _remote_mkdir "$IP1" "$host_model_path $host_engine_path"
 
       # Use the container to download
-      # Ensure huggingface-cli or hf is available
-      local dl_cmd="if command -v hf &>/dev/null; then hf download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks False; else if ! command -v huggingface-cli &>/dev/null; then pip install -U huggingface_hub[cli]; fi; huggingface-cli download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks False; fi"
+      # Ensure huggingface-cli is available (prefer over 'hf' which may be incompatible)
+      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U 'huggingface_hub[cli]'; fi; huggingface-cli download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks False"
       ssh "${SSH_OPTS[@]}" "$IP1" \
-        "docker run --rm -e HF_TOKEN=$HF_TOKEN -v $host_model_base:$ctr_model_base $IMAGE bash -c '$dl_cmd'"
+        "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_model_base:$ctr_model_base $IMAGE bash -c '$dl_cmd'"
 
       # 2. Build Engine
       printf "Building Engine (TP=%s)...\n" "$TP_SIZE"
@@ -889,6 +895,8 @@ function _ensure_trt_engine() {
   ssh "${SSH_OPTS[@]}" "$IP1" "tar -cf - -C $host_engine_path . | pigz -1" | \
       ssh "${SSH_OPTS[@]}" "$IP2" "pigz -d | tar -xf - -C $host_engine_path"
   printf "Engine synced.\n"
+
+  if [[ "$DRY_RUN" -eq 0 ]]; then set +x; fi
 }
 
 # Internal: Cleanup
