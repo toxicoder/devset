@@ -189,6 +189,51 @@ echo "Running test: Image pull failure on one node (with transfer failure)"
 )
 if [ $? -ne 0 ]; then exit 1; fi
 
+# Test 18b: Image Override
+echo "Running test: Image Override"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    echo "n" | "$TARGET_SCRIPT" --image my-custom-image:latest "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    # The script should try to run my-custom-image:latest
+    if echo "$LOG_CONTENT" | grep -q "my-custom-image:latest"; then
+        echo "PASS"
+    else
+        echo "FAIL: Did not find usage of my-custom-image:latest. Log:"
+        echo "$LOG_CONTENT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 18c: Custom HF Model Default to TRT-LLM
+echo "Running test: Custom HF Model Default to TRT-LLM"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    export HF_TOKEN="test-token"
+    # Using dry-run to skip actual build logic which requires mocks for trtllm-build
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --dry-run "10.0.0.1" "10.0.0.2" "https://huggingface.co/MyOrg/MyModel" 2>&1)
+
+    if echo "$OUTPUT" | grep -q "Defaulting to TensorRT-LLM Engine Build"; then
+        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:latest"; then
+            echo "PASS"
+        else
+             echo "FAIL: Expected TRT-LLM release image. Output:"
+             echo "$OUTPUT"
+             exit 1
+        fi
+    else
+        echo "FAIL: Did not default to TRT-LLM for custom HF model. Output:"
+        echo "$OUTPUT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
 # Test 22: Platform Mismatch (ARM64 Host, AMD64 Image) - Should Fail
 echo "Running test: Platform Mismatch Failure"
 (

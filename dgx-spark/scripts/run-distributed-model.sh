@@ -52,6 +52,7 @@ NET_CONF_1=""
 NET_CONF_2=""
 QUANT_OVERRIDE=""
 ENGINE_OVERRIDE=""
+IMAGE_OVERRIDE=""
 BATCH_SIZE=128
 MAX_SEQ_LEN=2048
 WANDB_KEY=""
@@ -91,7 +92,7 @@ function _read_config() {
 
   # Python parsing
   local config_values
-  config_values=$(python3 -c "import sys, json; data=json.load(open(sys.argv[1])); print(f\"{data.get('ip1','')}|{data.get('ip2','')}|{data.get('model','')}|{data.get('engine','')}\")" "$CONFIG_FILE")
+  config_values=$(python3 -c "import sys, json; data=json.load(open(sys.argv[1])); print(f\"{data.get('ip1','')}|{data.get('ip2','')}|{data.get('model','')}|{data.get('engine','')}|{data.get('image','')}\")" "$CONFIG_FILE")
 
   if [[ $? -ne 0 ]]; then
      printf "Error: Failed to parse config file with python.\n" >&2
@@ -103,9 +104,14 @@ function _read_config() {
   MODEL_ARG=$(echo "$config_values" | cut -d'|' -f3)
   local saved_engine
   saved_engine=$(echo "$config_values" | cut -d'|' -f4)
+  local saved_image
+  saved_image=$(echo "$config_values" | cut -d'|' -f5)
 
   if [[ -n "$saved_engine" && -z "$ENGINE_OVERRIDE" ]]; then
     ENGINE_OVERRIDE="$saved_engine"
+  fi
+  if [[ -n "$saved_image" && -z "$IMAGE_OVERRIDE" ]]; then
+    IMAGE_OVERRIDE="$saved_image"
   fi
 
   if [[ -z "$IP1" || -z "$IP2" || -z "$MODEL_ARG" ]]; then
@@ -121,7 +127,8 @@ function _write_config() {
     "ip1": "$IP1",
     "ip2": "$IP2",
     "model": "$MODEL_ARG",
-    "engine": "$ENGINE_OVERRIDE"
+    "engine": "$ENGINE_OVERRIDE",
+    "image": "$IMAGE_OVERRIDE"
 }
 EOF
   printf "Configuration saved to %s\n" "$CONFIG_FILE"
@@ -139,6 +146,9 @@ function _parse_arguments() {
       --engine)
         if [[ -z "${2:-}" ]]; then printf "Error: --engine requires argument\n" >&2; exit 1; fi
         ENGINE_OVERRIDE="$2"; shift 2 ;;
+      --image)
+        if [[ -z "${2:-}" ]]; then printf "Error: --image requires argument\n" >&2; exit 1; fi
+        IMAGE_OVERRIDE="$2"; shift 2 ;;
       --batch-size) BATCH_SIZE="$2"; shift 2 ;;
       --max-seq-len) MAX_SEQ_LEN="$2"; shift 2 ;;
       --wandb-key) WANDB_KEY="$2"; shift 2 ;;
@@ -164,6 +174,7 @@ function _parse_arguments() {
     printf "  --force               Bypass safety checks\n"
     printf "  --quant <fmt>         Force quantization (fp4, fp8, int8)\n"
     printf "  --engine <name>       Backend engine (vllm, trt-llm)\n"
+    printf "  --image <name>        Custom Docker image override\n"
     printf "  --batch-size <n>      Max batch size (default: 128)\n"
     printf "  --max-seq-len <n>     Max sequence length (default: 2048)\n"
     exit 1
@@ -280,7 +291,18 @@ function _configure_model() {
     extra=$(echo "$model_data" | cut -d'|' -f8)
     if [[ -n "$extra" ]]; then EXTRA_NIM_ENV="$extra"; fi
   else
-    if [[ "$FORCE" -eq 1 || -n "$HF_MODEL_ID" ]]; then
+    if [[ -n "$IMAGE_OVERRIDE" ]]; then
+      # Image provided by user, assume manual configuration
+      printf "Using custom image override: %s\n" "$IMAGE_OVERRIDE"
+      IMAGE="$IMAGE_OVERRIDE"
+      if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
+    elif [[ -n "$HF_MODEL_ID" ]]; then
+      # Custom HF Model without Image -> Default to TRT-LLM
+      printf "Warning: Custom HF Model detected (%s) without corresponding NIM Image.\n" "$HF_MODEL_ID"
+      printf "Defaulting to TensorRT-LLM Engine Build (Native).\n"
+      USE_TRT_LLM=1
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+    elif [[ "$FORCE" -eq 1 ]]; then
       printf "Warning: Model '%s' not found in registry. Using as custom image.\n" "$MODEL_ARG"
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
       if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
@@ -290,10 +312,17 @@ function _configure_model() {
     fi
   fi
 
+  # Image Override (Precedence over registry unless TRT-LLM forced)
+  if [[ -n "$IMAGE_OVERRIDE" ]]; then
+    IMAGE="$IMAGE_OVERRIDE"
+  fi
+
   # Engine Override
-  if [[ "$ENGINE_OVERRIDE" == "trt-llm" ]]; then
+  if [[ "$ENGINE_OVERRIDE" == "trt-llm" || "$USE_TRT_LLM" -eq 1 ]]; then
     USE_TRT_LLM=1
-    IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+    if [[ -z "$IMAGE_OVERRIDE" ]]; then
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+    fi
     printf "Engine Mode: TensorRT-LLM (Container: %s)\n" "$IMAGE"
     if [[ -z "$HF_MODEL_ID" ]]; then
        printf "Error: HF Model ID not found for %s. Cannot build engine.\n" "$MODEL_ARG" >&2
