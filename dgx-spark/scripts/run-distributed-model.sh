@@ -638,6 +638,54 @@ def find_examples_dir():
              # Validate content (look for common examples to ensure it's the right dir)
              if os.path.exists(os.path.join(c, "llama")) or os.path.exists(os.path.join(c, "gpt")):
                  return c, checked
+
+    # Fallback: Clone from GitHub if not found
+    print("[Info] Examples not found in standard paths. Attempting to clone from GitHub...")
+    try:
+        # Check/Install git
+        try:
+            subprocess.check_call(["git", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except:
+            print("[Info] git not found, attempting to install...")
+            try:
+                subprocess.check_call(["apt-get", "update", "-y"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                subprocess.check_call(["apt-get", "install", "-y", "git"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception as e:
+                print(f"[Warning] Failed to install git: {e}")
+
+        import tensorrt_llm
+        version = tensorrt_llm.__version__
+        # Clean version string (e.g., 0.10.0.dev -> 0.10.0) for tagging
+        base_ver = version.split('+')[0].split('-')[0]
+
+        clone_dir = "/tmp/tensorrt_llm_examples_repo"
+        if not os.path.exists(clone_dir):
+            tags_to_try = [f"v{base_ver}", f"release/{base_ver}", "main"]
+            success = False
+            for tag in tags_to_try:
+                print(f"[Info] Trying to clone tag: {tag}")
+                try:
+                    subprocess.check_call(["git", "clone", "--depth", "1", "--branch", tag, "https://github.com/NVIDIA/TensorRT-LLM.git", clone_dir], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    success = True
+                    break
+                except subprocess.CalledProcessError:
+                    continue
+
+            if not success:
+                 print("[Warning] Failed to clone specific tags. Trying default branch...")
+                 try:
+                    subprocess.check_call(["git", "clone", "--depth", "1", "https://github.com/NVIDIA/TensorRT-LLM.git", clone_dir], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                 except:
+                    pass
+
+        examples_path = os.path.join(clone_dir, "examples")
+        checked.append(examples_path)
+        if os.path.exists(examples_path):
+             return examples_path, checked
+
+    except Exception as e:
+        print(f"[Warning] Failed to clone examples: {e}")
+
     return None, checked
 
 def detect_architecture(model_dir):
