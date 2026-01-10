@@ -642,10 +642,16 @@ function _ensure_trt_engine() {
 
       # Assuming trtllm-build is in path or we use python script
       # New TRT-LLM uses 'trtllm-build' command
-      local build_cmd="trtllm-build --checkpoint_dir $ctr_model_path --output_dir $ctr_engine_path --tp_size $TP_SIZE --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
+      # Step 2a: Convert Checkpoint (Required for TRT-LLM v0.9+)
+      local ckpt_dir="$ctr_engine_path/ckpt"
+      local convert_cmd="trtllm-convert-checkpoint --model_dir $ctr_model_path --output_dir $ckpt_dir --tp_size $TP_SIZE --pp_size $PP_SIZE"
 
+      # Step 2b: Build Engine
+      local build_cmd="trtllm-build --checkpoint_dir $ckpt_dir --output_dir $ctr_engine_path --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
+
+      # Chained execution with cleanup
       ssh "${SSH_OPTS[@]}" "$IP1" \
-         "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$build_cmd'"
+         "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$convert_cmd && $build_cmd && rm -rf $ckpt_dir'"
 
       printf "Engine build complete.\n"
   fi
