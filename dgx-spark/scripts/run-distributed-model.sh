@@ -577,6 +577,18 @@ function _align_platform_with_image() {
   fi
 }
 
+# Internal: Robust mkdir on remote host
+function _remote_mkdir() {
+  local ip="$1"
+  local dirs="$2"
+  # Try normal mkdir first
+  if ! ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs 2>/dev/null"; then
+     printf "Warning: mkdir failed on %s. Attempting with sudo...\n" "$ip"
+     # Try with sudo and fix ownership
+     ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(whoami) $dirs"
+  fi
+}
+
 # Internal: Build TRT Engine (TRT-LLM Mode Only)
 function _ensure_trt_engine() {
   if [[ "$USE_TRT_LLM" -eq 0 ]]; then return; fi
@@ -613,7 +625,7 @@ function _ensure_trt_engine() {
 
       # 1. Download Model
       printf "Downloading model %s from Hugging Face...\n" "$HF_MODEL_ID"
-      ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p $host_model_path $host_engine_path"
+      _remote_mkdir "$IP1" "$host_model_path $host_engine_path"
 
       # Use the container to download
       # Ensure huggingface-cli is available
@@ -640,7 +652,7 @@ function _ensure_trt_engine() {
   printf "Syncing engine to Worker Node...\n"
   # Using simple tar pipe over SSH (assuming high bandwidth or small engine config, though engines are large)
   # Ideally engines should be on shared storage. If not, we copy.
-  ssh "${SSH_OPTS[@]}" "$IP2" "mkdir -p $host_engine_path"
+  _remote_mkdir "$IP2" "$host_engine_path"
   ssh "${SSH_OPTS[@]}" "$IP1" "tar -cf - -C $host_engine_path . | pigz -1" | \
       ssh "${SSH_OPTS[@]}" "$IP2" "pigz -d | tar -xf - -C $host_engine_path"
   printf "Engine synced.\n"
@@ -689,9 +701,10 @@ function _launch_distributed_service() {
       # Generate SSH Keys for MPI
       if [[ "$DRY_RUN" -eq 0 ]]; then
           printf "Generating SSH keys for MPI...\n"
-          ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p ~/.ssh-trt && ssh-keygen -t rsa -f ~/.ssh-trt/id_rsa -N '' && cat ~/.ssh-trt/id_rsa.pub > ~/.ssh-trt/authorized_keys"
+          _remote_mkdir "$IP1" "~/.ssh-trt"
+          ssh "${SSH_OPTS[@]}" "$IP1" "ssh-keygen -t rsa -f ~/.ssh-trt/id_rsa -N '' && cat ~/.ssh-trt/id_rsa.pub > ~/.ssh-trt/authorized_keys"
           # Copy to worker
-          ssh "${SSH_OPTS[@]}" "$IP2" "mkdir -p ~/.ssh-trt"
+          _remote_mkdir "$IP2" "~/.ssh-trt"
           ssh "${SSH_OPTS[@]}" "$IP1" "cat ~/.ssh-trt/id_rsa" | ssh "${SSH_OPTS[@]}" "$IP2" "cat > ~/.ssh-trt/id_rsa && chmod 600 ~/.ssh-trt/id_rsa"
           ssh "${SSH_OPTS[@]}" "$IP1" "cat ~/.ssh-trt/id_rsa.pub" | ssh "${SSH_OPTS[@]}" "$IP2" "cat > ~/.ssh-trt/id_rsa.pub"
           ssh "${SSH_OPTS[@]}" "$IP1" "cat ~/.ssh-trt/authorized_keys" | ssh "${SSH_OPTS[@]}" "$IP2" "cat > ~/.ssh-trt/authorized_keys"
