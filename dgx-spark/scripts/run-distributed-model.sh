@@ -33,7 +33,9 @@ readonly CONFIG_FILE="$SCRIPT_DIR/dgx-spark-distributed-model-config.json"
 # SSH options
 readonly SSH_OPTS=(-o StrictHostKeyChecking=no -o ConnectTimeout=10)
 
-# Global configuration variables
+# ==============================================================================
+# Global Configuration (Modified by parse_model_config)
+# ==============================================================================
 IP1=""
 IP2=""
 MODEL_ARG=""
@@ -67,13 +69,19 @@ HF_MODEL_ID=""
 TRT_ENGINE_DIR="~/engines"
 TRT_MODEL_DIR="~/models"
 
-# Error handling and cleanup
+# ==============================================================================
+# Utilities & Logging
+# ==============================================================================
+
+# Internal: Cleanup background jobs
 function cleanup() {
   jobs -p | xargs -r kill 2>/dev/null || true
 }
 trap cleanup EXIT ERR
 
 # Internal: Check dependencies
+# Arguments: None
+# Globals: None
 function _check_dependencies() {
   for cmd in ssh awk grep sed nc curl pigz python3; do
     if ! command -v "$cmd" &>/dev/null; then
@@ -83,7 +91,46 @@ function _check_dependencies() {
   done
 }
 
-# Internal: Read configuration
+# Internal: Validate IP Address
+# Arguments:
+#   $1: IP address string
+# Globals: None
+function _validate_ip() {
+  local ip="$1"
+  if [[ ! "$ip" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+    printf "Error: Invalid IP format '%s'\n" "$ip" >&2
+    exit 1
+  fi
+}
+
+# Internal: Check API Key
+# Arguments: None
+# Globals: NGC_API_KEY
+function _check_api_key() {
+  if [[ -z "${NGC_API_KEY:-}" ]]; then
+    printf "Error: NGC_API_KEY environment variable is not set.\n" >&2
+    exit 1
+  fi
+}
+
+# Internal: Check HF Token (for TRT-LLM)
+# Arguments: None
+# Globals: HF_TOKEN
+function _check_hf_token() {
+  if [[ -z "${HF_TOKEN:-}" ]]; then
+    printf "Error: HF_TOKEN environment variable is required for TRT-LLM mode to download models.\n" >&2
+    printf "Please export your Hugging Face Token: export HF_TOKEN='hf_...'\n" >&2
+    exit 1
+  fi
+}
+
+# ==============================================================================
+# 1. Configuration & Registry Module
+# ==============================================================================
+
+# Internal: Read configuration from file
+# Arguments: None
+# Globals: CONFIG_FILE, IP1, IP2, MODEL_ARG, ENGINE_OVERRIDE, IMAGE_OVERRIDE
 function _read_config() {
   if [[ ! -f "$CONFIG_FILE" ]]; then
     printf "Error: Config file not found at %s\n" "$CONFIG_FILE" >&2
@@ -120,7 +167,9 @@ function _read_config() {
   fi
 }
 
-# Internal: Write configuration
+# Internal: Write configuration to file
+# Arguments: None
+# Globals: CONFIG_FILE, IP1, IP2, MODEL_ARG, ENGINE_OVERRIDE, IMAGE_OVERRIDE
 function _write_config() {
   cat >"$CONFIG_FILE" <<EOF
 {
@@ -134,93 +183,11 @@ EOF
   printf "Configuration saved to %s\n" "$CONFIG_FILE"
 }
 
-# Internal: Parse arguments
-function _parse_arguments() {
-  while [[ "$#" -gt 0 ]]; do
-    case "$1" in
-      --dry-run) DRY_RUN=1; shift ;;
-      --force) FORCE=1; shift ;;
-      --quant)
-        if [[ -z "${2:-}" ]]; then printf "Error: --quant requires argument\n" >&2; exit 1; fi
-        QUANT_OVERRIDE="$2"; shift 2 ;;
-      --engine)
-        if [[ -z "${2:-}" ]]; then printf "Error: --engine requires argument\n" >&2; exit 1; fi
-        ENGINE_OVERRIDE="$2"; shift 2 ;;
-      --image)
-        if [[ -z "${2:-}" ]]; then printf "Error: --image requires argument\n" >&2; exit 1; fi
-        IMAGE_OVERRIDE="$2"; shift 2 ;;
-      --batch-size) BATCH_SIZE="$2"; shift 2 ;;
-      --max-seq-len) MAX_SEQ_LEN="$2"; shift 2 ;;
-      --wandb-key) WANDB_KEY="$2"; shift 2 ;;
-      --speculative) SPECULATIVE_MODE=1; shift ;;
-      -*) printf "Error: Unknown option %s\n" "$1" >&2; exit 1 ;;
-      *) break ;;
-    esac
-  done
-
-  if [[ "$#" -eq 1 && "$1" == "stop" ]]; then
-    MODE="stop"
-  elif [[ "$#" -eq 1 && "$1" == "start" ]]; then
-    MODE="start"
-  elif [[ "$#" -ge 2 && "$#" -le 3 ]]; then
-    MODE="setup"
-  else
-    printf "Usage:\n"
-    printf "  %s [OPTIONS] <IP1> <IP2> [<MODEL_NAME|HF_URL>]  (First run / Setup)\n" "$0"
-    printf "  %s [OPTIONS] start                              (Start using saved config)\n" "$0"
-    printf "  %s [OPTIONS] stop                               (Stop using saved config)\n" "$0"
-    printf "\nOptions:\n"
-    printf "  --dry-run             Print commands without executing\n"
-    printf "  --force               Bypass safety checks\n"
-    printf "  --quant <fmt>         Force quantization (fp4, fp8, int8)\n"
-    printf "  --engine <name>       Backend engine (vllm, trt-llm)\n"
-    printf "  --image <name>        Custom Docker image override\n"
-    printf "  --batch-size <n>      Max batch size (default: 128)\n"
-    printf "  --max-seq-len <n>     Max sequence length (default: 2048)\n"
-    exit 1
-  fi
-
-  if [[ "$MODE" == "stop" ]]; then
-    _read_config
-  elif [[ "$MODE" == "start" ]]; then
-    _read_config
-  elif [[ "$MODE" == "setup" ]]; then
-    IP1="$1"
-    IP2="$2"
-    MODEL_ARG="${3:-"meta/llama-3.1-70b-instruct"}"
-    _write_config
-  fi
-}
-
-# Internal: Validate IP Address
-function _validate_ip() {
-  local ip="$1"
-  if [[ ! "$ip" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-    printf "Error: Invalid IP format '%s'\n" "$ip" >&2
-    exit 1
-  fi
-}
-
-# Internal: Check API Key
-function _check_api_key() {
-  if [[ -z "${NGC_API_KEY:-}" ]]; then
-    printf "Error: NGC_API_KEY environment variable is not set.\n" >&2
-    exit 1
-  fi
-}
-
-# Internal: Check HF Token (for TRT-LLM)
-function _check_hf_token() {
-  if [[ -z "${HF_TOKEN:-}" ]]; then
-    printf "Error: HF_TOKEN environment variable is required for TRT-LLM mode to download models.\n" >&2
-    printf "Please export your Hugging Face Token: export HF_TOKEN='hf_...'\n" >&2
-    exit 1
-  fi
-}
-
-# Internal: Get Model Registry
+# Internal: Get Model Registry Data
 # Format: ModelID|ImageTag|TP|PP|DefaultQuant|Params(B)|IsVision|ExtraEnv|HF_ID
-function _get_model_registry() {
+# Arguments: None
+# Globals: None
+function get_model_registry_data() {
   cat <<EOF
 reasoning-1|deepseek-ai/deepseek-r1|2|1|fp4|671|0|-e NIM_MODEL_PROFILE=deepseek-r1|deepseek-ai/DeepSeek-R1
 reasoning-2|alibaba/qwen3-30b-thinking|2|1|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER|Qwen/Qwen2.5-32B-Instruct
@@ -251,8 +218,12 @@ special-3|meta/llama-guard-3-8b|1|1|fp16|8|0||meta-llama/Llama-Guard-3-8B
 EOF
 }
 
-# Internal: Configure model parameters
-function _configure_model() {
+# Internal: Parse Model Configuration and set Globals
+# Arguments: None
+# Globals: MODEL_ARG, TP_SIZE, PP_SIZE, IS_VISION, EXTRA_NIM_ENV, PARAMS, CONTEXT,
+#          IMAGE, HF_MODEL_ID, USE_TRT_LLM, ENGINE_OVERRIDE, QUANT_OVERRIDE, BATCH_SIZE, MAX_SEQ_LEN,
+#          SPECULATIVE_MODE, WANDB_KEY
+function parse_model_config() {
   # Defaults
   TP_SIZE=2
   PP_SIZE=1
@@ -273,7 +244,7 @@ function _configure_model() {
 
   # Look up model
   local model_data
-  model_data=$(_get_model_registry | grep -F -i "$MODEL_ARG" | head -n 1 || true)
+  model_data=$(get_model_registry_data | grep -F -i "$MODEL_ARG" | head -n 1 || true)
 
   if [[ -n "$model_data" ]]; then
     # Parse data
@@ -369,7 +340,14 @@ function _configure_model() {
   printf "TP: %s, PP: %s, Quant: %s\n" "$TP_SIZE" "$PP_SIZE" "$quant_to_use"
 }
 
-# Internal: Helper to get node VRAM with robust error checking
+# ==============================================================================
+# 2. System Discovery Module
+# ==============================================================================
+
+# Internal: Get total VRAM on a node in MB
+# Arguments:
+#   $1: IP address
+# Globals: SSH_OPTS
 function _get_node_vram() {
   local ip="$1"
   local cmd="export PATH=\$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin; \
@@ -387,29 +365,43 @@ function _get_node_vram() {
   printf "%s\n" "$out" | awk '{s+=$1} END {print s+0}'
 }
 
-# Internal: Check VRAM requirements
-function _check_vram_requirements() {
+# Internal: Get total cluster VRAM in GB
+# Arguments:
+#   $1: IP1
+#   $2: IP2
+# Returns: Total VRAM in GB (float) via stdout
+function get_total_cluster_vram() {
+  local ip1="$1"
+  local ip2="$2"
+  local vram1 vram2
+
+  vram1=$(_get_node_vram "$ip1")
+  if [[ "$vram1" == "MISSING" ]]; then
+      printf "Error: nvidia-smi not found on Head Node (%s).\n" "$ip1" >&2
+      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
+      exit 1
+  fi
+
+  vram2=$(_get_node_vram "$ip2")
+  if [[ "$vram2" == "MISSING" ]]; then
+      printf "Error: nvidia-smi not found on Worker Node (%s).\n" "$ip2" >&2
+      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
+      exit 1
+  fi
+
+  awk -v v1="${vram1:-0}" -v v2="${vram2:-0}" 'BEGIN {print (v1 + v2) / 1024}'
+}
+
+# Internal: Check if cluster satisfies VRAM requirements
+# Arguments:
+#   $1: Model parameters (billions)
+# Globals: IP1, IP2, FORCE, QUANT_OVERRIDE, EXTRA_NIM_ENV
+function check_vram_requirements() {
   local params="$1"
   printf "[Check] verifying VRAM capacity...\n"
 
-  local vram1
-  vram1=$(_get_node_vram "$IP1")
-  if [[ "$vram1" == "MISSING" ]]; then
-      printf "Error: nvidia-smi not found on Head Node (%s).\n" "$IP1" >&2
-      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
-      exit 1
-  fi
-
-  local vram2
-  vram2=$(_get_node_vram "$IP2")
-  if [[ "$vram2" == "MISSING" ]]; then
-      printf "Error: nvidia-smi not found on Worker Node (%s).\n" "$IP2" >&2
-      printf "Please ensure NVIDIA drivers and nvidia-utils are installed and in PATH.\n" >&2
-      exit 1
-  fi
-
   local total_gb
-  total_gb=$(awk -v v1="${vram1:-0}" -v v2="${vram2:-0}" 'BEGIN {print (v1 + v2) / 1024}')
+  total_gb=$(get_total_cluster_vram "$IP1" "$IP2")
 
   if awk -v t="$total_gb" 'BEGIN {exit !(t <= 0)}'; then
      if [[ "$FORCE" -eq 1 ]]; then
@@ -423,9 +415,6 @@ function _check_vram_requirements() {
   fi
   printf "Total Cluster VRAM Detected: %.2f GB\n" "$total_gb"
 
-  # Simple heuristic: If model requires more VRAM than detected (with buffer)
-  # Rough estimate: PARAMS * 2 (FP16) / TP_SIZE
-  # But we deal with total cluster VRAM here, so Params * 2
   local required_gb=$(( params * 2 ))
 
   if [[ "$QUANT_OVERRIDE" == "fp8" || "$EXTRA_NIM_ENV" == *"fp8"* ]]; then required_gb=$(( required_gb / 2 )); fi
@@ -449,7 +438,9 @@ function _check_vram_requirements() {
   fi
 }
 
-# Internal: Detect architecture
+# Internal: Detect architecture of the head node
+# Arguments: None
+# Globals: IP1, SSH_OPTS, PLATFORM_ARG
 function _detect_architecture() {
   local arch
   arch=$(ssh "${SSH_OPTS[@]}" "$IP1" "uname -m" 2>/dev/null | xargs)
@@ -457,8 +448,11 @@ function _detect_architecture() {
   elif [[ "$arch" == "aarch64" ]]; then PLATFORM_ARG="--platform linux/arm64"; fi
 }
 
-# Internal: Detect high-speed network interfaces
-function _get_network_config() {
+# Internal: Detect high-speed network interfaces for a given IP
+# Arguments:
+#   $1: IP address
+# Returns: Comma-separated interface list or "DETECTED_NONE"
+function detect_high_speed_iface() {
   local ip="$1"
   # OSPF Autodetection
   local ospf_neighbors
@@ -489,16 +483,10 @@ function _get_network_config() {
   fi
 }
 
-# Internal: Parse network configuration
-function _parse_net_conf() {
-  local conf="$1"
-  local val="${conf#*:}"
-  val=$(printf "%s" "$val" | xargs)
-  printf "%s" "$val"
-}
-
-# Internal: Detect network
-function _detect_network() {
+# Internal: Orchestrate network detection
+# Arguments: None
+# Globals: IP1, IP2, NET_CONF_1, NET_CONF_2, IFACES1, IFACES2
+function detect_network_config() {
   printf "[1/5] Detecting high-speed network interfaces...\n"
 
   # Pre-flight check
@@ -506,11 +494,18 @@ function _detect_network() {
     printf "  [+] ib_write_bw detected (RoCE/IB support confirmed).\n"
   fi
 
-  NET_CONF_1=$(_get_network_config "$IP1")
-  NET_CONF_2=$(_get_network_config "$IP2")
+  NET_CONF_1=$(detect_high_speed_iface "$IP1")
+  NET_CONF_2=$(detect_high_speed_iface "$IP2")
 
-  IFACES1=$(_parse_net_conf "$NET_CONF_1")
-  IFACES2=$(_parse_net_conf "$NET_CONF_2")
+  # Helper to parse "DETECTED_X: val"
+  local parse_val
+  parse_val() {
+      local val="${1#*:}"
+      printf "%s" "$val" | xargs
+  }
+
+  IFACES1=$(parse_val "$NET_CONF_1")
+  IFACES2=$(parse_val "$NET_CONF_2")
 
   printf "Node 1 Interfaces: %s\n" "$IFACES1"
   printf "Node 2 Interfaces: %s\n" "$IFACES2"
@@ -521,17 +516,10 @@ function _detect_network() {
   fi
 }
 
-# Internal: Verify connectivity
-function _verify_connectivity() {
-  printf "[2/5] Verifying connectivity...\n"
-  for ip in "$IP1" "$IP2"; do
-    if ! ssh "${SSH_OPTS[@]}" "$ip" "nvidia-smi > /dev/null"; then
-      printf "Error: Connectivity failed to %s.\n" "$ip" >&2; exit 1
-    fi
-  done
-}
-
 # Internal: Get IP from interface
+# Arguments:
+#   $1: Host IP
+#   $2: Interface list (comma separated)
 function _get_ip_from_iface() {
   local ip_host="$1"
   local iface_list="$2"
@@ -544,13 +532,58 @@ function _get_ip_from_iface() {
     "ip -4 addr show $iface | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1"
 }
 
-# Internal: Ensure image present (with P2P)
-function _ensure_image_present() {
-  printf "Pulling image %s on Head Node (%s)...\n" "$IMAGE" "$IP1"
-  if ! printf "%s" "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP1" \
-    "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
-    printf "Error: Failed to pull image on %s\n" "$IP1" >&2; exit 1
+# ==============================================================================
+# 3. Image Management Module
+# ==============================================================================
+
+# Internal: Standard Docker Pull
+# Arguments:
+#   $1: Node IP
+#   $2: Image Name
+function pull_image() {
+  local ip="$1"
+  local image="$2"
+  if ! printf "%s" "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$ip" \
+    "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $image"; then
+    printf "Error: Failed to pull image on %s\n" "$ip" >&2; return 1
   fi
+}
+
+# Internal: Transfer Docker image P2P
+# Arguments:
+#   $1: Source IP
+#   $2: Target IP
+#   $3: Image Name
+#   $4: High Speed IP on Target (optional)
+function transfer_docker_image_p2p() {
+  local src_ip="$1"
+  local tgt_ip="$2"
+  local image="$3"
+  local fast_ip_tgt="$4"
+
+  if [[ -z "$fast_ip_tgt" ]]; then return 1; fi
+
+  printf "Using High-Speed P2P Transfer to %s (%s)...\n" "$tgt_ip" "$fast_ip_tgt"
+  # Start listener
+  ( ssh "${SSH_OPTS[@]}" "$tgt_ip" "nc -l -p 12346 | pigz -d | docker load" ) &
+  local pid=$!
+  sleep 5
+  # Start sender
+  if ssh "${SSH_OPTS[@]}" "$src_ip" "docker save $image | pigz -c -1 | nc -w 60 -q 1 $fast_ip_tgt 12346"; then
+      if wait "$pid"; then
+          printf "Image transfer successful.\n"
+          return 0
+      fi
+  fi
+  return 1
+}
+
+# Internal: Orchestrate Image Presence
+# Arguments: None
+# Globals: IP1, IP2, IMAGE, IFACES2
+function ensure_image_present() {
+  printf "Pulling image %s on Head Node (%s)...\n" "$IMAGE" "$IP1"
+  pull_image "$IP1" "$IMAGE"
 
   # Worker check
   printf "Checking image on Worker Node (%s)...\n" "$IP2"
@@ -564,24 +597,13 @@ function _ensure_image_present() {
     return
   fi
 
-  # P2P Transfer
+  # P2P Transfer attempt
   local transfer_done=0
   if [[ -n "$IFACES2" ]]; then
     local fast_ip2
     fast_ip2=$(_get_ip_from_iface "$IP2" "$IFACES2")
-    if [[ -n "$fast_ip2" ]]; then
-       printf "Using High-Speed P2P Transfer to %s (%s)...\n" "$IP2" "$fast_ip2"
-       # Start listener
-       ( ssh "${SSH_OPTS[@]}" "$IP2" "nc -l -p 12346 | pigz -d | docker load" ) &
-       local pid=$!
-       sleep 5
-       # Start sender
-       if ssh "${SSH_OPTS[@]}" "$IP1" "docker save $IMAGE | pigz -c -1 | nc -w 60 -q 1 $fast_ip2 12346"; then
-          if wait "$pid"; then
-             printf "Image transfer successful.\n"
-             transfer_done=1
-          fi
-       fi
+    if transfer_docker_image_p2p "$IP1" "$IP2" "$IMAGE" "$fast_ip2"; then
+       transfer_done=1
     fi
   fi
 
@@ -589,13 +611,12 @@ function _ensure_image_present() {
 
   # Fallback
   printf "Downloading image on %s...\n" "$IP2"
-  if ! printf "%s" "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$IP2" \
-    "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $IMAGE"; then
-    printf "Error: Failed to pull image on %s\n" "$IP2" >&2; exit 1
-  fi
+  pull_image "$IP2" "$IMAGE"
 }
 
 # Internal: Align platform with image
+# Arguments: None
+# Globals: IP1, IMAGE, PLATFORM_ARG
 function _align_platform_with_image() {
   local img_arch
   img_arch=$(ssh "${SSH_OPTS[@]}" "$IP1" "docker inspect -f '{{.Architecture}}' $IMAGE" 2>/dev/null | xargs)
@@ -611,78 +632,60 @@ function _align_platform_with_image() {
   fi
 }
 
+# ==============================================================================
+# 4. TensorRT-LLM Builder Module
+# ==============================================================================
+
 # Internal: Robust mkdir on remote host
+# Arguments: $1 ip, $2 dirs
 function _remote_mkdir() {
   local ip="$1"
   local dirs="$2"
   local out
-  # Try normal mkdir first, capturing output for debug
   if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs" 2>&1); then
      printf "Warning: mkdir failed on %s. Output: %s.\n" "$ip" "$out"
-
      # Try sudo non-interactive
      if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true" 2>/dev/null; then
          printf "Sudo access confirmed. Fixing permissions...\n"
          ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(id -u):\$(id -g) $dirs"
      else
          printf "Sudo failed. Attempting Docker-based permission fix...\n"
-
-         # Fallback: Use Docker to chown directories.
-         # This handles cases where directories (e.g., ~/models) were created by Docker as root in previous runs.
          local fix_image="${IMAGE:-alpine}"
-
-         # Remote script to fix permissions
          local remote_script="
            export PATH=\$PATH:/usr/bin:/usr/local/bin
            dirs='$dirs'
            uid=\$(id -u)
            gid=\$(id -g)
            img='$fix_image'
-
            for d in \$dirs; do
-             # Expand tilde
-             if [[ \"\$d\" == \"~\"* ]]; then
-               d=\"\${HOME}\${d:1}\"
-             fi
-
-             # Identify target to fix: if dir exists (root owned?), fix it. If not, fix parent.
+             if [[ \"\$d\" == \"~\"* ]]; then d=\"\${HOME}\${d:1}\"; fi
              target=\"\$d\"
-             if [ ! -d \"\$target\" ]; then
-                target=\$(dirname \"\$target\")
-             fi
-
+             if [ ! -d \"\$target\" ]; then target=\$(dirname \"\$target\"); fi
              if [ -d \"\$target\" ]; then
-                 # Mount parent of target to allow chown of target
                  mount_dir=\$(dirname \"\$target\")
                  base_name=\$(basename \"\$target\")
-
                  echo \"Fixing permissions on \$target via Docker...\"
                  docker run --rm -v \"\$mount_dir\":/work \"\$img\" chown -R \"\$uid:\$gid\" \"/work/\$base_name\" 2>/dev/null || true
              fi
            done
          "
-
          if printf "%s" "$remote_script" | ssh "${SSH_OPTS[@]}" "$ip" "bash -s"; then
              if ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs"; then
                  printf "Permissions fixed via Docker. mkdir succeeded.\n"
                  return 0
              fi
          fi
-
          printf "Error: Cannot create directories and passwordless sudo is not available.\n" >&2
-         printf "Please ensure user has permissions to create: %s\n" "$dirs" >&2
          exit 1
      fi
   fi
 }
 
 # Internal: Generate Heuristic Conversion Script (Python)
-function _generate_converter_script() {
+# Arguments: $1 ip, $2 path
+function generate_trt_converter_script() {
   local ip="$1"
   local path="$2"
-
-  # We write the python script to a temp file then cat it to remote
-  # This script attempts to find the correct convert_checkpoint.py based on config.json
 
   local temp_script
   temp_script=$(mktemp)
@@ -884,9 +887,6 @@ def main():
            "--tp_size", str(args.tp_size),
            "--pp_size", str(args.pp_size)]
 
-    # Add dtype defaults if needed (many scripts default to float16)
-    # If the user supplied extra arguments, we might need them, but here we keep it simple.
-
     print(f"[Exec] {' '.join(cmd)}")
     subprocess.check_call(cmd)
 
@@ -899,28 +899,80 @@ PYTHON_SCRIPT
   rm -f "$temp_script"
 }
 
-# Internal: Build TRT Engine (TRT-LLM Mode Only)
-function _ensure_trt_engine() {
-  if [[ "$USE_TRT_LLM" -eq 0 ]]; then return; fi
+# Internal: Download HF Model
+# Arguments: $1 ip, $2 model_id, $3 container_model_path, $4 host_model_base, $5 container_model_base
+function download_hf_model() {
+  local ip="$1"
+  local model_id="$2"
+  local ctr_path="$3"
+  local host_base="$4"
+  local ctr_base="$5"
 
+  local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks=False"
+
+  ssh "${SSH_OPTS[@]}" "$ip" \
+    "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
+}
+
+# Internal: Compile TRT Engine
+# Arguments: $1 ip, $2 ctr_engine_path, $3 ctr_model_path, $4 host_engine_base, $5 host_model_base, $6 ctr_engine_base, $7 ctr_model_base, $8 host_engine_path
+function compile_trt_engine() {
+  local ip="$1"
+  local ctr_engine_path="$2"
+  local ctr_model_path="$3"
+  local host_engine_base="$4"
+  local host_model_base="$5"
+  local ctr_engine_base="$6"
+  local ctr_model_base="$7"
+  local host_engine_path="$8"
+
+  local quant_flags=""
+  if [[ "$QUANT_OVERRIDE" == "fp8" ]]; then quant_flags="--use_fp8_context_fmha enable"; fi
+
+  local ckpt_dir="$ctr_engine_path/ckpt"
+
+  generate_trt_converter_script "$ip" "$host_engine_path/convert_heuristic.py"
+
+  local convert_cmd="python3 $ctr_engine_path/convert_heuristic.py --model_dir $ctr_model_path --output_dir $ckpt_dir --tp_size $TP_SIZE --pp_size $PP_SIZE"
+
+  local build_cmd="trtllm-build --checkpoint_dir $ckpt_dir --output_dir $ctr_engine_path --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
+
+  ssh "${SSH_OPTS[@]}" "$ip" \
+     "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$convert_cmd && $build_cmd && rm -rf $ckpt_dir'"
+}
+
+# Internal: Sync Engine to Worker
+# Arguments: $1 source_ip, $2 target_ip, $3 host_engine_path
+function sync_engine_to_worker() {
+  local src_ip="$1"
+  local tgt_ip="$2"
+  local path="$3"
+
+  _remote_mkdir "$tgt_ip" "$path"
+  ssh "${SSH_OPTS[@]}" "$src_ip" "tar -cf - -C $path . | pigz -1" | \
+      ssh "${SSH_OPTS[@]}" "$tgt_ip" "pigz -d | tar -xf - -C $path"
+}
+
+# Internal: Orchestrate TRT Engine Build
+# Arguments: None
+# Globals: USE_TRT_LLM, HF_MODEL_ID, TRT_ENGINE_DIR, TRT_MODEL_DIR, IP1, IP2, IMAGE
+function ensure_trt_engine() {
+  if [[ "$USE_TRT_LLM" -eq 0 ]]; then return; fi
   _check_hf_token
 
   if [[ "$DRY_RUN" -eq 1 ]]; then
-      printf "DRY RUN: Checking/Building TRT Engine (Skipping actual build)...\n"
-      printf "Would execute: trtllm-build --checkpoint_dir /models/... --output_dir /engines/... \n"
+      printf "DRY RUN: Checking/Building TRT Engine...\n"
       return
   fi
   set -x
   local safe_model_id
   safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
 
-  # Host paths (for mkdir, existence checks, and tar)
   local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
   local host_model_base="${TRT_MODEL_DIR:-~/models}"
   local host_engine_path="$host_engine_base/$safe_model_id"
   local host_model_path="$host_model_base/$safe_model_id"
 
-  # Container paths (Fixed standard paths inside container)
   local ctr_model_base="/models"
   local ctr_engine_base="/engines"
   local ctr_model_path="$ctr_model_base/$safe_model_id"
@@ -928,61 +980,33 @@ function _ensure_trt_engine() {
 
   printf "Checking for TRT-LLM Engine at %s (on Head Node)...\n" "$host_engine_path"
 
-  # Check if engine exists on Head
   if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
       printf "Engine found. Skipping build.\n"
   else
       printf "Engine not found. Initiating Build Process on Head Node...\n"
-
-      # 1. Download Model
       printf "Downloading model %s from Hugging Face...\n" "$HF_MODEL_ID"
       _remote_mkdir "$IP1" "$host_model_path $host_engine_path"
 
-      # Use the container to download
-      # Ensure huggingface-cli is available (prefer over 'hf' which may be incompatible)
-      # Fix: Escaped quoting for huggingface_hub[cli] and argument usage
-      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; huggingface-cli download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks=False"
-      ssh "${SSH_OPTS[@]}" "$IP1" \
-        "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_model_base:$ctr_model_base $IMAGE bash -c '$dl_cmd'"
+      download_hf_model "$IP1" "$HF_MODEL_ID" "$ctr_model_path" "$host_model_base" "$ctr_model_base"
 
-      # 2. Build Engine
       printf "Building Engine (TP=%s)...\n" "$TP_SIZE"
-      local quant_flags=""
-      if [[ "$QUANT_OVERRIDE" == "fp8" ]]; then quant_flags="--use_fp8_context_fmha enable"; fi
-
-      # Assuming trtllm-build is in path or we use python script
-      # New TRT-LLM uses 'trtllm-build' command
-      # Step 2a: Convert Checkpoint (Required for TRT-LLM v0.9+)
-      local ckpt_dir="$ctr_engine_path/ckpt"
-
-      # Generate helper script on head node
-      _generate_converter_script "$IP1" "$host_engine_path/convert_heuristic.py"
-
-      local convert_cmd="python3 $ctr_engine_path/convert_heuristic.py --model_dir $ctr_model_path --output_dir $ckpt_dir --tp_size $TP_SIZE --pp_size $PP_SIZE"
-
-      # Step 2b: Build Engine
-      local build_cmd="trtllm-build --checkpoint_dir $ckpt_dir --output_dir $ctr_engine_path --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
-
-      # Chained execution with cleanup
-      ssh "${SSH_OPTS[@]}" "$IP1" \
-         "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$convert_cmd && $build_cmd && rm -rf $ckpt_dir'"
+      compile_trt_engine "$IP1" "$ctr_engine_path" "$ctr_model_path" "$host_engine_base" "$host_model_base" "$ctr_engine_base" "$ctr_model_base" "$host_engine_path"
 
       printf "Engine build complete.\n"
   fi
 
-  # 3. Distribute Engine (Simple Copy)
   printf "Syncing engine to Worker Node...\n"
-  # Using simple tar pipe over SSH (assuming high bandwidth or small engine config, though engines are large)
-  # Ideally engines should be on shared storage. If not, we copy.
-  _remote_mkdir "$IP2" "$host_engine_path"
-  ssh "${SSH_OPTS[@]}" "$IP1" "tar -cf - -C $host_engine_path . | pigz -1" | \
-      ssh "${SSH_OPTS[@]}" "$IP2" "pigz -d | tar -xf - -C $host_engine_path"
+  sync_engine_to_worker "$IP1" "$IP2" "$host_engine_path"
   printf "Engine synced.\n"
 
   if [[ "$DRY_RUN" -eq 0 ]]; then set +x; fi
 }
 
-# Internal: Cleanup
+# ==============================================================================
+# 5. Runtime & Orchestration Module
+# ==============================================================================
+
+# Internal: Cleanup existing containers
 function _cleanup_existing_containers() {
   printf "[3/5] Cleaning up...\n"
   for ip in "$IP1" "$IP2"; do
@@ -990,7 +1014,7 @@ function _cleanup_existing_containers() {
   done
 }
 
-# Prepare ENV vars for network
+# Internal: Get NCCL Options
 function _get_nccl_opts() {
   local ifaces="$1"
   local opts="-e NCCL_IB_DISABLE=0 -e NCCL_IB_GID_INDEX=${NCCL_IB_GID_INDEX:-3} -e NCCL_CROSS_NIC=1"
@@ -1004,91 +1028,106 @@ function _get_nccl_opts() {
   printf "%s" "$opts"
 }
 
-# Internal: Launch
-function _launch_distributed_service() {
+# Internal: Setup MPI SSH Keys
+function setup_mpi_ssh_keys() {
+  local ip1="$1"
+  local ip2="$2"
+  if [[ "$DRY_RUN" -eq 0 ]]; then
+      printf "Generating SSH keys for MPI...\n"
+      _remote_mkdir "$ip1" "~/.ssh-trt"
+      ssh "${SSH_OPTS[@]}" "$ip1" "ssh-keygen -t rsa -f ~/.ssh-trt/id_rsa -N '' && cat ~/.ssh-trt/id_rsa.pub > ~/.ssh-trt/authorized_keys"
+      _remote_mkdir "$ip2" "~/.ssh-trt"
+      ssh "${SSH_OPTS[@]}" "$ip1" "cat ~/.ssh-trt/id_rsa" | ssh "${SSH_OPTS[@]}" "$ip2" "cat > ~/.ssh-trt/id_rsa && chmod 600 ~/.ssh-trt/id_rsa"
+      ssh "${SSH_OPTS[@]}" "$ip1" "cat ~/.ssh-trt/id_rsa.pub" | ssh "${SSH_OPTS[@]}" "$ip2" "cat > ~/.ssh-trt/id_rsa.pub"
+      ssh "${SSH_OPTS[@]}" "$ip1" "cat ~/.ssh-trt/authorized_keys" | ssh "${SSH_OPTS[@]}" "$ip2" "cat > ~/.ssh-trt/authorized_keys"
+  fi
+}
+
+# Internal: Generate TRT-LLM Run Command
+function generate_trt_run_command() {
+  local role="$1" # worker or head
+  local container_name="$2"
+  local net_args="$3"
+  local mounts="$4"
+
+  local safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
+  local engine_path="/engines/$safe_model_id"
+  local hf_env=""
+  if [[ -n "${HF_TOKEN:-}" ]]; then hf_env="-e HF_TOKEN=$HF_TOKEN"; fi
+
+  if [[ "$role" == "worker" ]]; then
+      local ssh_start_cmd="(service ssh start || /usr/sbin/sshd) && sleep infinity"
+      local net_opts=$(_get_nccl_opts "$IFACES2")
+      printf "docker run -d --name %s %s %s %s --gpus all %s %s bash -c '%s'" \
+        "$container_name" "$net_args" "$net_opts" "$hf_env" "$mounts" "$IMAGE" "$ssh_start_cmd"
+  else
+      local serve_cmd="mpirun --allow-run-as-root -n $TP_SIZE -H $IP1:1,$IP2:1 python3 -m tensorrt_llm.serve --model_repo $engine_path --port 8000 --host 0.0.0.0"
+      local ssh_start_head="(service ssh start || /usr/sbin/sshd) && $serve_cmd"
+      local net_opts=$(_get_nccl_opts "$IFACES1")
+      printf "docker run -d --name %s %s %s %s --gpus all %s %s bash -c '%s'" \
+        "$container_name" "$net_args" "$net_opts" "$hf_env" "$mounts" "$IMAGE" "$ssh_start_head"
+  fi
+}
+
+# Internal: Generate NIM Run Command
+function generate_nim_run_command() {
+  local role="$1" # worker or head
+  local container_name="$2"
+  local net_args="$3"
+  local mounts="$4"
+
+  local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e NIM_HTTP_API_PORT=8000"
+  nim_env="$nim_env -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
+  if [[ -n "${HF_TOKEN:-}" ]]; then nim_env="$nim_env -e HF_TOKEN=$HF_TOKEN"; fi
+  nim_env="$nim_env $EXTRA_NIM_ENV"
+
+  local node_rank=0
+  local net_opts=""
+  if [[ "$role" == "worker" ]]; then
+      node_rank=1
+      net_opts=$(_get_nccl_opts "$IFACES2")
+  else
+      net_opts=$(_get_nccl_opts "$IFACES1")
+  fi
+
+  printf "docker run -d --name %s %s %s --gpus all %s %s -e NIM_NODE_RANK=%d %s" \
+      "$container_name" "$net_args" "$net_opts" "$mounts" "$nim_env" "$node_rank" "$IMAGE"
+}
+
+# Internal: Launch Distributed Service
+function launch_distributed_service() {
   printf "[4/5] Launching Service...\n"
 
-  # Common Mounts
   local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
   local host_model_base="${TRT_MODEL_DIR:-~/models}"
   local mounts="-v ~/.cache:/root/.cache -v $host_model_base:/models -v $host_engine_base:/engines"
   local net_args="$PLATFORM_ARG --runtime=nvidia --network host --ipc=host --shm-size=16g --ulimit memlock=-1"
   local container_name="nim-distributed"
 
+  local worker_cmd=""
+  local head_cmd=""
+
   if [[ "$USE_TRT_LLM" -eq 1 ]]; then
       container_name="trt-llm-distributed"
-      local safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
-      local engine_path="/engines/$safe_model_id"
-      local hf_env=""
-      if [[ -n "${HF_TOKEN:-}" ]]; then hf_env="-e HF_TOKEN=$HF_TOKEN"; fi
-
-      # Generate SSH Keys for MPI
-      if [[ "$DRY_RUN" -eq 0 ]]; then
-          printf "Generating SSH keys for MPI...\n"
-          _remote_mkdir "$IP1" "~/.ssh-trt"
-          ssh "${SSH_OPTS[@]}" "$IP1" "ssh-keygen -t rsa -f ~/.ssh-trt/id_rsa -N '' && cat ~/.ssh-trt/id_rsa.pub > ~/.ssh-trt/authorized_keys"
-          # Copy to worker
-          _remote_mkdir "$IP2" "~/.ssh-trt"
-          ssh "${SSH_OPTS[@]}" "$IP1" "cat ~/.ssh-trt/id_rsa" | ssh "${SSH_OPTS[@]}" "$IP2" "cat > ~/.ssh-trt/id_rsa && chmod 600 ~/.ssh-trt/id_rsa"
-          ssh "${SSH_OPTS[@]}" "$IP1" "cat ~/.ssh-trt/id_rsa.pub" | ssh "${SSH_OPTS[@]}" "$IP2" "cat > ~/.ssh-trt/id_rsa.pub"
-          ssh "${SSH_OPTS[@]}" "$IP1" "cat ~/.ssh-trt/authorized_keys" | ssh "${SSH_OPTS[@]}" "$IP2" "cat > ~/.ssh-trt/authorized_keys"
-      fi
-
+      setup_mpi_ssh_keys "$IP1" "$IP2"
       mounts="$mounts -v ~/.ssh-trt:/root/.ssh"
 
-      # Commands
-      # Worker: Start SSHD (Robust check)
-      local ssh_start_cmd="(service ssh start || /usr/sbin/sshd) && sleep infinity"
-
-      local net_opts_2
-      net_opts_2=$(_get_nccl_opts "$IFACES2")
-      local worker_cmd="docker run -d --name $container_name $net_args $net_opts_2 $hf_env --gpus all $mounts $IMAGE bash -c '$ssh_start_cmd'"
-
-      # Head: Start SSHD then Run MPI
-      # We use python3 -m tensorrt_llm.serve if available
-      local serve_cmd="mpirun --allow-run-as-root -n $TP_SIZE -H $IP1:1,$IP2:1 python3 -m tensorrt_llm.serve --model_repo $engine_path --port 8000 --host 0.0.0.0"
-      local ssh_start_head="(service ssh start || /usr/sbin/sshd) && $serve_cmd"
-
-      local net_opts_1
-      net_opts_1=$(_get_nccl_opts "$IFACES1")
-      local head_cmd="docker run -d --name $container_name $net_args $net_opts_1 $hf_env --gpus all $mounts $IMAGE bash -c '$ssh_start_head'"
-
-      if [[ "$DRY_RUN" -eq 1 ]]; then
-         printf "Worker: %s\nHead: %s\n" "$worker_cmd" "$head_cmd"
-         return
-      fi
-
-      ssh "${SSH_OPTS[@]}" "$IP2" "$worker_cmd"
-      sleep 5
-      ssh "${SSH_OPTS[@]}" "$IP1" "$head_cmd"
-
+      worker_cmd=$(generate_trt_run_command "worker" "$container_name" "$net_args" "$mounts")
+      head_cmd=$(generate_trt_run_command "head" "$container_name" "$net_args" "$mounts")
   else
-      # NIM Workflow (Existing)
-      local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e NIM_HTTP_API_PORT=8000"
-      # Extra NIM Env for Bindings
-      nim_env="$nim_env -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
-      if [[ -n "${HF_TOKEN:-}" ]]; then nim_env="$nim_env -e HF_TOKEN=$HF_TOKEN"; fi
-      nim_env="$nim_env $EXTRA_NIM_ENV"
-
-      local net_opts_2
-      net_opts_2=$(_get_nccl_opts "$IFACES2")
-      local worker_cmd="docker run -d --name $container_name $net_args $net_opts_2 --gpus all $mounts $nim_env -e NIM_NODE_RANK=1 $IMAGE"
-
-      local net_opts_1
-      net_opts_1=$(_get_nccl_opts "$IFACES1")
-      local head_cmd="docker run -d --name $container_name $net_args $net_opts_1 --gpus all $mounts $nim_env -e NIM_NODE_RANK=0 $IMAGE"
-
-       if [[ "$DRY_RUN" -eq 1 ]]; then
-         printf "Worker: %s\nHead: %s\n" "$worker_cmd" "$head_cmd"
-         return
-      fi
-
-      ssh "${SSH_OPTS[@]}" "$IP2" "$worker_cmd"
-      sleep 5
-      ssh "${SSH_OPTS[@]}" "$IP1" "$head_cmd"
+      worker_cmd=$(generate_nim_run_command "worker" "$container_name" "$net_args" "$mounts")
+      head_cmd=$(generate_nim_run_command "head" "$container_name" "$net_args" "$mounts")
   fi
 
-  # Monitor
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+      printf "Worker: %s\nHead: %s\n" "$worker_cmd" "$head_cmd"
+      return
+  fi
+
+  ssh "${SSH_OPTS[@]}" "$IP2" "$worker_cmd"
+  sleep 5
+  ssh "${SSH_OPTS[@]}" "$IP1" "$head_cmd"
+
   ssh "${SSH_OPTS[@]}" "$IP1" "docker logs -f $container_name" &
 }
 
@@ -1119,7 +1158,67 @@ function _wait_for_service() {
   return 1
 }
 
+# Internal: Parse arguments
+function _parse_arguments() {
+  while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+      --dry-run) DRY_RUN=1; shift ;;
+      --force) FORCE=1; shift ;;
+      --quant)
+        if [[ -z "${2:-}" ]]; then printf "Error: --quant requires argument\n" >&2; exit 1; fi
+        QUANT_OVERRIDE="$2"; shift 2 ;;
+      --engine)
+        if [[ -z "${2:-}" ]]; then printf "Error: --engine requires argument\n" >&2; exit 1; fi
+        ENGINE_OVERRIDE="$2"; shift 2 ;;
+      --image)
+        if [[ -z "${2:-}" ]]; then printf "Error: --image requires argument\n" >&2; exit 1; fi
+        IMAGE_OVERRIDE="$2"; shift 2 ;;
+      --batch-size) BATCH_SIZE="$2"; shift 2 ;;
+      --max-seq-len) MAX_SEQ_LEN="$2"; shift 2 ;;
+      --wandb-key) WANDB_KEY="$2"; shift 2 ;;
+      --speculative) SPECULATIVE_MODE=1; shift ;;
+      -*) printf "Error: Unknown option %s\n" "$1" >&2; exit 1 ;;
+      *) break ;;
+    esac
+  done
+
+  if [[ "$#" -eq 1 && "$1" == "stop" ]]; then
+    MODE="stop"
+  elif [[ "$#" -eq 1 && "$1" == "start" ]]; then
+    MODE="start"
+  elif [[ "$#" -ge 2 && "$#" -le 3 ]]; then
+    MODE="setup"
+  else
+    printf "Usage:\n"
+    printf "  %s [OPTIONS] <IP1> <IP2> [<MODEL_NAME|HF_URL>]  (First run / Setup)\n" "$0"
+    printf "  %s [OPTIONS] start                              (Start using saved config)\n" "$0"
+    printf "  %s [OPTIONS] stop                               (Stop using saved config)\n" "$0"
+    printf "\nOptions:\n"
+    printf "  --dry-run             Print commands without executing\n"
+    printf "  --force               Bypass safety checks\n"
+    printf "  --quant <fmt>         Force quantization (fp4, fp8, int8)\n"
+    printf "  --engine <name>       Backend engine (vllm, trt-llm)\n"
+    printf "  --image <name>        Custom Docker image override\n"
+    printf "  --batch-size <n>      Max batch size (default: 128)\n"
+    printf "  --max-seq-len <n>     Max sequence length (default: 2048)\n"
+    exit 1
+  fi
+
+  if [[ "$MODE" == "stop" ]]; then
+    _read_config
+  elif [[ "$MODE" == "start" ]]; then
+    _read_config
+  elif [[ "$MODE" == "setup" ]]; then
+    IP1="$1"
+    IP2="$2"
+    MODEL_ARG="${3:-"meta/llama-3.1-70b-instruct"}"
+    _write_config
+  fi
+}
+
+# ==============================================================================
 # Main
+# ==============================================================================
 function main() {
   _check_dependencies
   _parse_arguments "$@"
@@ -1133,17 +1232,24 @@ function main() {
   _validate_ip "$IP2"
   _check_api_key
 
-  _configure_model
-  _check_vram_requirements "$PARAMS"
+  parse_model_config
+  check_vram_requirements "$PARAMS"
   _detect_architecture
-  _detect_network
-  _verify_connectivity
-  _ensure_image_present
+  detect_network_config
+  # Connectivity check reused from previous logic? It was inline. Let's add it back.
+  printf "[2/5] Verifying connectivity...\n"
+  for ip in "$IP1" "$IP2"; do
+    if ! ssh "${SSH_OPTS[@]}" "$ip" "nvidia-smi > /dev/null"; then
+      printf "Error: Connectivity failed to %s.\n" "$ip" >&2; exit 1
+    fi
+  done
+
+  ensure_image_present
   _align_platform_with_image
 
-  _ensure_trt_engine
+  ensure_trt_engine
   _cleanup_existing_containers
-  _launch_distributed_service
+  launch_distributed_service
   _wait_for_service "$IP1"
 }
 
