@@ -351,12 +351,12 @@ function parse_model_config() {
 function _get_node_vram() {
   local ip="$1"
   local cmd="export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/usr/bin:/sbin:/bin:\$PATH; \
-             if ! command -v nvidia-smi &>/dev/null; then exit 1; fi; \
+             if ! command -v nvidia-smi &>/dev/null; then echo 'NVIDIA_SMI_NOT_FOUND'; exit 1; fi; \
              nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
 
   local out
-  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" 2>/dev/null); then
-      printf "Warning: nvidia-smi failed or not found on %s. Returning 0 VRAM.\n" "$ip" >&2
+  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd"); then
+      printf "Warning: nvidia-smi failed on %s. Output: %s\n" "$ip" "$out" >&2
       printf "0\n"
       return
   fi
@@ -366,6 +366,14 @@ function _get_node_vram() {
       printf "0\n"
       return
   fi
+
+  # Validate numeric output (multi-gpu output is newline separated numbers)
+  if ! [[ "$out" =~ ^[0-9[:space:]]+$ ]]; then
+      printf "Warning: nvidia-smi returned non-numeric output on %s: %s\n" "$ip" "$out" >&2
+      printf "0\n"
+      return
+  fi
+
   # Sum up (multi-gpu)
   printf "%s\n" "$out" | awk '{s+=$1} END {print s+0}'
 }
@@ -908,7 +916,7 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  local dl_cmd="if ! command -v huggingface-cli &>/dev/null && ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; if command -v hf &>/dev/null; then hf download $model_id --local-dir $ctr_path --local-dir-use-symlinks=False; else huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks=False; fi"
+  local dl_cmd="if ! command -v huggingface-cli &>/dev/null && ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; if command -v hf &>/dev/null; then hf download $model_id --local-dir $ctr_path --local-dir-use-symlinks False; else huggingface-cli download $model_id --local-dir $ctr_path --local-dir-use-symlinks False; fi"
 
   ssh "${SSH_OPTS[@]}" "$ip" \
     "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
