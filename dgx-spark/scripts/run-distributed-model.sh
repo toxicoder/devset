@@ -606,7 +606,8 @@ function _ensure_trt_engine() {
       ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p $model_path $engine_path"
 
       # Use the container to download
-      local dl_cmd="huggingface-cli download $HF_MODEL_ID --local-dir $model_path --local-dir-use-symlinks False"
+      # Ensure huggingface-cli is available
+      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U huggingface_hub[cli]; fi; huggingface-cli download $HF_MODEL_ID --local-dir $model_path --local-dir-use-symlinks False"
       ssh "${SSH_OPTS[@]}" "$IP1" \
         "docker run --rm -e HF_TOKEN=$HF_TOKEN -v /models:/models $IMAGE bash -c '$dl_cmd'"
 
@@ -670,6 +671,8 @@ function _launch_distributed_service() {
       container_name="trt-llm-distributed"
       local safe_model_id=$(echo "$HF_MODEL_ID" | tr '/' '--')
       local engine_path="/engines/$safe_model_id"
+      local hf_env=""
+      if [[ -n "${HF_TOKEN:-}" ]]; then hf_env="-e HF_TOKEN=$HF_TOKEN"; fi
 
       # Generate SSH Keys for MPI
       if [[ "$DRY_RUN" -eq 0 ]]; then
@@ -690,7 +693,7 @@ function _launch_distributed_service() {
 
       local net_opts_2
       net_opts_2=$(_get_nccl_opts "$IFACES2")
-      local worker_cmd="docker run -d --name $container_name $net_args $net_opts_2 --gpus all $mounts $IMAGE bash -c '$ssh_start_cmd'"
+      local worker_cmd="docker run -d --name $container_name $net_args $net_opts_2 $hf_env --gpus all $mounts $IMAGE bash -c '$ssh_start_cmd'"
 
       # Head: Start SSHD then Run MPI
       # We use python3 -m tensorrt_llm.serve if available
@@ -699,7 +702,7 @@ function _launch_distributed_service() {
 
       local net_opts_1
       net_opts_1=$(_get_nccl_opts "$IFACES1")
-      local head_cmd="docker run -d --name $container_name $net_args $net_opts_1 --gpus all $mounts $IMAGE bash -c '$ssh_start_head'"
+      local head_cmd="docker run -d --name $container_name $net_args $net_opts_1 $hf_env --gpus all $mounts $IMAGE bash -c '$ssh_start_head'"
 
       if [[ "$DRY_RUN" -eq 1 ]]; then
          printf "Worker: %s\nHead: %s\n" "$worker_cmd" "$head_cmd"
@@ -715,6 +718,7 @@ function _launch_distributed_service() {
       local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e NIM_HTTP_API_PORT=8000"
       # Extra NIM Env for Bindings
       nim_env="$nim_env -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
+      if [[ -n "${HF_TOKEN:-}" ]]; then nim_env="$nim_env -e HF_TOKEN=$HF_TOKEN"; fi
       nim_env="$nim_env $EXTRA_NIM_ENV"
 
       local net_opts_2

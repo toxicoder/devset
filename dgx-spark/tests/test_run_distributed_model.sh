@@ -220,7 +220,13 @@ echo "Running test: Custom HF Model Default to TRT-LLM"
 
     if echo "$OUTPUT" | grep -q "Defaulting to TensorRT-LLM Engine Build"; then
         if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:latest"; then
-            echo "PASS"
+            if echo "$OUTPUT" | grep -q "HF_TOKEN=test-token"; then
+                echo "PASS"
+            else
+                echo "FAIL: HF_TOKEN not passed to container in TRT-LLM mode. Output:"
+                echo "$OUTPUT"
+                exit 1
+            fi
         else
              echo "FAIL: Expected TRT-LLM release image. Output:"
              echo "$OUTPUT"
@@ -229,6 +235,26 @@ echo "Running test: Custom HF Model Default to TRT-LLM"
     else
         echo "FAIL: Did not default to TRT-LLM for custom HF model. Output:"
         echo "$OUTPUT"
+        exit 1
+    fi
+)
+if [ $? -ne 0 ]; then exit 1; fi
+
+# Test 23: Verify HF_TOKEN passed in NIM/VLLM mode
+echo "Running test: Verify HF_TOKEN passed in NIM/VLLM mode"
+(
+    rm -f "$TEST_DIR/docker_run.log"
+    export NGC_API_KEY="test-key"
+    export HF_TOKEN="test-token"
+    echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "meta/llama-3.3-70b-instruct" >/dev/null
+
+    LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+
+    if echo "$LOG_CONTENT" | grep -q "HF_TOKEN=test-token"; then
+        echo "PASS"
+    else
+        echo "FAIL: HF_TOKEN not found in docker run command for NIM. Log:"
+        echo "$LOG_CONTENT"
         exit 1
     fi
 )
