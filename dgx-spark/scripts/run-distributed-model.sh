@@ -921,7 +921,7 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  local dl_cmd="if ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; hf download $model_id --local-dir $ctr_path --local-dir-use-symlinks False"
+  local dl_cmd="if ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; hf download $model_id --local-dir $ctr_path"
 
   ssh "${SSH_OPTS[@]}" "$ip" \
     "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
