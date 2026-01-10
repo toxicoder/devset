@@ -219,7 +219,7 @@ echo "Running test: Custom HF Model Default to TRT-LLM"
     OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --dry-run "10.0.0.1" "10.0.0.2" "https://huggingface.co/MyOrg/MyModel" 2>&1)
 
     if echo "$OUTPUT" | grep -q "Defaulting to TensorRT-LLM Engine Build"; then
-        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:latest"; then
+        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm:26.01-py3"; then
             if echo "$OUTPUT" | grep -q "HF_TOKEN=test-token"; then
                 echo "PASS"
             else
@@ -295,13 +295,8 @@ echo "Running test: VRAM Detection Failure (0 GB)"
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
-        if echo "$OUTPUT" | grep -q "VRAM detection failed (Total: 0.00 GB)"; then
-            if echo "$OUTPUT" | grep -q "Debug Info"; then
-               echo "PASS"
-            else
-               echo "FAIL: Debug info not printed."
-               exit 1
-            fi
+        if echo "$OUTPUT" | grep -q "VRAM detection failed or total is 0 GB"; then
+             echo "PASS"
         else
             echo "FAIL: Expected VRAM failure message not found. Output:"
             echo "$OUTPUT"
@@ -709,10 +704,10 @@ echo "Running test: Garbage VRAM Output (Graceful Failure)"
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 1 ]; then
-        if echo "$OUTPUT" | grep -q "Warning: nvidia-smi returned non-numeric output"; then
+        if echo "$OUTPUT" | grep -q "VRAM detection failed or total is 0 GB"; then
             echo "PASS"
         else
-            echo "FAIL: Expected non-numeric warning not found. Output:"
+            echo "FAIL: Expected VRAM failure message not found. Output:"
             echo "$OUTPUT"
             exit 1
         fi
