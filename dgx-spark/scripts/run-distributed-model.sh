@@ -581,11 +581,13 @@ function _align_platform_with_image() {
 function _remote_mkdir() {
   local ip="$1"
   local dirs="$2"
-  # Try normal mkdir first
-  if ! ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs 2>/dev/null"; then
-     printf "Warning: mkdir failed on %s. Attempting with sudo...\n" "$ip"
+  local out
+  # Try normal mkdir first, capturing output for debug
+  if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs" 2>&1); then
+     printf "Warning: mkdir failed on %s. Output: %s. Attempting with sudo...\n" "$ip" "$out"
      # Try with sudo and fix ownership
-     ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(whoami) $dirs"
+     # Added -t to force pseudo-terminal for sudo password prompt
+     ssh -t "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(whoami) $dirs"
   fi
 }
 
