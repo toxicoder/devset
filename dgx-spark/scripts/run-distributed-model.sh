@@ -52,6 +52,7 @@ NET_CONF_1=""
 NET_CONF_2=""
 QUANT_OVERRIDE=""
 ENGINE_OVERRIDE=""
+IMAGE_OVERRIDE=""
 BATCH_SIZE=128
 MAX_SEQ_LEN=2048
 WANDB_KEY=""
@@ -91,7 +92,7 @@ function _read_config() {
 
   # Python parsing
   local config_values
-  config_values=$(python3 -c "import sys, json; data=json.load(open(sys.argv[1])); print(f\"{data.get('ip1','')}|{data.get('ip2','')}|{data.get('model','')}|{data.get('engine','')}\")" "$CONFIG_FILE")
+  config_values=$(python3 -c "import sys, json; data=json.load(open(sys.argv[1])); print(f\"{data.get('ip1','')}|{data.get('ip2','')}|{data.get('model','')}|{data.get('engine','')}|{data.get('image','')}\")" "$CONFIG_FILE")
 
   if [[ $? -ne 0 ]]; then
      printf "Error: Failed to parse config file with python.\n" >&2
@@ -103,9 +104,14 @@ function _read_config() {
   MODEL_ARG=$(echo "$config_values" | cut -d'|' -f3)
   local saved_engine
   saved_engine=$(echo "$config_values" | cut -d'|' -f4)
+  local saved_image
+  saved_image=$(echo "$config_values" | cut -d'|' -f5)
 
   if [[ -n "$saved_engine" && -z "$ENGINE_OVERRIDE" ]]; then
     ENGINE_OVERRIDE="$saved_engine"
+  fi
+  if [[ -n "$saved_image" && -z "$IMAGE_OVERRIDE" ]]; then
+    IMAGE_OVERRIDE="$saved_image"
   fi
 
   if [[ -z "$IP1" || -z "$IP2" || -z "$MODEL_ARG" ]]; then
@@ -121,7 +127,8 @@ function _write_config() {
     "ip1": "$IP1",
     "ip2": "$IP2",
     "model": "$MODEL_ARG",
-    "engine": "$ENGINE_OVERRIDE"
+    "engine": "$ENGINE_OVERRIDE",
+    "image": "$IMAGE_OVERRIDE"
 }
 EOF
   printf "Configuration saved to %s\n" "$CONFIG_FILE"
@@ -139,6 +146,9 @@ function _parse_arguments() {
       --engine)
         if [[ -z "${2:-}" ]]; then printf "Error: --engine requires argument\n" >&2; exit 1; fi
         ENGINE_OVERRIDE="$2"; shift 2 ;;
+      --image)
+        if [[ -z "${2:-}" ]]; then printf "Error: --image requires argument\n" >&2; exit 1; fi
+        IMAGE_OVERRIDE="$2"; shift 2 ;;
       --batch-size) BATCH_SIZE="$2"; shift 2 ;;
       --max-seq-len) MAX_SEQ_LEN="$2"; shift 2 ;;
       --wandb-key) WANDB_KEY="$2"; shift 2 ;;
@@ -164,6 +174,7 @@ function _parse_arguments() {
     printf "  --force               Bypass safety checks\n"
     printf "  --quant <fmt>         Force quantization (fp4, fp8, int8)\n"
     printf "  --engine <name>       Backend engine (vllm, trt-llm)\n"
+    printf "  --image <name>        Custom Docker image override\n"
     printf "  --batch-size <n>      Max batch size (default: 128)\n"
     printf "  --max-seq-len <n>     Max sequence length (default: 2048)\n"
     exit 1
@@ -280,7 +291,18 @@ function _configure_model() {
     extra=$(echo "$model_data" | cut -d'|' -f8)
     if [[ -n "$extra" ]]; then EXTRA_NIM_ENV="$extra"; fi
   else
-    if [[ "$FORCE" -eq 1 || -n "$HF_MODEL_ID" ]]; then
+    if [[ -n "$IMAGE_OVERRIDE" ]]; then
+      # Image provided by user, assume manual configuration
+      printf "Using custom image override: %s\n" "$IMAGE_OVERRIDE"
+      IMAGE="$IMAGE_OVERRIDE"
+      if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
+    elif [[ -n "$HF_MODEL_ID" ]]; then
+      # Custom HF Model without Image -> Default to TRT-LLM
+      printf "Warning: Custom HF Model detected (%s) without corresponding NIM Image.\n" "$HF_MODEL_ID"
+      printf "Defaulting to TensorRT-LLM Engine Build (Native).\n"
+      USE_TRT_LLM=1
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+    elif [[ "$FORCE" -eq 1 ]]; then
       printf "Warning: Model '%s' not found in registry. Using as custom image.\n" "$MODEL_ARG"
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
       if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
@@ -290,10 +312,17 @@ function _configure_model() {
     fi
   fi
 
+  # Image Override (Precedence over registry unless TRT-LLM forced)
+  if [[ -n "$IMAGE_OVERRIDE" ]]; then
+    IMAGE="$IMAGE_OVERRIDE"
+  fi
+
   # Engine Override
-  if [[ "$ENGINE_OVERRIDE" == "trt-llm" ]]; then
+  if [[ "$ENGINE_OVERRIDE" == "trt-llm" || "$USE_TRT_LLM" -eq 1 ]]; then
     USE_TRT_LLM=1
-    IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+    if [[ -z "$IMAGE_OVERRIDE" ]]; then
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:latest"
+    fi
     printf "Engine Mode: TensorRT-LLM (Container: %s)\n" "$IMAGE"
     if [[ -z "$HF_MODEL_ID" ]]; then
        printf "Error: HF Model ID not found for %s. Cannot build engine.\n" "$MODEL_ARG" >&2
@@ -577,7 +606,8 @@ function _ensure_trt_engine() {
       ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p $model_path $engine_path"
 
       # Use the container to download
-      local dl_cmd="huggingface-cli download $HF_MODEL_ID --local-dir $model_path --local-dir-use-symlinks False"
+      # Ensure huggingface-cli is available
+      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U huggingface_hub[cli]; fi; huggingface-cli download $HF_MODEL_ID --local-dir $model_path --local-dir-use-symlinks False"
       ssh "${SSH_OPTS[@]}" "$IP1" \
         "docker run --rm -e HF_TOKEN=$HF_TOKEN -v /models:/models $IMAGE bash -c '$dl_cmd'"
 
@@ -641,6 +671,8 @@ function _launch_distributed_service() {
       container_name="trt-llm-distributed"
       local safe_model_id=$(echo "$HF_MODEL_ID" | tr '/' '--')
       local engine_path="/engines/$safe_model_id"
+      local hf_env=""
+      if [[ -n "${HF_TOKEN:-}" ]]; then hf_env="-e HF_TOKEN=$HF_TOKEN"; fi
 
       # Generate SSH Keys for MPI
       if [[ "$DRY_RUN" -eq 0 ]]; then
@@ -661,7 +693,7 @@ function _launch_distributed_service() {
 
       local net_opts_2
       net_opts_2=$(_get_nccl_opts "$IFACES2")
-      local worker_cmd="docker run -d --name $container_name $net_args $net_opts_2 --gpus all $mounts $IMAGE bash -c '$ssh_start_cmd'"
+      local worker_cmd="docker run -d --name $container_name $net_args $net_opts_2 $hf_env --gpus all $mounts $IMAGE bash -c '$ssh_start_cmd'"
 
       # Head: Start SSHD then Run MPI
       # We use python3 -m tensorrt_llm.serve if available
@@ -670,7 +702,7 @@ function _launch_distributed_service() {
 
       local net_opts_1
       net_opts_1=$(_get_nccl_opts "$IFACES1")
-      local head_cmd="docker run -d --name $container_name $net_args $net_opts_1 --gpus all $mounts $IMAGE bash -c '$ssh_start_head'"
+      local head_cmd="docker run -d --name $container_name $net_args $net_opts_1 $hf_env --gpus all $mounts $IMAGE bash -c '$ssh_start_head'"
 
       if [[ "$DRY_RUN" -eq 1 ]]; then
          printf "Worker: %s\nHead: %s\n" "$worker_cmd" "$head_cmd"
@@ -686,6 +718,7 @@ function _launch_distributed_service() {
       local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e NIM_HTTP_API_PORT=8000"
       # Extra NIM Env for Bindings
       nim_env="$nim_env -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
+      if [[ -n "${HF_TOKEN:-}" ]]; then nim_env="$nim_env -e HF_TOKEN=$HF_TOKEN"; fi
       nim_env="$nim_env $EXTRA_NIM_ENV"
 
       local net_opts_2
