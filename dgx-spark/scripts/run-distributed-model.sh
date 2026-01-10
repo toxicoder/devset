@@ -64,8 +64,8 @@ HF_TOKEN="${HF_TOKEN:-}"
 # TRT-LLM Specifics
 USE_TRT_LLM=0
 HF_MODEL_ID=""
-TRT_ENGINE_DIR="/engines"
-TRT_MODEL_DIR="/models"
+TRT_ENGINE_DIR="~/engines"
+TRT_MODEL_DIR="~/models"
 
 # Error handling and cleanup
 function cleanup() {
@@ -590,26 +590,36 @@ function _ensure_trt_engine() {
   fi
   local safe_model_id
   safe_model_id=$(echo "$HF_MODEL_ID" | tr '/' '--')
-  local engine_path="/engines/$safe_model_id"
-  local model_path="/models/$safe_model_id"
 
-  printf "Checking for TRT-LLM Engine at %s (on Head Node)...\n" "$engine_path"
+  # Host paths (for mkdir, existence checks, and tar)
+  local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
+  local host_model_base="${TRT_MODEL_DIR:-~/models}"
+  local host_engine_path="$host_engine_base/$safe_model_id"
+  local host_model_path="$host_model_base/$safe_model_id"
+
+  # Container paths (Fixed standard paths inside container)
+  local ctr_model_base="/models"
+  local ctr_engine_base="/engines"
+  local ctr_model_path="$ctr_model_base/$safe_model_id"
+  local ctr_engine_path="$ctr_engine_base/$safe_model_id"
+
+  printf "Checking for TRT-LLM Engine at %s (on Head Node)...\n" "$host_engine_path"
 
   # Check if engine exists on Head
-  if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $engine_path/config.json ]"; then
+  if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
       printf "Engine found. Skipping build.\n"
   else
       printf "Engine not found. Initiating Build Process on Head Node...\n"
 
       # 1. Download Model
       printf "Downloading model %s from Hugging Face...\n" "$HF_MODEL_ID"
-      ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p $model_path $engine_path"
+      ssh "${SSH_OPTS[@]}" "$IP1" "mkdir -p $host_model_path $host_engine_path"
 
       # Use the container to download
       # Ensure huggingface-cli is available
-      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U huggingface_hub[cli]; fi; huggingface-cli download $HF_MODEL_ID --local-dir $model_path --local-dir-use-symlinks False"
+      local dl_cmd="if ! command -v huggingface-cli &>/dev/null; then pip install -U huggingface_hub[cli]; fi; huggingface-cli download $HF_MODEL_ID --local-dir $ctr_model_path --local-dir-use-symlinks False"
       ssh "${SSH_OPTS[@]}" "$IP1" \
-        "docker run --rm -e HF_TOKEN=$HF_TOKEN -v /models:/models $IMAGE bash -c '$dl_cmd'"
+        "docker run --rm -e HF_TOKEN=$HF_TOKEN -v $host_model_base:$ctr_model_base $IMAGE bash -c '$dl_cmd'"
 
       # 2. Build Engine
       printf "Building Engine (TP=%s)...\n" "$TP_SIZE"
@@ -618,10 +628,10 @@ function _ensure_trt_engine() {
 
       # Assuming trtllm-build is in path or we use python script
       # New TRT-LLM uses 'trtllm-build' command
-      local build_cmd="trtllm-build --checkpoint_dir $model_path --output_dir $engine_path --tp_size $TP_SIZE --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
+      local build_cmd="trtllm-build --checkpoint_dir $ctr_model_path --output_dir $ctr_engine_path --tp_size $TP_SIZE --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
 
       ssh "${SSH_OPTS[@]}" "$IP1" \
-         "docker run --rm --gpus all -v /models:/models -v /engines:/engines $IMAGE bash -c '$build_cmd'"
+         "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$build_cmd'"
 
       printf "Engine build complete.\n"
   fi
@@ -630,9 +640,9 @@ function _ensure_trt_engine() {
   printf "Syncing engine to Worker Node...\n"
   # Using simple tar pipe over SSH (assuming high bandwidth or small engine config, though engines are large)
   # Ideally engines should be on shared storage. If not, we copy.
-  ssh "${SSH_OPTS[@]}" "$IP2" "mkdir -p $engine_path"
-  ssh "${SSH_OPTS[@]}" "$IP1" "tar -cf - -C $engine_path . | pigz -1" | \
-      ssh "${SSH_OPTS[@]}" "$IP2" "pigz -d | tar -xf - -C $engine_path"
+  ssh "${SSH_OPTS[@]}" "$IP2" "mkdir -p $host_engine_path"
+  ssh "${SSH_OPTS[@]}" "$IP1" "tar -cf - -C $host_engine_path . | pigz -1" | \
+      ssh "${SSH_OPTS[@]}" "$IP2" "pigz -d | tar -xf - -C $host_engine_path"
   printf "Engine synced.\n"
 }
 
@@ -663,7 +673,9 @@ function _launch_distributed_service() {
   printf "[4/5] Launching Service...\n"
 
   # Common Mounts
-  local mounts="-v ~/.cache:/root/.cache -v /models:/models -v /engines:/engines"
+  local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
+  local host_model_base="${TRT_MODEL_DIR:-~/models}"
+  local mounts="-v ~/.cache:/root/.cache -v $host_model_base:/models -v $host_engine_base:/engines"
   local net_args="$PLATFORM_ARG --runtime=nvidia --network host --ipc=host --shm-size=16g --ulimit memlock=-1"
   local container_name="nim-distributed"
 
