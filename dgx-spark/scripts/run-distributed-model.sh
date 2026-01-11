@@ -124,9 +124,36 @@ function _check_hf_token() {
   fi
 }
 
+# Internal: Check passwordless sudo on remote nodes
+# Arguments: None
+# Globals: IP1, IP2, SSH_OPTS
+function _check_remote_sudo() {
+  printf "[Check] Verifying passwordless sudo access...\n"
+  for ip in "$IP1" "$IP2"; do
+    if ! ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true 2>/dev/null"; then
+      printf "Error: Passwordless sudo check failed for %s.\n" "$ip" >&2
+      printf "Please ensure the user has sudo privileges without password (NOPASSWD in sudoers).\n" >&2
+      exit 1
+    fi
+  done
+  printf "  [+] Sudo access verified.\n"
+}
+
 # ==============================================================================
 # 1. Configuration & Registry Module
 # ==============================================================================
+
+# Internal: Get JSON value from config file
+# Arguments: $1 key
+function json_get() {
+    local key="$1"
+    # FIXED: Added robust error handling and removed blind error suppression
+    # FIXED: Security improvement to pass config file as argument
+    if ! python3 -c "import sys, json; print(json.load(open(sys.argv[1])).get(sys.argv[2], ''))" "$CONFIG_FILE" "$key"; then
+        printf "Error: Failed to parse JSON key '%s' from config.\n" "$key" >&2
+        exit 1
+    fi
+}
 
 # Internal: Read configuration from file
 # Arguments: None
@@ -137,22 +164,13 @@ function _read_config() {
     exit 1
   fi
 
-  # Python parsing
-  local config_values
-  config_values=$(python3 -c "import sys, json; data=json.load(open(sys.argv[1])); print(f\"{data.get('ip1','')}|{data.get('ip2','')}|{data.get('model','')}|{data.get('engine','')}|{data.get('image','')}\")" "$CONFIG_FILE")
-
-  if [[ $? -ne 0 ]]; then
-     printf "Error: Failed to parse config file with python.\n" >&2
-     exit 1
-  fi
-
-  IP1=$(printf "%s" "$config_values" | cut -d'|' -f1)
-  IP2=$(printf "%s" "$config_values" | cut -d'|' -f2)
-  MODEL_ARG=$(printf "%s" "$config_values" | cut -d'|' -f3)
+  IP1=$(json_get "ip1")
+  IP2=$(json_get "ip2")
+  MODEL_ARG=$(json_get "model")
   local saved_engine
-  saved_engine=$(printf "%s" "$config_values" | cut -d'|' -f4)
+  saved_engine=$(json_get "engine")
   local saved_image
-  saved_image=$(printf "%s" "$config_values" | cut -d'|' -f5)
+  saved_image=$(json_get "image")
 
   if [[ -n "$saved_engine" && -z "$ENGINE_OVERRIDE" ]]; then
     ENGINE_OVERRIDE="$saved_engine"
@@ -186,36 +204,14 @@ EOF
 # Internal: Get Model Registry Data
 # Format: ModelID|ImageTag|TP|PP|DefaultQuant|Params(B)|IsVision|ExtraEnv|HF_ID
 # Arguments: None
-# Globals: None
+# Globals: SCRIPT_DIR
 function get_model_registry_data() {
-  cat <<EOF
-reasoning-1|deepseek-ai/deepseek-r1|2|1|fp4|671|0|-e NIM_MODEL_PROFILE=deepseek-r1|deepseek-ai/DeepSeek-R1
-reasoning-2|alibaba/qwen3-30b-thinking|2|1|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER|Qwen/Qwen2.5-32B-Instruct
-reasoning-3|microsoft/phi-4-reasoning|1|1|fp16|14|0||microsoft/phi-4
-mega-1|meta/llama-4-405b-instruct|2|1|fp4|405|0||meta-llama/Llama-4-405b-Instruct
-mega-2|meta/llama-3.1-405b-instruct|2|1|fp4|405|0||meta-llama/Meta-Llama-3.1-405B-Instruct
-mega-3|deepseek-ai/deepseek-v3|2|1|fp4|671|0|-e NIM_MODEL_PROFILE=deepseek-v3|deepseek-ai/DeepSeek-V3
-mega-4|nvidia/nemotron-4-340b-instruct|2|1|fp4|340|0||nvidia/Nemotron-4-340B-Instruct
-large-1|mistralai/mistral-large-2411|2|1|fp8|123|0||mistralai/Mistral-Large-Instruct-2411
-large-2|alibaba/qwen3-235b-moe-instruct|2|1|fp4|235|0||Qwen/Qwen2.5-235B-Instruct
-large-3|meta/llama-3.2-90b-vision-instruct|2|1|fp8|90|1||meta-llama/Llama-3.2-90B-Vision-Instruct
-large-4|cohere/command-r-plus-08-2024|2|1|fp16|104|0||CohereForAI/c4ai-command-r-plus-08-2024
-workhorse-1|meta/llama-3.3-70b-instruct|2|1|fp16|70|0||meta-llama/Llama-3.3-70B-Instruct
-workhorse-2|meta/llama-4-maverick-instruct|2|1|fp16|70|0||meta-llama/Llama-4-70b-Instruct
-workhorse-3|alibaba/qwen2.5-72b-instruct|2|1|fp16|72|0||Qwen/Qwen2.5-72B-Instruct
-workhorse-4|nvidia/llama-3.1-nemotron-70b-instruct|2|1|fp16|70|0||nvidia/Llama-3.1-Nemotron-70B-Instruct
-workhorse-5|mistralai/pixtral-large-2411|2|1|fp8|124|1||mistralai/Pixtral-Large-Instruct-2411
-coding-1|deepseek-ai/deepseek-coder-v2-instruct|2|1|fp4|236|0||deepseek-ai/DeepSeek-Coder-V2-Instruct
-coding-2|mistralai/codestral-2501|1|1|fp16|22|0||mistralai/Codestral-22B-v0.1
-efficient-1|meta/llama-4-scout-instruct|1|1|fp16|15|0||meta-llama/Llama-4-15b-Instruct
-efficient-2|google/gemma-3-27b-it|2|1|fp16|27|1||google/gemma-2-27b-it
-efficient-3|microsoft/phi-4-mini-instruct|1|1|fp16|14|0||microsoft/Phi-4-mini-4k-instruct
-efficient-4|google/gemma-2-27b-it|2|1|fp16|27|0||google/gemma-2-27b-it
-efficient-5|nvidia/nemotron-3-nano-30b-a3b|1|2|fp16|30|0|-e VLLM_ATTENTION_BACKEND=FLASHINFER -e NIM_TAGS_SELECTOR=precision=bf16|nvidia/nemotron-3-nano-30b-a3b
-special-1|allenai/molmo-72b-0924|2|1|fp16|72|1||allenai/Molmo-72B-0924
-special-2|nvidia/nemotron-super-49b-reward|2|1|fp16|49|0||nvidia/Nemotron-Super-49B-Reward
-special-3|meta/llama-guard-3-8b|1|1|fp16|8|0||meta-llama/Llama-Guard-3-8B
-EOF
+  if [[ -f "$SCRIPT_DIR/models.db" ]]; then
+    cat "$SCRIPT_DIR/models.db"
+  else
+    printf "Error: Model registry not found at %s/models.db\n" "$SCRIPT_DIR" >&2
+    exit 1
+  fi
 }
 
 # Internal: Parse Model Configuration and set Globals
@@ -370,9 +366,9 @@ function _get_node_vram() {
   fi
 
   # FIXED: Parse output to extract only numbers, handling multi-GPU output by summing
-  # Use sed to strip non-numeric characters (keeping newlines) then grep only pure numbers
+  # Refactored to use tr instead of sed to strictly match memory instructions and robustness
   local total_mem
-  total_mem=$(printf "%s" "$out" | sed 's/[^0-9\n]//g' | grep -E '^[0-9]+$' | awk '{s+=$1} END {print s+0}')
+  total_mem=$(printf "%s" "$out" | tr -d '\r' | grep -E '^[0-9]+$' | awk '{s+=$1} END {print s+0}')
 
   if [[ -z "$total_mem" || "$total_mem" -eq 0 ]]; then
       printf "Warning: Could not detect VRAM on %s (nvidia-smi failed or returned 0). Assuming 0.\n" "$ip" >&2
@@ -1324,10 +1320,6 @@ function main() {
   _validate_ip "$IP2"
   _check_api_key
 
-  parse_model_config
-  check_vram_requirements "$PARAMS"
-  _detect_architecture
-  detect_network_config
   # Connectivity check reused from previous logic? It was inline. Let's add it back.
   printf "[2/5] Verifying connectivity...\n"
   for ip in "$IP1" "$IP2"; do
@@ -1335,6 +1327,13 @@ function main() {
       printf "Error: Connectivity failed to %s.\n" "$ip" >&2; exit 1
     fi
   done
+
+  _check_remote_sudo
+
+  parse_model_config
+  check_vram_requirements "$PARAMS"
+  _detect_architecture
+  detect_network_config
 
   ensure_image_present
   _align_platform_with_image
