@@ -26,6 +26,7 @@ ARGS="$*"
 # Handle bash -s (Heredoc) execution
 if [[ "$ARGS" == *"bash -s"* ]]; then
     SCRIPT_CONTENT=$(cat -)
+    echo "SSH_EXEC: $SCRIPT_CONTENT" >> "$TEST_DIR/ssh_exec.log"
 
     # Check for docker login / pull failures in the script
     if [[ "$SCRIPT_CONTENT" == *"docker login"* ]] || [[ "$SCRIPT_CONTENT" == *"docker pull"* ]]; then
@@ -116,6 +117,19 @@ elif [[ "$*" == *"docker logs"* ]]; then
     exit 0
 elif [[ "$ARGS" == *"ip -4 addr show"* ]]; then
     echo "inet 10.0.0.2"
+    exit 0
+elif [[ "$ARGS" == *"[ -f"* ]]; then
+    if [[ -n "${MOCK_ENGINE_MISSING}" ]]; then
+        if [[ -n "${MOCK_BUILD_SUCCESS}" ]]; then
+             if [[ -f "$TEST_DIR/built_marker" ]]; then
+                  exit 0
+             else
+                  touch "$TEST_DIR/built_marker"
+                  exit 1
+             fi
+        fi
+        exit 1
+    fi
     exit 0
 else
     exit 0
@@ -241,22 +255,36 @@ if [ $? -ne 0 ]; then exit 1; fi
 echo "Running test: Custom HF Model Default to TRT-LLM"
 (
     rm -f "$TEST_DIR/docker_run.log"
+    rm -f "$TEST_DIR/ssh_exec.log"
     export NGC_API_KEY="test-key"
     export HF_TOKEN="test-token"
-    # Using dry-run to skip actual build logic which requires mocks for trtllm-build
-    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --dry-run "10.0.0.1" "10.0.0.2" "https://huggingface.co/MyOrg/MyModel" 2>&1)
+    export MOCK_ENGINE_MISSING=1
+    export MOCK_BUILD_SUCCESS=1
+    rm -f "$TEST_DIR/built_marker"
+    # Dry-run removed, mocks for trtllm-build are handled by ssh mock logging and default success
+    OUTPUT=$(echo "n" | "$TARGET_SCRIPT" "10.0.0.1" "10.0.0.2" "https://huggingface.co/MyOrg/MyModel" 2>&1)
 
     if echo "$OUTPUT" | grep -q "Defaulting to TensorRT-LLM Engine Build"; then
-        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:v0.12.0"; then
-            if echo "$OUTPUT" | grep -q "HF_TOKEN=test-token"; then
-                echo "PASS"
-            else
-                echo "FAIL: HF_TOKEN not passed to container in TRT-LLM mode. Output:"
-                echo "$OUTPUT"
-                exit 1
-            fi
+        # Check for correct image tag in output logs (parse_model_config logs it)
+        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:1.2.0rc6"; then
+             # Verify Runtime Launch (via docker_run.log)
+             LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
+             if echo "$LOG_CONTENT" | grep -q "HF_TOKEN=test-token"; then
+                 # Verify Build Step (via ssh_exec.log)
+                 SSH_LOG=$(cat "$TEST_DIR/ssh_exec.log")
+                 if echo "$SSH_LOG" | grep -q "trtllm-build"; then
+                     echo "PASS"
+                 else
+                     echo "FAIL: trtllm-build command not found in ssh execution log."
+                     exit 1
+                 fi
+             else
+                 echo "FAIL: HF_TOKEN not passed to container in TRT-LLM mode runtime launch. Log:"
+                 echo "$LOG_CONTENT"
+                 exit 1
+             fi
         else
-             echo "FAIL: Expected TRT-LLM release image. Output:"
+             echo "FAIL: Expected TRT-LLM release image (1.2.0rc6). Output:"
              echo "$OUTPUT"
              exit 1
         fi
