@@ -29,6 +29,26 @@ docs:
     url: /engineering_standards/release_process/
   - title: On-Call Guide
     url: /engineering_standards/on_call_guide/
+- title: Operational Playbooks
+  children:
+  - title: Overview
+    url: /playbooks/
+  - title: High Latency
+    url: /playbooks/high_latency/
+  - title: High Error Rate
+    url: /playbooks/high_error_rate/
+  - title: Database Failover
+    url: /playbooks/database_failover/
+  - title: Memory Leak / OOM
+    url: /playbooks/memory_leak_oom/
+  - title: Disk Space Exhaustion
+    url: /playbooks/disk_space_exhaustion/
+  - title: Certificate Expiry
+    url: /playbooks/certificate_expiry/
+  - title: Dependency Failure
+    url: /playbooks/dependency_failure/
+  - title: Bad Deployment
+    url: /playbooks/bad_deployment/
 - title: Corporate Strategy
   children:
   - title: Org Structure
@@ -175,6 +195,88 @@ docs:
       url: /job_roles/specialized_squads_cross_functional_teams/strategic_partner/
     - title: Sustainability (ESG)
       url: /job_roles/specialized_squads_cross_functional_teams/sustainability_esg/
+- title: Employee Training
+  children:
+  - title: Overview
+    url: /training/
+  - title: Engineering
+    children:
+    - title: Overview
+      url: /training/engineering/
+    - title: Distributed Systems
+      url: /training/engineering/distributed_systems/
+    - title: Code Quality
+      url: /training/engineering/code_quality/
+    - title: Incident Response
+      url: /training/engineering/incident_response_simulation/
+  - title: Security
+    children:
+    - title: Overview
+      url: /training/security/
+    - title: Security Awareness
+      url: /training/security/security_awareness/
+    - title: Data Handling
+      url: /training/security/data_handling/
+  - title: Soft Skills
+    children:
+    - title: Overview
+      url: /training/soft_skills/
+    - title: Effective Communication
+      url: /training/soft_skills/effective_communication/
+    - title: Giving Feedback
+      url: /training/soft_skills/giving_feedback/
+  - title: Leadership
+    children:
+    - title: Overview
+      url: /training/leadership/
+    - title: New Manager Guide
+      url: /training/leadership/new_manager/
+  - title: Product
+    children:
+    - title: Overview
+      url: /training/product/
+    - title: Product Thinking
+      url: /training/product/product_thinking/
+- title: Technical Support
+  children:
+  - title: Overview
+    url: /technical_support/
+  - title: Identity & Access
+    children:
+    - title: Password Reset
+      url: /technical_support/identity_access/password_reset/
+    - title: MFA Setup
+      url: /technical_support/identity_access/mfa_setup/
+    - title: SSO Troubleshooting
+      url: /technical_support/identity_access/sso_troubleshooting/
+  - title: Connectivity
+    children:
+    - title: Wi-Fi Access
+      url: /technical_support/connectivity/wifi_access/
+    - title: VPN Configuration
+      url: /technical_support/connectivity/vpn_configuration/
+  - title: Hardware
+    children:
+    - title: Laptop Refresh
+      url: /technical_support/hardware/laptop_refresh/
+    - title: Accessory Request
+      url: /technical_support/hardware/accessory_request/
+  - title: Software
+    children:
+    - title: Software Request
+      url: /technical_support/software/software_request/
+    - title: Developer Tools
+      url: /technical_support/software/developer_tools/
+  - title: Collaboration
+    children:
+    - title: Slack Guide
+      url: /technical_support/collaboration/slack_guide/
+    - title: Video Conferencing
+      url: /technical_support/collaboration/video_conferencing/
+  - title: Security
+    children:
+    - title: Reporting Phishing
+      url: /technical_support/security/reporting_phishing/
 - title: Interview Questions
   children:
   - title: Backend Engineer
