@@ -2,56 +2,177 @@
 
 **Role Code:** SWEN1001
 
-## Job Description
-A versatile and adaptive engineering role capable of working across the full technology stack. The Software Engineer builds, tests, and maintains software applications that solve tangible business problems. They are comfortable switching between frontend interfaces, backend logic, and database management as project needs evolve. They actively participate in code reviews, write comprehensive documentation, and contribute to the technical growth of the team. They focus on delivering value through high-quality, maintainable code.
+## Role Overview
+
+The **Software Engineer** at this organization is the fundamental building block of our engineering capacity. This is not merely a "coder" role; it is a position of creative problem-solving, architectural ownership, and technical craftsmanship. Software Engineers here are expected to be polyglots, comfortable navigating the entire stack—from configuring the Linux kernel on a bare-metal server to tweaking the CSS animation timing on a user-facing component.
+
+In this role, you will be solving problems at scale. You will encounter distributed systems challenges, concurrency issues, and data consistency trade-offs that don't exist in smaller environments. You are expected to write code that is not only functional but also readable, maintainable, testable, and secure. You will work in a matrixed environment, collaborating with Product Managers, Designers, Data Scientists, and Site Reliability Engineers to deliver value to millions of users.
+
+We believe in "You Build It, You Run It." This means you are responsible for the lifecycle of your code from the first keystroke to the production monitoring dashboard. You will participate in on-call rotations, write post-mortems for incidents, and constantly strive to improve the reliability of your systems.
 
 ## Responsibilities
 
-*   **Full-Stack Feature Development:** Implement robust and scalable features across the entire stack, utilizing technologies like React or Vue for the frontend, and Node.js, Python, or Go for the backend. You will design and build APIs (REST or GraphQL) that connect these layers seamlessly and efficiently. You ensure that the user experience is smooth, responsive, and the backend logic is performant. You are responsible for the end-to-end delivery of the feature, from the database schema to the CSS. You handle edge cases and error states gracefully.
-*   **Code Maintenance and Refactoring:** Maintain the health of the codebase by regularly refactoring legacy code, fixing bugs, and updating dependencies. You will apply design patterns to improve code readability, reusability, and maintainability. You actively look for opportunities to reduce technical debt without disrupting business operations. You ensure the code remains easy to change and extend for future requirements. You participate in "cleanup" sprints to keep the system healthy.
-*   **Automated Testing:** Write comprehensive unit, integration, and end-to-end tests to ensure software reliability and prevent regressions. You will use testing frameworks like Jest, Pytest, or Cypress to automate the verification process. You believe in the testing pyramid and strive for high code coverage to catch bugs early. You ensure that quality is built in from the start, not inspected in later. You maintain the test suite to ensure it remains fast and reliable.
-*   **Technical Design and Documentation:** Write clear and concise technical design documents (RFCs) before starting major implementation tasks. You will document API endpoints, data models, and system architecture to facilitate knowledge sharing. You keep the project's README and internal wiki up to date so new hires can onboard quickly. You ensure that your decisions are recorded and explained for future reference. You create diagrams to explain complex flows.
-*   **Code Review and Collaboration:** Participate actively in code reviews, providing constructive feedback to peers to ensure code quality and adherence to standards. You will pair program with other engineers to solve complex problems and share knowledge. You collaborate with product managers and designers to refine requirements and ensure feasibility. You foster a culture of open communication and continuous learning. You are open to receiving feedback on your own code.
-*   **Database Management:** Design and optimize database schemas for relational (PostgreSQL, MySQL) and non-relational (MongoDB, Redis) databases. You will write efficient SQL queries and manage database migrations to support new features. You understand the trade-offs between normalization and denormalization. You ensure data integrity and performance by indexing appropriate columns. You monitor database performance and tune slow queries.
-*   **Performance Optimization:** Analyze and improve the performance of applications, identifying bottlenecks in the frontend rendering or backend processing. You will use profiling tools to optimize memory usage and CPU cycles. You implement caching strategies to reduce latency and database load. You ensure the application scales with user growth and handles peak traffic. You understand the "Big O" complexity of your algorithms.
-*   **CI/CD Integration:** Work with the DevOps team to maintain and improve the Continuous Integration and Deployment pipelines. You will ensure that your code builds and deploys reliably to staging and production environments. You understand the deployment lifecycle and how to troubleshoot build failures. You aim for frequent and safe releases to deliver value faster. You write scripts to automate repetitive deployment tasks.
-*   **Security Best Practices:** Implement security best practices in your code to protect against common vulnerabilities like XSS, CSRF, and SQL Injection. You will handle sensitive user data responsibly and ensure compliance with privacy regulations. You stay updated on security patches for libraries you use. You write secure code by default and participate in security reviews. You sanitize all user inputs.
-*   **Production Support:** Assist in troubleshooting and resolving production issues when they arise. You will use logging and monitoring tools to diagnose bugs in the live environment. You participate in the on-call rotation (if applicable) to support the service and ensure availability. You prioritize fixing critical customer-facing issues immediately. You write post-mortems to learn from incidents.
+### Technical Execution & Delivery
+*   **Feature Development:** Design, implement, and deploy complex software features across the full technology stack. This involves writing clean, efficient code in languages such as Python, Go, TypeScript, or Java. You will be responsible for breaking down high-level requirements into executable technical tasks.
+*   **System Architecture:** Contribute to the architectural design of new services and the refactoring of existing ones. You will write Request for Comments (RFCs) and Technical Design Documents (TDDs) to propose solutions, considering factors like scalability, latency, cost, and maintainability.
+*   **API Design:** Design and implement robust, well-documented APIs (REST, gRPC, GraphQL) that serve as contracts between different parts of our system. You will ensure these APIs are versioned, secure, and performant.
+*   **Database Engineering:** Design data models and schemas for both relational (PostgreSQL, MySQL) and NoSQL (DynamoDB, Cassandra, Redis) databases. You will optimize queries for performance and manage database migrations with zero downtime.
+*   **Frontend Engineering:** Build responsive, accessible, and performant user interfaces using modern frameworks like React, Vue, or Svelte. You will ensure a seamless user experience across devices and browsers.
 
-### Role Variations
+### Code Quality & Maintenance
+*   **Code Review:** Actively participate in the code review process. You will review your peers' code with a critical but constructive eye, ensuring adherence to style guides, security best practices, and architectural patterns. You will use code reviews as a mentorship opportunity.
+*   **Testing:** Adhere to the "Test Pyramid" philosophy. You will write comprehensive unit tests, integration tests, and end-to-end tests. You will ensure that your code has high test coverage and that the CI/CD pipeline remains green.
+*   **Refactoring & Technical Debt:** Proactively identify and address technical debt. You will balance the need for speed with the need for long-term maintainability. You will participate in "fix-it" weeks and advocate for refactoring tasks during sprint planning.
+*   **Documentation:** Write clear, concise, and up-to-date documentation for your code, systems, and processes. This includes inline comments, READMEs, API docs (Swagger/OpenAPI), and internal wiki pages. You understand that code is read more often than it is written.
 
-*   **Full Stack Engineer:** Balanced focus on both frontend and backend development. They are equally comfortable centering a div and optimizing a database query. They are often the backbone of early-stage startups where versatility is key. They own vertical slices of functionality from the database to the UI. They can jump into any part of the stack to unblock the team.
-*   **Generalist Engineer:** Works on a wide variety of projects and technologies without deep specialization in any single area. They might work on a mobile app one month and a data pipeline the next. They are quick learners who adapt to the needs of the business. They prevent knowledge silos by being able to touch multiple systems. They thrive on variety and new challenges.
-*   **Product Engineer:** Focuses heavily on product features and user experience, working very closely with Product Managers and Designers. They care deeply about user metrics and A/B testing to validate hypotheses. They suggest product improvements based on technical feasibility and user behavior. They view code as a tool to solve user problems, not an end in itself. They are often involved in user research.
-*   **Backend-Leaning Software Engineer:** A software engineer who prefers working on server-side logic, APIs, and databases but can handle frontend tasks when necessary. They focus on system architecture, data consistency, and API design. They are often the go-to person for complex business logic. They ensure the backend is robust and scalable. They value clean code and performance.
-*   **Frontend-Leaning Software Engineer:** A software engineer who specializes in UI/UX and browser technologies but is capable of writing backend endpoints to support their frontend work. They focus on interactivity, visual polish, and component architecture. They ensure the application looks great and feels responsive. They bridge the gap between design and engineering. They value usability and accessibility.
-*   **Growth Engineer:** Focuses on engineering tasks that drive user acquisition, activation, and retention. They implement viral loops, referral programs, and marketing integrations. They are data-driven and experiment-oriented, often iterating quickly on features. They work closely with marketing and product growth teams. They prioritize speed of learning over perfect code structure.
-*   **Internal Tools Engineer:** Builds tools and dashboards for internal teams (Customer Support, Sales, Operations). They focus on developer productivity and operational efficiency to help the business run smoothly. They often have internal customers and shorter feedback loops. They automate manual processes to save time. They value stability and ease of use.
-*   **Prototyper / R&D Engineer:** Focuses on building rapid proofs of concept (POCs) to test new ideas or technologies. They prioritize speed and exploration over production-quality code. They help the company innovate and validate hypotheses before committing significant resources. They are comfortable with ambiguity and failure. They often work on "moonshot" projects.
-*   **Integrations Engineer:** Focuses on connecting the company's product with third-party services and APIs (e.g., Salesforce, Slack, Stripe). They deal with authentication, rate limiting, and data mapping between systems. They ensure data flows reliably between platforms. They maintain connectors and handle API version changes. They troubleshoot integration issues.
-*   **Maintenance Engineer:** Focuses on keeping the lights on for legacy or stable systems. They upgrade libraries, fix long-standing bugs, and improve the stability of older codebases. They are patient and methodical in their approach. They ensure that critical revenue-generating systems remain operational. They document undocumented systems.
+### Operational Excellence
+*   **CI/CD & DevOps:** maintain and improve the Continuous Integration and Continuous Deployment pipelines. You will write infrastructure-as-code (Terraform, CloudFormation) to manage cloud resources. You will ensure that deployments are automated, safe, and reversible.
+*   **Observability:** Instrument your code with logging, metrics, and tracing to ensure system observability. You will create dashboards (Grafana, Datadog) to monitor the health of your services and set up alerts for anomalies.
+*   **Incident Management:** Participate in the on-call rotation. You will respond to pager alerts, triage incidents, and lead resolution efforts. After an incident, you will lead or participate in blameless post-mortems to identify root causes and prevent recurrence.
+*   **Security:** Champion security best practices. You will write secure code by default, sanitizing inputs and escaping outputs to prevent vulnerabilities like XSS and SQL Injection. You will participate in security reviews and threat modeling exercises.
 
-## Average Daily Tasks
-*   **09:00 AM - Morning Standup:** Join the team for the daily standup to discuss progress on current tickets. I report that I finished the backend API for the new "User Profile" feature and am now moving to the frontend implementation. I flag that I need a design asset from the designer. I listen to other team members' updates to stay aligned. I check the sprint board for any new priorities.
-*   **09:30 AM - Feature Development (Frontend):** I start coding the React component for the user profile page. I use the design mockups in Figma as a reference to ensure visual fidelity. I implement the state management to fetch data from the API I built yesterday. I ensure the component is responsive on mobile devices and handles loading states gracefully. I test the component in different browsers.
-*   **11:30 AM - Code Review:** I review a pull request from a teammate who is adding a new email notification. I check that the email template is responsive and that the logic for triggering the email is sound. I suggest a small refactor to make the code more testable. I verify that they have included unit tests. I approve the PR once the changes are made.
-*   **12:00 PM - Lunch Break:** Take a break to eat and relax away from the screen. I chat with colleagues about non-work topics to build rapport. I take a short walk to get some fresh air. I return to my desk refreshed and ready for the afternoon.
-*   **01:00 PM - Feature Development (Backend):** I realize I need an additional field in the API response to support a UI change. I switch to the backend codebase (Node.js), update the Mongoose schema, and modify the controller logic. I write a unit test to verify the new field is returned correctly. I verify the endpoint using Postman. I update the API documentation.
-*   **02:30 PM - Pair Programming:** A colleague asks for help debugging a tricky race condition in the payment processing module. We hop on a call and pair program for an hour. We trace the execution flow and identify the issue. We write a fix together and verify it with a test case. I learn a new debugging technique from them.
-*   **03:30 PM - Documentation:** I update the API documentation in Swagger to reflect the changes I made earlier. I also add a note to the internal wiki about how to run the new payment tests locally. I ensure that the documentation is clear and helpful for others. I link the documentation to the relevant Jira ticket.
-*   **04:00 PM - Testing:** I run the full test suite to ensure my changes haven't broken anything. I write a new integration test that simulates a user updating their profile and verifies the database is updated. I fix a flaky test that failed during the run. I ensure all tests pass locally before pushing.
-*   **04:30 PM - Deployment:** My changes are approved and merged. I monitor the deployment pipeline as it pushes the code to the staging environment. I do a quick manual smoke test in staging to verify everything looks good. I check the logs for any errors. I notify the QA team that the feature is ready for testing.
-*   **05:00 PM - Wrap-up:** I check the sprint board and move my ticket to "QA Ready." I check my email and Slack for any end-of-day messages. I plan my tasks for tomorrow. I clean up my local git branches. I head out for the day.
+### Collaboration & Leadership
+*   **Cross-Functional Collaboration:** Work closely with Product Managers to understand customer needs and refine requirements. Collaborate with Designers to implement pixel-perfect UIs. Partner with Data Engineers to ensure data quality and availability.
+*   **Mentorship:** Mentor junior engineers and interns. You will help them grow their technical skills, understand the codebase, and navigate the organization. You will review their design docs and provide career guidance.
+*   **Knowledge Sharing:** Share your knowledge with the broader engineering team through tech talks, brown bag sessions, and internal blog posts. You will contribute to the engineering culture by promoting best practices and new technologies.
 
-## Common Partners
-*   **[Product Manager](../../product_design/product_manager.md)**: Aligns on feature requirements and user stories.
-*   **[Product Designer](../../product_design/product_designer.md)**: Collaborates on UI implementation and UX flow.
-*   **[Backend Engineer](backend_engineer.md)**: Consults on complex architectural decisions.
-*   **[QA Engineer](qa_engineer.md)**: coordinates on testing and bug fixes.
-*   **[Engineering Manager](engineering_manager.md)**: Discusses career growth and project priorities.
+## Competencies & Skills Matrix
 
-## Organization Chart
-*   **[Engineering & Technology Organization Chart](organization_chart.md)**: Detailed view of the department structure.
+The following matrix outlines the expected proficiency levels for a Software Engineer.
+
+| Competency Area | Essential Skills | Advanced Skills (Differentiators) |
+| :--- | :--- | :--- |
+| **Languages** | Python, JavaScript/TypeScript, SQL | Go, Rust, Java, C++, Bash Scripting |
+| **Frontend** | React/Vue, CSS/Sass, HTML5, DOM Manipulation | WebAssembly, WebGL, Service Workers, Accessibility (WCAG) |
+| **Backend** | REST API Design, Node.js/Django/FastAPI, Auth (JWT/OAuth) | gRPC, GraphQL, Microservices Patterns, Event-Driven Architecture |
+| **Databases** | PostgreSQL/MySQL (Schema Design, Indexing), Redis | Cassandra, DynamoDB, ElasticSearch, Graph Databases (Neo4j) |
+| **Infrastructure** | Docker, Git, Linux CLI, Basic AWS/GCP | Kubernetes (K8s), Terraform, Helm, Serverless (Lambda) |
+| **Testing** | Unit Testing (Jest/Pytest), Integration Testing | Property-Based Testing, Chaos Engineering, TDD/BDD |
+| **System Design** | Load Balancing, Caching, CAP Theorem Basics | Distributed Systems, Consensus Algorithms (Raft/Paxos), Sharding |
+| **Soft Skills** | Communication, Teamwork, Problem Solving | Negotiation, Conflict Resolution, Public Speaking, Mentorship |
+
+## Leveling & Career Progression
+
+At our organization, the Software Engineer role is divided into levels to clarify expectations and growth paths.
+
+### Level 3 (L3) - Entry Level / Junior
+*   **Focus:** Learning and Execution.
+*   **Scope:** Individual tasks and small features.
+*   **Expectation:** Requires guidance from senior engineers. writes clean code but may need help with architecture. Focuses on mastering the tools and stack.
+*   **Promotion Criteria:** Consistently delivers tasks on time, demonstrates ability to learn quickly, writes bug-free code.
+
+### Level 4 (L4) - Mid-Level
+*   **Focus:** Independence and Reliability.
+*   **Scope:** Medium-sized features and end-to-end ownership.
+*   **Expectation:** Works independently on most tasks. Can break down features into technical tasks. actively participates in code reviews. Mentors interns.
+*   **Promotion Criteria:** Owns entire features from design to deployment. Proactively identifies and fixes bugs. distinct domain expertise.
+
+### Level 5 (L5) - Senior Software Engineer
+*   **Focus:** Leadership and Architecture.
+*   **Scope:** Large, complex projects spanning multiple services.
+*   **Expectation:** Technical lead for a squad. Sets technical standards. Mentors L3/L4 engineers. Solves the "unknown unknowns."
+*   **Promotion Criteria:** consistently delivers high-impact projects. unexpected technical challenges are solved elegantly. Strong influence on team culture.
+
+### Level 6 (L6) - Staff Software Engineer
+*   **Focus:** Strategy and Cross-Team Impact.
+*   **Scope:** Multiple teams or entire product lines.
+*   **Expectation:** Solves organizational technical problems. Architects systems for the next 2-3 years. Partners with Directors/VPs.
+*   **Promotion Criteria:** proven track record of solving critical business problems through technology. recognized as a technical authority within the company.
+
+## Key Performance Indicators (KPIs)
+
+Performance is not measured by lines of code. We value impact and quality.
+
+1.  **Delivery Velocity:** Consistency in meeting sprint commitments and shipping features.
+2.  **Code Quality:** Low rate of bugs returned from QA or found in production. High test coverage.
+3.  **System Reliability:** Uptime of services owned, low mean-time-to-resolution (MTTR) for incidents.
+4.  **Code Review Impact:** Quality and timeliness of feedback provided to peers.
+5.  **Documentation:** Quality and freshness of system documentation.
+6.  **Mentorship:** Success and growth of mentees (for senior levels).
+
+## Tools & Technology Stack
+
+We use a modern, cloud-native stack. You are expected to be proficient in the core tools and willing to learn the specialized ones.
+
+*   **Languages:** Python (3.11+), TypeScript (5.0+), Go (1.21+)
+*   **Frontend:** React, Next.js, Tailwind CSS, Redux/Zustand
+*   **Backend:** FastAPI, Node.js (Express/NestJS), gRPC
+*   **Data:** PostgreSQL, Redis, Kafka, Snowflake, dbt
+*   **Infrastructure:** AWS (EKS, RDS, S3, Lambda), Kubernetes, Terraform
+*   **DevOps:** GitHub Actions, ArgoCD, Datadog, PagerDuty
+*   **Development:** VS Code, Cursor, Docker Desktop, Postman
+
+## Day-in-the-Life
+
+**08:45 AM - Morning Prep**
+I arrive at the office (or log in remotely), grab a coffee, and check my notifications. I review any alerts from PagerDuty that might have fired overnight (luckily none today). I scan Slack for urgent messages and check GitHub for PR reviews assigned to me.
+
+**09:15 AM - Standup**
+Our squad gathers for a 15-minute standup. I give a quick update: "Yesterday, I finished the backend logic for the User Profile API. Today, I'm writing the integration tests and updating the Swagger docs. No blockers." I listen to the frontend engineer mentioning a dependency on my API, so we agree to sync up after standup.
+
+**09:30 AM - Deep Work Block (Coding)**
+I put on my noise-canceling headphones and dive into the code. I'm building a new endpoint that aggregates user activity. It involves a complex SQL query. I write the SQL first, verifying the execution plan to ensure it uses the indexes correctly. Then I implement the Pydantic models in FastAPI. I adhere to TDD, so I write the failing test case first, then the implementation.
+
+**11:30 AM - Code Review**
+I take a break from my own code to review a PR from a teammate. They are refactoring the authentication middleware. I notice a potential race condition in how the token is refreshed and leave a comment suggesting a mutex lock or an atomic operation. I also praise their clean error handling.
+
+**12:30 PM - Lunch & Social**
+I grab lunch with a few engineers from the Mobile team. We discuss the latest release of React Native and debate the merits of server-driven UI. It's a casual conversation, but I learn something new about mobile constraints.
+
+**01:30 PM - Technical Design Review**
+I attend a design review meeting for the upcoming "Search V2" project. The Staff Engineer is presenting the architecture. I ask questions about how we will handle indexing latency and what the fallback strategy is if Elasticsearch goes down. We debate the trade-offs between eventual consistency and strong consistency for this use case.
+
+**03:00 PM - Pair Programming**
+I pair with a junior engineer who is stuck on a React component. We use VS Code Live Share. I watch as they navigate the state management logic. I guide them to use a custom hook to abstract the logic, making the component cleaner. We fix the bug together, and I explain the "why" behind the solution.
+
+**04:00 PM - Infrastructure & Chores**
+I spend the last hour on "glue work." I update a Terraform script that was generating a warning in the build pipeline. I also update the `README.md` for our service to include the new setup steps for local development. I merge my PR from the morning after addressing comments.
+
+**05:00 PM - Wrap Up**
+I check my calendar for tomorrow, update the Jira ticket status to "In Progress," and clear my unread emails. I verify that the staging environment is stable before logging off.
+
+## Onboarding Plan (First 90 Days)
+
+### Month 1: Acclimatization
+*   **Week 1:** Setup laptop and access. Complete HR orientation. Meet the team. Clone the repo and run "Hello World" locally. Read the "Engineering Handbook."
+*   **Week 2:** Ship your first bug fix to production. Understand the code review process. Sit in on all squad meetings.
+*   **Week 3:** Pick up a "good first issue" or a small feature. Pair program with a buddy. Understand the deployment pipeline.
+*   **Week 4:** Ship a small feature independently. Participate in an on-call shadow session (listen-only).
+
+### Month 2: Contribution
+*   **Goal:** Become a fully productive member of the squad.
+*   **Actions:** Take on a medium-sized feature. Write a technical design doc for a small component. perform code reviews for peers. Deep dive into one specific area of the codebase (e.g., the billing service).
+
+### Month 3: Independence
+*   **Goal:** operate independently and start adding value beyond code.
+*   **Actions:** Join the on-call rotation (primary). Propose a refactoring or improvement task. present a "tech talk" or demo at the team meeting. Help onboard a newer hire.
+
+## Interview Process Guide
+
+To join our team, you will go through a rigorous but fair interview process designed to assess your technical skills and cultural fit.
+
+1.  **Recruiter Screen (30 min):** High-level chat about your background, interests, and basic qualifications.
+2.  **Technical Screen (60 min):** A coding interview (usually LeetCode medium style) focused on algorithms and data structures, or a practical pair-programming task.
+3.  **Onsite Loop (4-5 hours):**
+    *   **Coding Round 1:** Algorithmic problem solving (Trees, Graphs, DP).
+    *   **Coding Round 2:** Practical coding (API design, refactoring, or a specific language task).
+    *   **System Design:** Designing a scalable system (e.g., "Design Twitter", "Design a URL Shortener"). Focus on trade-offs, database choices, and scaling strategies.
+    *   **Behavioral / Culture Fit:** Questions based on our leadership principles ("Tell me about a time you disagreed with a manager").
+4.  **Hiring Committee:** A review of all feedback to make a hiring decision.
+
+## Engineering Culture & Values
+
+*   **Blameless Post-Mortems:** When things break, we ask "how," not "who." We focus on systemic fixes, not punishment.
+*   **Disagree and Commit:** We debate ideas vigorously, but once a decision is made, we all support it 100%.
+*   **Bias for Action:** Speed matters. We value calculated risk-taking over analysis paralysis.
+*   **Customer Obsession:** We start with the customer and work backward. We don't build tech for tech's sake.
+*   **Continuous Learning:** We provide a stipend for books, courses, and conferences. We expect you to keep growing.
+
+## Recommended Reading
+*   **[Interview Preparation Guide](../../interview_questions/engineering_technology/software_engineer.md)**: Comprehensive questions and answers for this role.
+*   **[System Design Primer](https://github.com/donnemartin/system-design-primer)**
+*   **[Clean Code by Robert C. Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)**
+*   **[The Pragmatic Programmer](https://www.amazon.com/Pragmatic-Programmer-journey-mastery-Anniversary/dp/0135957052)**
 
 ---
 
@@ -126,6 +247,3 @@ A versatile and adaptive engineering role capable of working across the full tec
 *   **[visual-studio-code](https://code.visualstudio.com/)**: Used for code editing, debugging, and extensions.
 *   **[npm](https://www.npmjs.com/)**: Used for package management in JavaScript environments.
 *   **[docker](https://www.docker.com/)**: Used for running local development environments.
-
-## Recommended Reading
-*   **[Interview Preparation Guide](../../interview_questions/engineering_technology/software_engineer.md)**: Comprehensive questions and answers for this role.
