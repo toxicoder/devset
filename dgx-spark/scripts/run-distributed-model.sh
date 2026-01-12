@@ -570,7 +570,26 @@ function transfer_docker_image_p2p() {
   # Start listener
   ( ssh "${SSH_OPTS[@]}" "$tgt_ip" "nc -l -p 12346 | pigz -d | docker load" ) &
   local pid=$!
-  sleep 5
+
+  # Poll for readiness
+  printf "Waiting for receiver on %s:12346..." "$fast_ip_tgt"
+  local ready=0
+  for i in {1..30}; do
+      if ssh "${SSH_OPTS[@]}" "$src_ip" "nc -z -w 1 $fast_ip_tgt 12346 2>/dev/null"; then
+          ready=1
+          printf " Ready.\n"
+          break
+      fi
+      printf "."
+      sleep 1
+  done
+
+  if [[ "$ready" -eq 0 ]]; then
+      printf "\nError: Receiver timed out.\n" >&2
+      kill "$pid" 2>/dev/null
+      return 1
+  fi
+
   # Start sender
   if ssh "${SSH_OPTS[@]}" "$src_ip" "docker save $image | pigz -c -1 | nc -w 60 -q 1 $fast_ip_tgt 12346"; then
       if wait "$pid"; then
@@ -956,16 +975,24 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
-  # FIXED: Added retries for robustness
-  local dl_cmd="if ! command -v hf &>/dev/null; then pip install -U \"huggingface_hub[cli]\"; fi; \
-                for i in {1..3}; do \
-                    if hf download $model_id --local-dir $ctr_path; then exit 0; fi; \
-                    echo 'Download failed, retrying...' >&2; \
-                    sleep 5; \
-                done; exit 1"
+  ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    # Inner script for Docker
+    read -r -d '' DOCKER_SCRIPT <<'INNER'
+if ! command -v hf &>/dev/null; then pip install -U "huggingface_hub[cli]"; fi
+for i in {1..3}; do
+    if hf download $model_id --local-dir $ctr_path; then exit 0; fi
+    echo "Download failed, retrying..." >&2
+    sleep 5
+done
+exit 1
+INNER
 
-  ssh "${SSH_OPTS[@]}" "$ip" \
-    "docker run --rm --gpus all -e HF_TOKEN=$HF_TOKEN -v $host_base:$ctr_base $IMAGE bash -c '$dl_cmd'"
+    docker run --rm --gpus all \\
+        -e HF_TOKEN='$HF_TOKEN' \\
+        -v '$host_base':'$ctr_base' \\
+        '$IMAGE' \\
+        bash -c "\$DOCKER_SCRIPT"
+EOF
 }
 
 # Internal: Compile TRT Engine
@@ -1011,12 +1038,28 @@ function compile_trt_engine() {
 
   generate_trt_converter_script "$ip" "$host_engine_path/convert_heuristic.py"
 
-  local convert_cmd="python3 $ctr_engine_path/convert_heuristic.py --model_dir $ctr_model_path --output_dir $ckpt_dir --tp_size $TP_SIZE --pp_size $PP_SIZE"
-
-  local build_cmd="trtllm-build --checkpoint_dir $ckpt_dir --output_dir $ctr_engine_path --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_seq_len $MAX_SEQ_LEN $quant_flags"
-
-  if ! ssh "${SSH_OPTS[@]}" "$ip" \
-     "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$convert_cmd && $build_cmd && rm -rf $ckpt_dir'"; then
+  if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    docker run --rm --gpus all \\
+        -v '$host_model_base':'$ctr_model_base' \\
+        -v '$host_engine_base':'$ctr_engine_base' \\
+        '$IMAGE' \\
+        bash -c "
+python3 '$ctr_engine_path/convert_heuristic.py' \\
+  --model_dir '$ctr_model_path' \\
+  --output_dir '$ckpt_dir' \\
+  --tp_size '$TP_SIZE' \\
+  --pp_size '$PP_SIZE' && \\
+trtllm-build \\
+  --checkpoint_dir '$ckpt_dir' \\
+  --output_dir '$ctr_engine_path' \\
+  --workers '$TP_SIZE' \\
+  --max_batch_size '$BATCH_SIZE' \\
+  --max_seq_len '$MAX_SEQ_LEN' \\
+  $quant_flags && \\
+rm -rf '$ckpt_dir'
+"
+EOF
+  then
       printf "Error: TensorRT Engine Compilation Failed on %s.\n" "$ip" >&2
       exit 1
   fi
