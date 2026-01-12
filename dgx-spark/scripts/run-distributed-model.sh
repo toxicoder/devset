@@ -155,7 +155,11 @@ function _check_remote_sudo() {
     if ! ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true 2>/dev/null"; then
       log_error "Passwordless sudo check failed for $ip."
       log_error "Please ensure the user has sudo privileges without password (NOPASSWD in sudoers)."
-      exit 1
+      if [[ "$FORCE" -eq 1 ]]; then
+          log_warn "Force enabled. Proceeding despite sudo check failure..."
+      else
+          exit 1
+      fi
     fi
   done
   log_info "Sudo access verified."
