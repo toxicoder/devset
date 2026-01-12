@@ -901,6 +901,7 @@ function compile_trt_engine() {
 
   # Use CLI tools directly
   if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    set -e
     # Expand tilde in host paths if present
     HMB="$host_model_base"
     if [[ "\$HMB" == "~"* ]]; then HMB="\${HOME}\${HMB:1}"; fi
@@ -910,6 +911,10 @@ function compile_trt_engine() {
     # Define Python Conversion Script
     # Use mktemp on remote host to store the script securely
     REMOTE_SCRIPT=\$(mktemp)
+
+    # Ensure cleanup on exit
+    trap 'rm -f "\$REMOTE_SCRIPT"' EXIT
+
     cat > "\$REMOTE_SCRIPT" <<'PYTHON'
 import sys, os, json, runpy, shutil
 
@@ -931,36 +936,73 @@ def get_arch(model_dir):
     except:
         return 'llama'
 
+def find_script(arch):
+    # Search strategies
+    # 1. Direct mapped check
+    mapping = {
+        "llama": ["llama"],
+        "mistral": ["llama", "mistral"],
+        "qwen": ["qwen"],
+        "gemma": ["gemma"],
+        "mixtral": ["mixtral", "llama"],
+        "phi": ["phi"]
+    }
+    targets = mapping.get(arch, [arch])
+
+    # Common base paths in TRT-LLM containers
+    bases = ["/app/tensorrt_llm/examples", "/app/examples", "/usr/local/lib/python3.10/dist-packages/tensorrt_llm/examples", "/usr/local/lib/python3.12/dist-packages/tensorrt_llm/examples"]
+
+    candidates = []
+
+    # Heuristic 1: Known paths
+    for base in bases:
+        if not os.path.exists(base): continue
+        for target in targets:
+             p = os.path.join(base, target, "convert_checkpoint.py")
+             if os.path.exists(p): return p
+
+    # Heuristic 2: Recursive search if not found
+    print(f"[INFO] Standard paths failed. Searching recursively for convert_checkpoint.py...", file=sys.stderr)
+    for base in ["/app", "/usr/local"]:
+        for root, dirs, files in os.walk(base):
+            if "convert_checkpoint.py" in files:
+                full_path = os.path.join(root, "convert_checkpoint.py")
+                # Check if parent dir matches arch
+                parent = os.path.basename(root).lower()
+                if parent in targets:
+                    return full_path
+                candidates.append(full_path)
+
+    # Fallback to llama if available
+    for c in candidates:
+        if "llama" in c: return c
+
+    return candidates[0] if candidates else None
+
 try:
     # Attempt standard command (Unified Workflow)
+    # Note: run_module handles sys.argv but we need to ensure the module is importable
+    import tensorrt_llm.commands.convert_checkpoint
     runpy.run_module("tensorrt_llm.commands.convert_checkpoint", run_name="__main__", alter_sys=True)
-except ImportError:
+except (ImportError, ModuleNotFoundError):
     print("[WARN] Standard convert_checkpoint module not found. Attempting fallback...", file=sys.stderr)
 
     # Extract model_dir from args
     model_dir = "."
     if "--model_dir" in sys.argv:
-        model_dir = sys.argv[sys.argv.index("--model_dir") + 1]
+        try:
+            model_dir = sys.argv[sys.argv.index("--model_dir") + 1]
+        except ValueError:
+            pass
 
     arch = get_arch(model_dir)
-    # Check specific locations
-    candidates = [
-        f"/app/tensorrt_llm/examples/{arch}/convert_checkpoint.py",
-        f"/app/examples/{arch}/convert_checkpoint.py",
-        "/app/tensorrt_llm/examples/llama/convert_checkpoint.py" # Ultimate fallback
-    ]
-
-    script = None
-    for c in candidates:
-        if os.path.exists(c):
-            script = c
-            break
+    script = find_script(arch)
 
     if script:
         print(f"[INFO] Using fallback script: {script}", file=sys.stderr)
         runpy.run_path(script, run_name="__main__")
     else:
-        print(f"[ERROR] No conversion script found for {arch}. Checked: {candidates}", file=sys.stderr)
+        print(f"[ERROR] No conversion script found for {arch}.", file=sys.stderr)
         sys.exit(1)
 PYTHON
 
@@ -971,6 +1013,7 @@ PYTHON
         '$IMAGE' \\
         bash -c "
 # Fix pynvml warning
+pip uninstall -y pynvml >/dev/null 2>&1 || true
 pip install -q nvidia-ml-py >/dev/null 2>&1 || true
 
 # Execute Python Conversion Logic
@@ -988,8 +1031,6 @@ trtllm-build \\
   $quant_flags && \\
 rm -rf '$ckpt_dir'
 "
-    # Cleanup
-    rm "\$REMOTE_SCRIPT"
 EOF
   then
       log_error "TensorRT Engine Compilation Failed on $ip."
