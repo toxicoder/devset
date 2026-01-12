@@ -236,5 +236,20 @@
   "engineering_standards/incident_management.md": "engineering_standards/incident_management.md",
   "engineering_standards/post_mortem_guide.md": "engineering_standards/post_mortem_guide.md",
   "engineering_standards/release_process.md": "engineering_standards/release_process.md",
-  "engineering_standards/on_call_guide.md": "engineering_standards/on_call_guide.md"
+  "engineering_standards/on_call_guide.md": "engineering_standards/on_call_guide.md",
+  "training/engineering/distributed_systems.md": "training/engineering/distributed_systems.md",
+  "training/engineering/code_quality.md": "training/engineering/code_quality.md",
+  "training/engineering/incident_response_simulation.md": "training/engineering/incident_response_simulation.md",
+  "training/engineering/index.md": "training/engineering/index.md",
+  "training/security/security_awareness.md": "training/security/security_awareness.md",
+  "training/security/data_handling.md": "training/security/data_handling.md",
+  "training/security/index.md": "training/security/index.md",
+  "training/soft_skills/effective_communication.md": "training/soft_skills/effective_communication.md",
+  "training/soft_skills/giving_feedback.md": "training/soft_skills/giving_feedback.md",
+  "training/soft_skills/index.md": "training/soft_skills/index.md",
+  "training/leadership/new_manager.md": "training/leadership/new_manager.md",
+  "training/leadership/index.md": "training/leadership/index.md",
+  "training/product/product_thinking.md": "training/product/product_thinking.md",
+  "training/product/index.md": "training/product/index.md",
+  "training/index.md": "training/index.md"
 }

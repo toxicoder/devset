@@ -175,6 +175,48 @@ docs:
       url: /job_roles/specialized_squads_cross_functional_teams/strategic_partner/
     - title: Sustainability (ESG)
       url: /job_roles/specialized_squads_cross_functional_teams/sustainability_esg/
+- title: Employee Training
+  children:
+  - title: Overview
+    url: /training/
+  - title: Engineering
+    children:
+    - title: Overview
+      url: /training/engineering/
+    - title: Distributed Systems
+      url: /training/engineering/distributed_systems/
+    - title: Code Quality
+      url: /training/engineering/code_quality/
+    - title: Incident Response
+      url: /training/engineering/incident_response_simulation/
+  - title: Security
+    children:
+    - title: Overview
+      url: /training/security/
+    - title: Security Awareness
+      url: /training/security/security_awareness/
+    - title: Data Handling
+      url: /training/security/data_handling/
+  - title: Soft Skills
+    children:
+    - title: Overview
+      url: /training/soft_skills/
+    - title: Effective Communication
+      url: /training/soft_skills/effective_communication/
+    - title: Giving Feedback
+      url: /training/soft_skills/giving_feedback/
+  - title: Leadership
+    children:
+    - title: Overview
+      url: /training/leadership/
+    - title: New Manager Guide
+      url: /training/leadership/new_manager/
+  - title: Product
+    children:
+    - title: Overview
+      url: /training/product/
+    - title: Product Thinking
+      url: /training/product/product_thinking/
 - title: Interview Questions
   children:
   - title: Backend Engineer
