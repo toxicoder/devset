@@ -519,11 +519,16 @@ function detect_high_speed_iface() {
 
   # Fallback to ibdev2netdev
   local iface
+  # Updated to capture all Up interfaces, comma-separated (for multi-rail)
   iface=$(ssh "${SSH_OPTS[@]}" "$ip" \
-    "ibdev2netdev 2>/dev/null | grep 'Up' | awk -F'==> ' '{print \$2}' | awk '{print \$1}' | head -n 1")
+    "ibdev2netdev 2>/dev/null | grep 'Up' | awk -F'==> ' '{print \$2}' | awk '{print \$1}' | tr '\n' ',' | sed 's/,\$//'")
 
   if [[ -n "$iface" ]]; then
-    printf "DETECTED_SINGLE: %s" "$iface"
+    if [[ "$iface" == *","* ]]; then
+      printf "DETECTED_MULTI: %s" "$iface"
+    else
+      printf "DETECTED_SINGLE: %s" "$iface"
+    fi
   else
     printf "DETECTED_NONE"
   fi
