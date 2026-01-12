@@ -388,7 +388,7 @@ fi
 
 # Test 4c: Verify removal of deprecated --local-dir-use-symlinks argument
 echo "Running test: Verify absence of deprecated --local-dir-use-symlinks"
-if grep -F "--local-dir-use-symlinks" "$TARGET_SCRIPT"; then
+if grep -F -- "--local-dir-use-symlinks" "$TARGET_SCRIPT"; then
     echo "FAIL: Found deprecated argument --local-dir-use-symlinks in script"
     exit 1
 else
