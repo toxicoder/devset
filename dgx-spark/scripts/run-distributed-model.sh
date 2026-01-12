@@ -871,7 +871,8 @@ function compile_trt_engine() {
   local check_quant_cmd="grep -q '\"format\": \"nvfp4-pack-quantized\"' $ctr_model_path/config.json && echo 'DETECTED_NVFP4' || true"
 
   local quant_status
-  quant_status=$(ssh "${SSH_OPTS[@]}" "$ip" "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE bash -c '$check_quant_cmd'" 2>/dev/null)
+  # FIXED: Filter output to avoid capturing container splash text (e.g. PyTorch banner)
+  quant_status=$(ssh "${SSH_OPTS[@]}" "$ip" "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE bash -c '$check_quant_cmd'" 2>/dev/null | grep "DETECTED_NVFP4" || true)
 
   if [[ "$quant_status" == *"DETECTED_NVFP4"* ]]; then
        log_info "Detected pre-quantized NVFP4 model. Skipping conversion step."
