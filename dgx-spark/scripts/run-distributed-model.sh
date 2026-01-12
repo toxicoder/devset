@@ -908,7 +908,9 @@ function compile_trt_engine() {
     if [[ "\$HEB" == "~"* ]]; then HEB="\${HOME}\${HEB:1}"; fi
 
     # Define Python Conversion Script
-    read -r -d '' CONVERT_SCRIPT <<'PYTHON'
+    # Use mktemp on remote host to store the script securely
+    REMOTE_SCRIPT=\$(mktemp)
+    cat > "\$REMOTE_SCRIPT" <<'PYTHON'
 import sys, os, json, runpy, shutil
 
 def get_arch(model_dir):
@@ -963,7 +965,7 @@ except ImportError:
 PYTHON
 
     docker run --rm --gpus all \\
-        -e CONVERT_SCRIPT="\$CONVERT_SCRIPT" \\
+        -v "\$REMOTE_SCRIPT":/tmp/convert_script.py \\
         -v "\$HMB":'$ctr_model_base' \\
         -v "\$HEB":'$ctr_engine_base' \\
         '$IMAGE' \\
@@ -972,7 +974,7 @@ PYTHON
 pip install -q nvidia-ml-py >/dev/null 2>&1 || true
 
 # Execute Python Conversion Logic
-python3 -c \"\$CONVERT_SCRIPT\" \\
+python3 /tmp/convert_script.py \\
   --model_dir '$ctr_model_path' \\
   --output_dir '$ckpt_dir' \\
   --tp_size '$TP_SIZE' \\
@@ -986,6 +988,8 @@ trtllm-build \\
   $quant_flags && \\
 rm -rf '$ckpt_dir'
 "
+    # Cleanup
+    rm "\$REMOTE_SCRIPT"
 EOF
   then
       log_error "TensorRT Engine Compilation Failed on $ip."
