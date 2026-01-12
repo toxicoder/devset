@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package company.finance.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/finance/v1;financev1";
+
+import "company/common/v1/money.proto";
+import "google/protobuf/timestamp.proto";
+
+// PayrollRecord represents a single payroll entry for an employee.
+message PayrollRecord {
+  // Unique identifier for the payroll record.
+  string id = 1;
+
+  // The employee ID this record belongs to.
+  string employee_id = 2;
+
+  // The pay period for this record.
+  PayPeriod pay_period = 3;
+
+  // The gross pay amount before deductions.
+  company.common.v1.Money gross_pay = 4;
+
+  // The net pay amount after deductions.
+  company.common.v1.Money net_pay = 5;
+
+  // List of deductions applied.
+  repeated Deduction deductions = 6;
+
+  // The date payment was issued.
+  google.protobuf.Timestamp payment_date = 7;
+}
+
+// Deduction represents a subtraction from gross pay.
+message Deduction {
+  // Description of the deduction (e.g., "Federal Tax", "401k").
+  string description = 1;
+
+  // The amount deducted.
+  company.common.v1.Money amount = 2;
+}
+
+// PayPeriod represents the date range for the pay.
+message PayPeriod {
+  // Start date of the pay period.
+  google.protobuf.Timestamp start_date = 1;
+
+  // End date of the pay period.
+  google.protobuf.Timestamp end_date = 2;
+}
