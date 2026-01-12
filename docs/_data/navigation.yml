@@ -221,10 +221,16 @@ docs:
   children:
   - title: Anti-Harassment Policy
     url: /policies/anti_harassment_policy/
+  - title: Acceptable Use Policy
+    url: /policies/acceptable_use_policy/
   - title: Code of Conduct
     url: /policies/code_of_conduct/
   - title: Data Privacy Policy
     url: /policies/data_privacy_policy/
+  - title: Document Retention Policy
+    url: /policies/document_retention_policy/
+  - title: Incident Response Plan
+    url: /policies/incident_response_plan/
   - title: Information Security Policy
     url: /policies/information_security_policy/
   - title: Intellectual Property Policy
@@ -239,3 +245,5 @@ docs:
     url: /policies/social_media_policy/
   - title: Travel & Expense Policy
     url: /policies/travel_expense_policy/
+  - title: Whistleblower Policy
+    url: /policies/whistleblower_policy/
