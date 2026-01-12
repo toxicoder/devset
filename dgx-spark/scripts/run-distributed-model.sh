@@ -912,7 +912,7 @@ function compile_trt_engine() {
         -v "\$HEB":'$ctr_engine_base' \\
         '$IMAGE' \\
         bash -c "
-trtllm-convert-checkpoint \\
+python3 -m tensorrt_llm.commands.convert_checkpoint \\
   --model_dir '$ctr_model_path' \\
   --output_dir '$ckpt_dir' \\
   --tp_size '$TP_SIZE' \\
