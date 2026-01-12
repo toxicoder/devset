@@ -29,6 +29,16 @@ docs:
     url: /engineering_standards/release_process/
   - title: On-Call Guide
     url: /engineering_standards/on_call_guide/
+- title: Corporate Strategy
+  children:
+  - title: Org Structure
+    url: /corporate_strategy/organizational_structure/
+  - title: Financial Strategy
+    url: /corporate_strategy/financial_strategy/
+  - title: Structuring & Entities
+    url: /corporate_strategy/corporate_structuring/
+  - title: Tax Strategy
+    url: /corporate_strategy/tax_strategy/
 - title: Job Role Organization
   children:
   - title: Overview
