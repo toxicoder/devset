@@ -217,3 +217,25 @@ docs:
     url: /adr/0001_example_architecture_decision/
 - title: Technical Design Doc
   url: /technical_design_document/
+- title: Company Policies
+  children:
+  - title: Anti-Harassment Policy
+    url: /policies/anti_harassment_policy/
+  - title: Code of Conduct
+    url: /policies/code_of_conduct/
+  - title: Data Privacy Policy
+    url: /policies/data_privacy_policy/
+  - title: Information Security Policy
+    url: /policies/information_security_policy/
+  - title: Intellectual Property Policy
+    url: /policies/intellectual_property_policy/
+  - title: Open Source Policy
+    url: /policies/open_source_policy/
+  - title: Performance Review Policy
+    url: /policies/performance_review_policy/
+  - title: Remote Work Policy
+    url: /policies/remote_work_policy/
+  - title: Social Media Policy
+    url: /policies/social_media_policy/
+  - title: Travel & Expense Policy
+    url: /policies/travel_expense_policy/
