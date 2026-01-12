@@ -3,8 +3,10 @@ layout: page
 title: Data Privacy Policy
 permalink: /policies/data_privacy_policy/
 ---
-
 # Data Privacy Policy
+
+## Purpose
+The purpose of this policy is to establish a framework for compliance and integrity.
 
 ## 1. Introduction
 This Data Privacy Policy ("Policy") describes how the Company collects, uses, and discloses information, and what choices you have with respect to the information. We are committed to protecting your personal data and respecting your privacy.
@@ -55,3 +57,25 @@ We retain personal data only for as long as necessary to fulfill the purposes fo
 If you have questions about this Policy or our privacy practices, please contact:
 *   **Data Protection Officer**: privacy@company.com
 *   **Legal Department**: legal@company.com
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

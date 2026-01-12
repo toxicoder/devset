@@ -4,6 +4,12 @@ title: Slack Guide
 permalink: /technical_support/collaboration/slack_guide/
 ---
 
+# Slack Guide
+
+## Overview
+This document provides detailed technical support information for **Slack Guide**. It is intended for end-users and support staff.
+
+## Configuration & Instructions
 ## Slack Best Practices
 
 Slack is our digital HQ. Using it effectively helps reduce noise and increase productivity.
@@ -35,3 +41,14 @@ Slack is our digital HQ. Using it effectively helps reduce noise and increase pr
 ### Slack Connect
 
 We can connect shared channels with external partners/vendors. Request a Slack Connect channel via `#help-it`.
+
+## Troubleshooting Guide
+1.  **Reproduce:** Try to reproduce the issue consistently.
+2.  **Isolate:** Determine if the issue is with the hardware, software, or network.
+3.  **Logs:** Check the logs for specific error codes.
+
+## Getting Help
+If the issue persists:
+1.  Search the Knowledge Base.
+2.  Ask in the `#general-support` Slack channel.
+3.  Open a Jira ticket.

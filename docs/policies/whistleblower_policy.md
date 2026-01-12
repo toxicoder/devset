@@ -3,7 +3,6 @@ layout: page
 title: Whistleblower Policy
 permalink: /policies/whistleblower_policy/
 ---
-
 # Whistleblower Policy
 
 ## 1. Purpose
@@ -38,3 +37,25 @@ All reports will be promptly investigated and appropriate corrective action will
 ## 8. Contact
 *   **Compliance Officer**: compliance@company.com
 *   **Anonymous Hotline**: +1-800-555-0199
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

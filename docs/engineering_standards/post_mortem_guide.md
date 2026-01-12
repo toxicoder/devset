@@ -4,6 +4,12 @@ title: Post-Mortem Guide
 permalink: /engineering_standards/post_mortem_guide/
 ---
 
+# Post-Mortem Guide
+
+## Executive Summary
+This document defines the process standard for **Post-Mortem Guide**. Adherence is mandatory to ensure operational excellence.
+
+## The Process
 We learn more from our failures than our successes. A Post-Mortem (or COE -
 Correction of Error) is a structured process to analyze incidents, understand
 root causes, and prevent recurrence.
@@ -83,3 +89,12 @@ Date**.
 * [Detect] Add alert for high database query time. (Owner: @backend-team, Due:
   YYYY-MM-DD)
 * [Mitigate] Update rollback playbook. (Owner: @oncall, Due: YYYY-MM-DD)
+
+## Roles and Responsibilities
+*   **Process Owner:** Ensures the process is up-to-date.
+*   **Practitioner:** Follows the process in daily work.
+*   **Auditor:** Verifies compliance.
+
+## Continuous Improvement
+*   We review this process quarterly.
+*   Please submit feedback via Jira.

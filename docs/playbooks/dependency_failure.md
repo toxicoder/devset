@@ -4,6 +4,11 @@ title: Dependency Failure
 permalink: /playbooks/dependency_failure/
 ---
 
+# Playbook: Dependency Failure
+
+## Incident Overview
+**Playbook Name:** Dependency Failure
+**Target Response Time:** < 15 Minutes
 **Scenario:** A critical third-party API (e.g., Stripe, Twilio) or internal downstream service is down.
 
 ## 1. Symptoms
@@ -39,3 +44,15 @@ permalink: /playbooks/dependency_failure/
 
 ## 7. Escalation
 * **Vendor Support**.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with Dependency Failure. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.

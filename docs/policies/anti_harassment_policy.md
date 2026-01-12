@@ -3,8 +3,10 @@ layout: page
 title: Anti-Harassment and Non-Discrimination Policy
 permalink: /policies/anti_harassment_policy/
 ---
-
 # Anti-Harassment and Non-Discrimination Policy
+
+## Scope
+This policy applies to all employees and contractors.
 
 ## Purpose
 The Company is committed to providing a work environment free of harassment and discrimination.
@@ -22,3 +24,25 @@ The Company will promptly and thoroughly investigate all complaints. Confidentia
 
 ## Non-Retaliation
 Retaliation against any employee who reports harassment or participates in an investigation is strictly prohibited.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

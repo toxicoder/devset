@@ -4,6 +4,11 @@ title: High Latency
 permalink: /playbooks/high_latency/
 ---
 
+# Playbook: High Latency
+
+## Incident Overview
+**Playbook Name:** High Latency
+**Target Response Time:** < 15 Minutes
 **Scenario:** 99th percentile (p99) latency is elevated beyond the SLO threshold (e.g., > 500ms).
 
 ## 1. Symptoms
@@ -46,3 +51,15 @@ permalink: /playbooks/high_latency/
 ## 7. Escalation
 * If database is the bottleneck, page **Data Engineering**.
 * If network related, page **Infrastructure**.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with High Latency. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.

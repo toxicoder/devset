@@ -4,6 +4,12 @@ title: Tools and Access
 permalink: /onboarding/tools_and_access/
 ---
 
+# Tools and Access
+
+## Welcome!
+Welcome to the team! This guide covers **Tools and Access** as part of your onboarding journey.
+
+## Key Information
 ## Tools and Access
 
 Here is a list of the primary tools we use and how to get access to them.
@@ -49,3 +55,8 @@ If you need software that is not on this list:
 * **MFA**: Multi-Factor Authentication is required for all services.
 * **Password Manager**: Use 1Password to generate and store secure passwords.
 * **Phishing**: Be vigilant. Report suspicious emails to `security@company.com`.
+
+## Your Checklist
+*   [ ] Read this document thoroughly.
+*   [ ] Complete any setup steps listed above.
+*   [ ] Discuss any questions with your onboarding buddy.

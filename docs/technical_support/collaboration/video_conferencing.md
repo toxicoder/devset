@@ -4,6 +4,12 @@ title: Video Conferencing
 permalink: /technical_support/collaboration/video_conferencing/
 ---
 
+# Video Conferencing
+
+## Overview
+This document provides detailed technical support information for **Video Conferencing**. It is intended for end-users and support staff.
+
+## Configuration & Instructions
 ## Video Conferencing (Zoom/Google Meet)
 
 We use **Zoom** as our primary video conferencing tool and **Google Meet** as a backup.
@@ -34,3 +40,14 @@ We use **Zoom** as our primary video conferencing tool and **Google Meet** as a 
 
 *   **Audio Issues**: Check your input/output device in Zoom settings *before* the call.
 *   **Lag**: Turn off your camera if your internet connection is unstable.
+
+## Troubleshooting Guide
+1.  **Reproduce:** Try to reproduce the issue consistently.
+2.  **Isolate:** Determine if the issue is with the hardware, software, or network.
+3.  **Logs:** Check the logs for specific error codes.
+
+## Getting Help
+If the issue persists:
+1.  Search the Knowledge Base.
+2.  Ask in the `#general-support` Slack channel.
+3.  Open a Jira ticket.

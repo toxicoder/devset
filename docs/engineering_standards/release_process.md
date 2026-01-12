@@ -4,6 +4,12 @@ title: Release Process
 permalink: /engineering_standards/release_process/
 ---
 
+# Release Process
+
+## Executive Summary
+This document defines the process standard for **Release Process**. Adherence is mandatory to ensure operational excellence.
+
+## The Process
 Our release process is designed to deliver value to customers quickly and
 safely. We aim for continuous delivery while minimizing the risk of breakage.
 
@@ -59,3 +65,12 @@ We use feature flags to decouple deployment from release.
   implement a code freeze where only emergency fixes are allowed.
 * **Db Migrations:** Database schema changes must be backward compatible.
   Separate schema changes from code changes.
+
+## Roles and Responsibilities
+*   **Process Owner:** Ensures the process is up-to-date.
+*   **Practitioner:** Follows the process in daily work.
+*   **Auditor:** Verifies compliance.
+
+## Continuous Improvement
+*   We review this process quarterly.
+*   Please submit feedback via Jira.

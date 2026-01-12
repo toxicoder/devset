@@ -4,6 +4,12 @@ title: Culture and Values
 permalink: /onboarding/culture_and_values/
 ---
 
+# Culture and Values
+
+## Welcome!
+Welcome to the team! This guide covers **Culture and Values** as part of your onboarding journey.
+
+## Key Information
 ## Culture and Values
 
 At our company, culture isn't just a poster on the wall; it's how we make
@@ -62,3 +68,8 @@ Leaders develop leaders and take their role in coaching seriously.
 We are committed to building a diverse team and an inclusive environment where
 everyone feels they belong. We believe that diverse teams build better
 products.
+
+## Your Checklist
+*   [ ] Read this document thoroughly.
+*   [ ] Complete any setup steps listed above.
+*   [ ] Discuss any questions with your onboarding buddy.

@@ -6,6 +6,17 @@ permalink: /training/soft_skills/giving_feedback/
 
 # Giving Feedback
 
+## Course Overview
+**Course Title:** Giving Feedback
+**Level:** Intermediate
+**Format:** Workshop & Role-playing
+
+## Learning Objectives
+*   Master the art of Giving Feedback.
+*   Build stronger relationships with your team.
+*   Navigate complex interpersonal situations.
+
+## Core Curriculum
 ## Principles
 We strive for a culture of open, honest, and constructive feedback.
 
@@ -23,3 +34,16 @@ Care Personally + Challenge Directly.
 * **Ruinous Empathy**: Care without Challenge (avoiding conflict to be "nice").
 * **Manipulative Insincerity**: Neither Care nor Challenge (passive-aggressive).
 * **Radical Candor**: High Care + High Challenge.
+
+## Practical Exercises
+1.  **Role Play:** Pair up with a partner and simulate a scenario related to Giving Feedback.
+2.  **Reflection:** Write a short journal entry about a past experience.
+3.  **Feedback:** Request specific feedback from your manager this week.
+
+## Assessment
+*   Participation in the workshop.
+*   Self-assessment survey.
+
+## Resources
+*   Internal Leadership Wiki
+*   Recommended Reading List

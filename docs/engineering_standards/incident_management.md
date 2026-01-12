@@ -4,8 +4,12 @@ title: Incident Management
 permalink: /engineering_standards/incident_management/
 ---
 
-# Incident Management Standard
+# Incident Management
 
+## Executive Summary
+This document defines the process standard for **Incident Management**. Adherence is mandatory to ensure operational excellence.
+
+## The Process
 **Effective Date:** January 1, 2024
 **Owner:** SRE Directorate
 **Audience:** All Engineering, Product, and Support Staff
@@ -278,3 +282,12 @@ The incident is not over until the paperwork is done.
 ---
 
 *For any questions regarding this standard, please contact the SRE Team at `sre-help@company.org`.*
+
+## Roles and Responsibilities
+*   **Process Owner:** Ensures the process is up-to-date.
+*   **Practitioner:** Follows the process in daily work.
+*   **Auditor:** Verifies compliance.
+
+## Continuous Improvement
+*   We review this process quarterly.
+*   Please submit feedback via Jira.

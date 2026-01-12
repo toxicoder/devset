@@ -3,8 +3,10 @@ layout: page
 title: Acceptable Use Policy
 permalink: /policies/acceptable_use_policy/
 ---
+# Acceptable Use Policy
 
-# Acceptable Use Policy (AUP)
+## Purpose
+The purpose of this policy is to establish a framework for compliance and integrity.
 
 ## 1. Overview
 This Acceptable Use Policy ("Policy") outlines the acceptable use of computer equipment, systems, networks, and software ("Systems") at the Company. This policy is in place to protect the Company and its employees from illegal or damaging actions by individuals, either knowingly or unknowingly.
@@ -34,3 +36,25 @@ The following activities are strictly prohibited:
 ## 6. Policy Compliance
 *   **Measurement**: The Security Team will verify compliance to this policy through various methods, including but not limited to, business tool reports, internal and external audits, and feedback to the policy owner.
 *   **Enforcement**: Any employee found to have violated this policy may be subject to disciplinary action, up to and including termination of employment.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

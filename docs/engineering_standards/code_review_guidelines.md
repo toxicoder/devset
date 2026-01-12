@@ -6,6 +6,10 @@ permalink: /engineering_standards/code_review_guidelines/
 
 # Code Review Guidelines
 
+## Executive Summary
+This document defines the engineering standard for **Code Review Guidelines**. Adherence is mandatory to ensure quality and maintainability.
+
+## Core Standard
 **Effective Date:** January 1, 2024
 **Owner:** Engineering Leadership
 **Audience:** All Engineers
@@ -183,3 +187,11 @@ Sometimes production is burning, and we can't wait 24 hours.
 ---
 
 *Remember: The goal of code review is to ship high-quality software while growing as a team.*
+
+## Best Practices
+*   **Simplicity:** Prefer simple solutions over complex ones.
+*   **Readability:** Write code for humans first, computers second.
+*   **Testing:** All changes must be verified with tests.
+
+## Review Process
+*   All changes related to this standard must be reviewed by a peer.

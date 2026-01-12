@@ -3,8 +3,13 @@ layout: page
 title: Standard Terms of Service
 permalink: /policies/terms_of_service/standard/
 ---
-
 # Standard Terms of Service
+
+## Purpose
+The purpose of this policy is to establish a framework for compliance and integrity.
+
+## Scope
+This policy applies to all employees and contractors.
 
 **Last Updated:** October 26, 2023
 
@@ -59,3 +64,25 @@ These Terms are governed by the laws of the State of California without regard t
 ## 11. Contact Information
 
 The Service is offered by Company Name, located at Address. You may contact us by sending correspondence to that address or by emailing us at support@example.com.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

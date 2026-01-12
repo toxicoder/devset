@@ -4,8 +4,19 @@ title: Incident Response Simulation
 permalink: /training/engineering/incident_response_simulation/
 ---
 
-# Incident Response Simulation: "Wheel of Misfortune"
+# Incident Response Simulation
 
+## Course Overview
+**Course Title:** Incident Response Simulation
+**Level:** Intermediate/Advanced
+**Format:** Self-paced Reading & Hands-on Labs
+
+## Learning Objectives
+*   Articulate the core principles of Incident Response Simulation.
+*   Apply best practices to real-world engineering scenarios.
+*   Troubleshoot common issues and optimize performance.
+
+## Core Curriculum
 ## Overview
 The Wheel of Misfortune is a role-playing game used to train engineers on incident response.
 
@@ -31,3 +42,15 @@ The Wheel of Misfortune is a role-playing game used to train engineers on incide
 **Symptom**: Service C is returning 500 errors immediately after a deployment.
 **Root Cause**: Invalid YAML configuration file.
 **Resolution**: Rollback to the previous version and validate config in CI/CD.
+
+## Hands-on Exercises
+1.  **Review:** Read the core curriculum carefully.
+2.  **Apply:** Identify one area in your current project where this applies.
+3.  **Prototype:** Create a small proof-of-concept in your sandbox environment.
+
+## Assessment
+*   Complete the knowledge check in the Learning Management System (LMS).
+
+## Resources
+*   Internal Wiki
+*   Official Documentation

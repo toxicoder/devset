@@ -4,6 +4,12 @@ title: Accessory Request
 permalink: /technical_support/hardware/accessory_request/
 ---
 
+# Accessory Request
+
+## Overview
+This document provides detailed technical support information for **Accessory Request**. It is intended for end-users and support staff.
+
+## Configuration & Instructions
 ## Hardware Accessories
 
 Employees are entitled to standard peripherals to create a productive workspace.
@@ -35,3 +41,14 @@ Items requiring manager approval:
 ### Returns
 
 If you leave the company or upgrade, accessories over $50 value (monitors, docks) must be returned. Small peripherals (cables, old mice) do not need to be returned.
+
+## Troubleshooting Guide
+1.  **Reproduce:** Try to reproduce the issue consistently.
+2.  **Isolate:** Determine if the issue is with the hardware, software, or network.
+3.  **Logs:** Check the logs for specific error codes.
+
+## Getting Help
+If the issue persists:
+1.  Search the Knowledge Base.
+2.  Ask in the `#hardware-support` Slack channel.
+3.  Open a Jira ticket.

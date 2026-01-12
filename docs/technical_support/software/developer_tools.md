@@ -4,6 +4,12 @@ title: Developer Tools
 permalink: /technical_support/software/developer_tools/
 ---
 
+# Developer Tools
+
+## Overview
+This document provides detailed technical support information for **Developer Tools**. It is intended for end-users and support staff.
+
+## Configuration & Instructions
 ## Developer Tools & Ecosystem
 
 We provide a robust suite of tools for engineering teams.
@@ -48,3 +54,14 @@ registry=https://artifactory.company.com/artifactory/api/npm/npm/
 *   **GitHub Enterprise**: `https://github.company.com`
 *   **Access**: SSO enabled.
 *   **SSH Keys**: Must be Ed25519. RSA keys < 4096 bits are rejected.
+
+## Troubleshooting Guide
+1.  **Reproduce:** Try to reproduce the issue consistently.
+2.  **Isolate:** Determine if the issue is with the hardware, software, or network.
+3.  **Logs:** Check the logs for specific error codes.
+
+## Getting Help
+If the issue persists:
+1.  Search the Knowledge Base.
+2.  Ask in the `#software-support` Slack channel.
+3.  Open a Jira ticket.

@@ -3,8 +3,13 @@ layout: page
 title: API Terms of Service
 permalink: /policies/terms_of_service/api/
 ---
-
 # API Terms of Service
+
+## Purpose
+The purpose of this policy is to establish a framework for compliance and integrity.
+
+## Scope
+This policy applies to all employees and contractors.
 
 **Last Updated:** October 26, 2023
 
@@ -61,3 +66,25 @@ We may change, deprecate, or discontinue the API or any part of it at any time. 
 ## 10. General Terms
 
 These Terms are governed by the laws of the State of California. Any disputes arising out of these Terms will be resolved in the state or federal courts located in San Francisco County, California.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

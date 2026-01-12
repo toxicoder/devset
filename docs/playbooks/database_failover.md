@@ -4,6 +4,11 @@ title: Database Failover
 permalink: /playbooks/database_failover/
 ---
 
+# Playbook: Database Failover
+
+## Incident Overview
+**Playbook Name:** Database Failover
+**Target Response Time:** < 15 Minutes
 **Scenario:** Primary database is unresponsive, crashed, or experiencing high load requiring failover.
 
 ## 1. Symptoms
@@ -40,3 +45,15 @@ permalink: /playbooks/database_failover/
 
 ## 7. Escalation
 * **Data Engineering** / **DBA Team** immediately.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with Database Failover. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.

@@ -4,6 +4,12 @@ title: Reporting Phishing
 permalink: /technical_support/security/reporting_phishing/
 ---
 
+# Reporting Phishing
+
+## Overview
+This document provides detailed technical support information for **Reporting Phishing**. It is intended for end-users and support staff.
+
+## Configuration & Instructions
 ## Phishing & Security Reporting
 
 Security is everyone's responsibility. If you see something suspicious, report it immediately.
@@ -46,3 +52,14 @@ Don't panic, but act fast.
 If you lose your laptop or phone:
 1.  Report it to `#help-security` or `security@company.com` immediately.
 2.  We can remotely wipe the device to protect data.
+
+## Troubleshooting Guide
+1.  **Reproduce:** Try to reproduce the issue consistently.
+2.  **Isolate:** Determine if the issue is with the hardware, software, or network.
+3.  **Logs:** Check the logs for specific error codes.
+
+## Getting Help
+If the issue persists:
+1.  Search the Knowledge Base.
+2.  Ask in the `#general-support` Slack channel.
+3.  Open a Jira ticket.

@@ -4,6 +4,12 @@ title: On-Call Guide
 permalink: /engineering_standards/on_call_guide/
 ---
 
+# On-Call Guide
+
+## Executive Summary
+This document defines the process standard for **On-Call Guide**. Adherence is mandatory to ensure operational excellence.
+
+## The Process
 Being on-call is a shared responsibility. It ensures our services remain
 reliable and available for our customers. This guide sets expectations for
 on-call engineers.
@@ -55,3 +61,12 @@ on-call engineers.
   an outage persist.
 * **Tune Alerts:** If an alert is noisy (false positive) or not actionable, tune
   it or delete it. "Page Fatigue" is real and dangerous.
+
+## Roles and Responsibilities
+*   **Process Owner:** Ensures the process is up-to-date.
+*   **Practitioner:** Follows the process in daily work.
+*   **Auditor:** Verifies compliance.
+
+## Continuous Improvement
+*   We review this process quarterly.
+*   Please submit feedback via Jira.

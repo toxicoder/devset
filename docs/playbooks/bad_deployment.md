@@ -4,6 +4,11 @@ title: Bad Deployment
 permalink: /playbooks/bad_deployment/
 ---
 
+# Playbook: Bad Deployment
+
+## Incident Overview
+**Playbook Name:** Bad Deployment
+**Target Response Time:** < 15 Minutes
 **Scenario:** A recent code deployment has caused a regression, crash, or SEV.
 
 ## 1. Symptoms
@@ -38,3 +43,15 @@ permalink: /playbooks/bad_deployment/
 
 ## 7. Escalation
 * **Release Manager** / **Author of the Change**.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with Bad Deployment. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.

@@ -4,6 +4,11 @@ title: High Error Rate
 permalink: /playbooks/high_error_rate/
 ---
 
+# Playbook: High Error Rate
+
+## Incident Overview
+**Playbook Name:** High Error Rate
+**Target Response Time:** < 15 Minutes
 **Scenario:** Elevated rate of 5xx errors (Internal Server Errors).
 
 ## 1. Symptoms
@@ -39,3 +44,15 @@ permalink: /playbooks/high_error_rate/
 
 ## 7. Escalation
 * If related to core platform, page **Platform Team**.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with High Error Rate. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.

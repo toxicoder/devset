@@ -3,8 +3,10 @@ layout: page
 title: Information Security Policy
 permalink: /policies/information_security_policy/
 ---
-
 # Information Security Policy
+
+## Scope
+This policy applies to all employees and contractors.
 
 ## 1. Purpose
 This policy outlines the measures to protect the Company's information assets from unauthorized access, use, disclosure, disruption, modification, or destruction. It establishes the framework for the Company's Information Security Management System (ISMS).
@@ -51,3 +53,25 @@ This policy outlines the measures to protect the Company's information assets fr
 *   **Office Access**: Access to office premises is restricted to authorized personnel via badges or keys.
 *   **Visitor Management**: Visitors must sign in, sign an NDA if necessary, and be escorted at all times.
 *   **Clean Desk Policy**: Confidential documents must be secured in locked drawers when not in use.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

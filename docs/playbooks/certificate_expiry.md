@@ -4,6 +4,11 @@ title: Certificate Expiry
 permalink: /playbooks/certificate_expiry/
 ---
 
+# Playbook: Certificate Expiry
+
+## Incident Overview
+**Playbook Name:** Certificate Expiry
+**Target Response Time:** < 15 Minutes
 **Scenario:** An SSL/TLS certificate has expired or is about to expire, causing connection failures.
 
 ## 1. Symptoms
@@ -35,3 +40,15 @@ permalink: /playbooks/certificate_expiry/
 
 ## 7. Escalation
 * **Security Team** / **Infrastructure**.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with Certificate Expiry. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.

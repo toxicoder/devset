@@ -6,6 +6,17 @@ permalink: /training/leadership/new_manager/
 
 # New Manager Guide
 
+## Course Overview
+**Course Title:** New Manager Guide
+**Level:** Intermediate
+**Format:** Workshop & Role-playing
+
+## Learning Objectives
+*   Master the art of New Manager Guide.
+*   Build stronger relationships with your team.
+*   Navigate complex interpersonal situations.
+
+## Core Curriculum
 ## Transitioning from Maker to Manager
 * **Shift your mindset**: Your output is now the output of your team.
 * **Let go of the code**: You cannot be the primary coder and an effective manager.
@@ -23,3 +34,16 @@ permalink: /training/leadership/new_manager/
 ## Hiring
 * **The Bar**: Hire people better than you.
 * **Culture Add**: Look for diverse perspectives that add to our culture, not just fit in.
+
+## Practical Exercises
+1.  **Role Play:** Pair up with a partner and simulate a scenario related to New Manager Guide.
+2.  **Reflection:** Write a short journal entry about a past experience.
+3.  **Feedback:** Request specific feedback from your manager this week.
+
+## Assessment
+*   Participation in the workshop.
+*   Self-assessment survey.
+
+## Resources
+*   Internal Leadership Wiki
+*   Recommended Reading List

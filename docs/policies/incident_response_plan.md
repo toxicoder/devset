@@ -3,8 +3,10 @@ layout: page
 title: Incident Response Plan
 permalink: /policies/incident_response_plan/
 ---
-
 # Incident Response Plan
+
+## Scope
+This policy applies to all employees and contractors.
 
 ## 1. Purpose
 The purpose of this Incident Response Plan (IRP) is to provide a structured approach for handling security incidents. The goals are to minimize damage, reduce recovery time and costs, and ensure effective communication.
@@ -52,3 +54,22 @@ The purpose of this Incident Response Plan (IRP) is to provide a structured appr
 
 ## 5. Contact Information
 *   **Security Emergency**: `security-emergency@company.com` or call `+1-555-0199`.
+
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

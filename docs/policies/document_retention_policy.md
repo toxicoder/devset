@@ -3,8 +3,10 @@ layout: page
 title: Document Retention Policy
 permalink: /policies/document_retention_policy/
 ---
-
 # Document Retention Policy
+
+## Scope
+This policy applies to all employees and contractors.
 
 ## 1. Purpose
 The purpose of this Document Retention Policy is to ensure that necessary records and documents of the Company are adequately protected and maintained and to ensure that records that are no longer needed by the Company or are of no value are discarded at the proper time.
@@ -45,3 +47,25 @@ Electronic documents will be retained as if they were paper documents. Therefore
 
 ## 6. Document Destruction
 Documents that are no longer needed for business purposes and that do not fall into any of the document types on the retention schedule should be destroyed. Confidential documents (containing personal data or trade secrets) must be shredded or securely erased.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

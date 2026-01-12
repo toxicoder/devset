@@ -3,8 +3,13 @@ layout: page
 title: Remote Work & Hybrid Policy
 permalink: /policies/remote_work_policy/
 ---
-
 # Remote Work & Hybrid Policy
+
+## Purpose
+The purpose of this policy is to establish a framework for compliance and integrity.
+
+## Scope
+This policy applies to all employees and contractors.
 
 **Effective Date:** January 1, 2024
 **Owner:** People Operations
@@ -166,3 +171,14 @@ A: The company provides catered lunch on Tuesdays and Thursdays. Wednesday is "T
 ---
 
 *For questions, contact People Ops at `people@company.org`.*
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

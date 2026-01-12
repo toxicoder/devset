@@ -3,8 +3,10 @@ layout: page
 title: Intellectual Property Policy
 permalink: /policies/intellectual_property_policy/
 ---
-
 # Intellectual Property Policy
+
+## Scope
+This policy applies to all employees and contractors.
 
 ## Purpose
 This policy clarifies the ownership and protection of intellectual property (IP) created by employees and contractors.
@@ -19,3 +21,25 @@ This policy clarifies the ownership and protection of intellectual property (IP)
 
 ## Open Source
 Contributions to open source projects must follow the Open Source Policy.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

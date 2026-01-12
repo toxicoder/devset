@@ -4,6 +4,12 @@ title: Onboarding Checklists
 permalink: /onboarding/checklist/
 ---
 
+# Onboarding Checklists
+
+## Welcome!
+Welcome to the team! This guide covers **Onboarding Checklists** as part of your onboarding journey.
+
+## Key Information
 ## Onboarding Checklists
 
 Stay organized with these checklists designed to guide you through your first
@@ -79,3 +85,8 @@ month.
 * Propose improvements.
 * Operate independently on daily tasks.
 * Mentor a new hire (optional).
+
+## Your Checklist
+*   [ ] Read this document thoroughly.
+*   [ ] Complete any setup steps listed above.
+*   [ ] Discuss any questions with your onboarding buddy.

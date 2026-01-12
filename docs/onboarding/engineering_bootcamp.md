@@ -4,6 +4,12 @@ title: Engineering Bootcamp
 permalink: /onboarding/engineering_bootcamp/
 ---
 
+# Engineering Bootcamp
+
+## Welcome!
+Welcome to the team! This guide covers **Engineering Bootcamp** as part of your onboarding journey.
+
+## Key Information
 ## Engineering Bootcamp
 
 Welcome, Engineer! This guide will help you set up your development environment
@@ -82,3 +88,8 @@ Let's get you shipping code on Day 1 or 2!
 * **Stack Overflow**: The classic.
 
 Happy Coding!
+
+## Your Checklist
+*   [ ] Read this document thoroughly.
+*   [ ] Complete any setup steps listed above.
+*   [ ] Discuss any questions with your onboarding buddy.

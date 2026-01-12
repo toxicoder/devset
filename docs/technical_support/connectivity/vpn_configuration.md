@@ -4,6 +4,12 @@ title: VPN Configuration
 permalink: /technical_support/connectivity/vpn_configuration/
 ---
 
+# VPN Configuration
+
+## Overview
+This document provides detailed technical support information for **VPN Configuration**. It is intended for end-users and support staff.
+
+## Configuration & Instructions
 ## VPN Configuration
 
 The Virtual Private Network (VPN) allows you to access internal resources securely when working remotely.
@@ -39,3 +45,14 @@ Our VPN uses split tunneling.
 *   **Connection Failed**: Ensure you have a stable internet connection.
 *   **MFA Timeout**: Approve the Duo push promptly.
 *   **Certificate Error**: Re-install the root certificate from the [Security Portal](https://security.company.com).
+
+## Troubleshooting Guide
+1.  **Reproduce:** Try to reproduce the issue consistently.
+2.  **Isolate:** Determine if the issue is with the hardware, software, or network.
+3.  **Logs:** Check the logs for specific error codes.
+
+## Getting Help
+If the issue persists:
+1.  Search the Knowledge Base.
+2.  Ask in the `#general-support` Slack channel.
+3.  Open a Jira ticket.

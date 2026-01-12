@@ -3,7 +3,6 @@ layout: page
 title: Code of Conduct
 permalink: /policies/code_of_conduct/
 ---
-
 # Code of Conduct
 
 ## Purpose
@@ -29,3 +28,25 @@ If you witness or suspect a violation of this Code, you are encouraged to report
 
 ## Disciplinary Action
 Violations of this Code may result in disciplinary action, up to and including termination of employment.
+
+## Roles and Responsibilities
+*   **Employees:** Must adhere to the policy.
+*   **Managers:** Must enforce the policy.
+## Compliance
+Violations of this policy may result in disciplinary action.
+
+## FAQ
+
+**Q: How strictly must this be followed?**
+A: This document outlines mandatory standards. Deviations require formal approval.
+
+**Q: Who is the point of contact?**
+A: Refer to the "Owner" listed in the header or the relevant Slack channel.
+
+**Q: How often is this updated?**
+A: Reviews are conducted quarterly.
+
+## Version History
+| Version | Date | Author | Changes |
+| :--- | :--- | :--- | :--- |
+| 1.0 | Current | Policy Team | Initial Release |

@@ -4,6 +4,11 @@ title: Disk Space Exhaustion
 permalink: /playbooks/disk_space_exhaustion/
 ---
 
+# Playbook: Disk Space Exhaustion
+
+## Incident Overview
+**Playbook Name:** Disk Space Exhaustion
+**Target Response Time:** < 15 Minutes
 **Scenario:** Server or container volume is running out of disk space.
 
 ## 1. Symptoms
@@ -37,3 +42,15 @@ permalink: /playbooks/disk_space_exhaustion/
 
 ## 7. Escalation
 * **Infrastructure Team**.
+## Incident Commander Responsibilities
+*   **Assess:** Determine the severity and impact.
+*   **Coordinate:** Assign roles (Ops Lead, Comms Lead).
+*   **Communicate:** Update the status page and stakeholders every 30 minutes.
+
+## Communication Templates
+**Internal Update:**
+> "We are investigating an issue with Disk Space Exhaustion. Impact is [Low/High]. Next update in 30 mins."
+
+## Post-Incident Procedure
+1.  Ensure all logs and artifacts are preserved.
+2.  Schedule a Blameless Post-Mortem within 24 hours.
