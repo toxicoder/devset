@@ -225,8 +225,9 @@
   "policies/remote_work_policy.md": "policies/remote_work_policy.md",
   "policies/social_media_policy.md": "policies/social_media_policy.md",
   "policies/travel_expense_policy.md": "policies/travel_expense_policy.md",
-  "policies/terms_of_service/standard.md": "policies/terms_of_service/standard.md",
-  "policies/terms_of_service/saas.md": "policies/terms_of_service/saas.md",
-  "policies/terms_of_service/api.md": "policies/terms_of_service/api.md",
-  "policies/terms_of_service/marketplace.md": "policies/terms_of_service/marketplace.md"
+  "onboarding/checklist.md": "onboarding/checklist.md",
+  "onboarding/tools_and_access.md": "onboarding/tools_and_access.md",
+  "onboarding/culture_and_values.md": "onboarding/culture_and_values.md",
+  "onboarding/engineering_bootcamp.md": "onboarding/engineering_bootcamp.md",
+  "onboarding/index.md": "onboarding/index.md"
 }

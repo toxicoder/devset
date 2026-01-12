@@ -1,6 +1,18 @@
 docs:
 - title: Home
   url: /
+- title: Employee Onboarding
+  children:
+  - title: Overview
+    url: /onboarding/
+  - title: Checklists
+    url: /onboarding/checklist/
+  - title: Engineering Bootcamp
+    url: /onboarding/engineering_bootcamp/
+  - title: Culture and Values
+    url: /onboarding/culture_and_values/
+  - title: Tools and Access
+    url: /onboarding/tools_and_access/
 - title: Job Role Organization
   children:
   - title: Overview
