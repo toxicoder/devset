@@ -23,6 +23,30 @@ setup_mocks() {
 #!/bin/bash
 ARGS="$*"
 
+# Handle bash -s (Heredoc) execution
+if [[ "$ARGS" == *"bash -s"* ]]; then
+    SCRIPT_CONTENT=$(cat -)
+
+    # Check for docker login / pull failures in the script
+    if [[ "$SCRIPT_CONTENT" == *"docker login"* ]] || [[ "$SCRIPT_CONTENT" == *"docker pull"* ]]; then
+        if [[ -n "${MOCK_SSH_FAIL_PULL_IP:-}" ]] && [[ "$ARGS" == *"${MOCK_SSH_FAIL_PULL_IP}"* ]]; then
+            echo "Mocking pull failure on $MOCK_SSH_FAIL_PULL_IP (Heredoc)"
+            exit 1
+        fi
+        if [[ -n "${MOCK_SSH_DELAY_PULL_IP:-}" ]] && [[ "$ARGS" == *"${MOCK_SSH_DELAY_PULL_IP}"* ]]; then
+            sleep 2
+        fi
+    fi
+
+    # Check for TRT compilation script
+    if [[ "$SCRIPT_CONTENT" == *"trtllm-convert-checkpoint"* ]]; then
+         # We can simulate failure if needed, but default success
+         exit 0
+    fi
+
+    exit 0
+fi
+
 if [[ "$ARGS" == *"uname -m"* ]]; then
     if [[ -n "${MOCK_ARCH}" ]]; then
         echo "${MOCK_ARCH}"

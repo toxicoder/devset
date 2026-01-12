@@ -546,8 +546,16 @@ function _get_ip_from_iface() {
 function pull_image() {
   local ip="$1"
   local image="$2"
-  if ! printf "%s" "$NGC_API_KEY" | ssh "${SSH_OPTS[@]}" "$ip" \
-    "docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1 && docker pull $PLATFORM_ARG $image"; then
+
+  # Use Heredoc with local expansion for the key (safe as it goes to stdin of ssh -> bash)
+  if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    echo "$NGC_API_KEY" | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1
+    if ! docker pull $PLATFORM_ARG "$image"; then
+       echo "Error: Failed to pull image $image" >&2
+       exit 1
+    fi
+EOF
+  then
     printf "Error: Failed to pull image on %s\n" "$ip" >&2; return 1
   fi
 }
@@ -703,268 +711,6 @@ function _remote_mkdir() {
   fi
 }
 
-# Internal: Generate Heuristic Conversion Script (Python)
-# Arguments: $1 ip, $2 path
-function generate_trt_converter_script() {
-  local ip="$1"
-  local path="$2"
-
-  local temp_script
-  temp_script=$(mktemp)
-  cat <<'PYTHON_SCRIPT' > "$temp_script"
-import os
-import sys
-import json
-import subprocess
-import argparse
-
-def find_examples_dir():
-    # Standard locations in NVIDIA containers
-    candidates = [
-        "/app/tensorrt_llm/examples",
-        "/workspace/tensorrt_llm/examples",
-        "/usr/local/lib/python3.12/dist-packages/tensorrt_llm/examples", # Py3.12
-        "/usr/local/lib/python3.10/dist-packages/tensorrt_llm/examples", # Py3.10
-        "/opt/tensorrt_llm/examples",
-        "/usr/src/tensorrt_llm/examples"
-    ]
-
-    # Try to find via site-packages dynamically
-    try:
-        import site
-        if hasattr(site, 'getsitepackages'):
-            for p in site.getsitepackages():
-                candidates.append(os.path.join(p, "tensorrt_llm", "examples"))
-    except:
-        pass
-
-    # Also check sys.path
-    for p in sys.path:
-        candidates.append(os.path.join(p, "tensorrt_llm", "examples"))
-
-    checked = []
-    for c in candidates:
-        if c in checked: continue
-        checked.append(c)
-        if os.path.exists(c):
-             # Validate content (look for common examples to ensure it's the right dir)
-             if os.path.exists(os.path.join(c, "llama")) or os.path.exists(os.path.join(c, "gpt")):
-                 return c, checked
-
-    # Fallback: Clone from GitHub if not found
-    print("[Info] Examples not found in standard paths. Attempting to clone from GitHub...")
-    try:
-        # Check/Install git
-        try:
-            subprocess.check_call(["git", "--version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        except:
-            print("[Info] git not found, attempting to install...")
-            try:
-                subprocess.check_call(["apt-get", "update", "-y"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                subprocess.check_call(["apt-get", "install", "-y", "git"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            except Exception as e:
-                print(f"[Warning] Failed to install git: {e}")
-
-        import tensorrt_llm
-        version = tensorrt_llm.__version__
-        # Clean version string (e.g., 0.10.0.dev -> 0.10.0) for tagging
-        base_ver = version.split('+')[0].split('-')[0]
-
-        clone_dir = "/tmp/tensorrt_llm_examples_repo"
-        if not os.path.exists(clone_dir):
-            tags_to_try = [f"v{base_ver}", f"release/{base_ver}", "main"]
-            success = False
-            for tag in tags_to_try:
-                print(f"[Info] Trying to clone tag: {tag}")
-                try:
-                    subprocess.check_call(["git", "clone", "--depth", "1", "--branch", tag, "https://github.com/NVIDIA/TensorRT-LLM.git", clone_dir], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                    success = True
-                    break
-                except subprocess.CalledProcessError:
-                    continue
-
-            if not success:
-                 print("[Warning] Failed to clone specific tags. Trying default branch...")
-                 try:
-                    subprocess.check_call(["git", "clone", "--depth", "1", "https://github.com/NVIDIA/TensorRT-LLM.git", clone_dir], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                 except:
-                    pass
-
-        examples_path = os.path.join(clone_dir, "examples")
-        checked.append(examples_path)
-        if os.path.exists(examples_path):
-             return examples_path, checked
-
-    except Exception as e:
-        print(f"[Warning] Failed to clone examples: {e}")
-
-    return None, checked
-
-def detect_architecture(model_dir):
-    config_path = os.path.join(model_dir, "config.json")
-    if not os.path.exists(config_path):
-        return None
-    try:
-        with open(config_path, 'r') as f:
-            config = json.load(f)
-        # Check architectures list
-        if "architectures" in config and config["architectures"]:
-            return config["architectures"][0]
-        # Fallback: check model_type
-        if "model_type" in config:
-            return config["model_type"]
-    except:
-        return None
-    return None
-
-def get_script_for_arch(arch, examples_dir):
-    arch = arch.lower()
-    for suffix in ["forcausallm", "model", "config"]:
-        arch = arch.replace(suffix, "")
-
-    mapping = {
-        "llama": "llama", "mistral": "llama", "mixtral": "llama",
-        "gpt": "gpt", "gptj": "gptj", "gptneox": "gptneox",
-        "chatglm": "chatglm", "qwen": "qwen", "qwen2": "llama",
-        "falcon": "falcon", "baichuan": "baichuan", "gemma": "gemma",
-        "phi": "phi", "whisper": "whisper",
-        "nemotron": "gpt",
-        "nemotronh": "mamba",
-        "mamba": "mamba"
-    }
-
-    target_subdir = mapping.get(arch, arch)
-
-    print(f"[Info] Looking for converter for architecture '{arch}' (mapped to '{target_subdir}')...")
-
-    candidates = []
-    # Recursive search
-    for root, dirs, files in os.walk(examples_dir):
-        if "convert_checkpoint.py" in files:
-            full_path = os.path.join(root, "convert_checkpoint.py")
-            candidates.append(full_path)
-
-    if not candidates:
-        print(f"[Error] No convert_checkpoint.py scripts found in {examples_dir}")
-        return None
-
-    # Strategy 1: Match mapped directory name (parent dir)
-    for c in candidates:
-        parent = os.path.basename(os.path.dirname(c)).lower()
-        if parent == target_subdir:
-            return c
-
-    # Strategy 2: Fuzzy match parent dir with arch
-    for c in candidates:
-        parent = os.path.basename(os.path.dirname(c)).lower()
-        if arch in parent or parent in arch:
-            return c
-
-    # Strategy 3: Universal Fallback (Llama)
-    print("[Warning] Specific converter not found. Attempting Universal Fallback (Llama)...")
-    for c in candidates:
-        parent = os.path.basename(os.path.dirname(c)).lower()
-        if parent == "llama":
-            print(f"[Info] Using fallback: {c}")
-            return c
-
-    # Failure
-    print("[Error] Could not find a suitable conversion script.")
-    print("[Debug] Found the following conversion scripts:")
-    for c in candidates:
-        print(f" - {c}")
-    return None
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model_dir", required=True)
-    parser.add_argument("--output_dir", required=True)
-    parser.add_argument("--tp_size", default="1")
-    parser.add_argument("--pp_size", default="1")
-    args, unknown = parser.parse_known_args()
-
-    examples_dir, checked_paths = find_examples_dir()
-    if not examples_dir:
-        print("[Error] Could not find tensorrt_llm/examples directory.")
-        print(f"[Debug] Checked paths: {checked_paths}")
-        print(f"[Debug] Py Version: {sys.version}")
-        sys.exit(1)
-
-    arch = detect_architecture(args.model_dir)
-    if not arch:
-        print("[Warning] Could not detect architecture. Defaulting to Llama.")
-        arch = "llama"
-
-    print(f"[Info] Detected Architecture: {arch}")
-
-    # Patch for NemotronH (missing hidden_act in config causes Mamba conversion crash)
-    # Note: arch detection returns the raw string from config.json (e.g. "NemotronHForCausalLM")
-    if "NemotronH" in arch or "Mamba" in arch:
-        try:
-            config_path = os.path.join(args.model_dir, "config.json")
-            if os.path.exists(config_path):
-                with open(config_path, 'r') as f:
-                    config = json.load(f)
-
-                changed = False
-                if "hidden_act" not in config:
-                    print("[Info] Patching config.json: Adding 'hidden_act': 'silu' for NemotronH compatibility.")
-                    config["hidden_act"] = "silu"
-                    changed = True
-
-                if "rms_norm" not in config:
-                    print("[Info] Patching config.json: Adding 'rms_norm': true for NemotronH compatibility.")
-                    config["rms_norm"] = True
-                    changed = True
-
-                # FIXED: Added patch for ssm_state_size to support newer Nemotron configs
-                if "ssm_state_size" in config and "state_size" not in config:
-                    print("[Info] Patching config.json: Mapping 'ssm_state_size' to 'state_size'.")
-                    config["state_size"] = config["ssm_state_size"]
-                    changed = True
-
-                if changed:
-                    with open(config_path, 'w') as f:
-                        json.dump(config, f, indent=2)
-        except Exception as e:
-            print(f"[Warning] Failed to patch config.json: {e}")
-
-    script = get_script_for_arch(arch, examples_dir)
-    if not script:
-        print(f"[Error] No conversion script found for {arch}")
-        print(f"[Debug] Examples Directory: {examples_dir}")
-        try:
-            print(f"[Debug] Contents: {os.listdir(examples_dir)}")
-        except:
-            pass
-        sys.exit(1)
-
-    print(f"[Info] Using conversion script: {script}")
-
-    cmd = [sys.executable, script,
-           "--model_dir", args.model_dir,
-           "--output_dir", args.output_dir,
-           "--tp_size", str(args.tp_size),
-           "--pp_size", str(args.pp_size)]
-
-    print(f"[Exec] {' '.join(cmd)}")
-    try:
-        subprocess.check_call(cmd)
-    except subprocess.CalledProcessError as e:
-        print(f"[Error] Conversion script failed with exit code {e.returncode}")
-        sys.exit(e.returncode)
-    except Exception as e:
-        print(f"[Error] Unexpected error during conversion: {e}")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()
-PYTHON_SCRIPT
-
-  # Transfer to remote
-  ssh "${SSH_OPTS[@]}" "$ip" "cat > $path" < "$temp_script"
-  rm -f "$temp_script"
-}
 
 # Internal: Download HF Model
 # Arguments: $1 ip, $2 model_id, $3 container_model_path, $4 host_model_base, $5 container_model_base
@@ -993,6 +739,34 @@ INNER
         '$IMAGE' \\
         bash -c "\$DOCKER_SCRIPT"
 EOF
+}
+
+# Internal: Patch model config for compatibility (e.g. Nemotron)
+function _patch_model_config() {
+  local ip="$1"
+  local ctr_model_path="$2"
+  local host_model_base="$3"
+  local ctr_model_base="$4"
+
+  # Inline python to patch config.json
+  local patch_script="
+import json, os, sys
+path = '$ctr_model_path/config.json'
+if os.path.exists(path):
+    try:
+        with open(path, 'r') as f: config = json.load(f)
+        changed = False
+        if 'hidden_act' not in config: config['hidden_act'] = 'silu'; changed = True
+        if 'rms_norm' not in config: config['rms_norm'] = True; changed = True
+        if 'ssm_state_size' in config and 'state_size' not in config: config['state_size'] = config['ssm_state_size']; changed = True
+        if changed:
+             with open(path, 'w') as f: json.dump(config, f, indent=2)
+             print('Patched config.json')
+    except Exception as e: print(e)
+"
+  # Run via docker to access the volume
+  ssh "${SSH_OPTS[@]}" "$ip" \
+     "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE python3 -c \"$patch_script\"" 2>/dev/null || true
 }
 
 # Internal: Compile TRT Engine
@@ -1036,15 +810,17 @@ function compile_trt_engine() {
 
   local ckpt_dir="$ctr_engine_path/ckpt"
 
-  generate_trt_converter_script "$ip" "$host_engine_path/convert_heuristic.py"
+  # Patch config if needed (e.g. Nemotron/Mamba fixes)
+  _patch_model_config "$ip" "$ctr_model_path" "$host_model_base" "$ctr_model_base"
 
+  # Use CLI tools directly
   if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
     docker run --rm --gpus all \\
         -v '$host_model_base':'$ctr_model_base' \\
         -v '$host_engine_base':'$ctr_engine_base' \\
         '$IMAGE' \\
         bash -c "
-python3 '$ctr_engine_path/convert_heuristic.py' \\
+trtllm-convert-checkpoint \\
   --model_dir '$ctr_model_path' \\
   --output_dir '$ckpt_dir' \\
   --tp_size '$TP_SIZE' \\

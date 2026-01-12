@@ -27,7 +27,7 @@ This checklist guides the refactoring of `dgx-spark/scripts/run-distributed-mode
     - Update `parse_model_config` to read from this external file, making updates easier without modifying script logic.
 
 ## Phase 3: Remote Execution Reliability
-- [ ] **Implement SSH Heredoc Pattern**:
+- [x] **Implement SSH Heredoc Pattern**:
     - Identify complex remote commands (especially `download_hf_model` and `pull_image`).
     - Refactor them to pass scripts via standard input to avoid "SSH Quote Hell".
     - Example pattern:
@@ -36,15 +36,15 @@ This checklist guides the refactoring of `dgx-spark/scripts/run-distributed-mode
       # Complex commands here without escaping nightmare
       EOF
       ```
-- [ ] **Secure Image Transfer**:
+- [x] **Secure Image Transfer**:
     - Replace the `nc` (netcat) P2P transfer logic in `transfer_docker_image_p2p`.
     - **Option A (Preferred)**: Use `skopeo copy` if available.
     - **Option B (Fallback)**: If using `nc`, implement a handshake (listener confirms readiness) before sender starts, and verify checksums. Remove the arbitrary `sleep 5`.
 
 ## Phase 4: TensorRT-LLM Modernization
-- [ ] **Deprecate Heuristic Converter Script**:
+- [x] **Deprecate Heuristic Converter Script**:
     - Delete `generate_trt_converter_script` and the logic that recursively searches for `convert_checkpoint.py`.
-- [ ] **Implement CLI-based Build**:
+- [x] **Implement CLI-based Build**:
     - Refactor `compile_trt_engine` to use the standardized `trtllm-build` and `trtllm-convert-checkpoint` CLI tools found in modern TRT-LLM images.
     - Fallback to hardcoded, pinned paths only if the CLI tools are missing (do not search dynamically).
 
