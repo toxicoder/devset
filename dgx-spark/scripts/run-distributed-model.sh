@@ -907,12 +907,72 @@ function compile_trt_engine() {
     HEB="$host_engine_base"
     if [[ "\$HEB" == "~"* ]]; then HEB="\${HOME}\${HEB:1}"; fi
 
+    # Define Python Conversion Script
+    read -r -d '' CONVERT_SCRIPT <<'PYTHON'
+import sys, os, json, runpy, shutil
+
+def get_arch(model_dir):
+    try:
+        with open(os.path.join(model_dir, 'config.json')) as f:
+            c = json.load(f)
+        # Check architectures list or architectura field
+        a = c.get('architectures', [''])[0].lower()
+        if not a: a = c.get('architecture', '').lower()
+
+        if 'qwen' in a: return 'qwen'
+        if 'mistral' in a: return 'llama' # Mistral often uses Llama script structure
+        if 'mixtral' in a: return 'mixtral' # Or llama/mistral depending on version
+        if 'gemma' in a: return 'gemma'
+        if 'phi' in a: return 'phi'
+        if 'nemotron' in a: return 'llama' # Fallback for Nemotron
+        return 'llama' # Default
+    except:
+        return 'llama'
+
+try:
+    # Attempt standard command (Unified Workflow)
+    runpy.run_module("tensorrt_llm.commands.convert_checkpoint", run_name="__main__", alter_sys=True)
+except ImportError:
+    print("[WARN] Standard convert_checkpoint module not found. Attempting fallback...", file=sys.stderr)
+
+    # Extract model_dir from args
+    model_dir = "."
+    if "--model_dir" in sys.argv:
+        model_dir = sys.argv[sys.argv.index("--model_dir") + 1]
+
+    arch = get_arch(model_dir)
+    # Check specific locations
+    candidates = [
+        f"/app/tensorrt_llm/examples/{arch}/convert_checkpoint.py",
+        f"/app/examples/{arch}/convert_checkpoint.py",
+        "/app/tensorrt_llm/examples/llama/convert_checkpoint.py" # Ultimate fallback
+    ]
+
+    script = None
+    for c in candidates:
+        if os.path.exists(c):
+            script = c
+            break
+
+    if script:
+        print(f"[INFO] Using fallback script: {script}", file=sys.stderr)
+        runpy.run_path(script, run_name="__main__")
+    else:
+        print(f"[ERROR] No conversion script found for {arch}. Checked: {candidates}", file=sys.stderr)
+        sys.exit(1)
+PYTHON
+
     docker run --rm --gpus all \\
+        -e CONVERT_SCRIPT="\$CONVERT_SCRIPT" \\
         -v "\$HMB":'$ctr_model_base' \\
         -v "\$HEB":'$ctr_engine_base' \\
         '$IMAGE' \\
         bash -c "
-python3 -m tensorrt_llm.commands.convert_checkpoint \\
+# Fix pynvml warning
+pip install -q nvidia-ml-py >/dev/null 2>&1 || true
+
+# Execute Python Conversion Logic
+python3 -c \"\$CONVERT_SCRIPT\" \\
   --model_dir '$ctr_model_path' \\
   --output_dir '$ckpt_dir' \\
   --tp_size '$TP_SIZE' \\
