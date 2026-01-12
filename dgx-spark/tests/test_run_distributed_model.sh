@@ -7,6 +7,10 @@ ORIGINAL_SCRIPT="$SCRIPT_DIR/../scripts/run-distributed-model.sh"
 
 # Copy script to temp dir to avoid polluting source with config files
 cp "$ORIGINAL_SCRIPT" "$TEST_DIR/run-distributed-model.sh"
+# Copy models.db if it exists
+if [ -f "$SCRIPT_DIR/../scripts/models.db" ]; then
+    cp "$SCRIPT_DIR/../scripts/models.db" "$TEST_DIR/models.db"
+fi
 TARGET_SCRIPT="$TEST_DIR/run-distributed-model.sh"
 chmod +x "$TARGET_SCRIPT"
 
