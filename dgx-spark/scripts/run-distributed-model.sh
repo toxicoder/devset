@@ -103,6 +103,7 @@ trap cleanup EXIT ERR
 # Arguments: None
 # Globals: None
 function _check_dependencies() {
+  log_info "Checking dependencies..."
   local cmd
   for cmd in ssh awk grep sed nc curl pigz python3; do
     if ! command -v "$cmd" &>/dev/null; then
@@ -110,6 +111,7 @@ function _check_dependencies() {
       exit 1
     fi
   done
+  log_info "Dependencies checked."
 }
 
 # Internal: Validate IP Address
@@ -246,6 +248,7 @@ function get_model_registry_data() {
 #          IMAGE, HF_MODEL_ID, USE_TRT_LLM, ENGINE_OVERRIDE, QUANT_OVERRIDE, BATCH_SIZE, MAX_SEQ_LEN,
 #          SPECULATIVE_MODE, WANDB_KEY
 function parse_model_config() {
+  log_info "Parsing model configuration..."
   # Defaults
   TP_SIZE=2
   PP_SIZE=1
@@ -363,6 +366,7 @@ function parse_model_config() {
   log_info "Model: $MODEL_ARG (HF ID: ${HF_MODEL_ID:-N/A})"
   log_info "Image: $IMAGE"
   log_info "TP: $TP_SIZE, PP: $PP_SIZE, Quant: $quant_to_use"
+  log_info "Model configuration parsed."
 }
 
 # ==============================================================================
@@ -567,6 +571,7 @@ function detect_network_config() {
     log_warn "No high-speed interfaces detected. Defaulting to standard networking."
     log_info "Recommendation: Check netplan config for static IPs on high-speed interfaces."
   fi
+  log_info "Network detection complete."
 }
 
 # Internal: Get IP from interface
@@ -597,6 +602,7 @@ function pull_image() {
   local ip="$1"
   local image="$2"
 
+  log_info "Initiating docker pull on $ip..."
   # Use Heredoc with local expansion for the key (safe as it goes to stdin of ssh -> bash)
   if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
     echo "$NGC_API_KEY" | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1
@@ -609,6 +615,7 @@ EOF
     log_error "Failed to pull image on $ip"
     return 1
   fi
+  log_info "Docker pull complete on $ip."
 }
 
 # Internal: Transfer Docker image P2P
@@ -703,6 +710,7 @@ function ensure_image_present() {
   # Fallback
   log_info "Downloading image on $ip2..."
   pull_image "$ip2" "$image"
+  log_info "Image verification complete."
 }
 
 # Internal: Align platform with image
@@ -711,6 +719,7 @@ function ensure_image_present() {
 #   $2: Image
 #   $3: Platform Arg
 function _align_platform_with_image() {
+  log_info "Verifying platform alignment..."
   local ip="$1"
   local image="$2"
   local platform_arg="$3"
@@ -727,6 +736,7 @@ function _align_platform_with_image() {
         exit 1
      fi
   fi
+  log_info "Platform alignment verified."
 }
 
 # ==============================================================================
@@ -788,6 +798,7 @@ function download_hf_model() {
   local host_base="$4"
   local ctr_base="$5"
 
+  log_info "Downloading model $model_id on $ip..."
   ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
     # Inner script for Docker
     read -r -d '' DOCKER_SCRIPT <<'INNER'
@@ -810,6 +821,7 @@ INNER
         '$IMAGE' \\
         bash -c "\$DOCKER_SCRIPT"
 EOF
+  log_info "Model download complete."
 }
 
 # Internal: Patch model config for compatibility (e.g. Nemotron)
@@ -847,6 +859,8 @@ function compile_trt_engine() {
   local ctr_engine_path="$2"
   local ctr_model_path="$3"
   local host_engine_base="$4"
+
+  log_info "Compiling TRT Engine on $ip..."
   local host_model_base="$5"
   local ctr_engine_base="$6"
   local ctr_model_base="$7"
@@ -916,6 +930,7 @@ EOF
       log_error "TensorRT Engine Compilation Failed on $ip."
       exit 1
   fi
+  log_info "Compilation complete."
 }
 
 # Internal: Sync Engine to Worker
@@ -1013,6 +1028,7 @@ function _cleanup_existing_containers() {
   for ip in "$IP1" "$IP2"; do
     ssh "${SSH_OPTS[@]}" "$ip" "docker rm -f nim-distributed trt-llm-distributed >/dev/null 2>&1 || true"
   done
+  log_info "Cleanup complete."
 }
 
 # Internal: Get NCCL Options
@@ -1166,6 +1182,7 @@ function launch_distributed_service() {
   ssh "${SSH_OPTS[@]}" "$ip1" "$head_cmd"
 
   ssh "${SSH_OPTS[@]}" "$ip1" "docker logs -f $container_name" &
+  log_info "Service launch command issued."
 }
 
 # Internal: Wait for service
@@ -1201,6 +1218,7 @@ function _wait_for_service() {
 
 # Internal: Parse arguments
 function _parse_arguments() {
+  log_info "Parsing arguments..."
   while [[ "$#" -gt 0 ]]; do
     case "$1" in
       --dry-run) DRY_RUN=1; shift ;;
@@ -1256,6 +1274,7 @@ function _parse_arguments() {
     MODEL_ARG="${3:-"meta/llama-3.1-70b-instruct"}"
     _write_config
   fi
+  log_info "Arguments parsed."
 }
 
 # ==============================================================================
@@ -1283,6 +1302,7 @@ function main() {
       exit 1
     fi
   done
+  log_info "Connectivity verified."
 
   _check_remote_sudo
 
