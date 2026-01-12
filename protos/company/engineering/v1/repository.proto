@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package company.engineering.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/engineering/v1;engineeringv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Repository represents a source code repository.
+message Repository {
+  string id = 1;
+  string name = 2;
+  string url = 3;
+  string description = 4;
+  string owner_team_id = 5;
+  RepositoryLanguage language = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+enum RepositoryLanguage {
+  REPOSITORY_LANGUAGE_UNSPECIFIED = 0;
+  REPOSITORY_LANGUAGE_GO = 1;
+  REPOSITORY_LANGUAGE_PYTHON = 2;
+  REPOSITORY_LANGUAGE_TYPESCRIPT = 3;
+  REPOSITORY_LANGUAGE_JAVA = 4;
+  REPOSITORY_LANGUAGE_C_PLUS_PLUS = 5;
+  REPOSITORY_LANGUAGE_RUST = 6;
+}

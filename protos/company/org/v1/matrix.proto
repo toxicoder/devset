@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.org.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/org/v1;orgv1";
+
+// MatrixRelationship defines the dual-reporting structure for an employee.
+message MatrixRelationship {
+  // The ID of the employee.
+  string employee_id = 1;
+
+  // The functional manager (Vertical) - e.g., Director of Engineering.
+  string functional_manager_id = 2;
+
+  // The squad lead or product owner (Horizontal) - e.g., Group PM.
+  string squad_lead_id = 3;
+
+  // The primary squad the employee is assigned to.
+  string squad_id = 4;
+
+  // Percentage of allocation to the squad (usually 100, but can be split).
+  int32 allocation_percent = 5;
+}

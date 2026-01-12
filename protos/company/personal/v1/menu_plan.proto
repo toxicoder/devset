@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package company.personal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/personal/v1;personalv1";
+
+import "google/protobuf/timestamp.proto";
+
+// MenuPlan represents a culinary schedule.
+message MenuPlan {
+  string id = 1;
+  google.protobuf.Timestamp date = 2;
+  string meal_type = 3; // Breakfast, Lunch, Dinner
+  repeated string dishes = 4;
+  string dietary_notes = 5;
+  string chef_id = 6;
+}

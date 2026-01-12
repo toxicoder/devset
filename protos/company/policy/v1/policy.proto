@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package company.policy.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/policy/v1;policyv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Policy represents a corporate governance rule or compliance standard.
+message Policy {
+  string id = 1;
+  string title = 2; // e.g. "GDPR Data Handling", "Remote Work Policy"
+  string description = 3;
+  string version = 4;
+  google.protobuf.Timestamp effective_date = 5;
+  PolicyCategory category = 6;
+  string owner_department_id = 7;
+}
+
+enum PolicyCategory {
+  POLICY_CATEGORY_UNSPECIFIED = 0;
+  POLICY_CATEGORY_SECURITY = 1;
+  POLICY_CATEGORY_HR = 2;
+  POLICY_CATEGORY_LEGAL = 3;
+  POLICY_CATEGORY_FINANCE = 4;
+  POLICY_CATEGORY_ESG = 5; // Environmental, Social, Governance
+}

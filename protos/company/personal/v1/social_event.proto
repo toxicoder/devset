@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package company.personal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/personal/v1;personalv1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/address.proto";
+
+// SocialEvent represents a planned social engagement.
+message SocialEvent {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+  company.common.v1.Address location = 5;
+  repeated string guest_list = 6;
+  string coordinator_id = 7;
+  string dress_code = 8;
+  string notes = 9;
+}

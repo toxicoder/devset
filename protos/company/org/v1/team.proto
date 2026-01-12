@@ -12,7 +12,7 @@ message Team {
   // The name of the team (e.g., "Platform Infrastructure", "Mobile App").
   string name = 2;
 
-  // ID of the department this team belongs to.
+  // ID of the department this team belongs to (Functional home).
   string department_id = 3;
 
   // The type of team structure.
@@ -23,14 +23,25 @@ message Team {
 
   // Email distribution list for the team.
   string email_group = 6;
+
+  // Purpose or mission statement of the team/squad.
+  string purpose = 7;
+
+  // Specific tribe or strategic area (e.g. "Core Platform", "Growth").
+  string tribe = 8;
+
+  // Tags for searching/filtering (e.g., "infrastructure", "revenue").
+  repeated string tags = 9;
 }
 
 // TeamType describes the organizational structure of the team.
 enum TeamType {
   TEAM_TYPE_UNSPECIFIED = 0;
-  TEAM_TYPE_SQUAD = 1;
-  TEAM_TYPE_POD = 2;
-  TEAM_TYPE_CHAPTER = 3;
-  TEAM_TYPE_GUILD = 4;
-  TEAM_TYPE_PROJECT = 5;
+  TEAM_TYPE_SQUAD = 1; // Cross-functional execution team
+  TEAM_TYPE_POD = 2;   // Smaller unit within a squad
+  TEAM_TYPE_CHAPTER = 3; // Functional grouping within a tribe (e.g. "Web Chapter")
+  TEAM_TYPE_GUILD = 4; // Interest group across org (e.g. "Rust Guild")
+  TEAM_TYPE_PROJECT = 5; // Temporary project team
+  TEAM_TYPE_TRIBE = 6; // Group of Squads
+  TEAM_TYPE_DEPARTMENT = 7; // Traditional functional department
 }

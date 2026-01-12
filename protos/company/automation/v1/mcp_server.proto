@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.automation.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/automation/v1;automationv1";
+
+// MCPServer defines a Model Context Protocol server availability.
+message MCPServer {
+  // Unique name/ID of the server (e.g., "github").
+  string name = 1;
+
+  // Description of the tools provided.
+  string description = 2;
+
+  // The base URL of the server.
+  string url = 3;
+
+  // Documentation URL for the server integration.
+  string documentation_url = 4;
+
+  // List of tools exposed by this server.
+  repeated string tools = 5;
+}

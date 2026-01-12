@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package company.automation.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/automation/v1;automationv1";
+
+// AgentProfile defines the persona and configuration for an AI Agent.
+message AgentProfile {
+  // Unique identifier for the agent (e.g., "EXEC0001_Agent").
+  string id = 1;
+
+  // The name of the agent (e.g., "CEO_Agent").
+  string name = 2;
+
+  // The role code this agent is associated with (e.g., "EXEC0001").
+  string role_code = 3;
+
+  // The core persona and directive prompt for the LLM.
+  string system_prompt = 4;
+
+  // List of recommended MCP servers this agent uses.
+  repeated MCPServerRef mcp_servers = 5;
+
+  // List of other agents/roles this agent frequently interacts with.
+  repeated string common_partners = 6;
+}
+
+// MCPServerRef references an MCP server configuration.
+message MCPServerRef {
+  // The name/ID of the server (e.g., "github", "google-calendar").
+  string name = 1;
+
+  // Optional specific URL or configuration key override.
+  string config_key = 2;
+}
