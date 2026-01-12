@@ -3,12 +3,12 @@ set -euo pipefail
 
 function parse_vram() {
     local input="$1"
-    # Logic to be implemented:
-    # grep -oE '[0-9]+' extracts all number sequences on separate lines
+    # Logic implemented: Strict parsing to ignore garbage/warnings
+    # grep -E '^[0-9]+$' extracts only lines that are purely numeric
     # awk sums them up
 
     local numeric_out
-    numeric_out=$(printf "%s" "$input" | grep -oE '[0-9]+' || true)
+    numeric_out=$(printf "%s" "$input" | tr -d '\r' | grep -E '^[0-9]+$' || true)
 
     if [[ -z "$numeric_out" ]]; then
        echo "0"
@@ -31,23 +31,23 @@ input="Warning: Detected NVIDIA GB10 GPU
 81920"
 res=$(parse_vram "$input")
 echo "Result 2: $res"
-# Expect at least 81920. '10' from GB10 adds 10.
-if [[ "$res" -ge "81920" ]]; then echo "PASS: Warning Separate"; else echo "FAIL: Warning Separate"; exit 1; fi
+# Warning should be ignored. 81920.
+if [[ "$res" -eq "81920" ]]; then echo "PASS: Warning Separate"; else echo "FAIL: Warning Separate (Got $res)"; exit 1; fi
 
 # Test 3: Warning mixed
 input="Warning: Something 200 81920"
 res=$(parse_vram "$input")
-# 200 + 81920 = 82120
+# Should be ignored (0) because line contains text
 echo "Result 3: $res"
-if [[ "$res" -ge "81920" ]]; then echo "PASS: Warning Mixed"; else echo "FAIL: Warning Mixed"; exit 1; fi
+if [[ "$res" -eq "0" ]]; then echo "PASS: Warning Mixed"; else echo "FAIL: Warning Mixed (Got $res)"; exit 1; fi
 
 # Test 4: Polluted garbage
 input="Garbage 123
 Another 456
 8000"
 res=$(parse_vram "$input")
-# 123 + 456 + 8000 = 8579
+# Garbage ignored. 8000.
 echo "Result 4: $res"
-if [[ "$res" -ge "8000" ]]; then echo "PASS: Garbage"; else echo "FAIL: Garbage"; exit 1; fi
+if [[ "$res" -eq "8000" ]]; then echo "PASS: Garbage"; else echo "FAIL: Garbage (Got $res)"; exit 1; fi
 
 echo "All VRAM tests passed."
