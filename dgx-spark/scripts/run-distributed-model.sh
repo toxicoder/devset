@@ -103,6 +103,7 @@ trap cleanup EXIT ERR
 # Arguments: None
 # Globals: None
 function _check_dependencies() {
+  local cmd
   for cmd in ssh awk grep sed nc curl pigz python3; do
     if ! command -v "$cmd" &>/dev/null; then
       log_error "Required command '$cmd' not found."
@@ -148,6 +149,7 @@ function _check_hf_token() {
 # Arguments: None
 # Globals: IP1, IP2, SSH_OPTS
 function _check_remote_sudo() {
+  local ip
   log_info "Verifying passwordless sudo access..."
   for ip in "$IP1" "$IP2"; do
     if ! ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true 2>/dev/null"; then
@@ -525,7 +527,8 @@ function detect_high_speed_iface() {
 
 # Internal: Orchestrate network detection
 # Arguments: None
-# Globals: IP1, IP2, NET_CONF_1, NET_CONF_2, IFACES1, IFACES2
+# Globals: IP1, IP2
+# Side Effects: Sets NET_CONF_1, NET_CONF_2, IFACES1, IFACES2
 function detect_network_config() {
   log_step "[1/5] Detecting high-speed network interfaces..."
 
@@ -534,6 +537,7 @@ function detect_network_config() {
     log_info "ib_write_bw detected (RoCE/IB support confirmed)."
   fi
 
+  # Setting globals directly as this is an orchestrator function
   NET_CONF_1=$(detect_high_speed_iface "$IP1")
   NET_CONF_2=$(detect_high_speed_iface "$IP2")
 
@@ -908,22 +912,38 @@ function sync_engine_to_worker() {
 }
 
 # Internal: Orchestrate TRT Engine Build
-# Arguments: None
-# Globals: USE_TRT_LLM, HF_MODEL_ID, TRT_ENGINE_DIR, TRT_MODEL_DIR, IP1, IP2, IMAGE
+# Arguments:
+#   $1: use_trt_llm (0/1)
+#   $2: hf_model_id
+#   $3: ip1
+#   $4: ip2
+#   $5: image
+#   $6: dry_run (0/1)
+#   $7: trt_engine_dir
+#   $8: trt_model_dir
 function ensure_trt_engine() {
-  if [[ "$USE_TRT_LLM" -eq 0 ]]; then return; fi
+  local use_trt_llm="$1"
+  local hf_model_id="$2"
+  local ip1="$3"
+  local ip2="$4"
+  local image="$5"
+  local dry_run="$6"
+  local trt_engine_dir="$7"
+  local trt_model_dir="$8"
+
+  if [[ "$use_trt_llm" -eq 0 ]]; then return; fi
   _check_hf_token
 
-  if [[ "$DRY_RUN" -eq 1 ]]; then
+  if [[ "$dry_run" -eq 1 ]]; then
       log_info "DRY RUN: Checking/Building TRT Engine..."
       return
   fi
   set -x
   local safe_model_id
-  safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
+  safe_model_id=$(printf "%s" "$hf_model_id" | tr '/' '--')
 
-  local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
-  local host_model_base="${TRT_MODEL_DIR:-~/models}"
+  local host_engine_base="${trt_engine_dir:-~/engines}"
+  local host_model_base="${trt_model_dir:-~/models}"
   local host_engine_path="$host_engine_base/$safe_model_id"
   local host_model_path="$host_model_base/$safe_model_id"
 
@@ -934,20 +954,20 @@ function ensure_trt_engine() {
 
   log_info "Checking for TRT-LLM Engine at $host_engine_path (on Head Node)..."
 
-  if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
+  if ssh "${SSH_OPTS[@]}" "$ip1" "[ -f $host_engine_path/config.json ]"; then
       log_info "Engine found. Skipping build."
   else
       log_info "Engine not found. Initiating Build Process on Head Node..."
-      log_info "Downloading model $HF_MODEL_ID from Hugging Face..."
-      _remote_mkdir "$IP1" "$host_model_path $host_engine_path"
+      log_info "Downloading model $hf_model_id from Hugging Face..."
+      _remote_mkdir "$ip1" "$host_model_path $host_engine_path"
 
-      download_hf_model "$IP1" "$HF_MODEL_ID" "$ctr_model_path" "$host_model_base" "$ctr_model_base"
+      download_hf_model "$ip1" "$hf_model_id" "$ctr_model_path" "$host_model_base" "$ctr_model_base"
 
       log_info "Building Engine (TP=$TP_SIZE)..."
-      compile_trt_engine "$IP1" "$ctr_engine_path" "$ctr_model_path" "$host_engine_base" "$host_model_base" "$ctr_engine_base" "$ctr_model_base" "$host_engine_path"
+      compile_trt_engine "$ip1" "$ctr_engine_path" "$ctr_model_path" "$host_engine_base" "$host_model_base" "$ctr_engine_base" "$ctr_model_base" "$host_engine_path"
 
       # FIXED: Post-build verification
-      if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
+      if ssh "${SSH_OPTS[@]}" "$ip1" "[ -f $host_engine_path/config.json ]"; then
          log_info "Verification successful: Engine config found."
       else
          log_error "Engine build reported success but config.json is missing."
@@ -957,10 +977,10 @@ function ensure_trt_engine() {
   fi
 
   log_info "Syncing engine to Worker Node..."
-  sync_engine_to_worker "$IP1" "$IP2" "$host_engine_path"
+  sync_engine_to_worker "$ip1" "$ip2" "$host_engine_path"
   log_info "Engine synced."
 
-  if [[ "$DRY_RUN" -eq 0 ]]; then set +x; fi
+  if [[ "$dry_run" -eq 0 ]]; then set +x; fi
 }
 
 # ==============================================================================
@@ -969,6 +989,7 @@ function ensure_trt_engine() {
 
 # Internal: Cleanup existing containers
 function _cleanup_existing_containers() {
+  local ip
   log_step "[3/5] Cleaning up..."
   for ip in "$IP1" "$IP2"; do
     ssh "${SSH_OPTS[@]}" "$ip" "docker rm -f nim-distributed trt-llm-distributed >/dev/null 2>&1 || true"
@@ -1010,23 +1031,31 @@ function generate_trt_run_command() {
   local container_name="$2"
   local net_args="$3"
   local mounts="$4"
+  local image="$5"
+  local tp_size="$6"
+  local ip1="$7"
+  local ip2="$8"
+  local ifaces1="$9"
+  local ifaces2="${10}"
+  local hf_token="${11:-}"
+  local hf_model_id="${12:-}"
 
-  local safe_model_id=$(printf "%s" "$HF_MODEL_ID" | tr '/' '--')
+  local safe_model_id=$(printf "%s" "$hf_model_id" | tr '/' '--')
   local engine_path="/engines/$safe_model_id"
   local hf_env=""
-  if [[ -n "${HF_TOKEN:-}" ]]; then hf_env="-e HF_TOKEN=$HF_TOKEN"; fi
+  if [[ -n "$hf_token" ]]; then hf_env="-e HF_TOKEN=$hf_token"; fi
 
   if [[ "$role" == "worker" ]]; then
       local ssh_start_cmd="(service ssh start || /usr/sbin/sshd) && sleep infinity"
-      local net_opts=$(_get_nccl_opts "$IFACES2")
+      local net_opts=$(_get_nccl_opts "$ifaces2")
       printf "docker run -d --name %s %s %s %s --gpus all %s %s bash -c '%s'" \
-        "$container_name" "$net_args" "$net_opts" "$hf_env" "$mounts" "$IMAGE" "$ssh_start_cmd"
+        "$container_name" "$net_args" "$net_opts" "$hf_env" "$mounts" "$image" "$ssh_start_cmd"
   else
-      local serve_cmd="mpirun --allow-run-as-root -n $TP_SIZE -H $IP1:1,$IP2:1 python3 -m tensorrt_llm.serve --model_repo $engine_path --port 8000 --host 0.0.0.0"
+      local serve_cmd="mpirun --allow-run-as-root -n $tp_size -H $ip1:1,$ip2:1 python3 -m tensorrt_llm.serve --model_repo $engine_path --port 8000 --host 0.0.0.0"
       local ssh_start_head="(service ssh start || /usr/sbin/sshd) && $serve_cmd"
-      local net_opts=$(_get_nccl_opts "$IFACES1")
+      local net_opts=$(_get_nccl_opts "$ifaces1")
       printf "docker run -d --name %s %s %s %s --gpus all %s %s bash -c '%s'" \
-        "$container_name" "$net_args" "$net_opts" "$hf_env" "$mounts" "$IMAGE" "$ssh_start_head"
+        "$container_name" "$net_args" "$net_opts" "$hf_env" "$mounts" "$image" "$ssh_start_head"
   fi
 }
 
@@ -1036,70 +1065,101 @@ function generate_nim_run_command() {
   local container_name="$2"
   local net_args="$3"
   local mounts="$4"
+  local image="$5"
+  local tp_size="$6"
+  local ip1="$7"
+  local ip2="$8"
+  local ifaces1="$9"
+  local ifaces2="${10}"
+  local ngc_api_key="${11}"
+  local model_arg="${12}"
+  local extra_nim_env="${13}"
+  local hf_token="${14:-}"
 
-  local nim_env="-e NGC_API_KEY=$NGC_API_KEY -e NIM_SERVED_MODEL_NAME=$MODEL_ARG -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$TP_SIZE -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$IP1 -e MASTER_PORT=12345 -e NIM_HTTP_API_PORT=8000"
+  local nim_env="-e NGC_API_KEY=$ngc_api_key -e NIM_SERVED_MODEL_NAME=$model_arg -e NIM_MULTI_NODE=1 -e NIM_TENSOR_PARALLEL_SIZE=$tp_size -e NIM_NUM_WORKERS=2 -e MASTER_ADDR=$ip1 -e MASTER_PORT=12345 -e NIM_HTTP_API_PORT=8000"
   nim_env="$nim_env -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
-  if [[ -n "${HF_TOKEN:-}" ]]; then nim_env="$nim_env -e HF_TOKEN=$HF_TOKEN"; fi
-  nim_env="$nim_env $EXTRA_NIM_ENV"
+  if [[ -n "$hf_token" ]]; then nim_env="$nim_env -e HF_TOKEN=$hf_token"; fi
+  nim_env="$nim_env $extra_nim_env"
 
   local node_rank=0
   local net_opts=""
   if [[ "$role" == "worker" ]]; then
       node_rank=1
-      net_opts=$(_get_nccl_opts "$IFACES2")
+      net_opts=$(_get_nccl_opts "$ifaces2")
   else
-      net_opts=$(_get_nccl_opts "$IFACES1")
+      net_opts=$(_get_nccl_opts "$ifaces1")
   fi
 
   printf "docker run -d --name %s %s %s --gpus all %s %s -e NIM_NODE_RANK=%d %s" \
-      "$container_name" "$net_args" "$net_opts" "$mounts" "$nim_env" "$node_rank" "$IMAGE"
+      "$container_name" "$net_args" "$net_opts" "$mounts" "$nim_env" "$node_rank" "$image"
 }
 
 # Internal: Launch Distributed Service
 function launch_distributed_service() {
+  local ip1="$1"
+  local ip2="$2"
+  local use_trt_llm="$3"
+  local trt_engine_dir="$4"
+  local trt_model_dir="$5"
+  local platform_arg="$6"
+  local ifaces1="$7"
+  local ifaces2="$8"
+  local ngc_api_key="$9"
+  local model_arg="${10}"
+  local tp_size="${11}"
+  local extra_nim_env="${12}"
+  local image="${13}"
+  local hf_token="${14:-}"
+  local hf_model_id="${15:-}"
+  local dry_run="${16:-0}"
+
   log_step "[4/5] Launching Service..."
 
-  local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
-  local host_model_base="${TRT_MODEL_DIR:-~/models}"
+  local host_engine_base="${trt_engine_dir:-~/engines}"
+  local host_model_base="${trt_model_dir:-~/models}"
   local mounts="-v ~/.cache:/root/.cache -v $host_model_base:/models -v $host_engine_base:/engines"
-  local net_args="$PLATFORM_ARG --runtime=nvidia --network host --ipc=host --shm-size=16g --ulimit memlock=-1"
+  local net_args="$platform_arg --runtime=nvidia --network host --ipc=host --shm-size=16g --ulimit memlock=-1"
   local container_name="nim-distributed"
 
   local worker_cmd=""
   local head_cmd=""
 
-  if [[ "$USE_TRT_LLM" -eq 1 ]]; then
+  if [[ "$use_trt_llm" -eq 1 ]]; then
       container_name="trt-llm-distributed"
-      setup_mpi_ssh_keys "$IP1" "$IP2"
+      setup_mpi_ssh_keys "$ip1" "$ip2"
       mounts="$mounts -v ~/.ssh-trt:/root/.ssh"
 
-      worker_cmd=$(generate_trt_run_command "worker" "$container_name" "$net_args" "$mounts")
-      head_cmd=$(generate_trt_run_command "head" "$container_name" "$net_args" "$mounts")
+      worker_cmd=$(generate_trt_run_command "worker" "$container_name" "$net_args" "$mounts" "$image" "$tp_size" "$ip1" "$ip2" "$ifaces1" "$ifaces2" "$hf_token" "$hf_model_id")
+      head_cmd=$(generate_trt_run_command "head" "$container_name" "$net_args" "$mounts" "$image" "$tp_size" "$ip1" "$ip2" "$ifaces1" "$ifaces2" "$hf_token" "$hf_model_id")
   else
-      worker_cmd=$(generate_nim_run_command "worker" "$container_name" "$net_args" "$mounts")
-      head_cmd=$(generate_nim_run_command "head" "$container_name" "$net_args" "$mounts")
+      worker_cmd=$(generate_nim_run_command "worker" "$container_name" "$net_args" "$mounts" "$image" "$tp_size" "$ip1" "$ip2" "$ifaces1" "$ifaces2" "$ngc_api_key" "$model_arg" "$extra_nim_env" "$hf_token")
+      head_cmd=$(generate_nim_run_command "head" "$container_name" "$net_args" "$mounts" "$image" "$tp_size" "$ip1" "$ip2" "$ifaces1" "$ifaces2" "$ngc_api_key" "$model_arg" "$extra_nim_env" "$hf_token")
   fi
 
-  if [[ "$DRY_RUN" -eq 1 ]]; then
+  if [[ "$dry_run" -eq 1 ]]; then
       log_info "Worker: $worker_cmd"
       log_info "Head: $head_cmd"
       return
   fi
 
-  ssh "${SSH_OPTS[@]}" "$IP2" "$worker_cmd"
+  ssh "${SSH_OPTS[@]}" "$ip2" "$worker_cmd"
   sleep 5
-  ssh "${SSH_OPTS[@]}" "$IP1" "$head_cmd"
+  ssh "${SSH_OPTS[@]}" "$ip1" "$head_cmd"
 
-  ssh "${SSH_OPTS[@]}" "$IP1" "docker logs -f $container_name" &
+  ssh "${SSH_OPTS[@]}" "$ip1" "docker logs -f $container_name" &
 }
 
 # Internal: Wait for service
 function _wait_for_service() {
   local ip="$1"
+  local use_trt_llm="$2"
+  local dry_run="$3"
   local container_name="nim-distributed"
-  if [[ "$USE_TRT_LLM" -eq 1 ]]; then container_name="trt-llm-distributed"; fi
+  local i
 
-  if [[ "$DRY_RUN" -eq 1 ]]; then return 0; fi
+  if [[ "$use_trt_llm" -eq 1 ]]; then container_name="trt-llm-distributed"; fi
+
+  if [[ "$dry_run" -eq 1 ]]; then return 0; fi
 
   log_step "[5/5] Waiting for service (http://$ip:8000)..."
   for ((i = 1; i <= 60; i++)); do
@@ -1183,6 +1243,7 @@ function _parse_arguments() {
 # Main
 # ==============================================================================
 function main() {
+  local ip
   _check_dependencies
   _parse_arguments "$@"
 
@@ -1214,10 +1275,10 @@ function main() {
   ensure_image_present "$IP1" "$IP2" "$IMAGE" "$IFACES2"
   _align_platform_with_image "$IP1" "$IMAGE" "$PLATFORM_ARG"
 
-  ensure_trt_engine
+  ensure_trt_engine "$USE_TRT_LLM" "$HF_MODEL_ID" "$IP1" "$IP2" "$IMAGE" "$DRY_RUN" "$TRT_ENGINE_DIR" "$TRT_MODEL_DIR"
   _cleanup_existing_containers
-  launch_distributed_service
-  _wait_for_service "$IP1"
+  launch_distributed_service "$IP1" "$IP2" "$USE_TRT_LLM" "$TRT_ENGINE_DIR" "$TRT_MODEL_DIR" "$PLATFORM_ARG" "$IFACES1" "$IFACES2" "$NGC_API_KEY" "$MODEL_ARG" "$TP_SIZE" "$EXTRA_NIM_ENV" "$IMAGE" "${HF_TOKEN:-}" "${HF_MODEL_ID:-}" "$DRY_RUN"
+  _wait_for_service "$IP1" "$USE_TRT_LLM" "$DRY_RUN"
 }
 
 main "$@"
