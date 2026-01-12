@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.infrastructure.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/infrastructure/v1;infrastructurev1";
+
+import "company/infrastructure/v1/cluster_config.proto";
+import "company/infrastructure/v1/deployment_status.proto";
+
+service DeploymentService {
+  rpc DeployModel(DeployModelRequest) returns (DeployModelResponse);
+  rpc GetDeploymentStatus(GetDeploymentStatusRequest) returns (GetDeploymentStatusResponse);
+  rpc TeardownDeployment(TeardownDeploymentRequest) returns (TeardownDeploymentResponse);
+}
+
+message DeployModelRequest { DistributedModelConfig config = 1; }
+message DeployModelResponse { string deployment_id = 1; }
+
+message GetDeploymentStatusRequest { string deployment_id = 1; }
+message GetDeploymentStatusResponse { DeploymentStatus status = 1; }
+
+message TeardownDeploymentRequest { string deployment_id = 1; }
+message TeardownDeploymentResponse { bool success = 1; }

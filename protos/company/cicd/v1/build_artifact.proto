@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package company.cicd.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/cicd/v1;cicdv1";
+
+import "google/protobuf/timestamp.proto";
+
+// BuildArtifact represents an output of a build process.
+message BuildArtifact {
+  string id = 1;
+  string name = 2; // e.g., "_site", "docker-image"
+  ArtifactType type = 3;
+  string location = 4; // URL or Path
+  string checksum = 5;
+  google.protobuf.Timestamp created_at = 6;
+  string workflow_run_id = 7;
+}
+
+enum ArtifactType {
+  ARTIFACT_TYPE_UNSPECIFIED = 0;
+  ARTIFACT_TYPE_BINARY = 1;
+  ARTIFACT_TYPE_DOCKER_IMAGE = 2;
+  ARTIFACT_TYPE_STATIC_SITE = 3;
+  ARTIFACT_TYPE_LOG = 4;
+  ARTIFACT_TYPE_REPORT = 5;
+}

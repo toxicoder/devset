@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package company.common.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/common/v1;commonv1";
+
+// PersonName represents a person's name.
+message PersonName {
+  // The person's title or prefix (e.g., "Mr.", "Dr.", "Ms.").
+  string title = 1;
+
+  // The given name (first name).
+  string given_name = 2;
+
+  // The middle name or initial.
+  string middle_name = 3;
+
+  // The family name (last name).
+  string family_name = 4;
+
+  // The suffix (e.g., "Jr.", "Sr.", "III").
+  string suffix = 5;
+
+  // The preferred name for display purposes (e.g., "Liz" instead of "Elizabeth").
+  string preferred_name = 6;
+}

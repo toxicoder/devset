@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package company.assets.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/assets/v1;assetsv1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/money.proto";
+
+// SoftwareLicense represents a license for a software product.
+message SoftwareLicense {
+  // Unique identifier for the license record.
+  string id = 1;
+
+  // The name of the software (e.g., "IntelliJ IDEA", "Adobe Creative Cloud").
+  string software_name = 2;
+
+  // The license key or activation code (sensitive).
+  string license_key = 3;
+
+  // The vendor or publisher of the software.
+  string vendor = 4;
+
+  // The date the license was purchased or renewed.
+  google.protobuf.Timestamp purchase_date = 5;
+
+  // The date the license expires.
+  google.protobuf.Timestamp expiration_date = 6;
+
+  // The cost of the license.
+  company.common.v1.Money cost = 7;
+
+  // ID of the employee assigned to this license (if single-user).
+  string assigned_to_id = 8;
+
+  // Number of seats available (for multi-user licenses).
+  int32 seat_count = 9;
+}

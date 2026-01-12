@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package company.org.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/org/v1;orgv1";
+
+import "company/common/v1/address.proto";
+
+// Location represents a physical facility or office.
+message Location {
+  // Unique identifier for the location.
+  string id = 1;
+
+  // Display name of the location (e.g., "Headquarters", "NYC Office").
+  string name = 2;
+
+  // The code used to refer to the location (e.g., "NYC-01").
+  string code = 3;
+
+  // The physical address of the location.
+  company.common.v1.Address address = 4;
+
+  // The timezone ID of the location (e.g., "America/New_York").
+  string timezone = 5;
+
+  // The type of location.
+  LocationType type = 6;
+}
+
+// LocationType describes the purpose of the location.
+enum LocationType {
+  LOCATION_TYPE_UNSPECIFIED = 0;
+  LOCATION_TYPE_HEADQUARTERS = 1;
+  LOCATION_TYPE_OFFICE = 2;
+  LOCATION_TYPE_DATA_CENTER = 3;
+  LOCATION_TYPE_WAREHOUSE = 4;
+  LOCATION_TYPE_REMOTE = 5;
+}

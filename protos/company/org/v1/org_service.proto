@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package company.org.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/org/v1;orgv1";
+
+import "company/org/v1/department.proto";
+import "company/org/v1/team.proto";
+import "company/org/v1/location.proto";
+import "company/org/v1/matrix.proto";
+
+// OrgService handles organizational structure modifications.
+service OrgService {
+  rpc GetOrgChart(GetOrgChartRequest) returns (GetOrgChartResponse);
+
+  // Department Management
+  rpc CreateDepartment(CreateDepartmentRequest) returns (CreateDepartmentResponse);
+
+  // Team Management
+  rpc CreateTeam(CreateTeamRequest) returns (CreateTeamResponse);
+  rpc MoveTeam(MoveTeamRequest) returns (MoveTeamResponse);
+
+  // Matrix Management
+  rpc AssignMatrixReporting(AssignMatrixReportingRequest) returns (AssignMatrixReportingResponse);
+}
+
+message GetOrgChartRequest {
+  string root_department_id = 1;
+  int32 depth = 2;
+}
+
+message GetOrgChartResponse {
+  repeated Department departments = 1;
+  repeated Team teams = 2;
+}
+
+message CreateDepartmentRequest {
+  Department department = 1;
+}
+
+message CreateDepartmentResponse {
+  Department department = 1;
+}
+
+message CreateTeamRequest {
+  Team team = 1;
+}
+
+message CreateTeamResponse {
+  Team team = 1;
+}
+
+message MoveTeamRequest {
+  string team_id = 1;
+  string new_department_id = 2;
+}
+
+message MoveTeamResponse {
+  Team team = 1;
+}
+
+message AssignMatrixReportingRequest {
+  MatrixRelationship relationship = 1;
+}
+
+message AssignMatrixReportingResponse {
+  MatrixRelationship relationship = 1;
+}

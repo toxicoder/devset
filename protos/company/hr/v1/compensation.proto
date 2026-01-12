@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+import "company/common/v1/money.proto";
+
+// Compensation defines the financial package for an employee.
+message Compensation {
+  // The base annual salary.
+  company.common.v1.Money base_salary = 1;
+
+  // The target annual bonus amount.
+  company.common.v1.Money target_bonus = 2;
+
+  // The value of equity grants per year.
+  company.common.v1.Money equity_grant = 3;
+
+  // The frequency of salary payments.
+  PaymentFrequency payment_frequency = 4;
+}
+
+// PaymentFrequency describes how often an employee is paid.
+enum PaymentFrequency {
+  PAYMENT_FREQUENCY_UNSPECIFIED = 0;
+  PAYMENT_FREQUENCY_WEEKLY = 1;
+  PAYMENT_FREQUENCY_BIWEEKLY = 2;
+  PAYMENT_FREQUENCY_MONTHLY = 3;
+  PAYMENT_FREQUENCY_SEMIMONTHLY = 4;
+}

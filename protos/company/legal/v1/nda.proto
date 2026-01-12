@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package company.legal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/legal/v1;legalv1";
+
+import "google/protobuf/timestamp.proto";
+
+// NDA represents a Non-Disclosure Agreement.
+message NDA {
+  // Unique identifier for the NDA.
+  string id = 1;
+
+  // The external party (person or entity) bound by the NDA.
+  string counterparty_name = 2;
+
+  // The date the NDA was signed.
+  google.protobuf.Timestamp signed_date = 3;
+
+  // The duration of the NDA in months (0 if indefinite).
+  int32 duration_months = 4;
+
+  // Specific topics or projects covered by the NDA.
+  repeated string scopes = 5;
+
+  // Whether the NDA is mutual (two-way) or one-way.
+  bool is_mutual = 6;
+}

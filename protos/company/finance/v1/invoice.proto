@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package company.finance.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/finance/v1;financev1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/money.proto";
+import "company/common/v1/address.proto";
+
+// Invoice represents a bill for goods or services.
+message Invoice {
+  // Unique identifier for the invoice.
+  string id = 1;
+
+  // The invoice number (displayed to customer).
+  string invoice_number = 2;
+
+  // The date the invoice was issued.
+  google.protobuf.Timestamp issue_date = 3;
+
+  // The date payment is due.
+  google.protobuf.Timestamp due_date = 4;
+
+  // ID of the customer or entity being billed.
+  string customer_id = 5;
+
+  // List of line items in the invoice.
+  repeated InvoiceLineItem items = 6;
+
+  // The total amount of the invoice.
+  company.common.v1.Money total_amount = 7;
+
+  // The tax amount included in the total.
+  company.common.v1.Money tax_amount = 8;
+
+  // The current status of the invoice.
+  InvoiceStatus status = 9;
+
+  // Billing address for this invoice.
+  company.common.v1.Address billing_address = 10;
+}
+
+message InvoiceLineItem {
+  string description = 1;
+  int32 quantity = 2;
+  company.common.v1.Money unit_price = 3;
+  company.common.v1.Money total_price = 4;
+}
+
+enum InvoiceStatus {
+  INVOICE_STATUS_UNSPECIFIED = 0;
+  INVOICE_STATUS_DRAFT = 1;
+  INVOICE_STATUS_SENT = 2;
+  INVOICE_STATUS_PAID = 3;
+  INVOICE_STATUS_OVERDUE = 4;
+  INVOICE_STATUS_CANCELLED = 5;
+}

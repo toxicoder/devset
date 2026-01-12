@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package company.assets.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/assets/v1;assetsv1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/money.proto";
+
+// Device represents a physical hardware asset.
+message Device {
+  // Unique identifier for the device (Asset Tag).
+  string id = 1;
+
+  // The manufacturer of the device (e.g., "Apple", "Dell").
+  string manufacturer = 2;
+
+  // The model name or number (e.g., "MacBook Pro 16").
+  string model = 3;
+
+  // The serial number of the device.
+  string serial_number = 4;
+
+  // The type of device.
+  DeviceType type = 5;
+
+  // The current status of the device.
+  DeviceStatus status = 6;
+
+  // ID of the employee the device is assigned to.
+  string assigned_to_id = 7;
+
+  // The date the device was purchased.
+  google.protobuf.Timestamp purchase_date = 8;
+
+  // The date the warranty expires.
+  google.protobuf.Timestamp warranty_end_date = 9;
+
+  // The purchase price of the device.
+  company.common.v1.Money purchase_price = 10;
+}
+
+// DeviceType describes the category of hardware.
+enum DeviceType {
+  DEVICE_TYPE_UNSPECIFIED = 0;
+  DEVICE_TYPE_LAPTOP = 1;
+  DEVICE_TYPE_DESKTOP = 2;
+  DEVICE_TYPE_MOBILE_PHONE = 3;
+  DEVICE_TYPE_TABLET = 4;
+  DEVICE_TYPE_SERVER = 5;
+  DEVICE_TYPE_PERIPHERAL = 6;
+}
+
+// DeviceStatus describes the lifecycle state of the device.
+enum DeviceStatus {
+  DEVICE_STATUS_UNSPECIFIED = 0;
+  DEVICE_STATUS_AVAILABLE = 1;
+  DEVICE_STATUS_ASSIGNED = 2;
+  DEVICE_STATUS_REPAIR = 3;
+  DEVICE_STATUS_RETIRED = 4;
+  DEVICE_STATUS_LOST = 5;
+}

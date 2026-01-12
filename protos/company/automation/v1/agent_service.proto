@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package company.automation.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/automation/v1;automationv1";
+
+import "company/automation/v1/agent_profile.proto";
+
+service AgentService {
+  rpc GetAgentProfile(GetAgentProfileRequest) returns (GetAgentProfileResponse);
+  rpc ChatWithAgent(ChatWithAgentRequest) returns (ChatWithAgentResponse);
+  rpc ExecuteTool(ExecuteToolRequest) returns (ExecuteToolResponse);
+}
+
+message GetAgentProfileRequest { string role_code = 1; }
+message GetAgentProfileResponse { AgentProfile profile = 1; }
+
+message ChatWithAgentRequest { string agent_id = 1; string message = 2; string session_id = 3; }
+message ChatWithAgentResponse { string reply = 1; }
+
+message ExecuteToolRequest { string agent_id = 1; string tool_name = 2; string arguments_json = 3; }
+message ExecuteToolResponse { string result_json = 1; }

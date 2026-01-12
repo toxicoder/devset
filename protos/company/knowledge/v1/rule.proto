@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package company.knowledge.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/knowledge/v1;knowledgev1";
+
+// KnowledgeRule represents a specific instruction or heuristic.
+message KnowledgeRule {
+  string id = 1;
+  string title = 2; // e.g. "Do not use empty try-catch"
+  string description = 3;
+  string context = 4; // e.g. "Java Development"
+  RuleType type = 5;
+}
+
+enum RuleType {
+  RULE_TYPE_UNSPECIFIED = 0;
+  RULE_TYPE_PREFERENCE = 1; // "I prefer X over Y"
+  RULE_TYPE_CONSTRAINT = 2; // "Never do Z"
+  RULE_TYPE_PROCEDURE = 3; // "Always follow steps A, B, C"
+  RULE_TYPE_FACT = 4; // "The server IP is 1.2.3.4"
+}

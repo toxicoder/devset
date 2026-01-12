@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package company.engineering.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/engineering/v1;engineeringv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Incident represents a production outage or security event.
+message Incident {
+  string id = 1;
+  string title = 2;
+  IncidentSeverity severity = 3;
+  IncidentStatus status = 4;
+  string commander_id = 5;
+  google.protobuf.Timestamp start_time = 6;
+  google.protobuf.Timestamp end_time = 7;
+  string summary = 8;
+  repeated string affected_services = 9;
+}
+
+enum IncidentSeverity {
+  INCIDENT_SEVERITY_UNSPECIFIED = 0;
+  INCIDENT_SEVERITY_SEV1 = 1; // Critical
+  INCIDENT_SEVERITY_SEV2 = 2; // Major
+  INCIDENT_SEVERITY_SEV3 = 3; // Minor
+  INCIDENT_SEVERITY_SEV4 = 4; // Trivial
+}
+
+enum IncidentStatus {
+  INCIDENT_STATUS_UNSPECIFIED = 0;
+  INCIDENT_STATUS_INVESTIGATING = 1;
+  INCIDENT_STATUS_IDENTIFIED = 2;
+  INCIDENT_STATUS_MONITORING = 3;
+  INCIDENT_STATUS_RESOLVED = 4;
+}

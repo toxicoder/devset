@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package company.legal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/legal/v1;legalv1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/money.proto";
+
+// Contract represents a legally binding agreement.
+message Contract {
+  // Unique identifier for the contract.
+  string id = 1;
+
+  // Title or name of the contract.
+  string title = 2;
+
+  // Description of the contract's purpose.
+  string description = 3;
+
+  // List of parties involved in the contract (e.g., company names).
+  repeated string parties = 4;
+
+  // The date the contract becomes effective.
+  google.protobuf.Timestamp effective_date = 5;
+
+  // The date the contract expires.
+  google.protobuf.Timestamp expiration_date = 6;
+
+  // The total value of the contract, if applicable.
+  company.common.v1.Money total_value = 7;
+
+  // The current status of the contract.
+  ContractStatus status = 8;
+
+  // URL to the signed document (e.g., in a DMS or object storage).
+  string document_url = 9;
+
+  // Type of the contract.
+  ContractType type = 10;
+}
+
+// ContractStatus describes the lifecycle of a contract.
+enum ContractStatus {
+  CONTRACT_STATUS_UNSPECIFIED = 0;
+  CONTRACT_STATUS_DRAFT = 1;
+  CONTRACT_STATUS_NEGOTIATION = 2;
+  CONTRACT_STATUS_PENDING_SIGNATURE = 3;
+  CONTRACT_STATUS_ACTIVE = 4;
+  CONTRACT_STATUS_EXPIRED = 5;
+  CONTRACT_STATUS_TERMINATED = 6;
+}
+
+// ContractType describes the category of the legal agreement.
+enum ContractType {
+  CONTRACT_TYPE_UNSPECIFIED = 0;
+  CONTRACT_TYPE_NDA = 1;
+  CONTRACT_TYPE_MSA = 2;
+  CONTRACT_TYPE_SOW = 3;
+  CONTRACT_TYPE_EMPLOYMENT = 4;
+  CONTRACT_TYPE_LICENSE = 5;
+  CONTRACT_TYPE_VENDOR = 6;
+}

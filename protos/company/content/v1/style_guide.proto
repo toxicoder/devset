@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package company.content.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/content/v1;contentv1";
+
+import "google/protobuf/timestamp.proto";
+
+// StyleGuide represents a coding standard or style guide.
+message StyleGuide {
+  string id = 1;
+  string title = 2; // e.g., "Google C++ Style Guide"
+  string language = 3; // e.g., "C++", "Python"
+  string description = 4;
+  repeated StyleRule rules = 5;
+  google.protobuf.Timestamp last_updated = 6;
+  string file_path = 7; // Relative path in the repo
+}
+
+message StyleRule {
+  string id = 1;
+  string title = 2; // e.g., "Naming Conventions"
+  string description = 3;
+  string severity = 4; // "Mandatory", "Advisory"
+  string code_example = 5; // Markdown block
+}

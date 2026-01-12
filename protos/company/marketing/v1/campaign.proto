@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package company.marketing.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/marketing/v1;marketingv1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/money.proto";
+
+// Campaign represents a marketing initiative.
+message Campaign {
+  string id = 1;
+  string name = 2;
+  string objective = 3; // e.g., "Brand Awareness", "Lead Gen"
+  google.protobuf.Timestamp start_date = 4;
+  google.protobuf.Timestamp end_date = 5;
+  company.common.v1.Money budget = 6;
+  CampaignStatus status = 7;
+  repeated string channels = 8; // e.g., "Email", "Social", "TV"
+}
+
+enum CampaignStatus {
+  CAMPAIGN_STATUS_UNSPECIFIED = 0;
+  CAMPAIGN_STATUS_PLANNING = 1;
+  CAMPAIGN_STATUS_ACTIVE = 2;
+  CAMPAIGN_STATUS_PAUSED = 3;
+  CAMPAIGN_STATUS_COMPLETED = 4;
+}

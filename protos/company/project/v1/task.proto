@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package company.project.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/project/v1;projectv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Task represents a unit of work to be done.
+message Task {
+  // Unique identifier for the task.
+  string id = 1;
+
+  // A concise summary of the task.
+  string title = 2;
+
+  // Detailed instructions or acceptance criteria.
+  string description = 3;
+
+  // The ID of the project this task belongs to.
+  string project_id = 4;
+
+  // The ID of the sprint this task is assigned to.
+  string sprint_id = 5;
+
+  // ID of the employee assigned to complete the task.
+  string assigned_to_id = 6;
+
+  // The current status of the task.
+  TaskStatus status = 7;
+
+  // The priority level of the task.
+  TaskPriority priority = 8;
+
+  // The deadline for the task.
+  google.protobuf.Timestamp due_date = 9;
+
+  // Estimated effort (e.g., in hours or story points).
+  int32 estimated_effort = 10;
+}
+
+// TaskStatus describes the workflow state of a task.
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_TODO = 1;
+  TASK_STATUS_IN_PROGRESS = 2;
+  TASK_STATUS_IN_REVIEW = 3;
+  TASK_STATUS_DONE = 4;
+  TASK_STATUS_BLOCKED = 5;
+}
+
+// TaskPriority describes the urgency of a task.
+enum TaskPriority {
+  TASK_PRIORITY_UNSPECIFIED = 0;
+  TASK_PRIORITY_LOW = 1;
+  TASK_PRIORITY_MEDIUM = 2;
+  TASK_PRIORITY_HIGH = 3;
+  TASK_PRIORITY_CRITICAL = 4;
+}

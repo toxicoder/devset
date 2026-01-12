@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.knowledge.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/knowledge/v1;knowledgev1";
+
+import "company/knowledge/v1/memory_entry.proto";
+import "company/knowledge/v1/rule.proto";
+
+service KnowledgeService {
+  rpc AddMemory(AddMemoryRequest) returns (AddMemoryResponse);
+  rpc QueryKnowledge(QueryKnowledgeRequest) returns (QueryKnowledgeResponse);
+  rpc ListRules(ListRulesRequest) returns (ListRulesResponse);
+}
+
+message AddMemoryRequest { MemoryEntry memory = 1; }
+message AddMemoryResponse { string memory_id = 1; }
+
+message QueryKnowledgeRequest { string query = 1; int32 limit = 2; }
+message QueryKnowledgeResponse { repeated MemoryEntry memories = 1; }
+
+message ListRulesRequest { string context = 1; }
+message ListRulesResponse { repeated KnowledgeRule rules = 1; }

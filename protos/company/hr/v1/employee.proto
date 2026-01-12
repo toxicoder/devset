@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+import "company/common/v1/email.proto";
+import "company/common/v1/person_name.proto";
+import "company/common/v1/phone_number.proto";
+import "company/hr/v1/compensation.proto";
+import "company/hr/v1/employment_type.proto";
+import "google/protobuf/timestamp.proto";
+
+// Employee represents a full-time or part-time employee of the company.
+message Employee {
+  // Unique identifier for the employee (e.g., employee ID).
+  string id = 1;
+
+  // The employee's full name.
+  company.common.v1.PersonName name = 2;
+
+  // The employee's work email address.
+  company.common.v1.Email work_email = 3;
+
+  // The employee's personal email address (for recovery/contact).
+  company.common.v1.Email personal_email = 4;
+
+  // List of phone numbers associated with the employee.
+  repeated company.common.v1.PhoneNumber phone_numbers = 5;
+
+  // The date the employee started working at the company.
+  google.protobuf.Timestamp start_date = 6;
+
+  // The date the employee left the company, if applicable.
+  google.protobuf.Timestamp end_date = 7;
+
+  // The type of employment (e.g., Full-time).
+  EmploymentType employment_type = 8;
+
+  // ID of the employee's direct manager.
+  string manager_id = 9;
+
+  // ID of the department the employee belongs to.
+  string department_id = 10;
+
+  // ID of the team the employee is a member of.
+  string team_id = 11;
+
+  // ID of the job role assigned to the employee.
+  string job_role_id = 12;
+
+  // ID of the primary work location.
+  string location_id = 13;
+
+  // The employee's compensation package (access controlled).
+  Compensation compensation = 14;
+}

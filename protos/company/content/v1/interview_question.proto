@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package company.content.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/content/v1;contentv1";
+
+// InterviewQuestion represents a technical or behavioral interview question.
+message InterviewQuestion {
+  string id = 1;
+  string title = 2; // e.g., "Invert a Binary Tree"
+  string question_text = 3;
+  string category = 4; // e.g., "Algorithms", "System Design"
+  string difficulty = 5; // "Junior", "Mid", "Senior"
+  string suggested_answer = 6;
+  repeated string tags = 7;
+  string role_code = 8; // Associated Job Role code
+  repeated string follow_up_questions = 9;
+}

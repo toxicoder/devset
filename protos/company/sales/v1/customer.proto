@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package company.sales.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/sales/v1;salesv1";
+
+import "company/common/v1/address.proto";
+import "company/common/v1/person_name.proto";
+import "company/common/v1/email.proto";
+import "company/common/v1/phone_number.proto";
+
+// Customer represents an active client.
+message Customer {
+  // Unique identifier for the customer account.
+  string id = 1;
+
+  // Name of the company or entity.
+  string name = 2;
+
+  // Primary billing address.
+  company.common.v1.Address billing_address = 3;
+
+  // Primary shipping address.
+  company.common.v1.Address shipping_address = 4;
+
+  // List of key contacts.
+  repeated CustomerContact contacts = 5;
+
+  // Industry or vertical.
+  string industry = 6;
+
+  // Account status.
+  CustomerStatus status = 7;
+}
+
+message CustomerContact {
+  company.common.v1.PersonName name = 1;
+  company.common.v1.Email email = 2;
+  company.common.v1.PhoneNumber phone = 3;
+  string role = 4;
+}
+
+enum CustomerStatus {
+  CUSTOMER_STATUS_UNSPECIFIED = 0;
+  CUSTOMER_STATUS_ACTIVE = 1;
+  CUSTOMER_STATUS_INACTIVE = 2;
+  CUSTOMER_STATUS_CHURNED = 3;
+}

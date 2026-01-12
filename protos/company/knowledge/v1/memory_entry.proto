@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package company.knowledge.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/knowledge/v1;knowledgev1";
+
+import "google/protobuf/timestamp.proto";
+
+// MemoryEntry represents a persistent memory item for an AI agent.
+message MemoryEntry {
+  string id = 1;
+  string content = 2; // The raw text memory
+  string source = 3; // Where this memory came from
+  google.protobuf.Timestamp created_at = 4;
+  repeated string tags = 5;
+  float relevance_score = 6;
+}

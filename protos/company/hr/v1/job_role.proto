@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+// JobRole defines a specific role within the organization.
+message JobRole {
+  // Unique identifier for the job role.
+  string id = 1;
+
+  // The official title of the role (e.g., "Senior Software Engineer").
+  string title = 2;
+
+  // The internal code for the role (e.g., "SWEN0001", "EXEC0002").
+  string role_code = 3;
+
+  // The job level associated with this role.
+  int32 level = 4;
+
+  // The career track for this role.
+  JobTrack track = 5;
+
+  // The family this job belongs to (e.g., "Engineering", "Sales").
+  string job_family = 6;
+
+  // Detailed description of the role.
+  string description = 7;
+
+  // List of key responsibilities (bullet points).
+  repeated string responsibilities = 8;
+
+  // Typical daily schedule tasks.
+  repeated DailyTask average_daily_tasks = 9;
+
+  // List of role codes or titles that this role frequently partners with.
+  repeated string common_partners = 10;
+}
+
+// DailyTask represents a scheduled activity typical for a role.
+message DailyTask {
+  // The time of day (e.g., "09:00").
+  string time = 1;
+
+  // Description of the task (e.g., "Standup", "Code Review").
+  string description = 2;
+}
+
+// JobTrack describes the career path.
+enum JobTrack {
+  JOB_TRACK_UNSPECIFIED = 0;
+  JOB_TRACK_INDIVIDUAL_CONTRIBUTOR = 1;
+  JOB_TRACK_MANAGEMENT = 2;
+  JOB_TRACK_EXECUTIVE = 3;
+  JOB_TRACK_SPECIALIST = 4; // For Personal Staff Specialists
+  JOB_TRACK_SUPPORT = 5;
+}

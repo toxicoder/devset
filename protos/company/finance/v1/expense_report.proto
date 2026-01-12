@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package company.finance.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/finance/v1;financev1";
+
+import "google/protobuf/timestamp.proto";
+import "company/common/v1/money.proto";
+
+// ExpenseReport represents a collection of expenses submitted by an employee.
+message ExpenseReport {
+  // Unique identifier for the report.
+  string id = 1;
+
+  // Title or purpose of the expenses (e.g., "Trip to Conference").
+  string title = 2;
+
+  // ID of the employee submitting the report.
+  string employee_id = 3;
+
+  // The date the report was submitted.
+  google.protobuf.Timestamp submission_date = 4;
+
+  // List of individual expenses.
+  repeated ExpenseItem items = 5;
+
+  // Total amount requested for reimbursement.
+  company.common.v1.Money total_amount = 6;
+
+  // Current approval status.
+  ExpenseStatus status = 7;
+
+  // ID of the manager or approver.
+  string approver_id = 8;
+}
+
+message ExpenseItem {
+  string id = 1;
+  google.protobuf.Timestamp date = 2;
+  string description = 3;
+  ExpenseCategory category = 4;
+  company.common.v1.Money amount = 5;
+  string receipt_url = 6;
+}
+
+enum ExpenseCategory {
+  EXPENSE_CATEGORY_UNSPECIFIED = 0;
+  EXPENSE_CATEGORY_TRAVEL = 1;
+  EXPENSE_CATEGORY_MEALS = 2;
+  EXPENSE_CATEGORY_LODGING = 3;
+  EXPENSE_CATEGORY_OFFICE_SUPPLIES = 4;
+  EXPENSE_CATEGORY_SOFTWARE = 5;
+  EXPENSE_CATEGORY_OTHER = 6;
+}
+
+enum ExpenseStatus {
+  EXPENSE_STATUS_UNSPECIFIED = 0;
+  EXPENSE_STATUS_DRAFT = 1;
+  EXPENSE_STATUS_SUBMITTED = 2;
+  EXPENSE_STATUS_APPROVED = 3;
+  EXPENSE_STATUS_REJECTED = 4;
+  EXPENSE_STATUS_REIMBURSED = 5;
+}

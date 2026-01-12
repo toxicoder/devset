@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package company.marketing.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/marketing/v1;marketingv1";
+
+import "company/marketing/v1/campaign.proto";
+
+service MarketingService {
+  rpc CreateCampaign(CreateCampaignRequest) returns (CreateCampaignResponse);
+  rpc LaunchCampaign(LaunchCampaignRequest) returns (LaunchCampaignResponse);
+  rpc StopCampaign(StopCampaignRequest) returns (StopCampaignResponse);
+}
+
+message CreateCampaignRequest { Campaign campaign = 1; }
+message CreateCampaignResponse { Campaign campaign = 1; }
+
+message LaunchCampaignRequest { string campaign_id = 1; }
+message LaunchCampaignResponse { Campaign campaign = 1; }
+
+message StopCampaignRequest { string campaign_id = 1; }
+message StopCampaignResponse { Campaign campaign = 1; }

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package company.infrastructure.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/infrastructure/v1;infrastructurev1";
+
+import "google/protobuf/timestamp.proto";
+
+// DeploymentStatus represents the runtime state of a distributed model.
+message DeploymentStatus {
+  string deployment_id = 1;
+  string model_id = 2;
+  DeploymentState state = 3;
+  repeated NodeStatus nodes = 4;
+  google.protobuf.Timestamp start_time = 5;
+  string endpoint_url = 6;
+}
+
+message NodeStatus {
+  string ip_address = 1;
+  string role = 2; // "Head", "Worker"
+  string container_id = 3;
+  bool is_healthy = 4;
+  int32 gpu_utilization_percent = 5;
+  int32 memory_usage_mb = 6;
+}
+
+enum DeploymentState {
+  DEPLOYMENT_STATE_UNSPECIFIED = 0;
+  DEPLOYMENT_STATE_STARTING = 1;
+  DEPLOYMENT_STATE_RUNNING = 2;
+  DEPLOYMENT_STATE_UNHEALTHY = 3;
+  DEPLOYMENT_STATE_STOPPED = 4;
+  DEPLOYMENT_STATE_FAILED = 5;
+}

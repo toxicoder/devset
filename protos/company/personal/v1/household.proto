@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package company.personal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/personal/v1;personalv1";
+
+import "company/common/v1/address.proto";
+
+// Household represents a residence managed by personal staff.
+message Household {
+  // Unique identifier for the household.
+  string id = 1;
+
+  // Name of the residence (e.g., "Main Estate").
+  string name = 2;
+
+  // Physical address.
+  company.common.v1.Address address = 3;
+
+  // List of staff assigned to this household.
+  repeated string staff_ids = 4;
+
+  // Status of the property.
+  HouseholdStatus status = 5;
+}
+
+enum HouseholdStatus {
+  HOUSEHOLD_STATUS_UNSPECIFIED = 0;
+  HOUSEHOLD_STATUS_OCCUPIED = 1;
+  HOUSEHOLD_STATUS_VACANT = 2;
+  HOUSEHOLD_STATUS_MAINTENANCE = 3;
+  HOUSEHOLD_STATUS_RENOVATION = 4;
+}

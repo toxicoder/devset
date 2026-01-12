@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.infrastructure.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/infrastructure/v1;infrastructurev1";
+
+// DistributedModelConfig represents the JSON config for `dgx-spark`.
+message DistributedModelConfig {
+  // IP address of the first node (Head).
+  string ip1 = 1;
+
+  // IP address of the second node (Worker).
+  string ip2 = 2;
+
+  // The model identifier (URL or Registry ID) to deploy.
+  string model = 3;
+
+  // The inference engine backend (e.g., "trtllm", "vllm").
+  string engine = 4;
+
+  // Custom Docker image to use.
+  string image = 5;
+}

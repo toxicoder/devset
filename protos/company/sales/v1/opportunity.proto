@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package company.sales.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/sales/v1;salesv1";
+
+import "company/common/v1/money.proto";
+import "google/protobuf/timestamp.proto";
+
+// Opportunity represents a qualified potential deal.
+message Opportunity {
+  // Unique identifier for the opportunity.
+  string id = 1;
+
+  // Name of the deal.
+  string name = 2;
+
+  // ID of the customer account.
+  string customer_id = 3;
+
+  // Estimated value of the deal.
+  company.common.v1.Money estimated_value = 4;
+
+  // Probability of closing (0-100).
+  int32 probability_percent = 5;
+
+  // Current stage in the sales pipeline.
+  OpportunityStage stage = 6;
+
+  // Expected close date.
+  google.protobuf.Timestamp expected_close_date = 7;
+
+  // ID of the sales representative owning the deal.
+  string owner_id = 8;
+}
+
+enum OpportunityStage {
+  OPPORTUNITY_STAGE_UNSPECIFIED = 0;
+  OPPORTUNITY_STAGE_DISCOVERY = 1;
+  OPPORTUNITY_STAGE_PROPOSAL = 2;
+  OPPORTUNITY_STAGE_NEGOTIATION = 3;
+  OPPORTUNITY_STAGE_CLOSED_WON = 4;
+  OPPORTUNITY_STAGE_CLOSED_LOST = 5;
+}

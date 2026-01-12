@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package company.infrastructure.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/infrastructure/v1;infrastructurev1";
+
+// ModelRegistryEntry represents a row in `models.db`.
+message ModelRegistryEntry {
+  // Short ID used in CLI (e.g., "reasoning-1").
+  string id = 1;
+
+  // HuggingFace Model ID (e.g., "deepseek-ai/deepseek-r1").
+  string hf_model_id = 2;
+
+  // Number of Tensor Parallel GPUs required.
+  int32 tensor_parallel_size = 3;
+
+  // Number of Pipeline Parallel stages.
+  int32 pipeline_parallel_size = 4;
+
+  // Quantization format (e.g., "fp4", "fp16").
+  string quantization = 5;
+
+  // Parameter count in billions.
+  int32 param_count_billions = 6;
+
+  // Whether this requires a specific specialized image/environment.
+  bool requires_special_image = 7;
+
+  // Extra environment variables or args.
+  string extra_args = 8;
+
+  // Alternative or Source Model ID if different.
+  string source_model_id = 9;
+}

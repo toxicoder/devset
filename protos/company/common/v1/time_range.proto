@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package company.common.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/common/v1;commonv1";
+
+import "google/protobuf/timestamp.proto";
+
+// TimeRange represents a period of time with a start and end timestamp.
+message TimeRange {
+  // The start timestamp of the period (inclusive).
+  google.protobuf.Timestamp start_time = 1;
+
+  // The end timestamp of the period (exclusive).
+  // If not set, the period is considered ongoing or indefinite.
+  google.protobuf.Timestamp end_time = 2;
+}

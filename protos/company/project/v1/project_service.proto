@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package company.project.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/project/v1;projectv1";
+
+import "company/project/v1/project.proto";
+import "company/project/v1/task.proto";
+import "company/project/v1/sprint.proto";
+import "google/protobuf/field_mask.proto";
+
+service ProjectService {
+  rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
+  rpc GetProject(GetProjectRequest) returns (GetProjectResponse);
+  rpc UpdateProject(UpdateProjectRequest) returns (UpdateProjectResponse);
+  rpc ListProjects(ListProjectsRequest) returns (ListProjectsResponse);
+}
+
+message CreateProjectRequest { Project project = 1; }
+message CreateProjectResponse { Project project = 1; }
+message GetProjectRequest { string project_id = 1; }
+message GetProjectResponse { Project project = 1; }
+message UpdateProjectRequest { Project project = 1; google.protobuf.FieldMask update_mask = 2; }
+message UpdateProjectResponse { Project project = 1; }
+message ListProjectsRequest { string department_id = 1; }
+message ListProjectsResponse { repeated Project projects = 1; }
+
+service TaskService {
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
+  rpc AssignTask(AssignTaskRequest) returns (AssignTaskResponse);
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+}
+
+message CreateTaskRequest { Task task = 1; }
+message CreateTaskResponse { Task task = 1; }
+message UpdateTaskRequest { Task task = 1; google.protobuf.FieldMask update_mask = 2; }
+message UpdateTaskResponse { Task task = 1; }
+message AssignTaskRequest { string task_id = 1; string assignee_id = 2; }
+message AssignTaskResponse { Task task = 1; }
+message ListTasksRequest { string project_id = 1; string assignee_id = 2; }
+message ListTasksResponse { repeated Task tasks = 1; }
+
+service SprintService {
+  rpc StartSprint(StartSprintRequest) returns (StartSprintResponse);
+  rpc CloseSprint(CloseSprintRequest) returns (CloseSprintResponse);
+}
+
+message StartSprintRequest { string sprint_id = 1; }
+message StartSprintResponse { Sprint sprint = 1; }
+message CloseSprintRequest { string sprint_id = 1; }
+message CloseSprintResponse { Sprint sprint = 1; }

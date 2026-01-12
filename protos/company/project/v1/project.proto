@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package company.project.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/project/v1;projectv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Project represents a planned undertaking.
+message Project {
+  // Unique identifier for the project.
+  string id = 1;
+
+  // The name of the project.
+  string name = 2;
+
+  // A detailed description of the project goals.
+  string description = 3;
+
+  // The current status of the project.
+  ProjectStatus status = 4;
+
+  // The planned start date.
+  google.protobuf.Timestamp start_date = 5;
+
+  // The targeted completion date.
+  google.protobuf.Timestamp target_end_date = 6;
+
+  // ID of the employee who owns or manages the project.
+  string owner_id = 7;
+
+  // ID of the department sponsoring the project.
+  string department_id = 8;
+}
+
+// ProjectStatus describes the high-level state of a project.
+enum ProjectStatus {
+  PROJECT_STATUS_UNSPECIFIED = 0;
+  PROJECT_STATUS_PLANNING = 1;
+  PROJECT_STATUS_ACTIVE = 2;
+  PROJECT_STATUS_ON_HOLD = 3;
+  PROJECT_STATUS_COMPLETED = 4;
+  PROJECT_STATUS_CANCELLED = 5;
+}
