@@ -29,6 +29,26 @@ docs:
     url: /engineering_standards/release_process/
   - title: On-Call Guide
     url: /engineering_standards/on_call_guide/
+- title: Operational Playbooks
+  children:
+  - title: Overview
+    url: /playbooks/
+  - title: High Latency
+    url: /playbooks/high_latency/
+  - title: High Error Rate
+    url: /playbooks/high_error_rate/
+  - title: Database Failover
+    url: /playbooks/database_failover/
+  - title: Memory Leak / OOM
+    url: /playbooks/memory_leak_oom/
+  - title: Disk Space Exhaustion
+    url: /playbooks/disk_space_exhaustion/
+  - title: Certificate Expiry
+    url: /playbooks/certificate_expiry/
+  - title: Dependency Failure
+    url: /playbooks/dependency_failure/
+  - title: Bad Deployment
+    url: /playbooks/bad_deployment/
 - title: Corporate Strategy
   children:
   - title: Org Structure
