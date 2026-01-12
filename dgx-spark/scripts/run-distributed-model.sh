@@ -295,7 +295,7 @@ function parse_model_config() {
       log_info "Defaulting to TensorRT-LLM Engine Build (Native)."
       USE_TRT_LLM=1
       # FIXED: Updated default TRT-LLM image to newer version for Nemotron support
-      IMAGE="nvcr.io/nvidia/tensorrt-llm:25.12-py3"
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:v0.12.0"
     elif [[ "$FORCE" -eq 1 ]]; then
       log_warn "Model '$MODEL_ARG' not found in registry. Using as custom image."
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
@@ -321,7 +321,7 @@ function parse_model_config() {
     USE_TRT_LLM=1
     if [[ -z "$IMAGE_OVERRIDE" ]]; then
       # FIXED: Ensure override also defaults to newer image
-      IMAGE="nvcr.io/nvidia/tensorrt-llm:25.12-py3"
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:v0.12.0"
     fi
     log_info "Engine Mode: TensorRT-LLM (Container: $IMAGE)"
     if [[ -z "$HF_MODEL_ID" ]]; then

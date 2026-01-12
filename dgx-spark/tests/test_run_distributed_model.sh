@@ -247,7 +247,7 @@ echo "Running test: Custom HF Model Default to TRT-LLM"
     OUTPUT=$(echo "n" | "$TARGET_SCRIPT" --dry-run "10.0.0.1" "10.0.0.2" "https://huggingface.co/MyOrg/MyModel" 2>&1)
 
     if echo "$OUTPUT" | grep -q "Defaulting to TensorRT-LLM Engine Build"; then
-        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm:25.12-py3"; then
+        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:v0.12.0"; then
             if echo "$OUTPUT" | grep -q "HF_TOKEN=test-token"; then
                 echo "PASS"
             else
