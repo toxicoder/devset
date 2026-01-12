@@ -800,9 +800,13 @@ done
 exit 1
 INNER
 
+    # Expand tilde in host path if present (Docker requires absolute path)
+    HB="$host_base"
+    if [[ "\$HB" == "~"* ]]; then HB="\${HOME}\${HB:1}"; fi
+
     docker run --rm --gpus all \\
         -e HF_TOKEN='$HF_TOKEN' \\
-        -v '$host_base':'$ctr_base' \\
+        -v "\$HB":'$ctr_base' \\
         '$IMAGE' \\
         bash -c "\$DOCKER_SCRIPT"
 EOF
@@ -882,9 +886,15 @@ function compile_trt_engine() {
 
   # Use CLI tools directly
   if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    # Expand tilde in host paths if present
+    HMB="$host_model_base"
+    if [[ "\$HMB" == "~"* ]]; then HMB="\${HOME}\${HMB:1}"; fi
+    HEB="$host_engine_base"
+    if [[ "\$HEB" == "~"* ]]; then HEB="\${HOME}\${HEB:1}"; fi
+
     docker run --rm --gpus all \\
-        -v '$host_model_base':'$ctr_model_base' \\
-        -v '$host_engine_base':'$ctr_engine_base' \\
+        -v "\$HMB":'$ctr_model_base' \\
+        -v "\$HEB":'$ctr_engine_base' \\
         '$IMAGE' \\
         bash -c "
 trtllm-convert-checkpoint \\
