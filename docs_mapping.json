@@ -224,5 +224,9 @@
   "policies/performance_review_policy.md": "policies/performance_review_policy.md",
   "policies/remote_work_policy.md": "policies/remote_work_policy.md",
   "policies/social_media_policy.md": "policies/social_media_policy.md",
-  "policies/travel_expense_policy.md": "policies/travel_expense_policy.md"
+  "policies/travel_expense_policy.md": "policies/travel_expense_policy.md",
+  "policies/terms_of_service/standard.md": "policies/terms_of_service/standard.md",
+  "policies/terms_of_service/saas.md": "policies/terms_of_service/saas.md",
+  "policies/terms_of_service/api.md": "policies/terms_of_service/api.md",
+  "policies/terms_of_service/marketplace.md": "policies/terms_of_service/marketplace.md"
 }
