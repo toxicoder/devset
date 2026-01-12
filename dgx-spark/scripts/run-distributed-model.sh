@@ -73,6 +73,26 @@ TRT_MODEL_DIR="~/models"
 # Utilities & Logging
 # ==============================================================================
 
+# Internal: Log Info
+function log_info() {
+  printf "[INFO] %s\n" "$*"
+}
+
+# Internal: Log Warning
+function log_warn() {
+  printf "[WARN] %s\n" "$*" >&2
+}
+
+# Internal: Log Error
+function log_error() {
+  printf "[ERROR] %s\n" "$*" >&2
+}
+
+# Internal: Log Step
+function log_step() {
+  printf "[STEP] %s\n" "$*"
+}
+
 # Internal: Cleanup background jobs
 function cleanup() {
   jobs -p | xargs -r kill 2>/dev/null || true
@@ -85,7 +105,7 @@ trap cleanup EXIT ERR
 function _check_dependencies() {
   for cmd in ssh awk grep sed nc curl pigz python3; do
     if ! command -v "$cmd" &>/dev/null; then
-      printf "Error: Required command '%s' not found.\n" "$cmd" >&2
+      log_error "Required command '$cmd' not found."
       exit 1
     fi
   done
@@ -98,7 +118,7 @@ function _check_dependencies() {
 function _validate_ip() {
   local ip="$1"
   if [[ ! "$ip" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-    printf "Error: Invalid IP format '%s'\n" "$ip" >&2
+    log_error "Invalid IP format '$ip'"
     exit 1
   fi
 }
@@ -108,7 +128,7 @@ function _validate_ip() {
 # Globals: NGC_API_KEY
 function _check_api_key() {
   if [[ -z "${NGC_API_KEY:-}" ]]; then
-    printf "Error: NGC_API_KEY environment variable is not set.\n" >&2
+    log_error "NGC_API_KEY environment variable is not set."
     exit 1
   fi
 }
@@ -118,8 +138,8 @@ function _check_api_key() {
 # Globals: HF_TOKEN
 function _check_hf_token() {
   if [[ -z "${HF_TOKEN:-}" ]]; then
-    printf "Error: HF_TOKEN environment variable is required for TRT-LLM mode to download models.\n" >&2
-    printf "Please export your Hugging Face Token: export HF_TOKEN='hf_...'\n" >&2
+    log_error "HF_TOKEN environment variable is required for TRT-LLM mode to download models."
+    log_error "Please export your Hugging Face Token: export HF_TOKEN='hf_...'"
     exit 1
   fi
 }
@@ -128,15 +148,15 @@ function _check_hf_token() {
 # Arguments: None
 # Globals: IP1, IP2, SSH_OPTS
 function _check_remote_sudo() {
-  printf "[Check] Verifying passwordless sudo access...\n"
+  log_info "Verifying passwordless sudo access..."
   for ip in "$IP1" "$IP2"; do
     if ! ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true 2>/dev/null"; then
-      printf "Error: Passwordless sudo check failed for %s.\n" "$ip" >&2
-      printf "Please ensure the user has sudo privileges without password (NOPASSWD in sudoers).\n" >&2
+      log_error "Passwordless sudo check failed for $ip."
+      log_error "Please ensure the user has sudo privileges without password (NOPASSWD in sudoers)."
       exit 1
     fi
   done
-  printf "  [+] Sudo access verified.\n"
+  log_info "Sudo access verified."
 }
 
 # ==============================================================================
@@ -150,7 +170,7 @@ function json_get() {
     # FIXED: Added robust error handling and removed blind error suppression
     # FIXED: Security improvement to pass config file as argument
     if ! python3 -c "import sys, json; print(json.load(open(sys.argv[1])).get(sys.argv[2], ''))" "$CONFIG_FILE" "$key"; then
-        printf "Error: Failed to parse JSON key '%s' from config.\n" "$key" >&2
+        log_error "Failed to parse JSON key '$key' from config."
         exit 1
     fi
 }
@@ -160,7 +180,7 @@ function json_get() {
 # Globals: CONFIG_FILE, IP1, IP2, MODEL_ARG, ENGINE_OVERRIDE, IMAGE_OVERRIDE
 function _read_config() {
   if [[ ! -f "$CONFIG_FILE" ]]; then
-    printf "Error: Config file not found at %s\n" "$CONFIG_FILE" >&2
+    log_error "Config file not found at $CONFIG_FILE"
     exit 1
   fi
 
@@ -180,7 +200,7 @@ function _read_config() {
   fi
 
   if [[ -z "$IP1" || -z "$IP2" || -z "$MODEL_ARG" ]]; then
-    printf "Error: Invalid config file (missing fields).\n" >&2
+    log_error "Invalid config file (missing fields)."
     exit 1
   fi
 }
@@ -198,7 +218,7 @@ function _write_config() {
     "image": "$IMAGE_OVERRIDE"
 }
 EOF
-  printf "Configuration saved to %s\n" "$CONFIG_FILE"
+  log_info "Configuration saved to $CONFIG_FILE"
 }
 
 # Internal: Get Model Registry Data
@@ -209,7 +229,7 @@ function get_model_registry_data() {
   if [[ -f "$SCRIPT_DIR/models.db" ]]; then
     cat "$SCRIPT_DIR/models.db"
   else
-    printf "Error: Model registry not found at %s/models.db\n" "$SCRIPT_DIR" >&2
+    log_error "Model registry not found at $SCRIPT_DIR/models.db"
     exit 1
   fi
 }
@@ -236,7 +256,7 @@ function parse_model_config() {
     # FIXED: Ensure case preservation for HF_MODEL_ID
     HF_MODEL_ID=$(printf "%s" "$stripped" | cut -d'/' -f1,2)
     MODEL_ARG="$HF_MODEL_ID"
-    printf "Detected Hugging Face URL. Extracted Model ID: %s\n" "$HF_MODEL_ID"
+    log_info "Detected Hugging Face URL. Extracted Model ID: $HF_MODEL_ID"
   fi
 
   # Look up model
@@ -260,22 +280,22 @@ function parse_model_config() {
   else
     if [[ -n "$IMAGE_OVERRIDE" ]]; then
       # Image provided by user, assume manual configuration
-      printf "Using custom image override: %s\n" "$IMAGE_OVERRIDE"
+      log_info "Using custom image override: $IMAGE_OVERRIDE"
       IMAGE="$IMAGE_OVERRIDE"
       if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
     elif [[ -n "$HF_MODEL_ID" ]]; then
       # Custom HF Model without Image -> Default to TRT-LLM
-      printf "Warning: Custom HF Model detected (%s) without corresponding NIM Image.\n" "$HF_MODEL_ID"
-      printf "Defaulting to TensorRT-LLM Engine Build (Native).\n"
+      log_warn "Custom HF Model detected ($HF_MODEL_ID) without corresponding NIM Image."
+      log_info "Defaulting to TensorRT-LLM Engine Build (Native)."
       USE_TRT_LLM=1
       # FIXED: Updated default TRT-LLM image to newer version for Nemotron support
       IMAGE="nvcr.io/nvidia/tensorrt-llm:25.12-py3"
     elif [[ "$FORCE" -eq 1 ]]; then
-      printf "Warning: Model '%s' not found in registry. Using as custom image.\n" "$MODEL_ARG"
+      log_warn "Model '$MODEL_ARG' not found in registry. Using as custom image."
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
       if [[ -z "$HF_MODEL_ID" ]]; then HF_MODEL_ID="$MODEL_ARG"; fi
     else
-      printf "Error: Model '%s' not found in the supported registry.\n" "$MODEL_ARG" >&2
+      log_error "Model '$MODEL_ARG' not found in the supported registry."
       exit 1
     fi
   fi
@@ -297,9 +317,9 @@ function parse_model_config() {
       # FIXED: Ensure override also defaults to newer image
       IMAGE="nvcr.io/nvidia/tensorrt-llm:25.12-py3"
     fi
-    printf "Engine Mode: TensorRT-LLM (Container: %s)\n" "$IMAGE"
+    log_info "Engine Mode: TensorRT-LLM (Container: $IMAGE)"
     if [[ -z "$HF_MODEL_ID" ]]; then
-       printf "Error: HF Model ID not found for %s. Cannot build engine.\n" "$MODEL_ARG" >&2
+       log_error "HF Model ID not found for $MODEL_ARG. Cannot build engine."
        exit 1
     fi
   elif [[ -n "$ENGINE_OVERRIDE" ]]; then
@@ -332,11 +352,11 @@ function parse_model_config() {
   # Platform
   PLATFORM_ARG="--platform=linux/amd64"
 
-  printf "=== NVIDIA DGX Spark Distributed Launcher ===\n"
-  printf "Nodes: %s (Head), %s (Worker)\n" "$IP1" "$IP2"
-  printf "Model: %s (HF ID: %s)\n" "$MODEL_ARG" "${HF_MODEL_ID:-N/A}"
-  printf "Image: %s\n" "$IMAGE"
-  printf "TP: %s, PP: %s, Quant: %s\n" "$TP_SIZE" "$PP_SIZE" "$quant_to_use"
+  log_info "=== NVIDIA DGX Spark Distributed Launcher ==="
+  log_info "Nodes: $IP1 (Head), $IP2 (Worker)"
+  log_info "Model: $MODEL_ARG (HF ID: ${HF_MODEL_ID:-N/A})"
+  log_info "Image: $IMAGE"
+  log_info "TP: $TP_SIZE, PP: $PP_SIZE, Quant: $quant_to_use"
 }
 
 # ==============================================================================
@@ -360,7 +380,7 @@ function _get_node_vram() {
   local out
   # FIXED: Capture only stdout to avoid parsing SSH error messages as VRAM
   if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd"); then
-      printf "Warning: SSH to %s failed during VRAM check.\n" "$ip" >&2
+      log_warn "SSH to $ip failed during VRAM check."
       echo "0"
       return
   fi
@@ -371,7 +391,7 @@ function _get_node_vram() {
   total_mem=$(printf "%s" "$out" | tr -d '\r' | grep -E '^[0-9]+$' | awk '{s+=$1} END {print s+0}')
 
   if [[ -z "$total_mem" || "$total_mem" -eq 0 ]]; then
-      printf "Warning: Could not detect VRAM on %s (nvidia-smi failed or returned 0). Assuming 0.\n" "$ip" >&2
+      log_warn "Could not detect VRAM on $ip (nvidia-smi failed or returned 0). Assuming 0."
       echo "0"
   else
       echo "$total_mem"
@@ -397,58 +417,75 @@ function get_total_cluster_vram() {
 # Internal: Check if cluster satisfies VRAM requirements
 # Arguments:
 #   $1: Model parameters (billions)
-# Globals: IP1, IP2, FORCE, QUANT_OVERRIDE, EXTRA_NIM_ENV
+#   $2: IP1
+#   $3: IP2
+#   $4: Force flag
+#   $5: Quant override
+#   $6: Extra env
 function check_vram_requirements() {
   local params="$1"
-  printf "[Check] verifying VRAM capacity...\n"
+  local ip1="$2"
+  local ip2="$3"
+  local force="$4"
+  local quant_override="$5"
+  local extra_env="$6"
+
+  log_info "Verifying VRAM capacity..."
 
   local total_gb
-  total_gb=$(get_total_cluster_vram "$IP1" "$IP2")
+  total_gb=$(get_total_cluster_vram "$ip1" "$ip2")
 
   # FIXED: Graceful fallback for failed VRAM detection
   if awk -v t="$total_gb" 'BEGIN {exit !(t <= 0)}'; then
-     printf "Warning: VRAM detection failed or total is 0 GB.\n" >&2
-     if [[ "$FORCE" -eq 1 ]]; then
-         printf "Force enabled, proceeding...\n" >&2
+     log_warn "VRAM detection failed or total is 0 GB."
+     if [[ "$force" -eq 1 ]]; then
+         log_warn "Force enabled, proceeding..."
          return 0
      else
-         printf "Error: VRAM detection failed. Use --force to override.\n" >&2
+         log_error "VRAM detection failed. Use --force to override."
          exit 1
      fi
   fi
-  printf "Total Cluster VRAM Detected: %.2f GB\n" "$total_gb"
+  # Using printf for formatted float output, wrapped in log_info
+  log_info "$(printf "Total Cluster VRAM Detected: %.2f GB" "$total_gb")"
 
   local required_gb=$(( params * 2 ))
 
-  if [[ "$QUANT_OVERRIDE" == "fp8" || "$EXTRA_NIM_ENV" == *"fp8"* ]]; then required_gb=$(( required_gb / 2 )); fi
-  if [[ "$QUANT_OVERRIDE" == "fp4" || "$EXTRA_NIM_ENV" == *"fp4"* ]]; then required_gb=$(( required_gb / 4 )); fi
+  if [[ "$quant_override" == "fp8" || "$extra_env" == *"fp8"* ]]; then required_gb=$(( required_gb / 2 )); fi
+  if [[ "$quant_override" == "fp4" || "$extra_env" == *"fp4"* ]]; then required_gb=$(( required_gb / 4 )); fi
 
   # Add 20GB buffer for context/overhead
   required_gb=$(( required_gb + 20 ))
 
   if awk -v r="$required_gb" -v t="$total_gb" 'BEGIN {exit !(r > t)}'; then
-    printf "CRITICAL WARNING: Estimated VRAM required (~%d GB) exceeds detected VRAM (%.2f GB).\n" \
-        "$required_gb" "$total_gb"
+    # Using printf for formatted float output
+    local msg
+    msg=$(printf "Estimated VRAM required (~%d GB) exceeds detected VRAM (%.2f GB)." "$required_gb" "$total_gb")
+    log_warn "CRITICAL WARNING: $msg"
 
-    if [[ "$FORCE" -eq 1 ]]; then
-       printf "Force enabled. Proceeding despite memory risks...\n"
+    if [[ "$force" -eq 1 ]]; then
+       log_warn "Force enabled. Proceeding despite memory risks..."
     else
-       printf "Aborting to prevent potential crash. Use --force to override.\n" >&2
+       log_error "Aborting to prevent potential crash. Use --force to override."
        exit 1
     fi
   else
-    printf "VRAM Check Passed (Est. %d GB < %.2f GB)\n" "$required_gb" "$total_gb"
+    local msg
+    msg=$(printf "VRAM Check Passed (Est. %d GB < %.2f GB)" "$required_gb" "$total_gb")
+    log_info "$msg"
   fi
 }
 
 # Internal: Detect architecture of the head node
-# Arguments: None
-# Globals: IP1, SSH_OPTS, PLATFORM_ARG
+# Arguments:
+#   $1: IP address
+# Returns: Platform argument string (e.g. --platform linux/amd64)
 function _detect_architecture() {
+  local ip="$1"
   local arch
-  arch=$(ssh "${SSH_OPTS[@]}" "$IP1" "uname -m" 2>/dev/null | xargs)
-  if [[ "$arch" == "x86_64" ]]; then PLATFORM_ARG="--platform linux/amd64";
-  elif [[ "$arch" == "aarch64" ]]; then PLATFORM_ARG="--platform linux/arm64"; fi
+  arch=$(ssh "${SSH_OPTS[@]}" "$ip" "uname -m" 2>/dev/null | xargs)
+  if [[ "$arch" == "x86_64" ]]; then echo "--platform linux/amd64";
+  elif [[ "$arch" == "aarch64" ]]; then echo "--platform linux/arm64"; fi
 }
 
 # Internal: Detect high-speed network interfaces for a given IP
@@ -490,11 +527,11 @@ function detect_high_speed_iface() {
 # Arguments: None
 # Globals: IP1, IP2, NET_CONF_1, NET_CONF_2, IFACES1, IFACES2
 function detect_network_config() {
-  printf "[1/5] Detecting high-speed network interfaces...\n"
+  log_step "[1/5] Detecting high-speed network interfaces..."
 
   # Pre-flight check
   if ssh "${SSH_OPTS[@]}" "$IP1" "command -v ib_write_bw >/dev/null"; then
-    printf "  [+] ib_write_bw detected (RoCE/IB support confirmed).\n"
+    log_info "ib_write_bw detected (RoCE/IB support confirmed)."
   fi
 
   NET_CONF_1=$(detect_high_speed_iface "$IP1")
@@ -510,12 +547,12 @@ function detect_network_config() {
   IFACES1=$(parse_val "$NET_CONF_1")
   IFACES2=$(parse_val "$NET_CONF_2")
 
-  printf "Node 1 Interfaces: %s\n" "$IFACES1"
-  printf "Node 2 Interfaces: %s\n" "$IFACES2"
+  log_info "Node 1 Interfaces: $IFACES1"
+  log_info "Node 2 Interfaces: $IFACES2"
 
   if [[ -z "$IFACES1" || -z "$IFACES2" || "$NET_CONF_1" == *"DETECTED_NONE"* ]]; then
-    printf "Warning: No high-speed interfaces detected. Defaulting to standard networking.\n" >&2
-    printf "Recommendation: Check netplan config for static IPs on high-speed interfaces.\n"
+    log_warn "No high-speed interfaces detected. Defaulting to standard networking."
+    log_info "Recommendation: Check netplan config for static IPs on high-speed interfaces."
   fi
 }
 
@@ -556,7 +593,8 @@ function pull_image() {
     fi
 EOF
   then
-    printf "Error: Failed to pull image on %s\n" "$ip" >&2; return 1
+    log_error "Failed to pull image on $ip"
+    return 1
   fi
 }
 
@@ -574,7 +612,7 @@ function transfer_docker_image_p2p() {
 
   if [[ -z "$fast_ip_tgt" ]]; then return 1; fi
 
-  printf "Using High-Speed P2P Transfer to %s (%s)...\n" "$tgt_ip" "$fast_ip_tgt"
+  log_info "Using High-Speed P2P Transfer to $tgt_ip ($fast_ip_tgt)..."
   # Start listener
   ( ssh "${SSH_OPTS[@]}" "$tgt_ip" "nc -l -p 12346 | pigz -d | docker load" ) &
   local pid=$!
@@ -593,7 +631,9 @@ function transfer_docker_image_p2p() {
   done
 
   if [[ "$ready" -eq 0 ]]; then
-      printf "\nError: Receiver timed out.\n" >&2
+      # Need newline after dots
+      printf "\n"
+      log_error "Receiver timed out."
       kill "$pid" 2>/dev/null
       return 1
   fi
@@ -601,7 +641,7 @@ function transfer_docker_image_p2p() {
   # Start sender
   if ssh "${SSH_OPTS[@]}" "$src_ip" "docker save $image | pigz -c -1 | nc -w 60 -q 1 $fast_ip_tgt 12346"; then
       if wait "$pid"; then
-          printf "Image transfer successful.\n"
+          log_info "Image transfer successful."
           return 0
       fi
   fi
@@ -609,30 +649,38 @@ function transfer_docker_image_p2p() {
 }
 
 # Internal: Orchestrate Image Presence
-# Arguments: None
-# Globals: IP1, IP2, IMAGE, IFACES2
+# Arguments:
+#   $1: IP1
+#   $2: IP2
+#   $3: Image
+#   $4: Ifaces2
 function ensure_image_present() {
-  printf "Pulling image %s on Head Node (%s)...\n" "$IMAGE" "$IP1"
-  pull_image "$IP1" "$IMAGE"
+  local ip1="$1"
+  local ip2="$2"
+  local image="$3"
+  local ifaces2="$4"
+
+  log_info "Pulling image $image on Head Node ($ip1)..."
+  pull_image "$ip1" "$image"
 
   # Worker check
-  printf "Checking image on Worker Node (%s)...\n" "$IP2"
+  log_info "Checking image on Worker Node ($ip2)..."
   local id_head
-  id_head=$(ssh "${SSH_OPTS[@]}" "$IP1" "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
+  id_head=$(ssh "${SSH_OPTS[@]}" "$ip1" "docker inspect --format='{{.Id}}' $image 2>/dev/null" || true)
   local id_worker
-  id_worker=$(ssh "${SSH_OPTS[@]}" "$IP2" "docker inspect --format='{{.Id}}' $IMAGE 2>/dev/null" || true)
+  id_worker=$(ssh "${SSH_OPTS[@]}" "$ip2" "docker inspect --format='{{.Id}}' $image 2>/dev/null" || true)
 
   if [[ -n "$id_worker" && "$id_head" == "$id_worker" ]]; then
-    printf "Image matches on %s.\n" "$IP2"
+    log_info "Image matches on $ip2."
     return
   fi
 
   # P2P Transfer attempt
   local transfer_done=0
-  if [[ -n "$IFACES2" ]]; then
+  if [[ -n "$ifaces2" ]]; then
     local fast_ip2
-    fast_ip2=$(_get_ip_from_iface "$IP2" "$IFACES2")
-    if transfer_docker_image_p2p "$IP1" "$IP2" "$IMAGE" "$fast_ip2"; then
+    fast_ip2=$(_get_ip_from_iface "$ip2" "$ifaces2")
+    if transfer_docker_image_p2p "$ip1" "$ip2" "$image" "$fast_ip2"; then
        transfer_done=1
     fi
   fi
@@ -640,23 +688,29 @@ function ensure_image_present() {
   if [[ "$transfer_done" -eq 1 ]]; then return; fi
 
   # Fallback
-  printf "Downloading image on %s...\n" "$IP2"
-  pull_image "$IP2" "$IMAGE"
+  log_info "Downloading image on $ip2..."
+  pull_image "$ip2" "$image"
 }
 
 # Internal: Align platform with image
-# Arguments: None
-# Globals: IP1, IMAGE, PLATFORM_ARG
+# Arguments:
+#   $1: IP
+#   $2: Image
+#   $3: Platform Arg
 function _align_platform_with_image() {
+  local ip="$1"
+  local image="$2"
+  local platform_arg="$3"
+
   local img_arch
-  img_arch=$(ssh "${SSH_OPTS[@]}" "$IP1" "docker inspect -f '{{.Architecture}}' $IMAGE" 2>/dev/null | xargs)
+  img_arch=$(ssh "${SSH_OPTS[@]}" "$ip" "docker inspect -f '{{.Architecture}}' $image" 2>/dev/null | xargs)
 
   if [[ -n "$img_arch" ]]; then
-     if [[ "$img_arch" == "amd64" && "$PLATFORM_ARG" == *"--platform linux/arm64"* ]]; then
-        printf "Error: Image architecture (%s) is incompatible with Host architecture (arm64).\n" "$img_arch" >&2
+     if [[ "$img_arch" == "amd64" && "$platform_arg" == *"--platform linux/arm64"* ]]; then
+        log_error "Image architecture ($img_arch) is incompatible with Host architecture (arm64)."
         exit 1
-     elif [[ "$img_arch" == "arm64" && "$PLATFORM_ARG" == *"--platform linux/amd64"* ]]; then
-        printf "Error: Image architecture (%s) is incompatible with Host architecture (x86_64).\n" "$img_arch" >&2
+     elif [[ "$img_arch" == "arm64" && "$platform_arg" == *"--platform linux/amd64"* ]]; then
+        log_error "Image architecture ($img_arch) is incompatible with Host architecture (x86_64)."
         exit 1
      fi
   fi
@@ -673,13 +727,13 @@ function _remote_mkdir() {
   local dirs="$2"
   local out
   if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs" 2>&1); then
-     printf "Warning: mkdir failed on %s. Output: %s.\n" "$ip" "$out"
+     log_warn "mkdir failed on $ip. Output: $out."
      # Try sudo non-interactive
      if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true" 2>/dev/null; then
-         printf "Sudo access confirmed. Fixing permissions...\n"
+         log_info "Sudo access confirmed. Fixing permissions..."
          ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(id -u):\$(id -g) $dirs"
      else
-         printf "Sudo failed. Attempting Docker-based permission fix...\n"
+         log_info "Sudo failed. Attempting Docker-based permission fix..."
          local fix_image="${IMAGE:-alpine}"
          local remote_script="
            export PATH=\$PATH:/usr/bin:/usr/local/bin
@@ -701,11 +755,11 @@ function _remote_mkdir() {
          "
          if printf "%s" "$remote_script" | ssh "${SSH_OPTS[@]}" "$ip" "bash -s"; then
              if ssh "${SSH_OPTS[@]}" "$ip" "mkdir -p $dirs"; then
-                 printf "Permissions fixed via Docker. mkdir succeeded.\n"
+                 log_info "Permissions fixed via Docker. mkdir succeeded."
                  return 0
              fi
          fi
-         printf "Error: Cannot create directories and passwordless sudo is not available.\n" >&2
+         log_error "Cannot create directories and passwordless sudo is not available."
          exit 1
      fi
   fi
@@ -789,7 +843,7 @@ function compile_trt_engine() {
   quant_status=$(ssh "${SSH_OPTS[@]}" "$ip" "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE bash -c '$check_quant_cmd'" 2>/dev/null)
 
   if [[ "$quant_status" == *"DETECTED_NVFP4"* ]]; then
-       printf "Detected pre-quantized NVFP4 model. Skipping conversion step.\n"
+       log_info "Detected pre-quantized NVFP4 model. Skipping conversion step."
 
        # FIXED: Use trtllm-build directly for pre-quantized models
        # Using --checkpoint_dir as model path since it is pre-packed
@@ -798,7 +852,7 @@ function compile_trt_engine() {
 
        if ! ssh "${SSH_OPTS[@]}" "$ip" \
          "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$build_cmd'"; then
-          printf "Error: Engine build failed (NVFP4 direct mode) on %s.\n" "$ip" >&2
+          log_error "Engine build failed (NVFP4 direct mode) on $ip."
           exit 1
        fi
        return
@@ -836,7 +890,7 @@ rm -rf '$ckpt_dir'
 "
 EOF
   then
-      printf "Error: TensorRT Engine Compilation Failed on %s.\n" "$ip" >&2
+      log_error "TensorRT Engine Compilation Failed on $ip."
       exit 1
   fi
 }
@@ -861,7 +915,7 @@ function ensure_trt_engine() {
   _check_hf_token
 
   if [[ "$DRY_RUN" -eq 1 ]]; then
-      printf "DRY RUN: Checking/Building TRT Engine...\n"
+      log_info "DRY RUN: Checking/Building TRT Engine..."
       return
   fi
   set -x
@@ -878,33 +932,33 @@ function ensure_trt_engine() {
   local ctr_model_path="$ctr_model_base/$safe_model_id"
   local ctr_engine_path="$ctr_engine_base/$safe_model_id"
 
-  printf "Checking for TRT-LLM Engine at %s (on Head Node)...\n" "$host_engine_path"
+  log_info "Checking for TRT-LLM Engine at $host_engine_path (on Head Node)..."
 
   if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
-      printf "Engine found. Skipping build.\n"
+      log_info "Engine found. Skipping build."
   else
-      printf "Engine not found. Initiating Build Process on Head Node...\n"
-      printf "Downloading model %s from Hugging Face...\n" "$HF_MODEL_ID"
+      log_info "Engine not found. Initiating Build Process on Head Node..."
+      log_info "Downloading model $HF_MODEL_ID from Hugging Face..."
       _remote_mkdir "$IP1" "$host_model_path $host_engine_path"
 
       download_hf_model "$IP1" "$HF_MODEL_ID" "$ctr_model_path" "$host_model_base" "$ctr_model_base"
 
-      printf "Building Engine (TP=%s)...\n" "$TP_SIZE"
+      log_info "Building Engine (TP=$TP_SIZE)..."
       compile_trt_engine "$IP1" "$ctr_engine_path" "$ctr_model_path" "$host_engine_base" "$host_model_base" "$ctr_engine_base" "$ctr_model_base" "$host_engine_path"
 
       # FIXED: Post-build verification
       if ssh "${SSH_OPTS[@]}" "$IP1" "[ -f $host_engine_path/config.json ]"; then
-         printf "Verification successful: Engine config found.\n"
+         log_info "Verification successful: Engine config found."
       else
-         printf "Error: Engine build reported success but config.json is missing.\n" >&2
+         log_error "Engine build reported success but config.json is missing."
          exit 1
       fi
-      printf "Engine build complete.\n"
+      log_info "Engine build complete."
   fi
 
-  printf "Syncing engine to Worker Node...\n"
+  log_info "Syncing engine to Worker Node..."
   sync_engine_to_worker "$IP1" "$IP2" "$host_engine_path"
-  printf "Engine synced.\n"
+  log_info "Engine synced."
 
   if [[ "$DRY_RUN" -eq 0 ]]; then set +x; fi
 }
@@ -915,7 +969,7 @@ function ensure_trt_engine() {
 
 # Internal: Cleanup existing containers
 function _cleanup_existing_containers() {
-  printf "[3/5] Cleaning up...\n"
+  log_step "[3/5] Cleaning up..."
   for ip in "$IP1" "$IP2"; do
     ssh "${SSH_OPTS[@]}" "$ip" "docker rm -f nim-distributed trt-llm-distributed >/dev/null 2>&1 || true"
   done
@@ -940,7 +994,7 @@ function setup_mpi_ssh_keys() {
   local ip1="$1"
   local ip2="$2"
   if [[ "$DRY_RUN" -eq 0 ]]; then
-      printf "Generating SSH keys for MPI...\n"
+      log_info "Generating SSH keys for MPI..."
       _remote_mkdir "$ip1" "~/.ssh-trt"
       ssh "${SSH_OPTS[@]}" "$ip1" "ssh-keygen -t rsa -f ~/.ssh-trt/id_rsa -N '' && cat ~/.ssh-trt/id_rsa.pub > ~/.ssh-trt/authorized_keys"
       _remote_mkdir "$ip2" "~/.ssh-trt"
@@ -1003,7 +1057,7 @@ function generate_nim_run_command() {
 
 # Internal: Launch Distributed Service
 function launch_distributed_service() {
-  printf "[4/5] Launching Service...\n"
+  log_step "[4/5] Launching Service..."
 
   local host_engine_base="${TRT_ENGINE_DIR:-~/engines}"
   local host_model_base="${TRT_MODEL_DIR:-~/models}"
@@ -1027,7 +1081,8 @@ function launch_distributed_service() {
   fi
 
   if [[ "$DRY_RUN" -eq 1 ]]; then
-      printf "Worker: %s\nHead: %s\n" "$worker_cmd" "$head_cmd"
+      log_info "Worker: $worker_cmd"
+      log_info "Head: $head_cmd"
       return
   fi
 
@@ -1046,17 +1101,17 @@ function _wait_for_service() {
 
   if [[ "$DRY_RUN" -eq 1 ]]; then return 0; fi
 
-  printf "[5/5] Waiting for service (http://%s:8000)...\n" "$ip"
+  log_step "[5/5] Waiting for service (http://$ip:8000)..."
   for ((i = 1; i <= 60; i++)); do
     local state
     state=$(ssh "${SSH_OPTS[@]}" "$ip" "docker inspect -f '{{.State.Running}}' $container_name" 2>/dev/null || printf "false\n")
     if [[ "$state" != "true" ]]; then
-       printf "Error: Container '%s' crashed or stopped!\n" "$container_name" >&2
+       log_error "Container '$container_name' crashed or stopped!"
        ssh "${SSH_OPTS[@]}" "$ip" "docker logs --tail 20 $container_name" || true
        return 1
     fi
     if ssh "${SSH_OPTS[@]}" "$ip" "curl -s -m 5 http://localhost:8000/v1/health/ready | grep -q 'ready' 2>/dev/null"; then
-      printf "Service is ready!\n"
+      log_info "Service is ready!"
       return 0
     fi
     printf "."
@@ -1072,19 +1127,19 @@ function _parse_arguments() {
       --dry-run) DRY_RUN=1; shift ;;
       --force) FORCE=1; shift ;;
       --quant)
-        if [[ -z "${2:-}" ]]; then printf "Error: --quant requires argument\n" >&2; exit 1; fi
+        if [[ -z "${2:-}" ]]; then log_error "--quant requires argument"; exit 1; fi
         QUANT_OVERRIDE="$2"; shift 2 ;;
       --engine)
-        if [[ -z "${2:-}" ]]; then printf "Error: --engine requires argument\n" >&2; exit 1; fi
+        if [[ -z "${2:-}" ]]; then log_error "--engine requires argument"; exit 1; fi
         ENGINE_OVERRIDE="$2"; shift 2 ;;
       --image)
-        if [[ -z "${2:-}" ]]; then printf "Error: --image requires argument\n" >&2; exit 1; fi
+        if [[ -z "${2:-}" ]]; then log_error "--image requires argument"; exit 1; fi
         IMAGE_OVERRIDE="$2"; shift 2 ;;
       --batch-size) BATCH_SIZE="$2"; shift 2 ;;
       --max-seq-len) MAX_SEQ_LEN="$2"; shift 2 ;;
       --wandb-key) WANDB_KEY="$2"; shift 2 ;;
       --speculative) SPECULATIVE_MODE=1; shift ;;
-      -*) printf "Error: Unknown option %s\n" "$1" >&2; exit 1 ;;
+      -*) log_error "Unknown option $1"; exit 1 ;;
       *) break ;;
     esac
   done
@@ -1096,18 +1151,19 @@ function _parse_arguments() {
   elif [[ "$#" -ge 2 && "$#" -le 3 ]]; then
     MODE="setup"
   else
-    printf "Usage:\n"
-    printf "  %s [OPTIONS] <IP1> <IP2> [<MODEL_NAME|HF_URL>]  (First run / Setup)\n" "$0"
-    printf "  %s [OPTIONS] start                              (Start using saved config)\n" "$0"
-    printf "  %s [OPTIONS] stop                               (Stop using saved config)\n" "$0"
-    printf "\nOptions:\n"
-    printf "  --dry-run             Print commands without executing\n"
-    printf "  --force               Bypass safety checks\n"
-    printf "  --quant <fmt>         Force quantization (fp4, fp8, int8)\n"
-    printf "  --engine <name>       Backend engine (vllm, trt-llm)\n"
-    printf "  --image <name>        Custom Docker image override\n"
-    printf "  --batch-size <n>      Max batch size (default: 128)\n"
-    printf "  --max-seq-len <n>     Max sequence length (default: 2048)\n"
+    log_info "Usage:"
+    log_info "  $0 [OPTIONS] <IP1> <IP2> [<MODEL_NAME|HF_URL>]  (First run / Setup)"
+    log_info "  $0 [OPTIONS] start                              (Start using saved config)"
+    log_info "  $0 [OPTIONS] stop                               (Stop using saved config)"
+    log_info ""
+    log_info "Options:"
+    log_info "  --dry-run             Print commands without executing"
+    log_info "  --force               Bypass safety checks"
+    log_info "  --quant <fmt>         Force quantization (fp4, fp8, int8)"
+    log_info "  --engine <name>       Backend engine (vllm, trt-llm)"
+    log_info "  --image <name>        Custom Docker image override"
+    log_info "  --batch-size <n>      Max batch size (default: 128)"
+    log_info "  --max-seq-len <n>     Max sequence length (default: 2048)"
     exit 1
   fi
 
@@ -1140,22 +1196,23 @@ function main() {
   _check_api_key
 
   # Connectivity check reused from previous logic? It was inline. Let's add it back.
-  printf "[2/5] Verifying connectivity...\n"
+  log_step "[2/5] Verifying connectivity..."
   for ip in "$IP1" "$IP2"; do
     if ! ssh "${SSH_OPTS[@]}" "$ip" "nvidia-smi > /dev/null"; then
-      printf "Error: Connectivity failed to %s.\n" "$ip" >&2; exit 1
+      log_error "Connectivity failed to $ip."
+      exit 1
     fi
   done
 
   _check_remote_sudo
 
   parse_model_config
-  check_vram_requirements "$PARAMS"
-  _detect_architecture
+  check_vram_requirements "$PARAMS" "$IP1" "$IP2" "$FORCE" "$QUANT_OVERRIDE" "$EXTRA_NIM_ENV"
+  PLATFORM_ARG=$(_detect_architecture "$IP1")
   detect_network_config
 
-  ensure_image_present
-  _align_platform_with_image
+  ensure_image_present "$IP1" "$IP2" "$IMAGE" "$IFACES2"
+  _align_platform_with_image "$IP1" "$IMAGE" "$PLATFORM_ARG"
 
   ensure_trt_engine
   _cleanup_existing_containers
