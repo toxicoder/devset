@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package company.content.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/content/v1;contentv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Document represents a generic markdown document in the repository.
+message Document {
+  string id = 1;
+  string title = 2;
+  string file_path = 3;
+  string content_type = 4; // e.g., "Markdown", "Text"
+  google.protobuf.Timestamp last_modified = 5;
+  string author = 6;
+  map<string, string> metadata = 7; // Frontmatter key-values
+}

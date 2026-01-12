@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package company.content.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/content/v1;contentv1";
+
+import "google/protobuf/timestamp.proto";
+
+// ArchitectureDecisionRecord (ADR) captures a significant architectural decision.
+message ArchitectureDecisionRecord {
+  string id = 1; // e.g., "ADR-0001"
+  string title = 2;
+  ADRStatus status = 3;
+  string context = 4;
+  string decision = 5;
+  string consequences = 6;
+  google.protobuf.Timestamp date = 7;
+  repeated string authors = 8;
+  string file_path = 9;
+}
+
+enum ADRStatus {
+  ADR_STATUS_UNSPECIFIED = 0;
+  ADR_STATUS_PROPOSED = 1;
+  ADR_STATUS_ACCEPTED = 2;
+  ADR_STATUS_REJECTED = 3;
+  ADR_STATUS_DEPRECATED = 4;
+  ADR_STATUS_SUPERSEDED = 5;
+}

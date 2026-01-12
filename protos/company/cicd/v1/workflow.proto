@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package company.cicd.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/cicd/v1;cicdv1";
+
+// Workflow represents a CI/CD pipeline definition (e.g., GitHub Actions).
+message Workflow {
+  string id = 1;
+  string name = 2; // e.g., "Deploy to GitHub Pages"
+  string file_path = 3; // e.g., ".github/workflows/gh-pages.yml"
+  repeated string triggers = 4; // e.g., "push", "workflow_dispatch"
+  repeated Job jobs = 5;
+}
+
+message Job {
+  string id = 1;
+  string name = 2;
+  string runs_on = 3; // e.g., "ubuntu-latest"
+  repeated string steps = 4; // Descriptions of steps
+}
