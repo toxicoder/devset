@@ -1,158 +1,168 @@
 ---
 layout: page
-title: Remote and Hybrid Work Policy
+title: Remote Work & Hybrid Policy
 permalink: /policies/remote_work_policy/
 ---
 
-## Remote and Hybrid Work Policy
+# Remote Work & Hybrid Policy
 
-**Effective Date:** January 1, 2024 **Owner:** People Operations (HR) **Applies
-To:** All Full-Time Employees
+**Effective Date:** January 1, 2024
+**Owner:** People Operations
+**Audience:** All Employees
 
-## 1. Purpose & Philosophy
+## 1. Introduction & Philosophy
 
-At our company, we believe that work is what you do, not where you go. We are
-committed to a flexible work environment that empowers employees to choose the
-setting where they are most productive. This policy outlines the guidelines,
-expectations, and support structures for remote and hybrid work.
+Our organization operates on a **Hybrid** work model. We believe in the power of in-person collaboration *and* the flexibility of remote focus. We do not view these as opposing forces, but as complementary tools in our productivity arsenal.
 
-Our goal is to balance individual flexibility with the need for high-performance
-collaboration. We trust our employees to manage their time and output, while
-maintaining the strong cultural bonds that define us.
+### The "Best of Both Worlds" Mindset
+*   **The Office is for Collaboration:** We use our physical spaces for brainstorming, whiteboarding, complex problem solving, and social bonding. The office is a "tool," not just a place to sit.
+*   **Home is for Focus:** We respect that deep work often happens best in a quiet, controlled environment. Remote days are optimized for execution and "heads-down" time.
+*   **Intentionality:** We don't come to the office just to sit on Zoom calls. We structure our weeks to maximize the value of both environments.
 
-## 2. Work Arrangements
+---
 
-We offer three primary work arrangements. Employees select their preferred mode
-in consultation with their manager during onboarding or typically during the
-annual review cycle.
+## 2. The Hybrid Model: 3+2
 
-### 2.1. Fully Remote
+### Standard Schedule
+Our standard cadence is **3 days in the office** and **2 days remote**.
+*   **Anchor Days (Tuesday, Wednesday, Thursday):** These are mandatory in-office days. We synchronize our schedules to ensure that when you are in the office, your team is too.
+*   **Flex Days (Monday, Friday):** These are optional remote days. You may work from home or the office.
 
-- **Definition:** The employee works from a location of their choice (typically
-  their home) 100% of the time. They do not have an assigned desk at a company
-  office.
-- **Expectation:** The employee must reside in a jurisdiction where the company
-  is legally authorized to employ staff (see Section 6: Geography). They may be
-  required to travel to the office for quarterly planning or team offsites.
+### Rationale: Why Anchor Days?
+Research and internal data show that unplanned hybrid schedules (where employees choose any 3 days) result in "ghost towns" and frustrated collaboration. By synchronizing our Anchor Days:
+1.  **Maximize Overlap:** We ensure critical mass for meetings and spontaneous interactions.
+2.  **Minimize FOMO:** You don't worry about missing an important hallway conversation.
+3.  **Predictability:** It simplifies meeting scheduling and resource planning (catering, etc.).
 
-### 2.2. Hybrid
+---
 
-- **Definition:** The employee splits their time between a company office and a
-  remote location.
-- **Typical Schedule:** 3 days in office (Tue/Wed/Thu), 2 days remote (Mon/Fri).
-  This "Anchor Days" model ensures that when people are in the office, their
-  teammates are too.
-- **Desk:** Depending on office capacity, hybrid employees may have a dedicated
-  desk or use a "hot desk" reservation system.
+## 3. Eligibility & Exceptions
 
-### 2.3. Office-Based
+### Who is Eligible?
+*   **Hybrid-Eligible Roles:** Most Knowledge Worker roles (Engineering, Product, Marketing, Sales, Finance).
+*   **Office-Essential Roles:** Roles requiring physical presence (e.g., Office Manager, IT Support, Hardware Engineering, Lab Technicians). These roles are 100% on-site.
+*   **Remote-Exceptional Roles:** Rare cases where specialized talent is hired outside of a hub radius. Requires VP-level approval.
 
-- **Definition:** The employee works from the company office 4-5 days a week.
-- **Requirement:** Some roles (e.g., Office Manager, Hardware Lab Engineer) may
-  require this designation due to the physical nature of the work.
+### Geographic Radius
+*   Employees in Hybrid roles must live within a **commutable distance** (typically <50 miles or <90 minutes door-to-door) of an assigned office hub.
 
-## 3. Expectations & Guidelines
+---
 
-Flexibility comes with responsibility. Regardless of location, all employees are
-held to the same standards of performance and professionalism.
+## 4. Work Environment Guidelines
 
-### 3.1. Availability & Hours
+### In-Office Expectations
+*   **Hours:** Core hours are 10:00 AM to 4:00 PM. We expect you to be physically present during this window on Anchor Days.
+*   **Desk Usage:** We utilize a "Hot Desking" or "Neighborhood" system. Teams have assigned zones, but individual desks are bookable.
+*   **Meeting Etiquette:** If 3 people are in a room and 1 is remote, *everyone* should join the Zoom call individually (audio muted) or use the "Smart Room" hardware to ensure the remote person feels included.
 
-- **Core Hours:** To facilitate synchronous collaboration, all employees
-  (regardless of time zone) are expected to be available during "Core Hours" of
-  **10:00 AM to 2:00 PM Pacific Time** (or the relevant hub timezone).
-- **Flexibility:** Outside of core hours, employees may structure their day as
-  they see fit, provided they meet their deadlines and attend scheduled
-  meetings.
-- **Responsiveness:** During working hours, employees should be responsive on
-  Slack and email. If stepping away for an extended period (e.g., > 1 hour),
-  update your Slack status.
+### Remote Office Requirements
+When working remotely (Mon/Fri), you are still "at work."
+*   **Connectivity:** High-speed internet (Minimum 100 Mbps Down / 20 Mbps Up).
+*   **Availability:** You must be reachable via Slack/Teams/Phone during core business hours.
+*   **Environment:** A quiet, private space suitable for video calls. Working from a noisy cafe is discouraged for sensitive meetings.
 
-### 3.2. Workspace Requirements
-
-Employees working remotely must ensure they have a suitable environment:
-
-- **High-Speed Internet:** A stable connection capable of supporting video calls
-  (minimum 50 Mbps down / 10 Mbps up).
-- **Private Area:** A quiet space where confidential discussions can take place
-  without interruption or eavesdropping.
-- **Ergonomics:** A desk and chair that support healthy posture. (See Section 5
-  for stipends).
-
-### 3.3. Communication
-
-Remote work requires "over-communication."
-
-- **Video On:** For team meetings and 1:1s, we encourage cameras on to foster
-  connection.
-- **Async First:** Default to writing. Use documentation, recorded updates
-  (Loom), and public Slack channels instead of private DMs or unnecessary
-  meetings.
-- **Calendar Etiquette:** Keep your Google Calendar up to date. Mark "Focus
-  Time" and "Out of Office" blocks clearly.
-
-## 4. Security & Data Privacy
-
-Remote work introduces unique security risks. Employees must strictly adhere to
-the [Information Security Policy](/policies/information_security_policy/).
-
-- **VPN:** Always use the corporate VPN (Cisco AnyConnect) when accessing
-  internal tools or working from public Wi-Fi (e.g., cafes, airports).
-- **Device Management:** Only do company work on company-issued devices (MDM
-  managed). Do not use personal tablets or computers for accessing sensitive
-  customer data.
-- **Physical Security:** Do not leave your laptop unlocked or unattended in
-  public spaces. Use a privacy screen filter when traveling.
-- **Confidentiality:** Be aware of your surroundings. Do not discuss sensitive
-  company information in public places where you can be overheard.
+---
 
 ## 5. Equipment & Stipends
 
-We invest in your productivity.
+We invest in your productivity, wherever you are.
 
-### 5.1. Company-Issued Equipment
+### The "Hybrid Kit"
+We provide equipment to ensure seamless transition between home and office.
+*   **Laptop:** High-spec laptop (MacBook Pro or Dell XPS).
+*   **Backpack:** High-quality commuter backpack.
+*   **Chargers:** Two sets of chargers (one for home, one for office) to reduce carry weight.
 
-All employees receive:
+### Home Office Stipend
+*   **Initial Setup:** A one-time stipend of **$500 (USD)** is provided to upgrade your home monitor or chair.
+*   **Recurring:** We do *not* provide a monthly internet stipend for Hybrid employees, as the office is the primary work location. (Remote-Exceptional employees receive a separate package).
 
-- Laptop (MacBook Pro M3 or Dell XPS)
-- Monitor (27" 4K)
-- Peripherals (Keyboard, Mouse, Headset, Webcam)
+---
 
-### 5.2. Remote Work Stipend
+## 6. Communication & Collaboration
 
-- **Initial Setup:** A one-time stipend of **$1,000 (USD)** upon hire to
-  purchase a desk, chair, or office supplies.
-- **Monthly Allowance:** A monthly stipend of **$75 (USD)** to cover internet
-  and electricity costs. This is processed via payroll.
-- **Travel:** For fully remote employees, the company covers travel, lodging,
-  and meals for required onsite visits (e.g., quarterly offsites).
+Hybrid work requires distinct communication protocols.
 
-## 6. Geographic & Legal Considerations
+### Asynchronous First
+Even with Anchor Days, we default to writing.
+*   **Documentation:** Decisions made in-person must be documented in Confluence/Notion. "If it's not written down, it didn't happen."
+*   **Status Updates:** Daily standups may be async (Slack text) on Flex Days and sync (Zoom/In-person) on Anchor Days.
 
-- **Authorized Locations:** You may work from any state/country where we have a
-  legal entity or PEO (Professional Employer Organization) relationship.
-- **Relocation:** You must notify HR _before_ moving to a new city or state.
-  Relocation may impact your compensation (based on cost-of-labor zones) and tax
-  withholdings.
-- **Digital Nomadism:** Working temporarily from a different location is allowed
-  for up to 30 days per year, provided you maintain core hours and reliable
-  internet. Longer stays require HR approval due to potential tax nexus
-  implications.
+### The "One Remote, All Remote" Rule
+If a meeting has mixed attendance (some in-room, some remote):
+1.  **Video On:** Everyone turns their camera on.
+2.  **Digital Whiteboard:** Use FigJam or Miro instead of a physical whiteboard so remote participants can contribute.
+3.  **Inclusive Facilitation:** The meeting lead explicitly asks remote participants for input first.
 
-## 7. Health & Wellness
+### Availability Indicators
+*   **Slack Status:** Use custom statuses to indicate location (🏢 In Office, 🏠 Remote, 🚌 Commuting).
+*   **Calendar:** Block out commute times if you are traveling during working hours (e.g., leaving early to finish the day from home).
 
-Remote work can blur the lines between home and office. We encourage you to:
+---
 
-- **Set Boundaries:** "Turn off" work at the end of the day. Snooze Slack
-  notifications.
-- **Take Breaks:** Step away from the screen. Go for a walk.
-- **Mental Health:** Utilize our EAP (Employee Assistance Program) and mental
-  health benefits (e.g., Headspace subscription) if you feel isolated or burnt
-  out.
+## 7. Security & Data Protection
 
-## 8. Policy Violations
+### Commuting Security
+*   **Device Transport:** Laptops must be fully shut down (not just sleep mode) and encrypted (FileVault/BitLocker) during transport.
+*   **Privacy Screens:** Use privacy filters if working on the train or bus.
+*   **Theft:** Do not leave bags unattended in cars or public transit.
 
-Failure to adhere to these guidelines (e.g., consistent unavailability during
-core hours, security lapses, unauthorized relocation) may result in the
-revocation of remote work privileges or disciplinary action, up to and including
-termination.
+### Network Security
+*   **VPN:** Mandatory when accessing internal resources from home or public Wi-Fi.
+*   **Smart Home Devices:** We recommend isolating work devices from insecure smart home/IoT devices (Guest Network) at home.
+
+---
+
+## 8. Health, Wellness & The "Right to Disconnect"
+
+Hybrid work can blur the lines between work and life. We fight burnout aggressively.
+
+### Disconnection
+*   **No Expectation:** You are NOT expected to respond to emails/Slack after hours (e.g., after 6 PM or on weekends), regardless of where you worked that day.
+*   **Scheduled Send:** Managers should use "Schedule Send" for late-night messages to arrive the next morning.
+
+### Sick Policy
+*   **Sick = Sick:** If you are contagious or feeling unwell, **do not come to the office**.
+*   **Working While Sick?** If you are mildly ill but want to work, stay home (convert Anchor Day to Remote Day). If you are too sick to work, take a Sick Day. **Do not power through.**
+
+---
+
+## 9. Relocation & "Workcations"
+
+### Relocation
+*   Moving outside the commutable radius of your assigned hub changes your eligibility for a Hybrid role.
+*   This must be discussed with HR *before* moving. It may require a role change, compensation adjustment, or separation if the role is strictly Office-Essential.
+
+### Temporary "Workcations"
+*   Employees may work fully remotely for up to **2 weeks per year** from a different location (e.g., visiting family) with Manager approval.
+*   Time zone overlap requirements remain in effect.
+
+---
+
+## 10. Performance Management
+
+We measure **impact**, not face time.
+
+*   **Office Presence:** While we track badge swipes for capacity planning, we do not use it as a primary performance metric unless absenteeism becomes a pattern.
+*   **Output:** Are you delivering on your OKRs?
+*   **Collaboration:** Are you a good teammate? Do you contribute to the office culture?
+
+---
+
+## 11. FAQ
+
+**Q: Can I swap my Anchor Days?**
+A: Generally, no. The value comes from the *collective* presence. Exceptions can be made for doctor's appointments or home repairs, but the default is Tu/Wed/Thu.
+
+**Q: What if I have a cold?**
+A: Stay home. Work remotely if you feel up to it, or take a sick day. Do not bring germs to the office.
+
+**Q: Can I work from a coffee shop on Flex Days?**
+A: Yes, provided you follow security protocols (VPN) and have a quiet environment for calls.
+
+**Q: Do I get a stipend for lunch on Anchor Days?**
+A: The company provides catered lunch on Tuesdays and Thursdays. Wednesday is "Team Lunch" day (often expensed, check team budget).
+
+---
+
+*For questions, contact People Ops at `people@company.org`.*

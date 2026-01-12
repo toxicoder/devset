@@ -4,204 +4,182 @@ title: Code Review Guidelines
 permalink: /engineering_standards/code_review_guidelines/
 ---
 
-## Code Review Guidelines: The Handbook
+# Code Review Guidelines
 
-Code review is the single most important mechanism for maintaining high
-engineering standards at our company. It is not just about catching bugs; it is
-about knowledge sharing, mentorship, and collective ownership of the codebase.
+**Effective Date:** January 1, 2024
+**Owner:** Engineering Leadership
+**Audience:** All Engineers
 
-This document serves as the comprehensive guide for both authors and reviewers.
-It defines our philosophy, etiquette, and best practices.
+## 1. Introduction
 
-## 1. The Philosophy of Code Review
+Code Review (CR) is the single most important mechanism we have for maintaining code quality, sharing knowledge, and building engineering culture. It is not a hurdle to clear; it is a collaborative process to make our software better.
 
-### 1.1. Code is a Liability
-
-Every line of code we write is a liability. It must be read, understood, tested,
-debugged, and maintained. Therefore, the best code is no code. Code review is
-the gatekeeping process where we ask: "Is this liability worth the value it
-provides?"
-
-### 1.2. Collective Ownership
-
-Once code is merged, it belongs to the team, not the individual. The "blame" for
-a bug found in production lies with the team that reviewed and merged it, not
-just the author. When you approve a PR, you are co-signing the mortgage on that
-code.
-
-### 1.3. Mentorship Over Gatekeeping
-
-Code review is a teaching moment. Senior engineers should use it to mentor
-juniors on architecture and design patterns. Junior engineers should use it to
-learn from seniors' code and ask "why." It should never be used to flex
-intellectual superiority.
-
-### 1.4. Speed vs. Quality
-
-We optimize for "velocity over time," not "speed today." Merging bad code
-quickly slows us down next week. However, perfect is the enemy of good. We aim
-for _maintainable_ code, not _perfect_ code.
+### The "Google Standard"
+We aspire to the standard set by Google and other tech giants:
+> "In general, reviewers should favor approving a CL (Change List) once it is in a state that definitely improves the overall code health of the system, even if the CL isn't perfect."
 
 ---
 
-## 2. For Authors: Preparing a PR
+## 2. Philosophy & Principles
 
-A Code Review starts _before_ you open the Pull Request.
+### For Authors
+1.  **Small is Beautiful:** The single best predictor of code review quality is the size of the Pull Request (PR). Aim for PRs that are **under 400 lines** of code.
+2.  **Context is King:** Your PR description is as important as your code. Explain *why* you are making this change, not just *what* changed.
+3.  **Review Yourself First:** Never open a PR without reading through the diff yourself. Catch the typos and console logs before asking for your teammate's time.
 
-### 2.1. The "15-Minute Rule"
-
-A PR should be reviewable in under 15 minutes. If it takes longer, the
-reviewer's attention wanes, and bugs slip through.
-
-- **Target:** < 400 lines of code changed.
-- **Strategy:** Break large features into stackable PRs (e.g.,
-  `Part 1: Database Schema`, `Part 2: API Endpoint`, `Part 3: UI`).
-
-### 2.2. The Description Template
-
-A PR without a description is a black box. You must provide context.
-
-- **What:** Briefly describe the changes.
-- **Why:** Link to the Jira ticket or Tech Spec. Explain the business value.
-- **How:** Explain any non-obvious technical decisions (e.g., "I chose Redis
-  over Memcached because...").
-- **Screenshots/GIFs:** Mandatory for UI changes. A picture is worth 1000 lines
-  of code.
-
-### 2.3. The Self-Review Checklist
-
-Before assigning reviewers, go through this checklist:
-
-1.  [ ] Did I run the tests locally?
-2.  [ ] Did I lint the code?
-3.  [ ] Did I remove all `console.log` or print statements?
-4.  [ ] Did I add comments for complex logic?
-5.  [ ] Did I read the diff myself on GitHub/GitLab to catch unintended files?
+### For Reviewers
+1.  **Speed Matters:** Code review velocity directly impacts shipping velocity. Aim to review code within **24 hours** (or one business day).
+2.  **Be Kind:** Critique the code, not the person. "This code is buggy" is better than "You wrote a bug." "Consider using X" is better than "Why didn't you use X?"
+3.  **Distinguish Blockers from Nitpicks:** Explicitly label your comments.
+    *   **[BLOCKER]:** This must be fixed before merge (e.g., security flaw, major bug).
+    *   **[NIT]:** Minor suggestion (e.g., variable naming, formatting). Author can ignore if they disagree.
+    *   **[QUESTION]:** Asking for clarification.
 
 ---
 
-## 3. For Reviewers: How to Review
+## 3. The Code Review Checklist (General)
 
-### 3.1. The Hierarchy of Feedback
+### Functionality
+*   [ ] Does the code do what it claims to do?
+*   [ ] Are there any obvious bugs?
+*   [ ] Does it handle edge cases (null inputs, empty lists, network failures)?
+*   [ ] Is it thread-safe (if applicable)?
 
-Not all comments are created equal. Focus on what matters.
+### Architecture & Design
+*   [ ] Is the code in the right place? (e.g., Business logic in the Service layer, not the Controller).
+*   [ ] Does it follow SOLID principles?
+*   [ ] Is it over-engineered? (YAGNI).
+*   [ ] Does it introduce circular dependencies?
 
-1.  **Correctness:** Does the code do what it's supposed to do? Are there bugs?
-2.  **Security:** Are there vulnerabilities (XSS, SQLi, IDOR)?
-3.  **Readability:** Can a new hire understand this without asking you?
-4.  **Architecture:** Does this fit into the broader system design?
-5.  **Performance:** Are there N+1 queries or memory leaks?
-6.  **Style:** (Lowest priority) Indentation, variable naming. _Let the linter
-    handle this._
+### Readability & Maintenance
+*   [ ] Are variable and function names descriptive?
+*   [ ] Is the logic easy to follow?
+*   [ ] Are complex hacks documented with comments explaining *why*?
+*   [ ] Is there any dead code or commented-out code?
 
-### 3.2. Commenting Etiquette
+### Testing
+*   [ ] Are there unit tests?
+*   [ ] Do the tests actually test the logic (not just mocking everything)?
+*   [ ] Are the tests readable?
 
-How you say it is as important as what you say.
-
-- **Ask, Don't Command:**
-  - _Bad:_ "Rename this variable to `user_id`."
-  - _Good:_ "What do you think about renaming this to `user_id` to match the
-    schema?"
-- **Critique the Code, Not the Person:**
-  - _Bad:_ "You forgot to close the connection."
-  - _Good:_ "It looks like the connection might stay open here. Should we add a
-    `defer.close()`?"
-- **Explain "Why":**
-  - _Bad:_ "Change this to a Set."
-  - _Good:_ "Using a Set here would make the lookup O(1) instead of O(n)."
-
-### 3.3. Speed Expectations
-
-- **SLA:** 24 hours. Code review shouldn't block progress.
-- **Urgent PRs:** If a PR is blocking a release, review it immediately.
-- **Acknowledgement:** If you can't review it today, comment "I'll get to this
-  tomorrow morning" so the author isn't left hanging.
+### Security & Performance
+*   [ ] Is user input sanitized? (SQL Injection, XSS).
+*   [ ] Are secrets (API keys) committed? (Check carefully!).
+*   [ ] Are loops efficient? (Avoid N+1 queries).
 
 ---
 
-## 4. Standard Comment Prefixes
+## 4. Language-Specific Checklists
 
-To make reviews more efficient, we use prefixes to denote the severity of a
-comment.
+### Python
+*   **Style:** Does it follow PEP 8? (Use `black` and `ruff`).
+*   **Type Hinting:** Are type hints used for function arguments and return values?
+*   **List Comprehensions:** Are they used appropriately (readable)?
+*   **Context Managers:** Are `with` statements used for file/resource handling?
+*   **Exceptions:** Are we catching specific exceptions (e.g., `ValueError`) rather than bare `except:`?
+*   **Docstrings:** Does every public function/class have a docstring?
 
-- **[BLOCKER]:** This issue must be fixed before merging. (e.g., Bug, Security
-  flaw).
-- **[MAJOR]:** Strong recommendation. I will likely re-review. (e.g.,
-  Performance issue, confusing logic).
-- **[MINOR]:** Suggestion. You can merge without fixing, but consider it. (e.g.,
-  Variable naming, slight refactor).
-- **[NIT]:** Nitpick. Tiny detail. (e.g., Typo in comment).
-- **[QUESTION]:** I don't understand this. Please explain. (Doesn't necessarily
-  need a code change).
-- **[PRAISE]:** This is really good! (e.g., "Elegant solution!", "Great test
-  coverage!").
+### JavaScript / TypeScript
+*   **Async/Await:** Is `async/await` used instead of raw Promises/callbacks?
+*   **Types:** Are `any` types avoided? Is the schema strictly typed?
+*   **React Hooks:** Are hooks used correctly (rules of hooks)? Are dependency arrays correct?
+*   **Destructuring:** Is object/array destructuring used for cleaner code?
+*   **Equality:** Is `===` used instead of `==`?
+*   **Console:** Are `console.log` statements removed?
 
----
-
-## 5. Handling Disagreements
-
-Disagreements are healthy. They show we care. But they must be resolved
-professionally.
-
-### 5.1. The "Two-Comment Rule"
-
-If you go back and forth more than twice on a single comment thread, **stop
-typing**.
-
-- Hop on a call (Slack Huddle / Zoom).
-- Discuss it synchronously.
-- Post the resolution as a comment on the PR for history.
-
-### 5.2. Tie-Breakers
-
-If the author and reviewer cannot agree:
-
-1.  **Style Guide:** Consult the written style guide. If it's not there, add it.
-2.  **Tech Lead:** Escalate to the Staff Engineer or Tech Lead for a deciding
-    vote.
-3.  **Data:** Run a benchmark or POC to prove which approach is better.
+### Go (Golang)
+*   **Formatting:** Is `gofmt` applied?
+*   **Error Handling:** Are errors checked and handled explicitly? (No `_` for error returns).
+*   **Context:** Is `context.Context` passed as the first argument to functions doing I/O?
+*   **Concurrency:** Are goroutines and channels used correctly? (Check for leaks/race conditions).
+*   **Naming:** Do names follow Go conventions (Short, MixedCaps)?
+*   **Interfaces:** Are interfaces defined where used (consumer-side)?
 
 ---
 
-## 6. Language-Specific Checklists
+## 5. The Process
 
-### 6.1. Python
+### Step 1: The Author Opens the PR
+*   **Title:** Concise and descriptive. (e.g., "Fix race condition in UserAuth").
+*   **Description:**
+    *   **Summary:** What changed?
+    *   **Context:** Why this change? Link to Jira ticket.
+    *   **Test Plan:** How did you verify this? (e.g., "Tested locally with curl").
+    *   **Screenshots:** (For UI changes).
+*   **Assign Reviewers:** Pick 1-2 relevant people. Don't spam the whole team.
 
-- [ ] Are type hints (`mypy`) used for all function arguments and return values?
-- [ ] Are list comprehensions used appropriately (readable)?
-- [ ] Are context managers (`with`) used for file/network resources?
-- [ ] Are exceptions handled specifically (no bare `except:` or
-      `except Exception:`)?
+### Step 2: The Review Loop
+*   Reviewer reads the code.
+*   Reviewer leaves comments (inline).
+*   **Approval:** If it looks good, click "Approve."
+*   **Request Changes:** If there are blockers, select "Request Changes."
+*   Author responds to comments.
+    *   "Done" (fixed).
+    *   "Ack" (acknowledged but not fixing - explain why).
+*   Author pushes new commits.
+*   Reviewer re-reviews.
 
-### 6.2. JavaScript / TypeScript
-
-- [ ] Is `const` used over `let` wherever possible? (`var` is forbidden).
-- [ ] Are `async/await` used instead of raw Promises?
-- [ ] Is strict equality (`===`) used?
-- [ ] Are React hooks used correctly (dependency arrays)?
-
-### 6.3. Go
-
-- [ ] Are errors handled explicitly (no `_` for error returns)?
-- [ ] Are goroutines managed (waitgroups, channels) to prevent leaks?
-- [ ] Is the `context` passed down for cancellation/timeouts?
-- [ ] Does it follow `gofmt`?
+### Step 3: Merging
+*   Once approved (and CI passes), the **Author** is responsible for merging.
+*   "Squash and Merge" is the default to keep the history clean.
 
 ---
 
-## 7. Metrics & Success
+## 6. Handling Disagreements
 
-We measure the health of our code review process using the following metrics:
+Disagreements are healthy. Stalemate is not.
 
-1.  **Review Turnaround Time:** Median time from "Open" to "Merged". (Target: <
-    48 hours).
-2.  **Review Depth:** Average number of comments per PR. (Too low = rubber
-    stamping; Too high = nitpicking or bad requirements).
-3.  **Merge Frequency:** Number of PRs merged per dev per week. (Target: > 3).
+1.  **Discuss:** Use the PR comments to debate technical trade-offs.
+2.  **Escalate to Sync:** If a comment thread goes back and forth more than 3 times, **stop typing**. Jump on a quick Slack huddle or Zoom call.
+3.  **The "Tie-Breaker":** If you still can't agree, defer to the **Style Guide** or the **Team Lead / Architect**.
+4.  **Agree to Disagree:** For non-critical issues, the Reviewer should yield to the Author's preference.
 
-## 8. Final Thoughts
+---
 
-Code review is a service we perform for our team. Treat it with the same care
-and professionalism as you would writing production code. A good code review can
-save days of debugging and thousands of dollars. Be kind, be thorough, and keep
-shipping.
+## 7. Examples: Good vs. Bad Reviews
+
+### Example 1: Naming
+*   **Bad:** "Change this variable name."
+*   **Good:** "[NIT] `x` is a bit vague. How about `userIndex` to make it clearer what we're iterating over?"
+
+### Example 2: Performance
+*   **Bad:** "This is slow."
+*   **Good:** "[BLOCKER] This loop makes a database call in every iteration (N+1 problem). This will likely time out with large datasets. Can we fetch all the data in one query beforehand?"
+
+### Example 3: Praise (Don't forget this!)
+*   **Good:** "I really like how you refactored this logic. It's much cleaner now!"
+*   **Good:** "Great catch on that edge case."
+
+---
+
+## 8. Metrics (How we measure success)
+
+We track these metrics not to punish, but to improve our workflow.
+
+*   **Review Turnaround Time:** Time from "PR Opened" to "Review Submitted." Target: < 24 hours.
+*   **PR Size:** Number of lines changed. Target: < 400 lines.
+*   **Pick-up Time:** Time until the first comment is left.
+
+---
+
+## 9. Specific Scenarios
+
+### Emergency Fixes (The "Hotfix")
+Sometimes production is burning, and we can't wait 24 hours.
+*   **Protocol:**
+    1.  Announce in Slack: "Emergency PR incoming!"
+    2.  Get a "LGTM" (Looks Good To Me) from *anyone* available (even a junior).
+    3.  Merge.
+    4.  **Post-Merge Review:** Do a proper deep-dive review the next day to clean up any hacks.
+
+### Generated Code
+*   Do not review generated files (e.g., `package-lock.json`, compiled JS).
+*   Focus on the configuration that generated them.
+
+### Junior vs. Senior Reviewing
+*   **Seniors:** Focus on architecture, security, and scalability. Mentor juniors through comments.
+*   **Juniors:** Focus on readability, logic bugs, and tests. Don't be afraid to ask "Why?".
+
+---
+
+*Remember: The goal of code review is to ship high-quality software while growing as a team.*
