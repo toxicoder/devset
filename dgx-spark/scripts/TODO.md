@@ -49,9 +49,9 @@ This checklist guides the refactoring of `dgx-spark/scripts/run-distributed-mode
     - Fallback to hardcoded, pinned paths only if the CLI tools are missing (do not search dynamically).
 
 ## Phase 5: Code Hygiene & Cleanup
-- [ ] **Reduce Global Variable Usage**:
+- [x] **Reduce Global Variable Usage**:
     - Refactor helper functions (like `detect_high_speed_iface`) to accept arguments instead of modifying global variables like `NET_CONF_1`.
     - Use `local` variables within functions to prevent namespace pollution.
-- [ ] **Standardize Logging**:
+- [x] **Standardize Logging**:
     - Ensure all error messages print to `stderr` (`>&2`).
     - Standardize status output format (e.g., `[INFO]`, `[WARN]`, `[ERROR]`).
