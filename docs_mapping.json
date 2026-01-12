@@ -3,6 +3,7 @@
   "style-guides": "style_guides",
   "JOB_ROLE_ORGANIZATION": "job_roles",
   "interview-questions": "interview_questions",
+  "policies": "policies",
   "_config.yml": "_config.yml",
   "index.md": "index.md",
   "technical_design_doc.md": "technical_design_doc.md",
@@ -213,5 +214,15 @@
   "interview-questions/3.1 Engineering & Technology/VP of Engineering.md": "interview_questions/engineering__technology/vp_of_engineering.md",
   "interview-questions/3.1 Engineering & Technology/Security Engineer.md": "interview_questions/engineering__technology/security_engineer.md",
   "interview-questions/3.1 Engineering & Technology/Data Engineer.md": "interview_questions/engineering__technology/data_engineer.md",
-  "dgx-spark/docs/user_guide.md": "dgx-spark/docs/user_guide.md"
+  "dgx-spark/docs/user_guide.md": "dgx-spark/docs/user_guide.md",
+  "policies/anti_harassment_policy.md": "policies/anti_harassment_policy.md",
+  "policies/code_of_conduct.md": "policies/code_of_conduct.md",
+  "policies/data_privacy_policy.md": "policies/data_privacy_policy.md",
+  "policies/information_security_policy.md": "policies/information_security_policy.md",
+  "policies/intellectual_property_policy.md": "policies/intellectual_property_policy.md",
+  "policies/open_source_policy.md": "policies/open_source_policy.md",
+  "policies/performance_review_policy.md": "policies/performance_review_policy.md",
+  "policies/remote_work_policy.md": "policies/remote_work_policy.md",
+  "policies/social_media_policy.md": "policies/social_media_policy.md",
+  "policies/travel_expense_policy.md": "policies/travel_expense_policy.md"
 }
