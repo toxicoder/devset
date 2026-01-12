@@ -13,6 +13,22 @@ docs:
     url: /onboarding/culture_and_values/
   - title: Tools and Access
     url: /onboarding/tools_and_access/
+- title: Engineering Standards
+  children:
+  - title: Engineering Principles
+    url: /engineering_standards/engineering_principles/
+  - title: Code Review Guidelines
+    url: /engineering_standards/code_review_guidelines/
+  - title: Testing Standards
+    url: /engineering_standards/testing_standards/
+  - title: Incident Management
+    url: /engineering_standards/incident_management/
+  - title: Post-Mortem Guide
+    url: /engineering_standards/post_mortem_guide/
+  - title: Release Process
+    url: /engineering_standards/release_process/
+  - title: On-Call Guide
+    url: /engineering_standards/on_call_guide/
 - title: Corporate Strategy
   children:
   - title: Org Structure
