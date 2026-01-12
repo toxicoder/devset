@@ -217,6 +217,46 @@ docs:
       url: /training/product/
     - title: Product Thinking
       url: /training/product/product_thinking/
+- title: Technical Support
+  children:
+  - title: Overview
+    url: /technical_support/
+  - title: Identity & Access
+    children:
+    - title: Password Reset
+      url: /technical_support/identity_access/password_reset/
+    - title: MFA Setup
+      url: /technical_support/identity_access/mfa_setup/
+    - title: SSO Troubleshooting
+      url: /technical_support/identity_access/sso_troubleshooting/
+  - title: Connectivity
+    children:
+    - title: Wi-Fi Access
+      url: /technical_support/connectivity/wifi_access/
+    - title: VPN Configuration
+      url: /technical_support/connectivity/vpn_configuration/
+  - title: Hardware
+    children:
+    - title: Laptop Refresh
+      url: /technical_support/hardware/laptop_refresh/
+    - title: Accessory Request
+      url: /technical_support/hardware/accessory_request/
+  - title: Software
+    children:
+    - title: Software Request
+      url: /technical_support/software/software_request/
+    - title: Developer Tools
+      url: /technical_support/software/developer_tools/
+  - title: Collaboration
+    children:
+    - title: Slack Guide
+      url: /technical_support/collaboration/slack_guide/
+    - title: Video Conferencing
+      url: /technical_support/collaboration/video_conferencing/
+  - title: Security
+    children:
+    - title: Reporting Phishing
+      url: /technical_support/security/reporting_phishing/
 - title: Interview Questions
   children:
   - title: Backend Engineer

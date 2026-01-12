@@ -251,5 +251,18 @@
   "training/leadership/index.md": "training/leadership/index.md",
   "training/product/product_thinking.md": "training/product/product_thinking.md",
   "training/product/index.md": "training/product/index.md",
-  "training/index.md": "training/index.md"
+  "training/index.md": "training/index.md",
+  "technical_support/index.md": "technical_support/index.md",
+  "technical_support/identity_access/password_reset.md": "technical_support/identity_access/password_reset.md",
+  "technical_support/identity_access/mfa_setup.md": "technical_support/identity_access/mfa_setup.md",
+  "technical_support/identity_access/sso_troubleshooting.md": "technical_support/identity_access/sso_troubleshooting.md",
+  "technical_support/connectivity/wifi_access.md": "technical_support/connectivity/wifi_access.md",
+  "technical_support/connectivity/vpn_configuration.md": "technical_support/connectivity/vpn_configuration.md",
+  "technical_support/hardware/laptop_refresh.md": "technical_support/hardware/laptop_refresh.md",
+  "technical_support/hardware/accessory_request.md": "technical_support/hardware/accessory_request.md",
+  "technical_support/software/software_request.md": "technical_support/software/software_request.md",
+  "technical_support/software/developer_tools.md": "technical_support/software/developer_tools.md",
+  "technical_support/collaboration/slack_guide.md": "technical_support/collaboration/slack_guide.md",
+  "technical_support/collaboration/video_conferencing.md": "technical_support/collaboration/video_conferencing.md",
+  "technical_support/security/reporting_phishing.md": "technical_support/security/reporting_phishing.md"
 }
