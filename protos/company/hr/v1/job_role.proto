@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+// JobRole defines a specific role within the organization.
+message JobRole {
+  // Unique identifier for the job role.
+  string id = 1;
+
+  // The official title of the role (e.g., "Senior Software Engineer").
+  string title = 2;
+
+  // The internal code for the role (e.g., "SWE-L4").
+  string code = 3;
+
+  // The job level associated with this role.
+  int32 level = 4;
+
+  // The career track for this role.
+  JobTrack track = 5;
+
+  // The family this job belongs to (e.g., "Engineering", "Sales").
+  string job_family = 6;
+}
+
+// JobTrack describes the career path.
+enum JobTrack {
+  JOB_TRACK_UNSPECIFIED = 0;
+  JOB_TRACK_INDIVIDUAL_CONTRIBUTOR = 1;
+  JOB_TRACK_MANAGEMENT = 2;
+  JOB_TRACK_EXECUTIVE = 3;
+}

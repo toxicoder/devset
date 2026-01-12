@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package company.finance.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/finance/v1;financev1";
+
+import "company/common/v1/money.proto";
+import "company/common/v1/time_range.proto";
+
+// Budget represents an allocated financial plan.
+message Budget {
+  // Unique identifier for the budget.
+  string id = 1;
+
+  // Name of the budget (e.g., "Q1 Engineering Opex").
+  string name = 2;
+
+  // ID of the department owning this budget.
+  string department_id = 3;
+
+  // The time period covered by this budget.
+  company.common.v1.TimeRange period = 4;
+
+  // The total allocated amount.
+  company.common.v1.Money total_allocated = 5;
+
+  // The amount remaining.
+  company.common.v1.Money remaining_amount = 6;
+
+  // Status of the budget.
+  BudgetStatus status = 7;
+}
+
+enum BudgetStatus {
+  BUDGET_STATUS_UNSPECIFIED = 0;
+  BUDGET_STATUS_DRAFT = 1;
+  BUDGET_STATUS_APPROVED = 2;
+  BUDGET_STATUS_ACTIVE = 3;
+  BUDGET_STATUS_CLOSED = 4;
+}

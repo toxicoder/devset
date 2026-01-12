@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package company.project.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/project/v1;projectv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Sprint represents a time-boxed iteration of work.
+message Sprint {
+  // Unique identifier for the sprint.
+  string id = 1;
+
+  // The name or number of the sprint (e.g., "Sprint 24").
+  string name = 2;
+
+  // The main goal or theme of the sprint.
+  string goal = 3;
+
+  // The start date of the sprint.
+  google.protobuf.Timestamp start_date = 4;
+
+  // The end date of the sprint.
+  google.protobuf.Timestamp end_date = 5;
+
+  // ID of the team executing the sprint.
+  string team_id = 6;
+}

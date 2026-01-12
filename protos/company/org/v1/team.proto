@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package company.org.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/org/v1;orgv1";
+
+// Team represents a specific working group within the organization.
+message Team {
+  // Unique identifier for the team.
+  string id = 1;
+
+  // The name of the team (e.g., "Platform Infrastructure", "Mobile App").
+  string name = 2;
+
+  // ID of the department this team belongs to.
+  string department_id = 3;
+
+  // The type of team structure.
+  TeamType type = 4;
+
+  // ID of the employee who leads the team.
+  string lead_id = 5;
+
+  // Email distribution list for the team.
+  string email_group = 6;
+}
+
+// TeamType describes the organizational structure of the team.
+enum TeamType {
+  TEAM_TYPE_UNSPECIFIED = 0;
+  TEAM_TYPE_SQUAD = 1;
+  TEAM_TYPE_POD = 2;
+  TEAM_TYPE_CHAPTER = 3;
+  TEAM_TYPE_GUILD = 4;
+  TEAM_TYPE_PROJECT = 5;
+}

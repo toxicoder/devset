@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package company.common.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/common/v1;commonv1";
+
+// Email represents an email address.
+message Email {
+  // The complete email address string (e.g., "user@example.com").
+  string address = 1;
+
+  // The type of email address.
+  EmailType type = 2;
+
+  // Whether the email address has been verified.
+  bool verified = 3;
+}
+
+// EmailType describes the type of email address.
+enum EmailType {
+  EMAIL_TYPE_UNSPECIFIED = 0;
+  EMAIL_TYPE_PERSONAL = 1;
+  EMAIL_TYPE_WORK = 2;
+  EMAIL_TYPE_OTHER = 3;
+}

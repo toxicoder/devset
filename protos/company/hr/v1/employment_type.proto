@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+// EmploymentType describes the nature of the employment relationship.
+enum EmploymentType {
+  EMPLOYMENT_TYPE_UNSPECIFIED = 0;
+  EMPLOYMENT_TYPE_FULL_TIME = 1;
+  EMPLOYMENT_TYPE_PART_TIME = 2;
+  EMPLOYMENT_TYPE_CONTRACTOR = 3;
+  EMPLOYMENT_TYPE_INTERN = 4;
+  EMPLOYMENT_TYPE_TEMPORARY = 5;
+  EMPLOYMENT_TYPE_SEASONAL = 6;
+}

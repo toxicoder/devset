@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package company.common.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/common/v1;commonv1";
+
+// PhoneNumber represents a telephone number.
+message PhoneNumber {
+  // The country dialing code (e.g., "+1" for US, "+44" for UK).
+  string country_code = 1;
+
+  // The subscriber number, including area code if applicable.
+  string number = 2;
+
+  // The extension, if any.
+  string extension = 3;
+
+  // The type of phone number.
+  PhoneNumberType type = 4;
+}
+
+// PhoneNumberType describes the type of phone number.
+enum PhoneNumberType {
+  PHONE_NUMBER_TYPE_UNSPECIFIED = 0;
+  PHONE_NUMBER_TYPE_MOBILE = 1;
+  PHONE_NUMBER_TYPE_HOME = 2;
+  PHONE_NUMBER_TYPE_WORK = 3;
+  PHONE_NUMBER_TYPE_FAX = 4;
+  PHONE_NUMBER_TYPE_OTHER = 5;
+}

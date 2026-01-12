@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package company.common.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/common/v1;commonv1";
+
+// Address represents a physical mailing address.
+message Address {
+  // The first line of the address (e.g., street address).
+  string address_line_1 = 1;
+
+  // The second line of the address (e.g., apartment, suite, unit, or building).
+  string address_line_2 = 2;
+
+  // The city or town.
+  string city = 3;
+
+  // The state, province, or region.
+  string state_province = 4;
+
+  // The postal code or zip code.
+  string postal_code = 5;
+
+  // The country code (ISO 3166-1 alpha-2).
+  string country_code = 6;
+}

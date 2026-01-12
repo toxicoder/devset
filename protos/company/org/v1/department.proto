@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package company.org.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/org/v1;orgv1";
+
+// Department represents a high-level organizational unit.
+message Department {
+  // Unique identifier for the department.
+  string id = 1;
+
+  // The name of the department (e.g., "Engineering", "Sales").
+  string name = 2;
+
+  // Description of the department's function.
+  string description = 3;
+
+  // ID of the parent department, if any (for hierarchical structures).
+  string parent_department_id = 4;
+
+  // ID of the employee who leads the department.
+  string manager_id = 5;
+
+  // Cost center code for financial tracking.
+  string cost_center = 6;
+}
