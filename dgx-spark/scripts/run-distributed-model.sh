@@ -609,6 +609,7 @@ EOF
     log_error "Failed to pull image on $ip"
     return 1
   fi
+  log_info "Successfully pulled image on $ip."
 }
 
 # Internal: Transfer Docker image P2P
@@ -652,6 +653,7 @@ function transfer_docker_image_p2p() {
   fi
 
   # Start sender
+  log_info "Starting image transmission..."
   if ssh "${SSH_OPTS[@]}" "$src_ip" "docker save $image | pigz -c -1 | nc -w 60 -q 1 $fast_ip_tgt 12346"; then
       if wait "$pid"; then
           log_info "Image transfer successful."
@@ -806,6 +808,7 @@ INNER
         '$IMAGE' \\
         bash -c "\$DOCKER_SCRIPT"
 EOF
+  log_info "Model download completed on $ip."
 }
 
 # Internal: Patch model config for compatibility (e.g. Nemotron)
@@ -906,6 +909,7 @@ EOF
       log_error "TensorRT Engine Compilation Failed on $ip."
       exit 1
   fi
+  log_info "TensorRT Engine compilation completed successfully on $ip."
 }
 
 # Internal: Sync Engine to Worker
@@ -918,6 +922,7 @@ function sync_engine_to_worker() {
   _remote_mkdir "$tgt_ip" "$path"
   ssh "${SSH_OPTS[@]}" "$src_ip" "tar -cf - -C $path . | pigz -1" | \
       ssh "${SSH_OPTS[@]}" "$tgt_ip" "pigz -d | tar -xf - -C $path"
+  log_info "Engine sync to $tgt_ip complete."
 }
 
 # Internal: Orchestrate TRT Engine Build
@@ -1003,6 +1008,7 @@ function _cleanup_existing_containers() {
   for ip in "$IP1" "$IP2"; do
     ssh "${SSH_OPTS[@]}" "$ip" "docker rm -f nim-distributed trt-llm-distributed >/dev/null 2>&1 || true"
   done
+  log_info "Cleanup complete."
 }
 
 # Internal: Get NCCL Options
@@ -1031,6 +1037,7 @@ function setup_mpi_ssh_keys() {
       ssh "${SSH_OPTS[@]}" "$ip1" "cat ~/.ssh-trt/id_rsa" | ssh "${SSH_OPTS[@]}" "$ip2" "cat > ~/.ssh-trt/id_rsa && chmod 600 ~/.ssh-trt/id_rsa"
       ssh "${SSH_OPTS[@]}" "$ip1" "cat ~/.ssh-trt/id_rsa.pub" | ssh "${SSH_OPTS[@]}" "$ip2" "cat > ~/.ssh-trt/id_rsa.pub"
       ssh "${SSH_OPTS[@]}" "$ip1" "cat ~/.ssh-trt/authorized_keys" | ssh "${SSH_OPTS[@]}" "$ip2" "cat > ~/.ssh-trt/authorized_keys"
+      log_info "MPI SSH keys generated and synced."
   fi
 }
 
@@ -1156,6 +1163,7 @@ function launch_distributed_service() {
   ssh "${SSH_OPTS[@]}" "$ip1" "$head_cmd"
 
   ssh "${SSH_OPTS[@]}" "$ip1" "docker logs -f $container_name" &
+  log_info "Service launched. Tailing logs..."
 }
 
 # Internal: Wait for service
