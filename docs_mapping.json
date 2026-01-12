@@ -7,6 +7,7 @@
   "_config.yml": "_config.yml",
   "index.md": "index.md",
   "technical_design_doc.md": "technical_design_doc.md",
+  "playbooks": "playbooks",
   "adr/template.md": "adr/template.md",
   "adr/0001-example-architecture-decision.md": "adr/0001_example_architecture_decision.md",
   "style-guides/starlark": "style_guides/starlark",
@@ -264,5 +265,14 @@
   "technical_support/software/developer_tools.md": "technical_support/software/developer_tools.md",
   "technical_support/collaboration/slack_guide.md": "technical_support/collaboration/slack_guide.md",
   "technical_support/collaboration/video_conferencing.md": "technical_support/collaboration/video_conferencing.md",
-  "technical_support/security/reporting_phishing.md": "technical_support/security/reporting_phishing.md"
+  "technical_support/security/reporting_phishing.md": "technical_support/security/reporting_phishing.md",
+  "playbooks/index.md": "playbooks/index.md",
+  "playbooks/high_latency.md": "playbooks/high_latency.md",
+  "playbooks/high_error_rate.md": "playbooks/high_error_rate.md",
+  "playbooks/database_failover.md": "playbooks/database_failover.md",
+  "playbooks/memory_leak_oom.md": "playbooks/memory_leak_oom.md",
+  "playbooks/disk_space_exhaustion.md": "playbooks/disk_space_exhaustion.md",
+  "playbooks/certificate_expiry.md": "playbooks/certificate_expiry.md",
+  "playbooks/dependency_failure.md": "playbooks/dependency_failure.md",
+  "playbooks/bad_deployment.md": "playbooks/bad_deployment.md"
 }
