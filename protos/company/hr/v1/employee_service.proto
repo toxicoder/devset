@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+import "company/hr/v1/employee.proto";
+import "company/hr/v1/job_role.proto";
+import "google/protobuf/field_mask.proto";
+
+// EmployeeService handles employee lifecycle management.
+service EmployeeService {
+  rpc CreateEmployee(CreateEmployeeRequest) returns (CreateEmployeeResponse);
+  rpc GetEmployee(GetEmployeeRequest) returns (GetEmployeeResponse);
+  rpc UpdateEmployee(UpdateEmployeeRequest) returns (UpdateEmployeeResponse);
+  rpc DeleteEmployee(DeleteEmployeeRequest) returns (DeleteEmployeeResponse);
+  rpc ListEmployees(ListEmployeesRequest) returns (ListEmployeesResponse);
+
+  // Specific Lifecycle Events
+  rpc OnboardEmployee(OnboardEmployeeRequest) returns (OnboardEmployeeResponse);
+  rpc TerminateEmployee(TerminateEmployeeRequest) returns (TerminateEmployeeResponse);
+}
+
+message CreateEmployeeRequest {
+  Employee employee = 1;
+}
+
+message CreateEmployeeResponse {
+  Employee employee = 1;
+}
+
+message GetEmployeeRequest {
+  string employee_id = 1;
+}
+
+message GetEmployeeResponse {
+  Employee employee = 1;
+}
+
+message UpdateEmployeeRequest {
+  Employee employee = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateEmployeeResponse {
+  Employee employee = 1;
+}
+
+message DeleteEmployeeRequest {
+  string employee_id = 1;
+}
+
+message DeleteEmployeeResponse {
+  // Empty
+}
+
+message ListEmployeesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3; // e.g. "department_id = 'DEP123'"
+}
+
+message ListEmployeesResponse {
+  repeated Employee employees = 1;
+  string next_page_token = 2;
+}
+
+message OnboardEmployeeRequest {
+  Employee employee = 1;
+  string job_offer_id = 2;
+}
+
+message OnboardEmployeeResponse {
+  Employee employee = 1;
+  repeated string provisioning_task_ids = 2; // Tasks created in Project Service
+}
+
+message TerminateEmployeeRequest {
+  string employee_id = 1;
+  string reason = 2;
+  string termination_date = 3; // ISO Date
+}
+
+message TerminateEmployeeResponse {
+  bool success = 1;
+  repeated string offboarding_task_ids = 2;
+}

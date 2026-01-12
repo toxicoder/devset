@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package company.personal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/personal/v1;personalv1";
+
+import "company/personal/v1/menu_plan.proto";
+import "company/personal/v1/social_event.proto";
+
+service PersonalService {
+  rpc CreateMenuPlan(CreateMenuPlanRequest) returns (CreateMenuPlanResponse);
+  rpc ScheduleEvent(ScheduleEventRequest) returns (ScheduleEventResponse);
+}
+
+message CreateMenuPlanRequest { MenuPlan menu_plan = 1; }
+message CreateMenuPlanResponse { MenuPlan menu_plan = 1; }
+
+message ScheduleEventRequest { SocialEvent event = 1; }
+message ScheduleEventResponse { SocialEvent event = 1; }

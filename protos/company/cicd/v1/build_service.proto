@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package company.cicd.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/cicd/v1;cicdv1";
+
+import "company/cicd/v1/workflow.proto";
+import "company/cicd/v1/build_artifact.proto";
+
+service BuildService {
+  rpc TriggerWorkflow(TriggerWorkflowRequest) returns (TriggerWorkflowResponse);
+  rpc GetWorkflowRun(GetWorkflowRunRequest) returns (GetWorkflowRunResponse);
+  rpc ListArtifacts(ListArtifactsRequest) returns (ListArtifactsResponse);
+}
+
+message TriggerWorkflowRequest {
+  string workflow_id = 1;
+  map<string, string> inputs = 2;
+}
+message TriggerWorkflowResponse { string run_id = 1; }
+
+message GetWorkflowRunRequest { string run_id = 1; }
+message GetWorkflowRunResponse { string status = 1; }
+
+message ListArtifactsRequest { string run_id = 1; }
+message ListArtifactsResponse { repeated BuildArtifact artifacts = 1; }

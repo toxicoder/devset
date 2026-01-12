@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package company.finance.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/finance/v1;financev1";
+
+import "company/finance/v1/invoice.proto";
+import "company/finance/v1/expense_report.proto";
+import "company/finance/v1/budget.proto";
+
+service FinanceService {
+  rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse);
+  rpc SubmitExpenseReport(SubmitExpenseReportRequest) returns (SubmitExpenseReportResponse);
+  rpc ApproveExpenseReport(ApproveExpenseReportRequest) returns (ApproveExpenseReportResponse);
+  rpc CreateBudget(CreateBudgetRequest) returns (CreateBudgetResponse);
+}
+
+message CreateInvoiceRequest { Invoice invoice = 1; }
+message CreateInvoiceResponse { Invoice invoice = 1; }
+
+message SubmitExpenseReportRequest { ExpenseReport report = 1; }
+message SubmitExpenseReportResponse { ExpenseReport report = 1; }
+
+message ApproveExpenseReportRequest { string report_id = 1; string approver_id = 2; bool approved = 3; }
+message ApproveExpenseReportResponse { ExpenseReport report = 1; }
+
+message CreateBudgetRequest { Budget budget = 1; }
+message CreateBudgetResponse { Budget budget = 1; }

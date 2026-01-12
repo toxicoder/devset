@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.legal.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/legal/v1;legalv1";
+
+import "company/legal/v1/contract.proto";
+import "company/legal/v1/nda.proto";
+
+service LegalService {
+  rpc CreateContract(CreateContractRequest) returns (CreateContractResponse);
+  rpc SignContract(SignContractRequest) returns (SignContractResponse);
+  rpc CreateNDA(CreateNDARequest) returns (CreateNDAResponse);
+}
+
+message CreateContractRequest { Contract contract = 1; }
+message CreateContractResponse { Contract contract = 1; }
+
+message SignContractRequest { string contract_id = 1; string signer_id = 2; }
+message SignContractResponse { Contract contract = 1; }
+
+message CreateNDARequest { NDA nda = 1; }
+message CreateNDAResponse { NDA nda = 1; }

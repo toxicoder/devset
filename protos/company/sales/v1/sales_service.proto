@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package company.sales.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/sales/v1;salesv1";
+
+import "company/sales/v1/lead.proto";
+import "company/sales/v1/opportunity.proto";
+import "company/sales/v1/customer.proto";
+
+service SalesService {
+  rpc CreateLead(CreateLeadRequest) returns (CreateLeadResponse);
+  rpc ConvertLead(ConvertLeadRequest) returns (ConvertLeadResponse);
+  rpc CreateOpportunity(CreateOpportunityRequest) returns (CreateOpportunityResponse);
+  rpc CloseOpportunity(CloseOpportunityRequest) returns (CloseOpportunityResponse);
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse);
+}
+
+message CreateLeadRequest { Lead lead = 1; }
+message CreateLeadResponse { Lead lead = 1; }
+
+message ConvertLeadRequest { string lead_id = 1; }
+message ConvertLeadResponse { Opportunity opportunity = 1; Customer customer = 2; }
+
+message CreateOpportunityRequest { Opportunity opportunity = 1; }
+message CreateOpportunityResponse { Opportunity opportunity = 1; }
+
+message CloseOpportunityRequest { string opportunity_id = 1; bool won = 2; }
+message CloseOpportunityResponse { Opportunity opportunity = 1; }
+
+message GetCustomerRequest { string customer_id = 1; }
+message GetCustomerResponse { Customer customer = 1; }

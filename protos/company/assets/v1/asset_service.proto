@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package company.assets.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/assets/v1;assetsv1";
+
+import "company/assets/v1/device.proto";
+import "company/assets/v1/software_license.proto";
+
+service AssetService {
+  rpc RegisterDevice(RegisterDeviceRequest) returns (RegisterDeviceResponse);
+  rpc AssignDevice(AssignDeviceRequest) returns (AssignDeviceResponse);
+  rpc AssignLicense(AssignLicenseRequest) returns (AssignLicenseResponse);
+}
+
+message RegisterDeviceRequest { Device device = 1; }
+message RegisterDeviceResponse { Device device = 1; }
+
+message AssignDeviceRequest { string device_id = 1; string employee_id = 2; }
+message AssignDeviceResponse { Device device = 1; }
+
+message AssignLicenseRequest { string license_id = 1; string employee_id = 2; }
+message AssignLicenseResponse { SoftwareLicense license = 1; }

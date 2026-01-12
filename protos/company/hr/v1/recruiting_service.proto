@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package company.hr.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/hr/v1;hrv1";
+
+import "company/hr/v1/job_role.proto";
+
+// RecruitingService handles job postings and applications.
+service RecruitingService {
+  rpc ListJobOpenings(ListJobOpeningsRequest) returns (ListJobOpeningsResponse);
+  rpc CreateJobOpening(CreateJobOpeningRequest) returns (CreateJobOpeningResponse);
+  rpc ApplyForJob(ApplyForJobRequest) returns (ApplyForJobResponse);
+}
+
+message JobOpening {
+  string id = 1;
+  JobRole role_spec = 2;
+  string hiring_manager_id = 3;
+  string status = 4; // OPEN, CLOSED
+  int32 headcount = 5;
+}
+
+message ListJobOpeningsRequest {
+  string department_id = 1;
+}
+
+message ListJobOpeningsResponse {
+  repeated JobOpening openings = 1;
+}
+
+message CreateJobOpeningRequest {
+  JobOpening opening = 1;
+}
+
+message CreateJobOpeningResponse {
+  JobOpening opening = 1;
+}
+
+message ApplyForJobRequest {
+  string job_opening_id = 1;
+  string candidate_name = 2;
+  string email = 3;
+  string resume_url = 4;
+}
+
+message ApplyForJobResponse {
+  string application_id = 1;
+  string status = 2;
+}

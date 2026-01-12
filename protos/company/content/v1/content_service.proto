@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package company.content.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/content/v1;contentv1";
+
+import "company/content/v1/document.proto";
+import "company/content/v1/interview_question.proto";
+
+service ContentService {
+  rpc GetDocument(GetDocumentRequest) returns (GetDocumentResponse);
+  rpc SearchQuestions(SearchQuestionsRequest) returns (SearchQuestionsResponse);
+}
+
+message GetDocumentRequest { string document_id = 1; }
+message GetDocumentResponse { Document document = 1; }
+
+message SearchQuestionsRequest { string query = 1; string role_code = 2; }
+message SearchQuestionsResponse { repeated InterviewQuestion questions = 1; }
