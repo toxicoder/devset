@@ -229,5 +229,12 @@
   "onboarding/tools_and_access.md": "onboarding/tools_and_access.md",
   "onboarding/culture_and_values.md": "onboarding/culture_and_values.md",
   "onboarding/engineering_bootcamp.md": "onboarding/engineering_bootcamp.md",
-  "onboarding/index.md": "onboarding/index.md"
+  "onboarding/index.md": "onboarding/index.md",
+  "engineering_standards/engineering_principles.md": "engineering_standards/engineering_principles.md",
+  "engineering_standards/code_review_guidelines.md": "engineering_standards/code_review_guidelines.md",
+  "engineering_standards/testing_standards.md": "engineering_standards/testing_standards.md",
+  "engineering_standards/incident_management.md": "engineering_standards/incident_management.md",
+  "engineering_standards/post_mortem_guide.md": "engineering_standards/post_mortem_guide.md",
+  "engineering_standards/release_process.md": "engineering_standards/release_process.md",
+  "engineering_standards/on_call_guide.md": "engineering_standards/on_call_guide.md"
 }
