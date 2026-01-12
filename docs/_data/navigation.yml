@@ -259,3 +259,13 @@ docs:
     url: /policies/travel_expense_policy/
   - title: Whistleblower Policy
     url: /policies/whistleblower_policy/
+  - title: Terms of Service
+    children:
+    - title: Standard Terms
+      url: /policies/terms_of_service/standard/
+    - title: SaaS Terms
+      url: /policies/terms_of_service/saas/
+    - title: API Terms
+      url: /policies/terms_of_service/api/
+    - title: Marketplace Terms
+      url: /policies/terms_of_service/marketplace/
