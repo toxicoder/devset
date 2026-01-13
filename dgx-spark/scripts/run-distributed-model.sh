@@ -913,14 +913,28 @@ try:
     elif nk == 0 and tk == 0:
         # Ensure top_k and num_experts are strictly 0 to prevent mismatch in LLaMAConfig validation
         # LLaMAConfig may have default None for one and 0 for other depending on version/defaults
-        if config.get('num_experts') != 0:
-             config['num_experts'] = 0
-             changed = True
-             print("Forced num_experts=0")
-        if config.get('top_k') != 0:
-             config['top_k'] = 0
-             changed = True
-             print("Forced top_k=0")
+        # Also clear aliases to prevent ambiguity
+        for key in ['num_experts', 'moe_num_experts', 'n_routed_experts']:
+            if config.get(key) is not None and config.get(key) != 0:
+                config[key] = 0
+                changed = True
+                print(f"Forced {key}=0")
+            elif config.get(key) is None and key == 'num_experts':
+                # Ensure num_experts exists and is 0
+                config['num_experts'] = 0
+                changed = True
+                print("Forced num_experts=0 (was missing)")
+
+        for key in ['top_k', 'moe_top_k', 'num_experts_per_tok']:
+            if config.get(key) is not None and config.get(key) != 0:
+                config[key] = 0
+                changed = True
+                print(f"Forced {key}=0")
+            elif config.get(key) is None and key == 'top_k':
+                # Ensure top_k exists and is 0
+                config['top_k'] = 0
+                changed = True
+                print("Forced top_k=0 (was missing)")
     elif nk > 0 and tk > 0:
         # Valid MoE state, ensure standard keys exist for TRT-LLM
         if 'num_experts' not in config:
@@ -1099,12 +1113,16 @@ def find_script(arch):
 
     return candidates[0] if candidates else None
 
+use_fallback = False
 try:
     # Attempt standard command (Unified Workflow)
     # Note: run_module handles sys.argv but we need to ensure the module is importable
     import tensorrt_llm.commands.convert_checkpoint
     runpy.run_module("tensorrt_llm.commands.convert_checkpoint", run_name="__main__", alter_sys=True)
 except (ImportError, ModuleNotFoundError):
+    use_fallback = True
+
+if use_fallback:
     print("[WARN] Standard convert_checkpoint module not found. Attempting fallback...", file=sys.stderr)
 
     # Extract model_dir from args
