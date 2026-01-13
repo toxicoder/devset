@@ -877,29 +877,40 @@ try:
         print("Mapped norm_epsilon to rms_norm_eps")
 
     # Sanitize MoE config to prevent ValueError in LLaMAConfig
+    # Support aliases (e.g. DeepSeek uses n_routed_experts)
     try:
-        nk = int(config.get('num_experts', 0) or 0)
-        tk = int(config.get('top_k', 0) or 0)
+        moe_num_experts = config.get('num_experts', 0) or config.get('moe_num_experts', 0) or config.get('n_routed_experts', 0)
+        moe_top_k = config.get('top_k', 0) or config.get('num_experts_per_tok', 0) or config.get('moe_top_k', 0)
+
+        nk = int(moe_num_experts or 0)
+        tk = int(moe_top_k or 0)
     except:
         nk, tk = 0, 0
 
     if nk > 0 and tk == 0:
-        # Try finding alias
-        tkk = int(config.get('num_experts_per_tok', 0) or 0)
-        if tkk > 0:
-             config['top_k'] = tkk
-             changed = True
-             print(f"Mapped num_experts_per_tok ({tkk}) to top_k")
-        else:
-             config['num_experts'] = 0
-             changed = True
-             print(f"Reset num_experts to 0 (was {nk}) to fix MoE validation error (missing top_k)")
-    elif nk == 0 and tk > 0:
-        config['top_k'] = 0
-        if 'num_experts_per_tok' in config:
-             config['num_experts_per_tok'] = 0
+        # MoE enabled but top_k missing -> Invalid state, disable MoE
+        config['num_experts'] = 0
+        if 'n_routed_experts' in config: config['n_routed_experts'] = 0
+        if 'moe_num_experts' in config: config['moe_num_experts'] = 0
         changed = True
-        print(f"Reset top_k to 0 (was {tk}) to fix MoE validation error (missing num_experts)")
+        print(f"Reset num_experts (and aliases) to 0 (was {nk}) to fix MoE validation error (missing top_k)")
+    elif nk == 0 and tk > 0:
+        # top_k enabled but num_experts missing -> Invalid state, disable top_k
+        config['top_k'] = 0
+        if 'num_experts_per_tok' in config: config['num_experts_per_tok'] = 0
+        if 'moe_top_k' in config: config['moe_top_k'] = 0
+        changed = True
+        print(f"Reset top_k (and aliases) to 0 (was {tk}) to fix MoE validation error (missing num_experts)")
+    elif nk > 0 and tk > 0:
+        # Valid MoE state, ensure standard keys exist for TRT-LLM
+        if 'num_experts' not in config:
+             config['num_experts'] = nk
+             changed = True
+             print("Explicitly set num_experts from alias")
+        if 'top_k' not in config:
+             config['top_k'] = tk
+             changed = True
+             print("Explicitly set top_k from alias")
 
     mt = config.get('model_type', '').lower()
     if 'nemotron' in mt and mt != 'llama':
