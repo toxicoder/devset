@@ -385,7 +385,8 @@ function _get_node_vram() {
   local cmd="export PATH=/usr/local/bin:/usr/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/sbin:/bin:\$PATH; \
              if command -v nvidia-smi &>/dev/null; then \
                 mem=\$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>&1); \
-                if [[ \"\$mem\" == *\"Not Supported\"* || -z \"\$mem\" ]]; then \
+                ret=\$?; \
+                if [[ \$ret -ne 0 || \"\$mem\" == *\"Not Supported\"* || -z \"\$mem\" ]]; then \
                     free -m | grep Mem | awk '{print \$2}'; \
                 else \
                     echo \"\$mem\"; \
