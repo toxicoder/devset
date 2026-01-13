@@ -909,6 +909,12 @@ try:
         if 'moe_top_k' in config: config['moe_top_k'] = 0
         changed = True
         print(f"Reset top_k (and aliases) to 0 (was {tk}) to fix MoE validation error (missing num_experts)")
+    elif nk == 0 and tk == 0:
+        # Ensure top_k is not None (which breaks TRT-LLM validation) even if it evaluates to 0
+        if 'top_k' in config and config['top_k'] is None:
+             config['top_k'] = 0
+             changed = True
+             print("Fixed top_k=None to 0 to prevent validation error")
     elif nk > 0 and tk > 0:
         # Valid MoE state, ensure standard keys exist for TRT-LLM
         if 'num_experts' not in config:
