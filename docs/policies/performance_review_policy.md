@@ -84,6 +84,12 @@ metrics and weights vary by role but are standardized within each Job Role Code
 
 * **Rewards**: Compensation adjustments are programmatically determined by the
   Final Score.
+* **Development Nexus**: AI generates a personalized "Growth Map" with mandatory
+  and optional actions (e.g., mentorship pairings).
+* **Carry-Forward**: Unresolved goals may roll over with partial credit to
+  prevent cliff-edge failures.
+* **Process Audit**: Anonymous surveys and AI analysis review the quarter's NEF
+  execution for consistency, feeding improvements into the next cycle.
 
 ## 6. Implementation Requirements
 
@@ -97,25 +103,19 @@ metrics and weights vary by role but are standardized within each Job Role Code
 * **Data Manipulation**: Attempting to artificially inflate metrics (e.g.,
   "gaming" commit counts) is a violation of the Code of Conduct.
 
-## 8. Revision History
-
-* **Version 1.2**: Added the Impact Cascade Model (ICM) for attribution.
-* **Version 1.1**: Updated to emphasize automation and technical metric definitions.
-* **Version 1.0**: Initial release.
-
-## 9. Technical Metric Calculation & Logic
+## 8. Technical Metric Calculation & Logic
 
 All NEF metrics are derived from the **Company Feature Store**, defined in
 Protocol Buffers and calculated via standardized SQL pipelines.
 
-### 9.1 Metric Source: Feature Store (`company.features.v1`)
+### 8.1 Metric Source: Feature Store (`company.features.v1`)
 
 Metrics are strictly typed and defined in `.proto` files to ensure consistency.
 
 * **Domain**: `company.features.v1`
 * **Storage**: BigQuery Tables (e.g., `derived.sessions`, `raw.auth_logs`)
 
-### 9.2 Calculation Logic: User Engagement Example
+### 8.2 Calculation Logic: User Engagement Example
 
 For roles tied to product performance, the **Engagement Score** is calculated
 using the `calculate_frequency_segment` SQL function found in
@@ -140,7 +140,7 @@ RETURNS STRING AS (
 * **Weekly**: 75 Points
 * **Sporadic**: 25 Points
 
-### 9.3 Calculation Logic: Financial Impact Example
+### 8.3 Calculation Logic: Financial Impact Example
 
 For revenue-generating roles, impact is measured using the
 `micros_to_dollars` conversion to ensure precision.
@@ -152,7 +152,7 @@ For revenue-generating roles, impact is measured using the
 * **Transformation**: `CAST(amount_micros AS FLOAT64) / 1000000.0`
 * **Score**: `(Actual Revenue / Target Revenue) * 100` (Capped at 120%).
 
-### 9.4 Normalization Algorithm
+### 8.4 Normalization Algorithm
 
 To ensure fairness across different metric types (e.g., Dollars vs. Commits),
 all raw values are normalized before weighting.
@@ -164,13 +164,13 @@ all raw values are normalized before weighting.
   expected commits).
 * **MaxTarget**: Stretch goal defined in the Baseline Ledger.
 
-## 10. Attribution Strategy: The Impact Cascade Model (ICM)
+## 9. Attribution Strategy: The Impact Cascade Model (ICM)
 
 The Impact Cascade Model (ICM) is a graph-based extension of NEF designed to
 quantitatively value "invisible" or indirect work (e.g., tech debt, frameworks)
 by tracing contributions to downstream organizational outcomes.
 
-### 10.1 Technical Architecture
+### 9.1 Technical Architecture
 
 ICM extends the `company.features.v1` schema with graph structures in BigQuery.
 
@@ -181,7 +181,7 @@ ICM extends the `company.features.v1` schema with graph structures in BigQuery.
   * `contributions`: Log of individual inputs (Employee ID, Node ID, Effort).
 * **Compute**: BigQuery ML performs graph traversals and predictive modeling.
 
-### 10.2 Attribution Mechanisms
+### 9.2 Attribution Mechanisms
 
 ICM employs a hybrid scoring model: `TotalScore = Direct + Sum(Propagated)`.
 
@@ -212,7 +212,7 @@ Cascades credit along dependency paths using a **Decayed DFS Algorithm**.
   * **EdgeWeight**: Probabilistic impact (e.g., 0.5 for shared contribution).
   * **DecayFactor**: 0.8 per hop (prioritizes near-term impact).
 
-### 10.3 Incentivization Examples
+### 9.3 Incentivization Examples
 
 * **Tech Debt Cleanup**:
   * **Metric**: Pre/Post system health delta (e.g., Error Rate).
@@ -223,7 +223,7 @@ Cascades credit along dependency paths using a **Decayed DFS Algorithm**.
   * **Propagation**: A fraction of the velocity score from every team using the
     framework is attributed to the builder.
 
-### 10.4 Time-Decayed Valuation
+### 9.4 Time-Decayed Valuation
 
 Long-term impacts are valued using an exponential decay model to balance
 historical contribution with current relevance.
@@ -231,3 +231,10 @@ historical contribution with current relevance.
 * **Formula**: `TimeAdjustedValue = InitialValue * e^(-λ * t)`
   * **λ (Lambda)**: 0.05 (Monthly decay rate).
   * **t**: Months since contribution.
+
+## 10. Revision History
+
+* **Version 1.2**: Added the Impact Cascade Model (ICM) for attribution.
+* **Version 1.1**: Updated to emphasize automation and technical metric
+  definitions.
+* **Version 1.0**: Initial release.
