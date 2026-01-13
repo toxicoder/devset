@@ -871,11 +871,28 @@ function compile_trt_engine() {
 
   # FIXED: Check for pre-quantized model (e.g. NVFP4) to skip conversion
   # We check config.json in the container for quantization_config format
-  local check_quant_cmd="grep -q '\"format\": \"nvfp4-pack-quantized\"' $ctr_model_path/config.json && echo 'DETECTED_NVFP4' || true"
-
-  local quant_status
-  # FIXED: Filter output to avoid capturing container splash text (e.g. PyTorch banner)
-  quant_status=$(ssh "${SSH_OPTS[@]}" "$ip" "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE bash -c '$check_quant_cmd'" 2>/dev/null | grep "DETECTED_NVFP4" || true)
+  local quant_status=""
+  # Use Python for robust JSON parsing via Heredoc to avoid quoting issues
+  if quant_status=$(ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF 2>/dev/null
+    docker run --rm -v $host_model_base:$ctr_model_base $IMAGE python3 -c "
+import json, sys, os
+try:
+    path = '$ctr_model_path/config.json'
+    if os.path.exists(path):
+        with open(path) as f:
+            data = json.load(f)
+            fmt = data.get('format')
+            if not fmt and isinstance(data.get('quantization_config'), dict):
+                fmt = data.get('quantization_config').get('format')
+            if fmt == 'nvfp4-pack-quantized':
+                print('DETECTED_NVFP4')
+except Exception as e:
+    sys.stderr.write(str(e))
+"
+EOF
+  ); then
+      :
+  fi
 
   if [[ "$quant_status" == *"DETECTED_NVFP4"* ]]; then
        log_info "Detected pre-quantized NVFP4 model. Skipping conversion step."
