@@ -9,7 +9,9 @@ WITH churn_predictions AS (
         churn_prob,
         predicted_ltv_val,
         prediction_ts,
-        ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY prediction_ts DESC) as rn
+        ROW_NUMBER()
+            OVER (PARTITION BY user_id ORDER BY prediction_ts DESC)
+            AS rn
     FROM
         predictions.churn_model_output
 ),
@@ -40,12 +42,10 @@ SELECT
         ELSE 'Standard'
     END AS customer_segment,
     -- Resurrected Flag
-    CASE
-        WHEN u.previous_status = 'CHURNED' AND u.status = 'ACTIVE' THEN TRUE
-        ELSE FALSE
-    END AS is_resurrected,
+    COALESCE(u.previous_status = 'CHURNED' AND u.status = 'ACTIVE', FALSE) AS is_resurrected,
     CURRENT_TIMESTAMP() AS feature_timestamp
 FROM
-    user_history u
+    user_history AS u
 LEFT JOIN
-    churn_predictions p ON u.user_id = p.user_id AND p.rn = 1;
+    churn_predictions AS p
+    ON u.user_id = p.user_id AND p.rn = 1;
