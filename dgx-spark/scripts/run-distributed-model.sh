@@ -896,46 +896,7 @@ try:
     except:
         nk, tk = 0, 0
 
-    if nk > 0 and tk == 0:
-        # MoE enabled but top_k missing -> Invalid state, disable MoE
-        config['num_experts'] = 0
-        if 'n_routed_experts' in config: config['n_routed_experts'] = 0
-        if 'moe_num_experts' in config: config['moe_num_experts'] = 0
-        changed = True
-        print(f"Reset num_experts (and aliases) to 0 (was {nk}) to fix MoE validation error (missing top_k)")
-    elif nk == 0 and tk > 0:
-        # top_k enabled but num_experts missing -> Invalid state, disable top_k
-        config['top_k'] = 0
-        if 'num_experts_per_tok' in config: config['num_experts_per_tok'] = 0
-        if 'moe_top_k' in config: config['moe_top_k'] = 0
-        changed = True
-        print(f"Reset top_k (and aliases) to 0 (was {tk}) to fix MoE validation error (missing num_experts)")
-    elif nk == 0 and tk == 0:
-        # Ensure top_k and num_experts are strictly 0 to prevent mismatch in LLaMAConfig validation
-        # LLaMAConfig may have default None for one and 0 for other depending on version/defaults
-        # Also clear aliases to prevent ambiguity
-        for key in ['num_experts', 'moe_num_experts', 'n_routed_experts']:
-            if config.get(key) is not None and config.get(key) != 0:
-                config[key] = 0
-                changed = True
-                print(f"Forced {key}=0")
-            elif config.get(key) is None and key == 'num_experts':
-                # Ensure num_experts exists and is 0
-                config['num_experts'] = 0
-                changed = True
-                print("Forced num_experts=0 (was missing)")
-
-        for key in ['top_k', 'moe_top_k', 'num_experts_per_tok']:
-            if config.get(key) is not None and config.get(key) != 0:
-                config[key] = 0
-                changed = True
-                print(f"Forced {key}=0")
-            elif config.get(key) is None and key == 'top_k':
-                # Ensure top_k exists and is 0
-                config['top_k'] = 0
-                changed = True
-                print("Forced top_k=0 (was missing)")
-    elif nk > 0 and tk > 0:
+    if nk > 0 and tk > 0:
         # Valid MoE state, ensure standard keys exist for TRT-LLM
         if 'num_experts' not in config:
              config['num_experts'] = nk
@@ -945,6 +906,20 @@ try:
              config['top_k'] = tk
              changed = True
              print("Explicitly set top_k from alias")
+    else:
+        # Dense (nk=0) OR Invalid State (e.g. nk>0 but tk=0) -> Force Dense configuration
+        # Strict validation in TRT-LLM requires both num_experts and top_k to be 0 for dense models.
+        # We must ensure ALL MoE-related keys are explicitly 0 to prevent defaults (like None or 1) triggering errors.
+
+        keys_to_zero = ['num_experts', 'moe_num_experts', 'n_routed_experts',
+                        'top_k', 'moe_top_k', 'num_experts_per_tok']
+
+        for key in keys_to_zero:
+            # Set to 0 if it's missing (None) or if it's present but not 0
+            if config.get(key) != 0:
+                config[key] = 0
+                changed = True
+                print(f"Forced {key}=0")
 
     mt = config.get('model_type', '').lower()
     if 'nemotron' in mt and mt != 'llama':
