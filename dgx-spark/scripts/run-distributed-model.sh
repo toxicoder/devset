@@ -937,7 +937,7 @@ function _patch_model_config() {
 import json, os, sys
 
 try:
-    config_path = '$ctr_model_path/config.json'
+    config_path = os.path.join(sys.argv[1], 'config.json')
     if not os.path.exists(config_path):
         print(f"Config file not found at {config_path}")
         sys.exit(0)
@@ -1033,7 +1033,7 @@ PYTHON
         -v "\$HMB":'$ctr_model_base' \\
         -v /tmp/patch_config.py:/tmp/patch_config.py \\
         '$IMAGE' \\
-        python3 /tmp/patch_config.py
+        python3 /tmp/patch_config.py '$ctr_model_path'
 
     rm -f /tmp/patch_config.py
 EOF
