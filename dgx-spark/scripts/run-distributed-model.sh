@@ -831,28 +831,79 @@ function _patch_model_config() {
   local host_model_base="$3"
   local ctr_model_base="$4"
 
-  # Inline python to patch config.json
-  local patch_script="
+  log_info "Patching model config on $ip if needed..."
+
+  # Use Heredoc for robust remote execution and variable handling
+  ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    # Expand tilde in host path
+    HMB="$host_model_base"
+    if [[ "\$HMB" == "~"* ]]; then HMB="\${HOME}\${HMB:1}"; fi
+
+    # Python script to patch config
+    cat > /tmp/patch_config.py <<'PYTHON'
 import json, os, sys
-path = '$ctr_model_path/config.json'
-if os.path.exists(path):
-    try:
-        with open(path, 'r') as f: config = json.load(f)
-        changed = False
-        if 'hidden_act' not in config: config['hidden_act'] = 'silu'; changed = True
-        if 'rms_norm' not in config: config['rms_norm'] = True; changed = True
-        if 'ssm_state_size' in config and 'state_size' not in config: config['state_size'] = config['ssm_state_size']; changed = True
-        if 'norm_epsilon' in config and 'rms_norm_eps' not in config: config['rms_norm_eps'] = config['norm_epsilon']; changed = True; print('Mapped norm_epsilon')
-        mt = config.get('model_type', '').lower()
-        if 'nemotron' in mt and mt != 'llama': config['model_type'] = 'llama'; changed = True; print('Changed model_type to llama')
-        if changed:
-             with open(path, 'w') as f: json.dump(config, f, indent=2)
-             print('Patched config.json')
-    except Exception as e: print(e)
-"
-  # Run via docker to access the volume
-  ssh "${SSH_OPTS[@]}" "$ip" \
-     "docker run --rm -v $host_model_base:$ctr_model_base $IMAGE python3 -c \"$patch_script\"" 2>/dev/null || true
+
+try:
+    config_path = '$ctr_model_path/config.json'
+    if not os.path.exists(config_path):
+        print(f"Config file not found at {config_path}")
+        sys.exit(0)
+
+    print(f"Reading config from {config_path}")
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    changed = False
+
+    # Nemotron / Mamba fixes
+    if 'hidden_act' not in config:
+        config['hidden_act'] = 'silu'
+        changed = True
+        print("Added hidden_act=silu")
+
+    if 'rms_norm' not in config:
+        config['rms_norm'] = True
+        changed = True
+        print("Added rms_norm=True")
+
+    if 'ssm_state_size' in config and 'state_size' not in config:
+        config['state_size'] = config['ssm_state_size']
+        changed = True
+        print("Mapped ssm_state_size to state_size")
+
+    if 'norm_epsilon' in config and 'rms_norm_eps' not in config:
+        config['rms_norm_eps'] = config['norm_epsilon']
+        changed = True
+        print("Mapped norm_epsilon to rms_norm_eps")
+
+    mt = config.get('model_type', '').lower()
+    if 'nemotron' in mt and mt != 'llama':
+        config['model_type'] = 'llama'
+        changed = True
+        print(f"Changed model_type from {mt} to llama")
+
+    if changed:
+        with open(config_path, 'w') as f:
+            json.dump(config, f, indent=2)
+        print("Config patched successfully.")
+    else:
+        print("No patching required.")
+
+except Exception as e:
+    print(f"Error patching config: {e}")
+    sys.exit(1)
+PYTHON
+
+    # Run docker to execute the patch script
+    # We mount the host model base to the container model base
+    docker run --rm \\
+        -v "\$HMB":'$ctr_model_base' \\
+        -v /tmp/patch_config.py:/tmp/patch_config.py \\
+        '$IMAGE' \\
+        python3 /tmp/patch_config.py
+
+    rm -f /tmp/patch_config.py
+EOF
 }
 
 # Internal: Compile TRT Engine
