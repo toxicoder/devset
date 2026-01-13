@@ -993,16 +993,26 @@ try:
         nk, tk = 0, 0
 
     if nk > 0 and tk > 0:
-        # Valid MoE state, ensure standard keys exist for TRT-LLM
-        # Enforce consistency by overwriting potentially invalid/None values
-        config['num_experts'] = nk
-        config['top_k'] = tk
+        # Valid MoE state, ensure standard keys exist and MATCH for TRT-LLM
+        if config.get('num_experts') != nk:
+             config['num_experts'] = nk
+             changed = True
+             print(f"Explicitly set num_experts to {nk}")
+        if config.get('top_k') != tk:
+             config['top_k'] = tk
+             changed = True
+             print(f"Explicitly set top_k to {tk}")
+
         # FIX: Ensure TRT-LLM specific keys are set to avoid LLaMAConfig validation errors
         # LLaMAConfig often looks for moe_num_experts/moe_top_k in kwargs if 'moe' dict is missing
-        config['moe_num_experts'] = nk
-        config['moe_top_k'] = tk
-        changed = True
-        print(f"Enforced MoE: num_experts={nk}, top_k={tk}, moe_num_experts={nk}, moe_top_k={tk}")
+        if config.get('moe_num_experts') != nk:
+             config['moe_num_experts'] = nk
+             changed = True
+             print(f"Explicitly set moe_num_experts to {nk}")
+        if config.get('moe_top_k') != tk:
+             config['moe_top_k'] = tk
+             changed = True
+             print(f"Explicitly set moe_top_k to {tk}")
     else:
         # Dense (nk=0) OR Invalid State (e.g. nk>0 but tk=0) -> Force Dense configuration
         # Strict validation in TRT-LLM requires both num_experts and top_k to be 0 for dense models.
