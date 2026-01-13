@@ -178,7 +178,7 @@ function _diagnose_and_fix_gpu() {
   local log_file="/tmp/gpu_diag_${ip}_$(date +%s).log"
   log_warn "Running GPU diagnostics on $ip. Details in $log_file"
 
-  # We use a block to capture all output to log file and stdout
+  # We use a block to capture all output to log file
   {
       echo "=== Diagnostic Report: $ip ==="
       echo "Timestamp: $(date)"
@@ -197,7 +197,7 @@ function _diagnose_and_fix_gpu() {
       else
           echo "[FAIL] NVIDIA Modules NOT loaded"
           echo "Attempting to reload modules..."
-          if ssh "${SSH_OPTS[@]}" "$ip" "sudo modprobe nvidia"; then
+          if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n modprobe nvidia"; then
                echo "[FIX] Modules reloaded successfully"
           else
                echo "[FAIL] Failed to reload modules"
@@ -212,7 +212,7 @@ function _diagnose_and_fix_gpu() {
       else
           echo "[WARN] User '$r_user' is NOT in 'video' group"
           echo "Attempting to add user to video group..."
-          if ssh "${SSH_OPTS[@]}" "$ip" "sudo usermod -aG video $r_user"; then
+          if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n usermod -aG video $r_user"; then
               echo "[FIX] Added to video group (requires session restart)"
           else
               echo "[FAIL] Failed to add to video group"
@@ -231,7 +231,10 @@ function _diagnose_and_fix_gpu() {
       ssh "${SSH_OPTS[@]}" "$ip" "nvidia-smi 2>&1" || echo "nvidia-smi failed"
       echo "-------------------------"
 
-  } | tee "$log_file"
+  } > "$log_file" 2>&1
+
+  # Output to stdout (which can be redirected by caller)
+  cat "$log_file"
 }
 
 # ==============================================================================
@@ -517,6 +520,10 @@ function get_total_cluster_vram() {
 
   vram1=$(_get_node_vram "$ip1")
   vram2=$(_get_node_vram "$ip2")
+
+  # Sanitize outputs to ensure they are numeric (prevents awk crashes on diagnostics leak)
+  vram1=$(echo "$vram1" | grep -oE '[0-9]+' | head -n1 || echo "0")
+  vram2=$(echo "$vram2" | grep -oE '[0-9]+' | head -n1 || echo "0")
 
   awk -v v1="${vram1:-0}" -v v2="${vram2:-0}" 'BEGIN {print (v1 + v2) / 1024}'
 }
