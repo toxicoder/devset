@@ -997,8 +997,12 @@ try:
         # Enforce consistency by overwriting potentially invalid/None values
         config['num_experts'] = nk
         config['top_k'] = tk
+        # FIX: Ensure TRT-LLM specific keys are set to avoid LLaMAConfig validation errors
+        # LLaMAConfig often looks for moe_num_experts/moe_top_k in kwargs if 'moe' dict is missing
+        config['moe_num_experts'] = nk
+        config['moe_top_k'] = tk
         changed = True
-        print(f"Enforced MoE: num_experts={nk}, top_k={tk}")
+        print(f"Enforced MoE: num_experts={nk}, top_k={tk}, moe_num_experts={nk}, moe_top_k={tk}")
     else:
         # Dense (nk=0) OR Invalid State (e.g. nk>0 but tk=0) -> Force Dense configuration
         # Strict validation in TRT-LLM requires both num_experts and top_k to be 0 for dense models.
