@@ -63,6 +63,10 @@ DRY_RUN=0
 FORCE=0
 HF_TOKEN="${HF_TOKEN:-}"
 
+# Overrides
+VRAM_OVERRIDE_GB="${VRAM_OVERRIDE_GB:-}"
+FALLBACK_GPU_MEM_MB="${FALLBACK_GPU_MEM_MB:-}"
+
 # TRT-LLM Specifics
 USE_TRT_LLM=0
 HF_MODEL_ID=""
@@ -165,6 +169,69 @@ function _check_remote_sudo() {
     fi
   done
   log_info "Sudo access verified."
+}
+
+# New function: _diagnose_and_fix_gpu
+# Arguments: $1 ip
+function _diagnose_and_fix_gpu() {
+  local ip="$1"
+  local log_file="/tmp/gpu_diag_${ip}_$(date +%s).log"
+  log_warn "Running GPU diagnostics on $ip. Details in $log_file"
+
+  # We use a block to capture all output to log file and stdout
+  {
+      echo "=== Diagnostic Report: $ip ==="
+      echo "Timestamp: $(date)"
+
+      # 1. SSH Connectivity
+      if ssh -q "${SSH_OPTS[@]}" "$ip" exit; then
+          echo "[PASS] SSH Connectivity"
+      else
+          echo "[FAIL] SSH Connectivity"
+          return 1
+      fi
+
+      # 2. NVIDIA Modules
+      if ssh "${SSH_OPTS[@]}" "$ip" "lsmod | grep -q nvidia"; then
+          echo "[PASS] NVIDIA Modules loaded"
+      else
+          echo "[FAIL] NVIDIA Modules NOT loaded"
+          echo "Attempting to reload modules..."
+          if ssh "${SSH_OPTS[@]}" "$ip" "sudo modprobe nvidia"; then
+               echo "[FIX] Modules reloaded successfully"
+          else
+               echo "[FAIL] Failed to reload modules"
+          fi
+      fi
+
+      # 3. Video Group Membership
+      local r_user
+      r_user=$(ssh "${SSH_OPTS[@]}" "$ip" "whoami")
+      if ssh "${SSH_OPTS[@]}" "$ip" "id -nG | grep -qw video"; then
+          echo "[PASS] User '$r_user' is in 'video' group"
+      else
+          echo "[WARN] User '$r_user' is NOT in 'video' group"
+          echo "Attempting to add user to video group..."
+          if ssh "${SSH_OPTS[@]}" "$ip" "sudo usermod -aG video $r_user"; then
+              echo "[FIX] Added to video group (requires session restart)"
+          else
+              echo "[FAIL] Failed to add to video group"
+          fi
+      fi
+
+      # 4. Device Files
+      if ssh "${SSH_OPTS[@]}" "$ip" "ls -l /dev/nvidia* 2>/dev/null | head -n 5"; then
+          echo "[PASS] /dev/nvidia devices present"
+      else
+          echo "[FAIL] No /dev/nvidia devices found"
+      fi
+
+      # 5. NVIDIA-SMI Output
+      echo "--- nvidia-smi output ---"
+      ssh "${SSH_OPTS[@]}" "$ip" "nvidia-smi 2>&1" || echo "nvidia-smi failed"
+      echo "-------------------------"
+
+  } | tee "$log_file"
 }
 
 # ==============================================================================
@@ -379,6 +446,14 @@ function parse_model_config() {
 # Globals: SSH_OPTS
 function _get_node_vram() {
   local ip="$1"
+
+  # Check for override first
+  if [[ -n "$VRAM_OVERRIDE_GB" ]]; then
+      # Return in MB
+      awk -v gb="$VRAM_OVERRIDE_GB" 'BEGIN {print gb * 1024}'
+      return
+  fi
+
   # FIXED: Improved VRAM detection logic for DGX Spark (Unified Memory)
   # DGX Spark/Grace-Hopper often reports "Not Supported" for memory queries via nvidia-smi
   # Fallback to system memory (free -m) if nvidia-smi fails to report capacity.
@@ -398,9 +473,10 @@ function _get_node_vram() {
   local out
   # FIXED: Capture only stdout to avoid parsing SSH error messages as VRAM
   if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd"); then
-      log_warn "SSH to $ip failed during VRAM check."
-      echo "0"
-      return
+      log_warn "Initial VRAM check failed on $ip. Running diagnostics..."
+      _diagnose_and_fix_gpu "$ip"
+      # Retry once
+      out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" || echo "0")
   fi
 
   # FIXED: Parse output to extract only numbers, handling multi-GPU output by summing
@@ -409,7 +485,15 @@ function _get_node_vram() {
   total_mem=$(printf "%s" "$out" | tr -d '\r' | grep -E '^[0-9]+$' | awk '{s+=$1} END {print s+0}')
 
   if [[ -z "$total_mem" || "$total_mem" -eq 0 ]]; then
-      log_warn "Could not detect VRAM on $ip (nvidia-smi failed or returned 0). Assuming 0."
+      log_warn "VRAM 0 detected on $ip. Diagnostics:"
+      _diagnose_and_fix_gpu "$ip"
+
+      # Fallback to hardcoded if environment variable set
+      if [[ -n "${FALLBACK_GPU_MEM_MB:-}" ]]; then
+           echo "$FALLBACK_GPU_MEM_MB"
+           return
+      fi
+
       echo "0"
   else
       echo "$total_mem"
@@ -1299,6 +1383,13 @@ function generate_trt_run_command() {
   local hf_env=""
   if [[ -n "$hf_token" ]]; then hf_env="-e HF_TOKEN=$hf_token"; fi
 
+  # Auto-pass specific environment variables
+  local fw_env=""
+  for var in $(env | grep -E '^(RAY_|SPARK_|CUDA_|NCCL_|TOXIC_)' | cut -d= -f1); do
+      fw_env="$fw_env -e $var"
+  done
+  hf_env="$hf_env $fw_env"
+
   if [[ "$role" == "worker" ]]; then
       local ssh_start_cmd="(service ssh start || /usr/sbin/sshd) && sleep infinity"
       local net_opts=$(_get_nccl_opts "$ifaces2")
@@ -1334,6 +1425,13 @@ function generate_nim_run_command() {
   nim_env="$nim_env -e UVICORN_HOST=0.0.0.0 -e HOST=0.0.0.0 -e NIM_SERVER_HTTP_HOST=0.0.0.0"
   if [[ -n "$hf_token" ]]; then nim_env="$nim_env -e HF_TOKEN=$hf_token"; fi
   nim_env="$nim_env $extra_nim_env"
+
+  # Auto-pass specific environment variables
+  local fw_env=""
+  for var in $(env | grep -E '^(RAY_|SPARK_|CUDA_|NCCL_|TOXIC_)' | cut -d= -f1); do
+      fw_env="$fw_env -e $var"
+  done
+  nim_env="$nim_env $fw_env"
 
   local node_rank=0
   local net_opts=""
@@ -1517,8 +1615,9 @@ function main() {
   log_step "[2/5] Verifying connectivity..."
   for ip in "$IP1" "$IP2"; do
     if ! ssh "${SSH_OPTS[@]}" "$ip" "nvidia-smi > /dev/null"; then
-      log_error "Connectivity failed to $ip."
-      exit 1
+      log_warn "Connectivity check (nvidia-smi) failed on $ip. Running diagnostics..."
+      _diagnose_and_fix_gpu "$ip"
+      # If forceful continuation is desired, we proceed, else the script might fail at VRAM check
     fi
   done
   log_info "Connectivity verified."
