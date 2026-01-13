@@ -1,3 +1,8 @@
+CREATE TEMP FUNCTION micros_to_dollars(amount_micros FLOAT64)
+RETURNS FLOAT64 AS (
+    amount_micros / 1000000.0
+);
+
 -- Product Performance Feature Pipeline
 -- Target: company.features.v1.ProductPerformance
 -- Granularity: One row per product_id
@@ -9,7 +14,7 @@ sales_last_30d AS (
     SELECT
         product_id,
         SUM(quantity) AS units_sold_last_30d,
-        SUM(price_amount_micros) / 1000000.0 AS revenue_last_30d
+        micros_to_dollars(SUM(price_amount_micros)) AS revenue_last_30d
     FROM
         raw.order_items
     WHERE

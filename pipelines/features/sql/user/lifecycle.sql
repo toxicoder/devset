@@ -1,3 +1,15 @@
+CREATE TEMP FUNCTION calculate_customer_segment(
+    predicted_ltv FLOAT64, created_at TIMESTAMP, churn_prob FLOAT64
+)
+RETURNS STRING AS (
+    CASE
+        WHEN predicted_ltv > 1000 THEN 'VIP'
+        WHEN DATE_DIFF(CURRENT_DATE(), DATE(created_at), DAY) < 30 THEN 'New'
+        WHEN churn_prob > 0.7 THEN 'AtRisk'
+        ELSE 'Standard'
+    END
+);
+
 -- User Lifecycle Feature Pipeline
 -- Target: company.features.v1.UserLifecycle
 -- Granularity: One row per user_id
@@ -35,12 +47,9 @@ SELECT
     -- Predicted LTV
     COALESCE(p.predicted_ltv_val, 0.0) AS predicted_ltv,
     -- Customer Segment
-    CASE
-        WHEN p.predicted_ltv_val > 1000 THEN 'VIP'
-        WHEN DATE_DIFF(CURRENT_DATE(), DATE(u.created_at), DAY) < 30 THEN 'New'
-        WHEN p.churn_prob > 0.7 THEN 'AtRisk'
-        ELSE 'Standard'
-    END AS customer_segment,
+    calculate_customer_segment(
+        p.predicted_ltv_val, u.created_at, p.churn_prob
+    ) AS customer_segment,
     -- Resurrected Flag
     COALESCE(u.previous_status = 'CHURNED' AND u.status = 'ACTIVE', FALSE) AS is_resurrected,
     CURRENT_TIMESTAMP() AS feature_timestamp

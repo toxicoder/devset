@@ -1,3 +1,8 @@
+CREATE TEMP FUNCTION cents_to_dollars(amount_cents FLOAT64)
+RETURNS FLOAT64 AS (
+    amount_cents / 100.0
+);
+
 -- Vendor Spend Analysis
 -- Source: company.finance.v1.ExpenseReport
 -- Logic: Aggregates spend by vendor and category to identify top cost centers.
@@ -7,8 +12,8 @@ SELECT
     category, -- e.g., 'Software', 'Travel', 'Meals'
     DATE_TRUNC(date, MONTH) AS spend_month,
     COUNT(*) AS transaction_count,
-    SUM(amount_cents) / 100.0 AS total_spend,
-    AVG(amount_cents) / 100.0 AS avg_transaction_value
+    cents_to_dollars(SUM(amount_cents)) AS total_spend,
+    cents_to_dollars(AVG(amount_cents)) AS avg_transaction_value
 FROM
     `company_finance_v1_expense_report`
 WHERE
