@@ -371,7 +371,7 @@ function parse_model_config() {
       log_info "Defaulting to TensorRT-LLM Engine Build (Native)."
       USE_TRT_LLM=1
       # FIXED: Updated default TRT-LLM image to newer version for Nemotron support
-      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:1.2.0rc6"
+      IMAGE="nvcr.io/nvidia/tensorrt-llm:1.3.0"
     elif [[ "$FORCE" -eq 1 ]]; then
       log_warn "Model '$MODEL_ARG' not found in registry. Using as custom image."
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
@@ -397,7 +397,7 @@ function parse_model_config() {
     USE_TRT_LLM=1
     if [[ -z "$IMAGE_OVERRIDE" ]]; then
       # FIXED: Ensure override also defaults to newer image
-      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:1.2.0rc6"
+      IMAGE="nvcr.io/nvidia/tensorrt-llm:1.3.0"
     fi
     log_info "Engine Mode: TensorRT-LLM (Container: $IMAGE)"
     if [[ -z "$HF_MODEL_ID" ]]; then
@@ -460,21 +460,9 @@ function _get_node_vram() {
       return
   fi
 
-  # FIXED: Improved VRAM detection logic for DGX Spark (Unified Memory)
-  # DGX Spark/Grace-Hopper often reports "Not Supported" for memory queries via nvidia-smi
-  # Fallback to system memory (free -m) if nvidia-smi fails to report capacity.
+  # FIXED: Improved VRAM detection logic. Handle "Not Supported" by assuming default.
   local cmd="export PATH=/usr/local/bin:/usr/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/sbin:/bin:\$PATH; \
-             if command -v nvidia-smi &>/dev/null; then \
-                mem=\$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>&1); \
-                ret=\$?; \
-                if [[ \$ret -ne 0 || \"\$mem\" == *\"Not Supported\"* || -z \"\$mem\" ]]; then \
-                    free -m | grep -i Mem | awk '{print \$2}'; \
-                else \
-                    echo \"\$mem\"; \
-                fi; \
-             else \
-                free -m | grep -i Mem | awk '{print \$2}'; \
-             fi"
+             nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>&1"
 
   local out
   # FIXED: Capture only stdout to avoid parsing SSH error messages as VRAM
@@ -484,6 +472,13 @@ function _get_node_vram() {
       _diagnose_and_fix_gpu "$ip" >&2
       # Retry once
       out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" || echo "0")
+  fi
+
+  # Check for "Not Supported"
+  if [[ "$out" == *"Not Supported"* || "$out" == "Not" ]]; then
+      log_warn "VRAM reported as 'Not Supported' on $ip. Assuming 16384MiB."
+      echo "16384"
+      return
   fi
 
   # FIXED: Parse output to extract only numbers, handling multi-GPU output by summing
@@ -945,119 +940,58 @@ function _patch_model_config() {
     if [[ "\$HMB" == "~"* ]]; then HMB="\${HOME}\${HMB:1}"; fi
 
     # Python script to patch config
-    cat > /tmp/patch_config.py <<'PYTHON'
-import json, os, sys
+    cat > /tmp/patch_config.py <<PYTHON
+import json
+from pathlib import Path
 
-try:
-    config_path = os.path.join(sys.argv[1], 'config.json')
-    if not os.path.exists(config_path):
-        print(f"Config file not found at {config_path}")
-        sys.exit(0)
+ctr_model_path = "${ctr_model_path}"
+config_path = Path(ctr_model_path) / "config.json"
+with open(config_path, "r") as f:
+    config = json.load(f)
 
-    print(f"Reading config from {config_path}")
-    with open(config_path, 'r') as f:
-        config = json.load(f)
+print(f"Reading config from {config_path}")
 
-    changed = False
+if "hidden_act" not in config:
+    config["hidden_act"] = "relu2"
+    print("Added hidden_act=relu2")
 
-    # Nemotron / Mamba fixes
-    if 'hidden_act' not in config:
-        config['hidden_act'] = 'silu'
-        changed = True
-        print("Added hidden_act=silu")
+if "rms_norm_eps" in config:
+    config["layer_norm_epsilon"] = config.pop("rms_norm_eps")
+    print("Mapped rms_norm_eps to layer_norm_epsilon")
 
-    if 'rms_norm' not in config:
-        config['rms_norm'] = True
-        changed = True
-        print("Added rms_norm=True")
+if "ssm_state_size" in config:
+    config["state_size"] = config["ssm_state_size"]
+    print("Mapped ssm_state_size to state_size")
 
-    if 'ssm_state_size' in config and 'state_size' not in config:
-        config['state_size'] = config['ssm_state_size']
-        changed = True
-        print("Mapped ssm_state_size to state_size")
+if "n_routed_experts" in config or "num_experts" in config:
+    experts = config.get("n_routed_experts", config.get("num_experts", 0))
+    top_k = config.get("num_experts_per_tok", 0)
+    print(f"Detected MoE Model: experts={experts}, top_k={top_k}")
+    config["num_local_experts"] = experts
+    print(f"Set num_local_experts to {experts}")
+    config["moe_num_experts"] = experts  # Legacy fallback
+    print(f"Set moe_num_experts to {experts}")
+    config["num_experts_per_tok"] = top_k
+    print(f"Set num_experts_per_tok to {top_k}")
+    config["moe_top_k"] = top_k  # Legacy fallback
+    print(f"Set moe_top_k to {top_k}")
 
-    if 'norm_epsilon' in config and 'rms_norm_eps' not in config:
-        config['rms_norm_eps'] = config['norm_epsilon']
-        changed = True
-        print("Mapped norm_epsilon to rms_norm_eps")
+    # Shared expert support (if present)
+    if "moe_shared_expert_intermediate_size" in config:
+        config["shared_expert_intermediate_size"] = config["moe_shared_expert_intermediate_size"]
+        print(f"Set shared_expert_intermediate_size to {config['moe_shared_expert_intermediate_size']}")
 
-    # Sanitize MoE config to prevent ValueError in LLaMAConfig
-    # Support aliases (e.g. DeepSeek uses n_routed_experts)
-    moe_keys = {
-        'num_experts': ['num_experts', 'moe_num_experts', 'n_routed_experts'],
-        'top_k': ['top_k', 'moe_top_k', 'num_experts_per_tok']
-    }
+if "auto_map" in config:
+    del config["auto_map"]
+    print("Removed auto_map to force LlamaConfig")
 
-    detected_experts = 0
-    detected_top_k = 0
+if config.get("model_type") == "nemotron_h":
+    config["model_type"] = "llama"  # Keep as llama to avoid forcing swiglu act
+    print("Changed model_type from nemotron_h to llama")
 
-    # Detect maximum value to find the true config
-    for key in moe_keys['num_experts']:
-        val = config.get(key)
-        if val is not None and isinstance(val, int) and val > 0:
-            detected_experts = val
-            break
-
-    for key in moe_keys['top_k']:
-        val = config.get(key)
-        if val is not None and isinstance(val, int) and val > 0:
-            detected_top_k = val
-            break
-
-    if detected_experts > 0:
-        # It is an MoE model
-        print(f"Detected MoE Model: experts={detected_experts}, top_k={detected_top_k}")
-
-        # Enforce consistency
-        for key in moe_keys['num_experts']:
-            if config.get(key) != detected_experts:
-                config[key] = detected_experts
-                changed = True
-                print(f"Set {key} to {detected_experts}")
-
-        for key in moe_keys['top_k']:
-            if config.get(key) != detected_top_k:
-                config[key] = detected_top_k
-                changed = True
-                print(f"Set {key} to {detected_top_k}")
-    else:
-        # Dense model (or explicitly 0)
-        # Force all to 0 to pass strict validation
-        all_keys = moe_keys['num_experts'] + moe_keys['top_k']
-        for key in all_keys:
-            if config.get(key) is not None and config.get(key) != 0:
-                config[key] = 0
-                changed = True
-                print(f"Forced {key} to 0 (Dense Model)")
-
-        # Ensure canonical keys are set to 0 if not present, to be safe against defaults
-        if config.get('num_experts') != 0:
-            config['num_experts'] = 0
-            changed = True
-        if config.get('top_k') != 0:
-            config['top_k'] = 0
-            changed = True
-
-    mt = config.get('model_type', '').lower()
-    if 'nemotron' in mt and mt != 'llama':
-        config['model_type'] = 'llama'
-        # Remove auto_map to force using standard LlamaConfig
-        if 'auto_map' in config:
-            del config['auto_map']
-            print("Removed auto_map to force LlamaConfig")
-        changed = True
-        print(f"Changed model_type from {mt} to llama")
-
-    if changed:
-        with open(config_path, 'w') as f:
-            json.dump(config, f, indent=2)
-        print("Config patched successfully.")
-    else:
-        print("No patching required.")
-
-except Exception as e:
-    print(f"Error patching config: {e}")
-    sys.exit(1)
+with open(config_path, "w") as f:
+    json.dump(config, f, indent=4)
+print("Config patched successfully.")
 PYTHON
 
     # Run docker to execute the patch script
@@ -1066,7 +1000,7 @@ PYTHON
         -v "\$HMB":'$ctr_model_base' \\
         -v /tmp/patch_config.py:/tmp/patch_config.py \\
         '$IMAGE' \\
-        python3 /tmp/patch_config.py '$ctr_model_path'
+        python3 /tmp/patch_config.py
 
     rm -f /tmp/patch_config.py
 EOF
