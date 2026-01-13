@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+import "protos/company/features/v1/feature.proto";
+import "google/protobuf/field_mask.proto";
+
+option go_package = "github.com/toxicoder/devset/protos/company/features/v1;featuresv1";
+option java_multiple_files = true;
+option java_package = "com.toxicoder.devset.company.features.v1";
+
+// FeatureService manages the lifecycle and retrieval of machine learning features.
+service FeatureService {
+  // CreateFeature registers a new feature definition in the repository.
+  rpc CreateFeature(CreateFeatureRequest) returns (CreateFeatureResponse);
+
+  // GetFeature retrieves a feature definition by its ID.
+  rpc GetFeature(GetFeatureRequest) returns (GetFeatureResponse);
+
+  // UpdateFeature updates an existing feature definition.
+  rpc UpdateFeature(UpdateFeatureRequest) returns (UpdateFeatureResponse);
+
+  // DeleteFeature removes a feature definition (or marks it archived).
+  rpc DeleteFeature(DeleteFeatureRequest) returns (DeleteFeatureResponse);
+
+  // ListFeatures lists features with optional filtering.
+  rpc ListFeatures(ListFeaturesRequest) returns (ListFeaturesResponse);
+
+  // CreateFeatureSet creates a new grouping of features.
+  rpc CreateFeatureSet(CreateFeatureSetRequest) returns (CreateFeatureSetResponse);
+
+  // GetFeatureSet retrieves a feature set definition.
+  rpc GetFeatureSet(GetFeatureSetRequest) returns (GetFeatureSetResponse);
+}
+
+message CreateFeatureRequest {
+  Feature feature = 1;
+}
+
+message CreateFeatureResponse {
+  Feature feature = 1;
+}
+
+message GetFeatureRequest {
+  string id = 1;
+}
+
+message GetFeatureResponse {
+  Feature feature = 1;
+}
+
+message UpdateFeatureRequest {
+  Feature feature = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateFeatureResponse {
+  Feature feature = 1;
+}
+
+message DeleteFeatureRequest {
+  string id = 1;
+}
+
+message DeleteFeatureResponse {
+  // Empty response usually indicates success.
+}
+
+message ListFeaturesRequest {
+  // Filter expression to narrow down the list of features (e.g., "owner = 'team-ml'").
+  string filter = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListFeaturesResponse {
+  repeated Feature features = 1;
+  string next_page_token = 2;
+}
+
+message CreateFeatureSetRequest {
+  FeatureSet feature_set = 1;
+}
+
+message CreateFeatureSetResponse {
+  FeatureSet feature_set = 1;
+}
+
+message GetFeatureSetRequest {
+  string id = 1;
+}
+
+message GetFeatureSetResponse {
+  FeatureSet feature_set = 1;
+}
