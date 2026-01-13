@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "company/features/v1/feature_types.proto";
+
+// ProductFeatures aggregates features for a specific product.
+message ProductFeatures {
+  string product_id = 1;
+  ProductInventory inventory = 2;
+  ProductPerformance performance = 3;
+  ProductRating rating = 4;
+}
+
+message ProductInventory {
+  FeatureMetadata metadata = 1;
+  int32 stock_level = 2;
+  int32 days_of_supply = 3;
+  double restock_frequency_days = 4;
+  bool is_out_of_stock = 5;
+}
+
+message ProductPerformance {
+  FeatureMetadata metadata = 1;
+  int32 units_sold_last_30d = 2;
+  double conversion_rate = 3; // views to purchases
+  double revenue_last_30d = 4;
+  double refund_rate = 5;
+}
+
+message ProductRating {
+  FeatureMetadata metadata = 1;
+  double average_rating = 2;
+  int32 review_count = 3;
+  double sentiment_score = 4; // -1 to 1 derived from text reviews
+  int32 five_star_count = 5;
+}
