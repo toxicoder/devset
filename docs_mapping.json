@@ -274,5 +274,6 @@
   "playbooks/disk_space_exhaustion.md": "playbooks/disk_space_exhaustion.md",
   "playbooks/certificate_expiry.md": "playbooks/certificate_expiry.md",
   "playbooks/dependency_failure.md": "playbooks/dependency_failure.md",
-  "playbooks/bad_deployment.md": "playbooks/bad_deployment.md"
+  "playbooks/bad_deployment.md": "playbooks/bad_deployment.md",
+  "user_management/group_hierarchy.md": "user_management/group_hierarchy.md"
 }

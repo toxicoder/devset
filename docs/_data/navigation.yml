@@ -397,3 +397,7 @@ docs:
       url: /policies/terms_of_service/api/
     - title: Marketplace Terms
       url: /policies/terms_of_service/marketplace/
+- title: User Management
+  children:
+  - title: Group Hierarchy
+    url: /user_management/group_hierarchy/
