@@ -704,7 +704,14 @@ function pull_image() {
   log_info "Initiating docker pull on $ip..."
   # Use Heredoc with local expansion for the key (safe as it goes to stdin of ssh -> bash)
   if ! ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
-    echo "$NGC_API_KEY" | docker login nvcr.io -u '\$oauthtoken' --password-stdin >/dev/null 2>&1
+    # Explicit logout to clear stale credentials
+    docker logout nvcr.io >/dev/null 2>&1 || true
+
+    if ! echo "$NGC_API_KEY" | docker login nvcr.io -u '\$oauthtoken' --password-stdin; then
+        echo "Error: Docker login to nvcr.io failed on $ip" >&2
+        exit 1
+    fi
+
     if ! docker pull $PLATFORM_ARG "$image"; then
        echo "Error: Failed to pull image $image" >&2
        exit 1
