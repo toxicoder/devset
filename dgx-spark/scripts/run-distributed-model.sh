@@ -843,6 +843,7 @@ function _patch_model_config() {
 
   # Use Heredoc for robust remote execution and variable handling
   ssh "${SSH_OPTS[@]}" "$ip" "bash -s" <<EOF
+    set -e
     # Expand tilde in host path
     HMB="$host_model_base"
     if [[ "\$HMB" == "~"* ]]; then HMB="\${HOME}\${HMB:1}"; fi
@@ -910,15 +911,16 @@ try:
         changed = True
         print(f"Reset top_k (and aliases) to 0 (was {tk}) to fix MoE validation error (missing num_experts)")
     elif nk == 0 and tk == 0:
-        # Ensure top_k and num_experts are not None (which breaks TRT-LLM validation) even if they evaluate to 0
-        if 'top_k' in config and config['top_k'] is None:
-             config['top_k'] = 0
-             changed = True
-             print("Fixed top_k=None to 0 to prevent validation error")
-        if 'num_experts' in config and config['num_experts'] is None:
+        # Ensure top_k and num_experts are strictly 0 to prevent mismatch in LLaMAConfig validation
+        # LLaMAConfig may have default None for one and 0 for other depending on version/defaults
+        if config.get('num_experts') != 0:
              config['num_experts'] = 0
              changed = True
-             print("Fixed num_experts=None to 0 to prevent validation error")
+             print("Forced num_experts=0")
+        if config.get('top_k') != 0:
+             config['top_k'] = 0
+             changed = True
+             print("Forced top_k=0")
     elif nk > 0 and tk > 0:
         # Valid MoE state, ensure standard keys exist for TRT-LLM
         if 'num_experts' not in config:
