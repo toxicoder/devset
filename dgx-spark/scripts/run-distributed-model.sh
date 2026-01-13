@@ -200,7 +200,7 @@ function _diagnose_and_fix_gpu() {
           if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n modprobe nvidia"; then
                echo "[FIX] Modules reloaded successfully"
           else
-               echo "[FAIL] Failed to reload modules"
+               echo "[FAIL] Failed to reload modules (sudo -n required)"
           fi
       fi
 
@@ -215,7 +215,7 @@ function _diagnose_and_fix_gpu() {
           if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n usermod -aG video $r_user"; then
               echo "[FIX] Added to video group (requires session restart)"
           else
-              echo "[FAIL] Failed to add to video group"
+              echo "[FAIL] Failed to add to video group (sudo -n required)"
           fi
       fi
 
@@ -468,12 +468,12 @@ function _get_node_vram() {
                 mem=\$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>&1); \
                 ret=\$?; \
                 if [[ \$ret -ne 0 || \"\$mem\" == *\"Not Supported\"* || -z \"\$mem\" ]]; then \
-                    free -m | grep Mem | awk '{print \$2}'; \
+                    free -m | grep -i Mem | awk '{print \$2}'; \
                 else \
                     echo \"\$mem\"; \
                 fi; \
              else \
-                echo '0'; \
+                free -m | grep -i Mem | awk '{print \$2}'; \
              fi"
 
   local out
@@ -611,7 +611,7 @@ function detect_high_speed_iface() {
   # OSPF Autodetection
   local ospf_neighbors
   if ospf_neighbors=$(ssh "${SSH_OPTS[@]}" "$ip" \
-    "sudo vtysh -c 'show ip ospf neighbor' 2>/dev/null"); then
+    "sudo -n vtysh -c 'show ip ospf neighbor' 2>/dev/null"); then
     local ifaces
     ifaces=$(printf "%s" "$ospf_neighbors" | grep "Full" | awk '{print $6}' | sort | uniq | tr '\n' ',' | sed 's/,$//' || true)
     if [[ -n "$ifaces" ]]; then
@@ -858,7 +858,7 @@ function _remote_mkdir() {
      # Try sudo non-interactive
      if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true" 2>/dev/null; then
          log_info "Sudo access confirmed. Fixing permissions..."
-         ssh "${SSH_OPTS[@]}" "$ip" "sudo mkdir -p $dirs && sudo chown -R \$(id -u):\$(id -g) $dirs"
+         ssh "${SSH_OPTS[@]}" "$ip" "sudo -n mkdir -p $dirs && sudo -n chown -R \$(id -u):\$(id -g) $dirs"
      else
          log_info "Sudo failed. Attempting Docker-based permission fix..."
          local fix_image="${IMAGE:-alpine}"
@@ -983,50 +983,60 @@ try:
 
     # Sanitize MoE config to prevent ValueError in LLaMAConfig
     # Support aliases (e.g. DeepSeek uses n_routed_experts)
-    try:
-        moe_num_experts = config.get('num_experts', 0) or config.get('moe_num_experts', 0) or config.get('n_routed_experts', 0)
-        moe_top_k = config.get('top_k', 0) or config.get('num_experts_per_tok', 0) or config.get('moe_top_k', 0)
+    moe_keys = {
+        'num_experts': ['num_experts', 'moe_num_experts', 'n_routed_experts'],
+        'top_k': ['top_k', 'moe_top_k', 'num_experts_per_tok']
+    }
 
-        nk = int(moe_num_experts or 0)
-        tk = int(moe_top_k or 0)
-    except:
-        nk, tk = 0, 0
+    detected_experts = 0
+    detected_top_k = 0
 
-    if nk > 0 and tk > 0:
-        # Valid MoE state, ensure standard keys exist and MATCH for TRT-LLM
-        if config.get('num_experts') != nk:
-             config['num_experts'] = nk
-             changed = True
-             print(f"Explicitly set num_experts to {nk}")
-        if config.get('top_k') != tk:
-             config['top_k'] = tk
-             changed = True
-             print(f"Explicitly set top_k to {tk}")
+    # Detect maximum value to find the true config
+    for key in moe_keys['num_experts']:
+        val = config.get(key)
+        if val is not None and isinstance(val, int) and val > 0:
+            detected_experts = val
+            break
 
-        # FIX: Ensure TRT-LLM specific keys are set to avoid LLaMAConfig validation errors
-        # LLaMAConfig often looks for moe_num_experts/moe_top_k in kwargs if 'moe' dict is missing
-        if config.get('moe_num_experts') != nk:
-             config['moe_num_experts'] = nk
-             changed = True
-             print(f"Explicitly set moe_num_experts to {nk}")
-        if config.get('moe_top_k') != tk:
-             config['moe_top_k'] = tk
-             changed = True
-             print(f"Explicitly set moe_top_k to {tk}")
+    for key in moe_keys['top_k']:
+        val = config.get(key)
+        if val is not None and isinstance(val, int) and val > 0:
+            detected_top_k = val
+            break
+
+    if detected_experts > 0:
+        # It is an MoE model
+        print(f"Detected MoE Model: experts={detected_experts}, top_k={detected_top_k}")
+
+        # Enforce consistency
+        for key in moe_keys['num_experts']:
+            if config.get(key) != detected_experts:
+                config[key] = detected_experts
+                changed = True
+                print(f"Set {key} to {detected_experts}")
+
+        for key in moe_keys['top_k']:
+            if config.get(key) != detected_top_k:
+                config[key] = detected_top_k
+                changed = True
+                print(f"Set {key} to {detected_top_k}")
     else:
-        # Dense (nk=0) OR Invalid State (e.g. nk>0 but tk=0) -> Force Dense configuration
-        # Strict validation in TRT-LLM requires both num_experts and top_k to be 0 for dense models.
-        # We must ensure ALL MoE-related keys are explicitly 0 to prevent defaults (like None or 1) triggering errors.
-
-        keys_to_zero = ['num_experts', 'moe_num_experts', 'n_routed_experts',
-                        'top_k', 'moe_top_k', 'num_experts_per_tok']
-
-        for key in keys_to_zero:
-            # Set to 0 if it's missing (None) or if it's present but not 0
-            if config.get(key) != 0:
+        # Dense model (or explicitly 0)
+        # Force all to 0 to pass strict validation
+        all_keys = moe_keys['num_experts'] + moe_keys['top_k']
+        for key in all_keys:
+            if config.get(key) is not None and config.get(key) != 0:
                 config[key] = 0
                 changed = True
-                print(f"Forced {key}=0")
+                print(f"Forced {key} to 0 (Dense Model)")
+
+        # Ensure canonical keys are set to 0 if not present, to be safe against defaults
+        if config.get('num_experts') != 0:
+            config['num_experts'] = 0
+            changed = True
+        if config.get('top_k') != 0:
+            config['top_k'] = 0
+            changed = True
 
     mt = config.get('model_type', '').lower()
     if 'nemotron' in mt and mt != 'llama':
