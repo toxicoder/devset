@@ -304,8 +304,8 @@ function get_model_registry_data() {
   if [[ -f "$SCRIPT_DIR/models.db" ]]; then
     cat "$SCRIPT_DIR/models.db"
   else
-    log_error "Model registry not found at $SCRIPT_DIR/models.db"
-    exit 1
+    # FIX: Changed to return 1 silently so the caller handles the fallback without a scary ERROR log
+    return 1
   fi
 }
 
@@ -336,8 +336,11 @@ function parse_model_config() {
   fi
 
   # Look up model
-  local model_data
-  model_data=$(get_model_registry_data | grep -F -i "$MODEL_ARG" | head -n 1 || true)
+  local model_data=""
+  # FIX: Check if file exists before grepping to avoid error if running standalone
+  if [[ -f "$SCRIPT_DIR/models.db" ]]; then
+      model_data=$(grep -F -i "$MODEL_ARG" "$SCRIPT_DIR/models.db" | head -n 1 || true)
+  fi
 
   if [[ -n "$model_data" ]]; then
     # Parse data
@@ -474,7 +477,8 @@ function _get_node_vram() {
   # FIXED: Capture only stdout to avoid parsing SSH error messages as VRAM
   if ! out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd"); then
       log_warn "Initial VRAM check failed on $ip. Running diagnostics..."
-      _diagnose_and_fix_gpu "$ip"
+      # FIX: Redirect diagnostics to stderr so they aren't captured in 'out'
+      _diagnose_and_fix_gpu "$ip" >&2
       # Retry once
       out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" || echo "0")
   fi
@@ -486,7 +490,8 @@ function _get_node_vram() {
 
   if [[ -z "$total_mem" || "$total_mem" -eq 0 ]]; then
       log_warn "VRAM 0 detected on $ip. Diagnostics:"
-      _diagnose_and_fix_gpu "$ip"
+      # FIX: Redirect diagnostics to stderr so they aren't captured by the caller (get_total_cluster_vram)
+      _diagnose_and_fix_gpu "$ip" >&2
 
       # Fallback to hardcoded if environment variable set
       if [[ -n "${FALLBACK_GPU_MEM_MB:-}" ]]; then
