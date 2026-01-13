@@ -994,14 +994,11 @@ try:
 
     if nk > 0 and tk > 0:
         # Valid MoE state, ensure standard keys exist for TRT-LLM
-        if 'num_experts' not in config:
-             config['num_experts'] = nk
-             changed = True
-             print("Explicitly set num_experts from alias")
-        if 'top_k' not in config:
-             config['top_k'] = tk
-             changed = True
-             print("Explicitly set top_k from alias")
+        # Enforce consistency by overwriting potentially invalid/None values
+        config['num_experts'] = nk
+        config['top_k'] = tk
+        changed = True
+        print(f"Enforced MoE: num_experts={nk}, top_k={tk}")
     else:
         # Dense (nk=0) OR Invalid State (e.g. nk>0 but tk=0) -> Force Dense configuration
         # Strict validation in TRT-LLM requires both num_experts and top_k to be 0 for dense models.
