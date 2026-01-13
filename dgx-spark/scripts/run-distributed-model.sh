@@ -879,6 +879,10 @@ try:
     mt = config.get('model_type', '').lower()
     if 'nemotron' in mt and mt != 'llama':
         config['model_type'] = 'llama'
+        # Remove auto_map to force using standard LlamaConfig
+        if 'auto_map' in config:
+            del config['auto_map']
+            print("Removed auto_map to force LlamaConfig")
         changed = True
         print(f"Changed model_type from {mt} to llama")
 
