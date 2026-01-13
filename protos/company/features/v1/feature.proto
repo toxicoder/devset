@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/toxicoder/devset/protos/company/features/v1;featuresv1";
+option java_multiple_files = true;
+option java_package = "com.toxicoder.devset.company.features.v1";
+
+// FeatureType defines the data type of the feature.
+enum FeatureType {
+  FEATURE_TYPE_UNSPECIFIED = 0;
+  FEATURE_TYPE_INT64 = 1;
+  FEATURE_TYPE_DOUBLE = 2;
+  FEATURE_TYPE_STRING = 3;
+  FEATURE_TYPE_BOOL = 4;
+  FEATURE_TYPE_BYTES = 5;
+  // Vector type for embeddings, typically an array of floats.
+  FEATURE_TYPE_VECTOR = 6;
+}
+
+// FeatureStatus represents the lifecycle state of a feature.
+enum FeatureStatus {
+  FEATURE_STATUS_UNSPECIFIED = 0;
+  FEATURE_STATUS_DRAFT = 1;
+  FEATURE_STATUS_ACTIVE = 2;
+  FEATURE_STATUS_DEPRECATED = 3;
+  FEATURE_STATUS_ARCHIVED = 4;
+}
+
+// Feature represents a single machine learning feature definition.
+message Feature {
+  // Unique identifier for the feature.
+  string id = 1;
+
+  // Human-readable name of the feature (e.g., "user_age_days").
+  string name = 2;
+
+  // Detailed description of what the feature represents and how it is calculated.
+  string description = 3;
+
+  // The owner of the feature, typically a team or individual.
+  // We could use company.common.v1.PersonName here, but often owner is a team email or string identifier.
+  // Using string for flexibility as per common practice in feature stores.
+  string owner = 4;
+
+  // The data type of the feature.
+  FeatureType type = 5;
+
+  // The entity this feature is associated with (e.g., "user", "product", "transaction").
+  string entity_type = 6;
+
+  // Version of the feature definition.
+  string version = 7;
+
+  // Tags for categorization and search.
+  repeated string tags = 8;
+
+  // Additional metadata as key-value pairs.
+  map<string, string> metadata = 9;
+
+  // Lifecycle status of the feature.
+  FeatureStatus status = 10;
+
+  // Timestamp when the feature was created.
+  google.protobuf.Timestamp created_at = 11;
+
+  // Timestamp when the feature was last updated.
+  google.protobuf.Timestamp updated_at = 12;
+
+  // For vector features, the dimension of the embedding.
+  int32 vector_dimension = 13;
+}
+
+// FeatureSet represents a logical grouping of features, often used for model training or inference.
+message FeatureSet {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated string feature_ids = 4;
+  repeated string tags = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+// FeatureValue represents a concrete value for a feature for a specific entity at a point in time.
+message FeatureValue {
+  string feature_id = 1;
+  string entity_id = 2;
+
+  oneof value {
+    int64 int64_value = 3;
+    double double_value = 4;
+    string string_value = 5;
+    bool bool_value = 6;
+    bytes bytes_value = 7;
+    VectorValue vector_value = 8;
+  }
+
+  google.protobuf.Timestamp timestamp = 9;
+}
+
+// VectorValue represents a list of floats for embeddings.
+message VectorValue {
+  repeated float values = 1;
+}
