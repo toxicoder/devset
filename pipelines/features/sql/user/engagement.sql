@@ -1,3 +1,12 @@
+CREATE TEMP FUNCTION calculate_frequency_segment(sessions_last_7d INT64)
+RETURNS STRING AS (
+    CASE
+        WHEN sessions_last_7d >= 5 THEN 'Daily'
+        WHEN sessions_last_7d >= 1 THEN 'Weekly'
+        ELSE 'Sporadic'
+    END
+);
+
 -- User Engagement Feature Pipeline
 -- Target: company.features.v1.UserEngagement
 -- Granularity: One row per user_id
@@ -44,31 +53,16 @@ SELECT
     DATE_DIFF(CURRENT_DATE(), DATE(l.last_login_ts), DAY)
         AS days_since_last_login,
     -- Frequency Segment
-    CASE
-        WHEN
-            COUNT(
-                CASE
-                    WHEN
-                        s.session_start_ts
-                        >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-                        THEN 1
-                END
-            )
-            >= 5
-            THEN 'Daily'
-        WHEN
-            COUNT(
-                CASE
-                    WHEN
-                        s.session_start_ts
-                        >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-                        THEN 1
-                END
-            )
-            >= 1
-            THEN 'Weekly'
-        ELSE 'Sporadic'
-    END AS frequency_segment,
+    calculate_frequency_segment(
+        COUNT(
+            CASE
+                WHEN
+                    s.session_start_ts
+                    >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+                    THEN 1
+            END
+        )
+    ) AS frequency_segment,
     CURRENT_TIMESTAMP() AS feature_timestamp
 FROM
     (SELECT DISTINCT user_id FROM raw.users) AS u
