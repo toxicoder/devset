@@ -99,6 +99,7 @@ metrics and weights vary by role but are standardized within each Job Role Code
 
 ## 8. Revision History
 
+* **Version 1.2**: Added the Impact Cascade Model (ICM) for attribution.
 * **Version 1.1**: Updated to emphasize automation and technical metric definitions.
 * **Version 1.0**: Initial release.
 
@@ -162,3 +163,71 @@ all raw values are normalized before weighting.
 * **MinThreshold**: Defined per role in `docs/job_roles/` (e.g., Minimum
   expected commits).
 * **MaxTarget**: Stretch goal defined in the Baseline Ledger.
+
+## 10. Attribution Strategy: The Impact Cascade Model (ICM)
+
+The Impact Cascade Model (ICM) is a graph-based extension of NEF designed to
+quantitatively value "invisible" or indirect work (e.g., tech debt, frameworks)
+by tracing contributions to downstream organizational outcomes.
+
+### 10.1 Technical Architecture
+
+ICM extends the `company.features.v1` schema with graph structures in BigQuery.
+
+* **Graph Tables**:
+  * `impact_graph`: Nodes (Tasks, Features, Outcomes).
+  * `edges`: Relationships (e.g., `depends_on`, `enables`) inferred from Git
+    and Jira.
+  * `contributions`: Log of individual inputs (Employee ID, Node ID, Effort).
+* **Compute**: BigQuery ML performs graph traversals and predictive modeling.
+
+### 10.2 Attribution Mechanisms
+
+ICM employs a hybrid scoring model: `TotalScore = Direct + Sum(Propagated)`.
+
+#### 1. Direct Attribution
+
+Measures immediate, verifiable contributions.
+
+* **Formula**: `DirectScore = Effort * Quality * Relevance`
+* **SQL Example**:
+
+  ```sql
+  SELECT
+    employee_id,
+    SUM(commit_lines * (1 - bug_rate)) AS DirectScore
+  FROM
+    `company.features.v1.git_commits`
+  WHERE
+    timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+  GROUP BY employee_id;
+  ```
+
+#### 2. Propagated Attribution
+
+Cascades credit along dependency paths using a **Decayed DFS Algorithm**.
+
+* **Logic**: Value propagates from the source node to downstream outcomes.
+* **Formula**: `PropagatedValue = EdgeWeight * DecayFactor^HopCount`
+  * **EdgeWeight**: Probabilistic impact (e.g., 0.5 for shared contribution).
+  * **DecayFactor**: 0.8 per hop (prioritizes near-term impact).
+
+### 10.3 Incentivization Examples
+
+* **Tech Debt Cleanup**:
+  * **Metric**: Pre/Post system health delta (e.g., Error Rate).
+  * **Propagation**: If cleanup improves stability for dependent features,
+    credit flows back to the refactorer.
+* **Framework Building**:
+  * **Metric**: Adoption Rate (# of imports) and ROI (Time Savings).
+  * **Propagation**: A fraction of the velocity score from every team using the
+    framework is attributed to the builder.
+
+### 10.4 Time-Decayed Valuation
+
+Long-term impacts are valued using an exponential decay model to balance
+historical contribution with current relevance.
+
+* **Formula**: `TimeAdjustedValue = InitialValue * e^(-λ * t)`
+  * **λ (Lambda)**: 0.05 (Monthly decay rate).
+  * **t**: Months since contribution.
