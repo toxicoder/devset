@@ -894,20 +894,9 @@ EOF
       :
   fi
 
+  # Removed NVFP4 shortcut to ensure consistent conversion path with correct arguments and pynvml fixes.
   if [[ "$quant_status" == *"DETECTED_NVFP4"* ]]; then
-       log_info "Detected pre-quantized NVFP4 model. Skipping conversion step."
-
-       # FIXED: Use trtllm-build directly for pre-quantized models
-       # Using --checkpoint_dir as model path since it is pre-packed
-       # Added --tp and --pp flags for distributed support
-       local build_cmd="trtllm-build --checkpoint_dir $ctr_model_path --output_dir $ctr_engine_path --tp_size $TP_SIZE --pp_size $PP_SIZE --workers $TP_SIZE --max_batch_size $BATCH_SIZE --max_input_len $MAX_SEQ_LEN --max_output_len 1024 --use_weight_only --weight_only_precision nvfp4"
-
-       if ! ssh "${SSH_OPTS[@]}" "$ip" \
-         "docker run --rm --gpus all -v $host_model_base:$ctr_model_base -v $host_engine_base:$ctr_engine_base $IMAGE bash -c '$build_cmd'"; then
-          log_error "Engine build failed (NVFP4 direct mode) on $ip."
-          exit 1
-       fi
-       return
+       log_info "Detected pre-quantized NVFP4 model. Proceeding with standard conversion pipeline."
   fi
 
   # Standard flow for unquantized models
