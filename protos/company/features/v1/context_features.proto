@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "company/features/v1/feature_types.proto";
+
+// ContextFeatures aggregates environmental context for a prediction event.
+message ContextFeatures {
+  string event_id = 1;
+  DeviceContext device = 2;
+  GeoContext geo = 3;
+  TemporalContext temporal = 4;
+}
+
+// DeviceContext captures hardware and software environment.
+message DeviceContext {
+  FeatureMetadata metadata = 1;
+
+  // Operating System (e.g., "iOS", "Android", "Windows").
+  string os_family = 2;
+
+  // OS Version string.
+  string os_version = 3;
+
+  // Browser name (e.g., "Chrome", "Safari").
+  string browser_name = 4;
+
+  // Device model (e.g., "iPhone 13", "Pixel 6").
+  string device_model = 5;
+
+  // App version if applicable.
+  string app_version = 6;
+
+  // Connection type (e.g., "WiFi", "4G", "5G").
+  string connection_type = 7;
+
+  // Battery level (0 to 100).
+  int32 battery_level = 8;
+}
+
+// GeoContext captures location-based features.
+message GeoContext {
+  FeatureMetadata metadata = 1;
+
+  // Derived country from IP.
+  string ip_country = 2;
+
+  // Derived city from IP.
+  string ip_city = 3;
+
+  // Latitude (coarse).
+  double latitude = 4;
+
+  // Longitude (coarse).
+  double longitude = 5;
+
+  // Timezone string (e.g., "America/New_York").
+  string timezone = 6;
+
+  // Location accuracy radius in meters.
+  double accuracy_meters = 7;
+}
+
+// TemporalContext captures time-based features.
+message TemporalContext {
+  FeatureMetadata metadata = 1;
+
+  // Hour of the day (0-23).
+  int32 hour_of_day = 2;
+
+  // Day of the week (1=Monday, 7=Sunday).
+  int32 day_of_week = 3;
+
+  // Month of the year (1-12).
+  int32 month_of_year = 4;
+
+  // Is this a public holiday in the user's region?
+  bool is_holiday = 5;
+
+  // Is this a weekend?
+  bool is_weekend = 6;
+
+  // Time since the start of the epoch in seconds.
+  int64 epoch_seconds = 7;
+}

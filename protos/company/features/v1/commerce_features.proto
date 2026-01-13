@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "company/features/v1/feature_types.proto";
+import "company/common/v1/money.proto";
+
+// CommerceFeatures aggregates transactional features for an entity (user or merchant).
+message CommerceFeatures {
+  string entity_id = 1;
+  PurchaseStats purchase_stats = 2;
+  PaymentBehavior payment_behavior = 3;
+  CartMetrics cart_metrics = 4;
+}
+
+// PurchaseStats aggregates spending history.
+message PurchaseStats {
+  FeatureMetadata metadata = 1;
+
+  // Total amount spent over the lifetime.
+  company.common.v1.Money total_lifetime_spend = 2;
+
+  // Total number of completed orders.
+  int32 total_order_count = 3;
+
+  // Average Order Value (AOV).
+  company.common.v1.Money average_order_value = 4;
+
+  // Days since the last purchase.
+  int32 days_since_last_purchase = 5;
+
+  // Maximum amount spent in a single transaction.
+  company.common.v1.Money max_single_purchase = 6;
+}
+
+// PaymentBehavior captures preferences and risks.
+message PaymentBehavior {
+  FeatureMetadata metadata = 1;
+
+  // Most frequently used payment method (e.g., "CreditCard", "PayPal").
+  string preferred_payment_method = 2;
+
+  // Number of distinct payment cards used.
+  int32 unique_cards_used_count = 3;
+
+  // Number of refund requests in the last 90 days.
+  int32 refund_count_last_90d = 4;
+
+  // Ratio of refunded amount to total spend (0.0 to 1.0).
+  double refund_ratio = 5;
+
+  // Any history of chargebacks.
+  bool has_chargeback_history = 6;
+}
+
+// CartMetrics focuses on pre-purchase behavior.
+message CartMetrics {
+  FeatureMetadata metadata = 1;
+
+  // Rate of cart abandonment (carts created / orders completed).
+  double cart_abandonment_rate = 2;
+
+  // Average number of items added to cart per session.
+  double avg_items_per_cart = 3;
+
+  // Average time from first add-to-cart to checkout completion (seconds).
+  double avg_time_to_checkout_seconds = 4;
+
+  // Most common category added to cart but not purchased.
+  string frequent_abandoned_category = 5;
+}

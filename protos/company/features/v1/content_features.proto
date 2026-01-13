@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "company/features/v1/feature_types.proto";
+
+// ContentFeatures aggregates features derived from text, images, or video.
+message ContentFeatures {
+  string content_id = 1;
+  TextAnalysis text_analysis = 2;
+  MediaMetadata media_metadata = 3;
+}
+
+// TextAnalysis contains NLP-derived features.
+message TextAnalysis {
+  FeatureMetadata metadata = 1;
+
+  // Semantic embedding of the text.
+  Vector embedding = 2;
+
+  // Sentiment score (-1.0 negative to +1.0 positive).
+  double sentiment_score = 3;
+
+  // Probability that the content is toxic or harmful (0.0 to 1.0).
+  double toxicity_score = 4;
+
+  // Detected language code (ISO 639-1).
+  string language = 5;
+
+  // Confidence score of the language detection.
+  double language_confidence = 6;
+
+  // Top extracted topics or keywords.
+  repeated string topics = 7;
+
+  // Flesch-Kincaid readability score.
+  double readability_score = 8;
+}
+
+// MediaMetadata describes properties of non-text content.
+message MediaMetadata {
+  FeatureMetadata metadata = 1;
+
+  // Visual embedding (e.g., from a CNN or Vision Transformer).
+  Vector visual_embedding = 2;
+
+  // Width in pixels.
+  int32 width = 3;
+
+  // Height in pixels.
+  int32 height = 4;
+
+  // Duration in seconds (for video/audio).
+  double duration_seconds = 5;
+
+  // Format/MIME type (e.g., "image/jpeg", "video/mp4").
+  string mime_type = 6;
+
+  // Dominant color in hex (e.g., "#FF0000").
+  string dominant_color_hex = 7;
+
+  // Whether the media contains adult content.
+  bool is_nsfw = 8;
+}

@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "company/features/v1/feature_types.proto";
+
+// UserFeatures aggregates all feature sets related to a user.
+message UserFeatures {
+  string user_id = 1;
+  UserDemographics demographics = 2;
+  UserEngagement engagement = 3;
+  UserLifecycle lifecycle = 4;
+}
+
+// UserDemographics contains static or slowly changing attributes.
+message UserDemographics {
+  FeatureMetadata metadata = 1;
+
+  // Age bucket (e.g., "18-24", "25-34").
+  string age_bucket = 2;
+
+  // Gender identity if provided/inferred.
+  string gender = 3;
+
+  // Primary country code (ISO 3166-1 alpha-2).
+  string country_code = 4;
+
+  // Preferred language code (ISO 639-1).
+  string language_code = 5;
+
+  // City size classification (e.g., "Urban", "Rural").
+  string urbanization_level = 6;
+}
+
+// UserEngagement captures behavioral metrics.
+message UserEngagement {
+  FeatureMetadata metadata = 1;
+
+  // Number of sessions in the last 7 days.
+  int32 sessions_last_7d = 2;
+
+  // Number of sessions in the last 30 days.
+  int32 sessions_last_30d = 3;
+
+  // Average session length in seconds (last 30d).
+  double avg_session_length_seconds = 4;
+
+  // Days since the last active login.
+  int32 days_since_last_login = 5;
+
+  // Frequency classification (e.g., "Daily", "Weekly", "Sporadic").
+  string frequency_segment = 6;
+}
+
+// UserLifecycle contains prediction scores and account milestones.
+message UserLifecycle {
+  FeatureMetadata metadata = 1;
+
+  // Total age of the account in days.
+  int32 account_age_days = 2;
+
+  // Predicted probability of churn (0.0 to 1.0).
+  double churn_probability_score = 3;
+
+  // Predicted Lifetime Value.
+  double predicted_ltv = 4;
+
+  // Customer segment (e.g., "VIP", "New", "AtRisk").
+  string customer_segment = 5;
+
+  // Whether the user has previously churned and returned.
+  bool is_resurrected = 6;
+}
