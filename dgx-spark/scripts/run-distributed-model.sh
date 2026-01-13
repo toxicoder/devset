@@ -379,10 +379,17 @@ function parse_model_config() {
 # Globals: SSH_OPTS
 function _get_node_vram() {
   local ip="$1"
-  # FIXED: Improved VRAM detection command to be more robust against errors and formatting
+  # FIXED: Improved VRAM detection logic for DGX Spark (Unified Memory)
+  # DGX Spark/Grace-Hopper often reports "Not Supported" for memory queries via nvidia-smi
+  # Fallback to system memory (free -m) if nvidia-smi fails to report capacity.
   local cmd="export PATH=/usr/local/bin:/usr/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/sbin:/sbin:/bin:\$PATH; \
              if command -v nvidia-smi &>/dev/null; then \
-                nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits; \
+                mem=\$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits 2>&1); \
+                if [[ \"\$mem\" == *\"Not Supported\"* || -z \"\$mem\" ]]; then \
+                    free -m | grep Mem | awk '{print \$2}'; \
+                else \
+                    echo \"\$mem\"; \
+                fi; \
              else \
                 echo '0'; \
              fi"
