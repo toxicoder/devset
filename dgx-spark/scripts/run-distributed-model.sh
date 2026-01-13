@@ -842,6 +842,9 @@ if os.path.exists(path):
         if 'hidden_act' not in config: config['hidden_act'] = 'silu'; changed = True
         if 'rms_norm' not in config: config['rms_norm'] = True; changed = True
         if 'ssm_state_size' in config and 'state_size' not in config: config['state_size'] = config['ssm_state_size']; changed = True
+        if 'norm_epsilon' in config and 'rms_norm_eps' not in config: config['rms_norm_eps'] = config['norm_epsilon']; changed = True; print('Mapped norm_epsilon')
+        mt = config.get('model_type', '').lower()
+        if 'nemotron' in mt and mt != 'llama': config['model_type'] = 'llama'; changed = True; print('Changed model_type to llama')
         if changed:
              with open(path, 'w') as f: json.dump(config, f, indent=2)
              print('Patched config.json')
