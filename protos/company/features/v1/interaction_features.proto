@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "company/features/v1/feature_types.proto";
+
+// InteractionFeatures aggregates features from user-item interactions.
+message InteractionFeatures {
+  string interaction_id = 1;
+  ClickstreamStats clickstream = 2;
+  SocialGraph social = 3;
+}
+
+// ClickstreamStats captures navigation and engagement behavior.
+message ClickstreamStats {
+  FeatureMetadata metadata = 1;
+
+  // Click-Through Rate (CTR) for the specific item context.
+  double ctr = 2;
+
+  // Total number of views/impressions.
+  int64 view_count = 3;
+
+  // Total number of clicks.
+  int64 click_count = 4;
+
+  // Average dwell time on the item/page in seconds.
+  double avg_dwell_time_seconds = 5;
+
+  // Bounce rate (sessions with only this view).
+  double bounce_rate = 6;
+
+  // Source/Referrer classification (e.g., "Search", "Direct", "Social").
+  string referrer_source = 7;
+}
+
+// SocialGraph captures connectivity and network effects.
+message SocialGraph {
+  FeatureMetadata metadata = 1;
+
+  // Number of direct connections/friends.
+  int32 friend_count = 2;
+
+  // Number of followers.
+  int32 follower_count = 3;
+
+  // Number of accounts followed.
+  int32 following_count = 4;
+
+  // Graph embedding vector (e.g., from Node2Vec).
+  Vector graph_embedding = 5;
+
+  // Clustering coefficient (0.0 to 1.0).
+  double clustering_coefficient = 6;
+
+  // PageRank or centrality score.
+  double centrality_score = 7;
+}

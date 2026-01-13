@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package company.features.v1;
+
+option go_package = "github.com/toxicoder/devset/gen/go/company/features/v1;featuresv1";
+
+import "google/protobuf/timestamp.proto";
+
+// FeatureMetadata contains metadata about a specific feature definition.
+message FeatureMetadata {
+  // Unique name of the feature (e.g., "user_click_rate_7d").
+  string name = 1;
+
+  // Human-readable description of what the feature represents.
+  string description = 2;
+
+  // The team or individual responsible for this feature.
+  string owner = 3;
+
+  // Version of the feature logic/definition.
+  string version = 4;
+
+  // Timestamp when this feature was last updated/computed.
+  google.protobuf.Timestamp last_updated = 5;
+
+  // Tags for categorization (e.g., "pii", "behavioral").
+  repeated string tags = 6;
+}
+
+// FeatureValue represents the polymorphic value of a feature.
+message FeatureValue {
+  oneof kind {
+    string string_value = 1;
+    int64 int_value = 2;
+    double float_value = 3;
+    bool bool_value = 4;
+    bytes bytes_value = 5;
+
+    // List variants for multi-valued features.
+    StringList string_list = 6;
+    IntList int_list = 7;
+    FloatList float_list = 8;
+  }
+}
+
+message StringList {
+  repeated string values = 1;
+}
+
+message IntList {
+  repeated int64 values = 1;
+}
+
+message FloatList {
+  repeated double values = 1;
+}
+
+// Vector represents a mathematical vector, common in ML embeddings.
+message Vector {
+  oneof type {
+    DenseVector dense = 1;
+    SparseVector sparse = 2;
+  }
+}
+
+// DenseVector is a standard array of floats.
+message DenseVector {
+  repeated float values = 1;
+}
+
+// SparseVector represents a vector where most values are zero.
+message SparseVector {
+  // Indices of non-zero elements.
+  repeated int32 indices = 1;
+  // Values at the corresponding indices.
+  repeated float values = 2;
+  // Total dimension of the vector space.
+  int32 dimension = 3;
+}
