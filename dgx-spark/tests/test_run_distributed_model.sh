@@ -266,7 +266,7 @@ echo "Running test: Custom HF Model Default to TRT-LLM"
 
     if echo "$OUTPUT" | grep -q "Defaulting to TensorRT-LLM Engine Build"; then
         # Check for correct image tag in output logs (parse_model_config logs it)
-        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:1.2.0rc6"; then
+        if echo "$OUTPUT" | grep -q "Container: nvcr.io/nvidia/tensorrt-llm/release:v0.11.0"; then
              # Verify Runtime Launch (via docker_run.log)
              LOG_CONTENT=$(cat "$TEST_DIR/docker_run.log")
              if echo "$LOG_CONTENT" | grep -q "HF_TOKEN=test-token"; then
@@ -284,7 +284,7 @@ echo "Running test: Custom HF Model Default to TRT-LLM"
                  exit 1
              fi
         else
-             echo "FAIL: Expected TRT-LLM release image (1.2.0rc6). Output:"
+             echo "FAIL: Expected TRT-LLM release image (v0.11.0). Output:"
              echo "$OUTPUT"
              exit 1
         fi

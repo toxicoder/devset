@@ -61,6 +61,7 @@ WANDB_KEY=""
 SPECULATIVE_MODE=0
 DRY_RUN=0
 FORCE=0
+SUDO_AVAILABLE=0
 HF_TOKEN="${HF_TOKEN:-}"
 
 # Overrides
@@ -153,14 +154,16 @@ function _check_hf_token() {
 
 # Internal: Check passwordless sudo on remote nodes
 # Arguments: None
-# Globals: IP1, IP2, SSH_OPTS
+# Globals: IP1, IP2, SSH_OPTS, SUDO_AVAILABLE
 function _check_remote_sudo() {
   local ip
   log_info "Verifying passwordless sudo access..."
+  SUDO_AVAILABLE=1
   for ip in "$IP1" "$IP2"; do
     if ! ssh "${SSH_OPTS[@]}" "$ip" "sudo -n true 2>/dev/null"; then
       log_error "Passwordless sudo check failed for $ip."
       log_error "Please ensure the user has sudo privileges without password (NOPASSWD in sudoers)."
+      SUDO_AVAILABLE=0
       if [[ "$FORCE" -eq 1 ]]; then
           log_warn "Force enabled. Proceeding despite sudo check failure..."
       else
@@ -197,10 +200,14 @@ function _diagnose_and_fix_gpu() {
       else
           echo "[FAIL] NVIDIA Modules NOT loaded"
           echo "Attempting to reload modules..."
-          if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n modprobe nvidia"; then
-               echo "[FIX] Modules reloaded successfully"
+          if [[ "$SUDO_AVAILABLE" -eq 1 ]]; then
+              if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n modprobe nvidia"; then
+                   echo "[FIX] Modules reloaded successfully"
+              else
+                   echo "[FAIL] Failed to reload modules (sudo -n required)"
+              fi
           else
-               echo "[FAIL] Failed to reload modules (sudo -n required)"
+              echo "[SKIPPED] Cannot reload modules (no sudo access)"
           fi
       fi
 
@@ -212,10 +219,14 @@ function _diagnose_and_fix_gpu() {
       else
           echo "[WARN] User '$r_user' is NOT in 'video' group"
           echo "Attempting to add user to video group..."
-          if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n usermod -aG video $r_user"; then
-              echo "[FIX] Added to video group (requires session restart)"
+          if [[ "$SUDO_AVAILABLE" -eq 1 ]]; then
+              if ssh "${SSH_OPTS[@]}" "$ip" "sudo -n usermod -aG video $r_user"; then
+                  echo "[FIX] Added to video group (requires session restart)"
+              else
+                  echo "[FAIL] Failed to add to video group (sudo -n required)"
+              fi
           else
-              echo "[FAIL] Failed to add to video group (sudo -n required)"
+              echo "[SKIPPED] Cannot add user to video group (no sudo access)"
           fi
       fi
 
@@ -371,7 +382,7 @@ function parse_model_config() {
       log_info "Defaulting to TensorRT-LLM Engine Build (Native)."
       USE_TRT_LLM=1
       # FIXED: Updated default TRT-LLM image to newer version for Nemotron support
-      IMAGE="nvcr.io/nvidia/tensorrt-llm:1.3.0"
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:v0.11.0"
     elif [[ "$FORCE" -eq 1 ]]; then
       log_warn "Model '$MODEL_ARG' not found in registry. Using as custom image."
       IMAGE="nvcr.io/nim/$MODEL_ARG:latest"
@@ -397,7 +408,7 @@ function parse_model_config() {
     USE_TRT_LLM=1
     if [[ -z "$IMAGE_OVERRIDE" ]]; then
       # FIXED: Ensure override also defaults to newer image
-      IMAGE="nvcr.io/nvidia/tensorrt-llm:1.3.0"
+      IMAGE="nvcr.io/nvidia/tensorrt-llm/release:v0.11.0"
     fi
     log_info "Engine Mode: TensorRT-LLM (Container: $IMAGE)"
     if [[ -z "$HF_MODEL_ID" ]]; then
@@ -474,8 +485,8 @@ function _get_node_vram() {
       out=$(ssh "${SSH_OPTS[@]}" "$ip" "$cmd" || echo "0")
   fi
 
-  # Check for "Not Supported"
-  if [[ "$out" == *"Not Supported"* || "$out" == "Not" ]]; then
+  # Check for "Not Supported" (Case Insensitive)
+  if echo "$out" | grep -iq "not supported" || [[ "$out" == "Not" ]]; then
       log_warn "VRAM reported as 'Not Supported' on $ip. Assuming 16384MiB."
       echo "16384"
       return
@@ -484,7 +495,7 @@ function _get_node_vram() {
   # FIXED: Parse output to extract only numbers, handling multi-GPU output by summing
   # Refactored to use tr instead of sed to strictly match memory instructions and robustness
   local total_mem
-  total_mem=$(printf "%s" "$out" | tr -d '\r' | grep -E '^[0-9]+$' | awk '{s+=$1} END {print s+0}')
+  total_mem=$(printf "%s" "$out" | tr -d '\r' | grep -oE '[0-9]+' | awk '{s+=$1} END {print s+0}')
 
   if [[ -z "$total_mem" || "$total_mem" -eq 0 ]]; then
       log_warn "VRAM 0 detected on $ip. Diagnostics:"
