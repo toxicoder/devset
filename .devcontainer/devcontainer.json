@@ -1,33 +1,35 @@
 {
-    "name": "Generalized Developer Container",
-    "image": "mcr.microsoft.com/devcontainers/universal:linux",
-    "features": {
-        "ghcr.io/devcontainers/features/ansible:1": {
-            "version": "latest"
-        },
-        "ghcr.io/devcontainers/features/terraform:1": {
-            "version": "latest",
-            "tflint": "latest",
-            "terragrunt": "latest"
-        },
-        "ghcr.io/devcontainers/features/kubectl-helm-minikube:2": {
-            "kubectlVersion": "latest",
-            "helmVersion": "latest",
-            "minikube": "none"
-        }
+  "name": "Ultimate Dev Container (Ubuntu 24.04 Multi-Arch)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "saoudrizwan.claude-dev"
-            ]
-        }
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false,
+      "version": "latest"
     },
-    "postCreateCommand": [
-        "npm install -g cline",
-        "curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64",
-        "chmod +x /usr/local/bin/argocd"
-    ],
-    "mounts": [],
-    "remoteEnv": {}
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "bierner.markdown-mermaid"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "echo '✅ Ultimate dev environment ready! Run `node --version`, `python --version`, `docker --version` to verify.'",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "10gb",
+    "gpu": "optional" // Enables GPU passthrough automatically on NVIDIA hosts
+  }
 }
