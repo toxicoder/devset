@@ -1,31 +1,39 @@
-# Developer Container
+# Dev Container Configuration
 
-This directory contains the configuration for the generalized developer container that provides a consistent development environment for this project.
+This folder defines the **Ultimate Dev Container** for the repo — a reproducible, multi-architecture development environment that works identically on Windows amd64, macOS Apple Silicon, Linux arm64, and NVIDIA DGX Spark.
 
-## Features
+## Quick Start
 
-The dev container includes:
-- **Base Image**: Universal Linux container from Microsoft
-- **Development Tools**:
-  - Ansible
-  - Terraform with tflint and terragrunt
-  - Kubernetes, Helm, and Minikube tools
-- **IDE Extensions**:
-  - Claude Dev (Cline AI coding assistant)
-- **Post-creation Setup**:
-  - Installs Cline globally
-  - Installs Argo CD CLI
+1. Open the repo folder in VS Code
+2. When prompted, click **"Reopen in Container"**
+3. First build takes 30–90 seconds (everything is cached afterward)
 
-## Usage
+You now have:
 
-1. Open this project in VS Code with Dev Containers extension
-2. The container will automatically build and start
-3. All development tools are pre-installed and configured
-4. The Cline AI assistant is ready to help with coding tasks
+- Ubuntu 24.04
+- Node LTS + Python 3.12
+- Docker-in-Docker (official CE)
+- Zsh + Oh My Zsh
+- All recommended extensions + Kilo Code + Cline + MCP servers
 
-## Customization
+## When to Swap the Base Image (NVIDIA GPU / DGX Spark)
 
-To customize this container for your specific project needs:
-1. Modify `devcontainer.json` to add/remove features
-2. Update `postCreateCommand` to install additional tools
-3. Adjust VS Code extensions as needed
+**Keep the default image** (`mcr.microsoft.com/devcontainers/base:ubuntu-24.04`) for:
+
+- macOS Apple Silicon
+- Windows (no NVIDIA GPU)
+- Linux without heavy CUDA needs
+- General development (fastest build, smallest image)
+
+**Swap the base image** in `devcontainer.json` when you need **full CUDA development** on:
+
+- NVIDIA DGX Spark (arm64)
+- Any machine with an NVIDIA GPU where you compile CUDA kernels, run heavy ML training, or use CUDA 13.x tools
+
+### How to Swap (one-line change)
+
+Replace the `"image"` line with:
+
+```json
+"image": "nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04"
+```
