@@ -1,0 +1,96 @@
+[project]
+name = "gh-project-management-toolkit"
+version = "1.0.0"
+description = "GitHub project management toolkit for automating milestones, labels, and issues"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "toxicoder", email = "alx@overeazy.io" }
+]
+
+dependencies = [
+    "requests>=2.28.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "mypy>=1.0.0",
+    "black>=23.0.0",
+    "ruff>=0.0.0",
+]
+
+[project.scripts]
+gh-project-toolkit = "gh_project_toolkit.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --cov=src/gh_project_toolkit --cov-report=term-missing --cov-report=html --cov-report=xml"
+
+[tool.coverage.run]
+source = ["src/gh_project_toolkit"]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+    "raise AssertionError",
+]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = false
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = false
+follow_imports = "silent"
+ignore_missing_imports = true
+mypy_path = "src"
+plugins = ["pydantic.mypy"]
+exclude = ["site-packages", "conftest.py", "tests/conftest.py"]
+
+[[tool.mypy.overrides]]
+module = "requests"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "_pytest"
+ignore_missing_imports = true
+ignore_errors = true
+follow_imports = "skip"
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
