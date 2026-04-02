@@ -243,20 +243,20 @@ Command-line interface for the toolkit.
 
 **CLI Commands**:
 
-| Command | Description |
-| :------ | :---------- |
-| `setup` | Setup a new GitHub project with milestones and labels |
-| `issues` | Process issues from JSON file |
-| `cleanup` | Cleanup duplicate milestones/labels/issues |
+| Command   | Description                                           |
+| :-------- | :---------------------------------------------------- |
+| `setup`   | Setup a new GitHub project with milestones and labels |
+| `issues`  | Process issues from JSON file                         |
+| `cleanup` | Cleanup duplicate milestones/labels/issues            |
 
 **CLI Options**:
 
-| Option | Description |
-| :----- | :---------- |
-| `--version` | Show version and exit |
-| `-v, --verbose` | Enable verbose output |
-| `--dry-run` | Enable dry-run mode (no changes made) |
-| `-y, --yes` | Skip confirmation prompts |
+| Option          | Description                                           |
+| :-------------- | :---------------------------------------------------- |
+| `--version`     | Show version and exit                                 |
+| `-v, --verbose` | Enable verbose output                                 |
+| `--dry-run`     | Enable dry-run mode (no changes made)                 |
+| `-y, --yes`     | Skip confirmation prompts                             |
 | `-p, --project` | Specify project name (default: "Development Roadmap") |
 
 **Example**:
@@ -279,45 +279,45 @@ Pydantic models for data validation and serialization.
 
 **Issue Models**:
 
-| Model | Description |
-| :---- | :---------- |
-| `Issue` | Represents a GitHub issue with title, body, labels, milestone, assignees |
-| `IssueCreateRequest` | Request model for creating an issue |
-| `IssueModel` | Model for GitHub issue data from API responses |
+| Model                | Description                                                              |
+| :------------------- | :----------------------------------------------------------------------- |
+| `Issue`              | Represents a GitHub issue with title, body, labels, milestone, assignees |
+| `IssueCreateRequest` | Request model for creating an issue                                      |
+| `IssueModel`         | Model for GitHub issue data from API responses                           |
 
 **Milestone Models**:
 
-| Model | Description |
-| :---- | :---------- |
-| `Milestone` | Represents a GitHub milestone with title, description, due_on, state |
-| `MilestoneCreateRequest` | Request model for creating a milestone |
-| `MilestoneModel` | Model for GitHub milestone data from API responses |
+| Model                    | Description                                                          |
+| :----------------------- | :------------------------------------------------------------------- |
+| `Milestone`              | Represents a GitHub milestone with title, description, due_on, state |
+| `MilestoneCreateRequest` | Request model for creating a milestone                               |
+| `MilestoneModel`         | Model for GitHub milestone data from API responses                   |
 
 **Label Models**:
 
-| Model | Description |
-| :---- | :---------- |
-| `Label` | Represents a GitHub label with name, color, description |
-| `LabelCreateRequest` | Request model for creating a label |
-| `LabelModel` | Model for GitHub label data from API responses |
+| Model                | Description                                             |
+| :------------------- | :------------------------------------------------------ |
+| `Label`              | Represents a GitHub label with name, color, description |
+| `LabelCreateRequest` | Request model for creating a label                      |
+| `LabelModel`         | Model for GitHub label data from API responses          |
 
 **Project V2 Models**:
 
-| Model | Description |
-| :---- | :---------- |
-| `ProjectFieldOption` | Option for a Project V2 single-select field |
-| `ProjectField` | Project V2 field with options |
-| `ProjectV2` | GitHub Project V2 with id, title, number, state |
-| `ProjectItem` | Item in a Project V2 |
+| Model                | Description                                     |
+| :------------------- | :---------------------------------------------- |
+| `ProjectFieldOption` | Option for a Project V2 single-select field     |
+| `ProjectField`       | Project V2 field with options                   |
+| `ProjectV2`          | GitHub Project V2 with id, title, number, state |
+| `ProjectItem`        | Item in a Project V2                            |
 
 **Response Models**:
 
-| Model | Description |
-| :---- | :---------- |
-| `GitHubResponse` | Base model for GitHub API responses |
-| `CreateIssueResponse` | Response model for issue creation |
+| Model                     | Description                           |
+| :------------------------ | :------------------------------------ |
+| `GitHubResponse`          | Base model for GitHub API responses   |
+| `CreateIssueResponse`     | Response model for issue creation     |
 | `CreateMilestoneResponse` | Response model for milestone creation |
-| `CreateLabelResponse` | Response model for label creation |
+| `CreateLabelResponse`     | Response model for label creation     |
 
 **Example**:
 
@@ -359,43 +359,43 @@ Default configuration values for the toolkit.
 
 **Script Metadata**:
 
-| Constant | Type | Default | Description |
-| :------- | :--- | :------ | :---------- |
-| `SCRIPT_NAME` | `str` | `"setup-restoclaw.py"` | Script name for display |
-| `SCRIPT_VERSION` | `str` | `"1.0.0"` | Script version |
-| `SCRIPT_DESCRIPTION` | `str` | Creates GitHub milestones... | Script description |
+| Constant             | Type  | Default                      | Description             |
+| :------------------- | :---- | :--------------------------- | :---------------------- |
+| `SCRIPT_NAME`        | `str` | `"setup-restoclaw.py"`       | Script name for display |
+| `SCRIPT_VERSION`     | `str` | `"1.0.0"`                    | Script version          |
+| `SCRIPT_DESCRIPTION` | `str` | Creates GitHub milestones... | Script description      |
 
 **GitHub Repository Configuration**:
 
-| Constant | Type | Default | Description |
-| :------- | :--- | :------ | :---------- |
-| `DEFAULT_REPO` | `str` | `"toxicoder/RestoClaw"` | Default repository |
-| `DEFAULT_JSON_FILE` | `str` | `"issues.json"` | Default issues file |
+| Constant               | Type  | Default                           | Description          |
+| :--------------------- | :---- | :-------------------------------- | :------------------- |
+| `DEFAULT_REPO`         | `str` | `"toxicoder/RestoClaw"`           | Default repository   |
+| `DEFAULT_JSON_FILE`    | `str` | `"issues.json"`                   | Default issues file  |
 | `DEFAULT_PROJECT_NAME` | `str` | `"RestoClaw Development Roadmap"` | Default project name |
 
 **Paths and Files**:
 
-| Constant | Type | Default | Description |
-| :------- | :--- | :------ | :---------- |
+| Constant           | Type  | Default         | Description         |
+| :----------------- | :---- | :-------------- | :------------------ |
 | `ISSUES_JSON_PATH` | `str` | `"issues.json"` | Path to issues file |
-| `TMP_DIR` | `str` | `"/tmp"` | Temporary directory |
+| `TMP_DIR`          | `str` | `"/tmp"`        | Temporary directory |
 
 **GitHub API Configuration**:
 
-| Constant | Type | Default | Description |
-| :------- | :--- | :------ | :---------- |
+| Constant                  | Type  | Default                            | Description      |
+| :------------------------ | :---- | :--------------------------------- | :--------------- |
 | `GITHUB_GRAPHQL_ENDPOINT` | `str` | `"https://api.github.com/graphql"` | GraphQL endpoint |
-| `GITHUB_REST_API_BASE` | `str` | `"https://api.github.com"` | REST API base |
+| `GITHUB_REST_API_BASE`    | `str` | `"https://api.github.com"`         | REST API base    |
 
 **Exit Codes**:
 
-| Constant | Type | Value | Description |
-| :------- | :--- | :---- | :---------- |
-| `EXIT_SUCCESS` | `int` | `0` | Success exit code |
-| `EXIT_ERROR` | `int` | `1` | General error |
-| `EXIT_MISSING_CMD` | `int` | `2` | Missing command |
-| `EXIT_INVALID_CONFIG` | `int` | `3` | Invalid config |
-| `EXIT_API_ERROR` | `int` | `4` | API error |
+| Constant              | Type  | Value | Description       |
+| :-------------------- | :---- | :---- | :---------------- |
+| `EXIT_SUCCESS`        | `int` | `0`   | Success exit code |
+| `EXIT_ERROR`          | `int` | `1`   | General error     |
+| `EXIT_MISSING_CMD`    | `int` | `2`   | Missing command   |
+| `EXIT_INVALID_CONFIG` | `int` | `3`   | Invalid config    |
+| `EXIT_API_ERROR`      | `int` | `4`   | API error         |
 
 **Functions**:
 
@@ -425,41 +425,40 @@ Milestone definitions and label groupings.
 **Milestones** (`MILESTONES`):
 A dictionary mapping milestone titles to descriptions.
 
-| Milestone | Description |
-| :-------- | :---------- |
-| `"v0.0 Foundations"` | Repo, Docker, basic NemoClaw/OpenClaw install, logging, CI. |
-| `"v0.1 Email Digest MVP"` | 4x daily digests + cross-channel conversational follow-up. |
-| `"v0.2 Auto-Reply Drafting"` | One-click AI-draft replies with approval gate. |
+| Milestone                              | Description                                                          |
+| :------------------------------------- | :------------------------------------------------------------------- |
+| `"v0.0 Foundations"`                   | Repo, Docker, basic NemoClaw/OpenClaw install, logging, CI.          |
+| `"v0.1 Email Digest MVP"`              | 4x daily digests + cross-channel conversational follow-up.           |
+| `"v0.2 Auto-Reply Drafting"`           | One-click AI-draft replies with approval gate.                       |
 | `"v0.3 Inventory + Supplier Ordering"` | Daily stock-check, low-stock alerts, suggested POs, one-click order. |
-| `"v0.4 POS Sync & Daily Sales Brief"` | Pull sales from Toast/Square/Lightspeed, produce sales brief. |
-| `"v0.5 Review Monitoring"` | Scrape reviews, sentiment-flag negatives, draft response. |
-| `"v1.0 Full Restaurant OS"` | Staff scheduling, reservation management, marketing automation. |
+| `"v0.4 POS Sync & Daily Sales Brief"`  | Pull sales from Toast/Square/Lightspeed, produce sales brief.        |
+| `"v0.5 Review Monitoring"`             | Scrape reviews, sentiment-flag negatives, draft response.            |
+| `"v1.0 Full Restaurant OS"`            | Staff scheduling, reservation management, marketing automation.      |
 
 **Labels** (`ALL_LABELS`):
 
 List of 37 labels organized by category:
 
-- Phase labels (mvp, phase:*)
-- Integration labels (integration:*)
-- Skill labels (skill:*)
-- Priority labels (priority:*, good-first-issue)
+- Phase labels (mvp, phase:\*)
+- Integration labels (integration:\*)
+- Skill labels (skill:\*)
+- Priority labels (priority:\*, good-first-issue)
 - Category labels (documentation, testing, etc.)
-- Milestone labels (milestone:v*)
+- Milestone labels (milestone:v\*)
 
 **Functions**:
 
-
-| Function | Description |
-| :------- | :---------- |
-| `get_milestone_titles()` | Get all milestone titles as list |
-| `get_milestone_description(title)` | Get description by title |
-| `get_all_milestones()` | Get milestones as list of dicts |
-| `count_milestones()` | Count total milestones |
-| `get_milestones_json()` | Get milestones as JSON string |
-| `count_labels()` | Count total labels |
-| `get_label_color(label)` | Get color code for label |
-| `get_all_labels_by_category()` | Get labels organized by category |
-| `get_label_count(category)` | Get label count for category |
+| Function                           | Description                      |
+| :--------------------------------- | :------------------------------- |
+| `get_milestone_titles()`           | Get all milestone titles as list |
+| `get_milestone_description(title)` | Get description by title         |
+| `get_all_milestones()`             | Get milestones as list of dicts  |
+| `count_milestones()`               | Count total milestones           |
+| `get_milestones_json()`            | Get milestones as JSON string    |
+| `count_labels()`                   | Count total labels               |
+| `get_label_color(label)`           | Get color code for label         |
+| `get_all_labels_by_category()`     | Get labels organized by category |
+| `get_label_count(category)`        | Get label count for category     |
 
 **Label Colors** (`LABEL_COLORS`):
 
@@ -509,35 +508,35 @@ Logging and output utilities with colored output and dry-run support.
 
 **Configuration**:
 
-| Variable | Type | Default | Description |
-| :------- | :---- | :------ | :---------- |
-| `COLOR_INFO` | `str` | `"\033[1;34m"` | Blue color code |
-| `COLOR_ERROR` | `str` | `"\033[1;31m"` | Red color code |
-| `COLOR_SUCCESS` | `str` | `"\033[1;32m"` | Green color code |
-| `COLOR_WARN` | `str` | `"\033[1;33m"` | Yellow color code |
-| `COLOR_RESET` | `str` | `"\033[0m"` | Reset color |
-| `DRY_RUN` | `bool` | `False` | Dry-run mode flag |
-| `VERBOSE` | `bool` | `False` | Verbose mode flag |
+| Variable        | Type   | Default        | Description       |
+| :-------------- | :----- | :------------- | :---------------- |
+| `COLOR_INFO`    | `str`  | `"\033[1;34m"` | Blue color code   |
+| `COLOR_ERROR`   | `str`  | `"\033[1;31m"` | Red color code    |
+| `COLOR_SUCCESS` | `str`  | `"\033[1;32m"` | Green color code  |
+| `COLOR_WARN`    | `str`  | `"\033[1;33m"` | Yellow color code |
+| `COLOR_RESET`   | `str`  | `"\033[0m"`    | Reset color       |
+| `DRY_RUN`       | `bool` | `False`        | Dry-run mode flag |
+| `VERBOSE`       | `bool` | `False`        | Verbose mode flag |
 
 **Logging Functions**:
 
-| Function | Description | Example |
-| :------- | :---------- | :------ |
-| `log(message, *args, **kwargs)` | Log informational message | `log("Starting setup")` |
-| `log_success(message, *args, **kwargs)` | Log success message | `log_success("Setup complete")` |
-| `log_error(message, *args, **kwargs)` | Log error to stderr | `log_error("Connection failed")` |
-| `log_warning(message, *args, **kwargs)` | Log warning message | `log_warning("Deprecated option")` |
-| `log_verbose(message, *args, **kwargs)` | Log verbose (only if VERBOSE=true) | `log_verbose("Debug info")` |
+| Function                                | Description                        | Example                                 |
+| :-------------------------------------- | :--------------------------------- | :-------------------------------------- |
+| `log(message, *args, **kwargs)`         | Log informational message          | `log("Starting setup")`                 |
+| `log_success(message, *args, **kwargs)` | Log success message                | `log_success("Setup complete")`         |
+| `log_error(message, *args, **kwargs)`   | Log error to stderr                | `log_error("Connection failed")`        |
+| `log_warning(message, *args, **kwargs)` | Log warning message                | `log_warning("Deprecated option")`      |
+| `log_verbose(message, *args, **kwargs)` | Log verbose (only if VERBOSE=true) | `log_verbose("Debug info")`             |
 | `log_dry_run(message, *args, **kwargs)` | Log dry-run (only if DRY_RUN=true) | `log_dry_run("Would create milestone")` |
 
 **Status Line Functions**:
 
-| Function | Description | Example |
-| :------- | :---------- | :------ |
-| `print_status_line(char="=", width=None)` | Print status line separator | `print_status_line()` |
-| `print_section_header(title, char="=")` | Print section header | `print_section_header("Processing")` |
-| `print_summary(summary)` | Print final summary | `print_summary("All done")` |
-| `print_summary_line(char="=", width=None)` | Print summary separator | `print_summary_line()` |
+| Function                                   | Description                 | Example                              |
+| :----------------------------------------- | :-------------------------- | :----------------------------------- |
+| `print_status_line(char="=", width=None)`  | Print status line separator | `print_status_line()`                |
+| `print_section_header(title, char="=")`    | Print section header        | `print_section_header("Processing")` |
+| `print_summary(summary)`                   | Print final summary         | `print_summary("All done")`          |
+| `print_summary_line(char="=", width=None)` | Print summary separator     | `print_summary_line()`               |
 
 **Example**:
 
@@ -575,45 +574,46 @@ Validation and dependency checking utilities.
 
 **Dependency Checking Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `require_cmd(cmd)` | Check if command is available | `bool` |
-| `require_all_cmds(*cmds)` | Check if all commands are available | `bool` |
+| Function                  | Description                         | Returns |
+| :------------------------ | :---------------------------------- | :------ |
+| `require_cmd(cmd)`        | Check if command is available       | `bool`  |
+| `require_all_cmds(*cmds)` | Check if all commands are available | `bool`  |
 
 **File Validation Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `require_file(file_path)` | Check if file exists | `bool` |
-| `require_non_empty_file(file_path)` | Check if file has content | `bool` |
+| Function                            | Description               | Returns |
+| :---------------------------------- | :------------------------ | :------ |
+| `require_file(file_path)`           | Check if file exists      | `bool`  |
+| `require_non_empty_file(file_path)` | Check if file has content | `bool`  |
 
 **JSON Validation Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `validate_json(file_path)` | Validate JSON file | `bool` |
-| `validate_json_array(file_path)` | Validate JSON array | `bool` |
+| Function                         | Description         | Returns |
+| :------------------------------- | :------------------ | :------ |
+| `validate_json(file_path)`       | Validate JSON file  | `bool`  |
+| `validate_json_array(file_path)` | Validate JSON array | `bool`  |
 
 **Repository Validation Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `validate_git_repo()` | Check if current dir is Git repo | `bool` |
-| `validate_repo_format(repo)` | Validate OWNER/REPO format | `bool` |
+| Function                     | Description                      | Returns |
+| :--------------------------- | :------------------------------- | :------ |
+| `validate_git_repo()`        | Check if current dir is Git repo | `bool`  |
+| `validate_repo_format(repo)` | Validate OWNER/REPO format       | `bool`  |
 
 **Input Validation Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `require_non_empty(name, value)` | Check if string is not empty | `bool` |
-| `require_range(name, value, min_val, max_val)` | Check if number in range | `bool` |
+| Function                                       | Description                  | Returns |
+| :--------------------------------------------- | :--------------------------- | :------ |
+| `require_non_empty(name, value)`               | Check if string is not empty | `bool`  |
+| `require_range(name, value, min_val, max_val)` | Check if number in range     | `bool`  |
 
 **Utility Functions**:
-| Function | Description |
-| :------- | :---------- |
+
+| Function                                             | Description              |
+| :--------------------------------------------------- | :----------------------- |
 | `print_validation_summary(total, success, failures)` | Print validation summary |
-| `print_checkmark(count)` | Print checkmark symbol |
-| `print_xmark(count)` | Print X mark symbol |
+| `print_checkmark(count)`                             | Print checkmark symbol   |
+| `print_xmark(count)`                                 | Print X mark symbol      |
 
 **Example**:
 
@@ -654,56 +654,56 @@ GitHub API helper functions for GraphQL and REST endpoints.
 
 **Repository Information Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
+| Function                    | Description             | Returns         |
+| :-------------------------- | :---------------------- | :-------------- |
 | `get_owner_id(owner, repo)` | Get repository owner ID | `Optional[str]` |
-| `get_repo_id(owner, repo)` | Get repository node ID | `Optional[str]` |
+| `get_repo_id(owner, repo)`  | Get repository node ID  | `Optional[str]` |
 
 **Milestone Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `create_milestone(owner, repo, title, description, due_date)` | Create milestone | `Optional[str]` |
-| `get_all_milestones(owner, repo)` | Get all milestones | `List[Dict]` |
+| Function                                                      | Description        | Returns         |
+| :------------------------------------------------------------ | :----------------- | :-------------- |
+| `create_milestone(owner, repo, title, description, due_date)` | Create milestone   | `Optional[str]` |
+| `get_all_milestones(owner, repo)`                             | Get all milestones | `List[Dict]`    |
 
 **Label Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `create_label(owner, repo, name, color, description)` | Create label | `bool` |
-| `delete_label(owner, repo, name)` | Delete label | `bool` |
-| `get_all_labels(owner, repo)` | Get all labels | `List[Dict]` |
+| Function                                              | Description    | Returns      |
+| :---------------------------------------------------- | :------------- | :----------- |
+| `create_label(owner, repo, name, color, description)` | Create label   | `bool`       |
+| `delete_label(owner, repo, name)`                     | Delete label   | `bool`       |
+| `get_all_labels(owner, repo)`                         | Get all labels | `List[Dict]` |
 
 **Project V2 Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `project_exists(owner_id, title)` | Check if Project V2 exists | `Optional[str]` |
-| `create_project(owner_id, title)` | Create Project V2 | `Optional[str]` |
-| `get_project_fields(project_id)` | Get Project V2 fields | `Dict[str, Any]` |
-| `add_issue_to_project(project_id, content_id)` | Add issue to Project V2 | `Optional[str]` |
-| `update_project_field(project_id, item_id, field_id, option_id)` | Update field value | `bool` |
-| `get_todo_option(fields_json)` | Get "To Do" option ID | `Optional[str]` |
-| `get_status_field_id(fields_json)` | Get Status field ID | `Optional[str]` |
+| Function                                                         | Description                | Returns          |
+| :--------------------------------------------------------------- | :------------------------- | :--------------- |
+| `project_exists(owner_id, title)`                                | Check if Project V2 exists | `Optional[str]`  |
+| `create_project(owner_id, title)`                                | Create Project V2          | `Optional[str]`  |
+| `get_project_fields(project_id)`                                 | Get Project V2 fields      | `Dict[str, Any]` |
+| `add_issue_to_project(project_id, content_id)`                   | Add issue to Project V2    | `Optional[str]`  |
+| `update_project_field(project_id, item_id, field_id, option_id)` | Update field value         | `bool`           |
+| `get_todo_option(fields_json)`                                   | Get "To Do" option ID      | `Optional[str]`  |
+| `get_status_field_id(fields_json)`                               | Get Status field ID        | `Optional[str]`  |
 
 **Issue Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `create_issue(owner, repo, title, body, labels, milestone, assignees)` | Create issue | `Optional[str]` |
-| `get_issue_node_id(owner, repo, number)` | Get issue node ID | `Optional[str]` |
+| Function                                                               | Description       | Returns         |
+| :--------------------------------------------------------------------- | :---------------- | :-------------- |
+| `create_issue(owner, repo, title, body, labels, milestone, assignees)` | Create issue      | `Optional[str]` |
+| `get_issue_node_id(owner, repo, number)`                               | Get issue node ID | `Optional[str]` |
 
 **Helper Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `get_all_issues(owner, repo)` | Get all issues | `List[Dict]` |
-| `delete_issue(owner, repo, number)` | Delete issue | `bool` |
-| `milestone_exists(owner, repo, title)` | Check if milestone exists | `bool` |
-| `label_exists(owner, repo, name)` | Check if label exists | `bool` |
-| `issue_exists(owner, repo, title)` | Check if issue exists | `bool` |
-| `get_label_color(label)` | Get label color | `str` |
-| `wait_rate_limit(seconds)` | Wait for rate limit | `None` |
+| Function                               | Description               | Returns      |
+| :------------------------------------- | :------------------------ | :----------- |
+| `get_all_issues(owner, repo)`          | Get all issues            | `List[Dict]` |
+| `delete_issue(owner, repo, number)`    | Delete issue              | `bool`       |
+| `milestone_exists(owner, repo, title)` | Check if milestone exists | `bool`       |
+| `label_exists(owner, repo, name)`      | Check if label exists     | `bool`       |
+| `issue_exists(owner, repo, title)`     | Check if issue exists     | `bool`       |
+| `get_label_color(label)`               | Get label color           | `str`        |
+| `wait_rate_limit(seconds)`             | Wait for rate limit       | `None`       |
 
 **Example**:
 
@@ -756,26 +756,25 @@ Label management functions.
 
 **Functions**:
 
-
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `get_all_labels_by_category()` | Get labels by category | `Dict[str, List[str]]` |
-| `get_all_labels_array()` | Get labels as flat list | `List[str]` |
-| `create_all_labels(owner, repo, color)` | Create all labels | `int` |
-| `create_labels_by_category(owner, repo, category, color)` | Create category labels | `int` |
-| `get_label_count(category)` | Get label count | `int` |
-| `get_label_color(label)` | Get label color | `str` |
+| Function                                                  | Description             | Returns                |
+| :-------------------------------------------------------- | :---------------------- | :--------------------- |
+| `get_all_labels_by_category()`                            | Get labels by category  | `Dict[str, List[str]]` |
+| `get_all_labels_array()`                                  | Get labels as flat list | `List[str]`            |
+| `create_all_labels(owner, repo, color)`                   | Create all labels       | `int`                  |
+| `create_labels_by_category(owner, repo, category, color)` | Create category labels  | `int`                  |
+| `get_label_count(category)`                               | Get label count         | `int`                  |
+| `get_label_color(label)`                                  | Get label color         | `str`                  |
 
 **Label Categories**:
 
-| Category | Labels |
-| :------- | :----- |
-| `phase` | mvp, phase:foundations, phase:core-skill, phase:integrations, phase:conversation, phase:security, phase:infrastructure |
-| `integration` | integration:google, integration:twilio, integration:nemoclaw |
-| `skill` | skill:digest, skill:inventory, skill:pos, skill:review, skill:staff, skill:reservation, skill:marketing, skill:order, skill:sales-brief, skill:sentiment, skill:review-response |
-| `priority` | priority:high, priority:medium, good-first-issue |
-| `category` | documentation, testing, infrastructure, onboarding, configuration, ci-cd, observability, e2e, performance |
-| `milestone` | milestone:v0.0, milestone:v0.1, milestone:v0.2, milestone:v0.3, milestone:v0.4, milestone:v0.5, milestone:v1.0 |
+| Category      | Labels                                                                                                                                                                          |
+| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `phase`       | mvp, phase:foundations, phase:core-skill, phase:integrations, phase:conversation, phase:security, phase:infrastructure                                                          |
+| `integration` | integration:google, integration:twilio, integration:nemoclaw                                                                                                                    |
+| `skill`       | skill:digest, skill:inventory, skill:pos, skill:review, skill:staff, skill:reservation, skill:marketing, skill:order, skill:sales-brief, skill:sentiment, skill:review-response |
+| `priority`    | priority:high, priority:medium, good-first-issue                                                                                                                                |
+| `category`    | documentation, testing, infrastructure, onboarding, configuration, ci-cd, observability, e2e, performance                                                                       |
+| `milestone`   | milestone:v0.0, milestone:v0.1, milestone:v0.2, milestone:v0.3, milestone:v0.4, milestone:v0.5, milestone:v1.0                                                                  |
 
 **Example**:
 
@@ -813,23 +812,24 @@ Project V2 management functions.
 
 **Configuration**:
 
-| Variable | Type | Default | Description |
-| :------- | :---- | :------ | :---------- |
+| Variable               | Type  | Default                           | Description          |
+| :--------------------- | :---- | :-------------------------------- | :------------------- |
 | `DEFAULT_PROJECT_NAME` | `str` | `"RestoClaw Development Roadmap"` | Default project name |
 
 **Main Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `ensure_project_exists(owner, repo, project_name)` | Create or find Project V2 | `Optional[str]` |
-| `configure_project_fields(project_id)` | Configure Project V2 fields | `bool` |
-| `create_project_field(project_id, field_name, field_type)` | Create custom field | `Optional[str]` |
-| `create_project_field_option(field_id, option_name)` | Create field option | `Optional[str]` |
-| `get_project_todo_option(project_id)` | Get "To Do" option | `Optional[str]` |
-| `link_issue_to_project(project_id, owner, repo, issue_number)` | Add issue to Project V2 | `Optional[str]` |
-| `print_project_summary(project_name, project_id, issue_count)` | Print summary | `None` |
+| Function                                                       | Description                 | Returns         |
+| :------------------------------------------------------------- | :-------------------------- | :-------------- |
+| `ensure_project_exists(owner, repo, project_name)`             | Create or find Project V2   | `Optional[str]` |
+| `configure_project_fields(project_id)`                         | Configure Project V2 fields | `bool`          |
+| `create_project_field(project_id, field_name, field_type)`     | Create custom field         | `Optional[str]` |
+| `create_project_field_option(field_id, option_name)`           | Create field option         | `Optional[str]` |
+| `get_project_todo_option(project_id)`                          | Get "To Do" option          | `Optional[str]` |
+| `link_issue_to_project(project_id, owner, repo, issue_number)` | Add issue to Project V2     | `Optional[str]` |
+| `print_project_summary(project_name, project_id, issue_count)` | Print summary               | `None`          |
 
 **Aliases**:
+
 - `create_or_find_project` - Alias for `ensure_project_exists`
 
 **Example**:
@@ -866,64 +866,65 @@ Issue processing and JSON handling functions.
 
 **Configuration**:
 
-| Variable | Type | Default | Description |
-| :------- | :---- | :------ | :---------- |
-| `TMP_DIR` | `str` | `"/tmp"` | Temporary directory |
-| `DRY_RUN` | `bool` | `False` | Dry-run mode |
-| `VERBOSE` | `bool` | `False` | Verbose mode |
+| Variable  | Type   | Default  | Description         |
+| :-------- | :----- | :------- | :------------------ |
+| `TMP_DIR` | `str`  | `"/tmp"` | Temporary directory |
+| `DRY_RUN` | `bool` | `False`  | Dry-run mode        |
+| `VERBOSE` | `bool` | `False`  | Verbose mode        |
 
 **Temporary File Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `create_temp_file(base)` | Create temp file | `str` |
-| `cleanup_temp(file_path)` | Remove temp file | `bool` |
+| Function                  | Description      | Returns |
+| :------------------------ | :--------------- | :------ |
+| `create_temp_file(base)`  | Create temp file | `str`   |
+| `cleanup_temp(file_path)` | Remove temp file | `bool`  |
 
 **JSON Processing Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `strip_comments(content)` | Remove `/* */` comments | `str` |
-| `normalize_whitespace(content)` | Normalize whitespace | `str` |
-| `clean_json_file(input_path, output_path)` | Clean JSON file | `bool` |
+| Function                                   | Description             | Returns |
+| :----------------------------------------- | :---------------------- | :------ |
+| `strip_comments(content)`                  | Remove `/* */` comments | `str`   |
+| `normalize_whitespace(content)`            | Normalize whitespace    | `str`   |
+| `clean_json_file(input_path, output_path)` | Clean JSON file         | `bool`  |
 
 **Validation Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
+| Function                               | Description               | Returns         |
+| :------------------------------------- | :------------------------ | :-------------- |
 | `validate_and_count_issues(json_file)` | Validate and count issues | `Optional[int]` |
 
 **Data Extraction Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `extract_title(issue_json)` | Extract issue title | `str` |
-| `extract_body(issue_json)` | Extract issue body | `str` |
-| `extract_labels(issue_json)` | Extract labels | `str` |
-| `extract_milestone(issue_json)` | Extract milestone | `Optional[str]` |
-| `extract_assignees(issue_json)` | Extract assignees | `str` |
+| Function                        | Description         | Returns         |
+| :------------------------------ | :------------------ | :-------------- |
+| `extract_title(issue_json)`     | Extract issue title | `str`           |
+| `extract_body(issue_json)`      | Extract issue body  | `str`           |
+| `extract_labels(issue_json)`    | Extract labels      | `str`           |
+| `extract_milestone(issue_json)` | Extract milestone   | `Optional[str]` |
+| `extract_assignees(issue_json)` | Extract assignees   | `str`           |
 
 **Issue Processing Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `process_issue(owner, repo, issue_json)` | Process single issue | `Optional[str]` |
-| `process_all_issues(owner, repo, json_file, project_id)` | Process all issues | `int` |
+| Function                                                 | Description          | Returns         |
+| :------------------------------------------------------- | :------------------- | :-------------- |
+| `process_issue(owner, repo, issue_json)`                 | Process single issue | `Optional[str]` |
+| `process_all_issues(owner, repo, json_file, project_id)` | Process all issues   | `int`           |
 
 **Template Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `generate_issue_json(title, body, labels, milestone, assignees)` | Generate issue JSON | `str` |
-| `generate_sample_issues(output_file)` | Generate sample issues | `bool` |
+| Function                                                         | Description            | Returns |
+| :--------------------------------------------------------------- | :--------------------- | :------ |
+| `generate_issue_json(title, body, labels, milestone, assignees)` | Generate issue JSON    | `str`   |
+| `generate_sample_issues(output_file)`                            | Generate sample issues | `bool`  |
 
 **Validation Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `validate_issue(issue_json)` | Validate issue JSON | `bool` |
+| Function                     | Description         | Returns |
+| :--------------------------- | :------------------ | :------ |
+| `validate_issue(issue_json)` | Validate issue JSON | `bool`  |
 
 **Aliases**:
+
 - `process_issues` - Alias for `process_all_issues`
 
 **Example**:
@@ -970,38 +971,39 @@ Duplicate detection and cleanup functions.
 
 **Normalization Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `normalize_issue_title(title)` | Normalize title by removing bug numbers | `str` |
+| Function                       | Description                             | Returns |
+| :----------------------------- | :-------------------------------------- | :------ |
+| `normalize_issue_title(title)` | Normalize title by removing bug numbers | `str`   |
 
 **GitHub API Helper Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
+| Function                               | Description        | Returns      |
+| :------------------------------------- | :----------------- | :----------- |
 | `get_existing_milestones(owner, repo)` | Get all milestones | `List[Dict]` |
-| `get_existing_labels(owner, repo)` | Get all labels | `List[Dict]` |
-| `get_existing_issues(owner, repo)` | Get all issues | `List[Dict]` |
+| `get_existing_labels(owner, repo)`     | Get all labels     | `List[Dict]` |
+| `get_existing_issues(owner, repo)`     | Get all issues     | `List[Dict]` |
 
 **Existence Check Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `milestone_exists(owner, repo, title)` | Check if milestone exists | `bool` |
-| `label_exists(owner, repo, name)` | Check if label exists | `bool` |
-| `issue_exists(owner, repo, title)` | Check if issue exists | `bool` |
+| Function                               | Description               | Returns |
+| :------------------------------------- | :------------------------ | :------ |
+| `milestone_exists(owner, repo, title)` | Check if milestone exists | `bool`  |
+| `label_exists(owner, repo, name)`      | Check if label exists     | `bool`  |
+| `issue_exists(owner, repo, title)`     | Check if issue exists     | `bool`  |
 
 **Cleanup Functions**:
 
-| Function | Description | Returns |
-| :------- | :---------- | :------ |
-| `delete_milestone(owner, repo, number)` | Delete milestone | `bool` |
-| `cleanup_milestones(owner, repo, titles)` | Cleanup duplicate milestones | `int` |
-| `cleanup_labels(owner, repo, names)` | Cleanup duplicate labels | `int` |
-| `cleanup_issues(owner, repo, titles)` | Cleanup duplicate issues | `int` |
-| `cleanup_all(owner, repo, apply, resources)` | Cleanup all resources | `int` |
+| Function                                     | Description                  | Returns |
+| :------------------------------------------- | :--------------------------- | :------ |
+| `delete_milestone(owner, repo, number)`      | Delete milestone             | `bool`  |
+| `cleanup_milestones(owner, repo, titles)`    | Cleanup duplicate milestones | `int`   |
+| `cleanup_labels(owner, repo, names)`         | Cleanup duplicate labels     | `int`   |
+| `cleanup_issues(owner, repo, titles)`        | Cleanup duplicate issues     | `int`   |
+| `cleanup_all(owner, repo, apply, resources)` | Cleanup all resources        | `int`   |
 
 **Normalization Patterns**:
 The `normalize_issue_title` function removes:
+
 - `#123` at start/end
 - `123` at start/end
 - `bug #123` patterns
@@ -1220,19 +1222,20 @@ class CreateLabelResponse(BaseModel):
 
 ### Pydantic Environment Variables
 
-| Variable | Description | Required | Default |
-| :------- | :---------- | :------- | :------ |
-| `GITHUB_TOKEN` | Personal access token with repo scope | Yes | - |
-| `DRY_RUN` | Set to "true" for dry-run mode | No | `false` |
-| `VERBOSE` | Set to "true" for verbose output | No | `false` |
-| `TMPDIR` | Temporary directory path | No | `/tmp` |
-| `COLUMNS` | Console width for status lines | No | 80 |
+| Variable       | Description                           | Required | Default |
+| :------------- | :------------------------------------ | :------- | :------ |
+| `GITHUB_TOKEN` | Personal access token with repo scope | Yes      | -       |
+| `DRY_RUN`      | Set to "true" for dry-run mode        | No       | `false` |
+| `VERBOSE`      | Set to "true" for verbose output      | No       | `false` |
+| `TMPDIR`       | Temporary directory path              | No       | `/tmp`  |
+| `COLUMNS`      | Console width for status lines        | No       | 80      |
 
 ### Configuration Files
 
 #### `src/gh_project_toolkit/config/defaults.py`
 
 Contains default configuration values that control toolkit behavior.
+
 - Script metadata (name, version, description)
 - GitHub repository configuration
 - Path and file configuration
@@ -1242,26 +1245,27 @@ Contains default configuration values that control toolkit behavior.
 #### `src/gh_project_toolkit/config/milestones.py`
 
 Contains milestone and label definitions.
+
 - `MILESTONES`: Dictionary of 7 milestones
 - `ALL_LABELS`: List of 37 labels
 - `LABEL_COLORS`: Color mapping for labels
 
 ### GitHub API Endpoints
 
-| Endpoint | Type | Description |
-| :------- | :--- | :---------- |
+| Endpoint                         | Type    | Description        |
+| :------------------------------- | :------ | :----------------- |
 | `https://api.github.com/graphql` | GraphQL | GitHub GraphQL API |
-| `https://api.github.com` | REST | GitHub REST API |
+| `https://api.github.com`         | REST    | GitHub REST API    |
 
 ### Exit Codes
 
-| Code | Name | Description |
-| :--- | :--- | :---------- |
-| 0 | `EXIT_SUCCESS` | Operation completed successfully |
-| 1 | `EXIT_ERROR` | General error |
-| 2 | `EXIT_MISSING_CMD` | Required command not found |
-| 3 | `EXIT_INVALID_CONFIG` | Invalid configuration |
-| 4 | `EXIT_API_ERROR` | GitHub API error |
+| Code | Name                  | Description                      |
+| :--- | :-------------------- | :------------------------------- |
+| 0    | `EXIT_SUCCESS`        | Operation completed successfully |
+| 1    | `EXIT_ERROR`          | General error                    |
+| 2    | `EXIT_MISSING_CMD`    | Required command not found       |
+| 3    | `EXIT_INVALID_CONFIG` | Invalid configuration            |
+| 4    | `EXIT_API_ERROR`      | GitHub API error                 |
 
 ## Testing in Development Section
 
