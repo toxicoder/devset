@@ -64,6 +64,9 @@ site/
 .coverage
 htmlcov/
 
+# pytest cache
+.pytest_cache/
+
 # Environment files
 .env.local
 .env.*.local
@@ -71,3 +74,12 @@ htmlcov/
 # Local development files
 .local/
 _site/
+
+# gh-issues
+gh-tools/gh-project-management-toolkit/issues.json
+
+# Coverage reports
+gh-tools/gh-project-management-toolkit/.coverage
+gh-tools/gh-project-management-toolkit/coverage.xml
+gh-tools/gh-project-management-toolkit/htmlcov/
+gh-tools/gh-project-management-toolkit/src/*.egg-info/
