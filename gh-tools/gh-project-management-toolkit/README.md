@@ -113,7 +113,7 @@ Set your token:
 export GITHUB_TOKEN=your_token_here
 ```
 
-## Testing
+## Testing in Module Reference
 
 ### Run All Tests
 
@@ -175,7 +175,7 @@ make clean-build
 
 ## Project Structure
 
-```
+```text
 gh-tools/gh-project-management-toolkit/
 ├── src/
 │   └── gh_project_toolkit/
@@ -216,11 +216,13 @@ The main package module provides package-level metadata and exports core functio
 **Location**: `src/gh_project_toolkit/__init__.py`
 
 **Exports**:
+
 - `__version__` - Package version (e.g., "1.0.0")
 - `__author__` - Package author
 - `__description__` - Package description
 
 **Example**:
+
 ```python
 from gh_project_toolkit import __version__, __author__
 print(f"Version: {__version__}, Author: {__author__}")
@@ -233,12 +235,14 @@ Command-line interface for the toolkit.
 **Location**: `src/gh_project_toolkit/cli.py`
 
 **Main Functions**:
+
 - `main()` - Main entry point for CLI
 - `setup_project(owner, repo, project_name, dry_run)` - Setup GitHub project with milestones and labels
 - `process_project_issues(owner, repo, json_file, project_id)` - Process issues from JSON file
 - `cleanup_duplicates(owner, repo, titles)` - Cleanup duplicate milestones and labels
 
 **CLI Commands**:
+
 | Command | Description |
 | :------ | :---------- |
 | `setup` | Setup a new GitHub project with milestones and labels |
@@ -246,6 +250,7 @@ Command-line interface for the toolkit.
 | `cleanup` | Cleanup duplicate milestones/labels/issues |
 
 **CLI Options**:
+
 | Option | Description |
 | :----- | :---------- |
 | `--version` | Show version and exit |
@@ -255,6 +260,7 @@ Command-line interface for the toolkit.
 | `-p, --project` | Specify project name (default: "Development Roadmap") |
 
 **Example**:
+
 ```python
 from gh_project_toolkit.cli import main, setup_project
 
@@ -272,6 +278,7 @@ Pydantic models for data validation and serialization.
 **Location**: `src/gh_project_toolkit/models.py`
 
 **Issue Models**:
+
 | Model | Description |
 | :---- | :---------- |
 | `Issue` | Represents a GitHub issue with title, body, labels, milestone, assignees |
@@ -279,6 +286,7 @@ Pydantic models for data validation and serialization.
 | `IssueModel` | Model for GitHub issue data from API responses |
 
 **Milestone Models**:
+
 | Model | Description |
 | :---- | :---------- |
 | `Milestone` | Represents a GitHub milestone with title, description, due_on, state |
@@ -286,6 +294,7 @@ Pydantic models for data validation and serialization.
 | `MilestoneModel` | Model for GitHub milestone data from API responses |
 
 **Label Models**:
+
 | Model | Description |
 | :---- | :---------- |
 | `Label` | Represents a GitHub label with name, color, description |
@@ -293,6 +302,7 @@ Pydantic models for data validation and serialization.
 | `LabelModel` | Model for GitHub label data from API responses |
 
 **Project V2 Models**:
+
 | Model | Description |
 | :---- | :---------- |
 | `ProjectFieldOption` | Option for a Project V2 single-select field |
@@ -301,6 +311,7 @@ Pydantic models for data validation and serialization.
 | `ProjectItem` | Item in a Project V2 |
 
 **Response Models**:
+
 | Model | Description |
 | :---- | :---------- |
 | `GitHubResponse` | Base model for GitHub API responses |
@@ -309,6 +320,7 @@ Pydantic models for data validation and serialization.
 | `CreateLabelResponse` | Response model for label creation |
 
 **Example**:
+
 ```python
 from gh_project_toolkit.models import Issue, Milestone, Label
 
@@ -346,6 +358,7 @@ Default configuration values for the toolkit.
 **Location**: `src/gh_project_toolkit/config/defaults.py`
 
 **Script Metadata**:
+
 | Constant | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
 | `SCRIPT_NAME` | `str` | `"setup-restoclaw.py"` | Script name for display |
@@ -353,6 +366,7 @@ Default configuration values for the toolkit.
 | `SCRIPT_DESCRIPTION` | `str` | Creates GitHub milestones... | Script description |
 
 **GitHub Repository Configuration**:
+
 | Constant | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
 | `DEFAULT_REPO` | `str` | `"toxicoder/RestoClaw"` | Default repository |
@@ -360,18 +374,21 @@ Default configuration values for the toolkit.
 | `DEFAULT_PROJECT_NAME` | `str` | `"RestoClaw Development Roadmap"` | Default project name |
 
 **Paths and Files**:
+
 | Constant | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
 | `ISSUES_JSON_PATH` | `str` | `"issues.json"` | Path to issues file |
 | `TMP_DIR` | `str` | `"/tmp"` | Temporary directory |
 
 **GitHub API Configuration**:
+
 | Constant | Type | Default | Description |
 | :------- | :--- | :------ | :---------- |
 | `GITHUB_GRAPHQL_ENDPOINT` | `str` | `"https://api.github.com/graphql"` | GraphQL endpoint |
 | `GITHUB_REST_API_BASE` | `str` | `"https://api.github.com"` | REST API base |
 
 **Exit Codes**:
+
 | Constant | Type | Value | Description |
 | :------- | :--- | :---- | :---------- |
 | `EXIT_SUCCESS` | `int` | `0` | Success exit code |
@@ -381,10 +398,12 @@ Default configuration values for the toolkit.
 | `EXIT_API_ERROR` | `int` | `4` | API error |
 
 **Functions**:
+
 - `get_script_dir()` - Get directory containing the script
 - `get_script_path()` - Get full path to main script file
 
 **Example**:
+
 ```python
 from gh_project_toolkit.config.defaults import (
     DEFAULT_REPO,
@@ -417,7 +436,9 @@ A dictionary mapping milestone titles to descriptions.
 | `"v1.0 Full Restaurant OS"` | Staff scheduling, reservation management, marketing automation. |
 
 **Labels** (`ALL_LABELS`):
+
 List of 37 labels organized by category:
+
 - Phase labels (mvp, phase:*)
 - Integration labels (integration:*)
 - Skill labels (skill:*)
@@ -426,6 +447,8 @@ List of 37 labels organized by category:
 - Milestone labels (milestone:v*)
 
 **Functions**:
+
+
 | Function | Description |
 | :------- | :---------- |
 | `get_milestone_titles()` | Get all milestone titles as list |
@@ -439,7 +462,9 @@ List of 37 labels organized by category:
 | `get_label_count(category)` | Get label count for category |
 
 **Label Colors** (`LABEL_COLORS`):
+
 Dictionary mapping labels to 6-character hex color codes:
+
 - `priority:high` - `e11d21` (Red)
 - `priority:medium` - `d93f0b` (Orange)
 - `good-first-issue` - `008672` (Green)
@@ -451,6 +476,7 @@ Dictionary mapping labels to 6-character hex color codes:
 - `milestone:*` - `d2b48c` (Tan)
 
 **Example**:
+
 ```python
 from gh_project_toolkit.config.milestones import (
     MILESTONES,
@@ -482,6 +508,7 @@ Logging and output utilities with colored output and dry-run support.
 **Location**: `src/gh_project_toolkit/lib/logging.py`
 
 **Configuration**:
+
 | Variable | Type | Default | Description |
 | :------- | :---- | :------ | :---------- |
 | `COLOR_INFO` | `str` | `"\033[1;34m"` | Blue color code |
@@ -493,6 +520,7 @@ Logging and output utilities with colored output and dry-run support.
 | `VERBOSE` | `bool` | `False` | Verbose mode flag |
 
 **Logging Functions**:
+
 | Function | Description | Example |
 | :------- | :---------- | :------ |
 | `log(message, *args, **kwargs)` | Log informational message | `log("Starting setup")` |
@@ -503,6 +531,7 @@ Logging and output utilities with colored output and dry-run support.
 | `log_dry_run(message, *args, **kwargs)` | Log dry-run (only if DRY_RUN=true) | `log_dry_run("Would create milestone")` |
 
 **Status Line Functions**:
+
 | Function | Description | Example |
 | :------- | :---------- | :------ |
 | `print_status_line(char="=", width=None)` | Print status line separator | `print_status_line()` |
@@ -511,6 +540,7 @@ Logging and output utilities with colored output and dry-run support.
 | `print_summary_line(char="=", width=None)` | Print summary separator | `print_summary_line()` |
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.logging import (
     log, log_success, log_error, log_warning,
@@ -544,30 +574,35 @@ Validation and dependency checking utilities.
 **Location**: `src/gh_project_toolkit/lib/validation.py`
 
 **Dependency Checking Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `require_cmd(cmd)` | Check if command is available | `bool` |
 | `require_all_cmds(*cmds)` | Check if all commands are available | `bool` |
 
 **File Validation Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `require_file(file_path)` | Check if file exists | `bool` |
 | `require_non_empty_file(file_path)` | Check if file has content | `bool` |
 
 **JSON Validation Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `validate_json(file_path)` | Validate JSON file | `bool` |
 | `validate_json_array(file_path)` | Validate JSON array | `bool` |
 
 **Repository Validation Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `validate_git_repo()` | Check if current dir is Git repo | `bool` |
 | `validate_repo_format(repo)` | Validate OWNER/REPO format | `bool` |
 
 **Input Validation Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `require_non_empty(name, value)` | Check if string is not empty | `bool` |
@@ -581,6 +616,7 @@ Validation and dependency checking utilities.
 | `print_xmark(count)` | Print X mark symbol |
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.validation import (
     require_cmd, require_all_cmds,
@@ -617,18 +653,21 @@ GitHub API helper functions for GraphQL and REST endpoints.
 **Location**: `src/gh_project_toolkit/lib/github_api.py`
 
 **Repository Information Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `get_owner_id(owner, repo)` | Get repository owner ID | `Optional[str]` |
 | `get_repo_id(owner, repo)` | Get repository node ID | `Optional[str]` |
 
 **Milestone Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `create_milestone(owner, repo, title, description, due_date)` | Create milestone | `Optional[str]` |
 | `get_all_milestones(owner, repo)` | Get all milestones | `List[Dict]` |
 
 **Label Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `create_label(owner, repo, name, color, description)` | Create label | `bool` |
@@ -636,6 +675,7 @@ GitHub API helper functions for GraphQL and REST endpoints.
 | `get_all_labels(owner, repo)` | Get all labels | `List[Dict]` |
 
 **Project V2 Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `project_exists(owner_id, title)` | Check if Project V2 exists | `Optional[str]` |
@@ -647,12 +687,14 @@ GitHub API helper functions for GraphQL and REST endpoints.
 | `get_status_field_id(fields_json)` | Get Status field ID | `Optional[str]` |
 
 **Issue Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `create_issue(owner, repo, title, body, labels, milestone, assignees)` | Create issue | `Optional[str]` |
 | `get_issue_node_id(owner, repo, number)` | Get issue node ID | `Optional[str]` |
 
 **Helper Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `get_all_issues(owner, repo)` | Get all issues | `List[Dict]` |
@@ -664,6 +706,7 @@ GitHub API helper functions for GraphQL and REST endpoints.
 | `wait_rate_limit(seconds)` | Wait for rate limit | `None` |
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.github_api import (
     get_owner_id, get_repo_id,
@@ -712,6 +755,8 @@ Label management functions.
 **Location**: `src/gh_project_toolkit/lib/labels.py`
 
 **Functions**:
+
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `get_all_labels_by_category()` | Get labels by category | `Dict[str, List[str]]` |
@@ -722,6 +767,7 @@ Label management functions.
 | `get_label_color(label)` | Get label color | `str` |
 
 **Label Categories**:
+
 | Category | Labels |
 | :------- | :----- |
 | `phase` | mvp, phase:foundations, phase:core-skill, phase:integrations, phase:conversation, phase:security, phase:infrastructure |
@@ -732,6 +778,7 @@ Label management functions.
 | `milestone` | milestone:v0.0, milestone:v0.1, milestone:v0.2, milestone:v0.3, milestone:v0.4, milestone:v0.5, milestone:v1.0 |
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.labels import (
     get_all_labels_by_category,
@@ -765,11 +812,13 @@ Project V2 management functions.
 **Location**: `src/gh_project_toolkit/lib/projects.py`
 
 **Configuration**:
+
 | Variable | Type | Default | Description |
 | :------- | :---- | :------ | :---------- |
 | `DEFAULT_PROJECT_NAME` | `str` | `"RestoClaw Development Roadmap"` | Default project name |
 
 **Main Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `ensure_project_exists(owner, repo, project_name)` | Create or find Project V2 | `Optional[str]` |
@@ -784,6 +833,7 @@ Project V2 management functions.
 - `create_or_find_project` - Alias for `ensure_project_exists`
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.projects import (
     ensure_project_exists,
@@ -815,6 +865,7 @@ Issue processing and JSON handling functions.
 **Location**: `src/gh_project_toolkit/lib/issues.py`
 
 **Configuration**:
+
 | Variable | Type | Default | Description |
 | :------- | :---- | :------ | :---------- |
 | `TMP_DIR` | `str` | `"/tmp"` | Temporary directory |
@@ -822,24 +873,28 @@ Issue processing and JSON handling functions.
 | `VERBOSE` | `bool` | `False` | Verbose mode |
 
 **Temporary File Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `create_temp_file(base)` | Create temp file | `str` |
 | `cleanup_temp(file_path)` | Remove temp file | `bool` |
 
 **JSON Processing Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
-| `strip_comments(content)` | Remove /* */ comments | `str` |
+| `strip_comments(content)` | Remove `/* */` comments | `str` |
 | `normalize_whitespace(content)` | Normalize whitespace | `str` |
 | `clean_json_file(input_path, output_path)` | Clean JSON file | `bool` |
 
 **Validation Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `validate_and_count_issues(json_file)` | Validate and count issues | `Optional[int]` |
 
 **Data Extraction Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `extract_title(issue_json)` | Extract issue title | `str` |
@@ -849,18 +904,21 @@ Issue processing and JSON handling functions.
 | `extract_assignees(issue_json)` | Extract assignees | `str` |
 
 **Issue Processing Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `process_issue(owner, repo, issue_json)` | Process single issue | `Optional[str]` |
 | `process_all_issues(owner, repo, json_file, project_id)` | Process all issues | `int` |
 
 **Template Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `generate_issue_json(title, body, labels, milestone, assignees)` | Generate issue JSON | `str` |
 | `generate_sample_issues(output_file)` | Generate sample issues | `bool` |
 
 **Validation Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `validate_issue(issue_json)` | Validate issue JSON | `bool` |
@@ -869,6 +927,7 @@ Issue processing and JSON handling functions.
 - `process_issues` - Alias for `process_all_issues`
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.issues import (
     clean_json_file,
@@ -910,11 +969,13 @@ Duplicate detection and cleanup functions.
 **Location**: `src/gh_project_toolkit/lib/duplicates.py`
 
 **Normalization Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `normalize_issue_title(title)` | Normalize title by removing bug numbers | `str` |
 
 **GitHub API Helper Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `get_existing_milestones(owner, repo)` | Get all milestones | `List[Dict]` |
@@ -922,6 +983,7 @@ Duplicate detection and cleanup functions.
 | `get_existing_issues(owner, repo)` | Get all issues | `List[Dict]` |
 
 **Existence Check Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `milestone_exists(owner, repo, title)` | Check if milestone exists | `bool` |
@@ -929,6 +991,7 @@ Duplicate detection and cleanup functions.
 | `issue_exists(owner, repo, title)` | Check if issue exists | `bool` |
 
 **Cleanup Functions**:
+
 | Function | Description | Returns |
 | :------- | :---------- | :------ |
 | `delete_milestone(owner, repo, number)` | Delete milestone | `bool` |
@@ -945,6 +1008,7 @@ The `normalize_issue_title` function removes:
 - `(123)` at start/end
 
 **Example**:
+
 ```python
 from gh_project_toolkit.lib.duplicates import (
     normalize_issue_title,
@@ -977,6 +1041,7 @@ removed = cleanup_all("owner", "repo", apply=True)
 ### Issue Models
 
 #### `Issue`
+
 ```python
 class Issue(BaseModel):
     title: str              # Issue title (required)
@@ -987,6 +1052,7 @@ class Issue(BaseModel):
 ```
 
 #### `IssueCreateRequest`
+
 ```python
 class IssueCreateRequest(BaseModel):
     title: str                    # Issue title
@@ -997,6 +1063,7 @@ class IssueCreateRequest(BaseModel):
 ```
 
 #### `IssueModel`
+
 ```python
 class IssueModel(BaseModel):
     title: str
@@ -1009,6 +1076,7 @@ class IssueModel(BaseModel):
 ### Milestone Models
 
 #### `Milestone`
+
 ```python
 class Milestone(BaseModel):
     title: str                      # Milestone title (required)
@@ -1018,6 +1086,7 @@ class Milestone(BaseModel):
 ```
 
 #### `MilestoneCreateRequest`
+
 ```python
 class MilestoneCreateRequest(BaseModel):
     title: str                      # Milestone title
@@ -1026,6 +1095,7 @@ class MilestoneCreateRequest(BaseModel):
 ```
 
 #### `MilestoneModel`
+
 ```python
 class MilestoneModel(BaseModel):
     number: int
@@ -1040,6 +1110,7 @@ class MilestoneModel(BaseModel):
 ### Label Models
 
 #### `Label`
+
 ```python
 class Label(BaseModel):
     name: str                      # Label name (required)
@@ -1048,6 +1119,7 @@ class Label(BaseModel):
 ```
 
 #### `LabelCreateRequest`
+
 ```python
 class LabelCreateRequest(BaseModel):
     name: str                      # Label name
@@ -1056,6 +1128,7 @@ class LabelCreateRequest(BaseModel):
 ```
 
 #### `LabelModel`
+
 ```python
 class LabelModel(BaseModel):
     name: str
@@ -1067,6 +1140,7 @@ class LabelModel(BaseModel):
 ### Project V2 Models
 
 #### `ProjectFieldOption`
+
 ```python
 class ProjectFieldOption(BaseModel):
     id: str    # The option ID
@@ -1074,6 +1148,7 @@ class ProjectFieldOption(BaseModel):
 ```
 
 #### `ProjectField`
+
 ```python
 class ProjectField(BaseModel):
     id: str                  # The field ID
@@ -1082,6 +1157,7 @@ class ProjectField(BaseModel):
 ```
 
 #### `ProjectV2`
+
 ```python
 class ProjectV2(BaseModel):
     id: str     # The project ID
@@ -1091,6 +1167,7 @@ class ProjectV2(BaseModel):
 ```
 
 #### `ProjectItem`
+
 ```python
 class ProjectItem(BaseModel):
     id: str         # The item ID
@@ -1101,6 +1178,7 @@ class ProjectItem(BaseModel):
 ### Response Models
 
 #### `GitHubResponse`
+
 ```python
 class GitHubResponse(BaseModel):
     data: Optional[Dict[str, Any]]    # Response data
@@ -1109,6 +1187,7 @@ class GitHubResponse(BaseModel):
 ```
 
 #### `CreateIssueResponse`
+
 ```python
 class CreateIssueResponse(BaseModel):
     html_url: str  # URL to the created issue
@@ -1117,6 +1196,7 @@ class CreateIssueResponse(BaseModel):
 ```
 
 #### `CreateMilestoneResponse`
+
 ```python
 class CreateMilestoneResponse(BaseModel):
     number: int                # Milestone number
@@ -1126,6 +1206,7 @@ class CreateMilestoneResponse(BaseModel):
 ```
 
 #### `CreateLabelResponse`
+
 ```python
 class CreateLabelResponse(BaseModel):
     id: int          # Label ID
@@ -1135,9 +1216,9 @@ class CreateLabelResponse(BaseModel):
     description: str = ""  # Label description
 ```
 
-## Configuration Reference
+## Pydantic Models Configuration Reference
 
-### Environment Variables
+### Pydantic Environment Variables
 
 | Variable | Description | Required | Default |
 | :------- | :---------- | :------- | :------ |
@@ -1150,6 +1231,7 @@ class CreateLabelResponse(BaseModel):
 ### Configuration Files
 
 #### `src/gh_project_toolkit/config/defaults.py`
+
 Contains default configuration values that control toolkit behavior.
 - Script metadata (name, version, description)
 - GitHub repository configuration
@@ -1158,6 +1240,7 @@ Contains default configuration values that control toolkit behavior.
 - Exit codes
 
 #### `src/gh_project_toolkit/config/milestones.py`
+
 Contains milestone and label definitions.
 - `MILESTONES`: Dictionary of 7 milestones
 - `ALL_LABELS`: List of 37 labels
@@ -1180,9 +1263,9 @@ Contains milestone and label definitions.
 | 3 | `EXIT_INVALID_CONFIG` | Invalid configuration |
 | 4 | `EXIT_API_ERROR` | GitHub API error |
 
-## Testing
+## Testing in Development Section
 
-### Run All Tests
+### Testing Run All Tests
 
 ```bash
 make test
@@ -1190,7 +1273,7 @@ make test
 pytest tests/ -v
 ```
 
-### Run Tests with Coverage
+### Testing Run Tests with Coverage
 
 ```bash
 make test-coverage
@@ -1198,15 +1281,15 @@ make test-coverage
 pytest tests/ --cov=src/gh_project_toolkit --cov-report=term-missing
 ```
 
-### Run Tests for a Specific Module
+### Testing Run Tests for a Specific Module
 
 ```bash
 pytest tests/test_lib/test_logging.py -v
 ```
 
-## Development
+## Development in Development Section
 
-### Linting
+### Development Linting
 
 ```bash
 # Run ruff linting
@@ -1216,7 +1299,7 @@ make lint
 make lint-fix
 ```
 
-### Type Checking
+### Development Type Checking
 
 ```bash
 make type-check
@@ -1224,7 +1307,7 @@ make type-check
 mypy src/
 ```
 
-### Formatting
+### Development Formatting
 
 ```bash
 make format
@@ -1232,7 +1315,7 @@ make format
 black src/ tests/
 ```
 
-### Clean Build Artifacts
+### Development Clean Build Artifacts
 
 ```bash
 make clean
@@ -1240,9 +1323,9 @@ make clean
 make clean-build
 ```
 
-## Project Structure
+## Project Structure in Development Section
 
-```
+```text
 gh-tools/gh-project-management-toolkit/
 ├── src/
 │   └── gh_project_toolkit/
