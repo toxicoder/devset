@@ -25,6 +25,10 @@
     }
   },
   "remoteUser": "vscode",
+  "remoteEnv": {
+    "BRAVE_API_KEY": "${localEnv:BRAVE_API_KEY}",
+    "CONTEXT7_API_KEY": "${localEnv:CONTEXT7_API_KEY}"
+  },
   "postCreateCommand": "echo '✅ Ultimate dev environment ready! Run `node --version`, `python --version`, `docker --version` to verify.'",
   "hostRequirements": {
     "cpus": 2,
