@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package gh_project_toolkit.issue;
+
+import "common.proto";
+
+// GitHub Issue representation
+message Issue {
+  // The title of the GitHub issue.
+  string title = 1;
+  // The body description of the GitHub issue.
+  string body = 2;
+  // List of label names applied to this issue.
+  repeated string labels = 3;
+  // The milestone title this issue is assigned to.
+  optional string milestone = 4;
+  // List of assignee usernames for this issue.
+  repeated string assignees = 5;
+}
+
+// Request model for creating an issue
+message IssueCreateRequest {
+  // The title of the issue to create.
+  string title = 1;
+  // The body description of the issue to create.
+  string body = 2;
+  // List of label names to apply to the new issue.
+  repeated string labels = 3;
+  // The milestone number to assign to the new issue.
+  optional int32 milestone = 4;
+  // List of assignee usernames for the new issue.
+  repeated string assignees = 5;
+}
+
+// Model for GitHub issue data from API responses
+message IssueModel {
+  // The title of the GitHub issue.
+  string title = 1;
+  // The body description of the GitHub issue.
+  string body = 2;
+  // List of label names applied to this issue.
+  repeated string labels = 3;
+  // The milestone title this issue is assigned to.
+  optional string milestone = 4;
+  // List of assignee usernames for this issue.
+  repeated string assignees = 5;
+}

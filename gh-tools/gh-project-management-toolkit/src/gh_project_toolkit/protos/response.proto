@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package gh_project_toolkit.response;
+
+// Base model for GitHub API responses
+message GitHubResponse {
+  // The response data as a JSON string.
+  string data = 1;
+  // List of error messages if the request failed.
+  repeated string errors = 2;
+  // Optional status or info message.
+  optional string message = 3;
+}
+
+// Response model for issue creation
+message CreateIssueResponse {
+  // The HTML URL of the created issue.
+  string html_url = 1;
+  // The issue number assigned by GitHub.
+  int32 number = 2;
+  // The unique identifier of the created issue.
+  string id = 3;
+}
+
+// Response model for milestone creation
+message CreateMilestoneResponse {
+  // The milestone number assigned by GitHub.
+  int32 number = 1;
+  // The title of the created milestone.
+  string title = 2;
+  // The description of the created milestone.
+  string description = 3;
+  // The due date for the milestone in ISO 8601 format.
+  optional string due_on = 4;
+}
+
+// Response model for label creation
+message CreateLabelResponse {
+  // The unique identifier of the created label.
+  int32 id = 1;
+  // The node ID of the created label (GitHub GraphQL identifier).
+  string node_id = 2;
+  // The name of the created label.
+  string name = 3;
+  // The hex color code for the label (without the # prefix).
+  string color = 4;
+  // The description of the created label.
+  string description = 5;
+}

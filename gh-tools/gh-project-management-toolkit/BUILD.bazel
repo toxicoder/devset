@@ -1,0 +1,30 @@
+# =============================================================================
+# Root BUILD.bazel for gh-project-management-toolkit
+#
+# This file provides top-level targets and aliases for the entire project.
+# =============================================================================
+
+load("@rules_python//python:defs.bzl", "py_library")
+
+# =============================================================================
+# project_lib - Aggregates all library targets (convenient import point)
+# =============================================================================
+
+py_library(
+    name = "project_lib",
+    srcs = [],
+    data = glob(["**"]),
+    deps = [
+        "//src/gh_project_toolkit:main_library",
+        "//src/gh_project_toolkit:config_library",
+        "//src/gh_project_toolkit:lib_library",
+        "//src/gh_project_toolkit:protobuf_library",
+        "//src/gh_project_toolkit/protos:common_py_pb2",
+        "//src/gh_project_toolkit/protos:issue_py_pb2",
+        "//src/gh_project_toolkit/protos:label_py_pb2",
+        "//src/gh_project_toolkit/protos:milestone_py_pb2",
+        "//src/gh_project_toolkit/protos:project_py_pb2",
+        "//src/gh_project_toolkit/protos:response_py_pb2",
+    ],
+    visibility = ["//visibility:public"],
+)

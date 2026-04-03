@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package gh_project_toolkit.project;
+
+import "common.proto";
+
+// GitHub Project V2 representation
+message ProjectV2 {
+  // The unique identifier for the project.
+  string id = 1;
+  // The title of the project.
+  string title = 2;
+  // The project number (unique within the organization).
+  int32 number = 3;
+  // The state of the project: "OPEN" or "CLOSED".
+  string state = 4;
+}
+
+// Item in a Project V2
+message ProjectItem {
+  // The unique identifier for the project item.
+  string id = 1;
+  // The content ID referenced by this project item.
+  string content_id = 2;
+  // The project ID this item belongs to.
+  string project_id = 3;
+}
+
+// Re-export ProjectField from common.proto for convenience
+// (can also be imported directly from common.proto)
+message ProjectField {
+  // The unique identifier for this project field.
+  string id = 1;
+  // The name of this project field.
+  string name = 2;
+  // The available options for single-select fields.
+  repeated gh_project_toolkit.common.ProjectFieldOption options = 3;
+}

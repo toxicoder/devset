@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package gh_project_toolkit.common;
+
+// Project field option for single-select fields
+message ProjectFieldOption {
+  // The unique identifier for this field option.
+  string id = 1;
+  // The display name for this field option.
+  string name = 2;
+}
+
+// Project field with options
+message ProjectField {
+  // The unique identifier for this project field.
+  string id = 1;
+  // The name of this project field.
+  string name = 2;
+  // The available options for single-select fields.
+  repeated ProjectFieldOption options = 3;
+}

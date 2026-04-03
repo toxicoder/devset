@@ -83,3 +83,9 @@ gh-tools/gh-project-management-toolkit/.coverage
 gh-tools/gh-project-management-toolkit/coverage.xml
 gh-tools/gh-project-management-toolkit/htmlcov/
 gh-tools/gh-project-management-toolkit/src/*.egg-info/
+
+# Protobuf generated files
+src/gh_project_toolkit/protobuf/*.pb2.py
+src/gh_project_toolkit/protobuf/__pycache__/
+*.pb2.py
+protos/__pycache__/
