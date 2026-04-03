@@ -14,23 +14,28 @@
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
-    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    "ghcr.io/devcontainers/features/bazel:1": {
+      "version": "latest",
+      "installBuildifier": true
+    }
   },
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-vscode-remote.remote-containers",
-        "bierner.markdown-mermaid"
+        "bierner.markdown-mermaid",
+        "bazelbuild.vscode-bazel"
       ]
     }
   },
   "remoteUser": "vscode",
   "runArgs": ["--env-file", ".env"],
-  "postCreateCommand": "echo '✅ Ultimate dev environment ready! Run `node --version`, `python --version`, `docker --version` to verify.'",
+  "postCreateCommand": "echo '✅ Ultimate dev environment ready! Run node --version, python --version, docker --version, bazel --version to verify.'",
   "hostRequirements": {
     "cpus": 2,
     "memory": "4gb",
     "storage": "10gb",
-    "gpu": "optional" // Enables GPU passthrough automatically on NVIDIA hosts
+    "gpu": "optional"
   }
 }
