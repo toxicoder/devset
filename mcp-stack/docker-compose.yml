@@ -1,7 +1,7 @@
 services:
   # Playwright MCP - Deep crawling & research (direct internet for now)
   mcp-playwright:
-    image: mcp/playwright:latest
+    image: mcp/playwright:latest@sha256:67093e16743776a903330d54ee1526084622a1d1e0963a7157a337894369c9ec
     container_name: mcp-playwright
     environment:
       - PLAYWRIGHT_MCP_HEADLESS=true
@@ -15,7 +15,7 @@ services:
 
   # Context7 MCP - Real-time docs (direct internet + Redis cache)
   mcp-context7:
-    image: mcp/context7:latest
+    image: mcp/context7:latest@sha256:1174e6a29634a83b2be93ac1fefabf63265f498c02c72201fe3464e687dd8836
     container_name: mcp-context7
     environment:
       - CONTEXT7_API_KEY=${CONTEXT7_API_KEY}
@@ -26,7 +26,7 @@ services:
 
   # Brave Search MCP - Official Brave deep search (direct internet)
   mcp-brave-search:
-    image: mcp/brave-search:latest
+    image: mcp/brave-search:latest@sha256:62c16fce99a277f7a0db2a366ad0011d1c32c728d485fcfb810d85e2652f4399
     container_name: mcp-brave-search
     environment:
       - BRAVE_API_KEY=${BRAVE_API_KEY}
@@ -40,7 +40,7 @@ services:
 
   # Shared Redis cache layer
   redis:
-    image: redis:alpine
+    image: redis:alpine@sha256:81b6f81d6a6c5b9019231a2e8eb10085e3a139a34f833dcc965a8a959b040b72
     container_name: mcp-redis
     command: redis-server --appendonly yes --maxmemory-policy allkeys-lru --maxmemory 2gb
     volumes:
