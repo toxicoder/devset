@@ -21,7 +21,11 @@ bazel_dep(name = "platforms", version = "0.0.10")
 # Version 0.29.0 is compatible with Bazel 8.x
 bazel_dep(name = "rules_python", version = "0.29.0")
 
+# protobuf - Protocol Buffer build rules for .proto compilation
+# Required for py_proto_library targets in src/gh_project_toolkit/protos/
+bazel_dep(name = "protobuf", version = "29.0")
+
 use_extension(
     "@rules_python//python/extensions:python.bzl",
-    "python_ext",
+    "python",
 )

@@ -12,6 +12,7 @@
   // ───── Bazel Configuration ─────
   "bazel.executable": "bazel",
   "bazel.useBZLMOD": true,
+  "bazel.workspaceDirectory": "gh-tools/gh-project-management-toolkit",
   // ───── Core Editor & Formatting (team standards) ─────
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -57,8 +58,11 @@
   "extensions.ignoreRecommendations": false,
   "cSpell.words": [
     "airules",
+    "bazelrc",
     "conftest",
     "ededed",
+    "GITEA",
+    "homelab",
     "Lightspeed",
     "mypy",
     "Nemo",
@@ -67,6 +71,8 @@
     "PVTSSF",
     "pyproject",
     "pytest",
-    "Resto"
+    "Resto",
+    "srcs",
+    "starlark"
   ]
 }

@@ -89,3 +89,8 @@ src/gh_project_toolkit/protobuf/*.pb2.py
 src/gh_project_toolkit/protobuf/__pycache__/
 *.pb2.py
 protos/__pycache__/
+gh-tools/gh-project-management-toolkit/MODULE.bazel.lock
+gh-tools/gh-project-management-toolkit/bazel-testlogs
+gh-tools/gh-project-management-toolkit/bazel-out
+gh-tools/gh-project-management-toolkit/bazel-gh-project-management-toolkit
+gh-tools/gh-project-management-toolkit/bazel-bin

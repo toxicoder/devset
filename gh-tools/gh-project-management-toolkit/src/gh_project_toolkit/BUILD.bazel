@@ -39,8 +39,10 @@ py_library(
 
 py_library(
     name = "config_library",
-    srcs = glob(["config/*.py"]),
-    exclude = ["config/test_*.py"],
+    srcs = glob(
+        ["config/*.py"],
+        exclude = ["config/test_*.py"],
+    ),
     visibility = ["//visibility:public"],
 )
 
@@ -50,8 +52,10 @@ py_library(
 
 py_library(
     name = "lib_library",
-    srcs = glob(["lib/*.py"]),
-    exclude = ["lib/test_*.py"],
+    srcs = glob(
+        ["lib/*.py"],
+        exclude = ["lib/test_*.py"],
+    ),
     deps = [
         "//src/gh_project_toolkit:config_library",
         "//src/gh_project_toolkit:main_library",
@@ -65,8 +69,10 @@ py_library(
 
 py_library(
     name = "protobuf_library",
-    srcs = glob(["protobuf/*.py"]),
-    exclude = ["protobuf/test_*.py"],
+    srcs = glob(
+        ["protobuf/*.py"],
+        exclude = ["protobuf/test_*.py"],
+    ),
     visibility = ["//visibility:public"],
 )
 
