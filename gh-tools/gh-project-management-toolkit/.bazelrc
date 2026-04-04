@@ -1,0 +1,58 @@
+# .bazelrc - Bazel Build Configuration
+#
+# This file specifies command-line options to use by default.
+# Reference: https://bazel.build/run/bazelrc
+
+# =============================================================================
+# Build Mode Defaults
+# =============================================================================
+
+# Use optimized build by default
+build --compilation_mode=opt
+
+# Enable support for starlark based language analysis in the IDE
+build --features=mixed_mode
+
+# =============================================================================
+# Python Configuration
+# =============================================================================
+
+# Use Python 3.12 (latest stable as of 2026)
+build --python_top BOOTSTRAP
+build --@rules_python//python/config settings:python_version="3.12"
+
+# =============================================================================
+# Protobuf Configuration
+# =============================================================================
+
+# protoc generator options
+build --@protobuf//bazel:generator_language=python
+
+# =============================================================================
+# Test Configuration
+# =============================================================================
+
+# Run tests in verbose mode by default
+test --test_detail=all
+
+# Enable coverage collection
+test --coverage
+
+# =============================================================================
+# Caching
+# =============================================================================
+
+# Cache build artifacts
+build --action_cache_size_gb=4
+build --disk_cache Size=8192
+
+# =============================================================================
+# User Mode Overrides
+# =============================================================================
+
+# user-configurable options
+# Uncomment to enable verbose logging
+# build --verbose_failures
+#
+# Uncomment to disable caching for debugging
+# build --nocache_test --strategy=genrule=standalone

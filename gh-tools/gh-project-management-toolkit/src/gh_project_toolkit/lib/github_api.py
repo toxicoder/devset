@@ -237,7 +237,7 @@ def get_all_milestones(owner: str, repo: str) -> List[Dict[str, Any]]:
         repo: Repository name.
 
     Returns:
-        List of milestone objects.
+        List of milestone dictionaries (raw API response).
 
     Example:
         >>> milestones = get_all_milestones("owner", "repo")
@@ -258,6 +258,29 @@ def get_all_milestones(owner: str, repo: str) -> List[Dict[str, Any]]:
     except requests.RequestException as e:
         log_error(f"Failed to get milestones: {e}")
         return []
+
+
+def get_all_milestones_proto(owner: str, repo: str) -> List[Any]:
+    """
+    Get all milestones from the repository as protobuf objects.
+
+    Args:
+        owner: Repository owner.
+        repo: Repository name.
+
+    Returns:
+        List of protobuf Milestone objects.
+
+    Example:
+        >>> from gh_project_toolkit.lib.github_api import get_all_milestones_proto
+        >>> milestones = get_all_milestones_proto("owner", "repo")
+        >>> for m in milestones:
+        ...     print(f"{m.title}: {m.description}")
+    """
+    from gh_project_toolkit.models import MilestoneModel
+    
+    raw_data = get_all_milestones(owner, repo)
+    return [MilestoneModel(**m).to_proto() for m in raw_data]
 
 
 # =============================================================================

@@ -1,0 +1,85 @@
+# =============================================================================
+# BUILD.bazel for src/gh_project_toolkit/
+#
+# This file defines Python library targets for the main package,
+# including modules, config, and CLI entry points.
+# =============================================================================
+
+load("@rules_python//python:defs.bzl", "py_library", "py_binary")
+
+# =============================================================================
+# main_library - Aggregates all public modules
+# =============================================================================
+
+py_library(
+    name = "main_library",
+    srcs = [
+        "__init__.py",
+        "cli.py",
+        "models.py",
+        "protobuf_helpers.py",
+    ],
+    deps = [
+        ":config_library",
+        ":lib_library",
+        ":protobuf_library",
+        "//src/gh_project_toolkit/protos:common_py_pb2",
+        "//src/gh_project_toolkit/protos:issue_py_pb2",
+        "//src/gh_project_toolkit/protos:label_py_pb2",
+        "//src/gh_project_toolkit/protos:milestone_py_pb2",
+        "//src/gh_project_toolkit/protos:project_py_pb2",
+        "//src/gh_project_toolkit/protos:response_py_pb2",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# config subpackage
+# =============================================================================
+
+py_library(
+    name = "config_library",
+    srcs = glob(["config/*.py"]),
+    exclude = ["config/test_*.py"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# lib subpackage
+# =============================================================================
+
+py_library(
+    name = "lib_library",
+    srcs = glob(["lib/*.py"]),
+    exclude = ["lib/test_*.py"],
+    deps = [
+        "//src/gh_project_toolkit:config_library",
+        "//src/gh_project_toolkit:main_library",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# protobuf subpackage
+# =============================================================================
+
+py_library(
+    name = "protobuf_library",
+    srcs = glob(["protobuf/*.py"]),
+    exclude = ["protobuf/test_*.py"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# CLI Entry Point
+# =============================================================================
+
+py_binary(
+    name = "gh_project_toolkit_cli",
+    srcs = ["cli.py"],
+    main = "cli.py",
+    deps = [
+        ":main_library",
+    ],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package gh_project_toolkit.milestone;
+
+// GitHub Milestone representation
+message Milestone {
+  // The title of the milestone.
+  string title = 1;
+  // The description of the milestone.
+  string description = 2;
+  // The due date for the milestone in ISO 8601 format.
+  optional string due_on = 3;
+  // The state of the milestone: "open" or "closed".
+  string state = 4;
+}
+
+// Request model for creating a milestone
+message MilestoneCreateRequest {
+  // The title of the milestone to create.
+  string title = 1;
+  // The description of the milestone to create.
+  string description = 2;
+  // The due date for the milestone in ISO 8601 format.
+  optional string due_on = 3;
+}
+
+// Model for GitHub milestone data from API responses
+message MilestoneModel {
+  // The milestone number (unique identifier within the repository).
+  int32 number = 1;
+  // The title of the milestone.
+  string title = 2;
+  // The description of the milestone.
+  string description = 3;
+  // The state of the milestone: "open" or "closed".
+  string state = 4;
+  // The due date for the milestone in ISO 8601 format.
+  optional string due_on = 5;
+  // The number of open issues assigned to this milestone.
+  int32 open_issues = 6;
+  // The number of closed issues assigned to this milestone.
+  int32 closed_issues = 7;
+}

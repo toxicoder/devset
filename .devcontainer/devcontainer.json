@@ -14,22 +14,46 @@
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
-    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    "ghcr.io/devcontainers-community/features/bazel:1": {
+      "bazelisk_version": "latest",
+      "buildifier_version": "latest"
+    }
   },
   "customizations": {
     "vscode": {
       "extensions": [
+        "bazelbuild.vscode-bazel",
+        "bierner.markdown-mermaid",
         "ms-vscode-remote.remote-containers",
-        "bierner.markdown-mermaid"
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "usernamehw.errorlens",
+        "PKief.material-icon-theme",
+        "streetsidesoftware.code-spell-checker",
+        "Gruntfuggly.todo-tree",
+        "aaron-bond.better-comments",
+        "ms-azuretools.vscode-docker",
+        "ritwickdey.LiveServer",
+        "humao.rest-client",
+        "EditorConfig.EditorConfig",
+        "kilocode.Kilo-Code",
+        "saoudrizwan.claude-dev"
+      ],
+      "unwantedRecommendations": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "github.vscode-github-actions"
       ]
     }
   },
   "remoteUser": "vscode",
-  "postCreateCommand": "echo '✅ Ultimate dev environment ready! Run `node --version`, `python --version`, `docker --version` to verify.'",
+  "runArgs": ["--env-file", ".env"],
+  "postCreateCommand": "echo '✅ Ultimate dev environment ready! Run node --version, python --version, docker --version, bazel --version to verify.'",
   "hostRequirements": {
     "cpus": 2,
     "memory": "4gb",
     "storage": "10gb",
-    "gpu": "optional" // Enables GPU passthrough automatically on NVIDIA hosts
+    "gpu": "optional"
   }
 }

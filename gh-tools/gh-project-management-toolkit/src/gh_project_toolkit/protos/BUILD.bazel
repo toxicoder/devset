@@ -1,0 +1,113 @@
+# =============================================================================
+# BUILD.bazel for protos/
+#
+# This file defines Protocol Buffer targets for the gh_project_toolkit.
+# It uses the official protobuf repository's py_proto_library rules.
+#
+# The naming convention follows:
+#   - proto_library: <name>_proto
+#   - py_proto_library: <name>_py_pb2
+#
+# Reference: https://protobuf.dev/programming-guides/bazel/
+# =============================================================================
+
+load("@protobuf//bazel:proto_library.bzl", "proto_library")
+load("@protobuf//bazel:py_proto_library.bzl", "py_proto_library")
+
+# =============================================================================
+# common.proto - Project field definitions
+# =============================================================================
+
+proto_library(
+    name = "common_proto",
+    srcs = ["common.proto"],
+    visibility = ["//visibility:public"],
+)
+
+py_proto_library(
+    name = "common_py_pb2",
+    deps = [":common_proto"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# issue.proto - Issue definitions
+# =============================================================================
+
+proto_library(
+    name = "issue_proto",
+    srcs = ["issue.proto"],
+    deps = [":common_proto"],
+    visibility = ["//visibility:public"],
+)
+
+py_proto_library(
+    name = "issue_py_pb2",
+    deps = [":issue_proto"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# label.proto - Label definitions
+# =============================================================================
+
+proto_library(
+    name = "label_proto",
+    srcs = ["label.proto"],
+    visibility = ["//visibility:public"],
+)
+
+py_proto_library(
+    name = "label_py_pb2",
+    deps = [":label_proto"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# milestone.proto - Milestone definitions
+# =============================================================================
+
+proto_library(
+    name = "milestone_proto",
+    srcs = ["milestone.proto"],
+    visibility = ["//visibility:public"],
+)
+
+py_proto_library(
+    name = "milestone_py_pb2",
+    deps = [":milestone_proto"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# project.proto - Project V2 definitions
+# =============================================================================
+
+proto_library(
+    name = "project_proto",
+    srcs = ["project.proto"],
+    deps = [":common_proto"],
+    visibility = ["//visibility:public"],
+)
+
+py_proto_library(
+    name = "project_py_pb2",
+    deps = [":project_proto"],
+    visibility = ["//visibility:public"],
+)
+
+# =============================================================================
+# response.proto - API response definitions
+# =============================================================================
+
+proto_library(
+    name = "response_proto",
+    srcs = ["response.proto"],
+    visibility = ["//visibility:public"],
+)
+
+py_proto_library(
+    name = "response_py_pb2",
+    deps = [":response_proto"],
+    visibility = ["//visibility:public"],
+)

@@ -81,6 +81,23 @@ format:
 	$(PYTHON) -m black $(SRC_DIR)/ $(TESTS_DIR)/
 
 # =============================================================================
+# Protobuf Generation
+# =============================================================================
+
+## Generate Python code from protobuf definitions
+.PHONY: protobuf-generate
+protobuf-generate:
+	@echo -e "$(BLUE)Generating Python protobuf code...$(RESET)"
+	protoc --python_out=src/gh_project_toolkit --proto_path=src/gh_project_toolkit/protos src/gh_project_toolkit/protos/*.proto
+	@echo -e "$(GREEN)Protobuf code generated$(RESET)"
+
+## Watch and regenerate protobuf on changes
+.PHONY: protobuf-watch
+protobuf-watch:
+	@echo -e "$(BLUE)Watching protobuf files for changes...$(RESET)"
+	pbroc --python_out=src/gh_project_toolkit --proto_path=src/gh_project_toolkit/protos src/gh_project_toolkit/protos/*.proto
+
+# =============================================================================
 # Development Targets
 # =============================================================================
 
@@ -89,18 +106,20 @@ format:
 install-dev:
 	@echo -e "$(BLUE)Installing development dependencies...$(RESET)"
 	$(PIP) install -e ".[dev]"
+	$(PIP) install protobuf grpcio
 
 ## Install production dependencies
 .PHONY: install
 install:
 	@echo -e "$(BLUE)Installing production dependencies...$(RESET)"
 	$(PIP) install -e .
+	$(PIP) install protobuf grpcio
 
 ## Uninstall
 .PHONY: uninstall
 uninstall:
 	@echo -e "$(BLUE)Uninstalling package...$(RESET)"
-	$(PIP) uninstall -y gh-project-management-toolkit
+	$(PIP) uninstall -y gh-project-management-toolkit protobuf grpcio
 
 # =============================================================================
 # Clean Targets

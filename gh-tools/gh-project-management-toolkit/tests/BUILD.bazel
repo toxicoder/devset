@@ -1,0 +1,71 @@
+# =============================================================================
+# BUILD.bazel for tests/
+#
+# This file defines test targets for the gh_project_toolkit package.
+# =============================================================================
+
+load("@rules_python//python:defs.bzl", "py_test")
+
+# =============================================================================
+# test_config/tests
+# =============================================================================
+
+py_test(
+    name = "test_defaults",
+    srcs = ["test_config/test_defaults.py"],
+    deps = [
+        "//src/gh_project_toolkit:config_library",
+    ],
+)
+
+py_test(
+    name = "test_milestones",
+    srcs = ["test_config/test_milestones.py"],
+    deps = [
+        "//src/gh_project_toolkit:config_library",
+    ],
+)
+
+# =============================================================================
+# test_lib/tests
+# =============================================================================
+
+py_test(
+    name = "test_duplicates",
+    srcs = ["test_lib/test_duplicates.py"],
+    deps = [
+        "//src/gh_project_toolkit:lib_library",
+    ],
+)
+
+py_test(
+    name = "test_issues",
+    srcs = ["test_lib/test_issues.py"],
+    deps = [
+        "//src/gh_project_toolkit:lib_library",
+    ],
+)
+
+py_test(
+    name = "test_labels",
+    srcs = ["test_lib/test_labels.py"],
+    deps = [
+        "//src/gh_project_toolkit:lib_library",
+    ],
+)
+
+py_test(
+    name = "test_logging",
+    srcs = ["test_lib/test_logging.py"],
+    deps = [
+        "//src/gh_project_toolkit:lib_library",
+    ],
+)
+
+py_test(
+    name = "test_validation",
+    srcs = ["test_lib/test_validation.py"],
+    deps = [
+        "//src/gh_project_toolkit:lib_library",
+    ],
+)

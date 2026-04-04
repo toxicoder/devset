@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package gh_project_toolkit.label;
+
+// GitHub Label representation
+message Label {
+  // The name of the label.
+  string name = 1;
+  // The hex color code for the label (without the # prefix).
+  string color = 2;
+  // The description of the label.
+  string description = 3;
+}
+
+// Request model for creating a label
+message LabelCreateRequest {
+  // The name of the label to create.
+  string name = 1;
+  // The hex color code for the label (without the # prefix).
+  string color = 2;
+  // The description of the label.
+  string description = 3;
+}
+
+// Model for GitHub label data from API responses
+message LabelModel {
+  // The name of the label.
+  string name = 1;
+  // The hex color code for the label (without the # prefix).
+  string color = 2;
+  // The description of the label.
+  string description = 3;
+  // Whether this is a default label provided by GitHub.
+  bool default = 4;
+}
